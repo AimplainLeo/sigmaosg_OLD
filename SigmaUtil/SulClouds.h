@@ -12,7 +12,7 @@
 class SUL_EXPORT CSulClouds : public osg::Referenced
 {
 public:
-				CSulClouds();
+				CSulClouds( CSulCloudPlane* pCloudPlane=0 );
 
 	// coverage = 0.0-1.0
 	void		setCoverage( float coverage );
@@ -33,6 +33,9 @@ public:
 
 	osg::Node*	getNode();
 	osg::Group*	getGroup();
+
+	// must call this before create if you have a custom cloudplane
+	void		setCloudPlane( CSulCloudPlane* pCloudPlane );
 
 private:
 	void		setTextureStates();

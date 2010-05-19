@@ -181,6 +181,11 @@ float CSulGeomQuad::getHeight()
 
 void CSulGeomQuad::calcVertPositions()
 {
+	if ( !m_rVerts.valid() )
+	{
+		return;
+	}
+
 	switch ( m_ePlane )
 	{
 		case PLANE_XZ:

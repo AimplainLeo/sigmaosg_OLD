@@ -16,12 +16,17 @@
 // TODO: the warnings are hard to implement because of the way things are initialized in here
 // this class needs to be redesigned
 
-CSulClouds::CSulClouds() :
+CSulClouds::CSulClouds( CSulCloudPlane* pCloudPlane ) :
 m_coverage( 0.5f ),
 m_size( 20000.0f ),
 m_wind( 0, 0 ),
 m_height(1500)
 {
+	if ( pCloudPlane )
+	{
+		setCloudPlane( pCloudPlane );
+	}
+
 	create();
 }
 
@@ -36,7 +41,15 @@ void CSulClouds::setTextureStates()
 
 osg::Node* CSulClouds::createPlane( float size, float height )
 {
-	m_rPlane = new CSulCloudPlane( size, height );
+	if ( !m_rPlane.valid() )
+	{
+		m_rPlane = new CSulCloudPlane( size );
+	}
+	else
+	{
+		m_rPlane->setSize( size );
+	}
+
 	m_pPlaneGeode = new osg::Geode;
 	m_pPlaneGeode->addDrawable( m_rPlane->getDrawable() );
 
@@ -206,4 +219,9 @@ osg::Node* CSulClouds::create()
 osg::Group* CSulClouds::getGroup()
 {
 	return m_rGroup;
+}
+
+void CSulClouds::setCloudPlane( CSulCloudPlane* pCloudPlane )
+{
+	m_rPlane = pCloudPlane;
 }

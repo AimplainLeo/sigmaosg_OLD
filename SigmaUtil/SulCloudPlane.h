@@ -3,13 +3,16 @@
 #ifndef __SULCLOUDPLANE2_H__
 #define __SULCLOUDPLANE2_H__
 
+#include "SulExport.h"
 #include "SulGeomQuad.h"
 #include "SulCloudScrollTexture.h"
+#include <osg/program>
 
-class CSulCloudPlane : public CSulGeomQuad
+class SUL_EXPORT CSulCloudPlane : public CSulGeomQuad
 {
 public:
-					CSulCloudPlane( float size, float height );
+					CSulCloudPlane();
+					CSulCloudPlane( float size );
 
 	void			setSize( float s );
 
@@ -17,6 +20,8 @@ public:
 
 protected:
 	virtual void	createDrawable();
+
+	virtual osg::Program* createShaderProgram();
 
 private:
 	osg::ref_ptr<CCloudScrollTexture>	m_rCloudScrollTexture;

@@ -5,10 +5,20 @@
 #include <osgDB/FileUtils>
 #include <iostream>
 
-CSulCloudPlane::CSulCloudPlane( float size, float height ) :
+CSulCloudPlane::CSulCloudPlane() :
+CSulGeomQuad( 256, 256 )
+{
+}
+
+CSulCloudPlane::CSulCloudPlane( float size ) :
 CSulGeomQuad( size, size )
 {
+}
 
+osg::Program* CSulCloudPlane::createShaderProgram()
+{
+	osg::Program* program = new osg::Program();
+	return program;
 }
 
 void CSulCloudPlane::createDrawable()
@@ -19,6 +29,8 @@ void CSulCloudPlane::createDrawable()
 	m_rCloudScrollTexture->setUseDisplayList( false );
 	setDrawable( m_rCloudScrollTexture );
 	create();
+	
+	osg::Program* pShaderProgram = createShaderProgram();
 
 	bool bRet;
 
@@ -32,19 +44,22 @@ void CSulCloudPlane::createDrawable()
     bRet = fragShader->loadShaderSourceFromFile( osgDB::findDataFile("shaders/clouds.frag") );
 	assert( bRet );
 
-	osg::ref_ptr< osg::Program > program = new osg::Program();
-    program->addShader( vertexShader.get() );
-	program->addShader( fragShader.get() );
+    pShaderProgram->addShader( vertexShader.get() );
+	pShaderProgram->addShader( fragShader.get() );
 
 	osg::ref_ptr<osg::StateSet> ss = getDrawable()->getOrCreateStateSet();
-	ss->setAttribute( program.get(), osg::StateAttribute::ON );
+	ss->setAttribute( pShaderProgram, osg::StateAttribute::ON );
 }
 
 void CSulCloudPlane::setSize( float s )
 {
 	setWidth( s );
 	setHeight( s );
-	m_rCloudScrollTexture->setPlaneSize( s );
+
+	if ( m_rCloudScrollTexture.valid() )
+	{
+		m_rCloudScrollTexture->setPlaneSize( s );
+	}
 }
 
 void CSulCloudPlane::setWind( float x, float y )
