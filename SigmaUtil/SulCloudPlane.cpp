@@ -5,6 +5,8 @@
 #include <osgDB/FileUtils>
 #include <iostream>
 
+// hmm
+
 CSulCloudPlane::CSulCloudPlane() :
 CSulGeomQuad( 256, 256 )
 {
