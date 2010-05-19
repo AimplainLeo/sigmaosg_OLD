@@ -3,9 +3,10 @@
 #ifndef __SULSHADERBW_H__
 #define __SULSHADERBW_H__
 
+#include "SulExport.h"
 #include "SulShaderBase.h"
 
-class CSulShaderBW : public CSulShaderBase
+class SUL_EXPORT CSulShaderBW : public CSulShaderBase
 {
 public:
 			CSulShaderBW( osg::Node* pNode, osg::Program* pProg=0 );

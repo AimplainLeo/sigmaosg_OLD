@@ -5,8 +5,6 @@
 #include <osgDB/FileUtils>
 #include <iostream>
 
-// hmm
-
 CSulCloudPlane::CSulCloudPlane() :
 CSulGeomQuad( 256, 256 )
 {
@@ -20,6 +18,9 @@ CSulGeomQuad( size, size )
 osg::Program* CSulCloudPlane::createShaderProgram()
 {
 	osg::Program* program = new osg::Program();
+
+	// need to add main vert and frag here!
+
 	return program;
 }
 
