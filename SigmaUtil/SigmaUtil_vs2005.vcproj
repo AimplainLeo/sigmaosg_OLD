@@ -1166,6 +1166,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulShaderIntensity.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderIntensity.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulShaderStreak.cpp"
 						>
 					</File>

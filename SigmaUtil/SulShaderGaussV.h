@@ -5,7 +5,7 @@
 
 #include "SulShaderBase.h"
 
-class CSulShaderGaussV : public CSulShaderBase
+class SUL_EXPORT CSulShaderGaussV : public CSulShaderBase
 {
 public:
 	CSulShaderGaussV( osg::Node* pNode, float fTexV, osg::Program* pProg=0 );

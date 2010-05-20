@@ -5,7 +5,7 @@
 
 #include "SulShaderBase.h"
 
-class CSulShaderStreak : public CSulShaderBase
+class SUL_EXPORT CSulShaderStreak : public CSulShaderBase
 {
 public:
 			CSulShaderStreak( osg::Node* pNode, float offsetFactor, float glowFactor=0.2f, osg::Program* pProg=0 );
