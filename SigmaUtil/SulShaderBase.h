@@ -3,10 +3,11 @@
 #ifndef __SULSHADERBASE_H__
 #define __SULSHADERBASE_H__
 
+#include "SulExport.h"
 #include <osg/referenced>
 #include <osg/program>
 
-class CSulShaderBase : public osg::Referenced
+class SUL_EXPORT CSulShaderBase : public osg::Referenced
 {
 public:
 			CSulShaderBase( osg::Node* pNode, osg::Program* pProg=0 );

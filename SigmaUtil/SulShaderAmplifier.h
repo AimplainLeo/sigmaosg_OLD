@@ -4,12 +4,11 @@
 #define __SULSHADERAMPLIFIER_H__
 
 #include "SulShaderBase.h"
-#include "SulExport.h"
 
 class SUL_EXPORT CSulShaderAmplifier : public CSulShaderBase
 {
 public:
-	CSulShaderAmplifier( osg::Node* pNode, float fAmp, bool bColor, osg::Program* pProg=0 );
+	CSulShaderAmplifier( osg::Node* pNode, float fAmp, bool bColor=false, osg::Program* pProg=0 );
 
 	void						setAmp( float val );
 
