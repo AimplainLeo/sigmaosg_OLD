@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 #include "SulGeomQuad.h"
+#include <osgDB/ReadFile>
+#include <osgDB/FileUtils>
 
 CSulGeomQuad::CSulGeomQuad( float w, float h, EPLANE ePlane ) :
 m_vCenter(0,0,0),
@@ -95,16 +97,8 @@ const osg::Vec4& CSulGeomQuad::getColor( Sigma::uint32 index )
 	return (*m_rColors)[index];
 }
 
-void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat )
+void CSulGeomQuad::createUV()
 {
-	m_rTex = new osg::Texture2D;
-	m_rTex->setInternalFormat( internalFormat );	
-	m_rTex->setResizeNonPowerOfTwoHint(false);
-	m_rTex->setFilter( osg::Texture::MIN_FILTER,osg::Texture::LINEAR );
-	m_rTex->setFilter( osg::Texture::MAG_FILTER,osg::Texture::LINEAR );
-
-	m_rTex->setImage( pImage );
-	
 	if ( !m_rUV.valid() )
 	{
 		m_rUV = new osg::Vec2Array;
@@ -116,32 +110,45 @@ void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat )
 
 		getDrawable()->asGeometry()->setTexCoordArray( 0, m_rUV );
 	}
-
-    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( 0, m_rTex, osg::StateAttribute::ON );
 }
 
-void CSulGeomQuad::setTexture( osg::Texture2D* pTex )
+void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, Sigma::uint32 unit )
 {
-	m_rTex = pTex;
+	createUV();
 
-	if ( !m_rUV.valid() )
-	{
-		m_rUV = new osg::Vec2Array;
+	osg::Texture2D* pTex = new osg::Texture2D;
+	pTex->setInternalFormat( internalFormat );	
+	pTex->setResizeNonPowerOfTwoHint( false );
+	pTex->setFilter( osg::Texture::MIN_FILTER,osg::Texture::LINEAR );
+	pTex->setFilter( osg::Texture::MAG_FILTER,osg::Texture::LINEAR );
+	pTex->setImage( pImage );
 
-		m_rUV->push_back(osg::Vec2(0, 0));
-		m_rUV->push_back(osg::Vec2(1, 0));
-		m_rUV->push_back(osg::Vec2(1, 1));
-		m_rUV->push_back(osg::Vec2(0, 1));
+	m_mapTex[unit] = pTex;
 
-		getDrawable()->asGeometry()->setTexCoordArray( 0, m_rUV );
-	}
-
-    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( 0, pTex, osg::StateAttribute::ON );
+    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
-osg::Texture2D* CSulGeomQuad::getTexture()
+void CSulGeomQuad::setTexture( osg::Texture2D* pTex, Sigma::uint32 unit )
 {
-	return m_rTex;
+	createUV();
+
+	m_mapTex[unit] = pTex;
+
+    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+}
+
+void CSulGeomQuad::setTexture( const CSulString& file, Sigma::uint32 unit )
+{
+	osg::Texture2D* pTex = new osg::Texture2D;
+    osg::Image* pImage = osgDB::readImageFile( osgDB::findDataFile(file.c_str()) );
+    pTex->setImage( pImage );
+    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+	m_mapTex[unit] = pTex;
+}
+
+osg::Texture2D* CSulGeomQuad::getTexture( Sigma::uint32 unit )
+{
+	return m_mapTex[unit];
 }
 
 void CSulGeomQuad::setUV( float uv )

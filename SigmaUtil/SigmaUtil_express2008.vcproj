@@ -1211,6 +1211,30 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulShaderIntensity.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderIntensity.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderNormalMapObjectSpace.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderNormalMapObjectSpace.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderNormalMapTangentSpace.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderNormalMapTangentSpace.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulShaderStreak.cpp"
 						>
 					</File>
