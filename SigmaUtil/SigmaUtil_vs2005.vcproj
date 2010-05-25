@@ -774,6 +774,30 @@
 					RelativePath=".\SulIntersectGraphMouse.h"
 					>
 				</File>
+				<File
+					RelativePath=".\SulIntLine.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulIntLine.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulIntPlane.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulIntPlane.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulIntTriangle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulIntTriangle.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="NodeCallbacks"
