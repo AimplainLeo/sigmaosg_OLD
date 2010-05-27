@@ -54,7 +54,7 @@ bool CSulXmlParser::ParseElement( CSulParser* pSulParser )
 		strName = pszToken;
 
 		// <!-- --> need to bypass comments
-		if ( pszToken[0]=='<' && pSulParser->PeekToken() && !STRICMP( pSulParser->PeekToken(), "!--" ) )
+		if ( pszToken[0]=='<' && pSulParser->PeekToken() && !STRNICMP( pSulParser->PeekToken(), "!--", 3 ) )
 		{
 			while ( 1 )
 			{

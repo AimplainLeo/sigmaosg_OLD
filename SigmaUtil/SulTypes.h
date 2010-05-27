@@ -33,6 +33,7 @@ namespace Sigma
 		#define SSCANF		sscanf_s
 		#define SPRINTF		sprintf_s
 		#define STRICMP		_stricmp
+		#define STRNICMP	_strnicmp
 		#define STRCPY(a,b,c) 	strcpy_s(a,b,c)
 		#define STRCAT(a,b,c) 	strcat_s(a,b,c)
 		#define STRLWR	 	_strlwr_s
