@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wireframe", "Wireframe.vcproj", "{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}.Debug|Win32.Build.0 = Debug|Win32
+		{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}.Release|Win32.ActiveCfg = Release|Win32
+		{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

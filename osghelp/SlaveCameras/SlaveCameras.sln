@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SlaveCameras", "SlaveCameras.vcproj", "{58373410-C612-4862-901D-9A0A37E3763F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58373410-C612-4862-901D-9A0A37E3763F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{58373410-C612-4862-901D-9A0A37E3763F}.Debug|Win32.Build.0 = Debug|Win32
+		{58373410-C612-4862-901D-9A0A37E3763F}.Release|Win32.ActiveCfg = Release|Win32
+		{58373410-C612-4862-901D-9A0A37E3763F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

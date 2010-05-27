@@ -1,0 +1,52 @@
+digraph osg_scenegraph { rankdir = LR;
+0[shape="record" ,label="<top> Group" ,style="solid" ,color="black" ,fillColor="white"]
+1[shape="record" ,label="<top> LightSource" ,style="solid" ,color="black" ,fillColor="white"]
+2[shape="record" ,label="<top> StateSet" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+3[shape="record" ,label="<top> Geode" ,style="solid" ,color="black" ,fillColor="white"]
+4[shape="record" ,label="<top> ShapeDrawable" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+5[shape="record" ,label="<top> PositionAttitudeTransform" ,style="solid" ,color="black" ,fillColor="white"]
+6[shape="record" ,label="<top> Geode" ,style="solid" ,color="black" ,fillColor="white"]
+7[shape="record" ,label="<top> StateSet" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+8[shape="record" ,label="<top> Geometry" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+9[shape="record" ,label="<top> MatrixTransform| Scene Root" ,style="solid" ,color="black" ,fillColor="white"]
+10[shape="record" ,label="<top> StateSet" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+11[shape="record" ,label="<top> MatrixTransform| Plane01" ,style="solid" ,color="black" ,fillColor="white"]
+12[shape="record" ,label="<top> Geode" ,style="solid" ,color="black" ,fillColor="white"]
+13[shape="record" ,label="<top> Geometry" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+14[shape="record" ,label="<top> StateSet" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+15[shape="record" ,label="<top> Group" ,style="solid" ,color="black" ,fillColor="white"]
+16[shape="record" ,label="<top> Camera| CSulRTT(shadow)" ,style="solid" ,color="black" ,fillColor="white"]
+17[shape="record" ,label="<top> StateSet" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+18[shape="record" ,label="<top> Group" ,style="solid" ,color="black" ,fillColor="white"]
+19[shape="record" ,label="<top> TexGenNode" ,style="solid" ,color="black" ,fillColor="white"]
+20[shape="record" ,label="<top> StateSet" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+21[shape="record" ,label="<top> PositionAttitudeTransform" ,style="solid" ,color="black" ,fillColor="white"]
+22[shape="record" ,label="<top> Geode" ,style="solid" ,color="black" ,fillColor="white"]
+23[shape="record" ,label="<top> StateSet" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+24[shape="record" ,label="<top> Geometry" ,style="solid, filled" ,color="gray90" ,fillColor="white"]
+1:top -> 2:top [style="dashed"];
+3:top -> 4:top [style="dashed"];
+6:top -> 7:top [style="dashed"];
+6:top -> 8:top [style="dashed"];
+5:top -> 6:top [style="setlinewidth(2)"];
+9:top -> 10:top [style="dashed"];
+13:top -> 14:top [style="dashed"];
+12:top -> 13:top [style="dashed"];
+11:top -> 12:top [style="setlinewidth(2)"];
+9:top -> 11:top [style="setlinewidth(2)"];
+16:top -> 17:top [style="dashed"];
+18:top -> 5:top [style="setlinewidth(2)"];
+16:top -> 18:top [style="setlinewidth(2)"];
+15:top -> 16:top [style="setlinewidth(2)"];
+19:top -> 20:top [style="dashed"];
+22:top -> 23:top [style="dashed"];
+22:top -> 24:top [style="dashed"];
+21:top -> 22:top [style="setlinewidth(2)"];
+19:top -> 21:top [style="setlinewidth(2)"];
+0:top -> 1:top [style="setlinewidth(2)"];
+0:top -> 3:top [style="setlinewidth(2)"];
+0:top -> 5:top [style="setlinewidth(2)"];
+0:top -> 9:top [style="setlinewidth(2)"];
+0:top -> 15:top [style="setlinewidth(2)"];
+0:top -> 19:top [style="setlinewidth(2)"];
+}

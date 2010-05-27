@@ -1,0 +1,51 @@
+<GEN>
+
+  <TEXTURE_TREE 
+    suppress="false"
+    unit="0"
+  />
+  
+  <TREE 
+    sizemultiplier="4.0" 
+    radius_between_trees="2.0"
+  />
+  
+  <TERRAIN 
+    file="d:\data_files\FACTerrain\master.flt"
+    offsetx="1280"
+    offsety="1280"
+  />
+  
+  <SHAPE 
+    file="d:\data_files\flt\trees_all.flt"
+    offsetz="100"
+  />
+
+  <!--
+  <MASK file="flt\BuildingIndu.flt" linedist="4" offsetz="150"/>
+  <MASK file="flt\BuildingLand.flt" linedist="4" offsetz="150"/>
+  <MASK file="flt\church.flt" linedist="4" offsetz="150"/>
+  
+  <MASK file="flt\rivers.flt" linedist="4" offsetz="150"/>
+  <MASK file="flt\RoadLarge.flt" linedist="4" offsetz="150" renderme="true"/>
+  -->
+
+  <MASK file="d:\data_files\flt\lakes.flt" linedist="4" offsetz="150" renderme="true"/>
+
+  <!--
+  <MASK file="flt\RoadMedium.flt" linedist="4" offsetz="150" renderme="true"/>
+  <MASK file="flt\RoadOther.flt" linedist="4" offsetz="150"/>
+  <MASK file="flt\vindmill.flt" linedist="4" offsetz="150"/>
+ -->
+ 
+  <OUTPUT file="myass.ive" />
+  
+  <VIEWER suppress="false" />
+  
+  <DEBUGGING 
+    showpivots="false"
+  />
+    
+</GEN>
+
+
