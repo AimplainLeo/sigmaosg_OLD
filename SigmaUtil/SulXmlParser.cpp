@@ -64,10 +64,26 @@ bool CSulXmlParser::ParseElement( CSulParser* pSulParser )
 					return false;
 				}
 
-				if ( pszToken[0]=='-' && pSulParser->PeekToken() && !STRICMP( pSulParser->PeekToken(), ">" ) )
+				CSulString sTmp = pszToken;
+
+				if ( sTmp=="--" && pSulParser->PeekToken() )
 				{
-					pSulParser->GetToken();
-					break;
+					CSulString sTmp2 = pSulParser->PeekToken();
+					if ( sTmp2==">" )
+					{
+						pSulParser->GetToken();
+						break;
+					}
+				}
+
+				if ( sTmp.rfind( "--" )!=std::string::npos )
+				{
+					CSulString sTmp2 = pSulParser->PeekToken();
+					if ( sTmp2==">" )
+					{
+						pSulParser->GetToken();
+						break;
+					}
 				}
 			}
 
