@@ -12,6 +12,7 @@
     min="3.0"
     max="20.0"
     radius_between_trees="2.0"
+    distance_between_trees_line="10.0"
   />
   
   <TERRAIN 

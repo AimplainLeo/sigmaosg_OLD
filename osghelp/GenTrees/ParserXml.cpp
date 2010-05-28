@@ -99,6 +99,7 @@ void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 	if ( sName=="TREE" )
 	{
 		m_radiusBetweenTrees = pAttr->get( "radius_between_trees" ).asFloat();
+		m_distance_between_trees_line = pAttr->get( "distance_between_trees_line" ).asFloat();
 
 		m_minTree = pAttr->get( "min" ).asFloat();
 		m_maxTree = pAttr->get( "max" ).asFloat();
@@ -152,6 +153,7 @@ void CParserXml::LoadFinished()
 		m_rSceneShape->getClippedLineList(),
 		m_rSceneShape->getClippedTriangleList(),
 		m_radiusBetweenTrees,
+		m_distance_between_trees_line,
 		vecMask
 	);
 }

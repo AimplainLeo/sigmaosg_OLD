@@ -62,6 +62,7 @@ private:
 	Sigma::VEC_PLANE							m_vecBoundingBoxPlanes;
 	
 	float										m_radiusBetweenTrees;
+	float										m_distance_between_trees_line;
 
 	osg::ref_ptr<CSulGenTextureWithPositions>	m_gen;
 

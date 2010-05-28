@@ -15,6 +15,7 @@ public:
 				const Sigma::VEC_LINESEGMENT&	line,
 				const Sigma::VEC_TRI&			tri,
 				float							radius,						// radius between trees
+				float							distance_between_trees_line,
 				VEC_GENPOSITIONMASK				vecMask
 			);
 
@@ -37,14 +38,13 @@ private:
 	osg::ref_ptr<osg::PositionAttitudeTransform>		m_rSceneTerrain;
 	const Sigma::VEC_LINESEGMENT&	m_vecLine;
 	const Sigma::VEC_TRI&			m_vecTri;
-	float							m_radius;
+	float							m_radius;						// radius between trees on a patch
+	float							m_distance_between_trees_line;	// distance between trees on a line
 	Sigma::VEC_VEC3					m_vecPos;				// positions are in world space
 	Sigma::uint32					m_texSizeSquared;
 	osg::ref_ptr<osg::Image>		m_rImage;
 	Sigma::uint32					m_posCount;
 	
-	float							m_lineSpacing;
-
 	VEC_GENPOSITIONMASK				m_vecMask;
 };
 

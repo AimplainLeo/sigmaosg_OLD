@@ -25,14 +25,15 @@ CSulGenTextureWithPositions::CSulGenTextureWithPositions(
 	const Sigma::VEC_LINESEGMENT&	line,
 	const Sigma::VEC_TRI&			tri,
 	float							radius,
+	float							distance_between_trees_line,
 	VEC_GENPOSITIONMASK				vecMask
 ) :
 m_rSceneTerrain( pSceneTerrain ),
 m_vecLine( line ),
 m_vecTri( tri ),
 m_radius( radius ),
-m_vecMask( vecMask ),
-m_lineSpacing( 2.0f )
+m_distance_between_trees_line( distance_between_trees_line ),
+m_vecMask( vecMask )
 {
 	process();
 }
@@ -50,7 +51,7 @@ void CSulGenTextureWithPositions::processLine( osg::LineSegment* pLine )
 	// calc number of trees on line segment
 	osg::Vec3 vSeg = pLine->end()-pLine->start();
 	float len = vSeg.length();
-	Sigma::uint32 numTrees = (len/m_lineSpacing)+1;
+	Sigma::uint32 numTrees = (len/m_distance_between_trees_line)+1;
 
 	// calc new spacing
 	float spc = len/(float)numTrees;
