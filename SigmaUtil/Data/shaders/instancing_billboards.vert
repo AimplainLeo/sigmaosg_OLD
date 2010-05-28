@@ -1,5 +1,7 @@
 // instancing_billboards.vert
 
+#extension GL_EXT_gpu_shader4 : enable
+
 // not to be used in this version
 /*
 uniform int			cc;			
@@ -19,6 +21,9 @@ uniform int			numInstances;
 uniform sampler2D	texPositions;
 uniform int			texSizeSquared;
 uniform int			useLights;
+
+uniform float		minSize;
+uniform float		maxSize;
 
 // values to be varying (used in pixel shader)
 varying vec4		v;
@@ -162,7 +167,7 @@ void test()
 	// FIXME: to be replaced when z values are in the position texture
 	float xxx = 0.0;
 	float yyy = 0.0;
-	float zzz = 0.0f;
+	float zzz = 0.0;
 
 	// move top part of vertices (wind simulations and deforming of quad)
 	if ( gl_Vertex.z!=0.0 )
@@ -207,7 +212,7 @@ void test2()
 
 	float xxx = 0.0;
 	float yyy = 0.0;
-	float zzz = 0.0f;
+	float zzz = 0.0;
 
 	vec4 pos = vec4( plant_pos.x, plant_pos.y, plant_pos.z+zzz, 1.0 );
 	vec4 newX = vec4( 1.0, 0.0, 0.0, 0.0 );
@@ -231,7 +236,7 @@ void test3()
 
 	float xxx = 0.0;
 	float yyy = 0.0;
-	float zzz = 0.0f;
+	float zzz = 0.0;
 
 	vec4 pos = vec4( plant_pos.x, plant_pos.y, plant_pos.z+zzz, 1.0 );
 	vec4 newX = vec4( 1.0, 0.0, 0.0, 0.0 );
@@ -256,6 +261,51 @@ void test3()
 	v = gl_ModelViewMatrix * mV * gl_Vertex;  
 }
 
+void test4()
+{
+	float inst = float(gl_InstanceID);
+
+	float x = mod( inst, float(texSizeSquared) ) / float(texSizeSquared);
+	float y = ( inst/float(texSizeSquared) ) / float(texSizeSquared);
+	vec2 texPos = vec2( x, y );
+	vec4 plant_pos = texture2D( texPositions, texPos );
+
+	float xxx = 0.0;
+	float yyy = 0.0;
+	float zzz = 0.0;
+
+	vec4 pos = vec4( plant_pos.x, plant_pos.y, plant_pos.z+zzz, 1.0 );
+	vec4 newX = vec4( 1.0, 0.0, 0.0, 0.0 );
+	vec4 newY = vec4( 0.0, 1.0, 0.0, 0.0 );
+	vec4 newZ = vec4( 0.0, 0.0, 1.0, 0.0 );
+	mat4 mV = mat4( newX, newY, newZ, pos );
+
+	// orientation (billboard)
+	vec3 X = vec3( gl_ModelViewMatrix[0][0], gl_ModelViewMatrix[1][0], gl_ModelViewMatrix[2][0] );
+    vec3 Y = vec3( gl_ModelViewMatrix[0][1], gl_ModelViewMatrix[1][1], gl_ModelViewMatrix[2][1] );
+    vec3 Z = vec3( gl_ModelViewMatrix[0][2], gl_ModelViewMatrix[1][2], gl_ModelViewMatrix[2][2] );
+		
+	vec4 glv = gl_Vertex;
+	//float scale = (1.0+noise1(inst/float(numInstances))/2.0)*10.0;
+	//float scale = (1.0+IntNoise1(gl_InstanceID)/2.0)*10.0;
+	float scale = (1.0+IntNoise1(gl_InstanceID)/2.0)*(maxSize-minSize)+minSize;
+
+	glv.x = glv.x*scale;
+	glv.y = glv.y*scale;
+	glv.z = glv.z*scale;
+
+	vec3 xx = glv.x*X;
+	vec3 yy = glv.y*Y;
+	xx.z = 0.0;
+	yy.z = 0.0;
+	vec3 vertex = xx + yy + vec3( 0.0, 0.0, glv.z );
+
+
+	gl_Position = gl_ModelViewProjectionMatrix * mV * vec4( vertex, 1.0 );
+
+	v = gl_ModelViewMatrix * mV * gl_Vertex;  
+}
+
 void main()
 {
 	gl_TexCoord[0] = gl_MultiTexCoord0;
@@ -264,7 +314,8 @@ void main()
 	gl_TexCoord[0].x = f/8.0f + (gl_MultiTexCoord0.x/8.0);
 
 	//simple2();
-	test3();
+	//test3();
+	test4();
 
 	gl_FrontColor = gl_Color;
 

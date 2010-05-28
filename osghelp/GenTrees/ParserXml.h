@@ -32,8 +32,6 @@ public:
 
 	CSulGenTextureWithPositions* getGen();
 
-	float				getSizeMultiplier();
-
 	bool				isTextureSuppressed();
 
 	Sigma::uint32		getTexUnit();
@@ -41,6 +39,9 @@ public:
 	const CSulString&	getOutputFile() const;
 
 	Sigma::uint32		getUseLights();
+
+	float				getMinTree();
+	float				getMaxTree();
 
 private:
 	void				LoadFinished();
@@ -50,7 +51,6 @@ private:
 	bool										m_bSuppressTextureTree;
 	Sigma::uint32								m_texUnit;
 	CSulString									m_sOutputFile;
-	float										m_sizeMultiplier;
 	bool										m_suppressViewer;
 	bool										m_showPivots;
 
@@ -67,7 +67,10 @@ private:
 
 	Sigma::uint32								m_useLights;
 
-	CSulString					m_sInputFileOverride;
+	CSulString									m_sInputFileOverride;
+
+	float										m_minTree;
+	float										m_maxTree;
 };
 
 #endif // __PARSERXML_H__

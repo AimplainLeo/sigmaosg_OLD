@@ -8,10 +8,11 @@
 CParserXml::CParserXml() :
 m_bSuppressTextureTree( false ),
 m_texUnit( 0 ),
-m_sizeMultiplier( 1.0f ),
 m_suppressViewer( false ),
 m_showPivots( false ),
-m_useLights( 0 )
+m_useLights( 0 ),
+m_minTree( 3.0f ),
+m_maxTree( 3.0f )
 {
 }
 
@@ -97,8 +98,10 @@ void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 
 	if ( sName=="TREE" )
 	{
-		m_sizeMultiplier = pAttr->get( "sizemultiplier" ).asFloat();
 		m_radiusBetweenTrees = pAttr->get( "radius_between_trees" ).asFloat();
+
+		m_minTree = pAttr->get( "min" ).asFloat();
+		m_maxTree = pAttr->get( "max" ).asFloat();
 	}
 
 	if ( sName=="VIEWER" )
@@ -173,11 +176,6 @@ const VEC_SHAPEMASK& CParserXml::getShapeMaskList() const
 	return m_vecShapeMasks;
 }
 
-float CParserXml::getSizeMultiplier()
-{
-	return m_sizeMultiplier;
-}
-
 bool CParserXml::isTextureSuppressed()
 {
 	return m_bSuppressTextureTree;
@@ -196,4 +194,14 @@ const CSulString& CParserXml::getOutputFile() const
 Sigma::uint32 CParserXml::getUseLights()
 {
 	return m_useLights;
+}
+
+float CParserXml::getMinTree()
+{
+	return m_minTree;
+}
+
+float CParserXml::getMaxTree()
+{
+	return m_maxTree;
 }

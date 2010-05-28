@@ -71,19 +71,21 @@ CSulRenderInstances::CSulRenderInstances(
 	osg::Image* pImagePositions, 
 	Sigma::uint32 numInst, 
 	osg::BoundingBox& bb, 
-	float sizeMultiplier,
+	float min, 
+	float max,
 	bool bSuppressTexture,
 	Sigma::uint32 texUnit,
 	Sigma::uint32 texSizeSquared,
 	Sigma::uint32 useLights
 ) :
 osg::Geode(),
-m_sizeMultiplier( sizeMultiplier ),
 m_bb( bb ),
 m_bSuppressTexture( bSuppressTexture ),
 m_texUnit( texUnit ),
 m_texSizeSquared( texSizeSquared ),
-m_useLights( useLights )
+m_useLights( useLights ),
+m_min( min ),
+m_max( max )
 {
 	m_rTexturePositions = new osg::Texture2D( pImagePositions );
 	m_rTexturePositions->setInternalFormat( GL_RGB32F_ARB );
@@ -95,7 +97,7 @@ m_useLights( useLights )
 
 void CSulRenderInstances::create()
 {
-	CSulGeomBillboardInstancing* pBillboard = new CSulGeomBillboardInstancing( m_numInstances, m_sizeMultiplier );
+	CSulGeomBillboardInstancing* pBillboard = new CSulGeomBillboardInstancing( m_numInstances );
 
 	addDrawable( pBillboard->getDrawable() );
 
@@ -135,7 +137,7 @@ void CSulRenderInstances::create()
 
 void CSulRenderInstances::createShaders()
 {
-	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights );
+	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights, m_min, m_max );
 }
 
 Sigma::uint32 CSulRenderInstances::getNumInstances() const

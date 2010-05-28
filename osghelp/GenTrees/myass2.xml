@@ -1,4 +1,6 @@
-<GEN>
+<GEN
+  uselights="000000001"
+  >
 
   <TEXTURE_TREE 
     suppress="false"

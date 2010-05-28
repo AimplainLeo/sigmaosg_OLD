@@ -90,17 +90,18 @@ int _tmain( int argc, char** argv )
 	rXml->Load( xmlFile );
 
 	osg::ref_ptr<osg::Group> rRoot = new osg::Group;
-
+ 
 	// these are the actual trees that are generated
 	Sigma::uint32 texUnit			= rXml->getTexUnit();
 	bool bSuppressTexture			= rXml->isTextureSuppressed();
-	float sizeMultiplier			= rXml->getSizeMultiplier();
 	osg::Image* pImage				= rXml->getGen()->getImage();
 	Sigma::uint32 posCount			= rXml->getGen()->getCount();
 	Sigma::uint32 texSizeSquared	= rXml->getGen()->getTexSizeSquared();
 	Sigma::uint32 useLights			= rXml->getUseLights();
 	osg::BoundingBox bb				= rXml->getSceneTerrain()->getBoundingBoxWorld();
-	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, sizeMultiplier, bSuppressTexture, texUnit, texSizeSquared, useLights );
+	float minTree					= rXml->getMinTree();
+	float maxTree					= rXml->getMaxTree();
+	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights );
 	pRenderInstances->create();
 	//rRoot->addChild( pRenderInstances );
 	rXml->getSceneTerrain()->getPat()->addChild( pRenderInstances );

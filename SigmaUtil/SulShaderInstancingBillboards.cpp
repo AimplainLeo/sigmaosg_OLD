@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulShaderInstancingBillboards.h"
 
-CSulShaderInstancingBillboards::CSulShaderInstancingBillboards( osg::Node* pNode, Sigma::int32 numInstances, Sigma::int32 texUnit, Sigma::int32 texSizeSquared, unsigned int useLights, osg::Program* pProg ) :
+CSulShaderInstancingBillboards::CSulShaderInstancingBillboards( osg::Node* pNode, Sigma::int32 numInstances, Sigma::int32 texUnit, Sigma::int32 texSizeSquared, unsigned int useLights, float min, float max, osg::Program* pProg ) :
 CSulShaderBase( pNode )
 {
 	if ( !pProg )
@@ -38,6 +38,14 @@ CSulShaderBase( pNode )
 		m_rUniform_useLights = new osg::Uniform( osg::Uniform::INT, "useLights" );
 		m_rUniform_useLights->set( (int)useLights );
 		m_rSS->addUniform( m_rUniform_useLights );
+
+		m_rUniform_min = new osg::Uniform( osg::Uniform::FLOAT, "minSize" );
+		m_rUniform_min ->set( min );
+		m_rSS->addUniform( m_rUniform_min  );
+
+		m_rUniform_max = new osg::Uniform( osg::Uniform::FLOAT, "maxSize" );
+		m_rUniform_max ->set( max );
+		m_rSS->addUniform( m_rUniform_max  );
 	}
 }
 
