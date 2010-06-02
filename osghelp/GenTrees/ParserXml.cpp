@@ -20,7 +20,7 @@ void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
 	if ( sName=="GEN" )
 	{
-		m_useLights = strtoul( pAttr->get( "uselights" ).c_str(), 0, 16 );
+		m_useLights = strtoul( pAttr->get( "uselights" ).c_str(), 0, 2 );
 		m_areaPadding = pAttr->get( "areapadding" ).asFloat();		
 	}
 
