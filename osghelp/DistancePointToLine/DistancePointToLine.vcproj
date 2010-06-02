@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="Shapes"
-	ProjectGUID="{AC92FE72-0173-4E15-BAE6-A49AE1839FB4}"
-	RootNamespace="Shapes"
+	Name="DistancePointToLine"
+	ProjectGUID="{903E9D58-9110-4C32-81A2-E7D55A8F08C9}"
+	RootNamespace="DistancePointToLine"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH)"
+				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH);$(SIGMAOSG_ROOT_PATH)"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib"
+				AdditionalDependencies="SigmaUtil_x2008d.lib osgd.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OSG_LIB_PATH)"
+				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -117,7 +117,6 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH)"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -136,9 +135,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(OSG_LIB_PATH)"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -177,7 +174,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Shapes.cpp"
+				RelativePath=".\DistancePointToLine.cpp"
 				>
 			</File>
 			<File

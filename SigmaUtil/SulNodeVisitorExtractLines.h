@@ -1,5 +1,7 @@
 // SulNodeVisitorExtractLines.h
 
+// DEPRECATED: use CSulFuncExtractor
+
 #ifndef __SULNODEVISITOREXTRACTLINES_H__
 #define __SULNODEVISITOREXTRACTLINES_H__
 
@@ -20,7 +22,14 @@ public:
 		m_vecTri.push_back( tri );
 	}
 
-	void operator()(const osg::Vec3 v1, const osg::Vec3 v2, const osg::Vec3 v3, const osg::Vec3 v4, bool treatVertexDataAsTemporary){}
+	void operator()(const osg::Vec3 v1, const osg::Vec3 v2, const osg::Vec3 v3, const osg::Vec3 v4, bool treatVertexDataAsTemporary)
+	{
+		CSulDataTri tri0( v1, v2, v3);
+		m_vecTri.push_back( tri0 );
+
+		CSulDataTri tri1( v2, v3, v4);
+		m_vecTri.push_back( tri1 );
+	}
 
 	void operator()(const osg::Vec3 v1, const osg::Vec3 v2, bool treatVertexDataAsTemporary)
 	{

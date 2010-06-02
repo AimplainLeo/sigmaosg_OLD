@@ -21,6 +21,7 @@ void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 	if ( sName=="GEN" )
 	{
 		m_useLights = strtoul( pAttr->get( "uselights" ).c_str(), 0, 16 );
+		m_areaPadding = pAttr->get( "areapadding" ).asFloat();		
 	}
 
 	if ( sName=="TEXTURE_TREE" )
@@ -73,7 +74,7 @@ void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		CSulString sShapeFile = pAttr->get( "file" );
 		bool bRenderMe = pAttr->get( "renderme" ).asBool();
 		float lineDist = pAttr->get( "linedist" ).asFloat();
-
+		
 		CSceneShapeMask* pSceneShapeMask = new CSceneShapeMask( sShapeFile, bRenderMe, lineDist );
 		pSceneShapeMask->adjustPosition( m_rWorldUTM );
 
@@ -154,6 +155,7 @@ void CParserXml::LoadFinished()
 		m_rSceneShape->getClippedTriangleList(),
 		m_radiusBetweenTrees,
 		m_distance_between_trees_line,
+		m_areaPadding,
 		vecMask
 	);
 }

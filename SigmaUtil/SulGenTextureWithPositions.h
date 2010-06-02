@@ -14,8 +14,9 @@ public:
 				osg::PositionAttitudeTransform*	pSceneTerrain,
 				const Sigma::VEC_LINESEGMENT&	line,
 				const Sigma::VEC_TRI&			tri,
-				float							radius,						// radius between trees
+				float							radius,							// radius between trees
 				float							distance_between_trees_line,
+				float							areaPadding,					// areaPadding is used to extend masks for areas
 				VEC_GENPOSITIONMASK				vecMask
 			);
 
@@ -40,7 +41,8 @@ private:
 	const Sigma::VEC_TRI&			m_vecTri;
 	float							m_radius;						// radius between trees on a patch
 	float							m_distance_between_trees_line;	// distance between trees on a line
-	Sigma::VEC_VEC3					m_vecPos;				// positions are in world space
+	float							m_areaPadding;
+	Sigma::VEC_VEC3					m_vecPos;						// positions are in world space
 	Sigma::uint32					m_texSizeSquared;
 	osg::ref_ptr<osg::Image>		m_rImage;
 	Sigma::uint32					m_posCount;

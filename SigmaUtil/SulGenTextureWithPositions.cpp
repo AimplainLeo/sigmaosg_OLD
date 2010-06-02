@@ -6,6 +6,7 @@
 #include "SulIntLine.h"
 #include "SulGeomLine.h"
 #include "SulIntTriangle.h"
+#include "sulDistancePointAndTriangle2d.h"
 #include <osg/PositionAttitudeTransform>
 #include <osg/io_utils>
 #include <osgUtil/IntersectVisitor>
@@ -26,6 +27,7 @@ CSulGenTextureWithPositions::CSulGenTextureWithPositions(
 	const Sigma::VEC_TRI&			tri,
 	float							radius,
 	float							distance_between_trees_line,
+	float							areaPadding,
 	VEC_GENPOSITIONMASK				vecMask
 ) :
 m_rSceneTerrain( pSceneTerrain ),
@@ -33,6 +35,7 @@ m_vecLine( line ),
 m_vecTri( tri ),
 m_radius( radius ),
 m_distance_between_trees_line( distance_between_trees_line ),
+m_areaPadding( areaPadding ),
 m_vecMask( vecMask )
 {
 	process();
@@ -327,10 +330,19 @@ void CSulGenTextureWithPositions::processMaskTri( CSulGenPositionMask* pMask )
 					e.z() += 1000.0f;
 					osg::ref_ptr<osg::LineSegment> line = new osg::LineSegment( s, e );
 
-					// if line intersects triangle then we remove tree
+					// if line intersects triangle then we remove the position
 					if ( sulIntTriangle( *line, (*i) ) )
 					{
 						osg::notify(osg::NOTICE) << "masked with tri " << std::endl;						
+						++iPos;
+						continue;
+					}
+
+					// if the line/point is within 2 meters (debugging with 2 meters) of the triangle we remove the position
+					double d = sulDistancePointAndTriangle2d( s, (*i) );
+					if ( d<m_areaPadding )
+					{
+						osg::notify(osg::NOTICE) << "masked with distance tri and point d=" << d << std::endl;						
 						++iPos;
 						continue;
 					}

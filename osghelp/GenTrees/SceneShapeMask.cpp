@@ -17,6 +17,8 @@ m_lineDist( lineDist )
 		m_rScene->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE| osg::StateAttribute::PROTECTED );
 		m_rScene->getOrCreateStateSet()->setRenderingHint( osg::StateSet::TRANSPARENT_BIN );
 	}
+
+	//drawBoundingBox();
 }
 
 float CSceneShapeMask::getLineDist()

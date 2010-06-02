@@ -728,6 +728,22 @@
 				Name="Intersections"
 				>
 				<File
+					RelativePath=".\SulDistancePointAndLine.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulDistancePointAndLine.h"
+					>
+				</File>
+				<File
+					RelativePath=".\sulDistancePointAndTriangle2d.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\sulDistancePointAndTriangle2d.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulIntersectGraph.cpp"
 					>
 				</File>
@@ -741,6 +757,14 @@
 				</File>
 				<File
 					RelativePath=".\SulIntersectGraphMouse.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulIntersectionWithCamera.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulIntersectionWithCamera.h"
 					>
 				</File>
 				<File

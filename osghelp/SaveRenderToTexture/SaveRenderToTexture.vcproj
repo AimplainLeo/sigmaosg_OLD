@@ -117,6 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH);$(SIGMAOSG_ROOT_PATH)"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -135,7 +136,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="osgText.lib osgGA.lib osgDB.lib osg.lib osgViewer.lib  SigmaUtil_x2008.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"

@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgUtild.lib osgManipulatord.lib osgTextd.lib osgGAd.lib osgd.lib osgViewerd.lib SigmaUtil_x2008d.lib osgDBd.lib"
+				AdditionalDependencies="SigmaUtil_x2008d.lib osgUtild.lib osgManipulatord.lib osgTextd.lib osgGAd.lib osgd.lib osgViewerd.lib osgDBd.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgUtil.lib osgManipulator.lib osgText.lib osgGA.lib osg.lib osgViewer.lib SigmaUtil_x2008.lib osgDB.lib"
+				AdditionalDependencies="SigmaUtil_x2008.lib osgUtil.lib osgManipulator.lib osgText.lib osgGA.lib osg.lib osgViewer.lib  osgDB.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"

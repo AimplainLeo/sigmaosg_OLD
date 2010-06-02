@@ -72,6 +72,8 @@ private:
 
 	float										m_minTree;
 	float										m_maxTree;
+
+	float										m_areaPadding;
 };
 
 #endif // __PARSERXML_H__
