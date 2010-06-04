@@ -46,6 +46,7 @@ void CSulTexCam::initTex()
 			}
 			break;
 
+		// NOTE: the 16F is probably wrong? 32 might be more correct (need some testing)
 		case HDR:
 			{
 				m_rTex = new osg::Texture2D;
@@ -59,6 +60,16 @@ void CSulTexCam::initTex()
 				m_rTex->setFilter( osg::Texture2D::MAG_FILTER,osg::Texture2D::LINEAR );
 			}
 			break;
+
+		case ZVALUE_WITH_IMAGE:
+			{
+				m_rImage = new osg::Image;
+				m_rImage->allocateImage( m_w, m_h, 1,  GL_RGB, GL_FLOAT );	
+				m_rImage->setInternalTextureFormat( GL_RGB32F_ARB );
+
+				m_rTex = new osg::Texture2D( m_rImage );
+			}
+			break;		
 
 		default:
 			assert( 0 ); // not supported yet	
@@ -92,4 +103,7 @@ osg::Texture2D* CSulTexCam::getTexture()
 	return m_rTex;
 }
 
-
+osg::Image* CSulTexCam::getImage()
+{
+	return m_rImage;
+}

@@ -15,7 +15,8 @@ public:
 	{
 		STANDARD,
 		SHADOW,
-		HDR
+		HDR,
+		ZVALUE_WITH_IMAGE			// draws the scene using the vertex z values
 	};
 
 public:
@@ -25,12 +26,15 @@ public:
 	void				setTexture( osg::Texture2D* pTex );
 	osg::Texture2D*		getTexture();
 
+	osg::Image*			getImage();
+
 private:
 	void				initTex();
 	void				initCam();
 
 private:
 	osg::ref_ptr<osg::Texture2D>	m_rTex;
+	osg::ref_ptr<osg::Image>		m_rImage;
 	Sigma::uint32					m_w;
 	Sigma::uint32					m_h;
 	ESETUP							m_eSetup;
