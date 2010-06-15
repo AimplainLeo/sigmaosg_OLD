@@ -10,6 +10,9 @@
 #include <osgGA/GUIEventHandler>
 
 osg::ref_ptr<CSulIntersectionWithCamera> camInt;
+osg::ref_ptr<osgViewer::Viewer> rViewer;
+osg::Group* m_rootGroup = 0;
+osg::Group* m_rootWorkGroup = 0;
 
 class CKeyboardHandler : public osgGA::GUIEventHandler 
 {
@@ -55,12 +58,22 @@ public:
 class CMyIntersect : public CSulIntersectionInfo
 {
 public:
+	CMyIntersect()
+	{
+	}
+
 	void update()
 	{
+		osg::notify(osg::NOTICE) << "MSG: CMyIntersect::update" << std::endl;
+
+		// draw a sphere at hit point
+		osg::Geode* pGeode = new osg::Geode();
+		pGeode->addDrawable( new osg::ShapeDrawable( new osg::Sphere(getHit(),0.1f) ) );
+		m_rootWorkGroup->addChild( pGeode );
 	}
 };
 
-osg::Node* CreateScene()
+osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 {
 	osg::Group* pGroup = new osg::Group;
 
@@ -91,7 +104,9 @@ osg::Node* CreateScene()
 int _tmain(int argc, _TCHAR* argv[])
 {
     // construct the viewer
-    osg::ref_ptr<osgViewer::Viewer> rViewer = new osgViewer::Viewer;
+    rViewer = new osgViewer::Viewer;
+
+	//rViewer->setThreadingModel( osgViewer::ViewerBase::SingleThreaded );
 
     // make the viewer create a 512x512 window and position it at 32, 32
     rViewer->setUpViewInWindow( 32, 32, 800, 600 );
@@ -100,8 +115,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	osg::ref_ptr<CKeyboardHandler> rKeyboardHandler = new CKeyboardHandler;
 	rViewer->addEventHandler( rKeyboardHandler.get() );
 
+	m_rootGroup = new osg::Group;
+	m_rootGroup->addChild( CreateScene( rViewer ) );
+
+	m_rootWorkGroup = new osg::Group;
+	m_rootGroup->addChild( m_rootWorkGroup );
+
     // set the scene-graph data the viewer will render
-    rViewer->setSceneData( CreateScene() );
+    rViewer->setSceneData( m_rootGroup );
 
     // execute main loop
     return rViewer->run();
