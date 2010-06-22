@@ -21,6 +21,8 @@ public:
 			// check drawcallback 
 			if ( m_rDrawCallback->isFrameRendered() )
 			{
+//				osg::notify(osg::NOTICE) << "MSG: CSulIntersectionWithCameraCallback -> drawCallback frame is ready " << std::endl;
+
 				m_rDrawCallback->shoot();
 				m_bTest = false;
 			}
@@ -32,8 +34,14 @@ public:
 
 	void shoot()
 	{
+	//	osg::notify(osg::NOTICE) << "MSG: CSulIntersectionWithCameraCallback::shoot" << std::endl;
 		m_rDrawCallback->reset();
-		m_bTest = true;
+		m_bTest = true;		
+	}
+
+	bool IsReady()
+	{
+		return !m_bTest;
 	}
 
 private:

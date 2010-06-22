@@ -93,6 +93,18 @@ void CSulTexCam::initCam()
 			}
 			break;
 
+		case ZVALUE_WITH_IMAGE:
+			{
+				setRenderOrder( osg::Camera::PRE_RENDER );
+				setRenderTargetImplementation( osg::Camera::FRAME_BUFFER_OBJECT );	// this will render only to the texture
+				attach( osg::Camera::COLOR_BUFFER, m_rImage );
+				setName( "CSulTexCam" );
+				setClearColor( osg::Vec4( 0.0f, 0.0f, 0.0f, 1.0f ) );
+				setReferenceFrame( osg::Transform::ABSOLUTE_RF );
+				setViewport( 0, 0, m_w, m_h );
+			}
+			break;
+
 		default:
 			assert( 0 ); // not supported yet
 	}

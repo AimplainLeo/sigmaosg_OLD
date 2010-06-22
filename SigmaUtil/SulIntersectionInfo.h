@@ -8,12 +8,6 @@ class CSulIntersectionInfo : public osg::Referenced
 public:
 	CSulIntersectionInfo()
 	{
-		m_bHit = false;
-	}
-
-	bool isValid()
-	{
-		return m_bHit;
 	}
 
 	void setHit( const osg::Vec3& hit )
@@ -30,7 +24,6 @@ public:
 
 private:
 	osg::Vec3	m_posHit;
-	bool		m_bHit;
 };
 
 #endif // __SULINTERSECTIONINFO_H__

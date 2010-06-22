@@ -7,11 +7,12 @@
 #include "SulIntersectionDrawCallback.h"
 #include "SulIntersectionWithCameraCallback.h"
 #include "SulIntersectionInfo.h"
+#include "SulExport.h"
 #include <osg/referenced>
 #include <osg/node>
 #include <osg/group>
 
-class CSulIntersectionWithCamera : public osg::Group
+class SUL_EXPORT CSulIntersectionWithCamera : public osg::Group
 {
 public:
 					CSulIntersectionWithCamera( osg::Node* pNode, CSulIntersectionInfo* pIntersectionInfo );
@@ -19,9 +20,13 @@ public:
 	void			setPosition( const osg::Vec3& pos );
 	void			setDirection( const osg::Vec3& dir );
 
+	void			setLine( const osg::Vec3& v0, const osg::Vec3& v1 );
+
 	osg::Texture2D*	getTexture();
 	
 	void			shoot();
+
+	bool			IsReady();
 
 private:
 	osg::ref_ptr<osg::Node>								m_rNode;

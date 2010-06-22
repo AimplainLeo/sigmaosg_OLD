@@ -8,6 +8,7 @@ CSulIntersectionWithCamera::CSulIntersectionWithCamera( osg::Node* pNode, CSulIn
 {
 	// render to texture (RTT)
 	m_rTexCam = new CSulTexCam( 128, 128, CSulTexCam::ZVALUE_WITH_IMAGE );
+	//m_rTexCam->setDataVariance( osg::Object::DYNAMIC );
 	m_rTexCam->addChild( pNode );
 	addChild( m_rTexCam );
 
@@ -42,8 +43,22 @@ void CSulIntersectionWithCamera::setDirection( const osg::Vec3& dir )
 	m_rTexCam->setViewMatrixAsLookAt( eye, eye+dir, osg::Z_AXIS );
 }
 
+void CSulIntersectionWithCamera::setLine( const osg::Vec3& v0, const osg::Vec3& v1 )
+{
+	setPosition( v0 );
+	setDirection( v1-v0 );
+}
+
 void CSulIntersectionWithCamera::shoot()
 {
+//	osg::notify(osg::NOTICE) << "MSG: CSulIntersectionWithCamera::shoot" << std::endl;
+
 	m_rSulIntersectionWithCameraCallback->shoot();
 }
+
+bool CSulIntersectionWithCamera::IsReady()
+{
+	return m_rSulIntersectionWithCameraCallback->IsReady();
+}
+
 

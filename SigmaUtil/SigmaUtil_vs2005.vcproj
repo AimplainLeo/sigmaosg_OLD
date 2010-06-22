@@ -798,6 +798,32 @@
 					RelativePath=".\SulIntTriangle.h"
 					>
 				</File>
+
+				<Filter
+					Name="ImageBaseIntersection"
+					>
+					<File
+						RelativePath=".\SulIntersectionDrawCallback.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulIntersectionInfo.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulIntersectionWithCamera.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulIntersectionWithCamera.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulIntersectionWithCameraCallback.h"
+						>
+					</File>
+				</Filter>
+
 			</Filter>
 			<Filter
 				Name="NodeCallbacks"
@@ -1219,6 +1245,14 @@
 					</File>
 					<File
 						RelativePath=".\SulShaderStreak.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderZ.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderZ.h"
 						>
 					</File>
 				</Filter>
