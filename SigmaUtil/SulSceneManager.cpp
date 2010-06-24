@@ -183,3 +183,22 @@ bool CSulSceneManager::IsNodeInLayout( osg::Node* pNode )
 	return false;
 }
 
+void CSulSceneManager::addAttribute( const CSulString& sName, osg::StateAttribute* pAttr )
+{
+	m_mapStateAttribute[sName] = pAttr;
+}
+
+osg::StateAttribute* CSulSceneManager::getAttribute( const CSulString& sName )
+{
+	Sigma::MAP_STRING_STATEATTRIBUTE::iterator iFound;
+
+	iFound = m_mapStateAttribute.find( sName );
+	if ( iFound!=m_mapStateAttribute.end() )
+	{
+		return iFound->second;
+	}
+
+	return 0;
+}
+
+

@@ -798,7 +798,6 @@
 					RelativePath=".\SulIntTriangle.h"
 					>
 				</File>
-
 				<Filter
 					Name="ImageBaseIntersection"
 					>
@@ -823,7 +822,6 @@
 						>
 					</File>
 				</Filter>
-
 			</Filter>
 			<Filter
 				Name="NodeCallbacks"

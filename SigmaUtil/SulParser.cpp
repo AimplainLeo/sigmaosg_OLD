@@ -6,10 +6,6 @@
 #include "SulFile.h"
 #include "SulString.h"
 
-#ifdef _DEBUG
-#define new DEBUG_CLIENTBLOCK
-#endif
-
 using namespace Sigma;
 
 /*

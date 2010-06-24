@@ -86,7 +86,7 @@ float CSulString::asFloat()
 	return (float)atof( c_str() );
 }
 
-double CSulString::GetDouble()
+double CSulString::asDouble()
 {
 	return (float)strtod( c_str(), 0 );
 }
@@ -96,7 +96,7 @@ Sigma::uint32 CSulString::asUint32()
 	return (Sigma::uint32)atoi( c_str() );
 }
 
-Sigma::int32 CSulString::GetInt32()
+Sigma::int32 CSulString::asInt32()
 {
 	return (Sigma::int32)atoi( c_str() );
 }

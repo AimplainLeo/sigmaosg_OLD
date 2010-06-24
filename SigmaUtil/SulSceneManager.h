@@ -43,12 +43,20 @@ public:
 	virtual bool	AddStateSet( const CSulString& sName, osg::StateSet* pStateSet );
 	osg::StateSet*	GetStateSet( const CSulString& sName );
 
+	////////////////////////////////////////////////////////////////////////////////////
+	// use to manage stateattributes in the scene layout
+	////////////////////////////////////////////////////////////////////////////////////
+
+	virtual	void			addAttribute( const CSulString& sName, osg::StateAttribute* pAttr );
+	osg::StateAttribute*	getAttribute( const CSulString& sName );
+
 private:
 	bool			IsNodeInLayout( osg::Node* pNode );
 
 private:
-	MAP_NODE		m_mapNode;
-	MAP_STATESET	m_mapStateSet;
+	MAP_NODE							m_mapNode;
+	MAP_STATESET						m_mapStateSet;
+	Sigma::MAP_STRING_STATEATTRIBUTE	m_mapStateAttribute;
 };
 
 #endif // __SULSCENEMANAGER_H__

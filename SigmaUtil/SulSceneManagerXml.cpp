@@ -152,38 +152,56 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 		pGroup->addChild( pNode );
 	}
 
+	if ( sName=="ADD_ATTR" )
+	{
+		if ( !m_pCurrentStateSet )
+		{
+			osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::ElementStart -> ADD_ATTR: can only be added inside a stateset" << std::endl;
+		}
+		else
+		{
+			CSulString sAttrName = pAttr->get( "name" );
+			m_pCurrentStateSet->setAttributeAndModes( m_rSceneManager->getAttribute( sAttrName ) );
+		}
+	}
+
 	if ( sName=="STATESET" )
 	{
 		CSulString s = pAttr->get( "name" );
 		m_rSceneManager->AddStateSet( s, m_pCurrentStateSet = new osg::StateSet );
 	}
 
-	if ( m_pCurrentStateSet && sName=="FOG" )
+	if ( sName=="FOG" )
 	{
 		osg::Fog* pFog = new osg::Fog;
-		m_pCurrentStateSet->setAttributeAndModes(pFog);
+		
+		// @PWM: currentstateset is a bad design.. i'm changing this so statesets can add attributes instead
+		//m_pCurrentStateSet->setAttributeAndModes(pFog);
+		
 		pFog->setColor( osg::Vec4(1,1,1,1) );
 
 		CSulString sMode;
-		if( pAttr->get("mode", sMode) )
+		if ( pAttr->get( "mode", sMode ) )
 		{
-			if ( sMode == "linear" )
+			if ( sMode=="linear" )
 			{
-				pFog->setMode(osg::Fog::LINEAR);
+				pFog->setMode( osg::Fog::LINEAR );
 			}
-			else if ( sMode == "exp" )
+			else if ( sMode=="exp" )
 			{
-				pFog->setMode(osg::Fog::EXP);
+				pFog->setMode( osg::Fog::EXP );
 			}
-			else if ( sMode == "exp2" )
+			else if ( sMode=="exp2" )
 			{
-				pFog->setMode(osg::Fog::EXP2);
+				pFog->setMode( osg::Fog::EXP2 );
 			}
 			else
 			{
 				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::ElementStart -> FOG: Unknown mode" << std::endl;
 			}
 		}
+
+		m_rSceneManager->addAttribute( pAttr->get("name"), pFog );
 	}
 
 	if ( m_pCurrentStateSet && sName=="MODE" )
@@ -225,6 +243,22 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 			m_pCurrentStateSet->setRenderBinDetails(binNum, sBinName);
 		}
 	}
+
+	if ( sName=="UNIFORM" )
+	{
+		osg::Uniform* uniform = 0;
+
+		CSulString sUniformName = pAttr->get( "name" );
+		
+		CSulString type = pAttr->get( "type" );
+		
+		if ( type=="INT" )
+		{
+			uniform = new osg::Uniform( sUniformName.c_str(), pAttr->get( "value" ).asInt32() );
+		}
+
+		GetLastNode()->getOrCreateStateSet()->addUniform( uniform );
+	}
 }
 
 void CSulSceneManagerXml::ElementEnd( const CSulString& sName )
@@ -239,3 +273,4 @@ void CSulSceneManagerXml::ElementEnd( const CSulString& sName )
 		m_pCurrentStateSet = 0;
 	}
 }
+

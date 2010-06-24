@@ -22,9 +22,9 @@ public:
 	void			Trim();
 
 	float			asFloat();
-	double			GetDouble();
+	double			asDouble();
 	Sigma::uint32	asUint32();
-	Sigma::int32	GetInt32();
+	Sigma::int32	asInt32();
 	bool			asBool();
 
 	CSulString		GetStartWord( char c ) ;

@@ -7,6 +7,7 @@
 #include <osg/linesegment>
 #include <osg/plane>
 #include <osg/texture2d>
+#include <osg/stateattribute>
 #include <vector>
 #include <map>
 
@@ -20,12 +21,14 @@ namespace Sigma
 	typedef unsigned short	uint16;		// unsigned short:	??
 	typedef unsigned int	uint32;		// unsigned int:	0 -> 4294967295
 
-	typedef std::vector< osg::Vec3 >								VEC_VEC3;
-	typedef std::vector< CSulDataTri >								VEC_TRI;
-	typedef std::vector< osg::ref_ptr<osg::LineSegment> >			VEC_LINESEGMENT;
-	typedef std::vector< osg::Plane >								VEC_PLANE;
-	typedef std::vector< osg::ref_ptr<osg::Texture2D> >				VEC_TEXTURE2D;
-	typedef std::map< uint32, osg::ref_ptr<osg::Texture2D> >	MAP_TEXTURE2D;
+	typedef std::vector< osg::Vec3 >									VEC_VEC3;
+	typedef std::vector< CSulDataTri >									VEC_TRI;
+	typedef std::vector< osg::ref_ptr<osg::LineSegment> >				VEC_LINESEGMENT;
+	typedef std::vector< osg::Plane >									VEC_PLANE;
+	typedef std::vector< osg::ref_ptr<osg::Texture2D> >					VEC_TEXTURE2D;
+	typedef std::vector< osg::ref_ptr<osg::StateAttribute> >			VEC_STATEATTRIBUTE;
+	typedef std::map< std::string, osg::ref_ptr<osg::StateAttribute> >	MAP_STRING_STATEATTRIBUTE;
+	typedef std::map< uint32, osg::ref_ptr<osg::Texture2D> >			MAP_TEXTURE2D;
 
 	#define RGBA( r, g, b, a ) (uint32)a<<24 | (uint32)b<<16 | (uint32)g<<8 | (uint32)r;
 

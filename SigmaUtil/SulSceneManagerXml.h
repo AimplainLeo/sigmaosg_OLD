@@ -4,6 +4,7 @@
 #define __SULSCENEMANAGERXML_H__
 
 #include "SulExport.h"
+#include "SulTypes.h"
 #include "SulSceneManager.h"
 #include "SulXmlParser.h"
 #include <osg/AlphaFunc>
