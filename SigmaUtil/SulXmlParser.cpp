@@ -17,7 +17,7 @@ CSulXmlParser::~CSulXmlParser()
 {
 }
 
-bool CSulXmlParser::ParseElement( CSulParser* pSulParser )
+bool CSulXmlParser::parseElement( CSulParser* pSulParser )
 {
 	osg::ref_ptr<CSulXmlAttr>	rAttr = new CSulXmlAttr;
 
@@ -186,25 +186,25 @@ bool CSulXmlParser::ParseElement( CSulParser* pSulParser )
 	switch ( eElementType )
 	{
 		case TAGSTART:
-			ElementStart( strElementName, rAttr.get() );
+			elementStart( strElementName, rAttr.get() );
 			break;
 
 		case TAGEND:
-			ElementEnd( strElementName, rAttr.get() );
-			ElementEnd( strElementName );
+			elementEnd( strElementName, rAttr.get() );
+			elementEnd( strElementName );
 			break;
 
 		case TAGBOTH:
-			ElementStart( strElementName, rAttr.get() );
-			ElementEnd( strElementName, rAttr.get() );
-			ElementEnd( strElementName );
+			elementStart( strElementName, rAttr.get() );
+			elementEnd( strElementName, rAttr.get() );
+			elementEnd( strElementName );
 			break;
 	}
 
 	return true;
 }
 
-bool CSulXmlParser::Load( const CSulString& sXmlFile )
+bool CSulXmlParser::load( const CSulString& sXmlFile )
 {
 	osg::ref_ptr<CSulParser> rSulParser = new CSulParser;
 
@@ -236,7 +236,7 @@ bool CSulXmlParser::Load( const CSulString& sXmlFile )
 		// we are only interested in the start of an element
 		if ( !STRICMP( pszToken, "<" ) )
 		{
-			if ( !ParseElement( rSulParser.get() ) )
+			if ( !parseElement( rSulParser.get() ) )
 			{
 				return false;
 			}
@@ -245,7 +245,7 @@ bool CSulXmlParser::Load( const CSulString& sXmlFile )
 		pszToken = rSulParser->PeekToken();
 	}
 
-	LoadFinished();
+	loadFinished();
 
 	return true;
 }

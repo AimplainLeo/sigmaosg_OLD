@@ -7,7 +7,7 @@
 bool CSulSceneManager::Load( const CSulString& sXml )
 {
 	osg::ref_ptr<CSulSceneManagerXml> rXml = new CSulSceneManagerXml( this );
-	if ( !rXml->Load( sXml.c_str() ) )
+	if ( !rXml->load( sXml.c_str() ) )
 	{
 		return false;
 	}

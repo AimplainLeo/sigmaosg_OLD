@@ -113,7 +113,7 @@ osg::Node* CSulSceneManagerXml::GetLastNode()
 	return m_vecNodeStack[m_vecNodeStack.size()-1];
 }
 
-void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
+void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
 	if ( sName=="NODE" )
 	{
@@ -130,7 +130,7 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 			CSulString name = pAttr->get("stateset");
 			if ( pNode->getStateSet() )
 			{
-				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::ElementStart -> non-empty stateset on node ["<<pNode->getName()<<"] will be overridden!" << std::endl;
+				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::elementStart -> non-empty stateset on node ["<<pNode->getName()<<"] will be overridden!" << std::endl;
 			}
 			pNode->setStateSet( m_rSceneManager->GetStateSet(name) );
 		}
@@ -143,7 +143,7 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 		osg::Node* pNode = m_rSceneManager->Get( s );
 		if ( !pNode )
 		{
-			osg::notify(osg::WARN)<<"WARNING: CSulSceneManagerXml::ElementStart -> ADD pNode ["<<s<<"] does not exist"<<std::endl;
+			osg::notify(osg::WARN)<<"WARNING: CSulSceneManagerXml::elementStart -> ADD pNode ["<<s<<"] does not exist"<<std::endl;
 		}
 
 		// @PWM the m_sLastNodeName is not the current parent node! it's the name of the node last created!
@@ -156,7 +156,7 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 	{
 		if ( !m_pCurrentStateSet )
 		{
-			osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::ElementStart -> ADD_ATTR: can only be added inside a stateset" << std::endl;
+			osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::elementStart -> ADD_ATTR: can only be added inside a stateset" << std::endl;
 		}
 		else
 		{
@@ -197,7 +197,7 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 			}
 			else
 			{
-				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::ElementStart -> FOG: Unknown mode" << std::endl;
+				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::elementStart -> FOG: Unknown mode" << std::endl;
 			}
 		}
 
@@ -212,7 +212,7 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 			osg::StateAttribute::GLMode mode = GetStateMode(sMode);
 			if ( mode == 0 )
 			{
-				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::ElementStart -> MODE: Unknown mode" << std::endl;
+				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::elementStart -> MODE: Unknown mode" << std::endl;
 			}
 			else
 			{
@@ -244,7 +244,7 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 		}
 	}
 
-	if ( sName=="UNIFORM" )
+	if ( m_pCurrentStateSet && sName=="UNIFORM" )
 	{
 		osg::Uniform* uniform = 0;
 
@@ -257,11 +257,11 @@ void CSulSceneManagerXml::ElementStart( const CSulString& sName, CSulXmlAttr* pA
 			uniform = new osg::Uniform( sUniformName.c_str(), pAttr->get( "value" ).asInt32() );
 		}
 
-		GetLastNode()->getOrCreateStateSet()->addUniform( uniform );
+		m_pCurrentStateSet->addUniform( uniform );
 	}
 }
 
-void CSulSceneManagerXml::ElementEnd( const CSulString& sName )
+void CSulSceneManagerXml::elementEnd( const CSulString& sName )
 {
 	if ( sName=="NODE" )
 	{

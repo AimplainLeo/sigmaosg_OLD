@@ -17,8 +17,8 @@ private:
 public:
 										CSulSceneManagerXml( CSulSceneManager* pSceneManager );
 
-	virtual void						ElementStart( const CSulString& sName, CSulXmlAttr* pAttr );
-	virtual void						ElementEnd( const CSulString& sName );
+	virtual void						elementStart( const CSulString& sName, CSulXmlAttr* pAttr );
+	virtual void						elementEnd( const CSulString& sName );
 
 protected:
 	osg::StateAttribute::Values			GetStateAttribute( const CSulString& s );

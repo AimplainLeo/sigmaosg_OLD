@@ -36,9 +36,9 @@ void CSulPaths::Save( CSulXmlWriter* pWriterXML )
 	i = m_vecPath.begin();
 	while ( i!=m_vecPath.end() )
 	{
-		CSulXmlAttr* pAttr = pWriterXML->ElementStart( "PATH" );
+		CSulXmlAttr* pAttr = pWriterXML->elementStart( "PATH" );
 		pAttr->add( "location", (*i).c_str() );
-		pWriterXML->ElementEnd();
+		pWriterXML->elementEnd();
 
 		++i;
 	}

@@ -568,6 +568,14 @@
 				Name="GUI"
 				>
 				<File
+					RelativePath=".\SulGuiEventHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiEventHandler.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGuiManager.cpp"
 					>
 				</File>
@@ -583,6 +591,42 @@
 					RelativePath=".\SulGuiXml.h"
 					>
 				</File>
+				<Filter
+					Name="Components"
+					>
+					<File
+						RelativePath=".\SulGuiButton.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiButton.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiCanvas.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiCanvas.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiComp.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiComp.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiText.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiText.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="PerlinNoise"
@@ -1243,6 +1287,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulShaderGuiFrame.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderGuiFrame.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulShaderInstancingBillboards.cpp"
 						>
 					</File>
@@ -1368,6 +1420,14 @@
 					</File>
 					<File
 						RelativePath=".\Data\shaders\godrays.vert"
+						>
+					</File>
+					<File
+						RelativePath=".\Data\shaders\gui_frame.frag"
+						>
+					</File>
+					<File
+						RelativePath=".\Data\shaders\gui_frame.vert"
 						>
 					</File>
 					<File

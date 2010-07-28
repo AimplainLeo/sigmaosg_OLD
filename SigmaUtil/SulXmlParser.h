@@ -16,16 +16,16 @@ public:
 					CSulXmlParser();
 	virtual			~CSulXmlParser();
 
-	virtual bool	Load( const class CSulString& sXmlFile );
+	virtual bool	load( const class CSulString& sXmlFile );
 
-	virtual void	ElementStart( const CSulString& sName, CSulXmlAttr* pAttr ) {}
-	virtual void	ElementEnd( const CSulString& sName, CSulXmlAttr* pAttr  ) {}
-	virtual void	ElementEnd( const CSulString& sName ) {}
+	virtual void	elementStart( const CSulString& sName, CSulXmlAttr* pAttr ) {}
+	virtual void	elementEnd( const CSulString& sName, CSulXmlAttr* pAttr  ) {}
+	virtual void	elementEnd( const CSulString& sName ) {}
 
-	virtual void	LoadFinished() {}	
+	virtual void	loadFinished() {}	
 
 private:
-	bool			ParseElement( CSulParser* pSulParser );
+	bool			parseElement( CSulParser* pSulParser );
 
 private:
 	// because ParseElement is called a lot these variables are only created one instance of for faster usage

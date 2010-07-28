@@ -78,6 +78,11 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
 	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 }
 
+void CSulGeomQuad::setColor( osg::Vec4& c )
+{
+	setColor( c.r(), c.g(), c.b(), c.a() );
+}
+
 void CSulGeomQuad::setColor( float r, float g, float b, float a )
 {
 	if ( !m_rColors.valid() )

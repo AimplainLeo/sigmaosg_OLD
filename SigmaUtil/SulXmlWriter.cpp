@@ -12,7 +12,7 @@
 CSulXmlWriter::CSulXmlWriter( const char* pszRootName )
 {
 	 m_strRootName = pszRootName;
-	 m_pAttrRoot = ElementStart( m_strRootName.c_str() );
+	 m_pAttrRoot = elementStart( m_strRootName.c_str() );
 }
 
 CSulXmlWriter::~CSulXmlWriter()
@@ -33,7 +33,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 //	errno_t	err;
 
 	// this should be end on root
-	ElementEnd();
+	elementEnd();
 
 	bool bRet = rFile->Open( pszXmlFile, CSulFile::MODE_WRITE );
 	if ( !bRet )
@@ -72,7 +72,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 	{
 		CSulXmlDataInfo* pDataInfo = (*iDataInfo).get();
 
-		// check for end marker ( pAttr==0 is made by the ElementEnd method )
+		// check for end marker ( pAttr==0 is made by the elementEnd method )
 		if ( pDataInfo->getAttr()==0 )
 		{
 			CSulString strNameTmp;
@@ -186,7 +186,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 	return true;
 }
 
-CSulXmlAttr* CSulXmlWriter::ElementStart( const char* pszName )
+CSulXmlAttr* CSulXmlWriter::elementStart( const char* pszName )
 {
 	CSulXmlAttr* pAttr = new CSulXmlAttr;
 
@@ -198,7 +198,7 @@ CSulXmlAttr* CSulXmlWriter::ElementStart( const char* pszName )
 	return pAttr;
 }
 
-void CSulXmlWriter::ElementEnd()
+void CSulXmlWriter::elementEnd()
 {
 	CSulXmlDataInfo* pDataInfo = new CSulXmlDataInfo;
 	m_rVectorDataInfoPtr.push_back( pDataInfo );

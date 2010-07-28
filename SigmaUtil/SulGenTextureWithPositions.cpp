@@ -368,3 +368,9 @@ void CSulGenTextureWithPositions::processMask( CSulGenPositionMask* pMask )
 
 	osg::notify(osg::NOTICE) << "trees count: " << m_vecPos.size() << std::endl;
 }
+
+const Sigma::VEC_VEC3& CSulGenTextureWithPositions::getPositions()
+{
+	return m_vecPos;
+}
+

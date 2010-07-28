@@ -1214,6 +1214,22 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulShaderGodRays.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderGodRays.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderInstancingBillboards.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderInstancingBillboards.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulShaderIntensity.cpp"
 						>
 					</File>

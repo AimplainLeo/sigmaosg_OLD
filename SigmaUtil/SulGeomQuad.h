@@ -31,6 +31,7 @@ public:
 
 	void							createUV();
 
+	void							setColor( osg::Vec4& c );
 	void							setColor( float r, float g, float b, float a );
 	const osg::Vec4&				getColor( Sigma::uint32 index );
 

@@ -13,12 +13,12 @@
 //
 //	CSulXmlAttr* pAttr;
 //
-//	pAttr = pSaveState->ElementStart( "DEBUG_MENU" );
+//	pAttr = pSaveState->elementStart( "DEBUG_MENU" );
 //	pAttr->Add( "Information",	MF->GetMainWindow()->IsVisibleInformation()?"true":"false" );
 //	pAttr->Add( "Profiler",		MF->GetMainWindow()->IsVisibleProfiler()?"true":"false" );
 //	pAttr->Add( "TreeView",		MF->GetMainWindow()->IsVisibleTreeView()?"true":"false" );
 //	pAttr->Add( "Messages",		MF->GetMainWindow()->IsVisibleMessageInfo()?"true":"false" );
-//	pSaveState->ElementEnd();
+//	pSaveState->elementEnd();
 //
 //	pSaveState->Save( pszFile );
 //
@@ -46,8 +46,8 @@ public:
 
 	bool					Save( const char* pszXmlFile );
 
-	CSulXmlAttr*			ElementStart( const char* pszName );
-	void					ElementEnd();
+	CSulXmlAttr*			elementStart( const char* pszName );
+	void					elementEnd();
 
 private:
 	VECTOR_DATAINFO_PTR		m_rVectorDataInfoPtr;

@@ -20,9 +20,10 @@ public:
 				VEC_GENPOSITIONMASK				vecMask
 			);
 
-	osg::Image*		getImage();
-	Sigma::uint32	getCount();
-	Sigma::uint32	getTexSizeSquared();
+	osg::Image*				getImage();
+	Sigma::uint32			getCount();
+	Sigma::uint32			getTexSizeSquared();
+	const Sigma::VEC_VEC3&	getPositions();
 
 private:
 	void	process();
