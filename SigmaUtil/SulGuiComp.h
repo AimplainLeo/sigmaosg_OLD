@@ -11,38 +11,33 @@
 class CSulGuiComp : public osg::MatrixTransform
 {
 public:
+	// FIXME: should use the OSG events instead
 	enum EEVENTS
 	{
 		EVENT_MOUSE_MOVE		= 1,
 		EVENT_MOUSE_PUSHED		= 2,
-		EVENT_MOUSE_RELEASED	= 4
+		EVENT_MOUSE_RELEASE		= 4,
+		EVENT_KEYDOWN			= 4,
 	};
 
 public:
-				CSulGuiComp( const CSulString& sName, float x, float y, float w, float h );
+					CSulGuiComp( float x, float y );
 
-	void			setQuadColor( osg::Vec4& c );
-	void			setRenderQuad( bool bRenderQuad );
-
+	void			setXY( float x, float y );
 	float			getX();
 	float			getY();
 
 	Sigma::uint32	getEvents();
 
-	virtual void	eventMouseMove( float mouse_x, float mouse_y ) {}
+	virtual void	eventMouseMove( float mouse_local_x, float mouse_local_y, float mouse_x, float mouse_y );
+	virtual void	eventMouseRelease( float x_local, float y_local, float x, float y );
+	virtual void	eventKeyDown( Sigma::int32 key, Sigma::int32 iMod );
 
 protected:
 	void			addEvents( Sigma::uint32 events );
 
 private:
-	CSulString	m_sName;
-	float		m_w;
-	float		m_h;
-
-	osg::ref_ptr<CSulGeomQuad>			m_rQuad;
-	osg::Vec4							m_rQuadColor;
-	osg::ref_ptr<osg::Geode>			m_rGeodeQuad;
-	Sigma::uint32						m_events;
+	Sigma::uint32	m_events;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;

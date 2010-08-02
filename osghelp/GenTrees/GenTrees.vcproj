@@ -256,6 +256,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="ColGeom"
+				>
+				<File
+					RelativePath=".\AddGeometryFromPrototypeFunctor.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AddGeometryFromPrototypeFunctor.h"
+					>
+				</File>
+				<File
+					RelativePath=".\GeometryInstancingBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeometryInstancingBuilder.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

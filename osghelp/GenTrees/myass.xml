@@ -1,5 +1,6 @@
 <GEN
   uselights="000000001"
+  col_geom="true"
   >
 
   <TEXTURE_TREE 

@@ -3,22 +3,19 @@
 #include "stdafx.h"
 #include "SulGuiText.h"
 
-CSulGuiText::CSulGuiText( const CSulString& sName, float x, float y, float w, float h, float size ) :
-CSulGuiComp( sName, x, y, w, h )
+CSulGuiText::CSulGuiText( const CSulString& sText, float x, float y, float size ) :
+CSulGuiComp( x, y )
 {
 	m_rText = new osgText::Text;
 	m_rText->setDataVariance( osg::Object::DYNAMIC );		// FIXME: the code should be able to choose this
 	m_rText->setCharacterSize( size );
 	m_rText->setFont( "Tempest.ttf" );
 	m_rText->setColor( osg::Vec4(1,1,1,1) );
-	m_rText->setText( sName );	
+	m_rText->setText( sText );	
 
-	m_rText->setPosition( osg::Vec3( 0, 0, 0) );
+	//m_rText->setAlignment( osgText::TextBase::LEFT_CENTER );
 
-	//m_rText->setMaximumWidth( w );
-	//m_rText->setMaximumWidth( h );
-	//m_rText->setLayout( osgText::Text::RIGHT_TO_LEFT );
-	//m_rText->setAlignment( osgText::Text::RIGHT_BASE_LINE );
+	//m_rText->setPosition( osg::Vec3( 10, -getH()/2.0f, 0 ) );
 
 	// because of the coordinate system starting at top, left the text is drawn upside down
 	// to compensate for this I reverse the Y-Axis by using a negative scaling of one
@@ -32,9 +29,23 @@ CSulGuiComp( sName, x, y, w, h )
 	p->addChild( pGeode );
 
 	addChild( p );
+
+	setName( sText );
 }
 
-void CSulGuiText::setName( const CSulString& sName )
+void CSulGuiText::setText( const CSulString& sText )
 {
-	m_rText->setText( sName );
+	m_sText = sText;
+	m_rText->setText( m_sText );
 }
+
+const CSulString& CSulGuiText::getText() const
+{
+	return m_sText;
+}
+
+osgText::Text* CSulGuiText::getTextObject()
+{
+	return m_rText;
+}
+

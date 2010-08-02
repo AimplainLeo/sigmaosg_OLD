@@ -13,6 +13,37 @@
 #include <osgViewer/ViewerEventHandlers>
 #include <iostream>
 
+#include "AddGeometryFromPrototypeFunctor.h"
+#include "GeometryInstancingBuilder.h"
+
+osg::ref_ptr<osg::Geometry> createSingleTreeCollisionGeometry(float s)
+{
+	osg::ref_ptr<osg::Vec3Array> vertices = new osg::Vec3Array;
+	vertices->push_back( osg::Vec3(-0.5f, 0.0f, 0.0f) * s );
+	vertices->push_back( osg::Vec3( 0.5f, 0.0f, 0.0f) * s );
+	vertices->push_back( osg::Vec3( 0.5f, 0.0f, 1.0f) * s );
+	vertices->push_back( osg::Vec3(-0.5f, 0.0f, 1.0f) * s );
+
+	vertices->push_back( osg::Vec3(0.0f, -0.5f, 0.0f) * s );
+	vertices->push_back( osg::Vec3(0.0f,  0.5f, 0.0f) * s );
+	vertices->push_back( osg::Vec3(0.0f,  0.5f, 1.0f) * s );
+	vertices->push_back( osg::Vec3(0.0f, -0.5f, 1.0f) * s );
+
+	osg::ref_ptr<osg::Geometry> geometry = new osg::Geometry;
+	geometry->setVertexArray(vertices);
+    geometry->addPrimitiveSet( new osg::DrawArrays( GL_QUADS, 0, 8) );
+
+	return geometry;
+}
+
+osg::ref_ptr<osg::Node> createTreeCollisionGeometry( const std::vector<osg::Vec3>& positionList, float maxTreeSize )
+{
+	GeometryInstancingBuilder builder;
+	builder.setPositionList(positionList);
+	builder.setInstanceGeometry(createSingleTreeCollisionGeometry(maxTreeSize));
+	return builder.build();
+}
+
 int _tmain( int argc, char** argv )
 {
 	// create paths from environment variable
@@ -106,11 +137,23 @@ int _tmain( int argc, char** argv )
 	//rRoot->addChild( pRenderInstances );
 	rXml->getSceneTerrain()->getPat()->addChild( pRenderInstances );
 
+	osg::ref_ptr<osg::Node> rGeomCol; 
+	if ( rXml->hasColGeom() )
+	{
+		rGeomCol = createTreeCollisionGeometry( rXml->getGen()->getPositions(), rXml->getMaxTree() );
+		rGeomCol->setNodeMask(0x1);
+		rGeomCol->getOrCreateStateSet()->setMode(GL_CULL_FACE, osg::StateAttribute::OFF);
+	}
+
 	// we should write the output file here
 	if ( !rXml->getOutputFile().empty() )
 	{
 		osg::ref_ptr<osg::Group> pGroupSave = new osg::Group;
 		pGroupSave->addChild( pRenderInstances );
+		if ( rGeomCol.valid() )
+		{
+			pGroupSave->addChild( rGeomCol );
+		}
 		osgDB::writeNodeFile( *pGroupSave, rXml->getOutputFile() );
 	}
 

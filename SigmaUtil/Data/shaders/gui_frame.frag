@@ -5,6 +5,8 @@ uniform sampler2D	tex;
 uniform float w;
 uniform float h;
 uniform float border;
+uniform vec4 bg_color;
+uniform vec4 border_color;
 
 void main( void )
 {
@@ -12,22 +14,11 @@ void main( void )
 	float px = gl_TexCoord[0].x * w;
 	float py = gl_TexCoord[0].y * h;
 
-	vec4 color = vec4( 0, 0, 0, 0.2f );
-/*
-	if ( px<border || py<border )
-	{
-		color = vec4( 0,0,1,1 );
-	}
-
-	if ( px>(w-border) || py>(h-border) )
-	{
-		color = vec4( 0,0,0.7,1 );
-	}
-*/
+	vec4 color = bg_color;
 
 	if ( px<border || px>(w-border)  || py<border || py>(h-border) )
 	{
-		color = vec4( 0,0,1,1 );
+		color = border_color;
 	}
 
 	gl_FragColor = color;

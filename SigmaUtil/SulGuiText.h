@@ -9,12 +9,16 @@
 class CSulGuiText : public CSulGuiComp
 {
 public:
-	CSulGuiText( const CSulString& sName, float x, float y, float w, float h, float size );
+								CSulGuiText( const CSulString& sName, float x, float y, float size );
 
-	void	setName( const CSulString& sName );
+	void						setText( const CSulString& sName );
+	const CSulString&			getText() const;
+
+	osgText::Text*				getTextObject();
 
 private:
 	osg::ref_ptr<osgText::Text>	m_rText;
+	CSulString					m_sText;
 };
 
 #endif // __SULGUITEXT_H__

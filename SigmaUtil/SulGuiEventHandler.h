@@ -15,7 +15,8 @@ public:
 private:
 	VEC_GUICOMP		m_eventsMouseMove;
 	VEC_GUICOMP		m_eventsMousePushed;
-	VEC_GUICOMP		m_eventsMouseReleased;
+	VEC_GUICOMP		m_eventsMouseRelease;
+	VEC_GUICOMP		m_eventsKeyDown;
 };
 
 #endif // __SULGUIEVENTHANDLER_H__

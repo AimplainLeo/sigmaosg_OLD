@@ -2,44 +2,25 @@
 
 #include "stdafx.h"
 #include "SulGuiButton.h"
-#include "SulGuiText.h"
 
-CSulGuiButton::CSulGuiButton( const CSulString& sName, float x, float y, float w, float h ) :
-CSulGuiComp( sName, x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
+CSulGuiButton::CSulGuiButton( const CSulString& sText, float x, float y, float w, float h ) :
+CSulGuiCanvas( x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 {
 	addEvents( EVENT_MOUSE_MOVE );	
-	addEvents( EVENT_MOUSE_PUSHED );	
-	addEvents( EVENT_MOUSE_RELEASED );
+	//addEvents( EVENT_MOUSE_PUSHED );	
+	//addEvents( EVENT_MOUSE_RELEASE );
 
-	setQuadColor( osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) );
+	m_rText = new CSulGuiText( sText, 0, 0, 16.0f );
+	m_rText->getTextObject()->setAlignment( osgText::TextBase::CENTER_CENTER );
+	addChild( m_rText );
 
-	test = new CSulGuiText( "Hello World", 0, 0, 100, 100, 16 );
-	addChild( test );
+	// center text in button
+	m_rText->setXY( getW()/2.0f, getH()/2.0f );
 }
 
-
-#include <osgManipulator/Selection>
-
-void CSulGuiButton::eventMouseMove( float mouse_x, float mouse_y )
+void CSulGuiButton::setMouseHover( bool bHover )
 {
-/*
-	osg::Matrix m;
-	m.setTrans( mouse_x, mouse_y, 0 );
-	computeWorldToLocalMatrix( m, 0 );
-	mouse_x = m.getTrans().x();
-*/
+	CSulGuiCanvas::setMouseHover( bHover );
 
-    osg::NodePath pathToRoot;
-    osgManipulator::computeNodePathToRoot(*this,pathToRoot);
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
-
-/*
-	osg::Matrix m;
-	computeLocalToWorldMatrix( m, 0 );
-*/
-	mouse_x = m.getTrans().x();
-
-	CSulString s;
-	s.Format( "x= %f, y= %f", mouse_x, mouse_y );
-	test->setName( s );
+	setBgColor( bHover?osg::Vec4(1,0,0,0.5f):osg::Vec4(0,0,0,0.2f) );
 }

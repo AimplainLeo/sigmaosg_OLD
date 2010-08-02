@@ -3,17 +3,19 @@
 #ifndef __SULGUIBUTTON_H__
 #define __SULGUIBUTTON_H__
 
-#include "SulGuiComp.h"
+#include "SulGuiCanvas.h"
+#include "SulGuiText.h"
 
-class CSulGuiButton : public CSulGuiComp
+class CSulGuiButton : public CSulGuiCanvas
 {
 public:
-	CSulGuiButton( const CSulString& sName, float x, float y, float w, float h );
+			CSulGuiButton( const CSulString& sText, float x, float y, float w, float h );
 
-	void	eventMouseMove( float mouse_x, float mouse_y );
+protected:
+	void	setMouseHover( bool bHover );
 
 private:
-	class CSulGuiText* test;
+	osg::ref_ptr<CSulGuiText>	m_rText;
 };
 
 #endif // __SULGUIBUTTON_H__

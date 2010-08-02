@@ -12,7 +12,8 @@ m_suppressViewer( false ),
 m_showPivots( false ),
 m_useLights( 0 ),
 m_minTree( 3.0f ),
-m_maxTree( 3.0f )
+m_maxTree( 3.0f ),
+m_bColGeom( false )
 {
 }
 
@@ -20,8 +21,9 @@ void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
 	if ( sName=="GEN" )
 	{
-		m_useLights = strtoul( pAttr->get( "uselights" ).c_str(), 0, 2 );
-		m_areaPadding = pAttr->get( "areapadding" ).asFloat();		
+		m_useLights		= strtoul( pAttr->get( "uselights" ).c_str(), 0, 2 );
+		m_areaPadding	= pAttr->get( "areapadding" ).asFloat();		
+		m_bColGeom		= pAttr->get( "col_geom" ).asBool();
 	}
 
 	if ( sName=="TEXTURE_TREE" )
@@ -208,4 +210,9 @@ float CParserXml::getMinTree()
 float CParserXml::getMaxTree()
 {
 	return m_maxTree;
+}
+
+bool CParserXml::hasColGeom()
+{
+	return m_bColGeom;
 }

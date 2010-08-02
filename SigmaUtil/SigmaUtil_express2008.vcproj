@@ -284,6 +284,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomLineStrip.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomLineStrip.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomPlane.cpp"
 					>
 				</File>
@@ -611,6 +619,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiCheckBox.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiCheckBox.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiComp.cpp"
 						>
 					</File>
@@ -619,11 +635,31 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiEditBox.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiEditBox.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiRadioButton.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiRadioButton.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiText.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\SulGuiText.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiTextUpdateCallback.h"
 						>
 					</File>
 				</Filter>

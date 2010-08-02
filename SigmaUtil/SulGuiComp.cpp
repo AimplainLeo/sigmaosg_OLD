@@ -2,36 +2,30 @@
 
 #include "stdafx.h"
 #include "SulGuiComp.h"
-#include "SulShaderGuiFrame.h"
 #include <osg/matrix>
 
-CSulGuiComp::CSulGuiComp( const CSulString& sName, float x, float y, float w, float h )
+CSulGuiComp::CSulGuiComp( float x, float y )
 {
 	m_events = 0;
 
-	m_rQuadColor.set( 1.0f, 1.0f, 1.0f, 1.0f );
+	setXY( x, y );
+}
 
-	m_sName;
-	m_w = w;
-	m_h = h;
-
+void CSulGuiComp::setXY( float x, float y )
+{
 	osg::Matrix m;
 	m.setTrans( x, y, 0.0f );
 	setMatrix( m );	
 }
 
-// FIXME
 float CSulGuiComp::getX()
 {
-	osg::Matrix m;
-	computeLocalToWorldMatrix( m, 0 );
-	return m.getTrans().x();
+	return 0.0f; // FIXME, should return local coordinates
 }
 
-// FIXME
 float CSulGuiComp::getY()
 {
-	return getMatrix().getTrans().y();
+	return 0.0f; // fix me, should return local coordinates
 }
 
 void CSulGuiComp::addEvents( Sigma::uint32 events )
@@ -44,42 +38,15 @@ Sigma::uint32 CSulGuiComp::getEvents()
 	return m_events;
 }
 
-void CSulGuiComp::setQuadColor( osg::Vec4& c )
+void CSulGuiComp::eventMouseMove( float mouse_local_x, float mouse_local_y, float mouse_x, float mouse_y )
 {
-	m_rQuadColor = c;
 }
 
-void CSulGuiComp::setRenderQuad( bool bRenderQuad )
+void CSulGuiComp::eventMouseRelease( float x_local, float y_local, float x, float y )
 {
-	if ( !bRenderQuad )
-	{
-		if ( m_rGeodeQuad.valid() )
-		{
-			removeChild( m_rGeodeQuad );
-		}
-
-		return;
-	}
-
-	const osg::Matrix& m = getMatrix();
-	osg::Vec3 pos = m.getTrans();
-	
-	m_rQuad = new CSulGeomQuad(
-		osg::Vec3( m_w/2.0f, m_h/2.0f, 0.0f ),
-		m_w, m_h );
-	m_rQuad->createUV();
-	m_rQuad->setColor( m_rQuadColor );
-	m_rGeodeQuad = new osg::Geode;
-	m_rGeodeQuad->addDrawable( m_rQuad->getDrawable() );
-
-	addChild( m_rGeodeQuad );
-
-	// add a shader
-	new CSulShaderGuiFrame( m_rGeodeQuad );
-
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "w", m_w ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "h", m_h ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 4.0f ) );
 }
 
+void CSulGuiComp::eventKeyDown( Sigma::int32 key, Sigma::int32 iMod )
+{
+}
 

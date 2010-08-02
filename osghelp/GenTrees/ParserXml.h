@@ -30,6 +30,8 @@ public:
 	CSceneTerrain*		getSceneTerrain();
 	CSceneShape*		getSceneShape();
 
+	bool				hasColGeom();
+
 	CSulGenTextureWithPositions* getGen();
 
 	bool				isTextureSuppressed();
@@ -74,6 +76,7 @@ private:
 	float										m_maxTree;
 
 	float										m_areaPadding;
+	bool										m_bColGeom;
 };
 
 #endif // __PARSERXML_H__

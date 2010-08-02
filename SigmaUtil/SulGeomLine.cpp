@@ -45,4 +45,18 @@ void CSulGeomLine::createDrawable()
 		)
 	);
 
+	m_rLineWidth = new osg::LineWidth();
+	m_rLineWidth->setWidth( 1.0f );
+	getDrawable()->getOrCreateStateSet()->setAttributeAndModes( m_rLineWidth, osg::StateAttribute::ON );
+
+}
+
+void CSulGeomLine::setWidth( float width )
+{
+	if ( !m_rLineWidth.valid() )
+	{
+		createDrawable();
+	}
+
+	m_rLineWidth->setWidth( width );
 }
