@@ -38,6 +38,11 @@ Sigma::uint32 CSulGuiComp::getEvents()
 	return m_events;
 }
 
+void CSulGuiComp::setLayer( Sigma::uint32 layer )
+{
+	getOrCreateStateSet()->setRenderBinDetails( layer, "DepthSortedBin" );
+}
+
 void CSulGuiComp::eventMouseMove( float mouse_local_x, float mouse_local_y, float mouse_x, float mouse_y )
 {
 }

@@ -32,6 +32,11 @@ CSulGuiComp( x, y )
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
 }
 
+void CSulGuiCanvas::showCanvas( bool bShow )
+{
+	m_rGeodeQuad->setNodeMask( bShow?0xFFFFFFFF:0 );
+}
+
 void CSulGuiCanvas::setBgColor( const osg::Vec4& c )
 {
 	m_uniformBgColor->set( c );
@@ -94,3 +99,5 @@ void CSulGuiCanvas::eventMouseRelease( float x_local, float y_local, float x, fl
 void CSulGuiCanvas::setMouseRelease( bool bInside )
 {
 }
+
+

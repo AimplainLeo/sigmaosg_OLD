@@ -332,6 +332,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomTriangleFan.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomTriangleFan.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomTriangleList.cpp"
 					>
 				</File>
@@ -648,6 +656,14 @@
 					</File>
 					<File
 						RelativePath=".\SulGuiRadioButton.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiRadioButtonGroup.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiRadioButtonGroup.h"
 						>
 					</File>
 					<File

@@ -1,15 +1,15 @@
-// SulGeomLineStrip.cpp
+// SulGeomTriangleFan.cpp
 
 #include "stdafx.h"
-#include "SulGeomLineStrip.h"
+#include "SulGeomTriangleFan.h"
 
-CSulGeomLineStrip::CSulGeomLineStrip( const Sigma::VEC_VEC3& vecVector ) :
+CSulGeomTriangleFan::CSulGeomTriangleFan( const Sigma::VEC_VEC3& vecVector ) :
 CSulGeomBase(),
 m_vecVector( vecVector )
 {
 }
 
-void CSulGeomLineStrip::createDrawable()
+void CSulGeomTriangleFan::createDrawable()
 {
 	setDrawable( new osg::Geometry );
 
@@ -35,23 +35,11 @@ void CSulGeomLineStrip::createDrawable()
 
     getDrawable()->asGeometry()->addPrimitiveSet(
         new osg::DrawElementsUInt( 
-			GL_LINE_STRIP,
+			GL_TRIANGLE_FAN,
             indices->size(), 
 			&(indices->front())
 		)
 	);
 
-	m_rLineWidth = new osg::LineWidth();
-	m_rLineWidth->setWidth( 1.0f );
-	getDrawable()->getOrCreateStateSet()->setAttributeAndModes( m_rLineWidth, osg::StateAttribute::ON );
 }
 
-void CSulGeomLineStrip::setWidth( float width )
-{
-	if ( !m_rLineWidth.valid() )
-	{
-		createDrawable();
-	}
-
-	m_rLineWidth->setWidth( width );
-}

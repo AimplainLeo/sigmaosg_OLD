@@ -18,4 +18,6 @@ private:
 	bool						m_bActive;
 };
 
+typedef std::vector< osg::ref_ptr<CSulGuiRadioButton> >	VEC_RADIOBUTTON;
+
 #endif // __SULGUIRADIOBUTTON_H__

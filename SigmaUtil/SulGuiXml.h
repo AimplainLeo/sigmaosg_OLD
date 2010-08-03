@@ -5,6 +5,7 @@
 
 #include "SulXmlParser.h"
 #include "SulGuiEventHandler.h"
+#include "SulGuiRadioButtonGroup.h"
 
 class CSulGuiXml : public CSulXmlParser
 {
@@ -26,6 +27,10 @@ private:
 	osg::Group*		m_rRootGroup;
 	osg::Group*		m_curGroup;
 	osg::ref_ptr<CSulGuiEventHandler> m_rEventHandler;
+
+	Sigma::uint32	m_indent;
+
+	osg::ref_ptr<CSulGuiRadioButtonGroup>	m_curRadioButtonGroup;
 };
 
 #endif // __SULGUIXML_H__

@@ -8,7 +8,9 @@
 class CSulGuiCanvas : public CSulGuiComp
 {
 public:
-	CSulGuiCanvas( float x, float y, float w, float h );
+					CSulGuiCanvas( float x, float y, float w, float h );
+
+	void			showCanvas( bool bShow );
 
 	void			setBgColor( const osg::Vec4& c );
 	void			setBorderColor( const osg::Vec4& c );

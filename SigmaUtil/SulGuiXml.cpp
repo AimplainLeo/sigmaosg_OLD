@@ -12,6 +12,7 @@
 
 CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler )
 {
+	m_indent = 0;
 	m_rEventHandler = pEventHandler;
 	m_rRootGroup = pRootGroup;
 	m_curGroup = pRootGroup;
@@ -28,10 +29,13 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "h" ).asFloat()
 		);
 
+		p->setLayer( m_indent );
+
 		m_rEventHandler->addComp( p );
 
 		m_curGroup->addChild( p );
 		m_curGroup = p;
+		m_indent++;
 	}
 
 	if ( sName=="BUTTON" )
@@ -44,10 +48,13 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "h" ).asFloat()
 		);
 
+		p->setLayer( m_indent );
+
 		m_rEventHandler->addComp( p );
 
 		m_curGroup->addChild( p );
 		m_curGroup = p;
+		m_indent++;
 	}
 
 	if ( sName=="TEXT" )
@@ -59,10 +66,13 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "size" ).asFloat()
 		);
 
+		p->setLayer( m_indent );
+
 		m_rEventHandler->addComp( p );
 
 		m_curGroup->addChild( p );
 		m_curGroup = p;
+		m_indent++;
 	}
 
 	if ( sName=="EDITBOX" )
@@ -75,10 +85,13 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "h" ).asFloat()
 		);
 
+		p->setLayer( m_indent );
+
 		m_rEventHandler->addComp( p );
 
 		m_curGroup->addChild( p );
 		m_curGroup = p;
+		m_indent++;
 	}
 
 	if ( sName=="CHECKBOX" )
@@ -91,10 +104,13 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "h" ).asFloat()
 		);
 
+		p->setLayer( m_indent );
+
 		m_rEventHandler->addComp( p );
 
 		m_curGroup->addChild( p );
 		m_curGroup = p;
+		m_indent++;
 	}
 
 	if ( sName=="RADIOBUTTON" )
@@ -107,12 +123,32 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "h" ).asFloat()
 		);
 
+		p->setLayer( m_indent );
+
 		m_rEventHandler->addComp( p );
 
 		m_curGroup->addChild( p );
 		m_curGroup = p;
+		m_indent++;
+
+		m_curRadioButtonGroup->addRadioButton( dynamic_cast<CSulGuiRadioButton*>(p) );
 	}
 
+	if ( sName=="RADIOBUTTON_GROUP" )
+	{
+		m_curRadioButtonGroup = new CSulGuiRadioButtonGroup(
+			pAttr->get( "x" ).asFloat(),
+			pAttr->get( "y" ).asFloat()
+		);
+
+		m_curRadioButtonGroup->setLayer( m_indent );
+
+		m_rEventHandler->addComp( m_curRadioButtonGroup );
+
+		m_curGroup->addChild( m_curRadioButtonGroup );
+		m_curGroup = m_curRadioButtonGroup;
+		m_indent++;
+	}
 
 	// we assume only element tags from now on (there is no smart error checking here yet!)
 	m_mapAttr[sName] = pAttr;
@@ -120,9 +156,18 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 
 void CSulGuiXml::elementEnd( const CSulString& sName )
 {
-	if ( sName=="CANVAS" || sName=="BUTTON" || sName=="TEXT" || sName=="EDITBOX" || sName=="CHECKBOX" || sName=="RADIOBUTTON" )
+	if ( 
+		sName=="CANVAS" || 
+		sName=="BUTTON" || 
+		sName=="TEXT" || 
+		sName=="EDITBOX" || 
+		sName=="CHECKBOX" || 
+		sName=="RADIOBUTTON" ||
+		sName=="RADIOBUTTON_GROUP"
+	)
 	{
-		 m_curGroup = m_curGroup->getParent( 0 );
+		m_curGroup = m_curGroup->getParent( 0 );
+		m_indent--;
 	}
 }
 
