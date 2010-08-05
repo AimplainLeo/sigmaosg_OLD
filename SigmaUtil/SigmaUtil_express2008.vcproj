@@ -619,6 +619,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiButtonMediator.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiCanvas.cpp"
 						>
 					</File>
@@ -651,6 +655,22 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiItem.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiItem.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiListBox.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiListBox.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiRadioButton.cpp"
 						>
 					</File>
@@ -664,6 +684,14 @@
 					</File>
 					<File
 						RelativePath=".\SulGuiRadioButtonGroup.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiScrollBar.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiScrollBar.h"
 						>
 					</File>
 					<File

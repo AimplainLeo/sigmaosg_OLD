@@ -5,13 +5,12 @@
 #include "SulGuiText.h"
 #include "SulGeomLineStrip.h"
 #include "SulGeomTriangleFan.h"
+#include "SulGuiRadioButtonGroup.h"
+#include "SulGuiEventHandler.h"
 
 CSulGuiRadioButton::CSulGuiRadioButton( const CSulString& sText, float x, float y, float w, float h ) :
 CSulGuiCanvas( x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 {
-	addEvents( EVENT_MOUSE_RELEASE );
-
-
 	Sigma::VEC_VEC3::vector	vecPos;
 	Sigma::VEC_VEC3::vector	vecPosDots;
 	
@@ -48,23 +47,34 @@ CSulGuiCanvas( x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 
 	// inner dot
 	CSulGeomTriangleFan* pTriangleFan = new CSulGeomTriangleFan( vecPosDots );
-	osg::Geode* pGeodeTriangleFan = new osg::Geode;
-	pGeodeTriangleFan->addDrawable( pTriangleFan->getDrawable() );
-	addChild( pGeodeTriangleFan );
+	m_rGeodeTriangleFan = new osg::Geode;
+	m_rGeodeTriangleFan->addDrawable( pTriangleFan->getDrawable() );
+	addChild( m_rGeodeTriangleFan );
 
 
 	showCanvas( false );
+}
+
+void CSulGuiRadioButton::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiCanvas::setupEventHandler( pEventHandler );
+	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
+}
+
+void CSulGuiRadioButton::removeSelect()
+{
+	m_bActive = false;
+	m_rGeodeTriangleFan->setNodeMask( 0 );
 }
 
 void CSulGuiRadioButton::setMouseRelease( bool bInside )
 {
 	if ( bInside )
 	{
-		m_bActive = true;
-
 		// we need to disable any other radiobutton that is active in the same group
-
-
-//		m_rGeodeCross->setNodeMask( m_bActive?0xFFFFFFFF:0 );
+		CSulGuiRadioButtonGroup* pGroup = dynamic_cast<CSulGuiRadioButtonGroup*>(getParent(0));
+		pGroup->removeSelect();
+		m_rGeodeTriangleFan->setNodeMask( 0xFFFFFFFF );
+		m_bActive = true;
 	}
 }

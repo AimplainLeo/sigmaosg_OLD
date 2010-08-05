@@ -4,10 +4,17 @@
 #include "SulGuiCanvas.h"
 #include "SulGuiComp.h"
 #include "SulShaderGuiFrame.h"
+#include "SulGuiEventHandler.h"
 
 CSulGuiCanvas::CSulGuiCanvas( float x, float y, float w, float h ) :
 CSulGuiComp( x, y )
 {
+	m_dragAllowed = false;
+	m_dragMinX = 0.0f;
+	m_dragMaxX = 0.0f;		
+	m_dragMinY = 0.0f;
+	m_dragMaxY = 0.0f;
+
 	m_bMouseHover = false;
 
 	m_w = w;
@@ -100,4 +107,21 @@ void CSulGuiCanvas::setMouseRelease( bool bInside )
 {
 }
 
+void CSulGuiCanvas::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiComp::setupEventHandler( pEventHandler );
+
+	addEvent( CSulGuiEventHandler::EVENT_MOUSE_MOVE );	
+	addEvent( CSulGuiEventHandler::EVENT_MOUSE_PUSHED );	
+	//addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
+}
+
+void CSulGuiCanvas::allowDrag( float minX, float maxX, float minY, float maxY )
+{
+	m_dragAllowed	= true;
+	m_dragMinX		= minX;
+	m_dragMaxX		= maxX;
+	m_dragMinY		= minY;
+	m_dragMaxY		= maxY;
+}
 

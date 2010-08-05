@@ -11,6 +11,8 @@ class CSulGuiEditBox : public CSulGuiCanvas
 public:
 					CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h );
 
+	void			setupEventHandler( class CSulGuiEventHandler* pEventHandler );
+
 	void			setText( const CSulString& sText );
 	const CSulString& getText() const;
 

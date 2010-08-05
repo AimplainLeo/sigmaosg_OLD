@@ -9,6 +9,8 @@
 #include "SulGuiEditBox.h"
 #include "SulGuiCheckBox.h"
 #include "SulGuiRadioButton.h"
+#include "SulGuiItem.h"
+#include "SulGuiScrollBar.h"
 
 CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler )
 {
@@ -20,102 +22,64 @@ CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandl
 
 void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
+	CSulGuiComp* pComp = 0;
+
 	if ( sName=="CANVAS" )
 	{
-		CSulGuiComp* p = new CSulGuiCanvas(
+		pComp = new CSulGuiCanvas(
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
 			pAttr->get( "h" ).asFloat()
 		);
-
-		p->setLayer( m_indent );
-
-		m_rEventHandler->addComp( p );
-
-		m_curGroup->addChild( p );
-		m_curGroup = p;
-		m_indent++;
 	}
 
 	if ( sName=="BUTTON" )
 	{
-		CSulGuiComp* p = new CSulGuiButton(
+		pComp = new CSulGuiButton(
 			pAttr->get( "text" ),
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
 			pAttr->get( "h" ).asFloat()
 		);
-
-		p->setLayer( m_indent );
-
-		m_rEventHandler->addComp( p );
-
-		m_curGroup->addChild( p );
-		m_curGroup = p;
-		m_indent++;
 	}
 
 	if ( sName=="TEXT" )
 	{
-		CSulGuiComp* p = new CSulGuiText(
+		pComp = new CSulGuiText(
 			pAttr->get( "text" ),
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "size" ).asFloat()
 		);
-
-		p->setLayer( m_indent );
-
-		m_rEventHandler->addComp( p );
-
-		m_curGroup->addChild( p );
-		m_curGroup = p;
-		m_indent++;
 	}
 
 	if ( sName=="EDITBOX" )
 	{
-		CSulGuiComp* p = new CSulGuiEditBox(
+		pComp = new CSulGuiEditBox(
 			pAttr->get( "text" ),
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
 			pAttr->get( "h" ).asFloat()
 		);
-
-		p->setLayer( m_indent );
-
-		m_rEventHandler->addComp( p );
-
-		m_curGroup->addChild( p );
-		m_curGroup = p;
-		m_indent++;
 	}
 
 	if ( sName=="CHECKBOX" )
 	{
-		CSulGuiComp* p = new CSulGuiCheckBox(
+		pComp = new CSulGuiCheckBox(
 			pAttr->get( "text" ),
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
 			pAttr->get( "h" ).asFloat()
 		);
-
-		p->setLayer( m_indent );
-
-		m_rEventHandler->addComp( p );
-
-		m_curGroup->addChild( p );
-		m_curGroup = p;
-		m_indent++;
 	}
 
 	if ( sName=="RADIOBUTTON" )
 	{
-		CSulGuiComp* p = new CSulGuiRadioButton(
+		pComp = new CSulGuiRadioButton(
 			pAttr->get( "text" ),
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
@@ -123,32 +87,59 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "h" ).asFloat()
 		);
 
-		p->setLayer( m_indent );
-
-		m_rEventHandler->addComp( p );
-
-		m_curGroup->addChild( p );
-		m_curGroup = p;
-		m_indent++;
-
-		m_curRadioButtonGroup->addRadioButton( dynamic_cast<CSulGuiRadioButton*>(p) );
+		m_curRadioButtonGroup->addRadioButton( dynamic_cast<CSulGuiRadioButton*>(pComp) );
 	}
 
 	if ( sName=="RADIOBUTTON_GROUP" )
 	{
-		m_curRadioButtonGroup = new CSulGuiRadioButtonGroup(
+		pComp = new CSulGuiRadioButtonGroup(
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat()
 		);
 
-		m_curRadioButtonGroup->setLayer( m_indent );
+		m_curRadioButtonGroup = dynamic_cast<CSulGuiRadioButtonGroup*>(pComp);
+	}
 
-		m_rEventHandler->addComp( m_curRadioButtonGroup );
+	if ( sName=="LISTBOX" )
+	{
+		pComp = new CSulGuiListBox(
+			pAttr->get( "x" ).asFloat(),
+			pAttr->get( "y" ).asFloat(),
+			pAttr->get( "w" ).asFloat(),
+			pAttr->get( "h" ).asFloat()
+		);
 
-		m_curGroup->addChild( m_curRadioButtonGroup );
-		m_curGroup = m_curRadioButtonGroup;
+		m_curListBox = dynamic_cast<CSulGuiListBox*>(pComp);
+	}
+
+	if ( sName=="ITEM" )
+	{
+		pComp = new CSulGuiItem(
+			pAttr->get( "text" )
+		);
+
+		m_curListBox->addItem( dynamic_cast<CSulGuiItem*>(pComp) );
+	}
+
+	if ( sName=="SCROLLBAR" )
+	{
+		pComp = new CSulGuiScrollBar(
+			pAttr->get( "x" ).asFloat(),
+			pAttr->get( "y" ).asFloat(),
+			pAttr->get( "w" ).asFloat(),
+			pAttr->get( "h" ).asFloat()
+		);
+	}
+
+	if ( pComp )
+	{
+		pComp->setupEventHandler( m_rEventHandler );
+		pComp->setLayer( m_indent );
+		m_curGroup->addChild( pComp );
+		m_curGroup = pComp;
 		m_indent++;
 	}
+	
 
 	// we assume only element tags from now on (there is no smart error checking here yet!)
 	m_mapAttr[sName] = pAttr;
@@ -163,7 +154,10 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 		sName=="EDITBOX" || 
 		sName=="CHECKBOX" || 
 		sName=="RADIOBUTTON" ||
-		sName=="RADIOBUTTON_GROUP"
+		sName=="RADIOBUTTON_GROUP" ||
+		sName=="LISTBOX" ||
+		sName=="ITEM" ||
+		sName=="SCROLLBAR"
 	)
 	{
 		m_curGroup = m_curGroup->getParent( 0 );

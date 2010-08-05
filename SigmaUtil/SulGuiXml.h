@@ -6,6 +6,7 @@
 #include "SulXmlParser.h"
 #include "SulGuiEventHandler.h"
 #include "SulGuiRadioButtonGroup.h"
+#include "SulGuiListBox.h"
 
 class CSulGuiXml : public CSulXmlParser
 {
@@ -31,6 +32,7 @@ private:
 	Sigma::uint32	m_indent;
 
 	osg::ref_ptr<CSulGuiRadioButtonGroup>	m_curRadioButtonGroup;
+	osg::ref_ptr<CSulGuiListBox>			m_curListBox;
 };
 
 #endif // __SULGUIXML_H__

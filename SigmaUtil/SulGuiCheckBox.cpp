@@ -4,13 +4,12 @@
 #include "SulGuiCheckBox.h"
 #include "SulGuiText.h"
 #include "SulGeomLine.h"
+#include "SulGuiEventHandler.h"
 
 CSulGuiCheckBox::CSulGuiCheckBox( const CSulString& sText, float x, float y, float w, float h ) :
 CSulGuiCanvas( x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 {
 	m_bActive = false;
-
-	addEvents( EVENT_MOUSE_RELEASE );
 
 	float paddingLine = 6.0f;
 
@@ -31,6 +30,12 @@ CSulGuiCanvas( x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 	CSulGuiText* pGuiText = new CSulGuiText( sText, w+padding, h/2.0f, h );
 	pGuiText->getTextObject()->setAlignment( osgText::TextBase::LEFT_CENTER );
 	addChild( pGuiText );
+}
+
+void CSulGuiCheckBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiCanvas::setupEventHandler( pEventHandler );
+	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
 }
 
 void CSulGuiCheckBox::setMouseRelease( bool bInside )

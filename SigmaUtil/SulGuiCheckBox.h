@@ -10,6 +10,8 @@ class CSulGuiCheckBox : public CSulGuiCanvas
 public:
 								CSulGuiCheckBox( const CSulString& sText, float x, float y, float w, float h );
 
+	void						setupEventHandler( class CSulGuiEventHandler* pEventHandler );
+
 protected:
 	void						setMouseRelease( bool bInside );
 

@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiEditBox.h"
 #include "SulGuiTextUpdateCallback.h"
+#include "SulGuiEventHandler.h"
 
 CSulGuiEditBox::CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h ) :
 CSulGuiCanvas( x, y, w, h )
@@ -11,14 +12,19 @@ CSulGuiCanvas( x, y, w, h )
 
 	m_bActive = false;
 
-	addEvents( EVENT_KEYDOWN );	
-	addEvents( EVENT_MOUSE_RELEASE );
 	setUpdateCallback( new CSulGuiTextUpdateCallback( this ) );
 
 	float ofsx = 6.0f;
 	float ofsy = 6.0f;
 	m_rGuiText = new CSulGuiText( sText, 0.0f+ofsx, h-ofsy, h );
 	addChild( m_rGuiText );
+}
+
+void CSulGuiEditBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiCanvas::setupEventHandler( pEventHandler );
+	addEvent( CSulGuiEventHandler::EVENT_KEYDOWN );	
+	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
 }
 
 void CSulGuiEditBox::setMouseRelease( bool bInside )

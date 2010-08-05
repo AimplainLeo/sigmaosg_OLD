@@ -11,23 +11,16 @@
 class CSulGuiComp : public osg::MatrixTransform
 {
 public:
-	// FIXME: should use the OSG events instead
-	enum EEVENTS
-	{
-		EVENT_MOUSE_MOVE		= 1,
-		EVENT_MOUSE_PUSHED		= 2,
-		EVENT_MOUSE_RELEASE		= 4,
-		EVENT_KEYDOWN			= 4,
-	};
-
-public:
 					CSulGuiComp( float x, float y );
 
+	virtual void	setupEventHandler( class CSulGuiEventHandler* pEventHandler );
+
 	void			setXY( float x, float y );
+	void			setY( float y );
 	float			getX();
 	float			getY();
 
-	Sigma::uint32	getEvents();
+	void			show( bool bShow );
 
 	void			setLayer( Sigma::uint32 layer );
 
@@ -36,10 +29,10 @@ public:
 	virtual void	eventKeyDown( Sigma::int32 key, Sigma::int32 iMod );
 
 protected:
-	void			addEvents( Sigma::uint32 events );
+	void			addEvent( Sigma::uint32 eventType );
 
 private:
-	Sigma::uint32	m_events;
+	class CSulGuiEventHandler*	m_pEventHandler;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;

@@ -8,9 +8,18 @@
 class CSulGuiEventHandler : public osgGA::GUIEventHandler 
 {
 public:
+	enum EVENT
+	{
+		EVENT_MOUSE_MOVE,
+		EVENT_MOUSE_PUSHED,
+		EVENT_MOUSE_RELEASE,
+		EVENT_KEYDOWN
+	};
+
+public:
 	bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor );
 
-	void addComp( CSulGuiComp* pComp );
+	void addEvent( CSulGuiComp* pComp, Sigma::uint32 eventType );
 
 private:
 	VEC_GUICOMP		m_eventsMouseMove;

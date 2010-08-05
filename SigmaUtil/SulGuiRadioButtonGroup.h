@@ -13,6 +13,8 @@ public:
 
 	void		addRadioButton( CSulGuiRadioButton* pRadioButton );
 
+	void		removeSelect();
+
 private:
 	VEC_RADIOBUTTON	m_vecRadioButton;
 };

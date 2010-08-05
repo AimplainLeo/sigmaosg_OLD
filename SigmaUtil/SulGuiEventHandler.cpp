@@ -97,11 +97,28 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
     return false;
 }
 
-void CSulGuiEventHandler::addComp( CSulGuiComp* pComp )
+void CSulGuiEventHandler::addEvent( CSulGuiComp* pComp, Sigma::uint32 eventType )
 {
-		Sigma::uint32 events = pComp->getEvents();
-		if ( events & CSulGuiComp::EVENT_MOUSE_MOVE )		m_eventsMouseMove.push_back( pComp );
-		if ( events & CSulGuiComp::EVENT_MOUSE_PUSHED )		m_eventsMousePushed.push_back( pComp );
-		if ( events & CSulGuiComp::EVENT_MOUSE_RELEASE )	m_eventsMouseRelease.push_back( pComp );
-		if ( events & CSulGuiComp::EVENT_KEYDOWN )			m_eventsKeyDown.push_back( pComp );
+	switch ( eventType )
+	{
+		case EVENT_MOUSE_MOVE:		
+			if ( std::find( m_eventsMouseMove.begin(), m_eventsMouseMove.end(), pComp )==m_eventsMouseMove.end() )
+				m_eventsMouseMove.push_back( pComp );		
+			break;
+
+		case EVENT_MOUSE_PUSHED:	
+			if ( std::find( m_eventsMousePushed.begin(), m_eventsMousePushed.end(), pComp )==m_eventsMousePushed.end() )
+				m_eventsMousePushed.push_back( pComp );		
+			break;
+
+		case EVENT_MOUSE_RELEASE:	
+			if ( std::find( m_eventsMouseRelease.begin(), m_eventsMouseRelease.end(), pComp )==m_eventsMouseRelease.end() )
+				m_eventsMouseRelease.push_back( pComp );	
+			break;
+
+		case EVENT_KEYDOWN:			
+			if ( std::find( m_eventsKeyDown.begin(), m_eventsKeyDown.end(), pComp )==m_eventsKeyDown.end() )
+				m_eventsKeyDown.push_back( pComp );			
+			break;
+	}
 }

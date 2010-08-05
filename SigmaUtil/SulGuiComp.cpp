@@ -2,13 +2,17 @@
 
 #include "stdafx.h"
 #include "SulGuiComp.h"
+#include "SulGuiEventHandler.h"
 #include <osg/matrix>
 
 CSulGuiComp::CSulGuiComp( float x, float y )
 {
-	m_events = 0;
-
 	setXY( x, y );
+}
+
+void CSulGuiComp::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	m_pEventHandler = pEventHandler;
 }
 
 void CSulGuiComp::setXY( float x, float y )
@@ -18,24 +22,40 @@ void CSulGuiComp::setXY( float x, float y )
 	setMatrix( m );	
 }
 
+void CSulGuiComp::setY( float y )
+{
+	osg::Matrix m;
+	m = getMatrix();
+	osg::Vec3 pos = m.getTrans();
+	pos.y() = y;
+	m.setTrans( pos );
+	setMatrix( m );
+}
+
 float CSulGuiComp::getX()
 {
-	return 0.0f; // FIXME, should return local coordinates
+	osg::Matrix m;
+	m = getMatrix();
+	osg::Vec3 pos = m.getTrans();
+	return pos.x();
 }
 
 float CSulGuiComp::getY()
 {
-	return 0.0f; // fix me, should return local coordinates
+	osg::Matrix m;
+	m = getMatrix();
+	osg::Vec3 pos = m.getTrans();
+	return pos.y();
 }
 
-void CSulGuiComp::addEvents( Sigma::uint32 events )
+void CSulGuiComp::show( bool bShow )
 {
-	m_events |= events;
+	setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
-Sigma::uint32 CSulGuiComp::getEvents()
+void CSulGuiComp::addEvent( Sigma::uint32 eventType )
 {
-	return m_events;
+	m_pEventHandler->addEvent( this, eventType );
 }
 
 void CSulGuiComp::setLayer( Sigma::uint32 layer )
