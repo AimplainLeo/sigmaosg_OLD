@@ -6,11 +6,11 @@
 #include "SulGuiEventHandler.h"
 
 CSulGuiEditBox::CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h ) :
-CSulGuiCanvas( x, y, w, h )
+CSulGuiCanvas( "EDITBOX", x, y, w, h )
 {
 	m_sText = sText;
 
-	m_bActive = false;
+	m_bEditActive = false;
 
 	setUpdateCallback( new CSulGuiTextUpdateCallback( this ) );
 
@@ -29,9 +29,12 @@ void CSulGuiEditBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 
 void CSulGuiEditBox::setMouseRelease( bool bInside )
 {
-	m_bActive = bInside;
-	setBorderColor( bInside?osg::Vec4( 1,1,0,1 ):osg::Vec4( 0,0,1,1 ) );
-	m_rGuiText->setText( m_sText );
+	if ( isActive() )
+	{
+		m_bEditActive = bInside;
+		setBorderColor( bInside?osg::Vec4( 1,1,0,1 ):osg::Vec4( 0,0,1,1 ) );
+		m_rGuiText->setText( m_sText );
+	}
 }
 
 void CSulGuiEditBox::setText( const CSulString& sText )
@@ -47,18 +50,18 @@ const CSulString& CSulGuiEditBox::getText() const
 
 void CSulGuiEditBox::setCursor( const CSulString& sCursor )
 {
-	if ( m_bActive )
+	if ( m_bEditActive )
 	{
 		m_sCursor = sCursor;
 		m_rGuiText->setText( m_sText+m_sCursor );
 	}
 }
 
-void CSulGuiEditBox::eventKeyDown( Sigma::int32 key, Sigma::int32 iMod )
+void CSulGuiEditBox::eventKeyDown( sigma::int32 key, sigma::int32 iMod )
 {
 	CSulGuiCanvas::eventKeyDown( key, iMod );
 
-	if ( m_bActive )
+	if ( isActive() && m_bEditActive )
 	{
 		// keys to ignore
 		if ( key==osgGA::GUIEventAdapter::KEY_Left ||

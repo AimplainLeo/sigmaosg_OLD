@@ -62,7 +62,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 	// save all data
 	//////////////////////////////////////////////////////////////////
 	VECTOR_DATAINFO_PTR::iterator	iDataInfo;
-	Sigma::uint32					dwIndent;
+	sigma::uint32					dwIndent;
 	VECTOR_TAG_REF					rVectorTagRef;
 	CSulString						strLastNameUsed;
 
@@ -93,7 +93,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 			}
 			else
 			{
-				Sigma::uint32 i;
+				sigma::uint32 i;
 
 				// indent
 				for ( i=0; i<dwIndent-1; i++ )
@@ -121,7 +121,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 		}
 		else
 		{
-			Sigma::uint32 i;
+			sigma::uint32 i;
 
 			// if a tag is open,. close it
 			if ( strLastNameUsed.size() )
@@ -156,7 +156,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 			*/
 
 			// save attr
-			Sigma::uint32 dwCount = pDataInfo->getAttr()->getCount();
+			sigma::uint32 dwCount = pDataInfo->getAttr()->getCount();
 
 			CSulXmlAttr::VECTOR_ATTR_PTR::iterator iAttr;	
 

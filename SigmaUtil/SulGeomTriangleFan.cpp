@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulGeomTriangleFan.h"
 
-CSulGeomTriangleFan::CSulGeomTriangleFan( const Sigma::VEC_VEC3& vecVector ) :
+CSulGeomTriangleFan::CSulGeomTriangleFan( const sigma::VEC_VEC3& vecVector ) :
 CSulGeomBase(),
 m_vecVector( vecVector )
 {
@@ -17,8 +17,8 @@ void CSulGeomTriangleFan::createDrawable()
 	osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;	
 	m_rColors = new osg::Vec4Array;
 
-	Sigma::uint32 count = 0;
-	Sigma::VEC_VEC3::const_iterator i;
+	sigma::uint32 count = 0;
+	sigma::VEC_VEC3::const_iterator i;
 	i = m_vecVector.begin();
 	while ( i!=m_vecVector.end() )
 	{

@@ -28,19 +28,19 @@ public:
 	void			free();
 	void			reset();
 
-	Sigma::uint32	getCount();
+	sigma::uint32	getCount();
 
 	void			add( const CSulString& sName, bool bVal );
 	void			add( const CSulString& sName, const char* pszAttr );
-	void			add( const CSulString& sName, Sigma::int32 dwValue );
-	void			add( const CSulString& sName, Sigma::uint32 dwValue );
+	void			add( const CSulString& sName, sigma::int32 dwValue );
+	void			add( const CSulString& sName, sigma::uint32 dwValue );
 	void			add( const CSulString& sName, float fValue );
 
 	CSulString&		get( const CSulString& sName );
 	bool			get( const CSulString& sName, float& f );
 	bool			get( const CSulString& sName, bool& b );
-	bool			get( const CSulString& sName, Sigma::int8& c );
-	bool			get( const CSulString& sName, Sigma::uint32& i );
+	bool			get( const CSulString& sName, sigma::int8& c );
+	bool			get( const CSulString& sName, sigma::uint32& i );
 	bool			get( const CSulString& sName, CSulString& s );
 
 	bool			exist( const CSulString& sName );
@@ -50,7 +50,7 @@ private:
 
 private:
 	CSulString		m_strName;			// tag name
-	Sigma::uint32	m_dwCount;			// number of actual used sinfo
+	sigma::uint32	m_dwCount;			// number of actual used sinfo
 	CSulString		m_strEmpty;
 
 public:

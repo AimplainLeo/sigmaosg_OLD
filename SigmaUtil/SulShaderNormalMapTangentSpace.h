@@ -9,7 +9,7 @@
 class SUL_EXPORT CSulShaderNormalMapTangentSpace : public CSulShaderBase
 {
 public:
-	CSulShaderNormalMapTangentSpace( osg::Node* pNode, Sigma::int32 indexLight=0, osg::Program* pProg=0 );
+	CSulShaderNormalMapTangentSpace( osg::Node* pNode, sigma::int32 indexLight=0, osg::Program* pProg=0 );
 };
 
 #endif // __SULSHADERNORMALMAPTANGENTSPACE_H__

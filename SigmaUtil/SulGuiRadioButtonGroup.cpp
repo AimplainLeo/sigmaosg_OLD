@@ -4,7 +4,7 @@
 #include "SulGuiRadioButtonGroup.h"
 
 CSulGuiRadioButtonGroup::CSulGuiRadioButtonGroup( float x, float y ) :
-CSulGuiComp( x, y )
+CSulGuiComp( "RADIOBUTTON_GROUP", x, y )
 {
 }
 

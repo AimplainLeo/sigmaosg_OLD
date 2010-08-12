@@ -7,6 +7,7 @@ uniform float h;
 uniform float border;
 uniform vec4 bg_color;
 uniform vec4 border_color;
+uniform int cover;
 
 void main( void )
 {
@@ -20,6 +21,11 @@ void main( void )
 	{
 		color = border_color;
 	}
-
+	
 	gl_FragColor = color;
+
+	if ( cover )
+	{
+		gl_FragColor = vec4(0.5,0.5,0.5,1) + color;
+	}
 }

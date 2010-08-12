@@ -3,14 +3,14 @@
 #include "stdafx.h"
 #include "SulTextureBuffer.h"
 
-CSulTextureBuffer::CSulTextureBuffer( Sigma::uint32 texWidth, Sigma::uint32 texHeight, Sigma::uint32 numBuffers ) :
+CSulTextureBuffer::CSulTextureBuffer( sigma::uint32 texWidth, sigma::uint32 texHeight, sigma::uint32 numBuffers ) :
 m_numBuf( numBuffers ),
 m_curBuf( 0 ),
 m_texFormatInternal( GL_RGBA16F_ARB ),
 m_texFormatSource( GL_RGBA ),
 m_texSourceType( GL_FLOAT )
 {
-	for ( Sigma::uint32 i=0; i<m_numBuf; i++ )
+	for ( sigma::uint32 i=0; i<m_numBuf; i++ )
 	{
 		osg::Texture2D* pTex = createTexture( texWidth, texHeight );
 		m_vecTex.push_back( pTex );

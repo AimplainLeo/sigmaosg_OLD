@@ -11,6 +11,10 @@ class CSulGuiText : public CSulGuiComp
 public:
 								CSulGuiText( const CSulString& sName, float x, float y, float size );
 
+	virtual void				setupAttr( CSulXmlAttr* pAttr );
+
+	virtual void				init();
+
 	void						setText( const CSulString& sName );
 	const CSulString&			getText() const;
 
@@ -19,6 +23,7 @@ public:
 private:
 	osg::ref_ptr<osgText::Text>	m_rText;
 	CSulString					m_sText;
+	float						m_size;
 };
 
 #endif // __SULGUITEXT_H__

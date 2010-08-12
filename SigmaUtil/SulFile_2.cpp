@@ -52,11 +52,11 @@ bool CSulFile::Close()
 
 bool CSulFile::Print( const CSulString& s )
 {
-	Sigma::int32 iRet = fprintf_s( m_pFile, s.c_str() );
+	sigma::int32 iRet = fprintf_s( m_pFile, s.c_str() );
 	return iRet?true:false;
 }
 
-bool CSulFile::Save( CSulString& sFile, char* pBufData, Sigma::uint32 dwBufSize )
+bool CSulFile::Save( CSulString& sFile, char* pBufData, sigma::uint32 dwBufSize )
 {
 	FILE*			pFile;
 	errno_t			err;
@@ -80,7 +80,7 @@ bool CSulFile::Save( CSulString& sFile, char* pBufData, Sigma::uint32 dwBufSize 
 	return true;
 }
 
-Sigma::uint8* CSulFile::Load( const CSulString& sFile )
+sigma::uint8* CSulFile::Load( const CSulString& sFile )
 {
 	FILE*			pFile = 0;
 	errno_t			err;
@@ -163,7 +163,7 @@ Sigma::uint8* CSulFile::Load( const CSulString& sFile )
 	return m_pBuf;
 }
 
-CSulFile::VEC_STRING CSulFile::getTextLines( Sigma::uint32 maxChars )
+CSulFile::VEC_STRING CSulFile::getTextLines( sigma::uint32 maxChars )
 {
 	char* line = new char[maxChars];
 	VEC_STRING vs;

@@ -11,10 +11,10 @@ class SUL_EXPORT CSulString : public std::string
 {
 public:
 					CSulString();
-					CSulString( const Sigma::int8* pszText );
+					CSulString( const sigma::int8* pszText );
 					CSulString( const CSulString& s );
 					CSulString( const std::string& s );
-					CSulString( Sigma::uint8 c );
+					CSulString( sigma::uint8 c );
 					CSulString( float f );
 
 	void			Format( const char* Format, ... );
@@ -23,8 +23,8 @@ public:
 
 	float			asFloat();
 	double			asDouble();
-	Sigma::uint32	asUint32();
-	Sigma::int32	asInt32();
+	sigma::uint32	asUint32();
+	sigma::int32	asInt32();
 	bool			asBool();
 
 	CSulString		GetStartWord( char c ) ;

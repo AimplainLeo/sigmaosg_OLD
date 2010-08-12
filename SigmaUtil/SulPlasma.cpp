@@ -22,7 +22,7 @@ CSulPlasma::~CSulPlasma()
 
 int CSulPlasma::NewColor( int mc, int n, int dvd )
 {
-	Sigma::int32 loc;
+	sigma::int32 loc;
 
 	loc = ( mc + n - (2*n*rand())/RAND_MAX ) / dvd;
 	
@@ -36,9 +36,9 @@ int CSulPlasma::NewColor( int mc, int n, int dvd )
 }
 
 
-void CSulPlasma::Plasma( int x1, int y1, int x2, int y2, Sigma::uint8* pData )
+void CSulPlasma::Plasma( int x1, int y1, int x2, int y2, sigma::uint8* pData )
 {
-	Sigma::int32 xn, yn, dxy, p1, p2, p3, p4;
+	sigma::int32 xn, yn, dxy, p1, p2, p3, p4;
 
 	if ( (x2-x1<2) && (y2-y1<2) )
 		return;
@@ -59,7 +59,7 @@ void CSulPlasma::Plasma( int x1, int y1, int x2, int y2, Sigma::uint8* pData )
 	if ( pData[m_maxX*yn+x2]==0 ) pData[m_maxX*yn+x2] = (unsigned char)NewColor( p3+p4, dxy, 2 );
 	if ( pData[m_maxX*y2+xn]==0 ) pData[m_maxX*y2+xn] = (unsigned char)NewColor( p2+p4, dxy, 2 );
 
-	pData[m_maxX*yn+xn] = (Sigma::int8)NewColor( p1+p2+p3+p4, dxy, 4 );
+	pData[m_maxX*yn+xn] = (sigma::int8)NewColor( p1+p2+p3+p4, dxy, 4 );
 
 	Plasma( x1, y1, xn, yn, pData ); 
 	Plasma( xn, y1, x2, yn, pData );
@@ -68,7 +68,7 @@ void CSulPlasma::Plasma( int x1, int y1, int x2, int y2, Sigma::uint8* pData )
 }
 
 
-void CSulPlasma::Create( Sigma::uint32 w, Sigma::uint32 h )
+void CSulPlasma::Create( sigma::uint32 w, sigma::uint32 h )
 {
 	if ( m_pData )
 	{
@@ -78,14 +78,14 @@ void CSulPlasma::Create( Sigma::uint32 w, Sigma::uint32 h )
 	m_maxX = w;
 	m_maxY = h;
 	
-	m_pData = new Sigma::uint8[w*h*sizeof(Sigma::uint8)];
+	m_pData = new sigma::uint8[w*h*sizeof(sigma::uint8)];
 
-	memset( m_pData, 0, w*h*sizeof(Sigma::int8) );
+	memset( m_pData, 0, w*h*sizeof(sigma::int8) );
 
 	Plasma( 0, 0, w-1, h-1, m_pData );
 }
 
-Sigma::uint8 CSulPlasma::GetValue( Sigma::uint32 dwPosX, Sigma::uint32 dwPosY )
+sigma::uint8 CSulPlasma::GetValue( sigma::uint32 dwPosX, sigma::uint32 dwPosY )
 {
 	if ( m_pData )
 	{
@@ -95,7 +95,7 @@ Sigma::uint8 CSulPlasma::GetValue( Sigma::uint32 dwPosX, Sigma::uint32 dwPosY )
 	return 0;
 }
 
-Sigma::uint8* CSulPlasma::GetDataPtr()
+sigma::uint8* CSulPlasma::GetDataPtr()
 {
 	return m_pData;
 }

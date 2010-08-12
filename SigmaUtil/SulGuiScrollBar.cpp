@@ -1,12 +1,17 @@
-// SulGuiScrollBar.cpp
+// SulGuiScrollBar.cpp   ole.r@get2net.dk
 
 #include "stdafx.h"
 #include "SulGuiScrollBar.h"
-#include "SulGuiButtonMediator.h"
+#include "SulSigSlots.h"
+#include <iostream>
 
 CSulGuiScrollBar::CSulGuiScrollBar( float x, float y, float w, float h ) :
-CSulGuiCanvas( x, y, w, h )
+CSulGuiCanvas( "SCROLLBAR", x, y, w, h )
 {
+	m_min = 0.0f;
+	m_max = 1.0f;
+	m_cur = 0.0f;
+
 	// need top and bottom button
 	m_rButtonTop = new CSulGuiButton( 0, 0, w, w );
 	addChild( m_rButtonTop );
@@ -15,8 +20,18 @@ CSulGuiCanvas( x, y, w, h )
 	addChild( m_rButtonBottom );
 
 	// need drag button
+	m_rangeDrag = h-w-w/2.0f;
 	m_rButtonDrag = new CSulGuiButton( 0, w, w, w/2.0f );
+	m_rButtonDrag->allowDrag( 0, 0, w, m_rangeDrag );
 	addChild( m_rButtonDrag );
+
+	m_rButtonDrag->signalPositionChanged.connect( this, &CSulGuiScrollBar::onButtonDragPositionChanged );
+}
+
+void CSulGuiScrollBar::onButtonDragPositionChanged( float x, float y )
+{
+	m_cur = (y-getW()) / (m_rangeDrag-getW());
+	signalChanged( m_cur );
 }
 
 void CSulGuiScrollBar::setupEventHandler( CSulGuiEventHandler* pEventHandler )
@@ -26,14 +41,5 @@ void CSulGuiScrollBar::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 	m_rButtonTop->setupEventHandler( pEventHandler );
 	m_rButtonBottom->setupEventHandler( pEventHandler );
 	m_rButtonDrag->setupEventHandler( pEventHandler );
-
-	m_rButtonTop->addMediator( new CSulGuiButtonMediator<CSulGuiScrollBar>(this) );
 }
-
-void CSulGuiScrollBar::buttonClick( CSulGuiButton* pButton )
-{
-	
-}
-
-// prehaps a generic drag comp with limits would be better than a hardcoded one???
 

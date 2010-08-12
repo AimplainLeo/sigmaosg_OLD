@@ -40,18 +40,18 @@ public:
 	bool InitStringParse( const CSulString& s );
 
 	// NOTE: Init must not be called if calling ParseData directly
-	bool ParseData( const Sigma::uint8* pData, Sigma::uint32 iSize );
+	bool ParseData( const sigma::uint8* pData, sigma::uint32 iSize );
 
 	// reset parser pointer
 	void Reset();
 
-	void IncIndex( Sigma::uint32 i );
-	void DecIndex( Sigma::uint32 i );
+	void IncIndex( sigma::uint32 i );
+	void DecIndex( sigma::uint32 i );
 
 	void Goto( const CSulString& sText );
 
 	// gets the token and advances the pointer to the next token
-	Sigma::int8*	GetToken();
+	sigma::int8*	GetToken();
 	CSulString		GetStringToken();
 
 	// gets the token but does not advance the pointer
@@ -70,7 +70,7 @@ public:
 	void AddSentenceCharStart( char cChar );
 	void AddSentenceCharEnd( char cChar );
 
-	void RemoveCharToken( Sigma::int8 cChar );
+	void RemoveCharToken( sigma::int8 cChar );
 
 	bool IsCommentStart( char* lpszText );
 	bool IsCommentEnd( char* lpszText );
@@ -84,14 +84,14 @@ protected:
 	~CSulParser();
 
 private:
-	Sigma::uint32		m_dwSize;		// size of data
-	Sigma::uint8*		m_pBuf;			// data loaded
-	Sigma::uint32		m_dwIndex;
+	sigma::uint32		m_dwSize;		// size of data
+	sigma::uint8*		m_pBuf;			// data loaded
+	sigma::uint32		m_dwIndex;
 
-	Sigma::uint8			m_cDelimiters[256];
-	Sigma::uint8			m_cTokens[256];
-	Sigma::uint8			m_cSentenceStart[256];
-	Sigma::uint8			m_cSentenceEnd[256];
+	sigma::uint8			m_cDelimiters[256];
+	sigma::uint8			m_cTokens[256];
+	sigma::uint8			m_cSentenceStart[256];
+	sigma::uint8			m_cSentenceEnd[256];
 
 	VECTOR_STRING_REF	m_vecTokens;
 	VECTOR_STRING_REF	m_vecCommentStart;

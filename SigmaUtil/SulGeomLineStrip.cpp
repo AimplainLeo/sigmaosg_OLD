@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulGeomLineStrip.h"
 
-CSulGeomLineStrip::CSulGeomLineStrip( const Sigma::VEC_VEC3& vecVector ) :
+CSulGeomLineStrip::CSulGeomLineStrip( const sigma::VEC_VEC3& vecVector ) :
 CSulGeomBase(),
 m_vecVector( vecVector )
 {
@@ -17,8 +17,8 @@ void CSulGeomLineStrip::createDrawable()
 	osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;	
 	m_rColors = new osg::Vec4Array;
 
-	Sigma::uint32 count = 0;
-	Sigma::VEC_VEC3::const_iterator i;
+	sigma::uint32 count = 0;
+	sigma::VEC_VEC3::const_iterator i;
 	i = m_vecVector.begin();
 	while ( i!=m_vecVector.end() )
 	{

@@ -120,7 +120,7 @@ void CSulConsoleDisplay::GetBgColor( float& r, float& g, float& b, float& a )
 	a = c.a();
 }
 
-void CSulConsoleDisplay::SetActivateKey( Sigma::int32 iKey )
+void CSulConsoleDisplay::SetActivateKey( sigma::int32 iKey )
 {
 	m_iActivateKey = iKey;
 }
@@ -169,12 +169,12 @@ osg::Node* CSulConsoleDisplay::GetNode()
 	return m_rNode.get();
 }
 
-void CSulConsoleDisplay::CreateTextObjects( Sigma::uint32 iCount )
+void CSulConsoleDisplay::CreateTextObjects( sigma::uint32 iCount )
 {
 	// note:: might have to removeDrawables from geode first
 	m_vecTextObject.clear();
 	
-	Sigma::uint32 i;
+	sigma::uint32 i;
 	for ( i=0; i<iCount; i++ )
 	{
 		CSulString s;
@@ -247,7 +247,7 @@ void CSulConsoleDisplay::UpdateText()
 
 void CSulConsoleDisplay::MarkerUp()
 {
-	if ( (m_iMarkerPos+1)<(Sigma::int32)m_vecTextHistory.size() )
+	if ( (m_iMarkerPos+1)<(sigma::int32)m_vecTextHistory.size() )
 	{
 		++m_iMarkerPos;
 		m_sText = m_vecTextHistory[m_iMarkerPos];
@@ -276,10 +276,10 @@ void CSulConsoleDisplay::MarkerDown()
 void CSulConsoleDisplay::UpdateTextObjects()
 {
 	VECTOR_TEXT::iterator i;
-	Sigma::uint32 iBufSize = m_vecTextBuffer.size();
+	sigma::uint32 iBufSize = m_vecTextBuffer.size();
 
 	// updates the text from bottom to top
-	Sigma::uint32 iCount = 0;
+	sigma::uint32 iCount = 0;
 	for ( i=m_vecTextObject.begin(); i!=m_vecTextObject.end(); i++ )
 	{
 		if ( (iCount+m_iScrollPos)<iBufSize )
@@ -293,7 +293,7 @@ void CSulConsoleDisplay::UpdateTextObjects()
 void CSulConsoleDisplay::ScrollUp()
 {
 	// calc how many positions we can scroll up
-	Sigma::int32 i = m_vecTextBuffer.size()-m_vecTextObject.size();
+	sigma::int32 i = m_vecTextBuffer.size()-m_vecTextObject.size();
 
 	if ( m_iScrollPos<i )
 	{
@@ -314,8 +314,8 @@ void CSulConsoleDisplay::ScrollDown()
 void CSulConsoleDisplay::PageUp()
 {
 	// calc how many positions we can scroll up
-	Sigma::int32 i = m_vecTextBuffer.size()-m_vecTextObject.size();
-	Sigma::int32 iCountView = m_vecTextObject.size();
+	sigma::int32 i = m_vecTextBuffer.size()-m_vecTextObject.size();
+	sigma::int32 iCountView = m_vecTextObject.size();
 
 	if ( (m_iScrollPos+iCountView)<i )
 	{
@@ -326,7 +326,7 @@ void CSulConsoleDisplay::PageUp()
 
 void CSulConsoleDisplay::PageDown()
 {
-	Sigma::int32 iCountView = m_vecTextObject.size();
+	sigma::int32 iCountView = m_vecTextObject.size();
 	if ( (m_iScrollPos-iCountView)>0 )
 	{
 		m_iScrollPos-= iCountView;
@@ -339,7 +339,7 @@ void CSulConsoleDisplay::PageDown()
 	UpdateTextObjects();
 }
 
-void CSulConsoleDisplay::Input( Sigma::int32 key, Sigma::int32 iMod )
+void CSulConsoleDisplay::Input( sigma::int32 key, sigma::int32 iMod )
 {
 	if ( key==m_iActivateKey )
 	{

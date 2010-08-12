@@ -20,7 +20,7 @@ public:
 
 private:
 	osg::ref_ptr<CSulStringList>	m_listText;
-	Sigma::uint32					m_index;
+	sigma::uint32					m_index;
 };
 
 #endif // __SULDEBUGVALUETEXT_H__

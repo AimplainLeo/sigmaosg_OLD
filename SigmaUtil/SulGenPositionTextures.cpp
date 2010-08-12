@@ -79,7 +79,7 @@ void CSulGenPositionTextures::addLine( const osg::LineSegment& line )
 	
 		// calc number of trees on line segment
 		float len = vSeg.length();
-		Sigma::uint32 numTrees = (len/m_lineSpacing)+1;
+		sigma::uint32 numTrees = (len/m_lineSpacing)+1;
 
 		// calc new spacing
 		float spc = len/(float)numTrees;
@@ -88,7 +88,7 @@ void CSulGenPositionTextures::addLine( const osg::LineSegment& line )
 
 		// HACK: the +1 fills in the last spot on the line segment
 		// apparently the math to calculate the number of trees isnt' right :(
-		for ( Sigma::uint32 i=0; i<numTrees+1; i++ )
+		for ( sigma::uint32 i=0; i<numTrees+1; i++ )
 		{
 			float z = 0.0f;
 			osg::Vec3 plant_pos = p1 + vSeg*(spc*i);
@@ -140,8 +140,8 @@ void CSulGenPositionTextures::process()
 	// create a list of lines from shape file 
 	CSulNodeVisitorExtractLines myLines;
 	m_rShape->accept( myLines );
-	const Sigma::VEC_LINESEGMENT& lines = myLines.getLineSegmentList();
-	Sigma::VEC_LINESEGMENT::const_iterator i;
+	const sigma::VEC_LINESEGMENT& lines = myLines.getLineSegmentList();
+	sigma::VEC_LINESEGMENT::const_iterator i;
 
 	// now process each line into data for our x,y positions for grass/trees
 	i = lines.begin();
@@ -158,11 +158,11 @@ void CSulGenPositionTextures::process()
 	////////////////////////
 
 	// now process each triangle
-	Sigma::VEC_TRI tri_org = myLines.getTriList();
+	sigma::VEC_TRI tri_org = myLines.getTriList();
 
 	if ( tri_org.size() )
 	{
-		Sigma::VEC_TRI::iterator iTri;
+		sigma::VEC_TRI::iterator iTri;
 
 		// transform tri to local space
 		iTri = tri_org.begin();
@@ -190,8 +190,8 @@ void CSulGenPositionTextures::process()
 		std::cout << "clipTri4 = " << clipTri4.getCount() << std::endl;
 		std::cout << "clipTri5 = " << m_clipTri->getCount() << std::endl;
 
-		const Sigma::VEC_TRI& tri = m_clipTri->getTriangleList();
-		Sigma::VEC_TRI::const_iterator i_const;
+		const sigma::VEC_TRI& tri = m_clipTri->getTriangleList();
+		sigma::VEC_TRI::const_iterator i_const;
 
 		// calc area of polygon
 		std::vector<float> vecA;
@@ -215,7 +215,7 @@ void CSulGenPositionTextures::process()
 		osg::notify(osg::ALWAYS) << "total area = " << sum << std::endl;
 
 		// calc number of trees to plant
-		Sigma::uint32 n = (sum*0.907f)/(osg::PI*m_radius*m_radius);
+		sigma::uint32 n = (sum*0.907f)/(osg::PI*m_radius*m_radius);
 
 		float density = n/sum;
 		osg::notify(osg::ALWAYS) << "density = " << density << std::endl;
@@ -231,11 +231,11 @@ void CSulGenPositionTextures::process()
 	processTexture();
 }
 
-void CSulGenPositionTextures::plantTrees( Sigma::uint32 numTrees, const std::vector<float>& vecA, const Sigma::VEC_TRI& tri )
+void CSulGenPositionTextures::plantTrees( sigma::uint32 numTrees, const std::vector<float>& vecA, const sigma::VEC_TRI& tri )
 {
-	for ( Sigma::uint32 i=0; i<numTrees; i++ )
+	for ( sigma::uint32 i=0; i<numTrees; i++ )
 	{
-		float t = Sigma::rand0to1();
+		float t = sigma::rand0to1();
 
 		// which triangle to place tree into (j is the triangle index)
 		unsigned int j = 0;
@@ -254,7 +254,7 @@ void CSulGenPositionTextures::plantTrees( Sigma::uint32 numTrees, const std::vec
 
 	// put positions into texture positions
 	std::vector<osg::Vec3>::iterator iPos;
-	Sigma::uint32 ccc = 0;
+	sigma::uint32 ccc = 0;
 	iPos = m_vecPositions.begin();
 	while ( iPos!=m_vecPositions.end() )
 	{
@@ -300,8 +300,8 @@ void CSulGenPositionTextures::plantTrees( Sigma::uint32 numTrees, const std::vec
 
 void CSulGenPositionTextures::addTri( CSulDataTri tri )
 {
-	float a = Sigma::rand0to1();
-	float b = Sigma::rand0to1();
+	float a = sigma::rand0to1();
+	float b = sigma::rand0to1();
 
 	if ( (a+b) > 1.0f )
 	{
@@ -316,18 +316,18 @@ void CSulGenPositionTextures::addTri( CSulDataTri tri )
 	m_vecPositions.push_back( P );
 }
 
-Sigma::uint32 CSulGenPositionTextures::getTexSizeSquared()
+sigma::uint32 CSulGenPositionTextures::getTexSizeSquared()
 {
 	return m_texSizeSquared;
 }
 
 void CSulGenPositionTextures::processTexture()
 {
-	Sigma::VEC_VEC3::iterator i;
+	sigma::VEC_VEC3::iterator i;
 
 	// calc a good texture size for the positions
-	Sigma::uint32 sqr_root = sqrt( (float)m_vecPos.size() )+1;
-	m_texSizeSquared = nexthigher<Sigma::uint32>(sqr_root);
+	sigma::uint32 sqr_root = sqrt( (float)m_vecPos.size() )+1;
+	m_texSizeSquared = nexthigher<sigma::uint32>(sqr_root);
 
 
 	m_rImage = new osg::Image;
@@ -348,12 +348,12 @@ void CSulGenPositionTextures::processTexture()
 	}
 }
 
-Sigma::uint32 CSulGenPositionTextures::getCount()
+sigma::uint32 CSulGenPositionTextures::getCount()
 {
 	return m_lineCount;
 }
 
-Sigma::uint32 CSulGenPositionTextures::getCountPos()
+sigma::uint32 CSulGenPositionTextures::getCountPos()
 {
 	return m_posCount;
 }
@@ -388,8 +388,8 @@ void CSulGenPositionTextures::preprocessMasks()
 
 		CSulNodeVisitorExtractLines myLines;
 		node->accept( myLines );
-		const Sigma::VEC_LINESEGMENT& lines_org = myLines.getLineSegmentList();
-		Sigma::VEC_LINESEGMENT::const_iterator ii;
+		const sigma::VEC_LINESEGMENT& lines_org = myLines.getLineSegmentList();
+		sigma::VEC_LINESEGMENT::const_iterator ii;
 
 		ii = lines_org.begin();
 		while ( ii!=lines_org.end() )
@@ -406,7 +406,7 @@ void CSulGenPositionTextures::preprocessMasks()
 		CSulClipLines clipLines4( clipLines3.getLinesList(), m_vecPlane[4] );
 		i->m_clipLines = new CSulClipLines( clipLines4.getLinesList(), m_vecPlane[5] );
 
-		const Sigma::VEC_LINESEGMENT& lines = i->m_clipLines->getLinesList();
+		const sigma::VEC_LINESEGMENT& lines = i->m_clipLines->getLinesList();
 
 		std::cout << "mask lines org: " << lines_org.size() << std::endl;
 
@@ -467,9 +467,9 @@ void CSulGenPositionTextures::addTree( const osg::Vec3& pos_local )
 	{
 		osg::Node* node = i->m_node;		
 
-		Sigma::VEC_LINESEGMENT::const_iterator ii;
+		sigma::VEC_LINESEGMENT::const_iterator ii;
 
-		const Sigma::VEC_LINESEGMENT& lines = i->m_clipLines->getLinesList();
+		const sigma::VEC_LINESEGMENT& lines = i->m_clipLines->getLinesList();
 
 		// now process each line
 		ii = lines.begin();
@@ -495,7 +495,7 @@ void CSulGenPositionTextures::addTree( const osg::Vec3& pos_local )
 	m_vecPos.push_back( pos_local );
 }
 
-const Sigma::VEC_VEC3& CSulGenPositionTextures::getRejectedPositionsList()
+const sigma::VEC_VEC3& CSulGenPositionTextures::getRejectedPositionsList()
 {
 	return m_vecRejectedPositions;
 }

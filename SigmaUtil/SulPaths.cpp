@@ -10,9 +10,9 @@ void CSulPaths::Add( const CSulString& sPath )
 	m_vecPath.push_back( sPath );
 }
 
-Sigma::uint32 CSulPaths::GetCount()
+sigma::uint32 CSulPaths::GetCount()
 {
-	return (Sigma::uint32)m_vecPath.size();
+	return (sigma::uint32)m_vecPath.size();
 }
 
 const CSulPaths::VECTOR_PATH& CSulPaths::GetPaths() const

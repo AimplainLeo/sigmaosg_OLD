@@ -5,7 +5,7 @@
 #include <osg/geode>
 #include <osg/geometry>
 
-CSulShaderNormalMapObjectSpace::CSulShaderNormalMapObjectSpace( osg::Node* pNode, Sigma::int32 indexLight, osg::Program* pProg ) :
+CSulShaderNormalMapObjectSpace::CSulShaderNormalMapObjectSpace( osg::Node* pNode, sigma::int32 indexLight, osg::Program* pProg ) :
 CSulShaderBase( pNode )
 {
 	if ( !pProg )

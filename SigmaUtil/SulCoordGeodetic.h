@@ -18,7 +18,7 @@
 class CSulCoordGeodetic : public osg::Referenced
 {
 public:
-	CSulCoordGeodetic( const CSulCoordLatLon& latlon /*, Sigma::uint8 meridian, Sigma::uint8 hemisphere*/ );
+	CSulCoordGeodetic( const CSulCoordLatLon& latlon /*, sigma::uint8 meridian, sigma::uint8 hemisphere*/ );
 
 	const CSulCoordLatLon& getLatLon() const;
 
@@ -26,8 +26,8 @@ private:
 	CSulCoordLatLon		m_latlon;
 	double				m_height;
 /*
-	Sigma::uint8		m_meridian;		// 'E' : eastern, 'W' : western
-	Sigma::uint8		m_hemisphere;	// 'N' : nortern, 'S' : southern
+	sigma::uint8		m_meridian;		// 'E' : eastern, 'W' : western
+	sigma::uint8		m_hemisphere;	// 'N' : nortern, 'S' : southern
 */
 };
 

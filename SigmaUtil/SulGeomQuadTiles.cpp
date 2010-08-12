@@ -7,7 +7,7 @@
 CSulGeomQuadTiles::CSulGeomQuadTiles( 
 	const osg::Vec3& vCenter, 
 	float w, float h,						// total width and height with all quads
-	Sigma::uint32 tileX, Sigma::uint32 tileY,				// number of tiles x and y with in w and h
+	sigma::uint32 tileX, sigma::uint32 tileY,				// number of tiles x and y with in w and h
 	bool bFadeEdges,
 	EPLANE ePlane ) :
 m_vCenter(vCenter),
@@ -21,12 +21,12 @@ m_ePlane(ePlane)
 	
 }
 
-Sigma::uint32 CSulGeomQuadTiles::getTileX()
+sigma::uint32 CSulGeomQuadTiles::getTileX()
 {
 	return m_tileX;
 }
 
-Sigma::uint32 CSulGeomQuadTiles::getTileY()
+sigma::uint32 CSulGeomQuadTiles::getTileY()
 {
 	return m_tileY;
 }
@@ -56,13 +56,13 @@ void CSulGeomQuadTiles::createTiles()
 	osg::Vec3Array* pVerts = new osg::Vec3Array;
 
 	// calc vert count x and y
-	Sigma::uint32 vertCountX = (m_tileX+1)*(m_tileX+1);
-	Sigma::uint32 vertCountY = (m_tileY+1)*(m_tileY+1);
+	sigma::uint32 vertCountX = (m_tileX+1)*(m_tileX+1);
+	sigma::uint32 vertCountY = (m_tileY+1)*(m_tileY+1);
 
 	float dx = m_w/m_tileX;
 	float dy = m_h/m_tileY;
 
-	Sigma::uint32 x, y;
+	sigma::uint32 x, y;
 	for ( y=0; y<vertCountY; y++ )
 	{
 		for ( x=0; x<vertCountX; x++ )
@@ -103,7 +103,7 @@ void CSulGeomQuadTiles::createTiles()
 
 	m_texCoords = new osg::Vec2Array( m_tileX*m_tileY*4 );
 
-	Sigma::uint32 numTexCoordsPerRow = m_tileX*4;
+	sigma::uint32 numTexCoordsPerRow = m_tileX*4;
 
 	dx = 1.0f/m_tileX;
 	dy = 1.0f/m_tileX;
@@ -142,8 +142,8 @@ void CSulGeomQuadTiles::createTiles()
 	{
 		for ( x=0; x<m_tileX; x++ )
 		{
-			Sigma::uint32 cX;
-			Sigma::uint32 cY;
+			sigma::uint32 cX;
+			sigma::uint32 cY;
 
 			cX = x;
 			cY = y+1;

@@ -10,7 +10,7 @@
 class CSulGenHeightTexture : public osg::Group
 {
 public:
-						CSulGenHeightTexture( osg::Node* pRenderMe,	Sigma::uint32 texSizeXY );
+						CSulGenHeightTexture( osg::Node* pRenderMe,	sigma::uint32 texSizeXY );
 		
 	void				generate();
 	osg::Texture2D*		getTexture();

@@ -19,12 +19,12 @@ public:
 	CSulGeomQuadTiles( 
 		const osg::Vec3& vCenter, 
 		float w=1.0f, float h=1.0f, 
-		Sigma::uint32 tileX=3, Sigma::uint32 tileY=3, 
+		sigma::uint32 tileX=3, sigma::uint32 tileY=3, 
 		bool bFadeEdges=true,
 		EPLANE ePlane=PLANE_XY );
 
-	Sigma::uint32 getTileX();
-	Sigma::uint32 getTileY();
+	sigma::uint32 getTileX();
+	sigma::uint32 getTileY();
 
 	float getWidth();
 	float getHeight();
@@ -41,8 +41,8 @@ private:
 	osg::Vec3 m_vCenter;
 	float	m_w;
 	float	m_h;						// total width and height with all quads
-	Sigma::uint32	m_tileX;
-	Sigma::uint32	m_tileY;					// number of tiles x and y with in w and h
+	sigma::uint32	m_tileX;
+	sigma::uint32	m_tileY;					// number of tiles x and y with in w and h
 	bool	m_bFadeEdges;
 	EPLANE	m_ePlane;
 };

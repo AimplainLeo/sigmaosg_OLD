@@ -26,7 +26,7 @@ m_size_squared( 1024 )
 	setTextureUnit( 3 );
 }
 
-void CSulShadow::setTextureSize( Sigma::uint32 size_squared )
+void CSulShadow::setTextureSize( sigma::uint32 size_squared )
 {
 	m_size_squared = size_squared;
 }

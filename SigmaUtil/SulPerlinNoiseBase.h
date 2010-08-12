@@ -11,18 +11,18 @@ class CSulPerlinNoiseBase : public osg::Referenced
 public:
 						CSulPerlinNoiseBase();
 
-	void				SetRandomSeed( Sigma::uint32 iSeed );
+	void				SetRandomSeed( sigma::uint32 iSeed );
 
-	void				SetOctave( Sigma::uint32 iOctaves );
-	Sigma::uint32		GetOctave();
+	void				SetOctave( sigma::uint32 iOctaves );
+	sigma::uint32		GetOctave();
 
 	void				SetPersistence( float fPersistence );
 	float				GetPersistence();
 
 protected:
-	Sigma::uint32		m_iOctaves;
+	sigma::uint32		m_iOctaves;
 	float				m_fPersistence;
-	Sigma::uint32		m_iSeed;
+	sigma::uint32		m_iSeed;
 };
 
 #endif // __SULPERLINNOISEBASE_H__

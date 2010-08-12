@@ -9,7 +9,7 @@
 class SUL_EXPORT CSulShaderNormalMapObjectSpace : public CSulShaderBase
 {
 public:
-	CSulShaderNormalMapObjectSpace( osg::Node* pNode, Sigma::int32 indexLight=0, osg::Program* pProg=0 );
+	CSulShaderNormalMapObjectSpace( osg::Node* pNode, sigma::int32 indexLight=0, osg::Program* pProg=0 );
 };
 
 #endif // __SULSHADERNORMALMAPOBJECTSPACE_H__

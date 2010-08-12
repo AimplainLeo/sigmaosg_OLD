@@ -15,7 +15,7 @@ private:
 public:
 									CSulTokenManager();
 
-	bool							Parse( Sigma::uint8* pData, Sigma::uint32 iSize );
+	bool							Parse( sigma::uint8* pData, sigma::uint32 iSize );
 
 	// gets the current token and advances the index to the next token
 	const char*						GetToken();
@@ -23,7 +23,7 @@ public:
 private:
 	osg::ref_ptr<CSulTokenizer>		m_rTokenizer;
 	VECTOR_STRING	m_vecToken;
-	Sigma::int32	m_iIndex;
+	sigma::int32	m_iIndex;
 };
 
 #endif // __SULTOKENMANAGER_H__

@@ -8,8 +8,8 @@
 class CSulGenPositionMask : public osg::Referenced
 {
 public:
-		Sigma::VEC_TRI			m_vecTriMask;
-		Sigma::VEC_LINESEGMENT	m_vecLineMask;
+		sigma::VEC_TRI			m_vecTriMask;
+		sigma::VEC_LINESEGMENT	m_vecLineMask;
 		float					m_lineDist;
 };
 

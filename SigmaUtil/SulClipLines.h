@@ -9,11 +9,11 @@
 class CSulClipLines
 {
 public:
-	CSulClipLines( const Sigma::VEC_LINESEGMENT& lines, const osg::Plane& plane );
+	CSulClipLines( const sigma::VEC_LINESEGMENT& lines, const osg::Plane& plane );
 
-	const Sigma::VEC_LINESEGMENT& getLinesList();
+	const sigma::VEC_LINESEGMENT& getLinesList();
 
-	Sigma::uint32 getLineCount();
+	sigma::uint32 getLineCount();
 
 private:
 	int		testVert( const osg::Vec3& v );
@@ -21,8 +21,8 @@ private:
 
 private:
 	osg::Plane				m_plane;
-	Sigma::VEC_LINESEGMENT	m_vecLinesIn;
-	Sigma::VEC_LINESEGMENT	m_vecLines;
+	sigma::VEC_LINESEGMENT	m_vecLinesIn;
+	sigma::VEC_LINESEGMENT	m_vecLines;
 };
 
 #endif // __SULCLIPLINES_H__

@@ -29,24 +29,24 @@ public:
 
 	void	process();
 
-	Sigma::uint32				getCount();
-	Sigma::uint32				getCountPos();
+	sigma::uint32				getCount();
+	sigma::uint32				getCountPos();
 
 	osg::Image*					getImage();
 
-	Sigma::uint32				getTexSizeSquared();
+	sigma::uint32				getTexSizeSquared();
 
 	const CSulClipTriangle&		getClipTriangles();
 
 	const std::vector<osg::Vec3>& getTreePositions() const;
 
-	const Sigma::VEC_VEC3&		getRejectedPositionsList();
+	const sigma::VEC_VEC3&		getRejectedPositionsList();
 
 private:
 	void	addLine( const osg::LineSegment& line );
 	void	addTri( CSulDataTri tri );
 
-	void	plantTrees( Sigma::uint32 numTrees, const std::vector<float>& vecA, const Sigma::VEC_TRI& tri );
+	void	plantTrees( sigma::uint32 numTrees, const std::vector<float>& vecA, const sigma::VEC_TRI& tri );
 
 	void	preprocessMasks();
 
@@ -61,23 +61,23 @@ private:
 	float						m_lineJitterRadius;
 	bool						m_lineSnap;
 	osg::ref_ptr<osg::Image>	m_rImage;
-	Sigma::uint32				m_lineCount;
-	Sigma::uint32				m_posCount;
+	sigma::uint32				m_lineCount;
+	sigma::uint32				m_posCount;
 	osg::Matrix					m_lineTransform;
 	osg::ref_ptr<osg::Node>		m_rScene;
 
 	std::vector<osg::Vec3>		m_vecPositions;
 	float						m_radius;
 
-	Sigma::VEC_VEC3				m_vecPos;
-	Sigma::uint32				m_texSizeSquared;
+	sigma::VEC_VEC3				m_vecPos;
+	sigma::uint32				m_texSizeSquared;
 
 	std::vector<osg::Plane>		m_vecPlane;
 
 	CSulClipTriangle*			m_clipTri;
 
 	VEC_DATASHAPEMASK			m_vecDataShapeMask;
-	Sigma::VEC_VEC3				m_vecRejectedPositions;
+	sigma::VEC_VEC3				m_vecRejectedPositions;
 };
 
 #endif // __SULGENPOSITIONTEXTURES_H__

@@ -33,7 +33,7 @@ void CSulGeomGrid::Create( const osg::Vec3& vPos, float fW, float fH, float fCel
 {
 	osg::Vec3 v0;
 	osg::Vec3 v1;
-	Sigma::uint32 count = 0;
+	sigma::uint32 count = 0;
 	float x, y;
 
 	osg::Vec3Array* pVerts = dynamic_cast<osg::Vec3Array*>(getDrawable()->asGeometry()->getVertexArray());

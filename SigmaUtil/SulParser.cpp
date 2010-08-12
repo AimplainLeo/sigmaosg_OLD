@@ -6,7 +6,7 @@
 #include "SulFile.h"
 #include "SulString.h"
 
-using namespace Sigma;
+using namespace sigma;
 
 /*
 #ifdef TARGET_WINDOWS
@@ -87,19 +87,19 @@ bool CSulParser::InitStringParse( const CSulString& s )
 	}
 
 	// FIXME: who deletes pBuf???
-	Sigma::uint32 dwSize = s.size();
-	Sigma::uint8* pBuf = new Sigma::uint8[dwSize];
+	sigma::uint32 dwSize = s.size();
+	sigma::uint8* pBuf = new sigma::uint8[dwSize];
 	memcpy( pBuf, s.c_str(), dwSize );
 	return ParseData( pBuf, dwSize );
 }
 
-bool CSulParser::ParseData( const Sigma::uint8* pData, Sigma::uint32 iSize )
+bool CSulParser::ParseData( const sigma::uint8* pData, sigma::uint32 iSize )
 {
 	assert( !m_pBuf );
 
 	m_dwSize = iSize;
 	
-	m_pBuf = new Sigma::uint8[m_dwSize];
+	m_pBuf = new sigma::uint8[m_dwSize];
 
 	memcpy( m_pBuf, pData, m_dwSize );
 	
@@ -118,7 +118,7 @@ void CSulParser::AddCharToken( char cChar )
 	m_cTokens[(unsigned int) cChar] = 1;
 }
 
-void CSulParser::RemoveCharToken( Sigma::int8 cChar )
+void CSulParser::RemoveCharToken( sigma::int8 cChar )
 {
 	m_cTokens[(unsigned int) cChar] = 0;
 }

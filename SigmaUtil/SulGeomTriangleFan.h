@@ -9,13 +9,13 @@
 class CSulGeomTriangleFan : public CSulGeomBase
 {
 public: 
-					CSulGeomTriangleFan( const Sigma::VEC_VEC3& vecVector );
+					CSulGeomTriangleFan( const sigma::VEC_VEC3& vecVector );
 
 protected:
 	void			createDrawable();
 
 private:
-	Sigma::VEC_VEC3					m_vecVector;
+	sigma::VEC_VEC3					m_vecVector;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 };
 

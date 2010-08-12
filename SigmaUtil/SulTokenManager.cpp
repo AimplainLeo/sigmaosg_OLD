@@ -9,7 +9,7 @@ CSulTokenManager::CSulTokenManager()
 	m_rTokenizer = new CSulTokenizer;
 }
 
-bool CSulTokenManager::Parse( Sigma::uint8* pData, Sigma::uint32 iSize )
+bool CSulTokenManager::Parse( sigma::uint8* pData, sigma::uint32 iSize )
 {
 	return m_rTokenizer->Parse( pData, iSize );
 }
@@ -17,7 +17,7 @@ bool CSulTokenManager::Parse( Sigma::uint8* pData, Sigma::uint32 iSize )
 const char* CSulTokenManager::GetToken()
 {
 	// check if we are at the end
-	if ( m_iIndex>=(Sigma::int32)m_vecToken.size() )
+	if ( m_iIndex>=(sigma::int32)m_vecToken.size() )
 	{
 		return 0;
 	}

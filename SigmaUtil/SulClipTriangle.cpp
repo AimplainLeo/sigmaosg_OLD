@@ -15,19 +15,19 @@ m_plane( plane )
 	process();
 }
 
-CSulClipTriangle::CSulClipTriangle( const Sigma::VEC_TRI& vecTri, const osg::Plane& plane ) :
+CSulClipTriangle::CSulClipTriangle( const sigma::VEC_TRI& vecTri, const osg::Plane& plane ) :
 m_plane( plane )
 {
 	m_vecTriIn = vecTri;
 	process();
 }
 
-Sigma::uint32 CSulClipTriangle::getCount()
+sigma::uint32 CSulClipTriangle::getCount()
 {
 	return m_vecTriOut.size();
 }
 
-const CSulDataTri* CSulClipTriangle::getTriangle( Sigma::uint32 index )
+const CSulDataTri* CSulClipTriangle::getTriangle( sigma::uint32 index )
 {
 	return &m_vecTriOut[index];
 }
@@ -42,7 +42,7 @@ int CSulClipTriangle::testVert( const osg::Vec3& v )
 void CSulClipTriangle::processClipTriPlane( const CSulDataTri& tri, const osg::Plane& plane )
 {
 	// how many points are on the wrong side of the plane
-	Sigma::uint32 count = 0;
+	sigma::uint32 count = 0;
 
 	if ( testVert( tri.m_p0 )<0 ) count++;
 	if ( testVert( tri.m_p1 )<0 ) count++;
@@ -148,7 +148,7 @@ void CSulClipTriangle::processSingleTri( const CSulDataTri& tri )
 
 void CSulClipTriangle::process()
 {
-	Sigma::VEC_TRI::iterator i;
+	sigma::VEC_TRI::iterator i;
 
 	i = m_vecTriIn.begin();
 	while ( i!=m_vecTriIn.end() )	
@@ -158,7 +158,7 @@ void CSulClipTriangle::process()
 	}
 }
 
-const Sigma::VEC_TRI& CSulClipTriangle::getTriangleList() const
+const sigma::VEC_TRI& CSulClipTriangle::getTriangleList() const
 {
 	return m_vecTriOut;
 }

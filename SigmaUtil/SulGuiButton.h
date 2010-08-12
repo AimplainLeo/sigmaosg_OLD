@@ -5,7 +5,6 @@
 
 #include "SulGuiCanvas.h"
 #include "SulGuiText.h"
-#include "SulGuiButtonMediator.h"
 
 class CSulGuiButton : public CSulGuiCanvas
 {
@@ -14,9 +13,8 @@ public:
 			
 			CSulGuiButton( float x, float y, float w, float h );
 
-	void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
-
-	void	addMediator( CSulGuiButtonMediatorBase* p );
+	virtual void	setupAttr( CSulXmlAttr* pAttr );
+	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 
 	void	setMouseRelease( bool bInside );
 
@@ -26,8 +24,8 @@ protected:
 
 private:
 	osg::ref_ptr<CSulGuiText>	m_rText;
-
-CSulGuiButtonMediatorBase* m_test;
+	CSulString					m_sText;
+	float						m_sizeFont;
 };
 
 #endif // __SULGUIBUTTON_H__

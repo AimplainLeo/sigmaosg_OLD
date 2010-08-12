@@ -16,7 +16,7 @@ bool SulRenderInstances_readLocalData(osg::Object& obj, osgDB::Input& fr)
 {
 	CSulRenderInstances& ri = static_cast<CSulRenderInstances&>(obj);
 /*
-	Sigma::uint32 numInstances;
+	sigma::uint32 numInstances;
 	osg::Vec3 minBound;
 	osg::Vec3 maxBound;
 
@@ -69,14 +69,14 @@ osg::Geode( ri, copyop )
 
 CSulRenderInstances::CSulRenderInstances( 
 	osg::Image* pImagePositions, 
-	Sigma::uint32 numInst, 
+	sigma::uint32 numInst, 
 	osg::BoundingBox& bb, 
 	float min, 
 	float max,
 	bool bSuppressTexture,
-	Sigma::uint32 texUnit,
-	Sigma::uint32 texSizeSquared,
-	Sigma::uint32 useLights
+	sigma::uint32 texUnit,
+	sigma::uint32 texSizeSquared,
+	sigma::uint32 useLights
 ) :
 osg::Geode(),
 m_bb( bb ),
@@ -140,7 +140,7 @@ void CSulRenderInstances::createShaders()
 	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights, m_min, m_max );
 }
 
-Sigma::uint32 CSulRenderInstances::getNumInstances() const
+sigma::uint32 CSulRenderInstances::getNumInstances() const
 {
 	return m_numInstances;
 }

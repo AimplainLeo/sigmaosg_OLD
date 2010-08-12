@@ -6,45 +6,94 @@
 #include <osgManipulator/Selection>
 
 CSulGuiListBox::CSulGuiListBox( float x, float y, float w, float h ) :
-CSulGuiCanvas( x, y, w, h )
+CSulGuiCanvas( "LISTBOX", x, y, w, h )
 {
-	// opengl scissor?
-	// clip planes
-	// render to texture
-	// stencil buffer
-	// fixed point text positions with limits
+	// add a scrollbar
+	m_rScrollBar = new CSulGuiScrollBar( w, 0, 32, h );
+	addChild( m_rScrollBar );
 
-/*
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
-	x = m.getTrans().x();
-	y = m.getTrans().y();
-*/
-
-/*
-	osg::Matrix m;
-	m.setTrans( x, y, 0 );
-	this->computeLocalToWorldMatrix( m, 0 );
-
-
-	//osg::Scissor* pScissor = new osg::Scissor( 256+32, 512-(40+h), w, h );
-	osg::Scissor* pScissor = new osg::Scissor( x, 512-(h+y), w, h );
-	//osg::Scissor* pScissor = new osg::Scissor( 0, 0, 400, 512 );
-	getOrCreateStateSet()->setAttributeAndModes( pScissor, osg::StateAttribute::ON );
-*/
+	m_rScrollBar->signalChanged.connect( this, &CSulGuiListBox::onScrollBarChanged );
 }
 
-void CSulGuiListBox::addItem( CSulGuiItem* pItem )
+void CSulGuiListBox::setupView( float w, float h )
 {
-	m_vecItem.push_back( pItem );
+	CSulGuiCanvas::setupView( w, h );
 
-	// we need to set the position of the item in the listbox
+	float x = getWorldX();
+	float y = getWorldY();
+	float ww = getW();
+	float hh = getH();
 
-	pItem->setY( m_vecItem.size()*32.0f );
+	osg::Scissor* pScissor = new osg::Scissor( x, h-(y+hh), ww+32, hh );
+	getOrCreateStateSet()->setAttributeAndModes( pScissor, osg::StateAttribute::ON );
+}
 
-	if ( pItem->getY()>getH() )
+float CSulGuiListBox::getTotalItemsHeight()
+{
+	MAP_GUIITEM::iterator i, e;
+	i = m_mapItem.begin();	
+	e = m_mapItem.end();
+	float h = 0.0f;
+
+	while( i!=e )
 	{
-		pItem->show( false );
+		h += i->first->getH();		
+		++i;
+	}
+
+	return h;
+}
+
+void CSulGuiListBox::onScrollBarChanged( float val )
+{
+	float totalHeight = getTotalItemsHeight()-getH();
+	
+	float realPosition = totalHeight*val;
+
+	// reposition items
+	MAP_GUIITEM::iterator i, e;
+	i = m_mapItem.begin();	
+	e = m_mapItem.end();
+
+	float h = 0.0f;
+
+	while( i!=e )
+	{
+		i->first->setY( -realPosition+h );
+		h += i->first->getH();
+		++i;
 	}
 }
+
+void CSulGuiListBox::setupEventHandler( class CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiCanvas::setupEventHandler( pEventHandler );
+
+	m_rScrollBar->setupEventHandler( pEventHandler );
+}
+
+void CSulGuiListBox::addItem( CSulGuiCanvas* pCanvas )
+{
+	CSulGuiItem* pItem = new CSulGuiItem( pCanvas );
+
+	float h = getTotalItemsHeight();
+
+	m_mapItem[pCanvas] = pItem;
+
+	// we need to set the position of the item in the listbox
+	pCanvas->setY( h );
+	pCanvas->signalClicked.connect( this, &CSulGuiListBox::onClick );
+	pCanvas->setActive( false );
+}
+
+void CSulGuiListBox::onClick( CSulGuiCanvas* pItem )
+{
+	// find item in our list
+	MAP_GUIITEM::iterator iFound = m_mapItem.find( pItem );
+	if ( iFound!=m_mapItem.end() )
+	{
+		iFound->second->toggleSelect();
+	}
+
+}
+

@@ -23,8 +23,8 @@ public:
 /*
 		CSulNodeVisitorExtractLines myLines;
 		node->accept( myLines );
-		const Sigma::VEC_LINESEGMENT& lines_org = myLines.getLineSegmentList();
-		Sigma::VEC_LINESEGMENT::const_iterator ii;
+		const sigma::VEC_LINESEGMENT& lines_org = myLines.getLineSegmentList();
+		sigma::VEC_LINESEGMENT::const_iterator ii;
 
 		// we need to minize the number of lines, so we only have those in the boundingbox area
 		CSulClipLines clipLines0( lines_org, m_vecPlane[0] );

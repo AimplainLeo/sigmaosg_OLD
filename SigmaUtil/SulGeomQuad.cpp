@@ -97,7 +97,7 @@ void CSulGeomQuad::setColor( float r, float g, float b, float a )
 	getDrawable()->asGeometry()->dirtyDisplayList();
 }
 
-const osg::Vec4& CSulGeomQuad::getColor( Sigma::uint32 index )
+const osg::Vec4& CSulGeomQuad::getColor( sigma::uint32 index )
 {
 	return (*m_rColors)[index];
 }
@@ -117,7 +117,7 @@ void CSulGeomQuad::createUV()
 	}
 }
 
-void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, Sigma::uint32 unit )
+void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, sigma::uint32 unit )
 {
 	createUV();
 
@@ -133,7 +133,7 @@ void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, Sigma::
     getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
-void CSulGeomQuad::setTexture( osg::Texture2D* pTex, Sigma::uint32 unit )
+void CSulGeomQuad::setTexture( osg::Texture2D* pTex, sigma::uint32 unit )
 {
 	createUV();
 
@@ -142,7 +142,7 @@ void CSulGeomQuad::setTexture( osg::Texture2D* pTex, Sigma::uint32 unit )
     getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
-void CSulGeomQuad::setTexture( const CSulString& file, Sigma::uint32 unit )
+void CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 unit )
 {
 	osg::Texture2D* pTex = new osg::Texture2D;
     osg::Image* pImage = osgDB::readImageFile( osgDB::findDataFile(file.c_str()) );
@@ -151,7 +151,7 @@ void CSulGeomQuad::setTexture( const CSulString& file, Sigma::uint32 unit )
 	m_mapTex[unit] = pTex;
 }
 
-osg::Texture2D* CSulGeomQuad::getTexture( Sigma::uint32 unit )
+osg::Texture2D* CSulGeomQuad::getTexture( sigma::uint32 unit )
 {
 	return m_mapTex[unit];
 }

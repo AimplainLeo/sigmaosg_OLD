@@ -20,8 +20,8 @@ const float CSulDataTri::getArea() const
 
 osg::Vec3 CSulDataTri::getRandomPoint() const
 {
-	float a = Sigma::rand0to1();
-	float b = Sigma::rand0to1();
+	float a = sigma::rand0to1();
+	float b = sigma::rand0to1();
 
 	if ( (a+b) > 1.0f )
 	{

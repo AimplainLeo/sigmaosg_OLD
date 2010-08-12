@@ -35,7 +35,7 @@ CSulCoordUTM::CSulCoordUTM( const CSulCoordGeodetic& coord )
 	calcOffset( coord.getLatLon(), m_zoneEW, m_zoneNS, m_easting, m_northing );
 }
 
-void CSulCoordUTM::calcOffset( const CSulCoordLatLon& latlon, Sigma::uint32 zoneEW, Sigma::uint8 zoneNS, double& easting, double& northing )
+void CSulCoordUTM::calcOffset( const CSulCoordLatLon& latlon, sigma::uint32 zoneEW, sigma::uint8 zoneNS, double& easting, double& northing )
 {
 	double Origin_Latitude = 0.0;
 	double Central_Meridian = 0.0;
@@ -80,7 +80,7 @@ void CSulCoordUTM::calcOffset( const CSulCoordLatLon& latlon, Sigma::uint32 zone
 }
 
 
-void CSulCoordUTM::calcZone( const CSulCoordLatLon& latlon, Sigma::uint32& ewZone, Sigma::uint8& nsZone )
+void CSulCoordUTM::calcZone( const CSulCoordLatLon& latlon, sigma::uint32& ewZone, sigma::uint8& nsZone )
 {
 	double lat;
 	double lon;

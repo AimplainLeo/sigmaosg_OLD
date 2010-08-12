@@ -10,10 +10,10 @@
 class CSulTexImage : public osg::Referenced
 {
 public:
-						CSulTexImage( Sigma::uint32 w, Sigma::uint32 h );
+						CSulTexImage( sigma::uint32 w, sigma::uint32 h );
 
-	Sigma::uint32		GetWidth();
-	Sigma::uint32		GetHeight();
+	sigma::uint32		GetWidth();
+	sigma::uint32		GetHeight();
 
 	osg::Texture2D*		getTexture();
 
@@ -22,10 +22,10 @@ public:
 	void				Process();
 
 private:
-	osg::ref_ptr<CSulArray2D<Sigma::uint8>>	m_rData;
+	osg::ref_ptr<CSulArray2D<sigma::uint8>>	m_rData;
 	osg::ref_ptr<osg::Texture2D>			m_rTex;
-	Sigma::uint32							m_w;
-	Sigma::uint32							m_h;
+	sigma::uint32							m_w;
+	sigma::uint32							m_h;
 };
 
 #endif // __SULTEXIMAGE_H__

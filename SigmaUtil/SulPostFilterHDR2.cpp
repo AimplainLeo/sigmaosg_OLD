@@ -59,8 +59,8 @@ void CSulPostFilterHDR2::in( osg::Texture2D* pTex )
 	// downsample
 	///////////////////
 
-	Sigma::uint32 w = pTex->getTextureWidth();
-	Sigma::uint32 h = pTex->getTextureHeight();
+	sigma::uint32 w = pTex->getTextureWidth();
+	sigma::uint32 h = pTex->getTextureHeight();
 /*
 	osg::ref_ptr<osg::Texture2D> tex_ds_1 = createTexture( w/2, h/2 );
 	osg::ref_ptr<osg::Texture2D> tex_ds_1_tmp = createTexture( w/2, h/2 );
@@ -132,8 +132,8 @@ void CSulPostFilterHDR2::in( osg::Texture2D* pTex )
 	// downsample
 	///////////////////
 
-	Sigma::uint32 w = pTex->getTextureWidth();
-	Sigma::uint32 h = pTex->getTextureHeight();
+	sigma::uint32 w = pTex->getTextureWidth();
+	sigma::uint32 h = pTex->getTextureHeight();
 
 	osg::ref_ptr<osg::Texture2D> tex_ds_1 = createTexture( w/2, h/2 );
 	osg::ref_ptr<osg::Texture2D> tex_ds_1_tmp = createTexture( w/2, h/2 );
@@ -178,8 +178,8 @@ void CSulPostFilterHDR2::in( osg::Texture2D* pTex )
 		return;
 	}
 
-	Sigma::uint32 w = pTex->getTextureWidth();
-	Sigma::uint32 h = pTex->getTextureHeight();
+	sigma::uint32 w = pTex->getTextureWidth();
+	sigma::uint32 h = pTex->getTextureHeight();
 
 	/**/
 	// calc luminance, we do this by down sampling the orginal image until we get

@@ -26,17 +26,17 @@ public:
 			osg::TemplatePrimitiveFunctor<CSulFuncExtractor> functor;
 			p->accept(functor);
 
-			const Sigma::VEC_LINESEGMENT& src = functor.getLineSegmentList();
+			const sigma::VEC_LINESEGMENT& src = functor.getLineSegmentList();
 
-			Sigma::VEC_LINESEGMENT::const_iterator iS;
-			Sigma::VEC_LINESEGMENT::const_iterator iE;
+			sigma::VEC_LINESEGMENT::const_iterator iS;
+			sigma::VEC_LINESEGMENT::const_iterator iE;
 			iS = src.begin();
 			iE = src.end();
 			std::copy( iS, iE, std::back_inserter(m_vecLineSegment) );
 
-			const Sigma::VEC_TRI& srcTri = functor.getTriList();
-			Sigma::VEC_TRI::const_iterator iTriS;
-			Sigma::VEC_TRI::const_iterator iTriE;
+			const sigma::VEC_TRI& srcTri = functor.getTriList();
+			sigma::VEC_TRI::const_iterator iTriS;
+			sigma::VEC_TRI::const_iterator iTriE;
 			iTriS = srcTri.begin();
 			iTriE = srcTri.end();
 			std::copy( iTriS, iTriE, std::back_inserter(m_vecTri) );
@@ -46,19 +46,19 @@ public:
         traverse( geode );
 	}
 
-	const Sigma::VEC_LINESEGMENT& getLineSegmentList() const
+	const sigma::VEC_LINESEGMENT& getLineSegmentList() const
 	{
 		return m_vecLineSegment;
 	}
 
-	const Sigma::VEC_TRI& getTriList() const
+	const sigma::VEC_TRI& getTriList() const
 	{
 		return m_vecTri;
 	}
 
 private:
-	Sigma::VEC_LINESEGMENT	m_vecLineSegment;
-	Sigma::VEC_TRI m_vecTri;
+	sigma::VEC_LINESEGMENT	m_vecLineSegment;
+	sigma::VEC_TRI m_vecTri;
 };
 
 #endif // __SULEXTRACTGEOMETRY_H__

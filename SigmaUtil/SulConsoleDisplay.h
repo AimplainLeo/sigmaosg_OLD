@@ -29,21 +29,21 @@ public:
 	const osg::Vec4&						GetBgColor();
 	void									GetBgColor( float& r, float& g, float& b, float& a );
 
-	void									SetActivateKey( Sigma::int32 iKey );
+	void									SetActivateKey( sigma::int32 iKey );
 	int										GetActivateKey();
 
 	void									Show( bool bShow );
 	bool									IsVisible();
 	
 	// creates visible text objects in view
-	void									CreateTextObjects( Sigma::uint32 iCount );
+	void									CreateTextObjects( sigma::uint32 iCount );
 
 	void									ExecuteCommand( const CSulString& sCmd );
 	void									WantCommand( CSulConsoleFunctorBase* pFunctor );
 
 	void									DisplayText( const CSulString& sText );
 
-	void									Input( Sigma::int32 key, Sigma::int32 iMod );
+	void									Input( sigma::int32 key, sigma::int32 iMod );
 
 	void									SetCursor( const CSulString& s );
 
@@ -80,15 +80,15 @@ private:
 	VECTOR_STRING							m_vecTextBuffer;
 	VECTOR_STRING							m_vecTextHistory;
 
-	Sigma::uint32							m_iSpacingV;
-	Sigma::uint32							m_iTextObjs;
-	Sigma::int32							m_h;
-	Sigma::int32							m_w;
-	Sigma::int32							m_iActivateKey;
+	sigma::uint32							m_iSpacingV;
+	sigma::uint32							m_iTextObjs;
+	sigma::int32							m_h;
+	sigma::int32							m_w;
+	sigma::int32							m_iActivateKey;
 	float									m_fCharSize;
 
-	Sigma::int32							m_iMarkerPos;
-	Sigma::int32							m_iScrollPos;
+	sigma::int32							m_iMarkerPos;
+	sigma::int32							m_iScrollPos;
 };
 
 #endif // __SULCONSOLEDISPLAY_H__

@@ -14,12 +14,12 @@ public:
 
 						CSulClipTriangle( const CSulDataTri& tri, const osg::Plane& plane );
 
-						CSulClipTriangle( const Sigma::VEC_TRI& vecTri, const osg::Plane& plane );
+						CSulClipTriangle( const sigma::VEC_TRI& vecTri, const osg::Plane& plane );
 
-	Sigma::uint32		getCount();
-	const CSulDataTri*	getTriangle( Sigma::uint32 index );
+	sigma::uint32		getCount();
+	const CSulDataTri*	getTriangle( sigma::uint32 index );
 
-	const Sigma::VEC_TRI&		getTriangleList() const;
+	const sigma::VEC_TRI&		getTriangleList() const;
 
 private:
 	void				processClipTriPlane( const CSulDataTri& tri, const osg::Plane& plane );
@@ -30,8 +30,8 @@ private:
 
 private:
 	osg::Plane			m_plane;
-	Sigma::VEC_TRI		m_vecTriIn;	
-	Sigma::VEC_TRI		m_vecTriOut;
+	sigma::VEC_TRI		m_vecTriIn;	
+	sigma::VEC_TRI		m_vecTriOut;
 };
 
 #endif // __SULCLIPTRIANGLE_H__

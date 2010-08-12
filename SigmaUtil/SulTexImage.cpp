@@ -3,9 +3,9 @@
 #include "stdafx.h"
 #include "SulTexImage.h"
 
-CSulTexImage::CSulTexImage( Sigma::uint32 w, Sigma::uint32 h )
+CSulTexImage::CSulTexImage( sigma::uint32 w, sigma::uint32 h )
 {
-	m_rData = new CSulArray2D<Sigma::uint8>(w,h);
+	m_rData = new CSulArray2D<sigma::uint8>(w,h);
 
 	m_rTex = new osg::Texture2D;
 	
@@ -13,12 +13,12 @@ CSulTexImage::CSulTexImage( Sigma::uint32 w, Sigma::uint32 h )
 	m_h = h;
 }
 
-Sigma::uint32 CSulTexImage::GetWidth()
+sigma::uint32 CSulTexImage::GetWidth()
 {
 	return m_w;
 }
 
-Sigma::uint32 CSulTexImage::GetHeight()
+sigma::uint32 CSulTexImage::GetHeight()
 {
 	return m_h;
 }

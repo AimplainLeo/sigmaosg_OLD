@@ -9,10 +9,10 @@
 #include "SulGuiEventHandler.h"
 
 CSulGuiRadioButton::CSulGuiRadioButton( const CSulString& sText, float x, float y, float w, float h ) :
-CSulGuiCanvas( x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
+CSulGuiCanvas( "RADIOBUTTON", x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 {
-	Sigma::VEC_VEC3::vector	vecPos;
-	Sigma::VEC_VEC3::vector	vecPosDots;
+	sigma::VEC_VEC3::vector	vecPos;
+	sigma::VEC_VEC3::vector	vecPosDots;
 	
 	float padding = 6.0f;
 

@@ -13,20 +13,20 @@ public:
 
 	void			setupEventHandler( class CSulGuiEventHandler* pEventHandler );
 
-	void			setText( const CSulString& sText );
-	const CSulString& getText() const;
+	void				setText( const CSulString& sText );
+	const CSulString&	getText() const;
 
-	void			setCursor( const CSulString& sCursor );
+	void				setCursor( const CSulString& sCursor );
 
-	void			eventKeyDown( Sigma::int32 key, Sigma::int32 iMod );
+	void				eventKeyDown( sigma::int32 key, sigma::int32 iMod );
 
 protected:
-	virtual void	setMouseRelease( bool bInside );
+	virtual void		setMouseRelease( bool bInside );
 
 private:
 	osg::ref_ptr<CSulGuiText>	m_rGuiText;
 	CSulString					m_sCursor;
-	bool						m_bActive;
+	bool						m_bEditActive;
 	CSulString					m_sText;
 };
 

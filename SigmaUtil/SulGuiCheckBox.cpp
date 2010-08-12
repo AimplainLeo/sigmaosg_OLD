@@ -7,7 +7,7 @@
 #include "SulGuiEventHandler.h"
 
 CSulGuiCheckBox::CSulGuiCheckBox( const CSulString& sText, float x, float y, float w, float h ) :
-CSulGuiCanvas( x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
+CSulGuiCanvas( "CHECKBOX", x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 {
 	m_bActive = false;
 

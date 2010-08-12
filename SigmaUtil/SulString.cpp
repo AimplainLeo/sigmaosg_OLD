@@ -8,7 +8,7 @@ std::string()
 {
 }
 
-CSulString::CSulString( const Sigma::int8* pszText ) :
+CSulString::CSulString( const sigma::int8* pszText ) :
 std::string( pszText )
 {
 }
@@ -23,7 +23,7 @@ std::string( s )
 {
 }
 
-CSulString::CSulString( Sigma::uint8 c )
+CSulString::CSulString( sigma::uint8 c )
 {
 	CSulString s;
 	s.Format( "%c", c );
@@ -91,14 +91,14 @@ double CSulString::asDouble()
 	return (float)strtod( c_str(), 0 );
 }
 
-Sigma::uint32 CSulString::asUint32()
+sigma::uint32 CSulString::asUint32()
 {
-	return (Sigma::uint32)atoi( c_str() );
+	return (sigma::uint32)atoi( c_str() );
 }
 
-Sigma::int32 CSulString::asInt32()
+sigma::int32 CSulString::asInt32()
 {
-	return (Sigma::int32)atoi( c_str() );
+	return (sigma::int32)atoi( c_str() );
 }
 
 CSulString CSulString::GetStartWord( char c ) 

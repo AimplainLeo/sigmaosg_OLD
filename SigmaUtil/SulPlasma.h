@@ -13,18 +13,18 @@ public:
 								CSulPlasma();
 								~CSulPlasma();
 
-	void						Create( Sigma::uint32 w, Sigma::uint32 h );
-	Sigma::uint8				GetValue( Sigma::uint32 dwPosX, Sigma::uint32 dwPosY );
-	Sigma::uint8*				GetDataPtr();
+	void						Create( sigma::uint32 w, sigma::uint32 h );
+	sigma::uint8				GetValue( sigma::uint32 dwPosX, sigma::uint32 dwPosY );
+	sigma::uint8*				GetDataPtr();
 
 private:
-	int							NewColor( Sigma::int32 mc, Sigma::int32 n, Sigma::int32 dvd );
-	void						Plasma( Sigma::int32 x1, Sigma::int32 y1, Sigma::int32 x2, Sigma::int32 y2, Sigma::uint8* pData );
+	int							NewColor( sigma::int32 mc, sigma::int32 n, sigma::int32 dvd );
+	void						Plasma( sigma::int32 x1, sigma::int32 y1, sigma::int32 x2, sigma::int32 y2, sigma::uint8* pData );
 
 private:
-	Sigma::uint32				m_maxX;
-	Sigma::uint32				m_maxY;
-	Sigma::uint8*				m_pData;
+	sigma::uint32				m_maxX;
+	sigma::uint32				m_maxY;
+	sigma::uint8*				m_pData;
 };
 
 #endif // __SULPLASMA_H__

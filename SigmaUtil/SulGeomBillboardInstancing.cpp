@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulGeomBillboardInstancing.h"
 
-CSulGeomBillboardInstancing::CSulGeomBillboardInstancing( Sigma::uint32 numInstances, float sizeMultiplier, float min, float max ) :
+CSulGeomBillboardInstancing::CSulGeomBillboardInstancing( sigma::uint32 numInstances, float sizeMultiplier, float min, float max ) :
 CSulGeomBase(),
 m_numInstances( numInstances ),
 m_sizeMultiplier( sizeMultiplier )

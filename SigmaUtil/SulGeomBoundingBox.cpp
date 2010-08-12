@@ -66,7 +66,7 @@ osg::PrimitiveSet* CSulGeomBoundingBox::AddCornerLines( osg::Vec3Array& verts, c
 	return pLines;
 }
 
-void CSulGeomBoundingBox::ModifyCornerLines( Sigma::uint32 index, osg::Vec3Array* pVerts, const osg::BoundingBox& bound, unsigned i0, unsigned i1, unsigned i2, unsigned i3 )
+void CSulGeomBoundingBox::ModifyCornerLines( sigma::uint32 index, osg::Vec3Array* pVerts, const osg::BoundingBox& bound, unsigned i0, unsigned i1, unsigned i2, unsigned i3 )
 {
 	static float f = 0.3f;
 

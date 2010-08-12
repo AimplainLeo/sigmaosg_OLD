@@ -34,7 +34,7 @@ void CSulShadowTexture::setShadowMapBounds( osg::Node* pNode )
 	m_rShadowMapBounds = pNode;
 }
 
-void CSulShadowTexture::setTextureSize( Sigma::uint32 size_squared )
+void CSulShadowTexture::setTextureSize( sigma::uint32 size_squared )
 {
 	m_size_squared = size_squared;
 }

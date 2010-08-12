@@ -13,7 +13,7 @@ private:
 	typedef std::vector< osg::ref_ptr<osg::Texture2D> >	VEC_TEXTURE;
 
 public:
-					CSulTextureBuffer( Sigma::uint32 texWidth, Sigma::uint32 texHeight, Sigma::uint32 numBuffers=2 );
+					CSulTextureBuffer( sigma::uint32 texWidth, sigma::uint32 texHeight, sigma::uint32 numBuffers=2 );
 
 	void			setIn( CSulTextureBuffer* texBuf );
 	void			setIn( osg::Texture2D* texIn );
@@ -32,8 +32,8 @@ private:
 	VEC_TEXTURE						m_vecTex;
 	osg::ref_ptr<osg::Texture2D>	m_texIn;
 	osg::ref_ptr<osg::Texture2D>	m_texOut;
-	Sigma::uint32					m_numBuf;
-	Sigma::uint32					m_curBuf;
+	sigma::uint32					m_numBuf;
+	sigma::uint32					m_curBuf;
 	GLint							m_texFormatInternal;
 	GLint							m_texFormatSource;
 	GLenum							m_texSourceType;

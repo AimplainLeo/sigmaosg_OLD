@@ -29,12 +29,12 @@ CSulFile::~CSulFile()
 	}
 }
 
-Sigma::uint32 CSulFile::GetSize()
+sigma::uint32 CSulFile::GetSize()
 {
 	return m_dwBufSize;
 }
 
-Sigma::uint8* CSulFile::GetDataPtr()
+sigma::uint8* CSulFile::GetDataPtr()
 {
 	return m_pBuf;
 }

@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulTexCam.h"
 
-CSulTexCam::CSulTexCam( Sigma::uint32 w, Sigma::uint32 h, ESETUP eSetup ) :
+CSulTexCam::CSulTexCam( sigma::uint32 w, sigma::uint32 h, ESETUP eSetup ) :
 m_w( w ),
 m_h( h ),
 m_eSetup( eSetup )

@@ -17,7 +17,7 @@ void CSulStringList::Tokenize( const CSulString& s )
 
 	rParser->InitStringParse( s );
 
-	Sigma::int8* pToken = 0;
+	sigma::int8* pToken = 0;
 	while ( pToken = rParser->GetToken() )
 	{
 		m_vecString.push_back( pToken );
@@ -29,7 +29,7 @@ const CSulStringList::VECTOR_STRING& CSulStringList::GetList() const
 	return m_vecString;
 }
 
-CSulString CSulStringList::getString( Sigma::uint32 index )
+CSulString CSulStringList::getString( sigma::uint32 index )
 {
 	if ( !m_vecString.size() )
 	{
@@ -44,12 +44,12 @@ CSulString CSulStringList::getString( Sigma::uint32 index )
 	return m_vecString[index];
 }
 
-Sigma::uint32 CSulStringList::getIndex( const CSulString& s )
+sigma::uint32 CSulStringList::getIndex( const CSulString& s )
 {
 	VECTOR_STRING::iterator iFound = find( m_vecString.begin(), m_vecString.end(), s );
 	if ( iFound!=m_vecString.end() )
 	{
-		return (Sigma::uint32)std::distance( m_vecString.begin(), iFound );
+		return (sigma::uint32)std::distance( m_vecString.begin(), iFound );
 	}
 
 	return 0;

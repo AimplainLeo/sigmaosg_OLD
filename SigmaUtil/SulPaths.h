@@ -15,7 +15,7 @@ public:
 
 public:
 	void				Add( const CSulString& sPath );
-	Sigma::uint32		GetCount();
+	sigma::uint32		GetCount();
 	const VECTOR_PATH&	GetPaths() const;
 
 	void				Load( class CSulXmlAttr* pAttr );

@@ -4,19 +4,19 @@
 #include "SulClipLines.h"
 #include "SulIntPlane.h"
 
-CSulClipLines::CSulClipLines( const Sigma::VEC_LINESEGMENT& lines, const osg::Plane& plane ) :
+CSulClipLines::CSulClipLines( const sigma::VEC_LINESEGMENT& lines, const osg::Plane& plane ) :
 m_vecLinesIn( lines ),
 m_plane( plane )
 {
 	process();
 }
 
-const Sigma::VEC_LINESEGMENT& CSulClipLines::getLinesList()
+const sigma::VEC_LINESEGMENT& CSulClipLines::getLinesList()
 {
 	return m_vecLines;
 }
 
-Sigma::uint32 CSulClipLines::getLineCount()
+sigma::uint32 CSulClipLines::getLineCount()
 {
 	return m_vecLines.size();
 }
@@ -30,13 +30,13 @@ int CSulClipLines::testVert( const osg::Vec3& v )
 
 void CSulClipLines::process()
 {
-	Sigma::VEC_LINESEGMENT::const_iterator i;
+	sigma::VEC_LINESEGMENT::const_iterator i;
 
 	i = m_vecLinesIn.begin();
 	while ( i!=m_vecLinesIn.end() )
 	{
 		// how many points are on the wrong side of the plane
-		Sigma::uint32 count = 0;
+		sigma::uint32 count = 0;
 
 		if ( testVert( (*i)->start() )<0 ) count++;
 		if ( testVert( (*i)->end() )<0 ) count++;

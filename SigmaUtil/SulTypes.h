@@ -11,7 +11,7 @@
 #include <vector>
 #include <map>
 
-namespace Sigma
+namespace sigma
 {
 	typedef char			int8;		// char:			-127 -> 128
 	typedef short			int16;		// short:			-??? -> ???
@@ -57,6 +57,6 @@ namespace Sigma
 		#define VSPRINTF(a,b,c,d) vsprintf(a,c,d)
 	#endif 
 
-}; // end namespace Sigma
+}; // end namespace sigma
 
 #endif // __SULTYPES_H__

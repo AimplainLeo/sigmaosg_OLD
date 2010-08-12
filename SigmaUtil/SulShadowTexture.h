@@ -19,7 +19,7 @@ public:
 	
 	void				setShadowMapBounds( osg::Node* pNode );
 
-	void				setTextureSize( Sigma::uint32 size_squared );
+	void				setTextureSize( sigma::uint32 size_squared );
 	void				setLight( const osg::Vec3& pos );
 
 	osg::Node*			getNode();
@@ -33,7 +33,7 @@ private:
 	osg::ref_ptr<osg::TexGenNode>	m_rTexGenNode;
 	osg::ref_ptr<osg::Group>		m_rGroup;
 	osg::ref_ptr<osg::Node>			m_rShadowMapBounds;
-	Sigma::uint32					m_size_squared;
+	sigma::uint32					m_size_squared;
 
 	osg::ref_ptr<CSulShadowTextureNodeCallback>	m_rShadowTextureNodeCallback;
 };

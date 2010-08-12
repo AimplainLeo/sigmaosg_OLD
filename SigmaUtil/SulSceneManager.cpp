@@ -190,7 +190,7 @@ void CSulSceneManager::addAttribute( const CSulString& sName, osg::StateAttribut
 
 osg::StateAttribute* CSulSceneManager::getAttribute( const CSulString& sName )
 {
-	Sigma::MAP_STRING_STATEATTRIBUTE::iterator iFound;
+	sigma::MAP_STRING_STATEATTRIBUTE::iterator iFound;
 
 	iFound = m_mapStateAttribute.find( sName );
 	if ( iFound!=m_mapStateAttribute.end() )

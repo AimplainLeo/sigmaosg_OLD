@@ -43,8 +43,8 @@ public:
 
 			if ( ii==2 )
 			{	
-				Sigma::int32 w = m_rImage->s();
-				Sigma::int32 h = m_rImage->t();
+				sigma::int32 w = m_rImage->s();
+				sigma::int32 h = m_rImage->t();
 
 				//m_hit = based on texture and inversed camera
 				osg::Vec3 v = (*(osg::Vec3*)m_rImage->data(w/2,h/2));

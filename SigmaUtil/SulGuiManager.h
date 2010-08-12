@@ -15,12 +15,14 @@ class CSulGuiManager : public osg::Projection
 public:
 			CSulGuiManager( osgViewer::Viewer* pViewer, float viewW, float viewH );
 
-	bool	load( const CSulString& sFileXml, osg::Group* pParent=0 );
+	bool	load( const CSulString& sFileXml, osg::Group* pParent=0, CSulString sFileThemeXml="" );
 
 private:
 	osg::ref_ptr<osg::MatrixTransform>	m_rMT;
 	osg::ref_ptr<osgViewer::Viewer>		m_rViewer;
 	osg::ref_ptr<CSulGuiEventHandler>	m_rEventHandler;
+	float m_viewW;
+	float m_viewH;
 };
 
 #endif // __SULGUIMANAGER_H__

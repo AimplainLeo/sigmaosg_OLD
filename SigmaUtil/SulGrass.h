@@ -16,7 +16,7 @@ public:
 
 	void						setReceiveShadow( bool bReceiveShadow );
 
-	void						setTextureUnit_HeightMap( Sigma::int32 i );
+	void						setTextureUnit_HeightMap( sigma::int32 i );
 
 	void						setShowBB( bool bShow );
 
@@ -32,8 +32,8 @@ public:
 	// FIXME: spacing and grid size are depend on each other.. need to make this easier to understand
 	void						setSpacing( float spacing );
 
-	void							setGridSize( Sigma::uint32 size );
-	Sigma::uint32					getGridSize();
+	void							setGridSize( sigma::uint32 size );
+	sigma::uint32					getGridSize();
 
 	osg::PositionAttitudeTransform*	getPat();
 	osg::Geode*						getGeode();
@@ -48,7 +48,7 @@ private:
 
 private:
 	osg::ref_ptr<osg::Geode>	m_geodeGrass;
-	Sigma::uint32				m_sizeGrid;		// m_sizeGrid=2 => 2 x 2 grid
+	sigma::uint32				m_sizeGrid;		// m_sizeGrid=2 => 2 x 2 grid
 	float						m_spacing;
 	float						m_heightAdjust;	// tweak the height position of the grass (default: 0)
 	float						m_windFactor;	// defines how much movement there is in the grass (no direction)
@@ -77,7 +77,7 @@ private:
 
 	bool	m_bShowBB;
 
-	Sigma::int32									m_iTexUnit_HeightMap;
+	sigma::int32									m_iTexUnit_HeightMap;
 	bool											m_bReceiveShadow;
 };
 

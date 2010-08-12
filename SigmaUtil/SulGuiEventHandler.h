@@ -8,9 +8,11 @@
 class CSulGuiEventHandler : public osgGA::GUIEventHandler 
 {
 public:
+	// FIXME: we should use the osgGA::GUIEventAdapter::RELEASE definitions instead
 	enum EVENT
 	{
 		EVENT_MOUSE_MOVE,
+		EVENT_MOUSE_DRAG,
 		EVENT_MOUSE_PUSHED,
 		EVENT_MOUSE_RELEASE,
 		EVENT_KEYDOWN
@@ -19,10 +21,11 @@ public:
 public:
 	bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor );
 
-	void addEvent( CSulGuiComp* pComp, Sigma::uint32 eventType );
+	void addEvent( CSulGuiComp* pComp, sigma::uint32 eventType );
 
 private:
 	VEC_GUICOMP		m_eventsMouseMove;
+	VEC_GUICOMP		m_eventsMouseDrag;
 	VEC_GUICOMP		m_eventsMousePushed;
 	VEC_GUICOMP		m_eventsMouseRelease;
 	VEC_GUICOMP		m_eventsKeyDown;

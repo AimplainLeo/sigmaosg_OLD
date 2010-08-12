@@ -6,6 +6,8 @@
 
 CSulGuiManager::CSulGuiManager( osgViewer::Viewer* pViewer, float viewW, float viewH )
 {
+	m_viewW = viewW;
+	m_viewH = viewH;
 	m_rViewer = pViewer;
 
     m_rEventHandler = new CSulGuiEventHandler;
@@ -29,8 +31,16 @@ CSulGuiManager::CSulGuiManager( osgViewer::Viewer* pViewer, float viewW, float v
 	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
 }
 
-bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent )
+bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent, CSulString sFileThemeXml )
 {
-	CSulGuiXml* pXml = new CSulGuiXml( pParent?pParent:m_rMT, m_rEventHandler );
+	osg::ref_ptr<CSulGuiThemeXml> rThemeXml;
+	if ( !sFileThemeXml.empty() )
+	{
+		rThemeXml = new CSulGuiThemeXml;
+		rThemeXml->load( sFileThemeXml );
+	}
+
+	CSulGuiXml* pXml = new CSulGuiXml( pParent?pParent:m_rMT, m_rEventHandler, m_viewW, m_viewH, rThemeXml );
 	return pXml->load( sFileXml );
 }
+

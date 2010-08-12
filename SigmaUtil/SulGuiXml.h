@@ -7,14 +7,12 @@
 #include "SulGuiEventHandler.h"
 #include "SulGuiRadioButtonGroup.h"
 #include "SulGuiListBox.h"
+#include "SulGuiThemeXml.h"
 
 class CSulGuiXml : public CSulXmlParser
 {
-private:
-	typedef std::map< CSulString, osg::ref_ptr<CSulXmlAttr> >	MAP_ATTR;
-
 public:
-					CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler );
+					CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml );
 
 	void			elementStart( const class CSulString& sName, class CSulXmlAttr* pAttr );
 
@@ -23,16 +21,18 @@ public:
 	CSulXmlAttr*	get( const CSulString& sTag );
 
 private:
-	MAP_ATTR		m_mapAttr;
+	osg::Group*								m_rRootGroup;
+	osg::Group*								m_curGroup;
+	osg::ref_ptr<CSulGuiEventHandler>		m_rEventHandler;
 
-	osg::Group*		m_rRootGroup;
-	osg::Group*		m_curGroup;
-	osg::ref_ptr<CSulGuiEventHandler> m_rEventHandler;
-
-	Sigma::uint32	m_indent;
+	sigma::uint32							m_indent;
 
 	osg::ref_ptr<CSulGuiRadioButtonGroup>	m_curRadioButtonGroup;
 	osg::ref_ptr<CSulGuiListBox>			m_curListBox;
+	float m_viewW;
+	float m_viewH;
+
+	osg::ref_ptr<CSulGuiThemeXml>			m_rThemeXml;
 };
 
 #endif // __SULGUIXML_H__

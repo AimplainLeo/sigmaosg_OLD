@@ -4,9 +4,19 @@
 #include "SulGuiItem.h"
 #include "SulGuiText.h"
 
-CSulGuiItem::CSulGuiItem( const CSulString& sText) :
-CSulGuiComp( 0, 0 )
+CSulGuiItem::CSulGuiItem( CSulGuiCanvas* pCanvas ) 
 {
-	CSulGuiText* pGuiText = new CSulGuiText( sText, 0, 0, 32.0f );
-	addChild( pGuiText );
+	m_rCanvas = pCanvas;
+	m_bSelected = false;
+}
+
+CSulGuiCanvas* CSulGuiItem::getCanvas()
+{
+	return m_rCanvas;
+}
+
+void CSulGuiItem::toggleSelect()
+{
+	m_bSelected = !m_bSelected;
+	m_rCanvas->m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", m_bSelected?1:0 ) );
 }

@@ -9,7 +9,7 @@
 class CSulGeomTriangleList : public CSulGeomBase
 {
 public: 
-					CSulGeomTriangleList( const Sigma::VEC_TRI& vecTri );
+					CSulGeomTriangleList( const sigma::VEC_TRI& vecTri );
 
 	void			setColor( const osg::Vec4& color );
 	void			setColor( float r, float g, float b, float a );
@@ -18,7 +18,7 @@ protected:
 	void			createDrawable();
 
 private:
-	Sigma::VEC_TRI					m_vecTri;
+	sigma::VEC_TRI					m_vecTri;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 };
 

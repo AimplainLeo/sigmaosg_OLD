@@ -9,7 +9,7 @@
 class CSulGeomLineList : public CSulGeomBase
 {
 public: 
-					CSulGeomLineList( const Sigma::VEC_LINESEGMENT& vecLines );
+					CSulGeomLineList( const sigma::VEC_LINESEGMENT& vecLines );
 
 	void			setColor( const osg::Vec4& color );
 	void			setColor( float r, float g, float b, float a );
@@ -18,7 +18,7 @@ protected:
 	void			createDrawable();
 
 private:
-	Sigma::VEC_LINESEGMENT			m_vecLines;
+	sigma::VEC_LINESEGMENT			m_vecLines;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 };
 

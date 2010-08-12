@@ -12,8 +12,8 @@ class CSulGenTextureWithPositions : public osg::Referenced
 public:
 			CSulGenTextureWithPositions(
 				osg::PositionAttitudeTransform*	pSceneTerrain,
-				const Sigma::VEC_LINESEGMENT&	line,
-				const Sigma::VEC_TRI&			tri,
+				const sigma::VEC_LINESEGMENT&	line,
+				const sigma::VEC_TRI&			tri,
 				float							radius,							// radius between trees
 				float							distance_between_trees_line,
 				float							areaPadding,					// areaPadding is used to extend masks for areas
@@ -21,9 +21,9 @@ public:
 			);
 
 	osg::Image*				getImage();
-	Sigma::uint32			getCount();
-	Sigma::uint32			getTexSizeSquared();
-	const Sigma::VEC_VEC3&	getPositions();
+	sigma::uint32			getCount();
+	sigma::uint32			getTexSizeSquared();
+	const sigma::VEC_VEC3&	getPositions();
 
 private:
 	void	process();
@@ -38,15 +38,15 @@ private:
 
 private:
 	osg::ref_ptr<osg::PositionAttitudeTransform>		m_rSceneTerrain;
-	const Sigma::VEC_LINESEGMENT&	m_vecLine;
-	const Sigma::VEC_TRI&			m_vecTri;
+	const sigma::VEC_LINESEGMENT&	m_vecLine;
+	const sigma::VEC_TRI&			m_vecTri;
 	float							m_radius;						// radius between trees on a patch
 	float							m_distance_between_trees_line;	// distance between trees on a line
 	float							m_areaPadding;
-	Sigma::VEC_VEC3					m_vecPos;						// positions are in world space
-	Sigma::uint32					m_texSizeSquared;
+	sigma::VEC_VEC3					m_vecPos;						// positions are in world space
+	sigma::uint32					m_texSizeSquared;
 	osg::ref_ptr<osg::Image>		m_rImage;
-	Sigma::uint32					m_posCount;
+	sigma::uint32					m_posCount;
 	
 	VEC_GENPOSITIONMASK				m_vecMask;
 };

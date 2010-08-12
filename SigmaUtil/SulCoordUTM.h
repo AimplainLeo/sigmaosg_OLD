@@ -29,12 +29,12 @@ public:
 	osg::Vec3d	getXYZ( const CSulCoordLatLon& latlon );
 
 private:
-	void		calcZone( const CSulCoordLatLon& latlon, Sigma::uint32& ewZone, Sigma::uint8& nsZone );
-	void		calcOffset( const CSulCoordLatLon& latlon, Sigma::uint32 zoneEW, Sigma::uint8 zoneNS, double& easting, double& northing );
+	void		calcZone( const CSulCoordLatLon& latlon, sigma::uint32& ewZone, sigma::uint8& nsZone );
+	void		calcOffset( const CSulCoordLatLon& latlon, sigma::uint32 zoneEW, sigma::uint8 zoneNS, double& easting, double& northing );
 
 private:
-	Sigma::uint32	m_zoneEW;			// 1-60
-	Sigma::uint8	m_zoneNS;			// A-X
+	sigma::uint32	m_zoneEW;			// 1-60
+	sigma::uint8	m_zoneNS;			// A-X
 
 	double			m_easting;
 	double			m_northing;

@@ -10,17 +10,17 @@ CSulPerlinNoiseBase::CSulPerlinNoiseBase()
 	m_fPersistence	= 1;
 }
 
-void CSulPerlinNoiseBase::SetRandomSeed( Sigma::uint32 iSeed )
+void CSulPerlinNoiseBase::SetRandomSeed( sigma::uint32 iSeed )
 {
 	m_iSeed = iSeed;
 }
 
-void CSulPerlinNoiseBase::SetOctave( Sigma::uint32 iOctaves )
+void CSulPerlinNoiseBase::SetOctave( sigma::uint32 iOctaves )
 {
 	m_iOctaves = iOctaves;
 }
 
-Sigma::uint32 CSulPerlinNoiseBase::GetOctave()
+sigma::uint32 CSulPerlinNoiseBase::GetOctave()
 {
 	return m_iOctaves;
 }

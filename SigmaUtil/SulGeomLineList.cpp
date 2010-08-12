@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulGeomLineList.h"
 
-CSulGeomLineList::CSulGeomLineList( const Sigma::VEC_LINESEGMENT& vecLines ) :
+CSulGeomLineList::CSulGeomLineList( const sigma::VEC_LINESEGMENT& vecLines ) :
 CSulGeomBase(),
 m_vecLines( vecLines )
 {
@@ -17,8 +17,8 @@ void CSulGeomLineList::createDrawable()
 	osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;	
 	m_rColors = new osg::Vec4Array;
 
-	Sigma::uint32 count = 0;
-	Sigma::VEC_LINESEGMENT::const_iterator i;
+	sigma::uint32 count = 0;
+	sigma::VEC_LINESEGMENT::const_iterator i;
 	i = m_vecLines.begin();
 	while ( i!=m_vecLines.end() )
 	{
@@ -59,8 +59,8 @@ void CSulGeomLineList::setColor( float r, float g, float b, float a )
 		createDrawable();
 	}
 
-	Sigma::uint32 count = m_vecLines.size()*2;
-	for ( Sigma::uint32 i=0; i<count; i++  )
+	sigma::uint32 count = m_vecLines.size()*2;
+	for ( sigma::uint32 i=0; i<count; i++  )
 	{
 		(*m_rColors)[i].set( r, g, b, a );
 	}

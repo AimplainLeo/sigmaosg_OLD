@@ -19,9 +19,9 @@ public:
 
 	const VECTOR_STRING&	GetList() const;
 
-	CSulString				getString( Sigma::uint32 index );
+	CSulString				getString( sigma::uint32 index );
 
-	Sigma::uint32			getIndex( const CSulString& s );
+	sigma::uint32			getIndex( const CSulString& s );
 
 private:
 	VECTOR_STRING			m_vecString;

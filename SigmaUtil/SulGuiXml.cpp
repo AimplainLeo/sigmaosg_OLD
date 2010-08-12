@@ -11,9 +11,14 @@
 #include "SulGuiRadioButton.h"
 #include "SulGuiItem.h"
 #include "SulGuiScrollBar.h"
+#include "SulGuiComboBox.h"
+#include "SulGuiTextBox.h"
 
-CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler )
+CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml )
 {
+	m_rThemeXml = pThemeXml;
+	m_viewW = viewW;
+	m_viewH = viewH;
 	m_indent = 0;
 	m_rEventHandler = pEventHandler;
 	m_rRootGroup = pRootGroup;
@@ -27,6 +32,7 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 	if ( sName=="CANVAS" )
 	{
 		pComp = new CSulGuiCanvas(
+			"CANVAS",
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
@@ -112,15 +118,6 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		m_curListBox = dynamic_cast<CSulGuiListBox*>(pComp);
 	}
 
-	if ( sName=="ITEM" )
-	{
-		pComp = new CSulGuiItem(
-			pAttr->get( "text" )
-		);
-
-		m_curListBox->addItem( dynamic_cast<CSulGuiItem*>(pComp) );
-	}
-
 	if ( sName=="SCROLLBAR" )
 	{
 		pComp = new CSulGuiScrollBar(
@@ -131,18 +128,56 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		);
 	}
 
+	if ( sName=="COMBOBOX" )
+	{
+		pComp = new CSulGuiComboBox(
+			pAttr->get( "x" ).asFloat(),
+			pAttr->get( "y" ).asFloat(),
+			pAttr->get( "w" ).asFloat(),
+			pAttr->get( "h" ).asFloat()
+		);
+	}
+
+	if ( sName=="TEXTBOX" )
+	{
+		pComp = new CSulGuiTextBox(
+			pAttr->get( "text" ),
+			pAttr->get( "x" ).asFloat(),
+			pAttr->get( "y" ).asFloat(),
+			pAttr->get( "w" ).asFloat(),
+			pAttr->get( "h" ).asFloat(),
+			pAttr->get( "size" ).asFloat()
+		);
+	}
+
+	if ( sName=="COMP" )
+	{
+		pComp = new CSulGuiComp(
+			"COMP",
+			pAttr->get( "x" ).asFloat(),
+			pAttr->get( "y" ).asFloat()
+		);
+	}
+
+
 	if ( pComp )
 	{
+		CSulGuiListBox* pListBox = dynamic_cast<CSulGuiListBox*>(m_curGroup);
+		if ( pListBox )
+		{
+			pListBox->addItem( dynamic_cast<CSulGuiCanvas*>(pComp) );
+		}
+
+		m_curGroup->addChild( pComp );
+		pComp->setupTheme( m_rThemeXml );
+		pComp->setupAttr( pAttr );
+		pComp->setupView( m_viewW, m_viewH );
 		pComp->setupEventHandler( m_rEventHandler );
 		pComp->setLayer( m_indent );
-		m_curGroup->addChild( pComp );
+		pComp->init();
 		m_curGroup = pComp;
 		m_indent++;
 	}
-	
-
-	// we assume only element tags from now on (there is no smart error checking here yet!)
-	m_mapAttr[sName] = pAttr;
 }
 
 void CSulGuiXml::elementEnd( const CSulString& sName )
@@ -151,30 +186,19 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 		sName=="CANVAS" || 
 		sName=="BUTTON" || 
 		sName=="TEXT" || 
+		sName=="TEXTBOX" || 
 		sName=="EDITBOX" || 
 		sName=="CHECKBOX" || 
 		sName=="RADIOBUTTON" ||
 		sName=="RADIOBUTTON_GROUP" ||
 		sName=="LISTBOX" ||
-		sName=="ITEM" ||
-		sName=="SCROLLBAR"
+		sName=="SCROLLBAR" ||
+		sName=="COMBOBOX" ||
+		sName=="COMP"
 	)
 	{
 		m_curGroup = m_curGroup->getParent( 0 );
 		m_indent--;
 	}
-}
-
-CSulXmlAttr* CSulGuiXml::get( const CSulString& sTag ) 
-{
-	MAP_ATTR::const_iterator i;
-
-	i = m_mapAttr.find( sTag );
-	if ( i!=m_mapAttr.end() )
-	{
-		return m_mapAttr[sTag].get();
-	}
-
-	return 0;
 }
 

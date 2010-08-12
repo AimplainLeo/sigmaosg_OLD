@@ -25,7 +25,7 @@ void CSulGeomHeightField::Create( CSulArray2D<float>* pArray2D, float fScaleX, f
 
 	// create vertices
 	m_rVerts = new osg::Vec3Array;
-	Sigma::uint32 x, y;
+	sigma::uint32 x, y;
 	for ( y=0; y<m_h; y++ )
 	{
 		for ( x=0; x<m_w; x++ ) 
@@ -42,8 +42,8 @@ void CSulGeomHeightField::Create( CSulArray2D<float>* pArray2D, float fScaleX, f
 	{
 		for ( x=0; x<m_w-1; x++ ) 
 		{
-			Sigma::uint32 ofs = x+y*m_w;
-			Sigma::uint32 ofsY = (y+1)*m_w;
+			sigma::uint32 ofs = x+y*m_w;
+			sigma::uint32 ofsY = (y+1)*m_w;
 
 			// triange part I
 			pPrimitiveSet->push_back( ofs+0 );
@@ -86,12 +86,12 @@ void CSulGeomHeightField::Create( CSulArray2D<float>* pArray2D, float fScaleX, f
 	getDrawable()->asGeometry()->addPrimitiveSet( pPrimitiveSet2 );
 }
 
-float CSulGeomHeightField::GetHeight( Sigma::int32 x, Sigma::int32 y ) const
+float CSulGeomHeightField::GetHeight( sigma::int32 x, sigma::int32 y ) const
 {
 	return (*m_rVerts)[x+y*m_w].z();
 }
 
-osg::Vec3 CSulGeomHeightField::GetNormal( Sigma::int32 x, Sigma::int32 y ) const 
+osg::Vec3 CSulGeomHeightField::GetNormal( sigma::int32 x, sigma::int32 y ) const 
 {
 	float h0 = GetHeight( x, y );
 	float h1 = GetHeight( x, (y-1)%m_h );

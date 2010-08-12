@@ -35,7 +35,7 @@ void CSulXmlAttr::reset()
 	m_dwCount = 0;
 }
 
-Sigma::uint32 CSulXmlAttr::getCount()
+sigma::uint32 CSulXmlAttr::getCount()
 {
 	return m_dwCount;
 }
@@ -54,14 +54,14 @@ CSulXmlAttr::SINFO* CSulXmlAttr::getInfo()
 	return p;
 }
 
-void CSulXmlAttr::add( const CSulString& sName, Sigma::int32 lValue )
+void CSulXmlAttr::add( const CSulString& sName, sigma::int32 lValue )
 {
 	SINFO* p = getInfo();
 	p->strName = sName;
 	p->strValue.Format( "%d", lValue );
 }
 
-void CSulXmlAttr::add( const CSulString& sName, Sigma::uint32 dwValue )
+void CSulXmlAttr::add( const CSulString& sName, sigma::uint32 dwValue )
 {
 	SINFO* p = getInfo();
 	p->strName = sName;
@@ -121,7 +121,7 @@ bool CSulXmlAttr::get( const CSulString& sName, float& f )
 	return true;
 }
 
-bool CSulXmlAttr::get( const CSulString& sName, Sigma::uint32& i )
+bool CSulXmlAttr::get( const CSulString& sName, sigma::uint32& i )
 {
 	if ( !exist( sName ) )
 	{
@@ -138,7 +138,7 @@ bool CSulXmlAttr::get( const CSulString& sName, Sigma::uint32& i )
 	return false;
 }
 
-bool CSulXmlAttr::get( const CSulString& sName, Sigma::int8& c )
+bool CSulXmlAttr::get( const CSulString& sName, sigma::int8& c )
 {
 	if ( !exist( sName ) )
 	{

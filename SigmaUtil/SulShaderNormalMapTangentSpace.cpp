@@ -64,7 +64,7 @@ private:
 };
 
 
-CSulShaderNormalMapTangentSpace::CSulShaderNormalMapTangentSpace( osg::Node* pNode, Sigma::int32 indexLight, osg::Program* pProg ) :
+CSulShaderNormalMapTangentSpace::CSulShaderNormalMapTangentSpace( osg::Node* pNode, sigma::int32 indexLight, osg::Program* pProg ) :
 CSulShaderBase( pNode )
 {
 	if ( !pProg )

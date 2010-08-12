@@ -19,9 +19,9 @@ osg::StateAttribute::Values CSulSceneManagerXml::GetStateAttribute( const CSulSt
 	rParser->AddCharDelimiter( '|' );
 	rParser->InitStringParse( s );
 
-	Sigma::uint32 v = osg::StateAttribute::OFF;
+	sigma::uint32 v = osg::StateAttribute::OFF;
 
-	Sigma::int8* pToken = 0;
+	sigma::int8* pToken = 0;
 	while ( pToken = rParser->GetToken() )
 	{
 		if ( !strcmp( pToken, "on" ) )			v|= osg::StateAttribute::ON;	
@@ -236,7 +236,7 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 
 	if ( m_pCurrentStateSet && sName=="RENDERBIN" )
 	{
-		Sigma::uint32 binNum;
+		sigma::uint32 binNum;
 		CSulString sBinName;
 		if( pAttr->get("number", binNum) && pAttr->get("name", sBinName) )
 		{

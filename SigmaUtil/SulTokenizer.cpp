@@ -33,7 +33,7 @@ CSulTokenizer::CSulTokenizer()
 	AddCharAsSentenceEnd( '"' );
 }
 
-const CSulString& CSulTokenizer::GetToken( Sigma::uint32 iIndex )
+const CSulString& CSulTokenizer::GetToken( sigma::uint32 iIndex )
 {
 	static CSulString tmp( "" );
 
@@ -45,51 +45,51 @@ const CSulString& CSulTokenizer::GetToken( Sigma::uint32 iIndex )
 	return m_vecToken[iIndex];
 }
 
-void CSulTokenizer::AddCharAsToken( Sigma::uint8 c )
+void CSulTokenizer::AddCharAsToken( sigma::uint8 c )
 {
 	m_cToken[c] = 1;
 }
 
-void CSulTokenizer::RemoveCharAsToken( Sigma::uint8 c )
+void CSulTokenizer::RemoveCharAsToken( sigma::uint8 c )
 {
 	m_cToken[c] = 0;
 }
 
-void CSulTokenizer::AddCharAsDelimiter( Sigma::uint8 c )
+void CSulTokenizer::AddCharAsDelimiter( sigma::uint8 c )
 {
 	m_cDelimiter[c] = 1;
 }
 
-void CSulTokenizer::RemoveCharAsDelimiter( Sigma::uint8 c )
+void CSulTokenizer::RemoveCharAsDelimiter( sigma::uint8 c )
 {
 	m_cDelimiter[c] = 0;
 }
 
-void CSulTokenizer::AddCharAsSentenceStart( Sigma::uint8 c )
+void CSulTokenizer::AddCharAsSentenceStart( sigma::uint8 c )
 {
 	m_cSentenceStart[c] = 1;
 }
 
-void CSulTokenizer::RemoveCharAsSentenceStart( Sigma::uint8 c )
+void CSulTokenizer::RemoveCharAsSentenceStart( sigma::uint8 c )
 {
 	m_cSentenceStart[c] = 0;
 }
 
-void CSulTokenizer::AddCharAsSentenceEnd( Sigma::uint8 c )
+void CSulTokenizer::AddCharAsSentenceEnd( sigma::uint8 c )
 {
 	m_cSentenceStart[c] = 1;
 }
 
-void CSulTokenizer::RemoveCharAsSentenceEnd( Sigma::uint8 c )
+void CSulTokenizer::RemoveCharAsSentenceEnd( sigma::uint8 c )
 {
 	m_cSentenceStart[c] = 0;
 }
 
 // peter+marino				tokens: [peter] [+] [marino]
 // peter"wraae marino"		tokens: [peter] [wraae marino]
-bool CSulTokenizer::Parse( Sigma::uint8* pData, Sigma::uint32 iSize )
+bool CSulTokenizer::Parse( sigma::uint8* pData, sigma::uint32 iSize )
 {
-	Sigma::uint32 i = 0;
+	sigma::uint32 i = 0;
 	std::string sToken;
 
 	while ( i<iSize )

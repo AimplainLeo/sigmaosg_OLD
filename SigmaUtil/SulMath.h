@@ -3,7 +3,7 @@
 #ifndef __SULMATH_H__
 #define __SULMATH_H__
 
-namespace Sigma
+namespace sigma
 {
 	const unsigned long RAND_MAX_PLUS_1 = RAND_MAX + 1;
 	const unsigned long BIG_RAND_MAX = RAND_MAX_PLUS_1 * RAND_MAX_PLUS_1 - 1;

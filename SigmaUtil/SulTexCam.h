@@ -20,7 +20,7 @@ public:
 	};
 
 public:
-						CSulTexCam( Sigma::uint32 w, Sigma::uint32 h, ESETUP eSetup=STANDARD );
+						CSulTexCam( sigma::uint32 w, sigma::uint32 h, ESETUP eSetup=STANDARD );
 						CSulTexCam( osg::Texture2D* pTex, ESETUP eSetup=STANDARD );
 
 	void				setTexture( osg::Texture2D* pTex );
@@ -35,8 +35,8 @@ private:
 private:
 	osg::ref_ptr<osg::Texture2D>	m_rTex;
 	osg::ref_ptr<osg::Image>		m_rImage;
-	Sigma::uint32					m_w;
-	Sigma::uint32					m_h;
+	sigma::uint32					m_w;
+	sigma::uint32					m_h;
 	ESETUP							m_eSetup;
 };
 

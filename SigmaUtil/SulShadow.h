@@ -16,7 +16,7 @@ public:
 
 	void		init();
 
-	void		setTextureSize( Sigma::uint32 size_squared );
+	void		setTextureSize( sigma::uint32 size_squared );
 
 	void		useShaderVert( const std::string& file );
 	void		useShaderFrag( const std::string& file );
@@ -38,7 +38,7 @@ private:
 	osg::Vec3						m_posLight;
 	std::string						m_fileShaderFrag;
 	std::string						m_fileShaderVert;
-	Sigma::uint32					m_size_squared;
+	sigma::uint32					m_size_squared;
 };
 
 #endif // __SULSHADOW_H__

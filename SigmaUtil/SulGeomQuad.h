@@ -33,14 +33,14 @@ public:
 
 	void							setColor( osg::Vec4& c );
 	void							setColor( float r, float g, float b, float a );
-	const osg::Vec4&				getColor( Sigma::uint32 index );
+	const osg::Vec4&				getColor( sigma::uint32 index );
 
 	// FIXME: these texture methods should be moved to the base class (they are very generic)
-	void							setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB, Sigma::uint32 unit=0 );
-	void							setTexture( osg::Texture2D* pTex, Sigma::uint32 unit=0 );
-	void							setTexture( const CSulString& file, Sigma::uint32 unit );
+	void							setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB, sigma::uint32 unit=0 );
+	void							setTexture( osg::Texture2D* pTex, sigma::uint32 unit=0 );
+	void							setTexture( const CSulString& file, sigma::uint32 unit );
 
-	osg::Texture2D*					getTexture( Sigma::uint32 unit=0 );
+	osg::Texture2D*					getTexture( sigma::uint32 unit=0 );
 
 	void							setUV( float uv );
 	void							setUV( float u, float v );
@@ -58,7 +58,7 @@ private:
 	void							calcVertPositions();
 
 private:
-	Sigma::MAP_TEXTURE2D			m_mapTex;
+	sigma::MAP_TEXTURE2D			m_mapTex;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 	osg::ref_ptr<osg::Vec3Array>	m_rVerts;
 	osg::ref_ptr<osg::Vec2Array>	m_rUV;

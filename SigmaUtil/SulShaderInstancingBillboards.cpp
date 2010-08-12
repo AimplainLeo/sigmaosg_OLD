@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulShaderInstancingBillboards.h"
 
-CSulShaderInstancingBillboards::CSulShaderInstancingBillboards( osg::Node* pNode, Sigma::int32 numInstances, Sigma::int32 texUnit, Sigma::int32 texSizeSquared, unsigned int useLights, float min, float max, osg::Program* pProg ) :
+CSulShaderInstancingBillboards::CSulShaderInstancingBillboards( osg::Node* pNode, sigma::int32 numInstances, sigma::int32 texUnit, sigma::int32 texSizeSquared, unsigned int useLights, float min, float max, osg::Program* pProg ) :
 CSulShaderBase( pNode )
 {
 	if ( !pProg )

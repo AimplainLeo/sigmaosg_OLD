@@ -27,19 +27,19 @@ public:
 		m_vecLineSegment.push_back( new osg::LineSegment(v1,v2) );
 	}
 
-	const Sigma::VEC_LINESEGMENT& getLineSegmentList()
+	const sigma::VEC_LINESEGMENT& getLineSegmentList()
 	{
 		return m_vecLineSegment;
 	}
 
-	const Sigma::VEC_TRI& getTriList()
+	const sigma::VEC_TRI& getTriList()
 	{
 		return m_vecTri;
 	}
 
 private:
-	Sigma::VEC_LINESEGMENT	m_vecLineSegment;
-	Sigma::VEC_TRI m_vecTri;
+	sigma::VEC_LINESEGMENT	m_vecLineSegment;
+	sigma::VEC_TRI m_vecTri;
 };
 
 #endif // __SULFUNCEXTRACTOR_H__

@@ -35,7 +35,7 @@ void CSulGrass::setReceiveShadow( bool bReceiveShadow )
 	m_bReceiveShadow = bReceiveShadow;
 }
 
-void CSulGrass::setTextureUnit_HeightMap( Sigma::int32 i )
+void CSulGrass::setTextureUnit_HeightMap( sigma::int32 i )
 {
 	m_iTexUnit_HeightMap = i;
 }
@@ -263,12 +263,12 @@ void CSulGrass::setSpacing( float spacing )
 	m_spacing = spacing;
 }
 
-void CSulGrass::setGridSize( Sigma::uint32 size )
+void CSulGrass::setGridSize( sigma::uint32 size )
 {
 	m_sizeGrid = size/m_spacing;	
 }
 
-Sigma::uint32 CSulGrass::getGridSize()
+sigma::uint32 CSulGrass::getGridSize()
 {
 	return m_spacing*m_sizeGrid;
 }

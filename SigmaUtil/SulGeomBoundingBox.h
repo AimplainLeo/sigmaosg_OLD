@@ -20,7 +20,7 @@ protected:
 private:
 	osg::PrimitiveSet*	AddCornerLines(osg::Vec3Array& verts, const osg::BoundingBox& bound, unsigned i0, unsigned i1, unsigned i2, unsigned i3);
 
-	void				ModifyCornerLines( Sigma::uint32 index, osg::Vec3Array* pVerts, const osg::BoundingBox& bound, unsigned i0, unsigned i1, unsigned i2, unsigned i3 );
+	void				ModifyCornerLines( sigma::uint32 index, osg::Vec3Array* pVerts, const osg::BoundingBox& bound, unsigned i0, unsigned i1, unsigned i2, unsigned i3 );
 
 private:
 	osg::BoundingBox	m_bb;

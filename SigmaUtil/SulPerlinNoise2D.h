@@ -17,7 +17,7 @@ public:
 		float w = p->GetWidth();
 		float h = p->GetHeight();
 
-		Sigma::uint32 x,y;
+		sigma::uint32 x,y;
 		for ( y=0; y<h; y++ )
 		{
 			float valY = (float)y/h;
@@ -33,14 +33,14 @@ public:
 		}
 	}
 
-	void CreateArray2D( CSulArray2D<Sigma::uint8>* p, float fScale=1.0f, float fOfs=128.0f, Sigma::uint8 iMin=0, Sigma::uint8 iMax=255 )
+	void CreateArray2D( CSulArray2D<sigma::uint8>* p, float fScale=1.0f, float fOfs=128.0f, sigma::uint8 iMin=0, sigma::uint8 iMax=255 )
 	{
 		m_iOctaves = 4;
 
 		float w = p->GetWidth();
 		float h = p->GetHeight();
 
-		Sigma::uint32 x,y;
+		sigma::uint32 x,y;
 		for ( y=0; y<h; y++ )
 		{
 			float valY = (float)y/h;
@@ -53,16 +53,16 @@ public:
 				f = f*fScale+fOfs;
 				if ( f<iMin ) f = iMin;
 				if ( f>iMax ) f = iMax;
-				p->Set( x, y, (Sigma::uint8)f );
+				p->Set( x, y, (sigma::uint8)f );
 			}
 		}
 	}
 
-	void CreateArray2D( CSulTexImage* pTexImage, float fScale=1.0f, float fOfs=128.0f, Sigma::uint32 iMin=0, Sigma::uint32 iMax=255 );
+	void CreateArray2D( CSulTexImage* pTexImage, float fScale=1.0f, float fOfs=128.0f, sigma::uint32 iMin=0, sigma::uint32 iMax=255 );
 
 private:
-	float				IntNoise( Sigma::int32 x, Sigma::int32 y );
-	float				IntNoiseLoop( Sigma::int32 x, Sigma::int32 y, float freq );
+	float				IntNoise( sigma::int32 x, sigma::int32 y );
+	float				IntNoiseLoop( sigma::int32 x, sigma::int32 y, float freq );
 	float				CosInterpolate( float a, float b, float t );
 	float				InterpolatedNoise( float x, float y, float freq );
 	float				PerlinNoise( float x, float y );

@@ -36,11 +36,11 @@ bool CSulFile::Close()
 
 bool CSulFile::Print( const CSulString& s )
 {
-	Sigma::int32 iRet = fprintf( m_pFile, s.c_str() );
+	sigma::int32 iRet = fprintf( m_pFile, s.c_str() );
 	return iRet?true:false;
 }
 
-bool CSulFile::Save( CSulString& sFile, char* pBufData, Sigma::uint32 dwBufSize )
+bool CSulFile::Save( CSulString& sFile, char* pBufData, sigma::uint32 dwBufSize )
 {
 	assert( 0 ); // FIXME
 	return false;

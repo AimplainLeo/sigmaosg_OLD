@@ -56,7 +56,7 @@ private:
 private:
 	MAP_NODE							m_mapNode;
 	MAP_STATESET						m_mapStateSet;
-	Sigma::MAP_STRING_STATEATTRIBUTE	m_mapStateAttribute;
+	sigma::MAP_STRING_STATEATTRIBUTE	m_mapStateAttribute;
 };
 
 #endif // __SULSCENEMANAGER_H__

@@ -4,7 +4,7 @@
 #include "SulGenHeightTexture.h"
 #include "SulCalcBoundingBox.h"
 
-CSulGenHeightTexture::CSulGenHeightTexture( osg::Node* pRenderMe, Sigma::uint32 texSizeXY ) :
+CSulGenHeightTexture::CSulGenHeightTexture( osg::Node* pRenderMe, sigma::uint32 texSizeXY ) :
 osg::Group()
 {
 	m_rRenderMe = pRenderMe;

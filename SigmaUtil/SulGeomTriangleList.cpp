@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulGeomTriangleList.h"
 
-CSulGeomTriangleList::CSulGeomTriangleList( const Sigma::VEC_TRI& vecTri ) :
+CSulGeomTriangleList::CSulGeomTriangleList( const sigma::VEC_TRI& vecTri ) :
 CSulGeomBase(),
 m_vecTri( vecTri )
 {
@@ -18,8 +18,8 @@ void CSulGeomTriangleList::createDrawable()
 	m_rColors = new osg::Vec4Array;
 
 	float c = 1.0f;
-	Sigma::uint32 count = 0;
-	Sigma::VEC_TRI::iterator i;	// FIXME: bet there is a good cpy stl thingy that can do this
+	sigma::uint32 count = 0;
+	sigma::VEC_TRI::iterator i;	// FIXME: bet there is a good cpy stl thingy that can do this
 	i = m_vecTri.begin();
 	while ( i!=m_vecTri.end() )
 	{
@@ -63,8 +63,8 @@ void CSulGeomTriangleList::setColor( float r, float g, float b, float a )
 		createDrawable();
 	}
 
-	Sigma::uint32 count = m_vecTri.size()*3;
-	for ( Sigma::uint32 i=0; i<count; i++  )
+	sigma::uint32 count = m_vecTri.size()*3;
+	for ( sigma::uint32 i=0; i<count; i++  )
 	{
 		(*m_rColors)[i].set( r, g, b, a );
 	}

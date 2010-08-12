@@ -30,20 +30,20 @@ public:
 	bool			Close();
 	bool			Print( const CSulString& s );
 	
-	bool 			Save( class CSulString& sFile, Sigma::int8* pBufData, Sigma::uint32 dwBufSize );
-	Sigma::uint8* 	Load( const class CSulString& sFile );
+	bool 			Save( class CSulString& sFile, sigma::int8* pBufData, sigma::uint32 dwBufSize );
+	sigma::uint8* 	Load( const class CSulString& sFile );
 	
-	Sigma::uint32 	GetSize();
-	Sigma::uint8*	GetDataPtr();
+	sigma::uint32 	GetSize();
+	sigma::uint8*	GetDataPtr();
 	
-	VEC_STRING		getTextLines( Sigma::uint32 maxChars=1024 );
+	VEC_STRING		getTextLines( sigma::uint32 maxChars=1024 );
 
 protected:
 					~CSulFile();
 
 private:
-	Sigma::uint8*	m_pBuf;
-	Sigma::uint32	m_dwBufSize;
+	sigma::uint8*	m_pBuf;
+	sigma::uint32	m_dwBufSize;
 
 //	FILE*			m_pFile;
 

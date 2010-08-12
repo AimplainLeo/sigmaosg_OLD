@@ -53,21 +53,50 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			pComp->eventMouseMove( mouse_local_x, mouse_local_y, mouse_x, mouse_y );
 			++i;
 		}
+    }
 
-//        return true; // return true, event handled
+    if ( ea.getEventType() & osgGA::GUIEventAdapter::DRAG )
+    {
+		float mouse_x = ea.getX();
+		float mouse_y = ea.getYmax()-ea.getY();
+
+		VEC_GUICOMP::iterator i;
+		i = m_eventsMouseDrag.begin();
+		while ( i!=m_eventsMouseDrag.end() )
+		{
+			CSulGuiComp* pComp = (*i);
+
+			osg::NodePath pathToRoot;
+			osgManipulator::computeNodePathToRoot( *pComp, pathToRoot );
+			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			float mouse_local_x = mouse_x-m.getTrans().x();
+			float mouse_local_y = mouse_y-m.getTrans().y();
+
+			pComp->eventMouseDrag( mouse_local_x, mouse_local_y, mouse_x, mouse_y );
+			++i;
+		}
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::PUSH )
     {
-/*
 		float mouse_x = ea.getX();
 		float mouse_y = ea.getYmax()-ea.getY();
 
-        osgViewer::ViewerBase::Cameras cams;
-        pViewer->getCameras( cams );
-        cams[0]->setClearColor( osg::Vec4(1, 0, 0, 1 ) );
-*/
-   //     return true; // return true, event handled
+		VEC_GUICOMP::iterator i;
+		i = m_eventsMousePushed.begin();
+		while ( i!=m_eventsMousePushed.end() )
+		{
+			CSulGuiComp* pComp = (*i);
+
+			osg::NodePath pathToRoot;
+			osgManipulator::computeNodePathToRoot( *pComp, pathToRoot );
+			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			float mouse_local_x = mouse_x-m.getTrans().x();
+			float mouse_local_y = mouse_y-m.getTrans().y();
+
+			pComp->eventMousePushed( mouse_local_x, mouse_local_y, mouse_x, mouse_y );
+			++i;
+		}
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::RELEASE )
@@ -90,20 +119,23 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			pComp->eventMouseRelease( mouse_local_x, mouse_local_y, mouse_x, mouse_y );
 			++i;
 		}
-
-//        return false; // return true, event handled
     }
 
     return false;
 }
 
-void CSulGuiEventHandler::addEvent( CSulGuiComp* pComp, Sigma::uint32 eventType )
+void CSulGuiEventHandler::addEvent( CSulGuiComp* pComp, sigma::uint32 eventType )
 {
 	switch ( eventType )
 	{
 		case EVENT_MOUSE_MOVE:		
 			if ( std::find( m_eventsMouseMove.begin(), m_eventsMouseMove.end(), pComp )==m_eventsMouseMove.end() )
 				m_eventsMouseMove.push_back( pComp );		
+			break;
+
+		case EVENT_MOUSE_DRAG:		
+			if ( std::find( m_eventsMouseDrag.begin(), m_eventsMouseDrag.end(), pComp )==m_eventsMouseDrag.end() )
+				m_eventsMouseDrag.push_back( pComp );		
 			break;
 
 		case EVENT_MOUSE_PUSHED:	
