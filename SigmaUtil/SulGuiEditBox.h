@@ -9,9 +9,12 @@
 class CSulGuiEditBox : public CSulGuiCanvas
 {
 public:
-					CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h );
+						CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h, float fontSize );
 
-	void			setupEventHandler( class CSulGuiEventHandler* pEventHandler );
+	virtual void		init();
+
+	virtual void		setupAttr( CSulXmlAttr* pAttr );
+	virtual void		setupEventHandler( class CSulGuiEventHandler* pEventHandler );
 
 	void				setText( const CSulString& sText );
 	const CSulString&	getText() const;
@@ -28,6 +31,9 @@ private:
 	CSulString					m_sCursor;
 	bool						m_bEditActive;
 	CSulString					m_sText;
+	float						m_fontSize;
+	float						m_ofs_x;
+	float						m_ofs_y;
 };
 
 #endif // __SULGUIEDITBOX_H__

@@ -6,11 +6,22 @@
 #include <osg/matrix>
 #include <osgManipulator/Selection>
 
+CSulGuiComp::CSulGuiComp( const CSulString& sCompName )
+{
+	initConstructor();
+	m_sCompName = sCompName;
+}
+
 CSulGuiComp::CSulGuiComp( const CSulString& sCompName, float x, float y )
 {
+	initConstructor();
 	m_sCompName = sCompName;
-	m_bActive = true;
 	setXY( x, y );
+}
+
+void CSulGuiComp::initConstructor()
+{
+	m_bActive = true;
 }
 
 void CSulGuiComp::init()
@@ -57,6 +68,16 @@ void CSulGuiComp::setXY( float x, float y )
 	setMatrix( m );	
 
 	signalPositionChanged( x, y );
+}
+
+void CSulGuiComp::setX( float x )
+{
+	osg::Matrix m;
+	m = getMatrix();
+	osg::Vec3 pos = m.getTrans();
+	pos.x() = x;
+	m.setTrans( pos );
+	setMatrix( m );
 }
 
 void CSulGuiComp::setY( float y )

@@ -13,6 +13,7 @@
 class CSulGuiComp : public osg::MatrixTransform
 {
 public:
+					CSulGuiComp( const CSulString& sCompName );
 					CSulGuiComp( const CSulString& sCompName, float x, float y );
 
 	// must be called after all setups have been called
@@ -28,6 +29,7 @@ public:
 	virtual void	setupView( float w, float h );
 
 	void			setXY( float x, float y );
+	void			setX( float x );
 	void			setY( float y );
 	float			getX();
 	float			getY();
@@ -50,6 +52,9 @@ public:
 
 protected:
 	void			addEvent( sigma::uint32 eventType );
+
+private:
+	void			initConstructor();
 
 private:
 	class CSulGuiEventHandler*		m_pEventHandler;

@@ -9,8 +9,10 @@
 class CSulGuiTextBox : public CSulGuiCanvas
 {
 public:
-					CSulGuiTextBox( const CSulString& sText, float x, float y, float w, float h, float size );
+					CSulGuiTextBox( float x, float y );
+					CSulGuiTextBox( const CSulString& sText, float x, float y, float w, float h, float fontSize );
 
+	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 
 	virtual void	init();
@@ -18,7 +20,7 @@ public:
 private:
 	osg::ref_ptr<CSulGuiText>	m_rText;
 	CSulString					m_sText;
-	float						m_size;
+	float						m_fontSize;
 	float						m_ofs_x;
 	float						m_ofs_y;
 };

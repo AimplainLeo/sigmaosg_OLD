@@ -9,10 +9,13 @@
 class CSulGuiCanvas : public CSulGuiComp
 {
 public:
+					CSulGuiCanvas( const CSulString& sCompName );
+					CSulGuiCanvas( const CSulString& sCompName, float x, float y );
 					CSulGuiCanvas( const CSulString& sCompName, float x, float y, float w, float h );
 
 	virtual void	init();
 
+	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 
@@ -24,6 +27,8 @@ public:
 	void			setBorderColor( const osg::Vec4& c );
 
 	bool			isInside( float x, float y );
+
+	void			setWH( float w, float h );
 
 	float			getW();
 	float			getH();
@@ -40,8 +45,11 @@ public:
 
 	sigma::signal1<CSulGuiCanvas*>			signalClicked;
 
+private:
+	void			initConstructor();
+
 public:
-osg::ref_ptr<osg::Geode>	m_rGeodeQuad;
+	osg::ref_ptr<osg::Geode>	m_rGeodeQuad;		// FIXME: should be private
 
 private:
 	osg::ref_ptr<CSulGeomQuad>	m_rQuad;

@@ -9,15 +9,44 @@
 #include "SulGuiEventHandler.h"
 
 CSulGuiRadioButton::CSulGuiRadioButton( const CSulString& sText, float x, float y, float w, float h ) :
-CSulGuiCanvas( "RADIOBUTTON", x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
+CSulGuiCanvas( "RADIOBUTTON", x, y, w, h )
 {
+	m_sText = sText;
+}
+
+void CSulGuiRadioButton::setupAttr( CSulXmlAttr* pAttr )
+{
+	CSulGuiCanvas::setupAttr( pAttr );
+
+	m_fontSize = getThemeValue( "font_size" ).asFloat();
+	m_radioSizeOuter = getThemeValue( "radio_size_outer" ).asFloat();
+	m_radioSizeInner = getThemeValue( "radio_size_inner" ).asFloat();
+	m_paddingText = getThemeValue( "padding_text" ).asFloat();
+
+	if ( pAttr->exist( "font_size" ) )			m_fontSize = pAttr->get( "font_size" ).asFloat();
+	if ( pAttr->exist( "radio_size_outer" ) )	m_radioSizeOuter = pAttr->get( "radio_size_outer" ).asFloat();
+	if ( pAttr->exist( "radio_size_inner" ) )	m_radioSizeInner = pAttr->get( "radio_size_inner" ).asFloat();
+	if ( pAttr->exist( "padding_text" ) )		m_paddingText = pAttr->get( "padding_text" ).asFloat();
+}
+
+void CSulGuiRadioButton::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiCanvas::setupEventHandler( pEventHandler );
+	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
+}
+
+void CSulGuiRadioButton::init()
+{
+	CSulGuiCanvas::init();
+
 	sigma::VEC_VEC3::vector	vecPos;
 	sigma::VEC_VEC3::vector	vecPosDots;
 	
-	float padding = 6.0f;
+	float w = getW();
+	float h = getH();
 
-	double r = 16;
-	double rdot = 13;
+	double r = m_radioSizeOuter;
+	double rdot = m_radioSizeInner;
 
 	for ( int i=0; i<17; i++ )
 	{
@@ -26,10 +55,10 @@ CSulGuiCanvas( "RADIOBUTTON", x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 		double x = cos( d );
 		double y = sin( d );
 
-		osg::Vec3 pos = osg::Vec3( x*r+w/2.0f, y*r+h/2.0f, 0 );
+		osg::Vec3 pos = osg::Vec3( x*r+r, y*r+h/2.0f, 0 );
 		vecPos.push_back( pos );
 
-		osg::Vec3 posDot = osg::Vec3( x*rdot+w/2.0f, y*rdot+h/2.0f, 0 );
+		osg::Vec3 posDot = osg::Vec3( x*rdot+r, y*rdot+h/2.0f, 0 );
 		vecPosDots.push_back( posDot );
 	}
 
@@ -41,7 +70,8 @@ CSulGuiCanvas( "RADIOBUTTON", x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 	addChild( pGeodeCircle );
 
 	// text
-	CSulGuiText* pGuiText = new CSulGuiText( sText, w+padding, h/2.0f, h );
+	CSulGuiText* pGuiText = new CSulGuiText( m_sText, r*2.0f+m_paddingText, h/2.0f, m_fontSize );
+	pGuiText->init();
 	pGuiText->getTextObject()->setAlignment( osgText::TextBase::LEFT_CENTER );
 	addChild( pGuiText );
 
@@ -51,14 +81,7 @@ CSulGuiCanvas( "RADIOBUTTON", x, y, w!=0.0?w:128.0f, h!=0.0f?h:32.0f )
 	m_rGeodeTriangleFan->addDrawable( pTriangleFan->getDrawable() );
 	addChild( m_rGeodeTriangleFan );
 
-
 	showCanvas( false );
-}
-
-void CSulGuiRadioButton::setupEventHandler( CSulGuiEventHandler* pEventHandler )
-{
-	CSulGuiCanvas::setupEventHandler( pEventHandler );
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
 }
 
 void CSulGuiRadioButton::removeSelect()

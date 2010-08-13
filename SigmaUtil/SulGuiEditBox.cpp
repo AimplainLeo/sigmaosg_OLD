@@ -5,26 +5,47 @@
 #include "SulGuiTextUpdateCallback.h"
 #include "SulGuiEventHandler.h"
 
-CSulGuiEditBox::CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h ) :
+CSulGuiEditBox::CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h, float fontSize ) :
 CSulGuiCanvas( "EDITBOX", x, y, w, h )
 {
+	m_fontSize = fontSize;
 	m_sText = sText;
 
 	m_bEditActive = false;
+}
 
-	setUpdateCallback( new CSulGuiTextUpdateCallback( this ) );
+void CSulGuiEditBox::setupAttr( CSulXmlAttr* pAttr )
+{
+	CSulGuiCanvas::setupAttr( pAttr );
 
-	float ofsx = 6.0f;
-	float ofsy = 6.0f;
-	m_rGuiText = new CSulGuiText( sText, 0.0f+ofsx, h-ofsy, h );
-	addChild( m_rGuiText );
+	m_fontSize = getThemeValue( "font_size" ).asFloat();
+	m_ofs_x = getThemeValue( "ofs_x" ).asFloat();
+	m_ofs_y = getThemeValue( "ofs_y" ).asFloat();
+
+	if ( pAttr->exist( "font_size" ) )	m_fontSize = pAttr->get( "font_size" ).asFloat();
+	if ( pAttr->exist( "ofs_x" ) )		m_ofs_x		= pAttr->get( "ofs_x" ).asFloat();
+	if ( pAttr->exist( "ofs_y" ) )		m_ofs_x		= pAttr->get( "ofs_y" ).asFloat();
 }
 
 void CSulGuiEditBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
+
 	addEvent( CSulGuiEventHandler::EVENT_KEYDOWN );	
 	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
+}
+
+void CSulGuiEditBox::init()
+{
+	CSulGuiCanvas::init();
+
+	setUpdateCallback( new CSulGuiTextUpdateCallback( this ) );
+
+	float h = getH();
+
+	m_rGuiText = new CSulGuiText( m_sText, 0.0f+m_ofs_x, h-m_ofs_y, m_fontSize );
+	m_rGuiText->init();
+	addChild( m_rGuiText );
 }
 
 void CSulGuiEditBox::setMouseRelease( bool bInside )

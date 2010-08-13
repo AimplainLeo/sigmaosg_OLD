@@ -68,7 +68,8 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
-			pAttr->get( "h" ).asFloat()
+			pAttr->get( "h" ).asFloat(),
+			pAttr->get( "font_size" ).asFloat()
 		);
 	}
 
@@ -162,19 +163,21 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 
 	if ( pComp )
 	{
+		m_curGroup->addChild( pComp );
+
+		pComp->setupTheme( m_rThemeXml );
+		pComp->setupAttr( pAttr );
+		pComp->setupView( m_viewW, m_viewH );
+		pComp->setLayer( m_indent );
+		pComp->init();
+		pComp->setupEventHandler( m_rEventHandler );
+
 		CSulGuiListBox* pListBox = dynamic_cast<CSulGuiListBox*>(m_curGroup);
 		if ( pListBox )
 		{
 			pListBox->addItem( dynamic_cast<CSulGuiCanvas*>(pComp) );
 		}
 
-		m_curGroup->addChild( pComp );
-		pComp->setupTheme( m_rThemeXml );
-		pComp->setupAttr( pAttr );
-		pComp->setupView( m_viewW, m_viewH );
-		pComp->setupEventHandler( m_rEventHandler );
-		pComp->setLayer( m_indent );
-		pComp->init();
 		m_curGroup = pComp;
 		m_indent++;
 	}

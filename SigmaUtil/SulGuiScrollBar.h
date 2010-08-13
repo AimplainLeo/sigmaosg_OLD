@@ -12,7 +12,9 @@ class CSulGuiScrollBar : public CSulGuiCanvas, public sigma::has_slots<>
 public:
 			CSulGuiScrollBar( float x, float y, float w, float h );
 
-	void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
+	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
+
+	virtual void	init();
 
 	void	buttonClick( CSulGuiButton* pButton );
 

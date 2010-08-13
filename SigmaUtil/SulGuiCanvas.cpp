@@ -6,8 +6,27 @@
 #include "SulShaderGuiFrame.h"
 #include "SulGuiEventHandler.h"
 
+CSulGuiCanvas::CSulGuiCanvas( const CSulString& sCompName ) :
+CSulGuiComp( sCompName )
+{
+	initConstructor();
+}
+
+CSulGuiCanvas::CSulGuiCanvas( const CSulString& sCompName, float x, float y ) :
+CSulGuiComp( sCompName, x, y )
+{
+	initConstructor();
+}
+
 CSulGuiCanvas::CSulGuiCanvas( const CSulString& sCompName, float x, float y, float w, float h ) :
 CSulGuiComp( sCompName, x, y )
+{
+	initConstructor();
+	m_w = w;
+	m_h = h;
+}
+
+void CSulGuiCanvas::initConstructor()
 {
 	m_dragDragging = false;
 	m_dragAllowed = false;
@@ -16,16 +35,19 @@ CSulGuiComp( sCompName, x, y )
 	m_dragMinY = 0.0f;
 	m_dragMaxY = 10000000.0f;
 	m_bMouseHover = false;
-	m_w = w;
-	m_h = h;
+}
+
+void CSulGuiCanvas::setupTheme( CSulGuiThemeXml* pThemeXml )
+{
+	CSulGuiComp::setupTheme( pThemeXml );
+
+	m_w = getThemeValue( "w" ).asFloat();
+	m_h = getThemeValue( "h" ).asFloat();
 }
 
 void CSulGuiCanvas::setupAttr( CSulXmlAttr* pAttr )
 {
 	CSulGuiComp::setupAttr( pAttr );
-
-	m_w = getThemeValue( "w" ).asFloat();
-	m_h = getThemeValue( "h" ).asFloat();
 
 	if ( pAttr->exist( "w" ) ) m_w = pAttr->get( "w" ).asFloat();
 	if ( pAttr->exist( "h" ) ) m_h = pAttr->get( "h" ).asFloat();
@@ -35,9 +57,11 @@ void CSulGuiCanvas::init()
 {
 	CSulGuiComp::init();
 
+	float w = getW();
+
 	m_rQuad = new CSulGeomQuad(
-		osg::Vec3( getW()/2.0f, getH()/2.0f, 0.0f ),
-		getW(), getH() );
+		osg::Vec3( w/2.0f, getH()/2.0f, 0.0f ),
+		w, getH() );
 	m_rQuad->createUV();
 	m_rGeodeQuad = new osg::Geode;
 	m_rGeodeQuad->addDrawable( m_rQuad->getDrawable() );
@@ -73,6 +97,12 @@ void CSulGuiCanvas::setBgColor( const osg::Vec4& c )
 void CSulGuiCanvas::setBorderColor( const osg::Vec4& c )
 {
 	m_uniformBorderColor->set( c );
+}
+
+void CSulGuiCanvas::setWH( float w, float h )
+{
+	m_w = w;
+	m_h = h;
 }
 
 float CSulGuiCanvas::getW()

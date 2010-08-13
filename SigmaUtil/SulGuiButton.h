@@ -9,17 +9,19 @@
 class CSulGuiButton : public CSulGuiCanvas
 {
 public:
-			CSulGuiButton( const CSulString& sText, float x, float y, float w, float h );
-			
-			CSulGuiButton( float x, float y, float w, float h );
+					CSulGuiButton();
+					CSulGuiButton( const CSulString& sText, float x, float y, float w, float h );
+					CSulGuiButton( float x, float y, float w, float h );
 
+	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 
-	void	setMouseRelease( bool bInside );
+	virtual void	init();
+
+	void			setMouseRelease( bool bInside );
 
 protected:
-	void	init();
 	void	setMouseHover( bool bHover );
 
 private:

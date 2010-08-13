@@ -11,21 +11,6 @@ CSulGuiCanvas( "SCROLLBAR", x, y, w, h )
 	m_min = 0.0f;
 	m_max = 1.0f;
 	m_cur = 0.0f;
-
-	// need top and bottom button
-	m_rButtonTop = new CSulGuiButton( 0, 0, w, w );
-	addChild( m_rButtonTop );
-
-	m_rButtonBottom = new CSulGuiButton( 0, h-w, w, w );
-	addChild( m_rButtonBottom );
-
-	// need drag button
-	m_rangeDrag = h-w-w/2.0f;
-	m_rButtonDrag = new CSulGuiButton( 0, w, w, w/2.0f );
-	m_rButtonDrag->allowDrag( 0, 0, w, m_rangeDrag );
-	addChild( m_rButtonDrag );
-
-	m_rButtonDrag->signalPositionChanged.connect( this, &CSulGuiScrollBar::onButtonDragPositionChanged );
 }
 
 void CSulGuiScrollBar::onButtonDragPositionChanged( float x, float y )
@@ -43,3 +28,29 @@ void CSulGuiScrollBar::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 	m_rButtonDrag->setupEventHandler( pEventHandler );
 }
 
+void CSulGuiScrollBar::init()
+{
+	CSulGuiCanvas::init();
+
+	float w = getW();
+	float h = getH();
+
+	// need top and bottom button
+	m_rButtonTop = new CSulGuiButton( 0, 0, w, w );
+	m_rButtonTop->init();
+	addChild( m_rButtonTop );
+
+	m_rButtonBottom = new CSulGuiButton( 0, h-w, w, w );
+	m_rButtonBottom->init();
+	addChild( m_rButtonBottom );
+
+	// need drag button
+	m_rangeDrag = h-w-w/2.0f;
+	m_rButtonDrag = new CSulGuiButton( 0, w, w, w/2.0f );
+	m_rButtonDrag->init();
+	m_rButtonDrag->allowDrag( 0, 0, w, m_rangeDrag );
+	addChild( m_rButtonDrag );
+
+	m_rButtonDrag->signalPositionChanged.connect( this, &CSulGuiScrollBar::onButtonDragPositionChanged );
+
+}

@@ -21,6 +21,8 @@ void CSulGuiText::setupAttr( CSulXmlAttr* pAttr )
 
 void CSulGuiText::init()
 {
+	CSulGuiComp::init();
+
 	m_rText = new osgText::Text;
 	m_rText->setDataVariance( osg::Object::DYNAMIC );		// FIXME: the code should be able to choose this
 	m_rText->setCharacterSize( m_size );

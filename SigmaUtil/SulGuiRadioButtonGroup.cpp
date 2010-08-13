@@ -8,8 +8,19 @@ CSulGuiComp( "RADIOBUTTON_GROUP", x, y )
 {
 }
 
+void CSulGuiRadioButtonGroup::setupAttr( CSulXmlAttr* pAttr )
+{
+	CSulGuiComp::setupAttr( pAttr );
+
+	m_spacingY = getThemeValue( "spacing_y" ).asFloat();
+
+	if ( pAttr->exist( "spacing_y" ) ) m_spacingY = pAttr->get( "spacing_y" ).asFloat();
+}
+
 void CSulGuiRadioButtonGroup::addRadioButton( CSulGuiRadioButton* pRadioButton )
 {
+	pRadioButton->setY( m_spacingY*m_vecRadioButton.size() );
+
 	m_vecRadioButton.push_back( pRadioButton );
 }
 

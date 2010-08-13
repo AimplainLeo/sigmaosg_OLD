@@ -13,8 +13,11 @@ class CSulGuiListBox : public CSulGuiCanvas, public sigma::has_slots<>
 public:
 					CSulGuiListBox( float x, float y, float w, float h );
 
-	void			setupView( float w, float h );
-	void			setupEventHandler( class CSulGuiEventHandler* pEventHandler );
+	virtual	void	setupAttr( CSulXmlAttr* pAttr );
+	virtual void	setupView( float w, float h );
+	virtual void	setupEventHandler( class CSulGuiEventHandler* pEventHandler );
+
+	virtual void	init();
 
 	void			addItem( CSulGuiCanvas* pCanvas );
 
@@ -24,9 +27,15 @@ private:
 	void			onClick( CSulGuiCanvas* pItem );
 	void			onScrollBarChanged( float val );
 
+	void			updateClipping();
+
 private:
 	MAP_GUIITEM						m_mapItem;
 	osg::ref_ptr<CSulGuiScrollBar>	m_rScrollBar;
+	float							m_clipPadding;
+	float							m_viewW;
+	float							m_viewH;
+	float							m_itemOfsX;
 }; 
 
 #endif // __SULGUILISTBOX_H__

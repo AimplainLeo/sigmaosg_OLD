@@ -4,6 +4,11 @@
 #include "SulGuiButton.h"
 #include "SulGuiEventHandler.h"
 
+CSulGuiButton::CSulGuiButton() :
+CSulGuiCanvas( "BUTTON" )
+{
+}
+
 CSulGuiButton::CSulGuiButton( const CSulString& sText, float x, float y, float w, float h ) :
 CSulGuiCanvas( "BUTTON", x, y, w, h )
 {
@@ -15,11 +20,16 @@ CSulGuiCanvas( "BUTTON", x, y, w, h )
 {
 }
 
+void CSulGuiButton::setupTheme( CSulGuiThemeXml* pThemeXml )
+{
+	CSulGuiCanvas::setupTheme( pThemeXml );
+
+	m_sizeFont = getThemeValue( "font_size" ).asFloat();
+}
+
 void CSulGuiButton::setupAttr( CSulXmlAttr* pAttr )
 {
 	CSulGuiCanvas::setupAttr( pAttr );
-
-	m_sizeFont = getThemeValue( "font_size" ).asFloat();
 
 	if ( pAttr->exist( "font_size" ) ) m_sizeFont = pAttr->get( "font_size" ).asFloat();
 }

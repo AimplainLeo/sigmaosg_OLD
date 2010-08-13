@@ -10,7 +10,10 @@ class CSulGuiRadioButton : public CSulGuiCanvas
 public:
 								CSulGuiRadioButton( const CSulString& sText, float x, float y, float w, float h );
 
-	void						setupEventHandler( CSulGuiEventHandler* pEventHandler );
+	virtual void				setupAttr( CSulXmlAttr* pAttr );
+	virtual void				setupEventHandler( CSulGuiEventHandler* pEventHandler );
+
+	virtual void				init();
 
 	void						removeSelect();
 
@@ -21,6 +24,11 @@ private:
 	osg::ref_ptr<osg::Geode>	m_rGeodeCross;
 	bool						m_bActive;
 	osg::ref_ptr<osg::Geode>	m_rGeodeTriangleFan;
+	CSulString					m_sText;
+	float						m_fontSize;
+	float						m_radioSizeInner;
+	float						m_radioSizeOuter;
+	float						m_paddingText;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiRadioButton> >	VEC_RADIOBUTTON;
