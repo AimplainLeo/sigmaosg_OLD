@@ -66,14 +66,14 @@ void CSulGuiCanvas::init()
 	m_rGeodeQuad = new osg::Geode;
 	m_rGeodeQuad->addDrawable( m_rQuad->getDrawable() );
 
-	addChild( m_rGeodeQuad );
+	osg::MatrixTransform::addChild( m_rGeodeQuad );
 
 	// add a shader
 	new CSulShaderGuiFrame( m_rGeodeQuad );
 
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", 0 ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "w", getW() ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "h", getH() ) );
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 4.0f ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", osg::Vec4(0,0,0,0.2f) ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
@@ -103,6 +103,15 @@ void CSulGuiCanvas::setWH( float w, float h )
 {
 	m_w = w;
 	m_h = h;
+
+	if ( m_rQuad.valid() )
+	{
+		m_rQuad->setCenter( osg::Vec3( w/2.0f, h/2.0f, 0.0f ) );
+		m_rQuad->setWidth( m_w );
+		m_rQuad->setHeight( m_h );
+		m_uniformW->set( m_w );
+		m_uniformH->set( m_h );
+	}
 }
 
 float CSulGuiCanvas::getW()
@@ -113,11 +122,6 @@ float CSulGuiCanvas::getW()
 float CSulGuiCanvas::getH()
 {
 	return m_h;
-}
-
-void CSulGuiCanvas::setMouseHover( bool bHover )
-{
-	m_bMouseHover = bHover;
 }
 
 bool CSulGuiCanvas::isInside( float x, float y )
@@ -167,14 +171,16 @@ void CSulGuiCanvas::eventMouseMove( float local_x, float local_y, float x, float
 	{
 		if ( !m_bMouseHover )
 		{
-			setMouseHover( true );
+			m_bMouseHover = true;
+			signalHover( true );
 		}
 	}
 	else
 	{
 		if ( m_bMouseHover )
 		{
-			setMouseHover( false );
+			m_bMouseHover = false;
+			signalHover( false );
 		}
 	}
 }

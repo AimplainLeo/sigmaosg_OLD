@@ -43,28 +43,15 @@ void CSulGuiButton::init()
 	m_rText->getTextObject()->setAlignment( osgText::TextBase::CENTER_CENTER );
 	m_rText->setXY( getW()/2.0f, getH()/2.0f );
 	addChild( m_rText );
+
+	signalHover.connect( this, &CSulGuiButton::onHover );
 }
 
-void CSulGuiButton::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+void CSulGuiButton::onHover( bool bHover )
 {
-	CSulGuiCanvas::setupEventHandler( pEventHandler );
-
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_MOVE );	
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
-}
-
-void CSulGuiButton::setMouseHover( bool bHover )
-{
-	CSulGuiCanvas::setMouseHover( bHover );
-
 	if ( isActive() )
 	{
 		setBgColor( bHover?osg::Vec4(1,0,0,0.5f):osg::Vec4(0,0,0,0.2f) );
 	}
-}
-
-void CSulGuiButton::setMouseRelease( bool bInside )
-{
-
 }
 

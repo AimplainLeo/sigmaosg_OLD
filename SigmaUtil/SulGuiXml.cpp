@@ -13,6 +13,8 @@
 #include "SulGuiScrollBar.h"
 #include "SulGuiComboBox.h"
 #include "SulGuiTextBox.h"
+#include "SulGuiTab.h"
+#include "SulGuiTabPage.h"
 
 CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml )
 {
@@ -115,13 +117,11 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			pAttr->get( "w" ).asFloat(),
 			pAttr->get( "h" ).asFloat()
 		);
-
-		m_curListBox = dynamic_cast<CSulGuiListBox*>(pComp);
 	}
 
-	if ( sName=="SCROLLBAR" )
+	if ( sName=="COMBOBOX" )
 	{
-		pComp = new CSulGuiScrollBar(
+		pComp = new CSulGuiComboBox(
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
@@ -129,9 +129,9 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		);
 	}
 
-	if ( sName=="COMBOBOX" )
+	if ( sName=="SCROLLBAR" )
 	{
-		pComp = new CSulGuiComboBox(
+		pComp = new CSulGuiScrollBar(
 			pAttr->get( "x" ).asFloat(),
 			pAttr->get( "y" ).asFloat(),
 			pAttr->get( "w" ).asFloat(),
@@ -160,10 +160,19 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		);
 	}
 
+	if ( sName=="TAB" )
+	{
+		pComp = new CSulGuiTab;
+	}
+
+	if ( sName=="TABPAGE" )
+	{
+		pComp = new CSulGuiTabPage;
+	}
 
 	if ( pComp )
 	{
-		m_curGroup->addChild( pComp );
+		m_vecCompStack.push( pComp );
 
 		pComp->setupTheme( m_rThemeXml );
 		pComp->setupAttr( pAttr );
@@ -172,11 +181,7 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		pComp->init();
 		pComp->setupEventHandler( m_rEventHandler );
 
-		CSulGuiListBox* pListBox = dynamic_cast<CSulGuiListBox*>(m_curGroup);
-		if ( pListBox )
-		{
-			pListBox->addItem( dynamic_cast<CSulGuiCanvas*>(pComp) );
-		}
+		m_curGroup->addChild( pComp );
 
 		m_curGroup = pComp;
 		m_indent++;
@@ -197,11 +202,21 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 		sName=="LISTBOX" ||
 		sName=="SCROLLBAR" ||
 		sName=="COMBOBOX" ||
-		sName=="COMP"
+		sName=="COMP" ||
+		sName=="TAB" ||
+		sName=="TABPAGE"
 	)
 	{
-		m_curGroup = m_curGroup->getParent( 0 );
-		m_indent--;
+		m_vecCompStack.pop();
+		if ( m_vecCompStack.empty() )
+		{
+			m_curGroup = 0;
+		}
+		else
+		{
+			m_curGroup = m_vecCompStack.top();
+			m_indent--;
+		}
 	}
 }
 

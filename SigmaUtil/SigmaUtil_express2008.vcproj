@@ -711,6 +711,22 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiTab.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiTab.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiTabPage.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiTabPage.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiText.cpp"
 						>
 					</File>

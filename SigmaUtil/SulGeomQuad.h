@@ -51,6 +51,8 @@ public:
 	float							getWidth();
 	float							getHeight();
 
+	void							setCenter( const osg::Vec3& vCenter );
+
 protected:
 	void							createDrawable();
 

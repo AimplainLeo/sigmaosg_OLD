@@ -40,10 +40,10 @@ public:
 	virtual void	eventMousePushed( float x_local, float y_local, float x, float y );
 	virtual void	eventMouseRelease( float x_local, float y_local, float x, float y );
 
-	virtual void	setMouseHover( bool bHover );
 	virtual void	setMouseRelease( bool bInside );
 
 	sigma::signal1<CSulGuiCanvas*>			signalClicked;
+	sigma::signal1<bool>					signalHover;
 
 private:
 	void			initConstructor();
@@ -56,6 +56,8 @@ private:
 	
 	osg::ref_ptr<osg::Uniform>	m_uniformBgColor;
 	osg::ref_ptr<osg::Uniform>	m_uniformBorderColor;
+	osg::ref_ptr<osg::Uniform>	m_uniformW;
+	osg::ref_ptr<osg::Uniform>	m_uniformH;
 
 	float						m_w;
 	float						m_h;

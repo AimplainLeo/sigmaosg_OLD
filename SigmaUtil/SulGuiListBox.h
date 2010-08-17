@@ -11,19 +11,26 @@
 class CSulGuiListBox : public CSulGuiCanvas, public sigma::has_slots<>
 {
 public:
+					CSulGuiListBox();
 					CSulGuiListBox( float x, float y, float w, float h );
 
+	virtual void	show( bool bShow );
+	virtual void	toggleShow();
+
+	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual	void	setupAttr( CSulXmlAttr* pAttr );
 	virtual void	setupView( float w, float h );
 	virtual void	setupEventHandler( class CSulGuiEventHandler* pEventHandler );
 
 	virtual void	init();
 
-	void			addItem( CSulGuiCanvas* pCanvas );
-
 	float			getTotalItemsHeight();
 
+	virtual bool	addChild( Node *child );
+
 private:
+	void			initConstructor();
+
 	void			onClick( CSulGuiCanvas* pItem );
 	void			onScrollBarChanged( float val );
 

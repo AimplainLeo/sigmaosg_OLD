@@ -10,16 +10,33 @@ CSulGuiCanvas( "COMBOBOX", x, y, w, h )
 	// combobox is going to be built with an textbox, listbox, button
 
 	m_rTextBox = new CSulGuiTextBox( 0, 0 );
-
 	m_rButton = new CSulGuiButton;
+	m_rListBox = new CSulGuiListBox;
+}
+
+void CSulGuiComboBox::setupView( float w, float h )
+{
+	CSulGuiCanvas::setupView( w, h );
+
+	if ( m_rListBox.valid() ) m_rListBox->setupView( w, h );
+}
+
+void CSulGuiComboBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiCanvas::setupEventHandler( pEventHandler );
+
+	if ( m_rTextBox.valid() )	m_rTextBox->setupEventHandler( pEventHandler );
+	if ( m_rButton.valid() )	m_rButton->setupEventHandler( pEventHandler );
+	if ( m_rListBox.valid() )	m_rListBox->setupEventHandler( pEventHandler );
 }
 
 void CSulGuiComboBox::setupTheme( CSulGuiThemeXml* pThemeXml )
 {
 	CSulGuiCanvas::setupTheme( pThemeXml );
 
-	m_rTextBox->setupTheme( pThemeXml );
-	m_rButton->setupTheme( pThemeXml );
+	if ( m_rTextBox.valid() )	m_rTextBox->setupTheme( pThemeXml );
+	if ( m_rButton.valid() )	m_rButton->setupTheme( pThemeXml );
+	if ( m_rListBox.valid() )	m_rListBox->setupTheme( pThemeXml );
 }
 
 void CSulGuiComboBox::setupAttr( CSulXmlAttr* pAttr )
@@ -31,11 +48,44 @@ void CSulGuiComboBox::init()
 {
 	CSulGuiCanvas::init();
 
-	m_rTextBox->init();
-	addChild( m_rTextBox );
+	if ( m_rTextBox.valid() )
+	{
+		m_rTextBox->setWH( getW(), getH() );
+		m_rTextBox->init();
+		osg::MatrixTransform::addChild( m_rTextBox );
+	}
+	
+	if ( m_rButton.valid() )
+	{
+		m_rButton->setX( getW() );
+		m_rButton->setWH( getH(), getH() );
+		m_rButton->init();
+		osg::MatrixTransform::addChild( m_rButton );
 
-	m_rButton->setX( getW() );
-	m_rButton->setWH( getH(), getH() );
-	m_rButton->init();
-	addChild( m_rButton );
+		m_rButton->signalClicked.connect( this, &CSulGuiComboBox::onDropDownClick );
+	}
+
+	if ( m_rListBox.valid() )
+	{
+		m_rListBox->setY( getH() );
+		m_rListBox->setWH( getW(), 128.0f );
+		m_rListBox->init();
+		m_rListBox->show( false );		
+		osg::MatrixTransform::addChild( m_rListBox );
+	}
+}
+/*
+void CSulGuiComboBox::addItem( CSulGuiCanvas* pCanvas )
+{
+}
+*/
+
+bool CSulGuiComboBox::addChild( Node *child )
+{
+	return m_rListBox->addChild( child );
+}
+
+void CSulGuiComboBox::onDropDownClick( CSulGuiCanvas* pCanvas )
+{
+	m_rListBox->toggleShow();
 }

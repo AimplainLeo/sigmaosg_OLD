@@ -45,6 +45,8 @@ CSulString CSulGuiComp::getThemeValue( const CSulString& attr )
 
 void CSulGuiComp::setupAttr( CSulXmlAttr* pAttr )
 {
+	if ( pAttr->exist( "x" ) ) setX( pAttr->get( "x" ).asFloat() );
+	if ( pAttr->exist( "y" ) ) setY( pAttr->get( "y" ).asFloat() );
 }
 
 void CSulGuiComp::setupTheme( CSulGuiThemeXml* pThemeXml )
@@ -127,6 +129,12 @@ float CSulGuiComp::getWorldY()
 void CSulGuiComp::show( bool bShow )
 {
 	setNodeMask( bShow?0xFFFFFFFF:0 );
+}
+
+void CSulGuiComp::toggleShow()
+{
+	int i = getNodeMask();
+	setNodeMask( i?0:0xFFFFFFFF );
 }
 
 void CSulGuiComp::addEvent( sigma::uint32 eventType )

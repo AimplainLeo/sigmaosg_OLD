@@ -9,6 +9,7 @@
 #include "SulGuiThemeXml.h"
 #include <osg/matrixtransform>
 #include <osg/geode>
+#include <stack>
 
 class CSulGuiComp : public osg::MatrixTransform
 {
@@ -36,7 +37,8 @@ public:
 	float			getWorldX();
 	float			getWorldY();
 
-	void			show( bool bShow );
+	virtual void	show( bool bShow );
+	virtual void	toggleShow();
 
 	void			setLayer( sigma::uint32 layer );
 
@@ -64,5 +66,6 @@ private:
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;
+typedef std::stack< osg::ref_ptr<CSulGuiComp > >	STACK_GUICOMP;
 
 #endif // SULGUICOMP_H__

@@ -224,3 +224,9 @@ void CSulGeomQuad::calcVertPositions()
 
 	getDrawable()->asGeometry()->dirtyBound();
 }
+
+void CSulGeomQuad::setCenter( const osg::Vec3& vCenter )
+{
+	m_vCenter = vCenter;
+	calcVertPositions();
+}

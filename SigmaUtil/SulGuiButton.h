@@ -5,8 +5,9 @@
 
 #include "SulGuiCanvas.h"
 #include "SulGuiText.h"
+#include "SulSigSlots.h"
 
-class CSulGuiButton : public CSulGuiCanvas
+class CSulGuiButton : public CSulGuiCanvas, public sigma::has_slots<>
 {
 public:
 					CSulGuiButton();
@@ -15,14 +16,11 @@ public:
 
 	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
-	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 
 	virtual void	init();
 
-	void			setMouseRelease( bool bInside );
-
 protected:
-	void	setMouseHover( bool bHover );
+	void			onHover( bool bHover );
 
 private:
 	osg::ref_ptr<CSulGuiText>	m_rText;

@@ -7,6 +7,7 @@
 #include "SulGuiEventHandler.h"
 #include "SulGuiRadioButtonGroup.h"
 #include "SulGuiListBox.h"
+#include "SulGuiComboBox.h"
 #include "SulGuiThemeXml.h"
 
 class CSulGuiXml : public CSulXmlParser
@@ -28,11 +29,12 @@ private:
 	sigma::uint32							m_indent;
 
 	osg::ref_ptr<CSulGuiRadioButtonGroup>	m_curRadioButtonGroup;
-	osg::ref_ptr<CSulGuiListBox>			m_curListBox;
 	float m_viewW;
 	float m_viewH;
 
 	osg::ref_ptr<CSulGuiThemeXml>			m_rThemeXml;
+
+	STACK_GUICOMP							m_vecCompStack;
 };
 
 #endif // __SULGUIXML_H__
