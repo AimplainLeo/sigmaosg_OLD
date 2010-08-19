@@ -9,7 +9,7 @@
 #include "SulGuiListBox.h"
 #include "SulSigSlots.h"
 
-class CSulGuiComboBox : public CSulGuiCanvas, public sigma::has_slots<>
+class CSulGuiComboBox : public CSulGuiCanvas
 {
 public:
 					CSulGuiComboBox( float x, float y, float w, float h );
@@ -20,8 +20,6 @@ public:
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	
 	virtual void	init();
-
-//	void			addItem( CSulGuiCanvas* pCanvas );
 
 	virtual bool	addChild( Node *child );
 

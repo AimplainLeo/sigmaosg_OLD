@@ -9,6 +9,9 @@ uniform vec4 bg_color;
 uniform vec4 border_color;
 uniform int cover;
 
+uniform sampler2D tex0;
+uniform int use_texture;
+
 void main( void )
 {
 	// calc uv to pixel
@@ -27,5 +30,13 @@ void main( void )
 	if ( cover )
 	{
 		gl_FragColor = vec4(0.5,0.5,0.5,1) + color;
+	}
+
+	if ( use_texture )
+	{
+		vec2 st = gl_TexCoord[0].st;
+		st[1] = 1.0-st[1];
+		vec4 color0 = texture2D( tex0, st );
+		gl_FragColor = color0;
 	}
 }

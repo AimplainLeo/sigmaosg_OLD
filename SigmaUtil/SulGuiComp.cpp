@@ -137,11 +137,6 @@ void CSulGuiComp::toggleShow()
 	setNodeMask( i?0:0xFFFFFFFF );
 }
 
-void CSulGuiComp::addEvent( sigma::uint32 eventType )
-{
-	m_pEventHandler->addEvent( this, eventType );
-}
-
 void CSulGuiComp::setLayer( sigma::uint32 layer )
 {
 	getOrCreateStateSet()->setRenderBinDetails( layer, "DepthSortedBin" );
@@ -167,3 +162,7 @@ void CSulGuiComp::eventKeyDown( sigma::int32 key, sigma::int32 iMod )
 {
 }
 
+CSulGuiEventHandler* CSulGuiComp::getEventHandler()
+{
+	return m_pEventHandler;
+}

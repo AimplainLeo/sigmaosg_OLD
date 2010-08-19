@@ -62,3 +62,11 @@ osgText::Text* CSulGuiText::getTextObject()
 	return m_rText;
 }
 
+void CSulGuiText::setFontSize( float size )
+{
+	m_size = size;
+	if ( m_rText.valid() )
+	{
+		m_rText->setCharacterSize( size );
+	}
+}

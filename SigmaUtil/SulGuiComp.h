@@ -52,8 +52,7 @@ public:
 
 	CSulString		getThemeValue( const CSulString& attr );
 
-protected:
-	void			addEvent( sigma::uint32 eventType );
+	CSulGuiEventHandler*	getEventHandler();
 
 private:
 	void			initConstructor();

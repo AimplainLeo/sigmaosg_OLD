@@ -1,0 +1,68 @@
+<THEME>
+  <TEXTBOX 
+      w="128"
+      h="32"
+      font_size="20"
+      ofs_x="6"
+      ofs_y="10"
+    />
+  
+  <BUTTON 
+    w="128"
+    h="32"
+    font_size="20"
+    />
+  
+  <TEXT
+    font_size="20"
+    />
+  
+  <EDITBOX
+    w="128"
+    h="32"
+    font_size="20"
+    ofs_x="6"
+    ofs_y="10"
+    />
+  
+  <CHECKBOX 
+    w="128"
+    h="32"
+    box_size ="20"
+    padding_cross="6"
+    padding_text="6"
+    font_size="20"
+    />
+  
+  <RADIOBUTTON_GROUP 
+      spacing_y="32"
+   />
+  
+  <RADIOBUTTON 
+    w="128"
+    h="32"
+    font_size="20"
+    radio_size_outer="10"
+    radio_size_inner="7"
+    padding_text="4"
+    />
+  
+  <SCROLLBAR 
+    />
+  
+  <LISTBOX 
+    clip_padding="4"
+    item_ofs_x ="6"
+    />
+  
+  <COMBOBOX 
+    w="256"
+    h="32"
+    />
+  
+  <TAB 
+    w="256"
+    h="32"
+    />
+  
+</THEME>

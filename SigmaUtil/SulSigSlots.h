@@ -79,8 +79,8 @@
 //
 //
 
-#ifndef SIGSLOT_H__
-#define SIGSLOT_H__
+#ifndef __SULSIGSLOT_H__
+#define __SULSIGSLOT_H__
 
 #include <set>
 #include <list>
@@ -2497,5 +2497,5 @@ namespace sigma {
 
 }; // namespace sigslot
 
-#endif // SIGSLOT_H__
+#endif // __SULSIGSLOT_H__
 

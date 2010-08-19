@@ -62,6 +62,8 @@ void CSulGuiComboBox::init()
 		m_rButton->init();
 		osg::MatrixTransform::addChild( m_rButton );
 
+		m_rButton->createDownDecal();
+
 		m_rButton->signalClicked.connect( this, &CSulGuiComboBox::onDropDownClick );
 	}
 

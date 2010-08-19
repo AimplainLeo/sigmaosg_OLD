@@ -8,7 +8,14 @@
 class CSulGuiTabPage : public CSulGuiCanvas
 {
 public:
-	CSulGuiTabPage();
+					CSulGuiTabPage();
+
+	virtual void	setupAttr( CSulXmlAttr* pAttr );
+
+	CSulString		getTitle();
+
+private:
+	CSulString		m_sTitle;
 };
 
 #endif // __SULGUITABPAGE_H__

@@ -3,32 +3,19 @@
 #ifndef __SULGUIEVENTHANDLER_H__
 #define __SULGUIEVENTHANDLER_H__
 
-#include "SulGuiComp.h"
+#include "SulSigSlots.h"
+#include <osgGA/guieventhandler>
 
 class CSulGuiEventHandler : public osgGA::GUIEventHandler 
 {
 public:
-	// FIXME: we should use the osgGA::GUIEventAdapter::RELEASE definitions instead
-	enum EVENT
-	{
-		EVENT_MOUSE_MOVE,
-		EVENT_MOUSE_DRAG,
-		EVENT_MOUSE_PUSHED,
-		EVENT_MOUSE_RELEASE,
-		EVENT_KEYDOWN
-	};
-
-public:
 	bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor );
 
-	void addEvent( CSulGuiComp* pComp, sigma::uint32 eventType );
-
-private:
-	VEC_GUICOMP		m_eventsMouseMove;
-	VEC_GUICOMP		m_eventsMouseDrag;
-	VEC_GUICOMP		m_eventsMousePushed;
-	VEC_GUICOMP		m_eventsMouseRelease;
-	VEC_GUICOMP		m_eventsKeyDown;
+	sigma::signal2<float,float>	signalMouseMove;
+	sigma::signal2<float,float>	signalMouseDrag;
+	sigma::signal2<int, int>	signalKeyDown;
+	sigma::signal2<float,float> signalMousePush;
+	sigma::signal2<float,float> signalMouseRelease;
 };
 
 #endif // __SULGUIEVENTHANDLER_H__

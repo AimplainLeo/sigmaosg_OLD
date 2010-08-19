@@ -452,6 +452,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SulSigSlots.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SulTypes.h"
 				>
 			</File>
@@ -575,11 +579,35 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomBillboardInstancing.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomBillboardInstancing.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomBoundingBox.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\SulGeomBoundingBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomFrame.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomFrame.h"
 					>
 				</File>
 				<File
@@ -607,6 +635,38 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomLine.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomLine.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomLineList.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomLineList.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomLineStrip.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomLineStrip.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomPlane.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomPlane.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomQuad.cpp"
 					>
 				</File>
@@ -620,6 +680,38 @@
 				</File>
 				<File
 					RelativePath=".\SulGeomQuadTiles.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomSphere.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomSphere.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomTriangle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomTriangle.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomTriangleFan.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomTriangleFan.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomTriangleList.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomTriangleList.h"
 					>
 				</File>
 			</Filter>
@@ -1222,6 +1314,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulShaderGuiFrame.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderGuiFrame.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulShaderInstancingBillboards.cpp"
 						>
 					</File>
@@ -1270,6 +1370,166 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="Gui"
+				>
+				<File
+					RelativePath=".\SulGuiButton.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiButton.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiCheckBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiCheckBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiComboBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiComboBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiComp.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiComp.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiEditBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiEditBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiEventHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiEventHandler.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiItem.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiItem.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiListBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiListBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiRadioButton.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiRadioButton.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiRadioButtonGroup.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiRadioButtonGroup.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiScrollBar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiScrollBar.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiTab.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiTab.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiTabPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiTabPage.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiText.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiText.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiTextBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiTextBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiTextUpdateCallback.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiThemeXml.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiThemeXml.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiXml.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiXml.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 	</Files>

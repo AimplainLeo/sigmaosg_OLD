@@ -32,7 +32,7 @@ void CSulGuiRadioButton::setupAttr( CSulXmlAttr* pAttr )
 void CSulGuiRadioButton::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
+//	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
 }
 
 void CSulGuiRadioButton::init()

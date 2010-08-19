@@ -31,8 +31,10 @@ void CSulGuiEditBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
 
-	addEvent( CSulGuiEventHandler::EVENT_KEYDOWN );	
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
+	pEventHandler->signalKeyDown.connect( this, &CSulGuiEditBox::onKeyDown );
+
+//	addEvent( CSulGuiEventHandler::EVENT_KEYDOWN );	
+//	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
 }
 
 void CSulGuiEditBox::init()
@@ -78,10 +80,8 @@ void CSulGuiEditBox::setCursor( const CSulString& sCursor )
 	}
 }
 
-void CSulGuiEditBox::eventKeyDown( sigma::int32 key, sigma::int32 iMod )
+void CSulGuiEditBox::onKeyDown( sigma::int32 key, sigma::int32 iMod )
 {
-	CSulGuiCanvas::eventKeyDown( key, iMod );
-
 	if ( isActive() && m_bEditActive )
 	{
 		// keys to ignore
@@ -121,3 +121,4 @@ void CSulGuiEditBox::eventKeyDown( sigma::int32 key, sigma::int32 iMod )
 		}
 	}
 }
+

@@ -5,6 +5,7 @@
 #include "SulGuiComp.h"
 #include "SulShaderGuiFrame.h"
 #include "SulGuiEventHandler.h"
+#include <osgManipulator/Selection>
 
 CSulGuiCanvas::CSulGuiCanvas( const CSulString& sCompName ) :
 CSulGuiComp( sCompName )
@@ -49,8 +50,9 @@ void CSulGuiCanvas::setupAttr( CSulXmlAttr* pAttr )
 {
 	CSulGuiComp::setupAttr( pAttr );
 
-	if ( pAttr->exist( "w" ) ) m_w = pAttr->get( "w" ).asFloat();
-	if ( pAttr->exist( "h" ) ) m_h = pAttr->get( "h" ).asFloat();
+	if ( pAttr->exist( "w" ) )		m_w = pAttr->get( "w" ).asFloat();
+	if ( pAttr->exist( "h" ) )		m_h = pAttr->get( "h" ).asFloat();
+	if ( pAttr->exist( "img" ) )	m_img = pAttr->get( "img" );
 }
 
 void CSulGuiCanvas::init()
@@ -68,15 +70,22 @@ void CSulGuiCanvas::init()
 
 	osg::MatrixTransform::addChild( m_rGeodeQuad );
 
-	// add a shader
+	// add a shader (perhaps we should move this to xml manager so we only have one shader)
 	new CSulShaderGuiFrame( m_rGeodeQuad );
 
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseTexture = new osg::Uniform( "use_texture", 0 ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", 0 ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 4.0f ) );
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 2.0f ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", osg::Vec4(0,0,0,0.2f) ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
+
+	if ( !m_img.empty() )
+	{
+		m_rQuad->setTexture( m_img, 0 );
+		m_uniformUseTexture->set( 1 );
+	}
 }
 
 void CSulGuiCanvas::setDraggable( bool bDraggable )
@@ -129,20 +138,55 @@ bool CSulGuiCanvas::isInside( float x, float y )
 	return ( x>0 && y>0 && x<getW() && y<getH() )?true:false;
 }
 
-void CSulGuiCanvas::eventMousePushed( float x_local, float y_local, float x, float y )
-{
-	CSulGuiComp::eventMousePushed( x_local, y_local, x, y );
 
-	if ( m_dragAllowed && isInside( x_local, y_local ) )
+void CSulGuiCanvas::setMouseRelease( bool bInside )
+{
+}
+
+void CSulGuiCanvas::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiComp::setupEventHandler( pEventHandler );
+
+	pEventHandler->signalMouseMove.connect( this, &CSulGuiCanvas::onMouseMove );
+	pEventHandler->signalMouseDrag.connect( this, &CSulGuiCanvas::onMouseDrag );
+	pEventHandler->signalMousePush.connect( this, &CSulGuiCanvas::onMousePush );
+	pEventHandler->signalMouseRelease.connect( this, &CSulGuiCanvas::onMouseRelease );
+}
+
+void CSulGuiCanvas::allowDrag( float minX, float maxX, float minY, float maxY )
+{
+	m_dragAllowed	= true;
+	m_dragMinX		= minX;
+	m_dragMaxX		= maxX;
+	m_dragMinY		= minY;
+	m_dragMaxY		= maxY;
+}
+
+
+void CSulGuiCanvas::onMousePush( float x, float y )
+{
+	// calc local positions
+	osg::NodePath pathToRoot;
+	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
+	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	float local_x = x-m.getTrans().x();
+	float local_y = y-m.getTrans().y();
+
+	if ( m_dragAllowed && isInside( local_x, local_y ) )
 	{
-		m_dragOfsPos = osg::Vec2( x_local, y_local );
+		m_dragOfsPos = osg::Vec2( local_x, local_y );
 		m_dragDragging = true;
 	}
 }
 
-void CSulGuiCanvas::eventMouseRelease( float x_local, float y_local, float x, float y )
+void CSulGuiCanvas::onMouseRelease( float x, float y )
 {
-	CSulGuiComp::eventMouseRelease( x_local, y_local, x, y );
+	// calc local positions
+	osg::NodePath pathToRoot;
+	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
+	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	float local_x = x-m.getTrans().x();
+	float local_y = y-m.getTrans().y();
 
 	// check dragging
 	if ( m_dragDragging )
@@ -151,7 +195,7 @@ void CSulGuiCanvas::eventMouseRelease( float x_local, float y_local, float x, fl
 	}
 
 	// something else...
-	if ( isInside( x_local, y_local ) )
+	if ( isInside( local_x, local_y ) )
 	{
 		signalClicked( this );
 		setMouseRelease( true );
@@ -162,9 +206,14 @@ void CSulGuiCanvas::eventMouseRelease( float x_local, float y_local, float x, fl
 	}
 }
 
-void CSulGuiCanvas::eventMouseMove( float local_x, float local_y, float x, float y )
+void CSulGuiCanvas::onMouseMove( float x, float y )
 {
-	CSulGuiComp::eventMouseMove( local_x, local_y, x, y );
+	// calc local positions
+	osg::NodePath pathToRoot;
+	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
+	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	float local_x = x-m.getTrans().x();
+	float local_y = y-m.getTrans().y();
 
 	// check hover
 	if ( local_x>0 && local_y>0 && local_x<getW() && local_y<getH() )
@@ -183,11 +232,17 @@ void CSulGuiCanvas::eventMouseMove( float local_x, float local_y, float x, float
 			signalHover( false );
 		}
 	}
+
 }
 
-void CSulGuiCanvas::eventMouseDrag( float local_x, float local_y, float x, float y )
+void CSulGuiCanvas::onMouseDrag( float x, float y )
 {
-	CSulGuiComp::eventMouseDrag( local_x, local_y, x, y );
+	// calc local positions
+	osg::NodePath pathToRoot;
+	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
+	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	float local_x = x-m.getTrans().x();
+	float local_y = y-m.getTrans().y();
 
 	// check dragging
 	if ( m_dragDragging )
@@ -205,27 +260,3 @@ void CSulGuiCanvas::eventMouseDrag( float local_x, float local_y, float x, float
 		setXY( pos.x(), pos.y() );
 	}
 }
-
-void CSulGuiCanvas::setMouseRelease( bool bInside )
-{
-}
-
-void CSulGuiCanvas::setupEventHandler( CSulGuiEventHandler* pEventHandler )
-{
-	CSulGuiComp::setupEventHandler( pEventHandler );
-
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_MOVE );	
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_DRAG );	
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_PUSHED );	
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
-}
-
-void CSulGuiCanvas::allowDrag( float minX, float maxX, float minY, float maxY )
-{
-	m_dragAllowed	= true;
-	m_dragMinX		= minX;
-	m_dragMaxX		= maxX;
-	m_dragMinY		= minY;
-	m_dragMaxY		= maxY;
-}
-

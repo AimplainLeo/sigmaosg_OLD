@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiButton.h"
 #include "SulGuiEventHandler.h"
+#include "SulGeomTriangle.h"
 
 CSulGuiButton::CSulGuiButton() :
 CSulGuiCanvas( "BUTTON" )
@@ -45,6 +46,54 @@ void CSulGuiButton::init()
 	addChild( m_rText );
 
 	signalHover.connect( this, &CSulGuiButton::onHover );
+}
+
+void CSulGuiButton::createDownDecal()
+{
+	// create a triangle to represent an arrow down
+	float pad = 10.0f;
+	float w = getW();
+	float h = getH();
+	CSulGeomTriangle* pTriDown = new CSulGeomTriangle(
+		osg::Vec3( w/2, h-pad, 0 ),
+		osg::Vec3( pad, pad, 0 ),
+		osg::Vec3( w-pad, pad, 0) );
+	osg::Geode* pGeode = new osg::Geode;
+	pGeode->addDrawable( pTriDown->getDrawable() );
+	addChild( pGeode );
+}
+
+void CSulGuiButton::createUpDecal()
+{
+	// create a triangle to represent an arrow down
+	float pad = 10.0f;
+	float w = getW();
+	float h = getH();
+	CSulGeomTriangle* pTriDown = new CSulGeomTriangle(
+		osg::Vec3( w/2, pad, 0 ),
+		osg::Vec3( pad, h-pad, 0 ),
+		osg::Vec3( w-pad, h-pad, 0) );
+	osg::Geode* pGeode = new osg::Geode;
+	pGeode->addDrawable( pTriDown->getDrawable() );
+	addChild( pGeode );
+}
+
+void CSulGuiButton::setText( const CSulString& sText )
+{
+	m_sText = sText;
+	if ( m_rText.valid() )
+	{
+		m_rText->setText( m_sText );
+	}
+}
+
+void CSulGuiButton::setFontSize( float size )
+{
+	m_sizeFont = size;
+	if ( m_rText.valid() )
+	{
+		m_rText->setFontSize( size );
+	}
 }
 
 void CSulGuiButton::onHover( bool bHover )

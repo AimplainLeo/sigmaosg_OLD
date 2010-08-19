@@ -32,7 +32,7 @@ void CSulGuiCheckBox::setupAttr( CSulXmlAttr* pAttr )
 void CSulGuiCheckBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
-	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
+//	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
 }
 
 void CSulGuiCheckBox::setMouseRelease( bool bInside )

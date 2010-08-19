@@ -20,6 +20,8 @@ public:
 
 	osgText::Text*				getTextObject();
 
+	void						setFontSize( float size );
+
 private:
 	osg::ref_ptr<osgText::Text>	m_rText;
 	CSulString					m_sText;

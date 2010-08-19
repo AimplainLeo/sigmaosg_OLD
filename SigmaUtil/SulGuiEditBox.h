@@ -21,10 +21,11 @@ public:
 
 	void				setCursor( const CSulString& sCursor );
 
-	void				eventKeyDown( sigma::int32 key, sigma::int32 iMod );
-
 protected:
 	virtual void		setMouseRelease( bool bInside );
+
+private:
+	void				onKeyDown( sigma::int32 key, sigma::int32 iMod );
 
 private:
 	osg::ref_ptr<CSulGuiText>	m_rGuiText;

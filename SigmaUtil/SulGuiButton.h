@@ -7,7 +7,7 @@
 #include "SulGuiText.h"
 #include "SulSigSlots.h"
 
-class CSulGuiButton : public CSulGuiCanvas, public sigma::has_slots<>
+class CSulGuiButton : public CSulGuiCanvas
 {
 public:
 					CSulGuiButton();
@@ -18,6 +18,12 @@ public:
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 
 	virtual void	init();
+
+	void			setText( const CSulString& sText );
+	void			setFontSize( float size );
+
+	void			createDownDecal();
+	void			createUpDecal();
 
 protected:
 	void			onHover( bool bHover );

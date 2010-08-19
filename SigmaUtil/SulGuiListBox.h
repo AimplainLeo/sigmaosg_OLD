@@ -8,7 +8,7 @@
 #include "SulGuiScrollBar.h"
 #include "SulSigSlots.h"
 
-class CSulGuiListBox : public CSulGuiCanvas, public sigma::has_slots<>
+class CSulGuiListBox : public CSulGuiCanvas
 {
 public:
 					CSulGuiListBox();

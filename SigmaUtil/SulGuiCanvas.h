@@ -1,4 +1,4 @@
-// SulGuiCanvas.h
+	// SulGuiCanvas.h
 
 #ifndef __SULGUICANVAS_H__
 #define __SULGUICANVAS_H__
@@ -6,7 +6,7 @@
 #include "SulGuiComp.h"
 #include "SulSigSlots.h"
 
-class CSulGuiCanvas : public CSulGuiComp
+class CSulGuiCanvas : public CSulGuiComp, public sigma::has_slots<>
 {
 public:
 					CSulGuiCanvas( const CSulString& sCompName );
@@ -35,11 +35,6 @@ public:
 
 	void			allowDrag( float minX, float maxX, float minY, float maxY );
 
-	virtual void	eventMouseMove( float local_x, float local_y, float x, float y );
-	virtual void	eventMouseDrag( float local_x, float local_y, float x, float y );
-	virtual void	eventMousePushed( float x_local, float y_local, float x, float y );
-	virtual void	eventMouseRelease( float x_local, float y_local, float x, float y );
-
 	virtual void	setMouseRelease( bool bInside );
 
 	sigma::signal1<CSulGuiCanvas*>			signalClicked;
@@ -47,6 +42,11 @@ public:
 
 private:
 	void			initConstructor();
+
+	void			onMouseMove( float x, float y );
+	void			onMouseDrag( float x, float y );
+	void			onMousePush( float x, float y );
+	void			onMouseRelease( float x, float y );
 
 public:
 	osg::ref_ptr<osg::Geode>	m_rGeodeQuad;		// FIXME: should be private
@@ -58,6 +58,7 @@ private:
 	osg::ref_ptr<osg::Uniform>	m_uniformBorderColor;
 	osg::ref_ptr<osg::Uniform>	m_uniformW;
 	osg::ref_ptr<osg::Uniform>	m_uniformH;
+	osg::ref_ptr<osg::Uniform>	m_uniformUseTexture;
 
 	float						m_w;
 	float						m_h;
@@ -70,6 +71,8 @@ private:
 	float						m_dragMaxY;			// maximum drag y axis
 	osg::Vec2					m_dragOfsPos;		// drag offset start position mouse
 	bool						m_dragDragging;		// dragging is in process
+
+	CSulString					m_img;
 
 };
 

@@ -38,10 +38,12 @@ void CSulGuiScrollBar::init()
 	// need top and bottom button
 	m_rButtonTop = new CSulGuiButton( 0, 0, w, w );
 	m_rButtonTop->init();
+	m_rButtonTop->createUpDecal();
 	addChild( m_rButtonTop );
 
 	m_rButtonBottom = new CSulGuiButton( 0, h-w, w, w );
 	m_rButtonBottom->init();
+	m_rButtonBottom->createDownDecal();
 	addChild( m_rButtonBottom );
 
 	// need drag button

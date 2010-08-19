@@ -7,16 +7,14 @@
 #include "SulGuiButton.h"
 #include "SulSigSlots.h"
 
-class CSulGuiScrollBar : public CSulGuiCanvas, public sigma::has_slots<>
+class CSulGuiScrollBar : public CSulGuiCanvas
 {
 public:
-			CSulGuiScrollBar( float x, float y, float w, float h );
+							CSulGuiScrollBar( float x, float y, float w, float h );
 
-	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
+	virtual void			setupEventHandler( CSulGuiEventHandler* pEventHandler );
 
-	virtual void	init();
-
-	void	buttonClick( CSulGuiButton* pButton );
+	virtual void			init();
 
 	sigma::signal1<float>	signalChanged;
 
