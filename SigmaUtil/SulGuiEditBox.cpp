@@ -14,15 +14,20 @@ CSulGuiCanvas( "EDITBOX", x, y, w, h )
 	m_bEditActive = false;
 }
 
+void CSulGuiEditBox::setupTheme( CSulGuiThemeXml* pThemeXml )
+{
+	CSulGuiCanvas::setupTheme( pThemeXml );
+
+	m_fontSize	= getThemeValue( "font_size" ).asFloat();
+	m_ofs_x		= getThemeValue( "ofs_x" ).asFloat();
+	m_ofs_y		= getThemeValue( "ofs_y" ).asFloat();
+}
+
 void CSulGuiEditBox::setupAttr( CSulXmlAttr* pAttr )
 {
 	CSulGuiCanvas::setupAttr( pAttr );
 
-	m_fontSize = getThemeValue( "font_size" ).asFloat();
-	m_ofs_x = getThemeValue( "ofs_x" ).asFloat();
-	m_ofs_y = getThemeValue( "ofs_y" ).asFloat();
-
-	if ( pAttr->exist( "font_size" ) )	m_fontSize = pAttr->get( "font_size" ).asFloat();
+	if ( pAttr->exist( "font_size" ) )	m_fontSize  = pAttr->get( "font_size" ).asFloat();
 	if ( pAttr->exist( "ofs_x" ) )		m_ofs_x		= pAttr->get( "ofs_x" ).asFloat();
 	if ( pAttr->exist( "ofs_y" ) )		m_ofs_x		= pAttr->get( "ofs_y" ).asFloat();
 }
@@ -32,9 +37,6 @@ void CSulGuiEditBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
 
 	pEventHandler->signalKeyDown.connect( this, &CSulGuiEditBox::onKeyDown );
-
-//	addEvent( CSulGuiEventHandler::EVENT_KEYDOWN );	
-//	addEvent( CSulGuiEventHandler::EVENT_MOUSE_RELEASE );
 }
 
 void CSulGuiEditBox::init()

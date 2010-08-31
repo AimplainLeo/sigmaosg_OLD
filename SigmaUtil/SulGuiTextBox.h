@@ -5,8 +5,9 @@
 
 #include "SulGuiCanvas.h"
 #include "SulGuiText.h"
+#include "SulExport.h"
 
-class CSulGuiTextBox : public CSulGuiCanvas
+class SUL_EXPORT CSulGuiTextBox : public CSulGuiCanvas
 {
 public:
 					CSulGuiTextBox( float x, float y );
@@ -17,12 +18,17 @@ public:
 
 	virtual void	init();
 
+	void			setText( const CSulString& text );
+
+	CSulGuiTextBox*	asTextBox() { return this; }
+
 private:
 	osg::ref_ptr<CSulGuiText>	m_rText;
 	CSulString					m_sText;
 	float						m_fontSize;
 	float						m_ofs_x;
 	float						m_ofs_y;
+	CSulString					m_font;
 };
 
 #endif // __SULGUITEXTBOX_H__

@@ -79,4 +79,9 @@ void CSulGuiTab::onTabClick( CSulGuiCanvas* pCanvas )
 	hideAllPages();
 
 	m_mapButton[pCanvas]->getCanvas()->show( true );
+
+	// workaround.. for some reason if the button is set to hidden it doesn't get the correct value
+	// i have no clue why it doesn't.. but this work around will set the width and height when the tab
+	// becomes visible
+	//m_mapButton[pCanvas]->getCanvas()->setWH( getW(), 256.0f );
 }

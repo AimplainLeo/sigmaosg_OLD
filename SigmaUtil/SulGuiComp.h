@@ -7,11 +7,13 @@
 #include "SulGeomQuad.h"
 #include "SulSigSlots.h"
 #include "SulGuiThemeXml.h"
+#include "SulSigSlots.h"
+#include "SulExport.h"
 #include <osg/matrixtransform>
 #include <osg/geode>
 #include <stack>
 
-class CSulGuiComp : public osg::MatrixTransform
+class SUL_EXPORT CSulGuiComp : public osg::MatrixTransform, public sigma::has_slots<>
 {
 public:
 					CSulGuiComp( const CSulString& sCompName );
@@ -54,14 +56,24 @@ public:
 
 	CSulGuiEventHandler*	getEventHandler();
 
+	osg::Vec2				getNativeDimensions();
+
+	const CSulString&		getId() const;
+
+	virtual class CSulGuiTextBox*	asTextBox() { return 0; }
+
 private:
 	void			initConstructor();
+
+	void			onNativeDimensionsChanged( float w, float h );
 
 private:
 	class CSulGuiEventHandler*		m_pEventHandler;
 	bool							m_bActive;
 	osg::ref_ptr<CSulGuiThemeXml>	m_rThemeXml;
 	CSulString						m_sCompName;
+	osg::Vec2						m_nativeDimensions;
+	CSulString						m_id;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;

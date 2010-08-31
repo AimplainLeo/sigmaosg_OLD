@@ -604,10 +604,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\SulGuiManagerUpdateCallback.h"
-					>
-				</File>
-				<File
 					RelativePath=".\SulGuiThemeXml.cpp"
 					>
 				</File>
@@ -626,6 +622,14 @@
 				<Filter
 					Name="Components"
 					>
+					<File
+						RelativePath=".\SulGuiAlignH.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiAlignH.h"
+						>
+					</File>
 					<File
 						RelativePath=".\SulGuiButton.cpp"
 						>

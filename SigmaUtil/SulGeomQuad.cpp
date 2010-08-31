@@ -142,18 +142,24 @@ void CSulGeomQuad::setTexture( osg::Texture2D* pTex, sigma::uint32 unit )
     getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
-void CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 unit )
+osg::Texture2D* CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 unit )
 {
 	osg::Texture2D* pTex = new osg::Texture2D;
-    osg::Image* pImage = osgDB::readImageFile( osgDB::findDataFile(file.c_str()) );
-    pTex->setImage( pImage );
+    m_rImage = osgDB::readImageFile( osgDB::findDataFile(file.c_str()) );
+    pTex->setImage( m_rImage );
     getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 	m_mapTex[unit] = pTex;
+	return pTex;
 }
 
 osg::Texture2D* CSulGeomQuad::getTexture( sigma::uint32 unit )
 {
 	return m_mapTex[unit];
+}
+
+osg::Image* CSulGeomQuad::getImage()
+{
+	return m_rImage;
 }
 
 void CSulGeomQuad::setUV( float uv )
@@ -223,6 +229,8 @@ void CSulGeomQuad::calcVertPositions()
 	}
 
 	getDrawable()->asGeometry()->dirtyBound();
+
+//getDrawable()->asGeometry()->dirtyDisplayList();
 }
 
 void CSulGeomQuad::setCenter( const osg::Vec3& vCenter )

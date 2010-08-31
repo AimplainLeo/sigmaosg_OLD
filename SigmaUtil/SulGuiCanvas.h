@@ -4,9 +4,8 @@
 #define __SULGUICANVAS_H__
 
 #include "SulGuiComp.h"
-#include "SulSigSlots.h"
 
-class CSulGuiCanvas : public CSulGuiComp, public sigma::has_slots<>
+class CSulGuiCanvas : public CSulGuiComp
 {
 public:
 					CSulGuiCanvas( const CSulString& sCompName );
@@ -29,6 +28,8 @@ public:
 	bool			isInside( float x, float y );
 
 	void			setWH( float w, float h );
+	void			setW( float w );
+	void			setH( float h );
 
 	float			getW();
 	float			getH();
@@ -47,6 +48,7 @@ private:
 	void			onMouseDrag( float x, float y );
 	void			onMousePush( float x, float y );
 	void			onMouseRelease( float x, float y );
+	void			onViewResize( float w, float h );
 
 public:
 	osg::ref_ptr<osg::Geode>	m_rGeodeQuad;		// FIXME: should be private
@@ -74,6 +76,7 @@ private:
 
 	CSulString					m_img;
 
+	bool						m_bShowCanvas;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiCanvas> >	VEC_GUICANVAS;

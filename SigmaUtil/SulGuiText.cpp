@@ -3,9 +3,10 @@
 #include "stdafx.h"
 #include "SulGuiText.h"
 
-CSulGuiText::CSulGuiText( const CSulString& sText, float x, float y, float size ) :
+CSulGuiText::CSulGuiText( const CSulString& sText, float x, float y, float size, CSulString font ) :
 CSulGuiComp( "TEXT", x, y )
 {
+	m_font = font;
 	m_sText = sText;
 	m_size = size;
 }
@@ -16,7 +17,8 @@ void CSulGuiText::setupAttr( CSulXmlAttr* pAttr )
 
 	m_size = getThemeValue( "font_size" ).asFloat();
 
-	if ( pAttr->exist( "font_size" ) ) m_size = pAttr->get( "font_size" ).asFloat();
+	if ( pAttr->exist( "font_size" ) )	m_size = pAttr->get( "font_size" ).asFloat();
+	if ( pAttr->exist( "font" ) )		m_font = pAttr->get( "font" );
 }
 
 void CSulGuiText::init()
@@ -26,7 +28,7 @@ void CSulGuiText::init()
 	m_rText = new osgText::Text;
 	m_rText->setDataVariance( osg::Object::DYNAMIC );		// FIXME: the code should be able to choose this
 	m_rText->setCharacterSize( m_size );
-	m_rText->setFont( "Tempest.ttf" );
+	m_rText->setFont( m_font );
 	m_rText->setColor( osg::Vec4(1,1,1,1) );
 	m_rText->setText( m_sText );	
 

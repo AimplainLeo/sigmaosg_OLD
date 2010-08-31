@@ -19,7 +19,7 @@ public:
 
 	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual	void	setupAttr( CSulXmlAttr* pAttr );
-	virtual void	setupView( float w, float h );
+//	virtual void	setupView( float w, float h );
 	virtual void	setupEventHandler( class CSulGuiEventHandler* pEventHandler );
 
 	virtual void	init();
@@ -31,6 +31,7 @@ public:
 private:
 	void			initConstructor();
 
+	void			onViewResize( float w, float h );
 	void			onClick( CSulGuiCanvas* pItem );
 	void			onScrollBarChanged( float val );
 

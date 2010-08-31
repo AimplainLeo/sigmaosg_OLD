@@ -15,6 +15,12 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::KEYDOWN )
     {
+/*
+		float w = pViewer->getCamera()->getViewport()->width();
+		float h = pViewer->getCamera()->getViewport()->height();
+		osg::notify(osg::NOTICE) << "w = " << w << "   h = " << h << std::endl;
+*/
+
 		int key = ea.getKey();
 		int mod = ea.getModKeyMask();
 
@@ -52,6 +58,13 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 		float mouse_y = ea.getYmax()-ea.getY();
 		signalMouseRelease( mouse_x, mouse_y );
     }
+
+    if ( ea.getEventType() & osgGA::GUIEventAdapter::RESIZE )
+    {
+		float windowWidth = ea.getWindowWidth();
+		float windowHeight = ea.getWindowHeight();
+		signalViewResize( windowWidth, windowHeight );
+	}
 
     return false;
 }

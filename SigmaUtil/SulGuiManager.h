@@ -18,8 +18,12 @@ public:
 
 	bool	load( const CSulString& sFileXml, osg::Group* pParent=0, CSulString sFileThemeXml="" );
 
-protected:
-	void	onViewSizeChanged( float w, float h );
+	void	show( bool bShow );
+
+	class CSulGuiComp* get( const CSulString& id );
+
+private:
+	void	onViewResize( float w, float h );
 
 private:
 	osg::ref_ptr<osg::MatrixTransform>	m_rMT;

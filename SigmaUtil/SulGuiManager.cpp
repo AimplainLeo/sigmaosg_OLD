@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiManager.h"
 #include "SulGuiXml.h"
-#include "SulGuiManagerUpdateCallback.h"
+#include "SulGuiCompVisitor.h"
 #include <osgDB/FileUtils>
 
 CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
@@ -13,6 +13,7 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 	m_rViewer = pViewer;
 
     m_rEventHandler = new CSulGuiEventHandler;
+	m_rEventHandler->signalViewResize.connect( this, &CSulGuiManager::onViewResize );
     pViewer->addEventHandler( m_rEventHandler );
 
 	m_rMT = new osg::MatrixTransform;
@@ -30,15 +31,6 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 	ss->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	ss->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
-
-	CSulGuiManagerUpdateCallback* pCB = new CSulGuiManagerUpdateCallback( pViewer );
-	pCB->signalSizeChanged.connect( this, &CSulGuiManager::onViewSizeChanged );
-	m_rMT->setUpdateCallback( pCB );
-}
-
-void CSulGuiManager::onViewSizeChanged( float w, float h )
-{
-	
 }
 
 bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent, CSulString sFileThemeXml )
@@ -70,5 +62,23 @@ bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent, CSul
 
 	CSulGuiXml* pXml = new CSulGuiXml( pParent?pParent:m_rMT, m_rEventHandler, m_viewW, m_viewH, rThemeXml );
 	return pXml->load( fileXml );
+}
+
+void CSulGuiManager::onViewResize( float w, float h )
+{
+	setMatrix( osg::Matrix::ortho2D( 0, w, h, 0) );
+}
+
+void CSulGuiManager::show( bool bShow )
+{
+	m_rMT->setNodeMask( bShow?0xFFFFFFFF:0 );
+}
+
+CSulGuiComp* CSulGuiManager::get( const CSulString& id )
+{
+	osg::ref_ptr<CSulGuiCompVisitor> nv = new CSulGuiCompVisitor( id );
+	nv->setNodeMaskOverride( 0xFFFFFFFF );
+	m_rMT->accept( *nv );
+	return nv->getFound();
 }
 

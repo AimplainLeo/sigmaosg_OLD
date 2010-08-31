@@ -31,6 +31,7 @@ void CSulGuiTextBox::setupAttr( CSulXmlAttr* pAttr )
 	if ( pAttr->exist( "font_size" ) )	m_fontSize	= pAttr->get( "font_size" ).asFloat();
 	if ( pAttr->exist( "ofs_x" ) )		m_ofs_x		= pAttr->get( "ofs_x" ).asFloat();
 	if ( pAttr->exist( "ofs_y" ) )		m_ofs_x		= pAttr->get( "ofs_y" ).asFloat();
+	if ( pAttr->exist( "font" ) )		m_font		= pAttr->get( "font" );
 }
 
 void CSulGuiTextBox::init()
@@ -39,7 +40,12 @@ void CSulGuiTextBox::init()
 
 	float h = getH();
 
-	m_rText = new CSulGuiText( m_sText, 0+m_ofs_x, h-m_ofs_y, m_fontSize );
+	m_rText = new CSulGuiText( m_sText, 0+m_ofs_x, h-m_ofs_y, m_fontSize, m_font );
 	m_rText->init();
 	addChild( m_rText );
+}
+
+void CSulGuiTextBox::setText( const CSulString& text )
+{
+	m_rText->setText( text );
 }

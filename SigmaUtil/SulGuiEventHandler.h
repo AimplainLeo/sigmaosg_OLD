@@ -16,6 +16,9 @@ public:
 	sigma::signal2<int, int>	signalKeyDown;
 	sigma::signal2<float,float> signalMousePush;
 	sigma::signal2<float,float> signalMouseRelease;
+	sigma::signal2<float,float> signalViewResize;
+
+	sigma::signal2<float,float>	signalNativeDimensionsChanged;
 };
 
 #endif // __SULGUIEVENTHANDLER_H__

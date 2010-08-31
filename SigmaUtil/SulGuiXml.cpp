@@ -15,6 +15,7 @@
 #include "SulGuiTextBox.h"
 #include "SulGuiTab.h"
 #include "SulGuiTabPage.h"
+#include "SulGuiAlignH.h"
 
 CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml )
 {
@@ -30,6 +31,12 @@ CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandl
 void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
 	CSulGuiComp* pComp = 0;
+
+	if ( sName=="ROOT" )
+	{
+		m_nativeW = pAttr->get( "native_w" ).asFloat();
+		m_nativeH = pAttr->get( "native_h" ).asFloat();
+	}
 
 	if ( sName=="CANVAS" )
 	{
@@ -170,17 +177,21 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		pComp = new CSulGuiTabPage;
 	}
 
+	if ( sName=="HALIGN" )
+	{
+		pComp = new CSulGuiAlignH;
+	}
+
 	if ( pComp )
 	{
 		m_vecCompStack.push( pComp );
 
 		pComp->setupTheme( m_rThemeXml );
 		pComp->setupAttr( pAttr );
-		pComp->setupView( m_viewW, m_viewH );
 		pComp->setLayer( m_indent );
+		pComp->setupEventHandler( m_rEventHandler );		
 		pComp->init();
-		pComp->setupEventHandler( m_rEventHandler );
-
+		
 		m_curGroup->addChild( pComp );
 
 		m_curGroup = pComp;
@@ -204,13 +215,14 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 		sName=="COMBOBOX" ||
 		sName=="COMP" ||
 		sName=="TAB" ||
-		sName=="TABPAGE"
+		sName=="TABPAGE" ||
+		sName=="HALIGN"
 	)
 	{
 		m_vecCompStack.pop();
 		if ( m_vecCompStack.empty() )
 		{
-			m_curGroup = 0;
+			m_curGroup = m_rRootGroup;
 		}
 		else
 		{
@@ -220,3 +232,15 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 	}
 }
 
+void CSulGuiXml::loadFinished()
+{
+	// a little cheesy way of doing it
+	m_rEventHandler->signalNativeDimensionsChanged( m_nativeW, m_nativeH );
+	m_rEventHandler->signalViewResize( m_viewW, m_viewH );
+}
+
+osg::Vec2 CSulGuiXml::getNativeDimensions()
+{
+	osg::Vec2 v( m_nativeW, m_nativeH );
+	return v;
+}

@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "SulGuiListBox.h"
+#include "SulGuiEventHandler.h"
 #include <osg/scissor>
 #include <osgManipulator/Selection>
 
@@ -22,6 +23,7 @@ void CSulGuiListBox::initConstructor()
 	m_clipPadding = 2.0f;
 }
 
+/*
 void CSulGuiListBox::setupView( float w, float h )
 {
 	CSulGuiCanvas::setupView( w, h );
@@ -31,6 +33,7 @@ void CSulGuiListBox::setupView( float w, float h )
 
 	updateClipping();
 }
+*/
 
 void CSulGuiListBox::setupTheme( CSulGuiThemeXml* pThemeXml )
 {
@@ -53,7 +56,7 @@ void CSulGuiListBox::setupEventHandler( class CSulGuiEventHandler* pEventHandler
 {
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
 
-	m_rScrollBar->setupEventHandler( pEventHandler );
+	pEventHandler->signalViewResize.connect( this, &CSulGuiListBox::onViewResize );
 }
 
 void CSulGuiListBox::init()
@@ -65,6 +68,7 @@ void CSulGuiListBox::init()
 
 	// add a scrollbar
 	m_rScrollBar = new CSulGuiScrollBar( w, 0, 32, h );
+	m_rScrollBar->setupEventHandler( getEventHandler() );
 	m_rScrollBar->init();
 	osg::MatrixTransform::addChild( m_rScrollBar );
 
@@ -194,4 +198,12 @@ bool CSulGuiListBox::addChild( Node *child )
 	updateClipping();
 
 	return true;
+}
+
+void CSulGuiListBox::onViewResize( float w, float h )
+{
+	m_viewW = w;
+	m_viewH = h;
+
+	updateClipping();
 }

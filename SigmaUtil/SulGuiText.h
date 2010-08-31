@@ -9,7 +9,7 @@
 class CSulGuiText : public CSulGuiComp
 {
 public:
-								CSulGuiText( const CSulString& sName, float x, float y, float size );
+								CSulGuiText( const CSulString& sName, float x, float y, float size, CSulString font="Tempest.ttf" );
 
 	virtual void				setupAttr( CSulXmlAttr* pAttr );
 
@@ -26,6 +26,7 @@ private:
 	osg::ref_ptr<osgText::Text>	m_rText;
 	CSulString					m_sText;
 	float						m_size;
+	CSulString					m_font;
 };
 
 #endif // __SULGUITEXT_H__

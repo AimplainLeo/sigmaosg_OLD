@@ -19,7 +19,9 @@ public:
 
 	void			elementEnd( const CSulString& sName );
 
-	CSulXmlAttr*	get( const CSulString& sTag );
+	osg::Vec2		getNativeDimensions();
+
+	void			loadFinished();
 
 private:
 	osg::Group*								m_rRootGroup;
@@ -35,6 +37,9 @@ private:
 	osg::ref_ptr<CSulGuiThemeXml>			m_rThemeXml;
 
 	STACK_GUICOMP							m_vecCompStack;
+
+	float									m_nativeW;
+	float									m_nativeH;
 };
 
 #endif // __SULGUIXML_H__

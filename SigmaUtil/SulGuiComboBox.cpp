@@ -24,10 +24,6 @@ void CSulGuiComboBox::setupView( float w, float h )
 void CSulGuiComboBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
-
-	if ( m_rTextBox.valid() )	m_rTextBox->setupEventHandler( pEventHandler );
-	if ( m_rButton.valid() )	m_rButton->setupEventHandler( pEventHandler );
-	if ( m_rListBox.valid() )	m_rListBox->setupEventHandler( pEventHandler );
 }
 
 void CSulGuiComboBox::setupTheme( CSulGuiThemeXml* pThemeXml )
@@ -51,6 +47,7 @@ void CSulGuiComboBox::init()
 	if ( m_rTextBox.valid() )
 	{
 		m_rTextBox->setWH( getW(), getH() );
+		m_rTextBox->setupEventHandler( getEventHandler() );
 		m_rTextBox->init();
 		osg::MatrixTransform::addChild( m_rTextBox );
 	}
@@ -59,6 +56,7 @@ void CSulGuiComboBox::init()
 	{
 		m_rButton->setX( getW() );
 		m_rButton->setWH( getH(), getH() );
+		m_rButton->setupEventHandler( getEventHandler() );
 		m_rButton->init();
 		osg::MatrixTransform::addChild( m_rButton );
 
@@ -71,16 +69,12 @@ void CSulGuiComboBox::init()
 	{
 		m_rListBox->setY( getH() );
 		m_rListBox->setWH( getW(), 128.0f );
+		m_rListBox->setupEventHandler( getEventHandler() );
 		m_rListBox->init();
 		m_rListBox->show( false );		
 		osg::MatrixTransform::addChild( m_rListBox );
 	}
 }
-/*
-void CSulGuiComboBox::addItem( CSulGuiCanvas* pCanvas )
-{
-}
-*/
 
 bool CSulGuiComboBox::addChild( Node *child )
 {

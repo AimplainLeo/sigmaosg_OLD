@@ -13,6 +13,7 @@ public:
 
 	virtual void		init();
 
+	virtual void		setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void		setupAttr( CSulXmlAttr* pAttr );
 	virtual void		setupEventHandler( class CSulGuiEventHandler* pEventHandler );
 

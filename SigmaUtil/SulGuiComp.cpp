@@ -45,8 +45,9 @@ CSulString CSulGuiComp::getThemeValue( const CSulString& attr )
 
 void CSulGuiComp::setupAttr( CSulXmlAttr* pAttr )
 {
-	if ( pAttr->exist( "x" ) ) setX( pAttr->get( "x" ).asFloat() );
-	if ( pAttr->exist( "y" ) ) setY( pAttr->get( "y" ).asFloat() );
+	if ( pAttr->exist( "id" ) )	m_id = pAttr->get( "id" );
+	if ( pAttr->exist( "x" ) )	setX( pAttr->get( "x" ).asFloat() );
+	if ( pAttr->exist( "y" ) )	setY( pAttr->get( "y" ).asFloat() );
 }
 
 void CSulGuiComp::setupTheme( CSulGuiThemeXml* pThemeXml )
@@ -61,6 +62,8 @@ void CSulGuiComp::setupView( float w, float h )
 void CSulGuiComp::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	m_pEventHandler = pEventHandler;
+
+	pEventHandler->signalNativeDimensionsChanged.connect( this, &CSulGuiComp::onNativeDimensionsChanged );
 }
 
 void CSulGuiComp::setXY( float x, float y )
@@ -166,3 +169,19 @@ CSulGuiEventHandler* CSulGuiComp::getEventHandler()
 {
 	return m_pEventHandler;
 }
+
+const CSulString& CSulGuiComp::getId() const
+{
+	return m_id;
+}
+
+osg::Vec2 CSulGuiComp::getNativeDimensions()
+{
+	return m_nativeDimensions;
+}
+
+void CSulGuiComp::onNativeDimensionsChanged( float w, float h )
+{
+	m_nativeDimensions.set( w, h );
+}
+

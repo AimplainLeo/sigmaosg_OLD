@@ -36,6 +36,7 @@ void CSulGuiCanvas::initConstructor()
 	m_dragMinY = 0.0f;
 	m_dragMaxY = 10000000.0f;
 	m_bMouseHover = false;
+	m_bShowCanvas	= true;
 }
 
 void CSulGuiCanvas::setupTheme( CSulGuiThemeXml* pThemeXml )
@@ -50,9 +51,21 @@ void CSulGuiCanvas::setupAttr( CSulXmlAttr* pAttr )
 {
 	CSulGuiComp::setupAttr( pAttr );
 
-	if ( pAttr->exist( "w" ) )		m_w = pAttr->get( "w" ).asFloat();
-	if ( pAttr->exist( "h" ) )		m_h = pAttr->get( "h" ).asFloat();
-	if ( pAttr->exist( "img" ) )	m_img = pAttr->get( "img" );
+	if ( pAttr->exist( "w" ) )				m_w = pAttr->get( "w" ).asFloat();
+	if ( pAttr->exist( "h" ) )				m_h = pAttr->get( "h" ).asFloat();
+	if ( pAttr->exist( "img" ) )			m_img = pAttr->get( "img" );
+	if ( pAttr->exist( "show_canvas" ) )	m_bShowCanvas = pAttr->get( "show_canvas" ).asBool();
+}
+
+void CSulGuiCanvas::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+{
+	CSulGuiComp::setupEventHandler( pEventHandler );
+
+	pEventHandler->signalMouseMove.connect( this, &CSulGuiCanvas::onMouseMove );
+	pEventHandler->signalMouseDrag.connect( this, &CSulGuiCanvas::onMouseDrag );
+	pEventHandler->signalMousePush.connect( this, &CSulGuiCanvas::onMousePush );
+	pEventHandler->signalMouseRelease.connect( this, &CSulGuiCanvas::onMouseRelease );
+	pEventHandler->signalViewResize.connect( this, &CSulGuiCanvas::onViewResize );
 }
 
 void CSulGuiCanvas::init()
@@ -85,7 +98,15 @@ void CSulGuiCanvas::init()
 	{
 		m_rQuad->setTexture( m_img, 0 );
 		m_uniformUseTexture->set( 1 );
+		
+		if ( m_w==0.0f || m_h==0.0f )
+		{
+			osg::Image* pImage = m_rQuad->getImage();
+			setWH( pImage->s(), pImage->t() );
+		}
 	}
+
+	showCanvas( m_bShowCanvas );
 }
 
 void CSulGuiCanvas::setDraggable( bool bDraggable )
@@ -123,6 +144,28 @@ void CSulGuiCanvas::setWH( float w, float h )
 	}
 }
 
+void CSulGuiCanvas::setW( float w )
+{
+	m_w = w;
+	if ( m_rQuad.valid() )
+	{
+		m_rQuad->setCenter( osg::Vec3( m_w/2.0f, m_h/2.0f, 0.0f ) );
+		m_rQuad->setWidth( m_w );
+		m_uniformW->set( m_w );
+	}
+}
+
+void CSulGuiCanvas::setH( float h )
+{
+	m_h = h;
+	if ( m_rQuad.valid() )
+	{
+		m_rQuad->setCenter( osg::Vec3( m_w/2.0f, m_h/2.0f, 0.0f ) );
+		m_rQuad->setHeight( m_h );
+		m_uniformH->set( m_h );
+	}
+}
+
 float CSulGuiCanvas::getW()
 {
 	return m_w;
@@ -141,16 +184,6 @@ bool CSulGuiCanvas::isInside( float x, float y )
 
 void CSulGuiCanvas::setMouseRelease( bool bInside )
 {
-}
-
-void CSulGuiCanvas::setupEventHandler( CSulGuiEventHandler* pEventHandler )
-{
-	CSulGuiComp::setupEventHandler( pEventHandler );
-
-	pEventHandler->signalMouseMove.connect( this, &CSulGuiCanvas::onMouseMove );
-	pEventHandler->signalMouseDrag.connect( this, &CSulGuiCanvas::onMouseDrag );
-	pEventHandler->signalMousePush.connect( this, &CSulGuiCanvas::onMousePush );
-	pEventHandler->signalMouseRelease.connect( this, &CSulGuiCanvas::onMouseRelease );
 }
 
 void CSulGuiCanvas::allowDrag( float minX, float maxX, float minY, float maxY )
@@ -256,7 +289,24 @@ void CSulGuiCanvas::onMouseDrag( float x, float y )
 		if ( pos.y()<m_dragMinY ) pos.y() = m_dragMinY;
 		if ( pos.y()>m_dragMaxY ) pos.y() = m_dragMaxY;
 		
-
 		setXY( pos.x(), pos.y() );
 	}
 }
+
+void CSulGuiCanvas::onViewResize( float w, float h  )
+{
+return;
+	osg::Vec2 d = getNativeDimensions();
+
+	float ww = m_w * (d.x()/w);
+	float hh = m_h * (d.y()/h);
+
+	m_rQuad->setCenter( osg::Vec3( ww/2.0f, hh/2.0f, 0.0f ) );
+
+	m_rQuad->setWidth( ww );
+	m_rQuad->setHeight( hh );
+
+	//osg::notify(osg::NOTICE) << "ww= " << ww << "   hh= " << hh << std::endl;
+	osg::notify(osg::NOTICE) << "m_w= " << m_w << "   m_h= " << m_h << std::endl;
+}
+

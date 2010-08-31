@@ -38,9 +38,11 @@ public:
 	// FIXME: these texture methods should be moved to the base class (they are very generic)
 	void							setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB, sigma::uint32 unit=0 );
 	void							setTexture( osg::Texture2D* pTex, sigma::uint32 unit=0 );
-	void							setTexture( const CSulString& file, sigma::uint32 unit );
+	osg::Texture2D*					setTexture( const CSulString& file, sigma::uint32 unit );
 
 	osg::Texture2D*					getTexture( sigma::uint32 unit=0 );
+
+	osg::Image*						getImage();
 
 	void							setUV( float uv );
 	void							setUV( float u, float v );
@@ -68,6 +70,8 @@ private:
 	float							m_w;
 	float							m_h;
 	EPLANE							m_ePlane;
+
+	osg::ref_ptr<osg::Image>		m_rImage;	// only valid if used
 };
 
 #endif // __SULGEOMQUAD_H__
