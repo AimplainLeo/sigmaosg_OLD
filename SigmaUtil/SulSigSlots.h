@@ -85,9 +85,13 @@
 #include <set>
 #include <list>
 
+#define _SIGSLOT_OPENTHREADS
+#include <OpenThreads/Mutex>
+/*
 #if defined(SIGSLOT_PURE_ISO) || (!defined(WIN32) && !defined(__GNUG__) && !defined(SIGSLOT_USE_POSIX_THREADS))
 #	define _SIGSLOT_SINGLE_THREADED
-#elif defined(WIN32)
+#elif defined(OSG) 
+#elif defined(WIN32) 
 #	define _SIGSLOT_HAS_WIN32_THREADS
 #	include <windows.h>
 #elif defined(__GNUG__) || defined(SIGSLOT_USE_POSIX_THREADS)
@@ -96,6 +100,7 @@
 #else
 #	define _SIGSLOT_SINGLE_THREADED
 #endif
+*/
 
 #ifndef SIGSLOT_DEFAULT_MT_POLICY
 #	ifdef _SIGSLOT_SINGLE_THREADED
@@ -131,6 +136,81 @@ namespace sigma {
 			;
 		}
 	};
+
+#ifdef _SIGSLOT_OPENTHREADS
+
+	class multi_threaded_global
+	{
+	public:
+		multi_threaded_global()
+		{
+			static bool isinitialised = false;
+
+			if(!isinitialised)
+			{
+				get_mutex();
+				isinitialised = true;
+			}
+		}
+
+		multi_threaded_global(const multi_threaded_global&)
+		{
+			;
+		}
+
+		virtual ~multi_threaded_global()
+		{
+			;
+		}
+
+		virtual void lock()
+		{
+			get_mutex()->lock();
+		}
+
+		virtual void unlock()
+		{
+			get_mutex()->unlock();
+		}
+
+	private:
+		OpenThreads::Mutex* get_mutex()
+		{
+			static OpenThreads::Mutex g_mutex;
+			return &g_mutex;
+		}
+	};
+
+	class multi_threaded_local
+	{
+	public:
+		multi_threaded_local()
+		{
+		}
+
+		multi_threaded_local(const multi_threaded_local&)
+		{
+		}
+
+		virtual ~multi_threaded_local()
+		{
+		}
+
+		virtual void lock()
+		{
+			m_mutex.lock();
+		}
+
+		virtual void unlock()
+		{
+			m_mutex.unlock();
+		}
+
+	private:
+		OpenThreads::Mutex m_mutex;
+	};
+
+#endif // _SIGSLOT_OPENTHREADS
 
 #ifdef _SIGSLOT_HAS_WIN32_THREADS
 	// The multi threading policies only get compiled in if they are enabled.
@@ -443,7 +523,7 @@ namespace sigma {
 			}
 		} 
 
-		void signal_connect(_signal_base<mt_policy>* sender)
+		void signalConnect(_signal_base<mt_policy>* sender)
 		{
 			lock_block<mt_policy> lock(this);
 			m_senders.insert(sender);
@@ -499,7 +579,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -610,7 +690,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -723,7 +803,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -835,7 +915,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -947,7 +1027,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -1061,7 +1141,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -1175,7 +1255,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -1289,7 +1369,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -1404,7 +1484,7 @@ namespace sigma {
 
 			while(it != itEnd)
 			{
-				(*it)->getdest()->signal_connect(this);
+				(*it)->getdest()->signalConnect(this);
 				m_connected_slots.push_back((*it)->clone());
 
 				++it;
@@ -1932,7 +2012,7 @@ namespace sigma {
 			_connection0<desttype, mt_policy>* conn = 
 				new _connection0<desttype, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit()
@@ -1992,7 +2072,7 @@ namespace sigma {
 			_connection1<desttype, arg1_type, mt_policy>* conn = 
 				new _connection1<desttype, arg1_type, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1)
@@ -2053,7 +2133,7 @@ namespace sigma {
 			_connection2<desttype, arg1_type, arg2_type, mt_policy>* conn = new
 				_connection2<desttype, arg1_type, arg2_type, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1, arg2_type a2)
@@ -2115,7 +2195,7 @@ namespace sigma {
 				new _connection3<desttype, arg1_type, arg2_type, arg3_type, mt_policy>(pclass,
 				pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1, arg2_type a2, arg3_type a3)
@@ -2178,7 +2258,7 @@ namespace sigma {
 				conn = new _connection4<desttype, arg1_type, arg2_type, arg3_type,
 				arg4_type, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4)
@@ -2244,7 +2324,7 @@ namespace sigma {
 				arg5_type, mt_policy>* conn = new _connection5<desttype, arg1_type, arg2_type,
 				arg3_type, arg4_type, arg5_type, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
@@ -2314,7 +2394,7 @@ namespace sigma {
 				new _connection6<desttype, arg1_type, arg2_type, arg3_type,
 				arg4_type, arg5_type, arg6_type, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
@@ -2384,7 +2464,7 @@ namespace sigma {
 				new _connection7<desttype, arg1_type, arg2_type, arg3_type,
 				arg4_type, arg5_type, arg6_type, arg7_type, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
@@ -2455,7 +2535,7 @@ namespace sigma {
 				arg4_type, arg5_type, arg6_type, arg7_type, 
 				arg8_type, mt_policy>(pclass, pmemfun);
 			m_connected_slots.push_back(conn);
-			pclass->signal_connect(this);
+			pclass->signalConnect(this);
 		}
 
 		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
