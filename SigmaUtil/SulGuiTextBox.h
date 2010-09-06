@@ -29,6 +29,7 @@ private:
 	float						m_ofs_x;
 	float						m_ofs_y;
 	CSulString					m_font;
+	osg::Vec4					m_color;
 };
 
 #endif // __SULGUITEXTBOX_H__

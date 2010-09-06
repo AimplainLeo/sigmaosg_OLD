@@ -9,6 +9,7 @@ CSulGuiComp( "TEXT", x, y )
 	m_font = font;
 	m_sText = sText;
 	m_size = size;
+	m_color.set( 1,1,1,1 );
 }
 
 void CSulGuiText::setupAttr( CSulXmlAttr* pAttr )
@@ -29,7 +30,7 @@ void CSulGuiText::init()
 	m_rText->setDataVariance( osg::Object::DYNAMIC );		// FIXME: the code should be able to choose this
 	m_rText->setCharacterSize( m_size );
 	m_rText->setFont( m_font );
-	m_rText->setColor( osg::Vec4(1,1,1,1) );
+	m_rText->setColor( m_color );
 	m_rText->setText( m_sText );	
 
 	// because of the coordinate system starting at top, left the text is drawn upside down
@@ -46,6 +47,15 @@ void CSulGuiText::init()
 	addChild( p );
 
 	setText( m_sText );
+}
+
+void CSulGuiText::setColor( const osg::Vec4& color )
+{
+	m_color = color;
+	if ( m_rText.valid() )
+	{
+		m_rText->setColor( color );
+	}
 }
 
 void CSulGuiText::setText( const CSulString& sText )

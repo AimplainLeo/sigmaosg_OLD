@@ -22,6 +22,9 @@ public:
 	// must be called after all setups have been called
 	virtual void	init();
 
+	virtual void	setEditMode( bool bEdit );
+	bool			isEditMode();
+
 	// active buttons can still be moved and clicked on, but depending on the component it should limit what is active
 	void			setActive( bool bActive );
 	bool			isActive();
@@ -74,6 +77,8 @@ private:
 	CSulString						m_sCompName;
 	osg::Vec2						m_nativeDimensions;
 	CSulString						m_id;
+
+	bool							m_bEditMode;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;

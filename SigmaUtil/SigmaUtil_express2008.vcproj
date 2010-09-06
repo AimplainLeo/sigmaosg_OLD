@@ -588,6 +588,14 @@
 				Name="GUI"
 				>
 				<File
+					RelativePath=".\SulGuiCompEditModeVisitor.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGuiCompVisitor.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGuiEventHandler.cpp"
 					>
 				</File>

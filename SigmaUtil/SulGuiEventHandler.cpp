@@ -7,11 +7,13 @@
 
 bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor )
 {
+	/*
     osgViewer::Viewer* pViewer = dynamic_cast<osgViewer::Viewer*>(&aa);
     if ( !pViewer )
     {
         return false;
     }
+	*/
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::KEYDOWN )
     {

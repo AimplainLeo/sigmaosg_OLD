@@ -26,6 +26,7 @@ public:
 	sigma::uint32	asUint32();
 	sigma::int32	asInt32();
 	bool			asBool();
+	osg::Vec4		asVec4();
 
 	CSulString		GetStartWord( char c ) ;
 };

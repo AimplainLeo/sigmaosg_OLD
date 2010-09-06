@@ -123,3 +123,15 @@ bool CSulString::asBool()
 
 	return false;
 }
+
+osg::Vec4 CSulString::asVec4()
+{
+	if ( !empty() )
+	{
+		float r, g, b, a;
+		sscanf( c_str(), "%f,%f,%f,%f", &r, &g, &b, &a ); 
+		return osg::Vec4( r, g, b, a );
+	}
+
+	return osg::Vec4( 1, 1, 1, 1 );
+}

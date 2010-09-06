@@ -22,6 +22,7 @@ void CSulGuiTextBox::setupTheme( CSulGuiThemeXml* pThemeXml )
 	m_fontSize	= getThemeValue( "font_size" ).asFloat();
 	m_ofs_x		= getThemeValue( "ofs_x" ).asFloat();
 	m_ofs_y		= getThemeValue( "ofs_y" ).asFloat();
+	m_color		= getThemeValue( "color" ).asVec4();
 }
 
 void CSulGuiTextBox::setupAttr( CSulXmlAttr* pAttr )
@@ -32,6 +33,7 @@ void CSulGuiTextBox::setupAttr( CSulXmlAttr* pAttr )
 	if ( pAttr->exist( "ofs_x" ) )		m_ofs_x		= pAttr->get( "ofs_x" ).asFloat();
 	if ( pAttr->exist( "ofs_y" ) )		m_ofs_x		= pAttr->get( "ofs_y" ).asFloat();
 	if ( pAttr->exist( "font" ) )		m_font		= pAttr->get( "font" );
+	if ( pAttr->exist( "color" ) )		m_color		= pAttr->get( "color" ).asVec4();
 }
 
 void CSulGuiTextBox::init()
@@ -41,6 +43,7 @@ void CSulGuiTextBox::init()
 	float h = getH();
 
 	m_rText = new CSulGuiText( m_sText, 0+m_ofs_x, h-m_ofs_y, m_fontSize, m_font );
+	m_rText->setColor( m_color );
 	m_rText->init();
 	addChild( m_rText );
 }

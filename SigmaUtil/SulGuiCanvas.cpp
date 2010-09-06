@@ -195,6 +195,36 @@ void CSulGuiCanvas::allowDrag( float minX, float maxX, float minY, float maxY )
 	m_dragMaxY		= maxY;
 }
 
+bool isInsideChildren( float x, float y, CSulGuiCanvas* pCanvas )
+{
+	sigma::uint32 count = pCanvas->getNumChildren();
+
+	for ( sigma::uint32 i=0; i<count; i++ )
+	{
+		CSulGuiCanvas* pChild = dynamic_cast<CSulGuiCanvas*>(pCanvas->getChild( i ));
+
+		if ( pChild )
+		{
+			// are we inside this child?
+			osg::NodePath pathToRoot;
+			osgManipulator::computeNodePathToRoot( *pChild, pathToRoot );
+			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			float local_x = x-m.getTrans().x();
+			float local_y = y-m.getTrans().y();
+			if ( pChild->isInside( local_x, local_y ) )
+			{
+				return true;
+			}
+
+			if ( isInsideChildren( x, y, pChild ) )
+			{
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}
 
 void CSulGuiCanvas::onMousePush( float x, float y )
 {
@@ -205,7 +235,13 @@ void CSulGuiCanvas::onMousePush( float x, float y )
 	float local_x = x-m.getTrans().x();
 	float local_y = y-m.getTrans().y();
 
-	if ( m_dragAllowed && isInside( local_x, local_y ) )
+	bool bEditMode = false;
+	if ( isEditMode() )
+	{
+		bEditMode = !isInsideChildren( x, y, this );
+	}
+
+	if ( (bEditMode || m_dragAllowed) && isInside( local_x, local_y ) )
 	{
 		m_dragOfsPos = osg::Vec2( local_x, local_y );
 		m_dragDragging = true;
@@ -237,6 +273,13 @@ void CSulGuiCanvas::onMouseRelease( float x, float y )
 	{
 		setMouseRelease( false );
 	}
+
+	// edit mode info stuff
+	if ( isEditMode() &&  isInside( local_x, local_y ) && !isInsideChildren( x, y, this ) )
+	{
+		osg::notify(osg::ALWAYS) << "GUI EDIT: x = " << getX() << " , y = " << getY() << std::endl;
+	}
+
 }
 
 void CSulGuiCanvas::onMouseMove( float x, float y )

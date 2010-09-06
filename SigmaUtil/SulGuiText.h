@@ -22,11 +22,14 @@ public:
 
 	void						setFontSize( float size );
 
+	void						setColor( const osg::Vec4& color );
+
 private:
 	osg::ref_ptr<osgText::Text>	m_rText;
 	CSulString					m_sText;
 	float						m_size;
 	CSulString					m_font;
+	osg::Vec4					m_color;
 };
 
 #endif // __SULGUITEXT_H__

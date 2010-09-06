@@ -14,13 +14,15 @@
 class SUL_EXPORT CSulGuiManager : public osg::Projection, public sigma::has_slots<>
 {
 public:
-			CSulGuiManager( osgViewer::View* pViewer );
+						CSulGuiManager( osgViewer::View* pViewer );
 
-	bool	load( const CSulString& sFileXml, osg::Group* pParent=0, CSulString sFileThemeXml="" );
+	bool				load( const CSulString& sFileXml, osg::Group* pParent=0, CSulString sFileThemeXml="" );
 
-	void	show( bool bShow );
+	void				show( bool bShow );
 
-	class CSulGuiComp* get( const CSulString& id );
+	void				setEditMode( bool bEdit );
+
+	class CSulGuiComp*	get( const CSulString& id );
 
 private:
 	void	onViewResize( float w, float h );

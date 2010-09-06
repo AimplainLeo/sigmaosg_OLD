@@ -21,11 +21,22 @@ CSulGuiComp::CSulGuiComp( const CSulString& sCompName, float x, float y )
 
 void CSulGuiComp::initConstructor()
 {
+	m_bEditMode = false;
 	m_bActive = true;
 }
 
 void CSulGuiComp::init()
 {
+}
+
+void CSulGuiComp::setEditMode( bool bEdit )
+{
+	m_bEditMode = bEdit;
+}
+
+bool CSulGuiComp::isEditMode()
+{
+	return m_bEditMode;
 }
 
 void CSulGuiComp::setActive( bool bActive )

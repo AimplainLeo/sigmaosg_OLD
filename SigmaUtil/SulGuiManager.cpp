@@ -4,6 +4,7 @@
 #include "SulGuiManager.h"
 #include "SulGuiXml.h"
 #include "SulGuiCompVisitor.h"
+#include "SulGuiCompEditModeVisitor.h"
 #include <osgDB/FileUtils>
 
 CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
@@ -12,7 +13,9 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 	m_viewH = pViewer->getCamera()->getViewport()->height();
 	m_rViewer = pViewer;
 
-    m_rEventHandler = new CSulGuiEventHandler;
+	m_rEventHandler = new CSulGuiEventHandler;
+	//m_rEventHandler->setIgnoreHandledEventsMask( osgGA::GUIEventAdapter::PUSH | osgGA::GUIEventAdapter::MOVE | osgGA::GUIEventAdapter::DRAG | osgGA::GUIEventAdapter::RELEASE | osgGA::GUIEventAdapter::RESIZE | osgGA::GUIEventAdapter::KEYDOWN);
+	m_rEventHandler->setIgnoreHandledEventsMask( 0 );
 	m_rEventHandler->signalViewResize.connect( this, &CSulGuiManager::onViewResize );
     pViewer->addEventHandler( m_rEventHandler );
 
@@ -72,6 +75,12 @@ void CSulGuiManager::onViewResize( float w, float h )
 void CSulGuiManager::show( bool bShow )
 {
 	m_rMT->setNodeMask( bShow?0xFFFFFFFF:0 );
+}
+
+void CSulGuiManager::setEditMode( bool bEdit )
+{
+	osg::ref_ptr<CSulGuiCompEditModeVisitor> r = new CSulGuiCompEditModeVisitor( bEdit );
+	m_rMT->accept( *r );
 }
 
 CSulGuiComp* CSulGuiManager::get( const CSulString& id )
