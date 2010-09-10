@@ -63,6 +63,7 @@ public:
 
 	const CSulString&		getId() const;
 
+	virtual class CSulGuiCanvas*	asCanvas()	{ return 0; }
 	virtual class CSulGuiTextBox*	asTextBox() { return 0; }
 
 private:

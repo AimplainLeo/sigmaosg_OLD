@@ -1426,6 +1426,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiAlignV.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiAlignV.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiButton.cpp"
 						>
 					</File>

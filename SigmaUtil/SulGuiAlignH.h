@@ -8,7 +8,13 @@
 class CSulGuiAlignH : public CSulGuiCanvas
 {
 public:
-	enum EALIGN
+	enum EALIGNV
+	{
+		TOP,
+		BOTTOM
+	};
+
+	enum EALIGNH
 	{
 		LEFT,
 		RIGHT
@@ -18,17 +24,17 @@ public:
 					CSulGuiAlignH();
 
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
-
-	void			setupAttr( CSulXmlAttr* pAttr );
-
+	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	virtual void	init();
 
 private:
 	void			onViewResize( float w, float h );
 
 private:
-	EALIGN			m_eAlign;
+	EALIGNH			m_eAlignH;
+	EALIGNV			m_eAlignV;
 	float			m_xOfs;
+	float			m_yOfs;
 };
 
 #endif // __SULGUIALIGNH_H__

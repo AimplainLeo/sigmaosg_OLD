@@ -38,6 +38,8 @@ public:
 
 	virtual void	setMouseRelease( bool bInside );
 
+	virtual class CSulGuiCanvas*	asCanvas();
+
 	sigma::signal1<CSulGuiCanvas*>			signalClicked;
 	sigma::signal1<bool>					signalHover;
 

@@ -109,6 +109,11 @@ void CSulGuiCanvas::init()
 	showCanvas( m_bShowCanvas );
 }
 
+CSulGuiCanvas* CSulGuiCanvas::asCanvas()
+{
+	return this;
+}
+
 void CSulGuiCanvas::setDraggable( bool bDraggable )
 {
 	m_dragAllowed = bDraggable;

@@ -16,6 +16,7 @@
 #include "SulGuiTab.h"
 #include "SulGuiTabPage.h"
 #include "SulGuiAlignH.h"
+#include "SulGuiAlignV.h"
 
 CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml )
 {
@@ -182,6 +183,11 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		pComp = new CSulGuiAlignH;
 	}
 
+	if ( sName=="VALIGN" )
+	{
+		pComp = new CSulGuiAlignV;
+	}
+
 	if ( pComp )
 	{
 		m_vecCompStack.push( pComp );
@@ -216,7 +222,8 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 		sName=="COMP" ||
 		sName=="TAB" ||
 		sName=="TABPAGE" ||
-		sName=="HALIGN"
+		sName=="HALIGN" ||
+		sName=="VALIGN"
 	)
 	{
 		m_vecCompStack.pop();
