@@ -42,6 +42,10 @@ public:
 	float			getWorldX();
 	float			getWorldY();
 
+	// attribute x and y values (they never change)
+	float			getAttrX();
+	float			getAttrY();
+
 	virtual void	show( bool bShow );
 	virtual void	toggleShow();
 
@@ -53,18 +57,15 @@ public:
 	virtual void	eventMouseRelease( float x_local, float y_local, float x, float y );
 	virtual void	eventKeyDown( sigma::int32 key, sigma::int32 iMod );
 
-	sigma::signal2<float, float>	signalPositionChanged;
-
-	CSulString		getThemeValue( const CSulString& attr );
-
-	CSulGuiEventHandler*	getEventHandler();
-
-	osg::Vec2				getNativeDimensions();
-
-	const CSulString&		getId() const;
+	CSulString						getThemeValue( const CSulString& attr );
+	CSulGuiEventHandler*			getEventHandler();
+	osg::Vec2						getNativeDimensions();
+	const CSulString&				getId() const;
 
 	virtual class CSulGuiCanvas*	asCanvas()	{ return 0; }
 	virtual class CSulGuiTextBox*	asTextBox() { return 0; }
+
+	sigma::signal2<float, float>	signalPositionChanged;
 
 private:
 	void			initConstructor();
@@ -80,6 +81,12 @@ private:
 	CSulString						m_id;
 
 	bool							m_bEditMode;
+
+	sigma::uint32					m_renderbinNum;
+
+	float							m_attrX;			
+	float							m_attrY;	
+	bool							m_attrValid;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;

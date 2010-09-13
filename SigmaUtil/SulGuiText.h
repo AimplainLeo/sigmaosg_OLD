@@ -11,6 +11,7 @@ class CSulGuiText : public CSulGuiComp
 public:
 								CSulGuiText( const CSulString& sName, float x, float y, float size, CSulString font="Tempest.ttf" );
 
+	virtual void				setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void				setupAttr( CSulXmlAttr* pAttr );
 
 	virtual void				init();

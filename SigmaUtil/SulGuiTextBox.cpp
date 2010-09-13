@@ -6,6 +6,7 @@
 CSulGuiTextBox::CSulGuiTextBox( float x, float y ) :
 CSulGuiCanvas( "TEXTBOX", x, y )
 {
+	initConstructor();
 }
 
 CSulGuiTextBox::CSulGuiTextBox( const CSulString& sText, float x, float y, float w, float h, float fontSize ) :
@@ -13,6 +14,12 @@ CSulGuiCanvas( "TEXTBOX", x, y, w, h )
 {
 	m_fontSize = fontSize;
 	m_sText = sText;
+	initConstructor();
+}
+
+void CSulGuiTextBox::initConstructor()
+{
+	m_font = "Tempest.ttf";
 }
 
 void CSulGuiTextBox::setupTheme( CSulGuiThemeXml* pThemeXml )

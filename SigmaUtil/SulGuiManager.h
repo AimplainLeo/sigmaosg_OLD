@@ -24,6 +24,10 @@ public:
 
 	class CSulGuiComp*	get( const CSulString& id );
 
+	// convience methods
+	class CSulGuiTextBox*	getTextBox( const CSulString& id );
+	class CSulGuiCanvas*	getCanvas( const CSulString& id );
+
 private:
 	void	onViewResize( float w, float h );
 

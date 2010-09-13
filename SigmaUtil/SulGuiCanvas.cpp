@@ -341,6 +341,11 @@ void CSulGuiCanvas::onMouseDrag( float x, float y )
 	}
 }
 
+CSulGeomQuad* CSulGuiCanvas::getQuad()
+{
+	return m_rQuad;
+}
+
 void CSulGuiCanvas::onViewResize( float w, float h  )
 {
 return;

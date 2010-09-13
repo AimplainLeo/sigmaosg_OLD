@@ -1418,19 +1418,11 @@
 					Name="Comp"
 					>
 					<File
-						RelativePath=".\SulGuiAlignH.cpp"
+						RelativePath=".\SulGuiAlign.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\SulGuiAlignH.h"
-						>
-					</File>
-					<File
-						RelativePath=".\SulGuiAlignV.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\SulGuiAlignV.h"
+						RelativePath=".\SulGuiAlign.h"
 						>
 					</File>
 					<File

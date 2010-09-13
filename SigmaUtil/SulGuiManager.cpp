@@ -1,6 +1,7 @@
 // SulGuiManager.cpp
 
 #include "stdafx.h"
+#include "SulGuiTextBox.h"
 #include "SulGuiManager.h"
 #include "SulGuiXml.h"
 #include "SulGuiCompVisitor.h"
@@ -91,3 +92,24 @@ CSulGuiComp* CSulGuiManager::get( const CSulString& id )
 	return nv->getFound();
 }
 
+CSulGuiTextBox* CSulGuiManager::getTextBox( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asTextBox();
+	}
+
+	return 0;
+}
+
+CSulGuiCanvas* CSulGuiManager::getCanvas( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asCanvas();
+	}
+
+	return 0;
+}

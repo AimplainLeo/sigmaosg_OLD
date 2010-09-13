@@ -23,6 +23,9 @@ public:
 	CSulGuiTextBox*	asTextBox() { return this; }
 
 private:
+	void						initConstructor();
+
+private:
 	osg::ref_ptr<CSulGuiText>	m_rText;
 	CSulString					m_sText;
 	float						m_fontSize;

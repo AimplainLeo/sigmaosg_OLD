@@ -4,8 +4,9 @@
 #define __SULGUICANVAS_H__
 
 #include "SulGuiComp.h"
+#include "SulExport.h"
 
-class CSulGuiCanvas : public CSulGuiComp
+class SUL_EXPORT CSulGuiCanvas : public CSulGuiComp
 {
 public:
 					CSulGuiCanvas( const CSulString& sCompName );
@@ -38,10 +39,12 @@ public:
 
 	virtual void	setMouseRelease( bool bInside );
 
+	CSulGeomQuad*					getQuad();
+
 	virtual class CSulGuiCanvas*	asCanvas();
 
-	sigma::signal1<CSulGuiCanvas*>			signalClicked;
-	sigma::signal1<bool>					signalHover;
+	sigma::signal1<CSulGuiCanvas*>	signalClicked;
+	sigma::signal1<bool>			signalHover;
 
 private:
 	void			initConstructor();

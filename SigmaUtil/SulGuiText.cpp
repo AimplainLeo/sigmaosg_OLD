@@ -12,11 +12,16 @@ CSulGuiComp( "TEXT", x, y )
 	m_color.set( 1,1,1,1 );
 }
 
+void CSulGuiText::setupTheme( CSulGuiThemeXml* pThemeXml )
+{
+	CSulGuiComp::setupTheme( pThemeXml );
+
+	m_size = getThemeValue( "font_size" ).asFloat();
+}
+
 void CSulGuiText::setupAttr( CSulXmlAttr* pAttr )
 {
 	CSulGuiComp::setupAttr( pAttr );
-
-	m_size = getThemeValue( "font_size" ).asFloat();
 
 	if ( pAttr->exist( "font_size" ) )	m_size = pAttr->get( "font_size" ).asFloat();
 	if ( pAttr->exist( "font" ) )		m_font = pAttr->get( "font" );
@@ -29,7 +34,8 @@ void CSulGuiText::init()
 	m_rText = new osgText::Text;
 	m_rText->setDataVariance( osg::Object::DYNAMIC );		// FIXME: the code should be able to choose this
 	m_rText->setCharacterSize( m_size );
-	m_rText->setFont( m_font );
+	if ( !m_font.empty() ) 
+		m_rText->setFont( m_font );
 	m_rText->setColor( m_color );
 	m_rText->setText( m_sText );	
 

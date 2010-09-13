@@ -1,12 +1,11 @@
-// SulGuiAlignH.cpp
+// SulGuiAlign.cpp
 
 #include "stdafx.h"
-#include "SulGuiAlignH.h"
+#include "SulGuiAlign.h"
 #include "SulGuiEventHandler.h"
-#include <assert.h>
 
-CSulGuiAlignH::CSulGuiAlignH() :
-CSulGuiCanvas( "HALIGN" )
+CSulGuiAlign::CSulGuiAlign() :
+CSulGuiCanvas( "ALIGN" )
 {
 	m_eAlignV = TOP;
 	m_eAlignH = LEFT;
@@ -14,14 +13,14 @@ CSulGuiCanvas( "HALIGN" )
 	m_yOfs = 0.0f;
 }
 
-void CSulGuiAlignH::setupEventHandler( CSulGuiEventHandler* pEventHandler )
+void CSulGuiAlign::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
 
-	pEventHandler->signalViewResize.connect( this, &CSulGuiAlignH::onViewResize );
+	pEventHandler->signalViewResize.connect( this, &CSulGuiAlign::onViewResize );
 }
 
-void CSulGuiAlignH::setupAttr( CSulXmlAttr* pAttr )
+void CSulGuiAlign::setupAttr( CSulXmlAttr* pAttr )
 {
 	CSulGuiCanvas::setupAttr( pAttr );
 
@@ -50,14 +49,15 @@ void CSulGuiAlignH::setupAttr( CSulXmlAttr* pAttr )
 	}
 }
 
-void CSulGuiAlignH::init()
+void CSulGuiAlign::init()
 {
 	CSulGuiCanvas::init();
 
 	showCanvas( false );
 }
 
-void CSulGuiAlignH::onViewResize( float w, float h )
+/*
+void CSulGuiAlign::onViewResize( float w, float h )
 {
 	CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getParent(0));
 	setW( p?p->getW():w );
@@ -99,6 +99,32 @@ void CSulGuiAlignH::onViewResize( float w, float h )
 			}
 		}
 	}
+}
+*/
 
+void CSulGuiAlign::onViewResize( float w, float h )
+{
+	CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getParent(0));
+	setW( p?p->getW():w );
+	setH( p?p->getH():h );
+		
+	sigma::uint32 count = getNumChildren();
+	for ( sigma::uint32 i=0; i<count ; i++ )
+	{
+		CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getChild(i));
+		if ( p )
+		{
+			if ( m_eAlignH==RIGHT )
+			{
+				float xx = getW() - (p->getW()+p->getAttrX());
+				p->setX( xx );
+			}
 
+			if ( m_eAlignV==BOTTOM )
+			{
+				float yy = getH() - (p->getH()+p->getAttrY());
+				p->setY( yy );
+			}
+		}
+	}
 }

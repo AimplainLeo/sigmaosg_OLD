@@ -23,10 +23,19 @@ void CSulGuiComp::initConstructor()
 {
 	m_bEditMode = false;
 	m_bActive = true;
+	m_renderbinNum = 0;
+	m_attrX = 0.0f;
+	m_attrY = 0.0f;
+	m_attrValid = false;
 }
 
 void CSulGuiComp::init()
 {
+	if ( m_attrValid )
+	{
+		setX( m_attrX );
+		setY( m_attrY ); 
+	}
 }
 
 void CSulGuiComp::setEditMode( bool bEdit )
@@ -56,9 +65,15 @@ CSulString CSulGuiComp::getThemeValue( const CSulString& attr )
 
 void CSulGuiComp::setupAttr( CSulXmlAttr* pAttr )
 {
-	if ( pAttr->exist( "id" ) )	m_id = pAttr->get( "id" );
-	if ( pAttr->exist( "x" ) )	setX( pAttr->get( "x" ).asFloat() );
-	if ( pAttr->exist( "y" ) )	setY( pAttr->get( "y" ).asFloat() );
+	if ( pAttr->exist( "id" ) )			m_id = pAttr->get( "id" );
+	if ( pAttr->exist( "x" ) )			m_attrX = pAttr->get( "x" ).asFloat();
+	if ( pAttr->exist( "y" ) )			m_attrY = pAttr->get( "y" ).asFloat();
+	if ( pAttr->exist( "renderbin" ) )	m_renderbinNum = pAttr->get( "renderbin" ).asInt32();
+
+	if ( pAttr->exist( "x" ) || pAttr->exist( "y" ) )
+	{
+		m_attrValid = true;
+	}
 }
 
 void CSulGuiComp::setupTheme( CSulGuiThemeXml* pThemeXml )
@@ -75,6 +90,16 @@ void CSulGuiComp::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 	m_pEventHandler = pEventHandler;
 
 	pEventHandler->signalNativeDimensionsChanged.connect( this, &CSulGuiComp::onNativeDimensionsChanged );
+}
+
+float CSulGuiComp::getAttrX()
+{
+	return m_attrX;
+}
+
+float CSulGuiComp::getAttrY()
+{
+	return m_attrY;
 }
 
 void CSulGuiComp::setXY( float x, float y )
@@ -153,9 +178,9 @@ void CSulGuiComp::toggleShow()
 
 void CSulGuiComp::setLayer( sigma::uint32 layer )
 {
-	getOrCreateStateSet()->setRenderBinDetails( layer, "DepthSortedBin" );
+	getOrCreateStateSet()->setRenderBinDetails( m_renderbinNum?m_renderbinNum:layer, "DepthSortedBin" );
 }
-
+ 
 void CSulGuiComp::eventMouseMove( float mouse_local_x, float mouse_local_y, float mouse_x, float mouse_y )
 {
 }

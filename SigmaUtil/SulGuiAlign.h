@@ -1,11 +1,11 @@
-// SulGuiAlignH.h
+// SulGuiAlign.h
 
-#ifndef __SULGUIALIGNH_H__
-#define __SULGUIALIGNH_H__
+#ifndef __SULGUIALIGN_H__
+#define __SULGUIALIGN_H__
 
 #include "SulGuiCanvas.h"
 
-class CSulGuiAlignH : public CSulGuiCanvas
+class CSulGuiAlign : public CSulGuiCanvas
 {
 public:
 	enum EALIGNV
@@ -21,7 +21,7 @@ public:
 	};
 
 public:
-					CSulGuiAlignH();
+					CSulGuiAlign();
 
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
@@ -37,4 +37,4 @@ private:
 	float			m_yOfs;
 };
 
-#endif // __SULGUIALIGNH_H__
+#endif // __SULGUIALIGN_H__

@@ -588,6 +588,10 @@
 				Name="GUI"
 				>
 				<File
+					RelativePath=".\Data\default_theme.xml"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGuiCompEditModeVisitor.h"
 					>
 				</File>
@@ -631,11 +635,11 @@
 					Name="Components"
 					>
 					<File
-						RelativePath=".\SulGuiAlignH.cpp"
+						RelativePath=".\SulGuiAlign.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\SulGuiAlignH.h"
+						RelativePath=".\SulGuiAlign.h"
 						>
 					</File>
 					<File
