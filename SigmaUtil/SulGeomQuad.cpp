@@ -175,6 +175,19 @@ void CSulGeomQuad::setUV( float u, float v )
 	(*m_rUV)[3].set( 0, v );
 }
 
+void CSulGeomQuad::setUV( float u0, float u1, float v0, float v1 )
+{
+	(*m_rUV)[0].set( u0, v0 );
+	(*m_rUV)[1].set( u1, v0 );
+	(*m_rUV)[2].set( u1, v1 );
+	(*m_rUV)[3].set( u0, v1 );
+}
+
+float CSulGeomQuad::getU()
+{
+	return (*m_rUV)[0].x();
+}
+
 void CSulGeomQuad::setWidth( float w )
 {
 	m_w = w;

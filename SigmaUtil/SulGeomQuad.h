@@ -46,6 +46,8 @@ public:
 
 	void							setUV( float uv );
 	void							setUV( float u, float v );
+	void							setUV( float u0, float u1, float v0, float v1 );
+	float							getU();
 
 	void							setWidth( float w );
 	void							setHeight( float h );
