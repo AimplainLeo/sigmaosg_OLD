@@ -683,6 +683,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiCounter.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiCounter.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiEditBox.cpp"
 						>
 					</File>

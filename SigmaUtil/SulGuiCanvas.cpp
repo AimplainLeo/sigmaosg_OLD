@@ -109,6 +109,11 @@ void CSulGuiCanvas::init()
 	showCanvas( m_bShowCanvas );
 }
 
+void CSulGuiCanvas::setImage( const CSulString& imgFile )
+{
+	m_img = imgFile;
+}
+
 CSulGuiCanvas* CSulGuiCanvas::asCanvas()
 {
 	return this;

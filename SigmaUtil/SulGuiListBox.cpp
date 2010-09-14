@@ -23,18 +23,6 @@ void CSulGuiListBox::initConstructor()
 	m_clipPadding = 2.0f;
 }
 
-/*
-void CSulGuiListBox::setupView( float w, float h )
-{
-	CSulGuiCanvas::setupView( w, h );
-
-	m_viewW = w;
-	m_viewH = h;
-
-	updateClipping();
-}
-*/
-
 void CSulGuiListBox::setupTheme( CSulGuiThemeXml* pThemeXml )
 {
 	CSulGuiCanvas::setupTheme( pThemeXml );

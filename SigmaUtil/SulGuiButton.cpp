@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "SulGuiButton.h"
-#include "SulGuiEventHandler.h"
 #include "SulGeomTriangle.h"
 
 CSulGuiButton::CSulGuiButton() :

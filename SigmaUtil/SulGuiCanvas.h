@@ -19,6 +19,8 @@ public:
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 
+	void			setImage( const CSulString& imgFile );
+
 	void			setDraggable( bool bDraggable );
 
 	void			showCanvas( bool bShow );
