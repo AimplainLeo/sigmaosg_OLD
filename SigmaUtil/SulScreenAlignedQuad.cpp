@@ -49,7 +49,7 @@ void CSulScreenAlignedQuad::setTexture( const std::string& sFile, GLint internal
 	setTexture( pImage, internalFormat );
 }
 
-void CSulScreenAlignedQuad::setTexture( osg::Texture2D* pTex )
+void CSulScreenAlignedQuad::setTexture( osg::Texture* pTex )
 {
 	m_rGeomQuad->setTexture( pTex );
 }

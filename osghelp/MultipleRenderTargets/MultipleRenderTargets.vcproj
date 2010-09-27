@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="ScreenAlignQuad"
-	ProjectGUID="{6561B8AB-570A-416F-AE95-1D10021DA131}"
-	RootNamespace="ScreenAlignQuad"
+	Name="MultipleRenderTargets"
+	ProjectGUID="{6D2B9FF1-C329-4AF9-9047-BDE57FE0B7CC}"
+	RootNamespace="MultipleRenderTargets"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib SigmaUtil_x2008d.lib osgDBd.lib"
+				AdditionalDependencies="SigmaUtil_x2008d.lib osgd.lib osgViewerd.lib  osgGAd.lib osgDBd.lib osgUtild.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)/libs"
+				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -174,7 +174,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ScreenAlignQuad.cpp"
+				RelativePath=".\MultipleRenderTargets.cpp"
 				>
 			</File>
 			<File

@@ -20,6 +20,9 @@ CSulGuiCanvas( "TEXTBOX", x, y, w, h )
 void CSulGuiTextBox::initConstructor()
 {
 	m_font = "Tempest.ttf";
+	m_ofs_x = 0.0f;
+	m_ofs_y = 0.0f;
+	m_color.set( 1,1,1,1 );
 }
 
 void CSulGuiTextBox::setupTheme( CSulGuiThemeXml* pThemeXml )

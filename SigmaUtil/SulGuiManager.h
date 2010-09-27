@@ -19,6 +19,7 @@ public:
 	bool				load( const CSulString& sFileXml, osg::Group* pParent=0, CSulString sFileThemeXml="" );
 
 	void				show( bool bShow );
+	bool				isVisible();
 
 	void				setEditMode( bool bEdit );
 
@@ -27,6 +28,8 @@ public:
 	// convience methods
 	class CSulGuiTextBox*	getTextBox( const CSulString& id );
 	class CSulGuiCanvas*	getCanvas( const CSulString& id );
+	class CSulGuiListBox*	getListBox( const CSulString& id );
+	class CSulGuiButton*	getButton( const CSulString& id );
 
 private:
 	void	onViewResize( float w, float h );

@@ -29,10 +29,15 @@ public:
 	bool			IsReady();
 
 private:
+	void			calcViewMatrix();
+
+private:
 	osg::ref_ptr<osg::Node>								m_rNode;
 	osg::ref_ptr<CSulTexCam>							m_rTexCam;
 	osg::ref_ptr<CSulIntersectionDrawCallback>			m_rDrawCallback;
 	osg::ref_ptr<CSulIntersectionWithCameraCallback>	m_rSulIntersectionWithCameraCallback;
+	osg::Vec3											m_pos;
+	osg::Vec3											m_dir;
 };
 
 #endif // __SULINTERSECTIONWITHCAMERA_H__

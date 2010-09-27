@@ -133,7 +133,7 @@ void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, sigma::
     getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
-void CSulGeomQuad::setTexture( osg::Texture2D* pTex, sigma::uint32 unit )
+void CSulGeomQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit )
 {
 	createUV();
 
@@ -152,7 +152,7 @@ osg::Texture2D* CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 
 	return pTex;
 }
 
-osg::Texture2D* CSulGeomQuad::getTexture( sigma::uint32 unit )
+osg::Texture* CSulGeomQuad::getTexture( sigma::uint32 unit )
 {
 	return m_mapTex[unit];
 }

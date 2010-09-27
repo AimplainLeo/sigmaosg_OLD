@@ -19,7 +19,7 @@ public:
 	CSulGeomQuad*						getQuad();
 
 	void								setTexture( const std::string& sFile, GLint internalFormat=GL_RGB );
-	void								setTexture( osg::Texture2D* pTex );
+	void								setTexture( osg::Texture* pTex );
 	void								setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB );
 
 private:

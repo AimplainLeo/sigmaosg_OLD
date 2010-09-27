@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SaveRenderToTexture", "SaveRenderToTexture.vcproj", "{E4336E59-CE4B-4DB1-9BF0-0E92F0280C71}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultipleRenderTargets", "MultipleRenderTargets.vcproj", "{6D2B9FF1-C329-4AF9-9047-BDE57FE0B7CC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
 	EndProjectSection
@@ -14,10 +14,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E4336E59-CE4B-4DB1-9BF0-0E92F0280C71}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E4336E59-CE4B-4DB1-9BF0-0E92F0280C71}.Debug|Win32.Build.0 = Debug|Win32
-		{E4336E59-CE4B-4DB1-9BF0-0E92F0280C71}.Release|Win32.ActiveCfg = Release|Win32
-		{E4336E59-CE4B-4DB1-9BF0-0E92F0280C71}.Release|Win32.Build.0 = Release|Win32
+		{6D2B9FF1-C329-4AF9-9047-BDE57FE0B7CC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6D2B9FF1-C329-4AF9-9047-BDE57FE0B7CC}.Debug|Win32.Build.0 = Debug|Win32
+		{6D2B9FF1-C329-4AF9-9047-BDE57FE0B7CC}.Release|Win32.ActiveCfg = Release|Win32
+		{6D2B9FF1-C329-4AF9-9047-BDE57FE0B7CC}.Release|Win32.Build.0 = Release|Win32
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Debug|Win32.ActiveCfg = Debug|Win32
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Debug|Win32.Build.0 = Debug|Win32
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Release|Win32.ActiveCfg = Release|Win32

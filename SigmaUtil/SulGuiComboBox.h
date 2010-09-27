@@ -14,7 +14,7 @@ class CSulGuiComboBox : public CSulGuiCanvas
 public:
 					CSulGuiComboBox( float x, float y, float w, float h );
 
-	virtual void	setupView( float w, float h );
+//	virtual void	setupView( float w, float h );
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );

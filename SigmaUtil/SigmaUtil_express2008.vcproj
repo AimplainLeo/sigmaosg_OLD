@@ -979,6 +979,10 @@
 					Name="ImageBaseIntersection"
 					>
 					<File
+						RelativePath=".\SulIntersectionCullCallback.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulIntersectionDrawCallback.h"
 						>
 					</File>

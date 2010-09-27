@@ -8,6 +8,7 @@
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
 #include <osgGA/GUIEventHandler>
+#include <osg/depth>
 
 osg::ref_ptr<CSulIntersectionWithCamera> camInt;
 osg::ref_ptr<osgViewer::Viewer> rViewer;
@@ -64,11 +65,17 @@ public:
 
 	void update()
 	{
-		osg::notify(osg::NOTICE) << "MSG: CMyIntersect::update" << std::endl;
+//		osg::notify(osg::NOTICE) << "MSG: CMyIntersect::update" << std::endl;
 
 		// draw a sphere at hit point
 		osg::Geode* pGeode = new osg::Geode();
 		pGeode->addDrawable( new osg::ShapeDrawable( new osg::Sphere(getHit(),0.1f) ) );
+		
+// disable writing to the zbuffer,.. but allow reading
+osg::Depth* depth = new osg::Depth;
+depth->setWriteMask( false );
+pGeode->getOrCreateStateSet()->setAttributeAndModes( depth, osg::StateAttribute::ON );
+
 		m_rootWorkGroup->addChild( pGeode );
 	}
 };
@@ -80,11 +87,11 @@ osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 	osg::Geode* pGeode = new osg::Geode();
 
 	// we create the simplest form of shapes in OpenSceneGraph
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Sphere(osg::Vec3(0.0f,0.0f,0.0f),0.5f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Box(osg::Vec3(2.0f,0.0f,0.0f),2.0f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cone(osg::Vec3(4.0f,0.0f,0.0f),0.5f,3.0f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(6.0f,0.0f,0.5f),0.5f,3.0f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Capsule(osg::Vec3(8.0f,0.0f,1.0f),0.5f,3.0f) ) );
+    //pGeode->addDrawable( new osg::ShapeDrawable( new osg::Sphere(osg::Vec3(0.0f,0.0f,0.0f),0.5f) ) );
+    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Box(osg::Vec3(0.0f,0.0f,0.0f),2.0f) ) );
+//    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cone(osg::Vec3(4.0f,0.0f,0.0f),0.5f,3.0f) ) );
+//    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(6.0f,0.0f,0.5f),0.5f,3.0f) ) );
+//    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Capsule(osg::Vec3(8.0f,0.0f,1.0f),0.5f,3.0f) ) );
 	pGroup->addChild( pGeode );
 
 	// create camera intersection code

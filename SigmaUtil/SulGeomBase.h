@@ -9,22 +9,15 @@
 class SUL_EXPORT CSulGeomBase : public osg::Referenced
 {
 public:
-								CSulGeomBase();
+									CSulGeomBase();
 
-/*
-	osg::Geometry*				getGeometry();
-	void						setGeom( osg::Geometry* pGeom );
-*/
-
-	osg::Drawable*				getDrawable();
-	void						setDrawable( osg::Drawable* pDrawable );
+	osg::Drawable*					getDrawable();
+	void							setDrawable( osg::Drawable* pDrawable );
 
 protected:
-//	virtual void				createGeometry();
-	virtual void				createDrawable() = 0;
+	virtual void					createDrawable() = 0;
 
 private:
-	//osg::ref_ptr<osg::Geometry>	m_rGeo;
 	osg::ref_ptr<osg::Drawable>		m_drawable;
 };
 

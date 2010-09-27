@@ -13,13 +13,14 @@ CSulGuiCanvas( "COMBOBOX", x, y, w, h )
 	m_rButton = new CSulGuiButton;
 	m_rListBox = new CSulGuiListBox;
 }
-
+/*
 void CSulGuiComboBox::setupView( float w, float h )
 {
 	CSulGuiCanvas::setupView( w, h );
 
 	if ( m_rListBox.valid() ) m_rListBox->setupView( w, h );
 }
+*/
 
 void CSulGuiComboBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {

@@ -42,14 +42,15 @@ osg::Node* CreateScene()
 {
 	// create geometry quad
 	osg::ref_ptr<CSulGeomQuad> pGeomQuad = new CSulGeomQuad( osg::Vec3(110,110, 0), 100, 100, CSulGeomQuad::PLANE_XY );
-
-	pGeomQuad->GetGeometry()->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+	osg::Geode* pGeode0 = new osg::Geode;
+	pGeode0->addDrawable( pGeomQuad->getDrawable() );
+	pGeode0->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	
     // create geometry node that will contain all our drawables
     osg::Geode* pGeode = new osg::Geode;
     osg::StateSet* pStateSet = pGeode->getOrCreateStateSet();
     pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-    pGeode->addDrawable( pGeomQuad->GetGeometry() );
+    pGeode->addDrawable( pGeomQuad->getDrawable() );
 	
 	osg::MatrixTransform* mtrans = new osg::MatrixTransform;
 	mtrans->setReferenceFrame( osg::Transform::ABSOLUTE_RF );

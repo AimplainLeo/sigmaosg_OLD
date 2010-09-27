@@ -16,7 +16,8 @@ public:
 		STANDARD,
 		SHADOW,
 		HDR,
-		ZVALUE_WITH_IMAGE			// draws the scene using the vertex z values
+		ZVALUE_WITH_IMAGE,			// draws the scene using the vertex z values
+		ZVALUE_FROM_DEPTH
 	};
 
 public:

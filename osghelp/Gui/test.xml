@@ -1,0 +1,84 @@
+<ROOT name="test" native_w="1024" native_h="512" >
+
+  
+  <CANVAS x="32" y="32" w="900" h="400">
+
+    <BUTTON text="myBut" x="8" y="8" />
+
+    <TEXT text="myAss" x="8" y="80" />
+
+    <EDITBOX text="hello" x="8" y="100" />
+
+    <CHECKBOX text="click me" x="8" y="148" />
+    
+    <RADIOBUTTON_GROUP x="8" y="200" >
+      <RADIOBUTTON text="radio 1" />
+      <RADIOBUTTON text="radio 2" />
+      <RADIOBUTTON text="radio 3" />
+      <RADIOBUTTON text="radio 4" />
+    </RADIOBUTTON_GROUP>
+
+    
+  <LISTBOX x="160" y="8" w="200" h="160">
+    <BUTTON text="but0" />
+    <BUTTON text="but1" />
+    <BUTTON text="but2" />
+    <BUTTON text="but3" />
+    <BUTTON text="but4" />
+    <EDITBOX text="hello0" />
+    <EDITBOX text="hello1" />
+    <EDITBOX text="hello2" />
+    <EDITBOX text="hello3" />
+    <CHECKBOX text="click me0" />
+    <CHECKBOX text="click me1" />
+    <CHECKBOX text="click me2" />
+    <CHECKBOX text="click me3" />
+  </LISTBOX>
+  
+  
+
+    <COMBOBOX x="160" y="180" w="200" h="32">
+      <BUTTON text="but0" />
+      <BUTTON text="but1" />
+      <BUTTON text="but2" />
+      <BUTTON text="but3" />
+      <BUTTON text="but4" />
+      <EDITBOX text="hello0" />
+      <EDITBOX text="hello1" />
+      <EDITBOX text="hello2" />
+      <EDITBOX text="hello3" />
+      <CHECKBOX text="click me0" />
+      <CHECKBOX text="click me1" />
+      <CHECKBOX text="click me2" />
+      <CHECKBOX text="click me3" />
+    </COMBOBOX>
+
+    <TAB x="400" y="8">
+      <TABPAGE title="tab1">
+        <BUTTON text="myBut" x="8" y="8" />
+      </TABPAGE>
+      <TABPAGE title="tab2">
+        <BUTTON text="myBut" x="8" y="8" />
+        <BUTTON text="myBut" x="38" y="38" />
+        <BUTTON text="myBut" x="68" y="68" />
+      </TABPAGE>
+    </TAB>
+
+    <SCROLLBAR x="700" y="8" w="32" h="128" />
+
+    <TEXTBOX text="Froggy" x="700" y="160" />
+    
+  </CANVAS>
+
+  <ALIGN align_h="right">
+    <CANVAS y="20" w="64" h="64" img="/images/tree_aligned_256.png"/>
+  </ALIGN>
+
+  <ALIGN align_v="bottom" align_h="right">
+    <COUNTER x="20" y="20" digits="8" />
+  </ALIGN>
+  
+
+</ROOT>
+
+

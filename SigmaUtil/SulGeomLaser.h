@@ -10,15 +10,19 @@
 class SUL_EXPORT CSulGeomLaser : public osg::Referenced
 {
 public:
-	void			Init();
+	void			init();
 
-	void			SetPosition( const osg::Vec3& v );
-	void			SetTarget( const osg::Vec3& v );
+	void			setPosition( const osg::Vec3& v );
+	void			setTarget( const osg::Vec3& v );
+
+	osg::Vec3		getTarget();
 
 	osg::Node*		getNode();
 
+	void			enabled( bool bEnable );
+
 private:
-	osg::Geometry*	CreateQuad();
+	osg::Geometry*	createQuad();
 	void			calcRot();
 
 private:

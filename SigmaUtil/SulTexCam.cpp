@@ -64,12 +64,30 @@ void CSulTexCam::initTex()
 		case ZVALUE_WITH_IMAGE:
 			{
 				m_rImage = new osg::Image;
-				m_rImage->allocateImage( m_w, m_h, 1,  GL_RGB, GL_FLOAT );	
+				m_rImage->allocateImage( m_w, m_h, 1, GL_RGB, GL_FLOAT );	
 				m_rImage->setInternalTextureFormat( GL_RGB32F_ARB );
 
 				m_rTex = new osg::Texture2D( m_rImage );
 			}
 			break;		
+
+		case ZVALUE_FROM_DEPTH:
+			{
+				m_rImage = new osg::Image;
+
+				m_rImage->allocateImage( m_w, m_h, 1, GL_DEPTH_COMPONENT, GL_FLOAT );	
+				m_rImage->setInternalTextureFormat( GL_DEPTH_COMPONENT );
+
+
+				
+/*
+				m_rImage->allocateImage( m_w, m_h, 1, GL_LUMINANCE, GL_FLOAT );	
+				m_rImage->setInternalTextureFormat( GL_LUMINANCE );
+*/
+				m_rTex = new osg::Texture2D( m_rImage );
+				m_rTex->setInternalFormat( GL_DEPTH_COMPONENT );
+			}
+			break;
 
 		default:
 			assert( 0 ); // not supported yet	
@@ -105,6 +123,18 @@ void CSulTexCam::initCam()
 			}
 			break;
 
+		case ZVALUE_FROM_DEPTH:
+			{
+				setRenderOrder( osg::Camera::PRE_RENDER );
+				setRenderTargetImplementation( osg::Camera::FRAME_BUFFER_OBJECT );
+				attach( osg::Camera::DEPTH_BUFFER, m_rImage );
+				setName( "CSulTexCam" );
+				setClearColor( osg::Vec4( 0.0f, 0.0f, 0.0f, 1.0f ) );
+				setReferenceFrame( osg::Transform::ABSOLUTE_RF );
+				setViewport( 0, 0, m_w, m_h );
+			}
+			break;
+
 		default:
 			assert( 0 ); // not supported yet
 	}
@@ -119,3 +149,4 @@ osg::Image* CSulTexCam::getImage()
 {
 	return m_rImage;
 }
+

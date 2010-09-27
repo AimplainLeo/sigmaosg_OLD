@@ -37,10 +37,10 @@ public:
 
 	// FIXME: these texture methods should be moved to the base class (they are very generic)
 	void							setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB, sigma::uint32 unit=0 );
-	void							setTexture( osg::Texture2D* pTex, sigma::uint32 unit=0 );
+	void							setTexture( osg::Texture* pTex, sigma::uint32 unit=0 );
 	osg::Texture2D*					setTexture( const CSulString& file, sigma::uint32 unit );
 
-	osg::Texture2D*					getTexture( sigma::uint32 unit=0 );
+	osg::Texture*					getTexture( sigma::uint32 unit=0 );
 
 	osg::Image*						getImage();
 
@@ -64,7 +64,7 @@ private:
 	void							calcVertPositions();
 
 private:
-	sigma::MAP_TEXTURE2D			m_mapTex;
+	sigma::MAP_TEXTURE				m_mapTex;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 	osg::ref_ptr<osg::Vec3Array>	m_rVerts;
 	osg::ref_ptr<osg::Vec2Array>	m_rUV;

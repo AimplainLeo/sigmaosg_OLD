@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="ScreenAlignQuad"
-	ProjectGUID="{6561B8AB-570A-416F-AE95-1D10021DA131}"
-	RootNamespace="ScreenAlignQuad"
+	Name="Gui"
+	ProjectGUID="{AE679729-CC07-40A4-8D2C-55401D21C469}"
+	RootNamespace="Gui"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib SigmaUtil_x2008d.lib osgDBd.lib"
+				AdditionalDependencies="openthreads.lib SigmaUtil_x2008d.lib osgd.lib osgViewerd.lib osgDBd.lib osgGAd.lib osgTextd.lib osgManipulatord.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)/libs"
+				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -174,7 +174,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ScreenAlignQuad.cpp"
+				RelativePath="..\..\SigmaUtil\Data\default_theme.xml"
+				>
+			</File>
+			<File
+				RelativePath=".\Gui.cpp"
 				>
 			</File>
 			<File
@@ -203,6 +207,10 @@
 			</File>
 			<File
 				RelativePath=".\targetver.h"
+				>
+			</File>
+			<File
+				RelativePath=".\test.xml"
 				>
 			</File>
 		</Filter>

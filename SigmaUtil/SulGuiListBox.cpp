@@ -99,25 +99,6 @@ void CSulGuiListBox::onScrollBarChanged( float val )
 		++i;
 	}
 }
-/*
-void CSulGuiListBox::addItem( CSulGuiCanvas* pCanvas )
-{
-	addChild( pCanvas );
-
-	CSulGuiItem* pItem = new CSulGuiItem( pCanvas );
-
-	float h = getTotalItemsHeight();
-
-	m_mapItem[pCanvas] = pItem;
-
-	// we need to set the position of the item in the listbox
-	pCanvas->setXY( m_itemOfsX, h );
-	pCanvas->signalClicked.connect( this, &CSulGuiListBox::onClick );
-	pCanvas->setActive( false );
-
-	updateClipping();
-}
-*/
 
 void CSulGuiListBox::onClick( CSulGuiCanvas* pItem )
 {

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="ScreenAlignQuad"
-	ProjectGUID="{6561B8AB-570A-416F-AE95-1D10021DA131}"
-	RootNamespace="ScreenAlignQuad"
+	Name="NodeMasks"
+	ProjectGUID="{944BEBD1-B8D1-4F21-9BD9-28F203A921B4}"
+	RootNamespace="NodeMasks"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH);$(SIGMAOSG_ROOT_PATH)"
+				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH)"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib SigmaUtil_x2008d.lib osgDBd.lib"
+				AdditionalDependencies="osgd.lib osgViewerd.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)/libs"
+				AdditionalLibraryDirectories="$(OSG_LIB_PATH)"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -174,7 +174,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ScreenAlignQuad.cpp"
+				RelativePath=".\NodeMasks.cpp"
 				>
 			</File>
 			<File

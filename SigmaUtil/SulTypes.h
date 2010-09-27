@@ -29,6 +29,7 @@ namespace sigma
 	typedef std::vector< osg::ref_ptr<osg::StateAttribute> >			VEC_STATEATTRIBUTE;
 	typedef std::map< std::string, osg::ref_ptr<osg::StateAttribute> >	MAP_STRING_STATEATTRIBUTE;
 	typedef std::map< uint32, osg::ref_ptr<osg::Texture2D> >			MAP_TEXTURE2D;
+	typedef std::map< uint32, osg::ref_ptr<osg::Texture> >				MAP_TEXTURE;
 
 	#define RGBA( r, g, b, a ) (uint32)a<<24 | (uint32)b<<16 | (uint32)g<<8 | (uint32)r;
 

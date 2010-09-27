@@ -19,7 +19,6 @@ public:
 
 	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual	void	setupAttr( CSulXmlAttr* pAttr );
-//	virtual void	setupView( float w, float h );
 	virtual void	setupEventHandler( class CSulGuiEventHandler* pEventHandler );
 
 	virtual void	init();
@@ -27,6 +26,8 @@ public:
 	float			getTotalItemsHeight();
 
 	virtual bool	addChild( Node *child );
+
+	virtual class CSulGuiListBox*	asListBox() { return this; }
 
 private:
 	void			initConstructor();

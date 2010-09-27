@@ -78,6 +78,11 @@ void CSulGuiManager::show( bool bShow )
 	m_rMT->setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
+bool CSulGuiManager::isVisible()
+{
+	return m_rMT->getNodeMask()==0?false:true;
+}
+
 void CSulGuiManager::setEditMode( bool bEdit )
 {
 	osg::ref_ptr<CSulGuiCompEditModeVisitor> r = new CSulGuiCompEditModeVisitor( bEdit );
@@ -109,6 +114,28 @@ CSulGuiCanvas* CSulGuiManager::getCanvas( const CSulString& id )
 	if ( p )
 	{
 		return p->asCanvas();
+	}
+
+	return 0;
+}
+
+CSulGuiListBox* CSulGuiManager::getListBox( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asListBox();
+	}
+
+	return 0;
+}
+
+CSulGuiButton* CSulGuiManager::getButton( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asButton();
 	}
 
 	return 0;

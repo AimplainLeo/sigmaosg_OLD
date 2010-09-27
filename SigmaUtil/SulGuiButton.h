@@ -25,6 +25,8 @@ public:
 	void			createDownDecal();
 	void			createUpDecal();
 
+	CSulGuiButton*	asButton() { return this; }
+
 protected:
 	void			onHover( bool bHover );
 
