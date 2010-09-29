@@ -3,10 +3,11 @@
 #ifndef __SULGUIEDITBOX_H__
 #define __SULGUIEDITBOX_H__
 
+#include "SulExport.h"
 #include "SulGuiCanvas.h"
 #include "SulGuiText.h"
 
-class CSulGuiEditBox : public CSulGuiCanvas
+class SUL_EXPORT CSulGuiEditBox : public CSulGuiCanvas
 {
 public:
 						CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h, float fontSize );
@@ -21,6 +22,8 @@ public:
 	const CSulString&	getText() const;
 
 	void				setCursor( const CSulString& sCursor );
+
+	CSulGuiEditBox*		asEditBox()	{ return this; }
 
 protected:
 	virtual void		setMouseRelease( bool bInside );

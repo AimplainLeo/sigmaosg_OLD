@@ -140,3 +140,14 @@ CSulGuiButton* CSulGuiManager::getButton( const CSulString& id )
 
 	return 0;
 }
+
+CSulGuiEditBox* CSulGuiManager::getEditBox( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asEditBox();
+	}
+
+	return 0;
+}

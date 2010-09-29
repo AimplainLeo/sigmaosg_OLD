@@ -66,6 +66,7 @@ public:
 	virtual class CSulGuiTextBox*	asTextBox() { return 0; }
 	virtual class CSulGuiListBox*	asListBox() { return 0; }
 	virtual class CSulGuiButton*	asButton()	{ return 0; }
+	virtual class CSulGuiEditBox*	asEditBox()	{ return 0; }
 
 	sigma::signal2<float, float>	signalPositionChanged;
 

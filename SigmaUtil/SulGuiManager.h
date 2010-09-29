@@ -30,6 +30,7 @@ public:
 	class CSulGuiCanvas*	getCanvas( const CSulString& id );
 	class CSulGuiListBox*	getListBox( const CSulString& id );
 	class CSulGuiButton*	getButton( const CSulString& id );
+	class CSulGuiEditBox*	getEditBox( const CSulString& id );
 
 private:
 	void	onViewResize( float w, float h );
