@@ -32,24 +32,24 @@ public:
 	void							drawBoundingBox();
 
 	// planes are in world positions
-	Sigma::VEC_PLANE				getBoundingBoxPlanes();
+	sigma::VEC_PLANE				getBoundingBoxPlanes();
 
 	osg::ComputeBoundsVisitor*		getBoundsVisitor();
 	osg::BoundingBox				getBoundingBoxWorld();
 
-	void							clip( const Sigma::VEC_PLANE& vecPlane );
+	void							clip( const sigma::VEC_PLANE& vecPlane );
 
 	// lines are in local space
-	const Sigma::VEC_LINESEGMENT&	getClippedLineList();
+	const sigma::VEC_LINESEGMENT&	getClippedLineList();
 
 	// triangles are in local space 
-	const Sigma::VEC_TRI&			getClippedTriangleList();
+	const sigma::VEC_TRI&			getClippedTriangleList();
 
 	osg::PositionAttitudeTransform* getPat();
 
 private:
-	void							clipLines( const CSulExtractGeometry& sceneGeometry, const Sigma::VEC_PLANE& vecPlane );
-	void							clipTriangles( const CSulExtractGeometry& sceneGeometry, const Sigma::VEC_PLANE& vecPlane );
+	void							clipLines( const CSulExtractGeometry& sceneGeometry, const sigma::VEC_PLANE& vecPlane );
+	void							clipTriangles( const CSulExtractGeometry& sceneGeometry, const sigma::VEC_PLANE& vecPlane );
 
 protected:
 	osg::ref_ptr<osg::Node>							m_rScene;
@@ -58,8 +58,8 @@ protected:
 	osg::ref_ptr<CSulCoordLatLon>					m_rCoordLatLon;
 	osg::ref_ptr<osg::ComputeBoundsVisitor>			m_rComputeBounds;
 
-	Sigma::VEC_TRI									m_vecTriangles;
-	Sigma::VEC_LINESEGMENT							m_vecLines;
+	sigma::VEC_TRI									m_vecTriangles;
+	sigma::VEC_LINESEGMENT							m_vecLines;
 
 	osg::Vec4										m_clipColor;
 

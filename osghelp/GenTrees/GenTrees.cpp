@@ -118,17 +118,17 @@ int _tmain( int argc, char** argv )
 	{
 		rXml->SetOutputFileOverride(outputfile);
 	}
-	rXml->Load( xmlFile );
+	rXml->load( xmlFile );
 
 	osg::ref_ptr<osg::Group> rRoot = new osg::Group;
  
 	// these are the actual trees that are generated
-	Sigma::uint32 texUnit			= rXml->getTexUnit();
+	sigma::uint32 texUnit			= rXml->getTexUnit();
 	bool bSuppressTexture			= rXml->isTextureSuppressed();
 	osg::Image* pImage				= rXml->getGen()->getImage();
-	Sigma::uint32 posCount			= rXml->getGen()->getCount();
-	Sigma::uint32 texSizeSquared	= rXml->getGen()->getTexSizeSquared();
-	Sigma::uint32 useLights			= rXml->getUseLights();
+	sigma::uint32 posCount			= rXml->getGen()->getCount();
+	sigma::uint32 texSizeSquared	= rXml->getGen()->getTexSizeSquared();
+	sigma::uint32 useLights			= rXml->getUseLights();
 	osg::BoundingBox bb				= rXml->getSceneTerrain()->getBoundingBoxWorld();
 	float minTree					= rXml->getMinTree();
 	float maxTree					= rXml->getMaxTree();

@@ -36,11 +36,11 @@ public:
 
 	bool				isTextureSuppressed();
 
-	Sigma::uint32		getTexUnit();
+	sigma::uint32		getTexUnit();
 
 	const CSulString&	getOutputFile() const;
 
-	Sigma::uint32		getUseLights();
+	sigma::uint32		getUseLights();
 
 	float				getMinTree();
 	float				getMaxTree();
@@ -51,7 +51,7 @@ private:
 	VEC_SHAPEMASK								m_vecShapeMasks;
 	
 	bool										m_bSuppressTextureTree;
-	Sigma::uint32								m_texUnit;
+	sigma::uint32								m_texUnit;
 	CSulString									m_sOutputFile;
 	bool										m_suppressViewer;
 	bool										m_showPivots;
@@ -61,14 +61,14 @@ private:
 
 	osg::ref_ptr<CSulCoordUTM>					m_rWorldUTM;
 
-	Sigma::VEC_PLANE							m_vecBoundingBoxPlanes;
+	sigma::VEC_PLANE							m_vecBoundingBoxPlanes;
 	
 	float										m_radiusBetweenTrees;
 	float										m_distance_between_trees_line;
 
 	osg::ref_ptr<CSulGenTextureWithPositions>	m_gen;
 
-	Sigma::uint32								m_useLights;
+	sigma::uint32								m_useLights;
 
 	CSulString									m_sInputFileOverride;
 

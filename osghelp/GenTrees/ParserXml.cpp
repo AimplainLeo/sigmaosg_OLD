@@ -187,7 +187,7 @@ bool CParserXml::isTextureSuppressed()
 	return m_bSuppressTextureTree;
 }
 
-Sigma::uint32 CParserXml::getTexUnit()
+sigma::uint32 CParserXml::getTexUnit()
 {
 	return m_texUnit;
 }
@@ -197,7 +197,7 @@ const CSulString& CParserXml::getOutputFile() const
 	return m_sOutputFile;
 }
 
-Sigma::uint32 CParserXml::getUseLights()
+sigma::uint32 CParserXml::getUseLights()
 {
 	return m_useLights;
 }

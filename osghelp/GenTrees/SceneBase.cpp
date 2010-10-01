@@ -79,16 +79,16 @@ void CSceneBase::drawBoundingBox()
 	}
 }
 
-Sigma::VEC_PLANE CSceneBase::getBoundingBoxPlanes()
+sigma::VEC_PLANE CSceneBase::getBoundingBoxPlanes()
 {
 	osg::Polytope polyTope;
 	m_rComputeBounds->getPolytope( polyTope, 0.0f );
 
 	// transform the planes to world space
-	Sigma::VEC_PLANE tmp = polyTope.getPlaneList();
+	sigma::VEC_PLANE tmp = polyTope.getPlaneList();
 	osg::Matrix m;
 	m_rPat->computeLocalToWorldMatrix( m, 0 );
-	Sigma::VEC_PLANE::iterator i;
+	sigma::VEC_PLANE::iterator i;
 	i = tmp.begin();
 	while ( i!=tmp.end() )
 	{
@@ -99,7 +99,7 @@ Sigma::VEC_PLANE CSceneBase::getBoundingBoxPlanes()
 	return tmp;
 }
 
-void CSceneBase::clip( const Sigma::VEC_PLANE& vecPlane )
+void CSceneBase::clip( const sigma::VEC_PLANE& vecPlane )
 {
 	// create a clipped version of the shape file that in contained inside a given boundingbox
 	CSulExtractGeometry sceneGeometry;
@@ -109,7 +109,7 @@ void CSceneBase::clip( const Sigma::VEC_PLANE& vecPlane )
 	clipTriangles( sceneGeometry, vecPlane );
 }
 
-void CSceneBase::clipLines( const CSulExtractGeometry& sceneGeometry, const Sigma::VEC_PLANE& vecPlane )
+void CSceneBase::clipLines( const CSulExtractGeometry& sceneGeometry, const sigma::VEC_PLANE& vecPlane )
 {
 	m_vecLines = sceneGeometry.getLineSegmentList();
 
@@ -117,8 +117,8 @@ void CSceneBase::clipLines( const CSulExtractGeometry& sceneGeometry, const Sigm
 	m_rPat->computeWorldToLocalMatrix( mWL, 0 );
 
 	osg::notify(osg::NOTICE) << "clippling lines against plane" << std::endl;
-	Sigma::uint32 count = 0;
-	Sigma::VEC_PLANE::const_iterator i;
+	sigma::uint32 count = 0;
+	sigma::VEC_PLANE::const_iterator i;
 	i = vecPlane.begin();
 	while ( i!=vecPlane.end() )
 	{
@@ -145,7 +145,7 @@ void CSceneBase::clipLines( const CSulExtractGeometry& sceneGeometry, const Sigm
 	}
 }
 
-void CSceneBase::clipTriangles( const CSulExtractGeometry& sceneGeometry, const Sigma::VEC_PLANE& vecPlane )
+void CSceneBase::clipTriangles( const CSulExtractGeometry& sceneGeometry, const sigma::VEC_PLANE& vecPlane )
 {
 	m_vecTriangles = sceneGeometry.getTriList();
 
@@ -153,8 +153,8 @@ void CSceneBase::clipTriangles( const CSulExtractGeometry& sceneGeometry, const 
 	m_rPat->computeWorldToLocalMatrix( mWL, 0 );
 
 	osg::notify(osg::NOTICE) << "clippling triangles against plane" << std::endl;
-	Sigma::uint32 count = 0;
-	Sigma::VEC_PLANE::const_iterator i;
+	sigma::uint32 count = 0;
+	sigma::VEC_PLANE::const_iterator i;
 	i = vecPlane.begin();
 	while ( i!=vecPlane.end() )
 	{
@@ -189,12 +189,12 @@ void CSceneBase::clipTriangles( const CSulExtractGeometry& sceneGeometry, const 
 	}
 }
 
-const Sigma::VEC_LINESEGMENT& CSceneBase::getClippedLineList()
+const sigma::VEC_LINESEGMENT& CSceneBase::getClippedLineList()
 {
 	return m_vecLines;
 }
 
-const Sigma::VEC_TRI& CSceneBase::getClippedTriangleList()
+const sigma::VEC_TRI& CSceneBase::getClippedTriangleList()
 {
 	return m_vecTriangles;
 }
