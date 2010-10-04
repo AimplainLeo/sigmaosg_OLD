@@ -13,6 +13,7 @@ public:
 	CSulGuiCanvas*	getCanvas();
 
 	void			toggleSelect();
+	void			setSelect( bool bSelect );
 
 private:
 	osg::ref_ptr<CSulGuiCanvas>	m_rCanvas;

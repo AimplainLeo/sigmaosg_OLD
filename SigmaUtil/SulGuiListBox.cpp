@@ -21,6 +21,7 @@ CSulGuiCanvas( "LISTBOX", x, y, w, h )
 void CSulGuiListBox::initConstructor()
 {
 	m_clipPadding = 2.0f;
+	m_bMultiSelect = false;
 }
 
 void CSulGuiListBox::setupTheme( CSulGuiThemeXml* pThemeXml )
@@ -37,7 +38,8 @@ void CSulGuiListBox::setupAttr( CSulXmlAttr* pAttr )
 	CSulGuiCanvas::setupAttr( pAttr );
 
 	if ( pAttr->exist( "clip_padding" ) )	m_clipPadding = pAttr->get( "clip_padding" ).asFloat();
-	if ( pAttr->exist( "item_ofs_x" ) )	m_itemOfsX = pAttr->get( "item_ofs_x" ).asFloat();
+	if ( pAttr->exist( "item_ofs_x" ) )		m_itemOfsX = pAttr->get( "item_ofs_x" ).asFloat();
+	if ( pAttr->exist( "multiselect" ) )	m_bMultiSelect = pAttr->get( "multiselect" ).asBool();
 }
 
 void CSulGuiListBox::setupEventHandler( class CSulGuiEventHandler* pEventHandler )
@@ -102,11 +104,27 @@ void CSulGuiListBox::onScrollBarChanged( float val )
 
 void CSulGuiListBox::onClick( CSulGuiCanvas* pItem )
 {
-	// find item in our list
-	MAP_GUIITEM::iterator iFound = m_mapItem.find( pItem );
-	if ( iFound!=m_mapItem.end() )
+	if ( m_bMultiSelect )
 	{
-		iFound->second->toggleSelect();
+		// find item in our list
+		MAP_GUIITEM::iterator iFound = m_mapItem.find( pItem );
+		if ( iFound!=m_mapItem.end() )
+		{
+			iFound->second->toggleSelect();
+		}
+	
+		return;
+	}
+
+	// de-select all
+	MAP_GUIITEM::iterator i,iE;
+
+	i = m_mapItem.begin();
+	iE = m_mapItem.end();
+	while ( i!=iE )
+	{
+		i->second->setSelect( i->second->getCanvas()==pItem?true:false );		
+		++i;
 	}
 }
 

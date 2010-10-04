@@ -87,6 +87,10 @@ void CSulGuiCanvas::init()
 	new CSulShaderGuiFrame( m_rGeodeQuad );
 
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseTexture = new osg::Uniform( "use_texture", 0 ) );
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseCover = new osg::Uniform( "use_cover", 1 ) );
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseBorder = new osg::Uniform( "use_border", 1 ) );
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseBackground = new osg::Uniform( "use_background", 1 ) );
+
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", 0 ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
@@ -107,6 +111,26 @@ void CSulGuiCanvas::init()
 	}
 
 	showCanvas( m_bShowCanvas );
+}
+
+void CSulGuiCanvas::useShaderTexture( bool bUse )
+{
+	m_uniformUseTexture->set( bUse?1:0 );
+}
+
+void CSulGuiCanvas::useShaderCover( bool bUse )
+{
+	m_uniformUseCover->set( bUse?1:0 );
+}
+
+void CSulGuiCanvas::useShaderBorder( bool bUse )
+{
+	m_uniformUseBorder->set( bUse?1:0 );
+}
+
+void CSulGuiCanvas::useShaderBackground( bool bUse )
+{
+	m_uniformUseBackground->set( bUse?1:0 );
 }
 
 void CSulGuiCanvas::setImage( const CSulString& imgFile )

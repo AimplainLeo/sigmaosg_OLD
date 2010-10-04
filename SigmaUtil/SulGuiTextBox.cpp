@@ -56,6 +56,10 @@ void CSulGuiTextBox::init()
 	m_rText->setColor( m_color );
 	m_rText->init();
 	addChild( m_rText );
+
+	useShaderTexture( false );
+	useShaderBorder( false );
+	useShaderBackground( false );
 }
 
 void CSulGuiTextBox::setText( const CSulString& text )

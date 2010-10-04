@@ -9,37 +9,42 @@
 class SUL_EXPORT CSulGuiCanvas : public CSulGuiComp
 {
 public:
-					CSulGuiCanvas( const CSulString& sCompName );
-					CSulGuiCanvas( const CSulString& sCompName, float x, float y );
-					CSulGuiCanvas( const CSulString& sCompName, float x, float y, float w, float h );
+									CSulGuiCanvas( const CSulString& sCompName );
+									CSulGuiCanvas( const CSulString& sCompName, float x, float y );
+									CSulGuiCanvas( const CSulString& sCompName, float x, float y, float w, float h );
 
-	virtual void	init();
+	virtual void					init();
 
-	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
-	virtual void	setupAttr( CSulXmlAttr* pAttr );
-	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
+	virtual void					setupTheme( CSulGuiThemeXml* pThemeXml );
+	virtual void					setupAttr( CSulXmlAttr* pAttr );
+	virtual void					setupEventHandler( CSulGuiEventHandler* pEventHandler );
 
-	void			setImage( const CSulString& imgFile );
+	void							useShaderTexture( bool bUse );
+	void							useShaderCover( bool bUse );
+	void							useShaderBorder( bool bUse );
+	void							useShaderBackground( bool bUse );
 
-	void			setDraggable( bool bDraggable );
+	void							setImage( const CSulString& imgFile );
 
-	void			showCanvas( bool bShow );
+	void							setDraggable( bool bDraggable );
 
-	void			setBgColor( const osg::Vec4& c );
-	void			setBorderColor( const osg::Vec4& c );
+	void							showCanvas( bool bShow );
 
-	bool			isInside( float x, float y );
+	void							setBgColor( const osg::Vec4& c );
+	void							setBorderColor( const osg::Vec4& c );
 
-	void			setWH( float w, float h );
-	void			setW( float w );
-	void			setH( float h );
+	bool							isInside( float x, float y );
 
-	float			getW();
-	float			getH();
+	void							setWH( float w, float h );
+	void							setW( float w );
+	void							setH( float h );
 
-	void			allowDrag( float minX, float maxX, float minY, float maxY );
+	float							getW();
+	float							getH();
 
-	virtual void	setMouseRelease( bool bInside );
+	void							allowDrag( float minX, float maxX, float minY, float maxY );
+
+	virtual void					setMouseRelease( bool bInside );
 
 	CSulGeomQuad*					getQuad();
 
@@ -63,11 +68,15 @@ public:
 private:
 	osg::ref_ptr<CSulGeomQuad>	m_rQuad;
 	
+	osg::ref_ptr<osg::Uniform>	m_uniformUseTexture;
+	osg::ref_ptr<osg::Uniform>	m_uniformUseCover;
+	osg::ref_ptr<osg::Uniform>	m_uniformUseBorder;
+	osg::ref_ptr<osg::Uniform>	m_uniformUseBackground;
+
 	osg::ref_ptr<osg::Uniform>	m_uniformBgColor;
 	osg::ref_ptr<osg::Uniform>	m_uniformBorderColor;
 	osg::ref_ptr<osg::Uniform>	m_uniformW;
 	osg::ref_ptr<osg::Uniform>	m_uniformH;
-	osg::ref_ptr<osg::Uniform>	m_uniformUseTexture;
 
 	float						m_w;
 	float						m_h;

@@ -10,7 +10,11 @@ uniform vec4 border_color;
 uniform int cover;
 
 uniform sampler2D tex0;
+
 uniform int use_texture;
+uniform int use_cover;
+uniform int use_border;
+uniform int use_background;
 
 void main( void )
 {
@@ -18,16 +22,24 @@ void main( void )
 	float px = gl_TexCoord[0].x * w;
 	float py = gl_TexCoord[0].y * h;
 
-	vec4 color = bg_color;
+	vec4 color = vec4(0,0,0,0);
 
-	if ( px<border || px>(w-border)  || py<border || py>(h-border) )
+	if ( use_background )
 	{
-		color = border_color;
+		color = bg_color;
+	}
+
+	if ( use_border )
+	{
+		if ( px<border || px>(w-border)  || py<border || py>(h-border) )
+		{
+			color = border_color;
+		}
 	}
 	
 	gl_FragColor = color;
 
-	if ( cover )
+	if ( cover && use_cover )
 	{
 		gl_FragColor = vec4(0.5,0.5,0.5,1) + color;
 	}

@@ -45,6 +45,7 @@ private:
 	float							m_viewW;
 	float							m_viewH;
 	float							m_itemOfsX;
+	bool							m_bMultiSelect;
 }; 
 
 #endif // __SULGUILISTBOX_H__

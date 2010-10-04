@@ -237,6 +237,10 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 			m_indent--;
 		}
 	}
+	else
+	{
+		osg::notify(osg::NOTICE) << "SulGuiXml -> not handled: " << sName << std::endl;
+	}
 }
 
 void CSulGuiXml::loadFinished()
