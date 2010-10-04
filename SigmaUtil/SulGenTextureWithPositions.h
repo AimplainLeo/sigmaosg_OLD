@@ -5,10 +5,14 @@
 
 #include "SulGenPositionMask.h"
 #include "SulTypes.h"
+#include "SulString.h"
 #include <osg/referenced>
 
 class CSulGenTextureWithPositions : public osg::Referenced
 {
+private:
+	typedef std::vector< CSulString >									VEC_STRING;
+
 public:
 			CSulGenTextureWithPositions(
 				osg::PositionAttitudeTransform*	pSceneTerrain,
@@ -17,7 +21,8 @@ public:
 				float							radius,							// radius between trees
 				float							distance_between_trees_line,
 				float							areaPadding,					// areaPadding is used to extend masks for areas
-				VEC_GENPOSITIONMASK				vecMask
+				VEC_GENPOSITIONMASK				vecMask,
+				VEC_STRING						vecIgnoreNodeList
 			);
 
 	osg::Image*				getImage();

@@ -7,6 +7,7 @@
 #include "SulGeomLine.h"
 #include "SulIntTriangle.h"
 #include "sulDistancePointAndTriangle2d.h"
+#include "SulGenNodeMaskVisitor.h"
 #include <osg/PositionAttitudeTransform>
 #include <osg/io_utils>
 #include <osgUtil/IntersectVisitor>
@@ -28,7 +29,8 @@ CSulGenTextureWithPositions::CSulGenTextureWithPositions(
 	float							radius,
 	float							distance_between_trees_line,
 	float							areaPadding,
-	VEC_GENPOSITIONMASK				vecMask
+	VEC_GENPOSITIONMASK				vecMask,
+	VEC_STRING						vecIgnoreNodeList
 ) :
 m_rSceneTerrain( pSceneTerrain ),
 m_vecLine( line ),
@@ -38,6 +40,10 @@ m_distance_between_trees_line( distance_between_trees_line ),
 m_areaPadding( areaPadding ),
 m_vecMask( vecMask )
 {
+	osg::ref_ptr<CSulGenNodeMaskVisitor>	tmp = new CSulGenNodeMaskVisitor( vecIgnoreNodeList );
+
+	m_rSceneTerrain->accept( *tmp );
+
 	process();
 }
 
