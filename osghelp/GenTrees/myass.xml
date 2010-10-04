@@ -15,7 +15,22 @@
     radius_between_trees="2.0"
     distance_between_trees_line="10.0"
   />
+
+  <TERRAIN 
+    file="d:/TKG/FACTerrain_levhegn5_2.flt"
+    offsetx="10240"
+    offsety="10240"
+  />
   
+  <SHAPE 
+    file="d:/TKG/s_(0).flt"
+    offsetz="100"
+  />
+  
+  <IGNORE_NODE name="windmill" />
+
+  
+  <!--
   <TERRAIN 
     file="\\pc55\TerrainData\FACTerrain_noforest_flt\FACTerrain_noforest0_1.flt"
     offsetx="1024"
@@ -26,6 +41,8 @@
     file="\\pc55\TerrainData\FACTerrain_noforest_flt\ll.flt"
     offsetz="100"
   />
+-->
+
 
   <!--
   <MASK file="flt\BuildingIndu.flt" linedist="4" offsetz="150"/>

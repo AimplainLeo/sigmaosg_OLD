@@ -17,7 +17,7 @@ m_bColGeom( false )
 {
 }
 
-void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
+void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
 	if ( sName=="GEN" )
 	{
@@ -118,6 +118,11 @@ void CParserXml::ElementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		m_showPivots = pAttr->get( "showpivots" ).asBool();
 	}
 
+	if ( sName=="IGNORE_NODE" )
+	{
+		m_vecNodeIgnoreList.push_back( pAttr->get("name") );
+	}
+
 }
 
 void CParserXml::SetInputFileOverride(const CSulString& filename)
@@ -135,7 +140,7 @@ CSulGenTextureWithPositions* CParserXml::getGen()
 	return m_gen;
 }
 
-void CParserXml::LoadFinished()
+void CParserXml::loadFinished()
 {
 	VEC_GENPOSITIONMASK vecMask;
 
@@ -158,7 +163,8 @@ void CParserXml::LoadFinished()
 		m_radiusBetweenTrees,
 		m_distance_between_trees_line,
 		m_areaPadding,
-		vecMask
+		vecMask,
+		m_vecNodeIgnoreList
 	);
 }
 

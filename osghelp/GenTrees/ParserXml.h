@@ -15,10 +15,14 @@
 
 class CParserXml : public CSulXmlParser
 {
+private:
+	typedef std::vector< CSulString >									VEC_STRING;
+
+
 public:
 						CParserXml();
 
-	void				ElementStart( const CSulString& sName, CSulXmlAttr* pAttr );
+	void				elementStart( const CSulString& sName, CSulXmlAttr* pAttr );
 
 	void				SetInputFileOverride(const CSulString& filename);
 	void				SetOutputFileOverride(const CSulString& filename);
@@ -46,7 +50,8 @@ public:
 	float				getMaxTree();
 
 private:
-	void				LoadFinished();
+	void				loadFinished();
+
 private:
 	VEC_SHAPEMASK								m_vecShapeMasks;
 	
@@ -77,6 +82,8 @@ private:
 
 	float										m_areaPadding;
 	bool										m_bColGeom;
+
+	VEC_STRING									m_vecNodeIgnoreList;
 };
 
 #endif // __PARSERXML_H__
