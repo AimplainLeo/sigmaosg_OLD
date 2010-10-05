@@ -15,6 +15,7 @@ public:
 					CSulString( const CSulString& s );
 					CSulString( const std::string& s );
 					CSulString( sigma::uint8 c );
+					CSulString( sigma::int64 c );
 					CSulString( float f );
 
 	void			Format( const char* Format, ... );
@@ -25,6 +26,7 @@ public:
 	double			asDouble();
 	sigma::uint32	asUint32();
 	sigma::int32	asInt32();
+	sigma::int64	asInt64();
 	bool			asBool();
 	osg::Vec4		asVec4();
 

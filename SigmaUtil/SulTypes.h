@@ -16,11 +16,12 @@ namespace sigma
 	typedef char			int8;		// char:			-127 -> 128
 	typedef short			int16;		// short:			-??? -> ???
 	typedef int				int32;		// int:				-??? -> ???
+	typedef __int64	  		int64;
 
 	typedef unsigned char	uint8;		// unsgined char:	0 -> 255
 	typedef unsigned short	uint16;		// unsigned short:	??
 	typedef unsigned int	uint32;		// unsigned int:	0 -> 4294967295
-
+	
 	typedef std::vector< osg::Vec3 >									VEC_VEC3;
 	typedef std::vector< CSulDataTri >									VEC_TRI;
 	typedef std::vector< osg::ref_ptr<osg::LineSegment> >				VEC_LINESEGMENT;

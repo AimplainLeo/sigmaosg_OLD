@@ -49,6 +49,7 @@ void CSulGuiEditBox::init()
 
 	m_rGuiText = new CSulGuiText( m_sText, 0.0f+m_ofs_x, h-m_ofs_y, m_fontSize );
 	m_rGuiText->init();
+	m_rGuiText->setText( m_sText );
 	addChild( m_rGuiText );
 }
 
@@ -65,7 +66,10 @@ void CSulGuiEditBox::setMouseRelease( bool bInside )
 void CSulGuiEditBox::setText( const CSulString& sText )
 {
 	m_sText = sText;
-	m_rGuiText->setText( sText );
+	if ( m_rGuiText.valid() )
+	{
+		m_rGuiText->setText( sText );
+	}
 }
 
 const CSulString& CSulGuiEditBox::getText() const

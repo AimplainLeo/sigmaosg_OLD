@@ -30,6 +30,14 @@ CSulString::CSulString( sigma::uint8 c )
 	assign( s.c_str() );
 }
 
+CSulString::CSulString( sigma::int64 c )
+{
+	// FIXME: very microsofty
+	char buf[1024];
+	_i64toa_s( c, buf, 1024, 10 );
+	CSulString s = buf;
+} 
+
 CSulString::CSulString( float f )
 {
 	CSulString s;
@@ -99,6 +107,12 @@ sigma::uint32 CSulString::asUint32()
 sigma::int32 CSulString::asInt32()
 {
 	return (sigma::int32)atoi( c_str() );
+}
+
+sigma::int64 CSulString::asInt64()
+{
+	// FIXME: very microsofty
+	return (sigma::int64)_strtoi64( c_str(), 0, 10 );
 }
 
 CSulString CSulString::GetStartWord( char c ) 
