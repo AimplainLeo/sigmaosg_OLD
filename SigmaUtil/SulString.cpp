@@ -36,6 +36,7 @@ CSulString::CSulString( sigma::int64 c )
 	char buf[1024];
 	_i64toa_s( c, buf, 1024, 10 );
 	CSulString s = buf;
+	assign( s.c_str() );
 } 
 
 CSulString::CSulString( float f )
