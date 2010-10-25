@@ -35,7 +35,7 @@ osg::Group* createGui( osgViewer::Viewer* pViewer )
 	pGuiManager->load( "test.xml", 0, "default_theme.xml" );
 	pGroup->addChild( pGuiManager );
 
-	pGuiManager->setEditMode( true );
+	//pGuiManager->setEditMode( true );
 
 	return pGroup;
 }

@@ -19,7 +19,13 @@
     </RADIOBUTTON_GROUP>
 
     
-  <LISTBOX x="160" y="8" w="200" h="160">
+  <LISTBOX x="160" y="8" w="200" h="160" multiselect="false">
+      <TEXTBOX text="myAss0" />
+      <TEXTBOX text="myAss1" />
+      <TEXTBOX text="myAss2" />
+      <TEXTBOX text="myAss3" />
+      <TEXTBOX text="myAss4" />
+      <TEXTBOX text="myAss5" />
     <BUTTON text="but0" />
     <BUTTON text="but1" />
     <BUTTON text="but2" />
@@ -35,8 +41,7 @@
     <CHECKBOX text="click me3" />
   </LISTBOX>
   
-  
-
+ 
     <COMBOBOX x="160" y="180" w="200" h="32">
       <BUTTON text="but0" />
       <BUTTON text="but1" />
