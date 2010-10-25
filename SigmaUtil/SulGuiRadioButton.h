@@ -17,6 +17,8 @@ public:
 
 	void						removeSelect();
 
+	virtual class CSulGuiRadioButton*	asRadioButton()	{ return this; }
+
 protected:
 	void						setMouseRelease( bool bInside );
 

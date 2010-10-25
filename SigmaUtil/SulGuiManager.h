@@ -26,11 +26,12 @@ public:
 	class CSulGuiComp*	get( const CSulString& id );
 
 	// convience methods
-	class CSulGuiTextBox*	getTextBox( const CSulString& id );
-	class CSulGuiCanvas*	getCanvas( const CSulString& id );
-	class CSulGuiListBox*	getListBox( const CSulString& id );
-	class CSulGuiButton*	getButton( const CSulString& id );
-	class CSulGuiEditBox*	getEditBox( const CSulString& id );
+	class CSulGuiTextBox*		getTextBox( const CSulString& id );
+	class CSulGuiCanvas*		getCanvas( const CSulString& id );
+	class CSulGuiListBox*		getListBox( const CSulString& id );
+	class CSulGuiButton*		getButton( const CSulString& id );
+	class CSulGuiEditBox*		getEditBox( const CSulString& id );
+	class CSulGuiRadioButton*	getRadioButton( const CSulString& id );
 
 private:
 	void	onViewResize( float w, float h );

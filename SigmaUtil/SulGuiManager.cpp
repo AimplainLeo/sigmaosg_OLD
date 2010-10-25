@@ -151,3 +151,14 @@ CSulGuiEditBox* CSulGuiManager::getEditBox( const CSulString& id )
 
 	return 0;
 }
+
+CSulGuiRadioButton* CSulGuiManager::getRadioButton( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asRadioButton();
+	}
+
+	return 0;
+}

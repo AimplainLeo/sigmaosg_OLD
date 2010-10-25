@@ -6,8 +6,9 @@
 #include "SulGuiCanvas.h"
 #include "SulGuiText.h"
 #include "SulSigSlots.h"
+#include "SulExport.h"
 
-class CSulGuiButton : public CSulGuiCanvas
+class SUL_EXPORT CSulGuiButton : public CSulGuiCanvas
 {
 public:
 					CSulGuiButton();
