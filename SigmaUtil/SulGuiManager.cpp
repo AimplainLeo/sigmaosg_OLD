@@ -162,3 +162,25 @@ CSulGuiRadioButton* CSulGuiManager::getRadioButton( const CSulString& id )
 
 	return 0;
 }
+
+CSulGuiComboBox* CSulGuiManager::getComboBox( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asComboBox();
+	}
+
+	return 0;
+}
+
+CSulGuiCheckBox* CSulGuiManager::getCheckBox( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asCheckBox();
+	}
+
+	return 0;
+}

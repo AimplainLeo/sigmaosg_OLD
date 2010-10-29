@@ -4,8 +4,9 @@
 #define __SULGUICHECKBOX_H__
 
 #include "SulGuiCanvas.h"
+#include "SulExport.h"
 
-class CSulGuiCheckBox : public CSulGuiCanvas
+class SUL_EXPORT CSulGuiCheckBox : public CSulGuiCanvas
 {
 public:
 								CSulGuiCheckBox( const CSulString& sText, float x, float y, float w, float h );
@@ -14,6 +15,10 @@ public:
 	virtual void				setupEventHandler( class CSulGuiEventHandler* pEventHandler );
 
 	void						init();
+
+	bool	isChecked();
+
+	virtual class CSulGuiCheckBox*		asCheckBox()	{ return this; }
 
 protected:
 	void						setMouseRelease( bool bInside );

@@ -88,3 +88,8 @@ void CSulGuiCheckBox::init()
 
 	showCanvas( false );
 }
+
+bool CSulGuiCheckBox::isChecked()
+{
+	return m_bActive;
+}

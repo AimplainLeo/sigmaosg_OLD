@@ -32,6 +32,8 @@ public:
 	class CSulGuiButton*		getButton( const CSulString& id );
 	class CSulGuiEditBox*		getEditBox( const CSulString& id );
 	class CSulGuiRadioButton*	getRadioButton( const CSulString& id );
+	class CSulGuiComboBox*		getComboBox( const CSulString& id );
+	class CSulGuiCheckBox*		getCheckBox( const CSulString& id );
 
 private:
 	void	onViewResize( float w, float h );

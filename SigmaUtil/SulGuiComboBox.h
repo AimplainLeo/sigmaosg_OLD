@@ -14,7 +14,6 @@ class CSulGuiComboBox : public CSulGuiCanvas
 public:
 					CSulGuiComboBox( float x, float y, float w, float h );
 
-//	virtual void	setupView( float w, float h );
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
@@ -22,6 +21,8 @@ public:
 	virtual void	init();
 
 	virtual bool	addChild( Node *child );
+
+	virtual class CSulGuiComboBox*		asComboBox()	{ return this; }
 
 private:
 	void			onDropDownClick( CSulGuiCanvas* );
