@@ -2,11 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PostFilter_HDR", "PostFilter_HDR.vcproj", "{D58BB85A-4031-4A59-9DE0-049DAC7A6286}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SigmaUtil", "..\..\sigmaosg\SigmaUtil\SigmaUtil_express2008.vcproj", "{3EB97355-D1CB-4537-9255-2DEBF2777FE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +13,6 @@ Global
 		{D58BB85A-4031-4A59-9DE0-049DAC7A6286}.Debug|Win32.Build.0 = Debug|Win32
 		{D58BB85A-4031-4A59-9DE0-049DAC7A6286}.Release|Win32.ActiveCfg = Release|Win32
 		{D58BB85A-4031-4A59-9DE0-049DAC7A6286}.Release|Win32.Build.0 = Release|Win32
-		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Debug|Win32.ActiveCfg = Debug|Win32
-		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Debug|Win32.Build.0 = Debug|Win32
-		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Release|Win32.ActiveCfg = Release|Win32
-		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

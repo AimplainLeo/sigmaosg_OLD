@@ -124,7 +124,7 @@ osg::Node* createSkyBox()
 
 	osg::Geode* pGeode = new osg::Geode;
 	pGeode->setCullingActive(false);
-	pGeode->addDrawable( pBox->getGeometry() );
+	pGeode->addDrawable( pBox->getDrawable() );
 
 	osg::StateSet* stateset = new osg::StateSet;
     stateset->setMode(GL_LIGHTING,  osg::StateAttribute::OFF);
