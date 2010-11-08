@@ -15,6 +15,8 @@ public:
 	void			toggleSelect();
 	void			setSelect( bool bSelect );
 
+	bool			isSelected();
+
 private:
 	osg::ref_ptr<CSulGuiCanvas>	m_rCanvas;
 	bool						m_bSelected;

@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiListBox.h"
 #include "SulGuiEventHandler.h"
+#include "SulGuiTextBox.h"
 #include <osg/scissor>
 #include <osgManipulator/Selection>
 
@@ -67,14 +68,14 @@ void CSulGuiListBox::init()
 
 float CSulGuiListBox::getTotalItemsHeight()
 {
-	MAP_GUIITEM::iterator i, e;
-	i = m_mapItem.begin();	
-	e = m_mapItem.end();
+	VEC_GUIITEM::iterator i, e;
+	i = m_vecItem.begin();	
+	e = m_vecItem.end();
 	float h = 0.0f;
 
 	while( i!=e )
 	{
-		h += i->first->getH();		
+		h += (*i)->getCanvas()->getH();		
 		++i;
 	}
 
@@ -88,20 +89,67 @@ void CSulGuiListBox::onScrollBarChanged( float val )
 	float realPosition = totalHeight*val;
 
 	// reposition items
-	MAP_GUIITEM::iterator i, e;
-	i = m_mapItem.begin();	
-	e = m_mapItem.end();
+	VEC_GUIITEM::iterator i, e;
+	i = m_vecItem.begin();	
+	e = m_vecItem.end();
 
 	float h = 0.0f;
 
 	while( i!=e )
 	{
-		i->first->setY( -realPosition+h );
-		h += i->first->getH();
+		(*i)->getCanvas()->setY( -realPosition+h );
+		h += (*i)->getCanvas()->getH();
 		++i;
 	}
 }
 
+CSulGuiItem* CSulGuiListBox::getItem( CSulGuiCanvas* pCanvas )
+{
+	VEC_GUIITEM::iterator i = m_vecItem.begin();
+	VEC_GUIITEM::iterator ie = m_vecItem.end();
+
+	while ( i!=ie )
+	{
+		if ( (*i)->getCanvas()==pCanvas )
+			return (*i);
+
+		++i;
+	}
+
+	return 0;
+}
+
+void CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
+{
+	// we need to test that the mouse_local_x and mouse_local_y are inside the listbox itself
+	// because the local coordinates are for the pCanvas and not the listbox we need to calculate
+	// the local mouse coordinates for the listbox
+	osg::NodePath pathToRoot;
+	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
+	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	float mouse_local_x = x-getWorldX();
+	float mouse_local_y = y-getWorldY();
+	if ( !isInside( mouse_local_x, mouse_local_y ) )
+	{
+		return;
+	}
+
+	if ( m_bMultiSelect )
+	{
+		getItem( pCanvas)->toggleSelect();
+		return;
+	}
+
+	VEC_GUIITEM::iterator i,ie;
+	i = m_vecItem.begin();
+	ie = m_vecItem.end();
+	while ( i!=ie )
+	{
+		(*i)->setSelect( (*i)->getCanvas()==pCanvas?true:false );		
+		++i;
+	}
+}
+/*
 void CSulGuiListBox::onClick( CSulGuiCanvas* pItem )
 {
 	if ( m_bMultiSelect )
@@ -127,6 +175,7 @@ void CSulGuiListBox::onClick( CSulGuiCanvas* pItem )
 		++i;
 	}
 }
+*/
 
 void CSulGuiListBox::show( bool bShow )
 {
@@ -149,13 +198,13 @@ void CSulGuiListBox::updateClipping()
 
 	osg::Scissor* pScissor = new osg::Scissor( x, m_viewH-(y+hh), ww+32, hh );
 
-	MAP_GUIITEM::iterator i, e;
-	i = m_mapItem.begin();	
-	e = m_mapItem.end();
+	VEC_GUIITEM::iterator i, e;
+	i = m_vecItem.begin();	
+	e = m_vecItem.end();
 
 	while( i!=e )
 	{
-		i->first->getOrCreateStateSet()->setAttributeAndModes( pScissor, osg::StateAttribute::ON );
+		(*i)->getCanvas()->getOrCreateStateSet()->setAttributeAndModes( pScissor, osg::StateAttribute::ON );
 		++i;
 	}
 }
@@ -175,11 +224,13 @@ bool CSulGuiListBox::addChild( Node *child )
 
 	float h = getTotalItemsHeight();
 
-	m_mapItem[pCanvas] = pItem;
+	m_vecItem.push_back( pItem );
 
 	// we need to set the position of the item in the listbox
 	pCanvas->setXY( m_itemOfsX, h );
-	pCanvas->signalClicked.connect( this, &CSulGuiListBox::onClick );
+
+	getEventHandler()->wantEvent( this, pCanvas, CSulGuiEventHandler::EVENT_MOUSERELEASE ); 
+
 	pCanvas->setActive( false );
 
 	updateClipping();
@@ -193,4 +244,59 @@ void CSulGuiListBox::onViewResize( float w, float h )
 	m_viewH = h;
 
 	updateClipping();
+}
+
+bool CSulGuiListBox::addTextItem( const CSulString& s )
+{
+	CSulGuiTextBox* p = new CSulGuiTextBox( s, 0, 0, 128, 32, 20 );
+	p->setupEventHandler( getEventHandler() );
+	p->setupTheme( getTheme() );
+	p->init();
+	p->useShaderBorder( false );
+	p->useShaderBackground( false );
+	return addChild( p );
+}
+
+CSulString CSulGuiListBox::getSelectedText()
+{
+	VEC_GUIITEM::iterator i, e;
+	i = m_vecItem.begin();	
+	e = m_vecItem.end();
+
+	while( i!=e )
+	{
+		if ( (*i)->isSelected() )
+		{
+			CSulGuiTextBox* pTextBox = dynamic_cast<CSulGuiTextBox*>((*i)->getCanvas());
+			if ( pTextBox )
+			{
+				return pTextBox->getText();
+			}
+		}
+
+		++i;
+	}
+
+	return "";
+}
+
+sigma::int32 CSulGuiListBox::getSelectedIndex()
+{
+	VEC_GUIITEM::iterator i, e;
+	i = m_vecItem.begin();	
+	e = m_vecItem.end();
+
+	sigma::int32 count = 0;
+	while( i!=e )
+	{
+		if ( (*i)->isSelected() )
+		{
+			return count;
+		}
+
+		++count;
+		++i;
+	}
+
+	return -1;
 }

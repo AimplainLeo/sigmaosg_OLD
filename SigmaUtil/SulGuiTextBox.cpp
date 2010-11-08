@@ -66,3 +66,8 @@ void CSulGuiTextBox::setText( const CSulString& text )
 {
 	m_rText->setText( text );
 }
+
+CSulString CSulGuiTextBox::getText()
+{
+	return m_rText->getText();
+}

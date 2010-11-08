@@ -8,8 +8,9 @@
 #include "SulGuiButton.h"
 #include "SulGuiListBox.h"
 #include "SulSigSlots.h"
+#include "SulExport.h"
 
-class CSulGuiComboBox : public CSulGuiCanvas
+class SUL_EXPORT CSulGuiComboBox : public CSulGuiCanvas
 {
 public:
 					CSulGuiComboBox( float x, float y, float w, float h );
@@ -21,6 +22,9 @@ public:
 	virtual void	init();
 
 	virtual bool	addChild( Node *child );
+
+	// convience method that creates a CSulGuiText and adds it some a child
+	bool			addTextItem( const CSulString& s );
 
 	virtual class CSulGuiComboBox*		asComboBox()	{ return this; }
 

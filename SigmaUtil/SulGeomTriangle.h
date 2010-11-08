@@ -27,8 +27,7 @@ public:
 
 	const CSulDataTri	getTriangle() const;
 
-protected:
-	void		createDrawable();
+	virtual void		createDrawable();
 
 private:
 	TYPE		m_type;

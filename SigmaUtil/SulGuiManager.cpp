@@ -10,6 +10,8 @@
 
 CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 {
+	m_pParent = 0;
+
 	m_viewW = pViewer->getCamera()->getViewport()->width();
 	m_viewH = pViewer->getCamera()->getViewport()->height();
 	m_rViewer = pViewer;
@@ -21,6 +23,7 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
     pViewer->addEventHandler( m_rEventHandler );
 
 	m_rMT = new osg::MatrixTransform;
+	m_rMT->setDataVariance( osg::Object::DYNAMIC );
 	m_rMT->setMatrix( osg::Matrix::identity() );
 
 	// create projection matrix
@@ -73,14 +76,38 @@ void CSulGuiManager::onViewResize( float w, float h )
 	setMatrix( osg::Matrix::ortho2D( 0, w, h, 0) );
 }
 
+// note, in this order
+//  eventTraversal
+//  updateTraversal
+//  renderingTraversals
+
+
 void CSulGuiManager::show( bool bShow )
 {
-	m_rMT->setNodeMask( bShow?0xFFFFFFFF:0 );
+	if ( bShow )
+	{
+		if ( m_pParent )
+			m_pParent->addChild( this );
+
+		m_pParent = 0;
+	}
+	else
+	{
+		if ( !m_pParent )
+		{
+			m_pParent = getParent(0);
+			m_pParent->removeChild( this );
+		}
+	}
+
+	//m_rMT->setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
 bool CSulGuiManager::isVisible()
 {
-	return m_rMT->getNodeMask()==0?false:true;
+	return m_pParent?false:true;
+
+//	return m_rMT->getNodeMask()==0?false:true;
 }
 
 void CSulGuiManager::setEditMode( bool bEdit )
@@ -180,6 +207,17 @@ CSulGuiCheckBox* CSulGuiManager::getCheckBox( const CSulString& id )
 	if ( p )
 	{
 		return p->asCheckBox();
+	}
+
+	return 0;
+}
+
+CSulGuiDial* CSulGuiManager::getDial( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asDial();
 	}
 
 	return 0;

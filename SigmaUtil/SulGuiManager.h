@@ -34,6 +34,7 @@ public:
 	class CSulGuiRadioButton*	getRadioButton( const CSulString& id );
 	class CSulGuiComboBox*		getComboBox( const CSulString& id );
 	class CSulGuiCheckBox*		getCheckBox( const CSulString& id );
+	class CSulGuiDial*			getDial( const CSulString& id );
 
 private:
 	void	onViewResize( float w, float h );
@@ -44,6 +45,8 @@ private:
 	osg::ref_ptr<CSulGuiEventHandler>	m_rEventHandler;
 	float m_viewW;
 	float m_viewH;
+
+	osg::Group* m_pParent;
 };
 
 #endif // __SULGUIMANAGER_H__

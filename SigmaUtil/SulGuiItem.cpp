@@ -26,3 +26,8 @@ void CSulGuiItem::setSelect( bool bSelect )
 	m_bSelected = bSelect;
 	m_rCanvas->m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", m_bSelected?1:0 ) );
 }
+
+bool CSulGuiItem::isSelected()
+{
+	return m_bSelected;
+}

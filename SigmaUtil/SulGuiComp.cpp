@@ -81,8 +81,9 @@ void CSulGuiComp::setupTheme( CSulGuiThemeXml* pThemeXml )
 	m_rThemeXml = pThemeXml;
 }
 
-void CSulGuiComp::setupView( float w, float h )
+CSulGuiThemeXml* CSulGuiComp::getTheme()
 {
+	return m_rThemeXml;
 }
 
 void CSulGuiComp::setupEventHandler( CSulGuiEventHandler* pEventHandler )
@@ -167,11 +168,13 @@ float CSulGuiComp::getWorldY()
 
 void CSulGuiComp::show( bool bShow )
 {
+	// FIXME: don't use nodemasks
 	setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
 void CSulGuiComp::toggleShow()
 {
+	// FIXME: don't use nodemasks
 	int i = getNodeMask();
 	setNodeMask( i?0:0xFFFFFFFF );
 }

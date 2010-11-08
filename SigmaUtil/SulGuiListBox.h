@@ -7,8 +7,9 @@
 #include "SulGuiItem.h"
 #include "SulGuiScrollBar.h"
 #include "SulSigSlots.h"
+#include "SulExport.h"
 
-class CSulGuiListBox : public CSulGuiCanvas
+class SUL_EXPORT CSulGuiListBox : public CSulGuiCanvas
 {
 public:
 					CSulGuiListBox();
@@ -27,19 +28,31 @@ public:
 
 	virtual bool	addChild( Node *child );
 
+	bool			addTextItem( const CSulString& s );
+
+	// returns the first selected (only text -> if any)
+	CSulString		getSelectedText();
+
+	sigma::int32		getSelectedIndex();
+
 	virtual class CSulGuiListBox*	asListBox() { return this; }
+
+	virtual void	eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
 
 private:
 	void			initConstructor();
 
 	void			onViewResize( float w, float h );
-	void			onClick( CSulGuiCanvas* pItem );
+//	void			onClick( CSulGuiCanvas* pItem );
 	void			onScrollBarChanged( float val );
 
 	void			updateClipping();
 
+	CSulGuiItem*	getItem( CSulGuiCanvas* pCanvas );
+
 private:
-	MAP_GUIITEM						m_mapItem;
+	//MAP_GUIITEM						m_mapItem;
+	VEC_GUIITEM						m_vecItem;
 	osg::ref_ptr<CSulGuiScrollBar>	m_rScrollBar;
 	float							m_clipPadding;
 	float							m_viewW;

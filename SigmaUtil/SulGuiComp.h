@@ -32,7 +32,8 @@ public:
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupEventHandler( class CSulGuiEventHandler* pEventHandler );
-	virtual void	setupView( float w, float h );
+
+	CSulGuiThemeXml* getTheme();
 
 	void			setXY( float x, float y );
 	void			setX( float x );
@@ -51,11 +52,16 @@ public:
 
 	void			setLayer( sigma::uint32 layer );
 
+	// deprecated event system
 	virtual void	eventMouseMove( float local_x, float local_y, float x, float y );
 	virtual void	eventMouseDrag( float local_x, float local_y, float x, float y );
 	virtual void	eventMousePushed( float local_x, float local_y, float x, float y );
 	virtual void	eventMouseRelease( float x_local, float y_local, float x, float y );
 	virtual void	eventKeyDown( sigma::int32 key, sigma::int32 iMod );
+
+	// new event system
+	virtual void	eventMousePush( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y ) {}
+	virtual void	eventMouseRelease( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y ) {}
 
 	CSulString						getThemeValue( const CSulString& attr );
 	CSulGuiEventHandler*			getEventHandler();
@@ -70,6 +76,7 @@ public:
 	virtual class CSulGuiRadioButton*	asRadioButton()	{ return 0; }
 	virtual class CSulGuiComboBox*		asComboBox()	{ return 0; }
 	virtual class CSulGuiCheckBox*		asCheckBox()	{ return 0; }
+	virtual class CSulGuiDial*			asDial()		{ return 0; }
 
 	sigma::signal2<float, float>	signalPositionChanged;
 

@@ -10,7 +10,10 @@
 class CSulGeomLineStrip : public CSulGeomBase
 {
 public: 
+					CSulGeomLineStrip();
 					CSulGeomLineStrip( const sigma::VEC_VEC3& vecVector );
+
+	void			setLines( const sigma::VEC_VEC3& vecVector );
 
 	void			setWidth( float width );
 	

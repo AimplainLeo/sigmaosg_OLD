@@ -10,7 +10,6 @@ m_extent( extent )
 
 void CSulGeomBox::createDrawable()
 {
-	//CSulGeomBase::createGeometry();
 	setDrawable( new osg::Geometry );
 
 	// vertices

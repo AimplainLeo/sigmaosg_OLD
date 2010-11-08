@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "SulGuiEventHandler.h"
+#include "SulGuiCanvas.h"
 #include <osgViewer/Viewer>
 #include <osgManipulator/Selection>
 
@@ -51,14 +52,67 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
     {
 		float mouse_x = ea.getX();
 		float mouse_y = ea.getYmax()-ea.getY();
+
+		// deprecated, not well suited for gui
 		signalMousePush( mouse_x, mouse_y );
+
+		// send new event
+		VEC_EVENT::iterator i = m_vecMousePush.begin();
+		VEC_EVENT::iterator ie = m_vecMousePush.end();
+		while ( i!=ie )
+		{
+			CSulGuiEvent* e = *i;
+			CSulGuiCanvas* pCanvas = e->m_rGuiCanvas;	// test event against this canvas
+
+			// calc local mouse coords
+			osg::NodePath pathToRoot;
+			osgManipulator::computeNodePathToRoot( *pCanvas, pathToRoot );
+			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			float mouse_local_x = mouse_x-m.getTrans().x();
+			float mouse_local_y = mouse_y-m.getTrans().y();
+			
+			// are we inside
+			if ( pCanvas->isInside( mouse_local_x, mouse_local_y ) )
+			{
+				e->m_rGuiCompReceiver->eventMousePush( pCanvas, mouse_local_x, mouse_local_y, mouse_x, mouse_y );
+			}
+			
+			++i;
+		}
+
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::RELEASE )
     {
 		float mouse_x = ea.getX();
 		float mouse_y = ea.getYmax()-ea.getY();
+
+		// deprecated, not well suited for gui
 		signalMouseRelease( mouse_x, mouse_y );
+
+		// send new event
+		VEC_EVENT::iterator i = m_vecMouseRelease.begin();
+		VEC_EVENT::iterator ie = m_vecMouseRelease.end();
+		while ( i!=ie )
+		{
+			CSulGuiEvent* e = *i;
+			CSulGuiCanvas* pCanvas = e->m_rGuiCanvas;	// test event against this canvas
+
+			// calc local mouse coords
+			osg::NodePath pathToRoot;
+			osgManipulator::computeNodePathToRoot( *pCanvas, pathToRoot );
+			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			float mouse_local_x = mouse_x-m.getTrans().x();
+			float mouse_local_y = mouse_y-m.getTrans().y();
+			
+			// are we inside
+			if ( pCanvas->isInside( mouse_local_x, mouse_local_y ) )
+			{
+				e->m_rGuiCompReceiver->eventMouseRelease( pCanvas, mouse_local_x, mouse_local_y, mouse_x, mouse_y );
+			}
+			
+			++i;
+		}
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::RESIZE )
@@ -71,3 +125,17 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
     return false;
 }
 
+
+void CSulGuiEventHandler::wantEvent( CSulGuiComp* pCompReceiver, CSulGuiCanvas* pCanvas, EEVENT e )
+{
+	switch ( e )
+	{
+		case EVENT_MOUSEPUSH:
+			m_vecMousePush.push_back( new CSulGuiEvent(pCompReceiver,pCanvas) );
+			break;
+
+		case EVENT_MOUSERELEASE:
+			m_vecMouseRelease.push_back( new CSulGuiEvent(pCompReceiver,pCanvas) );
+			break;
+	}
+}

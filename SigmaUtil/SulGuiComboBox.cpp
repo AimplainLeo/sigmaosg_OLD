@@ -2,25 +2,16 @@
 
 #include "stdafx.h"
 #include "SulGuiComboBox.h"
-
+#include "SulGuiTextBox.h"
 
 CSulGuiComboBox::CSulGuiComboBox( float x, float y, float w, float h ) :
 CSulGuiCanvas( "COMBOBOX", x, y, w, h )
 {
 	// combobox is going to be built with an textbox, listbox, button
-
 	m_rTextBox = new CSulGuiTextBox( 0, 0 );
 	m_rButton = new CSulGuiButton;
 	m_rListBox = new CSulGuiListBox;
 }
-/*
-void CSulGuiComboBox::setupView( float w, float h )
-{
-	CSulGuiCanvas::setupView( w, h );
-
-	if ( m_rListBox.valid() ) m_rListBox->setupView( w, h );
-}
-*/
 
 void CSulGuiComboBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
@@ -85,4 +76,16 @@ bool CSulGuiComboBox::addChild( Node *child )
 void CSulGuiComboBox::onDropDownClick( CSulGuiCanvas* pCanvas )
 {
 	m_rListBox->toggleShow();
+}
+
+// FIXME: this is not working???
+bool CSulGuiComboBox::addTextItem( const CSulString& s )
+{
+	CSulGuiTextBox* p = new CSulGuiTextBox( 0, 0 );
+	p->setupEventHandler( getEventHandler() );
+	p->init();
+	p->useShaderBorder( false );
+	p->useShaderBackground( false );
+	p->setText( s );
+	return addChild( p );
 }

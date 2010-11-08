@@ -19,6 +19,7 @@ public:
 	virtual void	init();
 
 	void			setText( const CSulString& text );
+	CSulString		getText();
 
 	CSulGuiTextBox*	asTextBox() { return this; }
 

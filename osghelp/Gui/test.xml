@@ -1,6 +1,8 @@
 <ROOT name="test" native_w="1024" native_h="512" >
 
-  
+  <DIAL x="100" y="100" radius="50.0"/>
+
+<!-- 
   <CANVAS x="32" y="32" w="900" h="400">
 
     <BUTTON text="myBut" x="8" y="8" />
@@ -82,8 +84,7 @@
   <ALIGN align_v="bottom" align_h="right">
     <COUNTER x="20" y="20" digits="8" />
   </ALIGN>
-  
-
+-->
 </ROOT>
 
 

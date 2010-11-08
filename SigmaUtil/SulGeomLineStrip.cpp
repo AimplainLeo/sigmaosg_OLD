@@ -3,10 +3,20 @@
 #include "stdafx.h"
 #include "SulGeomLineStrip.h"
 
+CSulGeomLineStrip::CSulGeomLineStrip() :
+CSulGeomBase()
+{
+}
+
 CSulGeomLineStrip::CSulGeomLineStrip( const sigma::VEC_VEC3& vecVector ) :
 CSulGeomBase(),
 m_vecVector( vecVector )
 {
+}
+
+void CSulGeomLineStrip::setLines( const sigma::VEC_VEC3& vecVector )
+{
+	m_vecVector = vecVector;
 }
 
 void CSulGeomLineStrip::createDrawable()

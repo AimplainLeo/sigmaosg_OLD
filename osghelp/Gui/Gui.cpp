@@ -6,8 +6,8 @@
 #include <osg/ShapeDrawable>
 #include <osgGA/TrackballManipulator>
 #include <SigmaUtil/SulGuiManager.h>
- 
 #include <SigmaUtil/SulShaderColor.h>
+#include <SigmaUtil/SulGuiListBox.h>
 
 osg::Node* createScene()
 {
@@ -36,6 +36,15 @@ osg::Group* createGui( osgViewer::Viewer* pViewer )
 	pGroup->addChild( pGuiManager );
 
 	//pGuiManager->setEditMode( true );
+
+	CSulGuiListBox* pListBox = pGuiManager->getListBox( "testme" );
+	if ( pListBox )
+	{
+		pListBox->addTextItem( "one" );
+		pListBox->addTextItem( "two" );
+		pListBox->addTextItem( "three" );
+		pListBox->addTextItem( "four" );
+	}
 
 	return pGroup;
 }

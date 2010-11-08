@@ -208,6 +208,14 @@
 				Name="Geoms"
 				>
 				<File
+					RelativePath=".\SulGeomArrow2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomArrow2D.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomBase.cpp"
 					>
 				</File>
@@ -237,6 +245,14 @@
 				</File>
 				<File
 					RelativePath=".\SulGeomBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomCircle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomCircle.h"
 					>
 				</File>
 				<File
@@ -600,6 +616,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGuiEvent.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGuiEventHandler.cpp"
 					>
 				</File>
@@ -688,6 +708,14 @@
 					</File>
 					<File
 						RelativePath=".\SulGuiCounter.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiDial.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiDial.h"
 						>
 					</File>
 					<File

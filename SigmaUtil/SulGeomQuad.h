@@ -57,8 +57,7 @@ public:
 
 	void							setCenter( const osg::Vec3& vCenter );
 
-protected:
-	void							createDrawable();
+	virtual void					createDrawable();
 
 private:
 	void							calcVertPositions();
