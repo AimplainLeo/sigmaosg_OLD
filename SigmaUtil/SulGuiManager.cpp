@@ -63,7 +63,7 @@ bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent, CSul
 	std::string fileXml = osgDB::findDataFile( sFileXml );
 	if ( fileXml.empty() )
 	{
-		osg::notify(osg::WARN) << "ERROR: CSulGuiManager::load -> could not find xml file" << fileXml << std::endl;
+		osg::notify(osg::WARN) << "ERROR: CSulGuiManager::load -> could not find xml file" << sFileXml << std::endl;
 		return false;
 	}
 
