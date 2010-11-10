@@ -5,6 +5,7 @@
 #include "SulGuiComp.h"
 #include "SulShaderGuiFrame.h"
 #include "SulGuiEventHandler.h"
+#include "SulNodePath.h"
 #include <osgManipulator/Selection>
 
 CSulGuiCanvas::CSulGuiCanvas( const CSulString& sCompName ) :
@@ -240,9 +241,9 @@ bool isInsideChildren( float x, float y, CSulGuiCanvas* pCanvas )
 		if ( pChild )
 		{
 			// are we inside this child?
-			osg::NodePath pathToRoot;
-			osgManipulator::computeNodePathToRoot( *pChild, pathToRoot );
-			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			osg::NodePath path;
+			sulNodePath( *pChild, path, 0, true );
+			osg::Matrix m = osg::computeLocalToWorld( path );
 			float local_x = x-m.getTrans().x();
 			float local_y = y-m.getTrans().y();
 			if ( pChild->isInside( local_x, local_y ) )
@@ -263,9 +264,9 @@ bool isInsideChildren( float x, float y, CSulGuiCanvas* pCanvas )
 void CSulGuiCanvas::onMousePush( float x, float y )
 {
 	// calc local positions
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
 	float local_x = x-m.getTrans().x();
 	float local_y = y-m.getTrans().y();
 
@@ -285,9 +286,9 @@ void CSulGuiCanvas::onMousePush( float x, float y )
 void CSulGuiCanvas::onMouseRelease( float x, float y )
 {
 	// calc local positions
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
 	float local_x = x-m.getTrans().x();
 	float local_y = y-m.getTrans().y();
 
@@ -319,9 +320,9 @@ void CSulGuiCanvas::onMouseRelease( float x, float y )
 void CSulGuiCanvas::onMouseMove( float x, float y )
 {
 	// calc local positions
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
 	float local_x = x-m.getTrans().x();
 	float local_y = y-m.getTrans().y();
 
@@ -348,9 +349,9 @@ void CSulGuiCanvas::onMouseMove( float x, float y )
 void CSulGuiCanvas::onMouseDrag( float x, float y )
 {
 	// calc local positions
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
 	float local_x = x-m.getTrans().x();
 	float local_y = y-m.getTrans().y();
 

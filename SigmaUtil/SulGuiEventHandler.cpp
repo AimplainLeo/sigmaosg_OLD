@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiEventHandler.h"
 #include "SulGuiCanvas.h"
+#include "SulNodePath.h"
 #include <osgViewer/Viewer>
 #include <osgManipulator/Selection>
 
@@ -65,9 +66,9 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			CSulGuiCanvas* pCanvas = e->m_rGuiCanvas;	// test event against this canvas
 
 			// calc local mouse coords
-			osg::NodePath pathToRoot;
-			osgManipulator::computeNodePathToRoot( *pCanvas, pathToRoot );
-			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			osg::NodePath path;
+			sulNodePath( *pCanvas, path, 0, true );
+			osg::Matrix m = osg::computeLocalToWorld( path );
 			float mouse_local_x = mouse_x-m.getTrans().x();
 			float mouse_local_y = mouse_y-m.getTrans().y();
 			
@@ -99,9 +100,9 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			CSulGuiCanvas* pCanvas = e->m_rGuiCanvas;	// test event against this canvas
 
 			// calc local mouse coords
-			osg::NodePath pathToRoot;
-			osgManipulator::computeNodePathToRoot( *pCanvas, pathToRoot );
-			osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+			osg::NodePath path;
+			sulNodePath( *pCanvas, path, 0, true );
+			osg::Matrix m = osg::computeLocalToWorld( path );
 			float mouse_local_x = mouse_x-m.getTrans().x();
 			float mouse_local_y = mouse_y-m.getTrans().y();
 			

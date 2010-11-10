@@ -4,6 +4,7 @@
 #include "SulGuiListBox.h"
 #include "SulGuiEventHandler.h"
 #include "SulGuiTextBox.h"
+#include "SulNodePath.h"
 #include <osg/scissor>
 #include <osgManipulator/Selection>
 
@@ -124,9 +125,9 @@ void CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, f
 	// we need to test that the mouse_local_x and mouse_local_y are inside the listbox itself
 	// because the local coordinates are for the pCanvas and not the listbox we need to calculate
 	// the local mouse coordinates for the listbox
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
 	float mouse_local_x = x-getWorldX();
 	float mouse_local_y = y-getWorldY();
 	if ( !isInside( mouse_local_x, mouse_local_y ) )

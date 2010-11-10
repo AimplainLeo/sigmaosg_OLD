@@ -36,6 +36,8 @@ public:
 private:
 	VEC_EVENT	m_vecMousePush;
 	VEC_EVENT	m_vecMouseRelease;
+
+	osg::ref_ptr<osg::Node>	m_rootNode;
 };
 
 #endif // __SULGUIEVENTHANDLER_H__

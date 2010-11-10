@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiComp.h"
 #include "SulGuiEventHandler.h"
+#include "SulNodePath.h"
 #include <osg/matrix>
 #include <osgManipulator/Selection>
 
@@ -150,18 +151,18 @@ float CSulGuiComp::getY()
 
 float CSulGuiComp::getWorldX()
 {
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
 	osg::Vec3 pos = m.getTrans();
 	return pos.x();
 }
 
 float CSulGuiComp::getWorldY()
 {
-	osg::NodePath pathToRoot;
-	osgManipulator::computeNodePathToRoot( *this, pathToRoot );
-	osg::Matrix m = osg::computeLocalToWorld( pathToRoot );
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
 	osg::Vec3 pos = m.getTrans();
 	return pos.y();
 }

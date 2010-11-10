@@ -16,15 +16,15 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 	m_viewH = pViewer->getCamera()->getViewport()->height();
 	m_rViewer = pViewer;
 
+	m_rMT = new osg::MatrixTransform;
+	m_rMT->setDataVariance( osg::Object::DYNAMIC );
+	m_rMT->setMatrix( osg::Matrix::identity() );
+
 	m_rEventHandler = new CSulGuiEventHandler;
 	//m_rEventHandler->setIgnoreHandledEventsMask( osgGA::GUIEventAdapter::PUSH | osgGA::GUIEventAdapter::MOVE | osgGA::GUIEventAdapter::DRAG | osgGA::GUIEventAdapter::RELEASE | osgGA::GUIEventAdapter::RESIZE | osgGA::GUIEventAdapter::KEYDOWN);
 	m_rEventHandler->setIgnoreHandledEventsMask( 0 );
 	m_rEventHandler->signalViewResize.connect( this, &CSulGuiManager::onViewResize );
     pViewer->addEventHandler( m_rEventHandler );
-
-	m_rMT = new osg::MatrixTransform;
-	m_rMT->setDataVariance( osg::Object::DYNAMIC );
-	m_rMT->setMatrix( osg::Matrix::identity() );
 
 	// create projection matrix
 	setName( "CSulGuiManager -> Projection" );

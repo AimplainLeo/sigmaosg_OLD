@@ -943,6 +943,14 @@
 				Name="Traversing"
 				>
 				<File
+					RelativePath=".\SulNodePath.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulNodePath.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulNodeTraverse.cpp"
 					>
 				</File>
