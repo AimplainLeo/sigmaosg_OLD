@@ -303,7 +303,7 @@ void test4()
 
 	gl_Position = gl_ModelViewProjectionMatrix * mV * vec4( vertex, 1.0 );
 
-	v = gl_ModelViewMatrix * mV * gl_Vertex;  
+	v = gl_ModelViewMatrix * mV * vec4( vertex, 1.0 );
 }
 
 void main()

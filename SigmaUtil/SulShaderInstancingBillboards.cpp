@@ -8,7 +8,7 @@ CSulShaderBase( pNode )
 {
 	if ( !pProg )
 	{
-		addShaderFrag( "shaders/instancing_billboards.frag" );
+		addShaderFrag( "shaders/instancing_billboards_collision.frag" );
 		addShaderVert( "shaders/instancing_billboards.vert" );
 
 		m_rUniform_windFactor = new osg::Uniform( "windFactor", 1.0f );
