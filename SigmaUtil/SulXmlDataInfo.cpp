@@ -3,10 +3,6 @@
 #include "stdafx.h"
 #include "SulXmlDataInfo.h"
 
-#ifdef _DEBUG
-#define new DEBUG_CLIENTBLOCK
-#endif
-
 void CSulXmlDataInfo::setAttr( CSulXmlAttr* pAttr )
 {
 	m_rAttr = pAttr;

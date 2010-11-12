@@ -3,10 +3,6 @@
 #include "stdafx.h"
 #include "SulXmlAttr.h"
 
-#ifdef _DEBUG
-#define new DEBUG_CLIENTBLOCK
-#endif
-
 CSulXmlAttr::CSulXmlAttr()
 {
 	m_dwCount = 0;

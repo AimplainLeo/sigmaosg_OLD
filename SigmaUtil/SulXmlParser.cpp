@@ -5,10 +5,6 @@
 #include "SulParser.h"
 #include "SulXmlAttr.h"
 
-#ifdef _DEBUG
-#define new DEBUG_CLIENTBLOCK
-#endif
-
 CSulXmlParser::CSulXmlParser()
 {
 }

@@ -4,10 +4,6 @@
 #include "SulFile.h"
 #include "SulString.h"
 
-#ifdef _DEBUG
-#define new DEBUG_CLIENTBLOCK
-#endif
-
 CSulFile::CSulFile()
 {
 	m_pBuf 		= 0;

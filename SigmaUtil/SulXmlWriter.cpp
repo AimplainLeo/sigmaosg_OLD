@@ -5,10 +5,6 @@
 #include "SulXmlAttr.h"
 #include "SulFile.h"
 
-#ifdef _DEBUG
-#define new DEBUG_CLIENTBLOCK
-#endif
-
 CSulXmlWriter::CSulXmlWriter( const char* pszRootName )
 {
 	 m_strRootName = pszRootName;
