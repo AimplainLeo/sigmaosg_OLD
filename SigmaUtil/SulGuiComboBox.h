@@ -31,6 +31,8 @@ public:
 private:
 	void			onDropDownClick( CSulGuiCanvas* );
 	
+	void			itemClicked( CSulGuiItem* pItem );
+
 private:
 	osg::ref_ptr< CSulGuiTextBox >	m_rTextBox;
 	osg::ref_ptr< CSulGuiButton >	m_rButton;

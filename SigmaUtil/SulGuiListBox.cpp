@@ -137,7 +137,7 @@ void CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, f
 
 	if ( m_bMultiSelect )
 	{
-		getItem( pCanvas)->toggleSelect();
+		getItem( pCanvas )->toggleSelect();
 		return;
 	}
 
@@ -146,7 +146,12 @@ void CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, f
 	ie = m_vecItem.end();
 	while ( i!=ie )
 	{
-		(*i)->setSelect( (*i)->getCanvas()==pCanvas?true:false );		
+		(*i)->setSelect( (*i)->getCanvas()==pCanvas?true:false );	
+
+		// signal that an item has been clicked on
+		if ( (*i)->getCanvas()==pCanvas )
+			signalItemClicked( (*i) );
+
 		++i;
 	}
 }

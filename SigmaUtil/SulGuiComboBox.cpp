@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiComboBox.h"
 #include "SulGuiTextBox.h"
+#include "SulGuiEditBox.h"
 
 CSulGuiComboBox::CSulGuiComboBox( float x, float y, float w, float h ) :
 CSulGuiCanvas( "COMBOBOX", x, y, w, h )
@@ -11,6 +12,8 @@ CSulGuiCanvas( "COMBOBOX", x, y, w, h )
 	m_rTextBox = new CSulGuiTextBox( 0, 0 );
 	m_rButton = new CSulGuiButton;
 	m_rListBox = new CSulGuiListBox;
+
+	m_rListBox->signalItemClicked.connect( this, &CSulGuiComboBox::itemClicked );
 }
 
 void CSulGuiComboBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
@@ -88,4 +91,27 @@ bool CSulGuiComboBox::addTextItem( const CSulString& s )
 	p->useShaderBackground( false );
 	p->setText( s );
 	return addChild( p );
+}
+
+void CSulGuiComboBox::itemClicked( CSulGuiItem* pItem )
+{
+	CSulGuiTextBox* pTextBox = dynamic_cast<CSulGuiTextBox*>(pItem->getCanvas());
+	if ( pTextBox )
+	{
+		m_rTextBox->setText( pTextBox->getText() );
+	}
+
+	CSulGuiEditBox* pEditBox = dynamic_cast<CSulGuiEditBox*>(pItem->getCanvas());
+	if ( pEditBox )
+	{
+		m_rTextBox->setText( pEditBox->getText() );
+	}
+
+	CSulGuiButton* pButton = dynamic_cast<CSulGuiButton*>(pItem->getCanvas());
+	if ( pButton )
+	{
+		m_rTextBox->setText( pButton->getText() );
+	}
+
+	m_rListBox->toggleShow();
 }

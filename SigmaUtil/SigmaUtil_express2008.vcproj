@@ -192,6 +192,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulNodePath.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulNodePath.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulSigSlots.h"
 					>
 				</File>

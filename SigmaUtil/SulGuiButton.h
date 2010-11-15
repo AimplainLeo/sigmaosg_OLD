@@ -21,6 +21,7 @@ public:
 	virtual void	init();
 
 	void			setText( const CSulString& sText );
+	const CSulString& getText() const;
 	void			setFontSize( float size );
 
 	void			createDownDecal();

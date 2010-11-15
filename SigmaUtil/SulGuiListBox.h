@@ -39,11 +39,12 @@ public:
 
 	virtual void	eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
 
+	sigma::signal1<CSulGuiItem*>	signalItemClicked;
+
 private:
 	void			initConstructor();
 
 	void			onViewResize( float w, float h );
-//	void			onClick( CSulGuiCanvas* pItem );
 	void			onScrollBarChanged( float val );
 
 	void			updateClipping();
@@ -51,7 +52,6 @@ private:
 	CSulGuiItem*	getItem( CSulGuiCanvas* pCanvas );
 
 private:
-	//MAP_GUIITEM						m_mapItem;
 	VEC_GUIITEM						m_vecItem;
 	osg::ref_ptr<CSulGuiScrollBar>	m_rScrollBar;
 	float							m_clipPadding;

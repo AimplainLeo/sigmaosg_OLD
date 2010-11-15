@@ -86,6 +86,11 @@ void CSulGuiButton::setText( const CSulString& sText )
 	}
 }
 
+const CSulString& CSulGuiButton::getText() const
+{
+	return m_sText;
+}
+
 void CSulGuiButton::setFontSize( float size )
 {
 	m_sizeFont = size;
