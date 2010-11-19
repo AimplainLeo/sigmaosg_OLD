@@ -25,11 +25,9 @@ public:
 
 	CSulGuiEditBox*		asEditBox()	{ return this; }
 
-protected:
-	virtual void		setMouseRelease( bool bInside );
-
 private:
 	void				onKeyDown( sigma::int32 key, sigma::int32 iMod );
+	void				onMouseRelease( float x, float y );
 
 private:
 	osg::ref_ptr<CSulGuiText>	m_rGuiText;

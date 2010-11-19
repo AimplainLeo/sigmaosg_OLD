@@ -35,25 +35,31 @@ void CSulGuiComboBox::setupAttr( CSulXmlAttr* pAttr )
 	CSulGuiCanvas::setupAttr( pAttr );
 }
 
+void CSulGuiComboBox::setLayer( sigma::uint32 layer )
+{
+	CSulGuiCanvas::setLayer( layer );
+	m_rButton->setLayer( layer+10 );
+}
+
 void CSulGuiComboBox::init()
 {
 	CSulGuiCanvas::init();
 
 	if ( m_rTextBox.valid() )
 	{
-		m_rTextBox->setWH( getW(), getH() );
+		m_rTextBox->setWH( getW()-getH(), getH() );
 		m_rTextBox->setupEventHandler( getEventHandler() );
 		m_rTextBox->init();
-		osg::MatrixTransform::addChild( m_rTextBox );
+		CSulGuiCanvas::addChild( m_rTextBox );
 	}
 	
 	if ( m_rButton.valid() )
 	{
-		m_rButton->setX( getW() );
+		m_rButton->setX( getW()-getH() );
 		m_rButton->setWH( getH(), getH() );
 		m_rButton->setupEventHandler( getEventHandler() );
 		m_rButton->init();
-		osg::MatrixTransform::addChild( m_rButton );
+		CSulGuiCanvas::addChild( m_rButton );
 
 		m_rButton->createDownDecal();
 
@@ -62,12 +68,13 @@ void CSulGuiComboBox::init()
 
 	if ( m_rListBox.valid() )
 	{
+		m_rListBox->setBgColor( osg::Vec4(0.5f,0.5f,0.5f,1.0f) );
 		m_rListBox->setY( getH() );
-		m_rListBox->setWH( getW(), 128.0f );
+		m_rListBox->setWH( getW()-getH(), 128.0f );
 		m_rListBox->setupEventHandler( getEventHandler() );
 		m_rListBox->init();
 		m_rListBox->show( false );		
-		osg::MatrixTransform::addChild( m_rListBox );
+		CSulGuiCanvas::addChild( m_rListBox );
 	}
 }
 
@@ -79,18 +86,14 @@ bool CSulGuiComboBox::addChild( Node *child )
 void CSulGuiComboBox::onDropDownClick( CSulGuiCanvas* pCanvas )
 {
 	m_rListBox->toggleShow();
+
+	// HACK: to solve the problem of combobox box vertically aligned and text overlapping
+	m_rListBox->setLayer( getLayer()+11 );
 }
 
-// FIXME: this is not working???
 bool CSulGuiComboBox::addTextItem( const CSulString& s )
 {
-	CSulGuiTextBox* p = new CSulGuiTextBox( 0, 0 );
-	p->setupEventHandler( getEventHandler() );
-	p->init();
-	p->useShaderBorder( false );
-	p->useShaderBackground( false );
-	p->setText( s );
-	return addChild( p );
+	return m_rListBox->addTextItem( s );
 }
 
 void CSulGuiComboBox::itemClicked( CSulGuiItem* pItem )
@@ -114,4 +117,9 @@ void CSulGuiComboBox::itemClicked( CSulGuiItem* pItem )
 	}
 
 	m_rListBox->toggleShow();
+}
+
+sigma::int32 CSulGuiComboBox::getSelectedIndex()
+{
+	return m_rListBox->getSelectedIndex();
 }

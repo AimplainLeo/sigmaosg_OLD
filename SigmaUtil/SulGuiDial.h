@@ -20,7 +20,7 @@ public:
 	virtual class CSulGuiDial*			asDial()		{ return this; }
 
 private:
-	virtual void eventMouseRelease( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
+	virtual bool eventMouseRelease( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
 
 private:
 	float									m_radius;

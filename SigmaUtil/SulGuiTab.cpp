@@ -43,7 +43,7 @@ bool CSulGuiTab::addChild( Node *child )
 	pBut->setFontSize( 20.0f );
 	pBut->setupEventHandler( getEventHandler() );
 	pBut->init();
-	osg::MatrixTransform::addChild( pBut );
+	CSulGuiCanvas::addChild( pBut );
 	CSulGuiItem* pItem = new CSulGuiItem( page );
 	m_mapButton[pBut] = pItem;
 

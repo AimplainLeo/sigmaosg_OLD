@@ -10,6 +10,8 @@
 CSulGuiCheckBox::CSulGuiCheckBox( const CSulString& sText, float x, float y, float w, float h ) :
 CSulGuiCanvas( "CHECKBOX", x, y, w, h )
 {
+	setName( "CSulGuiCheckBox" );
+
 	m_sText = sText;
 	m_bActive = false;
 }

@@ -19,12 +19,16 @@ public:
 	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	
+	virtual void	setLayer( sigma::uint32 layer );
+
 	virtual void	init();
 
 	virtual bool	addChild( Node *child );
 
 	// convience method that creates a CSulGuiText and adds it some a child
 	bool			addTextItem( const CSulString& s );
+
+	sigma::int32	getSelectedIndex();
 
 	virtual class CSulGuiComboBox*		asComboBox()	{ return this; }
 

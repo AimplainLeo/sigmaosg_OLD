@@ -1,7 +1,6 @@
 <ROOT name="test" native_w="1024" native_h="512" >
 
   <CANVAS x="32" y="32" w="900" h="400">
-
     <DIAL x="700" y="230" radius="50.0"/>
     
     <BUTTON text="myBut" x="8" y="8" />
@@ -19,7 +18,6 @@
       <RADIOBUTTON text="radio 4" />
     </RADIOBUTTON_GROUP>
 
-    
   <LISTBOX x="160" y="8" w="200" h="160" multiselect="false">
       <TEXTBOX text="myAss0" />
       <TEXTBOX text="myAss1" />
@@ -42,7 +40,6 @@
     <CHECKBOX text="click me3" />
   </LISTBOX>
   
- 
     <COMBOBOX x="160" y="180" w="200" h="32">
       <BUTTON text="but0" />
       <BUTTON text="but1" />
@@ -73,8 +70,9 @@
     <SCROLLBAR x="700" y="8" w="32" h="128" />
 
     <TEXTBOX text="Froggy" x="700" y="160" />
-    
+
   </CANVAS>
+
 
   <ALIGN align_h="right">
     <CANVAS y="20" w="64" h="64" img="/images/tree_aligned_256.png"/>
@@ -84,6 +82,7 @@
     <COUNTER x="20" y="20" digits="8" />
   </ALIGN>
 
+    
 </ROOT>
 
 

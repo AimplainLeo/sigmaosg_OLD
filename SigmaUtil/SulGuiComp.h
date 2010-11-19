@@ -22,6 +22,10 @@ public:
 	// must be called after all setups have been called
 	virtual void	init();
 
+	virtual bool	addChild( Node *child );
+
+	const CSulString& getCompName() const;
+
 	virtual void	setEditMode( bool bEdit );
 	bool			isEditMode();
 
@@ -43,14 +47,19 @@ public:
 	float			getWorldX();
 	float			getWorldY();
 
+	osg::Vec2		getLocal( const osg::Vec2& vWorld );
+	osg::Vec2		getLocal( float xWorld, float yWorld );
+
 	// attribute x and y values (they never change)
 	float			getAttrX();
 	float			getAttrY();
 
 	virtual void	show( bool bShow );
 	virtual void	toggleShow();
+	bool			isVisible();
 
-	void			setLayer( sigma::uint32 layer );
+	virtual void	setLayer( sigma::uint32 layer );
+	sigma::uint32	getLayer();
 
 	// deprecated event system
 	virtual void	eventMouseMove( float local_x, float local_y, float x, float y );
@@ -60,8 +69,8 @@ public:
 	virtual void	eventKeyDown( sigma::int32 key, sigma::int32 iMod );
 
 	// new event system
-	virtual void	eventMousePush( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y ) {}
-	virtual void	eventMouseRelease( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y ) {}
+	virtual bool	eventMousePush( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y ) { return false; }
+	virtual bool	eventMouseRelease( class CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y ) { return false; }
 
 	CSulString						getThemeValue( const CSulString& attr );
 	CSulGuiEventHandler*			getEventHandler();
@@ -100,6 +109,8 @@ private:
 	float							m_attrX;			
 	float							m_attrY;	
 	bool							m_attrValid;
+
+	sigma::uint32					m_layer;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;

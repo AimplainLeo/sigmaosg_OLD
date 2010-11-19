@@ -7,6 +7,8 @@
 CSulGuiAlign::CSulGuiAlign() :
 CSulGuiCanvas( "ALIGN" )
 {
+	setName( "CSulGuiCanvas" );
+
 	m_eAlignV = TOP;
 	m_eAlignH = LEFT;
 	m_xOfs = 0.0f;

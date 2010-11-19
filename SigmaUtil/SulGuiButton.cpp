@@ -7,6 +7,7 @@
 CSulGuiButton::CSulGuiButton() :
 CSulGuiCanvas( "BUTTON" )
 {
+	setName( "CSulGuiButton" );
 }
 
 CSulGuiButton::CSulGuiButton( const CSulString& sText, float x, float y, float w, float h ) :

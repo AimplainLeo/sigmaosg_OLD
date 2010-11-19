@@ -60,11 +60,23 @@ void CSulGuiListBox::init()
 
 	// add a scrollbar
 	m_rScrollBar = new CSulGuiScrollBar( w, 0, 32, h );
+	m_rScrollBar->setBgColor( getBgColor() );
 	m_rScrollBar->setupEventHandler( getEventHandler() );
 	m_rScrollBar->init();
-	osg::MatrixTransform::addChild( m_rScrollBar );
+	//osg::MatrixTransform::addChild( m_rScrollBar );
+	CSulGuiCanvas::addChild( m_rScrollBar );
 
 	m_rScrollBar->signalChanged.connect( this, &CSulGuiListBox::onScrollBarChanged );
+}
+
+void CSulGuiListBox::setBgColor( const osg::Vec4& c )
+{
+	CSulGuiCanvas::setBgColor( c );
+
+	if ( m_rScrollBar.valid() )
+	{
+		m_rScrollBar->setBgColor( c );
+	}
 }
 
 float CSulGuiListBox::getTotalItemsHeight()
@@ -120,8 +132,14 @@ CSulGuiItem* CSulGuiListBox::getItem( CSulGuiCanvas* pCanvas )
 	return 0;
 }
 
-void CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
+// fixme: local is to pCanvas and not the listbox
+void CSulGuiListBox::onItemClicked( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
 {
+	if ( !isVisible() )
+	{
+		return;
+	}
+
 	// we need to test that the mouse_local_x and mouse_local_y are inside the listbox itself
 	// because the local coordinates are for the pCanvas and not the listbox we need to calculate
 	// the local mouse coordinates for the listbox
@@ -155,31 +173,51 @@ void CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, f
 		++i;
 	}
 }
+
 /*
-void CSulGuiListBox::onClick( CSulGuiCanvas* pItem )
+bool CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
 {
+	if ( !isVisible() )
+	{
+		return false;
+	}
+
+	CSulGuiCanvas::eventMouseRelease( pCanvas, local_x, local_y, x, y );
+
+	// we need to test that the mouse_local_x and mouse_local_y are inside the listbox itself
+	// because the local coordinates are for the pCanvas and not the listbox we need to calculate
+	// the local mouse coordinates for the listbox
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
+	float mouse_local_x = x-getWorldX();
+	float mouse_local_y = y-getWorldY();
+	if ( !isInside( mouse_local_x, mouse_local_y ) )
+	{
+		return false;
+	}
+
 	if ( m_bMultiSelect )
 	{
-		// find item in our list
-		MAP_GUIITEM::iterator iFound = m_mapItem.find( pItem );
-		if ( iFound!=m_mapItem.end() )
-		{
-			iFound->second->toggleSelect();
-		}
-	
-		return;
+		getItem( pCanvas )->toggleSelect();
+		return true;
 	}
 
-	// de-select all
-	MAP_GUIITEM::iterator i,iE;
-
-	i = m_mapItem.begin();
-	iE = m_mapItem.end();
-	while ( i!=iE )
+	VEC_GUIITEM::iterator i,ie;
+	i = m_vecItem.begin();
+	ie = m_vecItem.end();
+	while ( i!=ie )
 	{
-		i->second->setSelect( i->second->getCanvas()==pItem?true:false );		
+		(*i)->setSelect( (*i)->getCanvas()==pCanvas?true:false );	
+
+		// signal that an item has been clicked on
+		if ( (*i)->getCanvas()==pCanvas )
+			signalItemClicked( (*i) );
+
 		++i;
 	}
+
+	return true;
 }
 */
 
@@ -235,7 +273,8 @@ bool CSulGuiListBox::addChild( Node *child )
 	// we need to set the position of the item in the listbox
 	pCanvas->setXY( m_itemOfsX, h );
 
-	getEventHandler()->wantEvent( this, pCanvas, CSulGuiEventHandler::EVENT_MOUSERELEASE ); 
+	//getEventHandler()->wantEvent( this, pCanvas, CSulGuiEventHandler::EVENT_MOUSERELEASE ); 
+	pCanvas->signalClickedExt.connect( this, &CSulGuiListBox::onItemClicked );
 
 	pCanvas->setActive( false );
 

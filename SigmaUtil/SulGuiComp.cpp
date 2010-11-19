@@ -22,6 +22,7 @@ CSulGuiComp::CSulGuiComp( const CSulString& sCompName, float x, float y )
 
 void CSulGuiComp::initConstructor()
 {
+	m_layer = 0;
 	m_bEditMode = false;
 	m_bActive = true;
 	m_renderbinNum = 0;
@@ -37,6 +38,24 @@ void CSulGuiComp::init()
 		setX( m_attrX );
 		setY( m_attrY ); 
 	}
+}
+
+bool CSulGuiComp::addChild( Node *child )
+{
+	bool bRet = osg::MatrixTransform::addChild( child );
+
+	CSulGuiComp* p = dynamic_cast<CSulGuiComp*>(child);
+	if ( p )
+	{
+		p->setLayer( getLayer()+10 );
+	}
+
+	return bRet;
+}
+
+const CSulString& CSulGuiComp::getCompName() const
+{
+	return m_sCompName;
 }
 
 void CSulGuiComp::setEditMode( bool bEdit )
@@ -167,6 +186,22 @@ float CSulGuiComp::getWorldY()
 	return pos.y();
 }
 
+osg::Vec2 CSulGuiComp::getLocal( const osg::Vec2& vWorld )
+{
+	return getLocal( vWorld.x(), vWorld.y() );
+}
+
+osg::Vec2 CSulGuiComp::getLocal( float xWorld, float yWorld )
+{
+	osg::NodePath path;
+	sulNodePath( *this, path, 0, true );
+	osg::Matrix m = osg::computeLocalToWorld( path );
+	osg::Vec2 v;
+	v.x() = xWorld-m.getTrans().x();
+	v.y() = yWorld-m.getTrans().y();
+	return v;
+}
+
 void CSulGuiComp::show( bool bShow )
 {
 	// FIXME: don't use nodemasks
@@ -180,9 +215,32 @@ void CSulGuiComp::toggleShow()
 	setNodeMask( i?0:0xFFFFFFFF );
 }
 
+bool CSulGuiComp::isVisible()
+{
+	int i = getNodeMask();
+	return i==0?false:true;
+}
+
 void CSulGuiComp::setLayer( sigma::uint32 layer )
 {
+	m_layer = layer;
 	getOrCreateStateSet()->setRenderBinDetails( m_renderbinNum?m_renderbinNum:layer, "DepthSortedBin" );
+
+	// set childrens new layer if any
+	sigma::uint32 numChildren = getNumChildren();
+	for ( sigma::uint32 i = 0; i<numChildren; i++ )
+	{
+		CSulGuiComp* p = dynamic_cast<CSulGuiComp*>(getChild( i ));
+		if ( p )
+		{
+			p->setLayer( layer+10 );
+		}
+	}
+}
+
+sigma::uint32 CSulGuiComp::getLayer()
+{
+	return m_layer;
 }
  
 void CSulGuiComp::eventMouseMove( float mouse_local_x, float mouse_local_y, float mouse_x, float mouse_y )

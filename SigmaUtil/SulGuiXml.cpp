@@ -200,7 +200,7 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 
 		pComp->setupTheme( m_rThemeXml );
 		pComp->setupAttr( pAttr );
-		pComp->setLayer( m_indent );
+//		pComp->setLayer( m_indent );
 		pComp->setupEventHandler( m_rEventHandler );		
 		pComp->init();
 		

@@ -37,6 +37,8 @@ void CSulGuiEditBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 	CSulGuiCanvas::setupEventHandler( pEventHandler );
 
 	pEventHandler->signalKeyDown.connect( this, &CSulGuiEditBox::onKeyDown );
+
+	pEventHandler->signalMouseRelease.connect( this, &CSulGuiEditBox::onMouseRelease );
 }
 
 void CSulGuiEditBox::init()
@@ -53,14 +55,16 @@ void CSulGuiEditBox::init()
 	addChild( m_rGuiText );
 }
 
-void CSulGuiEditBox::setMouseRelease( bool bInside )
+void CSulGuiEditBox::onMouseRelease( float x, float y )
 {
 	if ( isActive() )
 	{
+		bool bInside = isInsideWorld( x, y );
 		m_bEditActive = bInside;
 		setBorderColor( bInside?osg::Vec4( 1,1,0,1 ):osg::Vec4( 0,0,1,1 ) );
 		m_rGuiText->setText( m_sText );
 	}
+
 }
 
 void CSulGuiEditBox::setText( const CSulString& sText )

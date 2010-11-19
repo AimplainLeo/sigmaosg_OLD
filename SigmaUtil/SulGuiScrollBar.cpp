@@ -33,12 +33,14 @@ void CSulGuiScrollBar::init()
 
 	// need top and bottom button
 	m_rButtonTop = new CSulGuiButton( 0, 0, w, w );
+	m_rButtonTop->setBgColor( getBgColor() );
 	m_rButtonTop->setupEventHandler( getEventHandler() );
 	m_rButtonTop->init();
 	m_rButtonTop->createUpDecal();
 	addChild( m_rButtonTop );
 
 	m_rButtonBottom = new CSulGuiButton( 0, h-w, w, w );
+	m_rButtonBottom->setBgColor( getBgColor() );
 	m_rButtonBottom->setupEventHandler( getEventHandler() );
 	m_rButtonBottom->init();
 	m_rButtonBottom->createDownDecal();
@@ -47,11 +49,19 @@ void CSulGuiScrollBar::init()
 	// need drag button
 	m_rangeDrag = h-w-w/2.0f;
 	m_rButtonDrag = new CSulGuiButton( 0, w, w, w/2.0f );
+	m_rButtonDrag->setBgColor( getBgColor() );
 	m_rButtonDrag->setupEventHandler( getEventHandler() );
 	m_rButtonDrag->init();
 	m_rButtonDrag->allowDrag( 0, 0, w, m_rangeDrag );
 	addChild( m_rButtonDrag );
 
 	m_rButtonDrag->signalPositionChanged.connect( this, &CSulGuiScrollBar::onButtonDragPositionChanged );
+}
 
+void CSulGuiScrollBar::setBgColor( const osg::Vec4& c )
+{
+	CSulGuiCanvas::setBgColor( c );
+	if ( m_rButtonTop.valid() )	m_rButtonTop->setBgColor( c );
+	if ( m_rButtonBottom.valid() ) m_rButtonBottom->setBgColor( c );
+	if ( m_rButtonDrag.valid() ) m_rButtonDrag->setBgColor( c );
 }

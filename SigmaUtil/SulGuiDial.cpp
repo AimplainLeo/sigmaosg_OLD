@@ -54,7 +54,7 @@ void CSulGuiDial::init()
 	showCanvas( false );
 }
 
-void CSulGuiDial::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
+bool CSulGuiDial::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
 {
 	// NOTE: because we have flipped the y-axis to have 0,0 in top,left corner.. means that the degress for
 	// circle is also flipped on the y-axis. which means that our angle calculation is going clockwise.
@@ -76,6 +76,8 @@ void CSulGuiDial::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, floa
 	osg::Matrix m = m_mt->getMatrix();
 	m.setRotate( q );
 	m_mt->setMatrix( m );
+
+	return true;
 }
 
 osg::Vec2 CSulGuiDial::getDir()

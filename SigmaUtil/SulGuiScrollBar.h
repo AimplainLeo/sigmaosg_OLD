@@ -16,6 +16,8 @@ public:
 
 	virtual void			init();
 
+	virtual void			setBgColor( const osg::Vec4& c );
+
 	sigma::signal1<float>	signalChanged;
 
 private:

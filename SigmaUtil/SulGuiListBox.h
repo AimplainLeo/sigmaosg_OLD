@@ -24,6 +24,8 @@ public:
 
 	virtual void	init();
 
+	virtual void	setBgColor( const osg::Vec4& c );
+
 	float			getTotalItemsHeight();
 
 	virtual bool	addChild( Node *child );
@@ -37,7 +39,7 @@ public:
 
 	virtual class CSulGuiListBox*	asListBox() { return this; }
 
-	virtual void	eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
+//	virtual bool	eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
 
 	sigma::signal1<CSulGuiItem*>	signalItemClicked;
 
@@ -46,6 +48,8 @@ private:
 
 	void			onViewResize( float w, float h );
 	void			onScrollBarChanged( float val );
+
+	void			onItemClicked( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
 
 	void			updateClipping();
 

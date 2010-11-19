@@ -30,6 +30,9 @@ CSulGuiComp( sCompName, x, y )
 
 void CSulGuiCanvas::initConstructor()
 {
+	setName( "CSulGuiCanvas" );
+
+	m_cBg.set( 0,0,0, 0.2f );
 	m_dragDragging = false;
 	m_dragAllowed = false;
 	m_dragMinX = 0.0f;
@@ -96,7 +99,7 @@ void CSulGuiCanvas::init()
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 2.0f ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", osg::Vec4(0,0,0,0.2f) ) );
+	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", m_cBg ) );
 	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
 
 	if ( !m_img.empty() )
@@ -112,6 +115,9 @@ void CSulGuiCanvas::init()
 	}
 
 	showCanvas( m_bShowCanvas );
+
+	// FIXME: this should be an option for the user (not all gui components need mouserelease)
+	getEventHandler()->wantEvent( this, this, CSulGuiEventHandler::EVENT_MOUSERELEASE ); 
 }
 
 void CSulGuiCanvas::useShaderTexture( bool bUse )
@@ -156,7 +162,17 @@ void CSulGuiCanvas::showCanvas( bool bShow )
 
 void CSulGuiCanvas::setBgColor( const osg::Vec4& c )
 {
-	m_uniformBgColor->set( c );
+	m_cBg = c;
+
+	if ( m_uniformBgColor.valid() )
+	{
+		m_uniformBgColor->set( c );
+	}
+}
+
+const osg::Vec4& CSulGuiCanvas::getBgColor() const
+{
+	return m_cBg;
 }
 
 void CSulGuiCanvas::setBorderColor( const osg::Vec4& c )
@@ -211,11 +227,27 @@ float CSulGuiCanvas::getH()
 	return m_h;
 }
 
+// uses local coordinates
+bool CSulGuiCanvas::isInside( const osg::Vec2& vLocal )
+{
+	return isInside( vLocal.x(), vLocal.y() );
+}
+
 bool CSulGuiCanvas::isInside( float x, float y )
 {
 	return ( x>0 && y>0 && x<getW() && y<getH() )?true:false;
 }
 
+bool CSulGuiCanvas::isInsideWorld( const osg::Vec2& vWorld )
+{
+	osg::Vec2 local = getLocal( vWorld );
+	return isInside( local );
+}
+
+bool CSulGuiCanvas::isInsideWorld( float xWorld, float yWorld )
+{
+	return isInsideWorld( osg::Vec2(xWorld, yWorld) );
+}
 
 void CSulGuiCanvas::setMouseRelease( bool bInside )
 {
@@ -283,8 +315,33 @@ void CSulGuiCanvas::onMousePush( float x, float y )
 	}
 }
 
+bool CSulGuiCanvas::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
+{
+	if ( !isVisible() )
+	{
+		return false;
+	}
+
+	if ( pCanvas==this )
+	{
+		// check dragging
+		if ( m_dragDragging )
+		{
+			m_dragDragging = false;
+		}
+
+		signalClicked( this );
+		signalClickedExt( this, local_x, local_y, x, y );
+		setMouseRelease( true );
+		return true;
+	}
+
+	return false;
+}
+
 void CSulGuiCanvas::onMouseRelease( float x, float y )
 {
+return;
 	// calc local positions
 	osg::NodePath path;
 	sulNodePath( *this, path, 0, true );

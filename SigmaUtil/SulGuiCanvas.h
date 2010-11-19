@@ -30,10 +30,14 @@ public:
 
 	void							showCanvas( bool bShow );
 
-	void							setBgColor( const osg::Vec4& c );
-	void							setBorderColor( const osg::Vec4& c );
+	virtual void					setBgColor( const osg::Vec4& c );
+	const osg::Vec4&				getBgColor() const;
+	virtual void					setBorderColor( const osg::Vec4& c );
 
-	bool							isInside( float x, float y );
+	bool							isInside( const osg::Vec2& vLocal );
+	bool							isInside( float xLocal, float yLocal );
+	bool							isInsideWorld( const osg::Vec2& vWorld );
+	bool							isInsideWorld( float xWorld, float yWorld );
 
 	void							setWH( float w, float h );
 	void							setW( float w );
@@ -51,7 +55,10 @@ public:
 	virtual class CSulGuiCanvas*	asCanvas();
 
 	sigma::signal1<CSulGuiCanvas*>	signalClicked;
+	sigma::signal5<CSulGuiCanvas*,float,float,float,float>	signalClickedExt;
 	sigma::signal1<bool>			signalHover;
+
+	virtual bool eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
 
 private:
 	void			initConstructor();
@@ -93,6 +100,8 @@ private:
 	CSulString					m_img;
 
 	bool						m_bShowCanvas;
+
+	osg::Vec4					m_cBg;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiCanvas> >	VEC_GUICANVAS;
