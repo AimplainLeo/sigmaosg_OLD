@@ -89,7 +89,7 @@ void CSulClouds::setCoverage( float coverage )
 	// m_coverage is a value from 0.0-1.0 we need to map this to values between 0-10
 	int cloudNumber = osg::clampBetween( m_coverage*10.0f, 0.0f, 10.0f );
 	CSulString texturePath;
-	texturePath.Format( "common/images/clouds/CloudTexture%d.dds", cloudNumber );
+	texturePath.Format( "Textures/clouds/CloudTexture%d.dds", cloudNumber );
 	osg::Image* image = osgDB::readImageFile( texturePath );
 	if ( image )
 	{
