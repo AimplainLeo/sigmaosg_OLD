@@ -7,7 +7,7 @@
 
     <TEXT text="myAss" x="8" y="80" />
 
-    <EDITBOX text="hello" x="8" y="100" />
+    <EDITBOX text="hello" x="8" y="100" max="10"/>
 
     <CHECKBOX text="click me" x="8" y="148" />
     

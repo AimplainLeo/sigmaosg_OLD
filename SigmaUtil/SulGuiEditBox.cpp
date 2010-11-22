@@ -8,6 +8,7 @@
 CSulGuiEditBox::CSulGuiEditBox( const CSulString& sText, float x, float y, float w, float h, float fontSize ) :
 CSulGuiCanvas( "EDITBOX", x, y, w, h )
 {
+	m_max = 1024;
 	m_fontSize = fontSize;
 	m_sText = sText;
 
@@ -30,6 +31,7 @@ void CSulGuiEditBox::setupAttr( CSulXmlAttr* pAttr )
 	if ( pAttr->exist( "font_size" ) )	m_fontSize  = pAttr->get( "font_size" ).asFloat();
 	if ( pAttr->exist( "ofs_x" ) )		m_ofs_x		= pAttr->get( "ofs_x" ).asFloat();
 	if ( pAttr->exist( "ofs_y" ) )		m_ofs_x		= pAttr->get( "ofs_y" ).asFloat();
+	if ( pAttr->exist( "max" ) )		m_max		= pAttr->get( "max" ).asUint32();
 }
 
 void CSulGuiEditBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
@@ -101,6 +103,7 @@ void CSulGuiEditBox::onKeyDown( sigma::int32 key, sigma::int32 iMod )
 			return;
 		}
 
+		// user presses [return], we end input now
 		if ( iMod==0 && key==osgGA::GUIEventAdapter::KEY_Return )
 		{
 			setCursor( "" );
@@ -108,6 +111,7 @@ void CSulGuiEditBox::onKeyDown( sigma::int32 key, sigma::int32 iMod )
 			return;
 		}
 
+		// delete
 		if ( key==osgGA::GUIEventAdapter::KEY_BackSpace )
 		{
 			CSulString sText = getText();
@@ -119,7 +123,10 @@ void CSulGuiEditBox::onKeyDown( sigma::int32 key, sigma::int32 iMod )
 			return;
 		}
 
-		if (	key!=osgGA::GUIEventAdapter::KEY_Shift_L && 
+		bool bCheck = getText().size()<m_max?true:false;
+
+		if (	bCheck &&
+				key!=osgGA::GUIEventAdapter::KEY_Shift_L && 
 				key!=osgGA::GUIEventAdapter::KEY_Shift_R && 
 				key!=osgGA::GUIEventAdapter::KEY_Control_L &&
 				key!=osgGA::GUIEventAdapter::KEY_Control_R 

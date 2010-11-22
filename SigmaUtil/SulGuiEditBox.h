@@ -37,6 +37,7 @@ private:
 	float						m_fontSize;
 	float						m_ofs_x;
 	float						m_ofs_y;
+	sigma::uint32				m_max;
 };
 
 #endif // __SULGUIEDITBOX_H__
