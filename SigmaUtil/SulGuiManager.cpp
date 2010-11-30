@@ -21,7 +21,6 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 	m_rMT->setMatrix( osg::Matrix::identity() );
 
 	m_rEventHandler = new CSulGuiEventHandler;
-	//m_rEventHandler->setIgnoreHandledEventsMask( osgGA::GUIEventAdapter::PUSH | osgGA::GUIEventAdapter::MOVE | osgGA::GUIEventAdapter::DRAG | osgGA::GUIEventAdapter::RELEASE | osgGA::GUIEventAdapter::RESIZE | osgGA::GUIEventAdapter::KEYDOWN);
 	m_rEventHandler->setIgnoreHandledEventsMask( 0 );
 	m_rEventHandler->signalViewResize.connect( this, &CSulGuiManager::onViewResize );
     pViewer->addEventHandler( m_rEventHandler );
@@ -84,6 +83,8 @@ void CSulGuiManager::onViewResize( float w, float h )
 
 void CSulGuiManager::show( bool bShow )
 {
+	m_rEventHandler->pause( !bShow );
+
 	if ( bShow )
 	{
 		if ( m_pParent )

@@ -22,8 +22,21 @@ bool sortByLayer( const eventDataTest& r1, const eventDataTest& r2 )
 	return r1.pCanvas->getLayer() > r2.pCanvas->getLayer();
 }
 
+CSulGuiEventHandler::CSulGuiEventHandler()
+{
+	m_bPause = false;
+}
+
+void CSulGuiEventHandler::pause( bool bPause )
+{
+	m_bPause = bPause;
+}
+
 bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor )
 {
+	if ( m_bPause )
+		return false;
+
 	/*
     osgViewer::Viewer* pViewer = dynamic_cast<osgViewer::Viewer*>(&aa);
     if ( !pViewer )
@@ -161,7 +174,7 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			if ( bHandled )
 			{
 				// echo who handled it
-				osg::notify(osg::NOTICE) << "EVENT MOUSE RELEASE: " << iEDs->pCanvas->getCompName() << " (" << iEDs->pCanvas->getLayer() << ")" << std::endl;
+			//	osg::notify(osg::NOTICE) << "EVENT MOUSE RELEASE: " << iEDs->pCanvas->getCompName() << " (" << iEDs->pCanvas->getLayer() << ")" << std::endl;
 				break;
 			}
 			

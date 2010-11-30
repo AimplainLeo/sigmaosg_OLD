@@ -20,6 +20,10 @@ public:
 	typedef std::vector< osg::ref_ptr<CSulGuiEvent> > VEC_EVENT;	
 
 public:
+	CSulGuiEventHandler();
+
+	void pause( bool bPause );
+
 	bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor );
 
 	void wantEvent( CSulGuiComp* pCompReceiver, CSulGuiCanvas* pCanvas, EEVENT e );
@@ -38,6 +42,7 @@ private:
 	VEC_EVENT	m_vecMouseRelease;
 
 	osg::ref_ptr<osg::Node>	m_rootNode;
+	bool						m_bPause;
 };
 
 #endif // __SULGUIEVENTHANDLER_H__
