@@ -34,6 +34,14 @@ void CSulGuiEventHandler::pause( bool bPause )
 
 bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor )
 {
+    if ( ea.getEventType() & osgGA::GUIEventAdapter::RESIZE )
+    {
+		float windowWidth = ea.getWindowWidth();
+		float windowHeight = ea.getWindowHeight();
+		signalViewResize( windowWidth, windowHeight );
+	}
+
+
 	if ( m_bPause )
 		return false;
 
@@ -183,14 +191,7 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 		}
     }
 
-    if ( ea.getEventType() & osgGA::GUIEventAdapter::RESIZE )
-    {
-		float windowWidth = ea.getWindowWidth();
-		float windowHeight = ea.getWindowHeight();
-		signalViewResize( windowWidth, windowHeight );
-	}
-
-    return false;
+	return false;
 }
 
 

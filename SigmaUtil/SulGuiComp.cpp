@@ -22,13 +22,15 @@ CSulGuiComp::CSulGuiComp( const CSulString& sCompName, float x, float y )
 
 void CSulGuiComp::initConstructor()
 {
-	m_layer = 0;
-	m_bEditMode = false;
-	m_bActive = true;
-	m_renderbinNum = 0;
-	m_attrX = 0.0f;
-	m_attrY = 0.0f;
-	m_attrValid = false;
+	m_pParentLast	= 0;
+	m_layer			= 0;
+	m_bEditMode		= false;
+	m_bActive		= true;
+	m_renderbinNum	= 0;
+	m_attrX			= 0.0f;
+	m_attrY			= 0.0f;
+	m_attrValid		= false;
+	m_bShow			= true;
 }
 
 void CSulGuiComp::init()
@@ -38,6 +40,8 @@ void CSulGuiComp::init()
 		setX( m_attrX );
 		setY( m_attrY ); 
 	}
+
+	show( m_bShow );
 }
 
 bool CSulGuiComp::addChild( Node *child )
@@ -204,21 +208,47 @@ osg::Vec2 CSulGuiComp::getLocal( float xWorld, float yWorld )
 
 void CSulGuiComp::show( bool bShow )
 {
+	m_bShow = bShow;
+
+	if ( m_bShow )
+	{
+		if ( m_pParentLast )
+			m_pParentLast->addChild( this );
+
+		m_pParentLast = 0;
+	}
+	else
+	{
+		if ( getNumParents() )
+		{
+			m_pParentLast = getParent(0)->asGroup();
+			m_pParentLast->removeChild( this );
+		}
+	}
+
 	// FIXME: don't use nodemasks
-	setNodeMask( bShow?0xFFFFFFFF:0 );
+	//setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
 void CSulGuiComp::toggleShow()
 {
+	m_bShow = !m_bShow;
+
 	// FIXME: don't use nodemasks
+	/*
 	int i = getNodeMask();
 	setNodeMask( i?0:0xFFFFFFFF );
+	*/
 }
 
 bool CSulGuiComp::isVisible()
 {
+	return m_bShow;
+
+	/*
 	int i = getNodeMask();
 	return i==0?false:true;
+	*/
 }
 
 void CSulGuiComp::setLayer( sigma::uint32 layer )

@@ -25,6 +25,9 @@ public:
 
 	class CSulGuiComp*	get( const CSulString& id );
 
+	float				getViewW();
+	float				getViewH();
+
 	// convience methods
 	class CSulGuiTextBox*		getTextBox( const CSulString& id );
 	class CSulGuiCanvas*		getCanvas( const CSulString& id );

@@ -111,6 +111,9 @@ private:
 	bool							m_attrValid;
 
 	sigma::uint32					m_layer;
+
+	bool							m_bShow;
+	osg::Group*						m_pParentLast; // used for method show
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiComp > >	VEC_GUICOMP;

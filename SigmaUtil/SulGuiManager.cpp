@@ -39,6 +39,16 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
 }
 
+float CSulGuiManager::getViewW()
+{
+	return m_viewW;
+}
+
+float CSulGuiManager::getViewH()
+{
+	return m_viewH;
+}
+
 bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent, CSulString sFileThemeXml )
 {
 	osg::ref_ptr<CSulGuiThemeXml> rThemeXml;
@@ -72,6 +82,8 @@ bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent, CSul
 
 void CSulGuiManager::onViewResize( float w, float h )
 {
+	m_viewW = w;
+	m_viewH = h;
 	setMatrix( osg::Matrix::ortho2D( 0, w, h, 0) );
 }
 

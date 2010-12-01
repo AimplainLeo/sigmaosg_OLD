@@ -157,7 +157,21 @@ void CSulGuiCanvas::setDraggable( bool bDraggable )
 
 void CSulGuiCanvas::showCanvas( bool bShow )
 {
-	m_rGeodeQuad->setNodeMask( bShow?0xFFFFFFFF:0 );
+	if ( bShow==m_bShowCanvas )
+		return;
+
+	m_bShowCanvas = bShow;
+
+	if ( m_bShowCanvas )
+	{
+		osg::MatrixTransform::addChild( m_rGeodeQuad );
+	}
+	else
+	{
+		osg::MatrixTransform::removeChild( m_rGeodeQuad );
+	}
+
+//	m_rGeodeQuad->setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
 void CSulGuiCanvas::setBgColor( const osg::Vec4& c )

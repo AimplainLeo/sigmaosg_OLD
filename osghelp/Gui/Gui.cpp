@@ -8,6 +8,46 @@
 #include <SigmaUtil/SulGuiManager.h>
 #include <SigmaUtil/SulShaderColor.h>
 #include <SigmaUtil/SulGuiListBox.h>
+#include <iostream>
+
+osg::ref_ptr<CSulGuiManager> pGuiManager = 0;
+
+class CKeyboardHandler : public osgGA::GUIEventHandler 
+{
+public:
+	virtual bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor )
+	{
+		osgViewer::Viewer* pViewer = dynamic_cast<osgViewer::Viewer*>(&aa);
+        if ( !pViewer )
+		{
+			return false;
+		}
+
+		if ( ea.getEventType()==osgGA::GUIEventAdapter::KEYDOWN )
+		{
+			if ( ea.getKey()==osgGA::GUIEventAdapter::KEY_Space )
+			{
+				pGuiManager->show( !pGuiManager->isVisible() );
+ 				return true; // return true, event handled
+			}
+
+			if ( ea.getKey()==osgGA::GUIEventAdapter::KEY_Return )
+			{
+				CSulGuiCanvas* p = pGuiManager->getCanvas( "myCanvas" );
+				float w = p->getW();
+				float h = p->getH();
+				std::cout << "canvas: w = " << w << ", h = " << h << std::endl;
+
+				float viewW = pGuiManager->getViewW();
+				float viewH = pGuiManager->getViewH();
+				std::cout << "view: w = " << viewW << ", h = " << viewH << std::endl;
+				
+			}
+		}
+
+		return false;
+	}
+};
 
 osg::Node* createScene()
 {
@@ -31,7 +71,7 @@ osg::Group* createGui( osgViewer::Viewer* pViewer )
 	osg::Group* pGroup = new osg::Group;
 
 	// create gui
-	CSulGuiManager* pGuiManager = new CSulGuiManager( pViewer );
+	pGuiManager = new CSulGuiManager( pViewer );
 	pGuiManager->load( "test.xml", 0, "default_theme.xml" );
 	pGroup->addChild( pGuiManager );
 
@@ -68,8 +108,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	pRoot->addChild( createGui(rViewer) );
 
+	// add the handler to the viewer
+	osg::ref_ptr<CKeyboardHandler> rKeyboardHandler = new CKeyboardHandler;
+	rViewer->addEventHandler( rKeyboardHandler.get() );
+
     // execute main loop
     return rViewer->run();
 }
+
 
 
