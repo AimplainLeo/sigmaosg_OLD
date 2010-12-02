@@ -6,6 +6,7 @@
 #include "SulNodePath.h"
 #include <osgViewer/Viewer>
 #include <osgManipulator/Selection>
+#include <iostream>
 
 struct eventDataTest
 {
@@ -140,12 +141,22 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			osg::Vec2 mouse_local = pCanvas->getLocal( mouse_x, mouse_y );
 			
 			// HACK: this checks that the mouse position is also inside the parents canvas (need a better way to handle this)
-			bool bCheck = true;
-			CSulGuiCanvas* pParent = dynamic_cast<CSulGuiCanvas*>(pCanvas->getParent(0));
-			if ( pParent )
+			bool bCheck = true;			
+			//Need to check if there is a parent or we will get a zero index crash 
+			if (!pCanvas->getParents().empty())
 			{
-				bCheck = pParent->isInsideWorld( mouse_x, mouse_y );
+				CSulGuiCanvas* pParent = dynamic_cast<CSulGuiCanvas*>(pCanvas->getParent(0));
+				if ( pParent )
+				{
+					bCheck = pParent->isInsideWorld( mouse_x, mouse_y );
+				}
 			}
+			else
+			{
+				//TKG Unsure if bCheck should be set to false in this case
+				std::cout << "CSulGuiEventHandler::handle -> line 155 \"Hello\"" << std::endl;
+			}
+			
 
 			// are we inside
 			if ( bCheck && pCanvas->isInside( mouse_local ) )
