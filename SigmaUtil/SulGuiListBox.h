@@ -30,6 +30,9 @@ public:
 
 	virtual bool	addChild( Node *child );
 
+	// osg::Group removeChild is not a virtual :(
+	void			removeChildItem( osg::Node* child );
+
 	bool			addTextItem( const CSulString& s );
 
 	// returns the first selected (only text -> if any)

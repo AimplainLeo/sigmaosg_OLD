@@ -253,7 +253,18 @@ void CSulGuiListBox::updateClipping()
 	}
 }
 
-bool CSulGuiListBox::addChild( Node *child )
+void CSulGuiListBox::removeChildItem( osg::Node* child )
+{
+	CSulGuiCanvas* pCanvas = dynamic_cast<CSulGuiCanvas*>(child);
+	CSulGuiItem* item = getItem( pCanvas );
+
+	VEC_GUIITEM::iterator i = std::find( m_vecItem.begin(), m_vecItem.end(), item );
+	m_vecItem.erase( i );
+
+	CSulGuiCanvas::removeChild( child );
+}
+
+bool CSulGuiListBox::addChild( Node* child )
 {
 	CSulGuiCanvas* pCanvas = dynamic_cast<CSulGuiCanvas*>(child);
 	if ( !pCanvas )

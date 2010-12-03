@@ -209,7 +209,7 @@ osg::Vec2 CSulGuiComp::getLocal( float xWorld, float yWorld )
 void CSulGuiComp::show( bool bShow )
 {
 	m_bShow = bShow;
-
+/*
 	if ( m_bShow )
 	{
 		if ( m_pParentLast )
@@ -225,14 +225,15 @@ void CSulGuiComp::show( bool bShow )
 			m_pParentLast->removeChild( this );
 		}
 	}
+	*/
 
 	// FIXME: don't use nodemasks
-	//setNodeMask( bShow?0xFFFFFFFF:0 );
+	setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
 void CSulGuiComp::toggleShow()
 {
-	m_bShow = !m_bShow;
+	show( !m_bShow );
 
 	// FIXME: don't use nodemasks
 	/*
@@ -243,12 +244,12 @@ void CSulGuiComp::toggleShow()
 
 bool CSulGuiComp::isVisible()
 {
-	return m_bShow;
+	//return m_bShow;
 
-	/*
+	
 	int i = getNodeMask();
 	return i==0?false:true;
-	*/
+	
 }
 
 void CSulGuiComp::setLayer( sigma::uint32 layer )
