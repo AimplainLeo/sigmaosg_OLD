@@ -168,58 +168,14 @@ void CSulGuiListBox::onItemClicked( CSulGuiCanvas* pCanvas, float local_x, float
 
 		// signal that an item has been clicked on
 		if ( (*i)->getCanvas()==pCanvas )
+		{
 			signalItemClicked( (*i) );
+			signalItemChanged( (*i) );
+		}
 
 		++i;
 	}
 }
-
-/*
-bool CSulGuiListBox::eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y )
-{
-	if ( !isVisible() )
-	{
-		return false;
-	}
-
-	CSulGuiCanvas::eventMouseRelease( pCanvas, local_x, local_y, x, y );
-
-	// we need to test that the mouse_local_x and mouse_local_y are inside the listbox itself
-	// because the local coordinates are for the pCanvas and not the listbox we need to calculate
-	// the local mouse coordinates for the listbox
-	osg::NodePath path;
-	sulNodePath( *this, path, 0, true );
-	osg::Matrix m = osg::computeLocalToWorld( path );
-	float mouse_local_x = x-getWorldX();
-	float mouse_local_y = y-getWorldY();
-	if ( !isInside( mouse_local_x, mouse_local_y ) )
-	{
-		return false;
-	}
-
-	if ( m_bMultiSelect )
-	{
-		getItem( pCanvas )->toggleSelect();
-		return true;
-	}
-
-	VEC_GUIITEM::iterator i,ie;
-	i = m_vecItem.begin();
-	ie = m_vecItem.end();
-	while ( i!=ie )
-	{
-		(*i)->setSelect( (*i)->getCanvas()==pCanvas?true:false );	
-
-		// signal that an item has been clicked on
-		if ( (*i)->getCanvas()==pCanvas )
-			signalItemClicked( (*i) );
-
-		++i;
-	}
-
-	return true;
-}
-*/
 
 void CSulGuiListBox::show( bool bShow )
 {
@@ -334,6 +290,25 @@ CSulString CSulGuiListBox::getSelectedText()
 	}
 
 	return "";
+}
+
+void CSulGuiListBox::setSelectedIndex( sigma::uint32 index )
+{
+	VEC_GUIITEM::iterator i, e;
+	i = m_vecItem.begin();	
+	e = m_vecItem.end();
+
+	sigma::int32 count = 0;
+	while( i!=e )
+	{
+		(*i)->setSelect( count==index?true:false );
+
+		if ( count==index )
+			signalItemChanged( (*i) );
+
+		++count;
+		++i;
+	}
 }
 
 sigma::int32 CSulGuiListBox::getSelectedIndex()

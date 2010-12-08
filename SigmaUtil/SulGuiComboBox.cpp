@@ -13,7 +13,8 @@ CSulGuiCanvas( "COMBOBOX", x, y, w, h )
 	m_rButton = new CSulGuiButton;
 	m_rListBox = new CSulGuiListBox;
 
-	m_rListBox->signalItemClicked.connect( this, &CSulGuiComboBox::itemClicked );
+	m_rListBox->signalItemClicked.connect( this, &CSulGuiComboBox::onItemClicked );
+	m_rListBox->signalItemChanged.connect( this, &CSulGuiComboBox::onItemChanged );
 }
 
 void CSulGuiComboBox::setupEventHandler( CSulGuiEventHandler* pEventHandler )
@@ -96,27 +97,38 @@ bool CSulGuiComboBox::addTextItem( const CSulString& s )
 	return m_rListBox->addTextItem( s );
 }
 
-void CSulGuiComboBox::itemClicked( CSulGuiItem* pItem )
+void CSulGuiComboBox::onItemChanged( CSulGuiItem* pItem )
 {
+	// if item is a textbox
 	CSulGuiTextBox* pTextBox = dynamic_cast<CSulGuiTextBox*>(pItem->getCanvas());
 	if ( pTextBox )
 	{
 		m_rTextBox->setText( pTextBox->getText() );
 	}
 
+	// if item is an editbox
 	CSulGuiEditBox* pEditBox = dynamic_cast<CSulGuiEditBox*>(pItem->getCanvas());
 	if ( pEditBox )
 	{
 		m_rTextBox->setText( pEditBox->getText() );
 	}
 
+	// if item is a button
 	CSulGuiButton* pButton = dynamic_cast<CSulGuiButton*>(pItem->getCanvas());
 	if ( pButton )
 	{
 		m_rTextBox->setText( pButton->getText() );
 	}
+}
 
+void CSulGuiComboBox::onItemClicked( CSulGuiItem* pItem )
+{
 	m_rListBox->toggleShow();
+}
+
+void CSulGuiComboBox::setSelectedIndex( sigma::uint32 index )
+{
+	m_rListBox->setSelectedIndex( index );
 }
 
 sigma::int32 CSulGuiComboBox::getSelectedIndex()

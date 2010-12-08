@@ -95,6 +95,8 @@ void CSulGuiManager::onViewResize( float w, float h )
 
 void CSulGuiManager::show( bool bShow )
 {
+	signalShow( bShow );
+
 	m_rEventHandler->pause( !bShow );
 
 	if ( bShow )

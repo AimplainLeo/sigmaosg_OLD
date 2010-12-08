@@ -3,7 +3,7 @@
     <CANVAS id="myCanvas" x="32" y="32" w="900" h="400">
   </CANVAS>
   
-<!--
+
   <CANVAS x="32" y="32" w="900" h="400">
     <DIAL x="700" y="230" radius="50.0"/>
     
@@ -85,7 +85,7 @@
   <ALIGN align_v="bottom" align_h="right">
     <COUNTER x="20" y="20" digits="8" />
   </ALIGN>
--->
+
     
 </ROOT>
 

@@ -39,6 +39,8 @@ public:
 	class CSulGuiCheckBox*		getCheckBox( const CSulString& id );
 	class CSulGuiDial*			getDial( const CSulString& id );
 
+	sigma::signal1<bool> signalShow;
+
 private:
 	void	onViewResize( float w, float h );
 

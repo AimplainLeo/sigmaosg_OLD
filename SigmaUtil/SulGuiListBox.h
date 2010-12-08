@@ -38,13 +38,13 @@ public:
 	// returns the first selected (only text -> if any)
 	CSulString		getSelectedText();
 
+	void				setSelectedIndex( sigma::uint32 index );
 	sigma::int32		getSelectedIndex();
 
 	virtual class CSulGuiListBox*	asListBox() { return this; }
 
-//	virtual bool	eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
-
 	sigma::signal1<CSulGuiItem*>	signalItemClicked;
+	sigma::signal1<CSulGuiItem*>	signalItemChanged;
 
 private:
 	void			initConstructor();

@@ -28,6 +28,7 @@ public:
 	// convience method that creates a CSulGuiText and adds it some a child
 	bool			addTextItem( const CSulString& s );
 
+	void			setSelectedIndex( sigma::uint32 index );
 	sigma::int32	getSelectedIndex();
 
 	virtual class CSulGuiComboBox*		asComboBox()	{ return this; }
@@ -35,7 +36,8 @@ public:
 private:
 	void			onDropDownClick( CSulGuiCanvas* );
 	
-	void			itemClicked( CSulGuiItem* pItem );
+	void			onItemChanged( CSulGuiItem* pItem );
+	void			onItemClicked( CSulGuiItem* pItem );
 
 private:
 	osg::ref_ptr< CSulGuiTextBox >	m_rTextBox;
