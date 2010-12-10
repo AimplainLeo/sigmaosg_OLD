@@ -9,7 +9,7 @@
 class CSulGeomBillboardInstancing :  public CSulGeomBase
 {
 public:
-					CSulGeomBillboardInstancing( sigma::uint32 numInstances, float sizeMultiplier=1.0f, float min=1.0f, float max=1.0f );
+					CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal = false, float sizeMultiplier=1.0f, float min=1.0f, float max=1.0f );
 
 protected:
 	void			createDrawable();
@@ -17,6 +17,7 @@ protected:
 private:
 	sigma::uint32	m_numInstances;
 	float			m_sizeMultiplier;
+	bool			m_bUseZDirectionNormal;
 };
 
 #endif // __SULGEOMBILLBOARDINSTANCING_H__

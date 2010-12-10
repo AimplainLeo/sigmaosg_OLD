@@ -76,7 +76,8 @@ CSulRenderInstances::CSulRenderInstances(
 	bool bSuppressTexture,
 	sigma::uint32 texUnit,
 	sigma::uint32 texSizeSquared,
-	sigma::uint32 useLights
+	sigma::uint32 useLights,
+	bool bUseZDirectionNormal
 ) :
 osg::Geode(),
 m_bb( bb ),
@@ -85,7 +86,8 @@ m_texUnit( texUnit ),
 m_texSizeSquared( texSizeSquared ),
 m_useLights( useLights ),
 m_min( min ),
-m_max( max )
+m_max( max ),
+m_bUseZDirectionNormal( bUseZDirectionNormal )
 {
 	m_rTexturePositions = new osg::Texture2D( pImagePositions );
 	m_rTexturePositions->setInternalFormat( GL_RGB32F_ARB );
@@ -97,7 +99,7 @@ m_max( max )
 
 void CSulRenderInstances::create()
 {
-	CSulGeomBillboardInstancing* pBillboard = new CSulGeomBillboardInstancing( m_numInstances );
+	CSulGeomBillboardInstancing* pBillboard = new CSulGeomBillboardInstancing( m_numInstances, m_bUseZDirectionNormal );
 
 	addDrawable( pBillboard->getDrawable() );
 

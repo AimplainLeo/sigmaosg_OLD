@@ -29,6 +29,7 @@ uniform float		maxSize;
 varying vec4		v;
 varying vec3		n;
 varying vec4		colorme;
+varying float		fogFactor;
 
 float IntNoise1( int x )
 {
@@ -261,7 +262,8 @@ void test3()
 	v = gl_ModelViewMatrix * mV * gl_Vertex;  
 }
 
-void test4()
+// returns the adjusted object-space position for this vertex
+vec4 test4()
 {
 	float inst = float(gl_InstanceID);
 
@@ -300,10 +302,43 @@ void test4()
 	yy.z = 0.0;
 	vec3 vertex = xx + yy + vec3( 0.0, 0.0, glv.z );
 
+	return mV * vec4( vertex, 1.0 );
+}
 
-	gl_Position = gl_ModelViewProjectionMatrix * mV * vec4( vertex, 1.0 );
+vec4 lightContribution(in int lightNum, in vec4 vsPos)
+{
+	/* first transform the normal into eye space and normalize the result */
+	vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
 
-	v = gl_ModelViewMatrix * mV * vec4( vertex, 1.0 );
+	float intensity = 1.0;
+	if(gl_LightSource[lightNum].position.w == 0.0)
+	{
+		// directional light
+		vec3 lightDir;
+		lightDir = normalize(vec3(gl_LightSource[lightNum].position));
+		intensity = max(dot(normal, lightDir), 0.0);
+	}
+	else
+	{
+		// point light
+		vec3 vsPointToLight = vec3(gl_LightSource[lightNum].position - vsPos);
+		float dist = length(vsPointToLight);
+		vec3 lightDir = normalize(vsPointToLight);
+		float NdotL = max(dot(normal, lightDir), 0.0);
+		float attenuation = 1.0 / (gl_LightSource[lightNum].constantAttenuation +
+					gl_LightSource[lightNum].linearAttenuation * dist +
+					gl_LightSource[lightNum].quadraticAttenuation * dist * dist);
+		intensity = attenuation * NdotL;
+	}
+
+	/* Compute the diffuse term */
+	return intensity * gl_LightSource[lightNum].diffuse + gl_FrontLightProduct[lightNum].ambient;
+}
+
+float getFogFactor(in vec4 vsPos)
+{
+	float z = -vsPos.z;
+	return clamp((gl_Fog.end - z) * gl_Fog.scale, 0.0, 1.0);
 }
 
 void main()
@@ -315,7 +350,10 @@ void main()
 
 	//simple2();
 	//test3();
-	test4();
+	vec4 osPosition = test4(); // test4 computes the object-space position of the current vertex
+	gl_Position = gl_ModelViewProjectionMatrix * osPosition;
+	vec4 vsPosition = gl_ModelViewMatrix * osPosition;
+	v = vsPosition;
 
 	gl_FrontColor = gl_Color;
 
@@ -337,12 +375,13 @@ void main()
 	colorme.g = 0.0;
 	colorme.b = 0.0;
 	colorme.a = 1.0;
-	if ( useLights & 0x00000001 ) colorme += gl_LightSource[0].diffuse + gl_LightSource[0].ambient;
-	if ( useLights & 0x00000002 ) colorme += gl_LightSource[1].diffuse + gl_LightSource[1].ambient;
-	if ( useLights & 0x00000004 ) colorme += gl_LightSource[2].diffuse + gl_LightSource[2].ambient;
-	if ( useLights & 0x00000008 ) colorme += gl_LightSource[3].diffuse + gl_LightSource[3].ambient;
-	
+	if ( (useLights & 0x00000001) != 0 ) colorme += lightContribution(0, vsPosition);
+	if ( (useLights & 0x00000002) != 0 ) colorme += lightContribution(1, vsPosition);
+	if ( (useLights & 0x00000004) != 0 ) colorme += lightContribution(2, vsPosition);
+	if ( (useLights & 0x00000008) != 0 ) colorme += lightContribution(3, vsPosition);
 	colorme.a = 1.0;
+	
+	fogFactor = getFogFactor(vsPosition);
 /*
 	// sun light
 	colorme = gl_LightSource[3].diffuse + gl_LightSource[3].ambient;

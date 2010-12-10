@@ -10,6 +10,7 @@
 #include <osgDB/FileUtils>
 #include <osgDB/WriteFile>
 #include <osgGA/StateSetManipulator>
+#include <osgGA/TerrainManipulator>
 #include <osgViewer/ViewerEventHandlers>
 #include <iostream>
 
@@ -132,7 +133,7 @@ int _tmain( int argc, char** argv )
 	osg::BoundingBox bb				= rXml->getSceneTerrain()->getBoundingBoxWorld();
 	float minTree					= rXml->getMinTree();
 	float maxTree					= rXml->getMaxTree();
-	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights );
+	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights, true );
 	pRenderInstances->create();
 	//rRoot->addChild( pRenderInstances );
 	rXml->getSceneTerrain()->getPat()->addChild( pRenderInstances );
@@ -190,6 +191,8 @@ int _tmain( int argc, char** argv )
 
 		// allow wireframe modes
 		rViewer->addEventHandler( new osgGA::StateSetManipulator(rViewer->getCamera()->getOrCreateStateSet()) );
+
+		rViewer->setCameraManipulator(new osgGA::TerrainManipulator);
 
 		// work with best detailed lod
 		rViewer->getCamera()->setLODScale( 0.0 );

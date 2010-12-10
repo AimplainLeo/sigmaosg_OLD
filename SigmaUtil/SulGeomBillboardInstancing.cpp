@@ -3,10 +3,11 @@
 #include "stdafx.h"
 #include "SulGeomBillboardInstancing.h"
 
-CSulGeomBillboardInstancing::CSulGeomBillboardInstancing( sigma::uint32 numInstances, float sizeMultiplier, float min, float max ) :
+CSulGeomBillboardInstancing::CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal, float sizeMultiplier, float min, float max ) :
 CSulGeomBase(),
 m_numInstances( numInstances ),
-m_sizeMultiplier( sizeMultiplier )
+m_sizeMultiplier( sizeMultiplier ),
+m_bUseZDirectionNormal( bUseZDirectionNormal )
 {
 }
 
@@ -31,6 +32,19 @@ void CSulGeomBillboardInstancing::createDrawable()
     (*v)[ 1 ] = osg::Vec3( halfDimX, 0., 0. );
     (*v)[ 2 ] = osg::Vec3( halfDimX, 0., halfDimZ*2.0f );
     (*v)[ 3 ] = osg::Vec3( -halfDimX, 0., halfDimZ*2.0f );
+
+	// Normal for the quad
+	osg::Vec3Array* n = new osg::Vec3Array;
+	if ( m_bUseZDirectionNormal )
+	{
+		n->push_back( osg::Z_AXIS );
+	} 
+	else
+	{
+		n->push_back( osg::Y_AXIS );
+	}
+	pGeo->setNormalArray( n );
+	pGeo->setNormalBinding(osg::Geometry::BIND_OVERALL);
 
 	// create color array data (each corner of our triangle will have one color component)
     osg::Vec4Array* pColors = new osg::Vec4Array;
