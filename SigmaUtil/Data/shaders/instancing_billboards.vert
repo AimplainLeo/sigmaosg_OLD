@@ -346,7 +346,7 @@ void main()
 	gl_TexCoord[0] = gl_MultiTexCoord0;
 
 	float f = mod( float(gl_InstanceID), 8.0 );
-	gl_TexCoord[0].x = f/8.0f + (gl_MultiTexCoord0.x/8.0);
+	gl_TexCoord[0].x = f/8.0 + (gl_MultiTexCoord0.x/8.0);
 
 	//simple2();
 	//test3();

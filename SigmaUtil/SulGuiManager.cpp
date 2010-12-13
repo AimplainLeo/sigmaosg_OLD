@@ -37,6 +37,7 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 	ss->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	ss->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
+	ss->setRenderBinDetails( 1000000, "DepthSortedBin" );	
 }
 
 float CSulGuiManager::getViewW()
