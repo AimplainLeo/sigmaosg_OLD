@@ -154,7 +154,7 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			else
 			{
 				//TKG Unsure if bCheck should be set to false in this case
-				std::cout << "CSulGuiEventHandler::handle -> line 155 \"Hello\"" << std::endl;
+				//std::cout << "CSulGuiEventHandler::handle -> line 155 \"Hello\"" << std::endl;
 			}
 			
 
