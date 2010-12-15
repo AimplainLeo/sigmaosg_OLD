@@ -9,6 +9,8 @@ uniform float		spacing;
 uniform float		heightAdjust;
 */
 
+uniform float colorAmpFactor;
+
 // osg devlievered uniforms
 uniform float		osg_FrameTime;
 uniform mat4		osg_ViewMatrixInverse;
@@ -379,6 +381,7 @@ void main()
 	if ( (useLights & 0x00000002) != 0 ) colorme += lightContribution(1, vsPosition);
 	if ( (useLights & 0x00000004) != 0 ) colorme += lightContribution(2, vsPosition);
 	if ( (useLights & 0x00000008) != 0 ) colorme += lightContribution(3, vsPosition);
+	colorme = colorme*colorAmpFactor;
 	colorme.a = 1.0;
 	
 	fogFactor = getFogFactor(vsPosition);

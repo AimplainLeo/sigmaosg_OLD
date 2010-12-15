@@ -42,17 +42,8 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 		signalViewResize( windowWidth, windowHeight );
 	}
 
-
 	if ( m_bPause )
 		return false;
-
-	/*
-    osgViewer::Viewer* pViewer = dynamic_cast<osgViewer::Viewer*>(&aa);
-    if ( !pViewer )
-    {
-        return false;
-    }
-	*/
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::KEYDOWN )
     {
@@ -117,7 +108,6 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			
 			++i;
 		}
-
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::RELEASE )
