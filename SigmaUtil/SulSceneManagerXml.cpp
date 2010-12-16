@@ -256,6 +256,10 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		{
 			uniform = new osg::Uniform( sUniformName.c_str(), pAttr->get( "value" ).asInt32() );
 		}
+		else if ( type=="FLOAT" )
+		{
+			uniform = new osg::Uniform( sUniformName.c_str(), pAttr->get( "value" ).asFloat() );
+		}
 
 		m_pCurrentStateSet->addUniform( uniform );
 	}
