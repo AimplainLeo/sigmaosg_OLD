@@ -4,10 +4,8 @@
 #include "SulGeomLaser.h"
 #include <osg/billboard>
 
-osg::Geometry* CSulGeomLaser::createQuad()
+osg::Geometry* CSulGeomLaser::createQuad(float fThickness)
 {
-	float fThickness = 0.01f;
-
 	// create drawable geometry object
 	osg::Geometry* pGeo = new osg::Geometry;
 
@@ -53,14 +51,10 @@ osg::Geometry* CSulGeomLaser::createQuad()
 
 void CSulGeomLaser::init()
 {
-	osg::Billboard* pBillboard = new osg::Billboard;
-	pBillboard->setMode( osg::Billboard::AXIAL_ROT );
-	pBillboard->addDrawable( createQuad() );
-	pBillboard->setNormal( osg::Vec3(0,0,1) );
-	pBillboard->setAxis( osg::Vec3(0,1,0) );
-
+	static const float defaultScale = 0.01f;
 	m_rPat = new osg::PositionAttitudeTransform;
-	m_rPat->addChild( pBillboard );
+	m_rPat->addChild( createBillboard(defaultScale) );
+	m_rPat->setDataVariance(osg::Object::DYNAMIC); // children are modified via setRadius
 }
 
 osg::Node* CSulGeomLaser::getNode()
@@ -104,3 +98,18 @@ void CSulGeomLaser::enabled( bool bEnable )
 	m_rPat->setNodeMask( bEnable ? 0xFFFFFFFF:0 );
 }
 
+void CSulGeomLaser::setRadius(float fRadius)
+{
+	m_rPat->removeChildren(0, 1);
+	m_rPat->addChild(createBillboard(fRadius));
+}
+
+osg::Billboard* CSulGeomLaser::createBillboard(float radius)
+{
+	osg::Billboard* pBillboard = new osg::Billboard;
+	pBillboard->setMode( osg::Billboard::AXIAL_ROT );
+	pBillboard->addDrawable( createQuad(radius) );
+	pBillboard->setNormal( osg::Vec3(0,0,1) );
+	pBillboard->setAxis( osg::Vec3(0,1,0) );
+	return pBillboard;
+}

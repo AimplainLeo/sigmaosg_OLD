@@ -14,6 +14,7 @@ public:
 
 	void			setPosition( const osg::Vec3& v );
 	void			setTarget( const osg::Vec3& v );
+	void			setRadius(float fRadius);
 
 	osg::Vec3		getTarget();
 
@@ -22,8 +23,9 @@ public:
 	void			enabled( bool bEnable );
 
 private:
-	osg::Geometry*	createQuad();
+	osg::Geometry*	createQuad(float fThickness);
 	void			calcRot();
+	osg::Billboard* createBillboard(float radius);
 
 private:
 	osg::ref_ptr<osg::PositionAttitudeTransform>	m_rPat;
