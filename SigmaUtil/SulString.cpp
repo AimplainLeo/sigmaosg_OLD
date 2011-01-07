@@ -150,3 +150,168 @@ osg::Vec4 CSulString::asVec4()
 
 	return osg::Vec4( 1, 1, 1, 1 );
 }
+
+void CSulString::replaceAll( const std::string& searchFor, const std::string& changeTo ) 
+{
+	basic_string <char>::size_type x;
+
+	while ( x=find(searchFor), x!=std::string::npos ) 
+	{
+		erase(x, searchFor.length());
+		insert(x, changeTo);
+	}
+}
+
+// "http://whatever.com?id=1&what=2
+
+void CSulString::urlSetHost( const CSulString& host )
+{
+	basic_string <char>::size_type i;
+
+	i = find( '?' );
+	if ( i!=npos )
+	{
+		assign( host+substr( i ) );
+		return;
+	}
+
+	// two possibilities
+	// 1. there is only a host string
+	// 2. there is only the url part 
+
+	// '=' does not exist in the host string
+	if ( find( '=' )==npos )
+	{
+		assign( host );
+		return;
+	}
+
+	assign( host + "?" + c_str() );
+}
+
+CSulString CSulString::urlGetHost()
+{
+	basic_string <char>::size_type i;
+	
+	i = find( '?' );
+	if ( i==npos )
+	{
+		if ( find( '=' )==npos )
+			return *this;
+
+		return "";
+	}
+
+	return substr( 0, i );
+}
+
+CSulString CSulString::urlGetParameterStringOnly()
+{
+	basic_string <char>::size_type i;
+	
+	i = find( '?' );
+	if ( i==npos )
+	{
+		if ( find( '=' )==npos )
+			return "";
+
+		return *this;
+	}
+
+	return substr( i );
+}
+
+CSulString CSulString::urlGetParameter( const CSulString& name )
+{
+	CSulString s = urlGetParameterStringOnly();
+	CSulString sParam;
+
+	basic_string <char>::size_type is, ie;
+	
+	is = s.find( name+"=" );
+	if ( is==npos )
+		return "";
+
+	is += name.length()+1;
+
+	ie = s.find( '&', is );
+	if ( ie!=npos )
+	{
+		sParam = s.substr( is, ie-is );
+	}
+	else
+	{
+		sParam = s.substr( is );
+	}
+
+	return sParam.urlGetDecode();
+}
+
+void CSulString::urlAddParameter( const CSulString& name, const CSulString& value )
+{
+	CSulString v = value.urlGetEncode();
+
+	if ( empty() )
+	{
+		assign( name+"="+v );
+		return;
+	}
+
+	// ok, the string is not empty. Now we check to see if the "?" exists
+	if ( find( '?' )==npos )
+	{
+		if ( find( '=' )==npos )
+		{
+			append( "?"+name+"="+v );
+			return;
+		}
+	}
+
+	append( "&"+name+"="+v );
+}
+
+CSulString CSulString::urlGetDecode() const
+{
+	CSulString s = *this;
+	s.replaceAll( "%20", " " );
+	return s;
+}
+
+CSulString CSulString::urlGetEncode() const
+{
+	CSulString escaped="";
+    int max = length();
+    for(int i=0; i<max; i++)
+    {
+        if ( (48 <= c_str()[i] && c_str()[i] <= 57) ||//0-9
+             (65 <= c_str()[i] && c_str()[i] <= 90) ||//abc...xyz
+             (97 <= c_str()[i] && c_str()[i] <= 122) || //ABC...XYZ
+             (c_str()[i]=='~' || c_str()[i]=='!' || c_str()[i]=='*' || c_str()[i]=='(' || c_str()[i]==')' || c_str()[i]=='\'')
+        )
+        {
+            escaped.append( &c_str()[i], 1);
+        }
+        else
+        {
+            escaped.append("%");
+            escaped.append( char2hex(c_str()[i]) );//converts char 255 to string "ff"
+        }
+    }
+
+    return escaped;
+}
+
+CSulString CSulString::char2hex( char dec ) const
+{
+    char dig1 = (dec&0xF0)>>4;
+    char dig2 = (dec&0x0F);
+    if ( 0<= dig1 && dig1<= 9) dig1+=48;    //0,48inascii
+    if (10<= dig1 && dig1<=15) dig1+=97-10; //a,97inascii
+    if ( 0<= dig2 && dig2<= 9) dig2+=48;
+    if (10<= dig2 && dig2<=15) dig2+=97-10;
+
+    CSulString r;
+    r.append( &dig1, 1);
+    r.append( &dig2, 1);
+    return r;
+}

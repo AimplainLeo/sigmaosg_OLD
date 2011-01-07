@@ -18,10 +18,13 @@ public:
 					CSulString( sigma::int64 c );
 					CSulString( float f );
 
+	// modifiers
 	void			Format( const char* Format, ... );
 	void			MakeLower();
 	void			Trim();
+	void			replaceAll( const std::string& searchFor, const std::string& changeTo );
 
+	// conversions
 	float			asFloat();
 	double			asDouble();
 	sigma::uint32	asUint32();
@@ -30,7 +33,19 @@ public:
 	bool			asBool();
 	osg::Vec4		asVec4();
 
+	CSulString		char2hex( char dec ) const;
+
+	// web
+	void			urlSetHost( const CSulString& host );
+	CSulString		urlGetHost();
+	CSulString		urlGetParameterStringOnly();
+	CSulString		urlGetParameter( const CSulString& name );
+	void			urlAddParameter( const CSulString& name, const CSulString& value );
+	CSulString		urlGetDecode() const;
+	CSulString		urlGetEncode() const;
+
 	CSulString		GetStartWord( char c ) ;
+	
 };
 
 #endif // __SULSTRING_H__
