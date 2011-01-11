@@ -246,7 +246,8 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 	}
 	else
 	{
-		osg::notify(osg::NOTICE) << "SulGuiXml -> not handled: " << sName << std::endl;
+		if ( sName!="ROOT" )
+			osg::notify(osg::NOTICE) << "SulGuiXml -> not handled: " << sName << std::endl;
 	}
 }
 
