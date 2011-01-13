@@ -24,7 +24,7 @@ void CSulStringList::Tokenize( const CSulString& s )
 	}
 }
 
-const CSulStringList::VECTOR_STRING& CSulStringList::GetList() const
+const CSulStringList::VECTOR_STRING& CSulStringList::getList() const
 {
 	return m_vecString;
 }

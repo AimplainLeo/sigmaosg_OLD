@@ -14,7 +14,7 @@ CSulDebugValueBase( sTitle )
 void CSulDebugValueText::inc()
 {
 	m_index++;
-	if ( m_index>=m_listText->GetList().size() )
+	if ( m_index>=m_listText->getList().size() )
 	{	
 		m_index = 0;
 	}
@@ -26,7 +26,7 @@ void CSulDebugValueText::dec()
 {
 	if ( m_index==0 )
 	{
-		m_index = m_listText->GetList().size()-1;
+		m_index = m_listText->getList().size()-1;
 	}
 	else
 	{

@@ -17,7 +17,7 @@ public:
 
 	void					Tokenize( const CSulString& s );
 
-	const VECTOR_STRING&	GetList() const;
+	const VECTOR_STRING&	getList() const;
 
 	CSulString				getString( sigma::uint32 index );
 
