@@ -271,7 +271,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib osgTextd.lib osgUtild.lib osgManipulatord.lib osgGAd.lib OpenThreads.lib opengl32.lib osgDBd.lib "
+				AdditionalDependencies="osgd.lib osgViewerd.lib osgTextd.lib osgUtild.lib osgManipulatord.lib osgGAd.lib OpenThreadsd.lib opengl32.lib osgDBd.lib "
 				OutputFile="$(SIGMAOSG_ROOT_PATH)\bin\$(ProjectName)d.dll"
 				AdditionalLibraryDirectories="$(DELTA_LIB)"
 				GenerateDebugInformation="true"
