@@ -8,6 +8,14 @@ std::string()
 {
 }
 
+CSulString::CSulString( sigma::uint32 i ) :
+std::string()
+{
+	char buf[16];
+	itoa( i, buf, 10 );
+	assign( buf );
+}
+
 CSulString::CSulString( const sigma::int8* pszText ) :
 std::string( pszText )
 {

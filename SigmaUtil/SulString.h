@@ -15,6 +15,7 @@ public:
 					CSulString( const CSulString& s );
 					CSulString( const std::string& s );
 					CSulString( sigma::uint8 c );
+					CSulString( sigma::uint32 i );
 					CSulString( sigma::int64 c );
 					CSulString( float f );
 
