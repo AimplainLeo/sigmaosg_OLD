@@ -65,6 +65,9 @@ void CSulGuiEditBox::onMouseRelease( float x, float y )
 		m_bEditActive = bInside;
 		setBorderColor( bInside?osg::Vec4( 1,1,0,1 ):osg::Vec4( 0,0,1,1 ) );
 		m_rGuiText->setText( m_sText );
+
+		if ( m_bEditActive )
+			setCursor( "|" );
 	}
 
 }
@@ -74,7 +77,7 @@ void CSulGuiEditBox::setText( const CSulString& sText )
 	m_sText = sText;
 	if ( m_rGuiText.valid() )
 	{
-		m_rGuiText->setText( sText );
+		m_rGuiText->setText( sText+m_sCursor );
 	}
 }
 
