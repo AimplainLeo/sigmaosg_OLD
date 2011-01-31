@@ -21,7 +21,7 @@ extern bool			bSuppressTexture;
 extern std::string	outputFile;
 extern float		sizeMultiplier;
 extern osg::Node*	pSceneLocal;
-extern Sigma::uint32 texUnit;
+extern sigma::uint32 texUnit;
 extern bool generateCollisionGeometry;
 
 #define SHOW_BOUNDING_BOX
@@ -175,7 +175,7 @@ void CConsole::generate()
 	// show rejected positions
 	////////////////////////////////////////////////////
 
-	const Sigma::VEC_VEC3& rejectedPos = tmp.getRejectedPositionsList();
+	const sigma::VEC_VEC3& rejectedPos = tmp.getRejectedPositionsList();
 	osg::notify(osg::NOTICE)  << "Rejected positions count: " << rejectedPos.size() << std::endl;
 /*
 	// debug show rejected positions
@@ -212,7 +212,7 @@ osg::Geode* CConsole::createSphere( const osg::Vec3& pos )
 	return pGeode;
 }
 
-void CConsole::showPlaceholders( osg::Image* pImage, Sigma::uint32 posCount )
+void CConsole::showPlaceholders( osg::Image* pImage, sigma::uint32 posCount )
 {
 	float* p = reinterpret_cast<float*>(pImage->data());
 
@@ -232,11 +232,14 @@ void CConsole::showPlaceholders( osg::Image* pImage, Sigma::uint32 posCount )
 	}
 }
 
-void CConsole::showTrees( osg::Image* pImage, Sigma::uint32 posCount, osg::BoundingBox& bb, Sigma::uint32 texSizeSquared )
+void CConsole::showTrees( osg::Image* pImage, sigma::uint32 posCount, osg::BoundingBox& bb, sigma::uint32 texSizeSquared )
 {
+
+#if 0  // FIXME: the CSulRenderInstances has changed too much.. now this doesn't work
 	pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, sizeMultiplier, bSuppressTexture, texUnit, texSizeSquared );
 	pRenderInstances->create();
 	m_rScene->addChild( pRenderInstances );
+#endif
 }
 
 osg::ref_ptr<osg::Geometry> CConsole::createSingleTreeCollisionGeometry(float s)

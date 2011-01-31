@@ -14,7 +14,7 @@ osg::Node* CreateScene()
 	pGeomGrid->Create( osg::Vec3(-2,-2,0), 4, 4, 1, 1, 5, 5 );
 
 	osg::Geode* pGeode = new osg::Geode;
-	pGeode->addDrawable( pGeomGrid->GetGeometry() );
+	pGeode->addDrawable( pGeomGrid->getDrawable() );
 
 	return pGeode;
 }

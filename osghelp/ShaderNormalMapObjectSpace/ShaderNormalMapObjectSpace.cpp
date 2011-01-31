@@ -7,13 +7,18 @@
 #include <SigmaUtil/SulShaderNormalMapObjectSpace.h>
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
- 
+#include <osgDB/ReadFile>
+#include <osgDB/FileUtils>
+
 osg::Node* CreateScene()
 {
 	CSulGeomQuad* p = new CSulGeomQuad;
 	p->createUV();
-	p->setTexture( "images/BubblyBricks-ColorMap.png", 0 );
-	p->setTexture( "images/BubblyBricks-NormalMap.png", 1 );
+
+	CSulString sColorMap = osgDB::findDataFile( "BubblyBricks-ColorMap.png" );
+	CSulString sNormalMap = osgDB::findDataFile( "BubblyBricks-NormalMap.png");
+	p->setTexture( sColorMap, 0 );
+	p->setTexture( sNormalMap, 1 );
 
 	osg::Geode* pGeode = new osg::Geode;
 	pGeode->addDrawable( p->getDrawable() );

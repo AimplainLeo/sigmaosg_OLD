@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgTextd.lib osgGAd.lib osgd.lib osgViewerd.lib SigmaUtil_x2008d.lib osgDBd.lib"
+				AdditionalDependencies="osgTextd.lib osgGAd.lib osgd.lib osgViewerd.lib osgDBd.lib SigmaUtil_x2008d.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"

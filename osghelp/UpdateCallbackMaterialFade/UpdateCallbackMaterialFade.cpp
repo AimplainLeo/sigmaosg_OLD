@@ -6,6 +6,7 @@
 #include <osgDB/ReadFile>
 #include <osg/Material>
 #include <osg/BlendFunc>
+#include <osgDB/FileUtils>
 
 class CIuMaterialFaderCallback : public osg::NodeCallback
 {
@@ -72,8 +73,7 @@ void CIuMaterialFaderCallback::operator()( osg::Node* node, osg::NodeVisitor* nv
 osg::Node* CreateScene()
 {
     // load model
-    //osg::Node* pLoadedModel = osgDB::readNodeFile( "rover.3ds" );
-	osg::Node* pLoadedModel = osgDB::readNodeFile( "C:/Downloads/models/Recon_LandRover/LandRover.3DS" );
+	osg::Node* pLoadedModel = osgDB::readNodeFile(  osgDB::findDataFile( "LandRover.3DS" ) );
 
 	osg::Material* pMaterial = new osg::Material;
 	pMaterial->setAlpha( osg::Material::FRONT_AND_BACK, 0.0f );

@@ -7,6 +7,7 @@
 #include "SulFuncExtractor.h"
 #include <osg/geode>
 #include <osg/TemplatePrimitiveFunctor>
+#include <iterator>
 
 class CSulExtractGeometry : public osg::NodeVisitor
 {

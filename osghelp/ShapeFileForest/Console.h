@@ -22,8 +22,8 @@ public:
     void	Command( const CSulString& sText );
 
 private:
-	void			showTrees( osg::Image* pImage, Sigma::uint32 posCount, osg::BoundingBox& bb, Sigma::uint32 texSizeSquared );
-	void			showPlaceholders( osg::Image* pImage, Sigma::uint32 posCount );
+	void			showTrees( osg::Image* pImage, sigma::uint32 posCount, osg::BoundingBox& bb, sigma::uint32 texSizeSquared );
+	void			showPlaceholders( osg::Image* pImage, sigma::uint32 posCount );
 	osg::Geode*		createSphere( const osg::Vec3& pos );
 	osg::ref_ptr<osg::Geometry>	createSingleTreeCollisionGeometry(float s);
 	osg::ref_ptr<osg::Node> createTreeCollisionGeometry(const std::vector<osg::Vec3>& positionList);

@@ -6,6 +6,8 @@
 #include <osgDB/ReadFile>
 #include <osg/MatrixTransform>
 #include <osg/animationpath>
+#include <osgDB/FileUtils>
+#include <iostream>
 
 osg::Node* FindNodeByName( osg::Node* pNode, const std::string& sName )
 {
@@ -53,10 +55,14 @@ osg::MatrixTransform* AddMatrixTransform( osg::Node* pNode )
 	return 0;
 }
 
-osg::Node* CreateScene()
+osg::Node* createScene()
 {
 	// load our model
-	osg::Node* pModel =  osgDB::readNodeFile( "htest.3ds" );
+	std::string file = osgDB::findDataFile( "htest.3ds" );
+	if ( file.empty() )
+		return 0;
+	
+	osg::Node* pModel =  osgDB::readNodeFile( file );
 
 	// find the node for the cannon
 	osg::Node* pFound = FindNodeByName( pModel, "LOD01_g6_c" );
@@ -87,7 +93,15 @@ int _tmain(int argc, _TCHAR* argv[])
     rViewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render
-    rViewer->setSceneData( CreateScene() );
+	osg::Node* pNode = createScene();
+	if ( pNode )
+	{
+		rViewer->setSceneData( pNode );
+	}
+	else
+	{
+		std::cout << "WARNING: scene not created. Perhaps a missing file" << std::endl;
+	}
 
     // execute main loop
     return rViewer->run();

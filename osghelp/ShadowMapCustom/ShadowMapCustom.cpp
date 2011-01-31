@@ -67,12 +67,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	CSulShadow* pShadow = new CSulShadow( rRoot );
 
 	pShadow->addCaster( pShapes );
-	pShadow->addReceiver( pGround );	
+//	pShadow->addReceiver( pGround );	
 //	pShadow->addReceiver( pShapes );		// self shadowing has problems
 
 	pShadow->init();
 
-	rRoot->addChild( pShadow->getNode() );
+	rRoot->addChild( pShadow );
 
 	////////////////////////////////////////////////
 	// something else

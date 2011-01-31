@@ -11,6 +11,7 @@
 #include <osg/geometry>
 #include <osg/TemplatePrimitiveFunctor>
 #include <osg/linesegment>
+#include <iterator>
 
 class Extractor
 {

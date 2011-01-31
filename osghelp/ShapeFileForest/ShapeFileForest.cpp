@@ -44,7 +44,7 @@
 CParserXml		xmlParser;
 bool			bShowPivots = false;
 bool			bSuppressTexture = false;
-Sigma::uint32	texUnit = 0;
+sigma::uint32	texUnit = 0;
 std::string		sceneFile;
 std::string		shapeFile;
 std::string		outputFile;
@@ -228,7 +228,7 @@ int _tmain(int argc, char** argv)
 	std::string xmlFile;
 	if ( arguments.read( "--xml", xmlFile ) )
 	{
-		xmlParser.Load( xmlFile );
+		xmlParser.load( xmlFile );
 	}	
 
 	if ( arguments.read( "--suppressTexture"  ) )

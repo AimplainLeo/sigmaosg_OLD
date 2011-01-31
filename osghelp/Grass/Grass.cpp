@@ -91,7 +91,7 @@ public:
 		{
 			CSulString sVal = list.getString( 1 );
 
-			float f = sVal.GetFloat();
+			float f = sVal.asFloat();
 			ss->setAttribute( new osg::AlphaFunc(osg::AlphaFunc::GREATER, f), osg::StateAttribute::ON );
 		}
 
@@ -99,7 +99,7 @@ public:
 		{
 			CSulString sVal = list.getString( 1 );
 
-			sp = sVal.GetFloat();
+			sp = sVal.asFloat();
 			uniformSpacing->set( sp );		// grass shader (placement of grass next to each other)
 			pHeightRTT->setOrtho( cc, sp );
 		}
@@ -107,21 +107,21 @@ public:
 		if ( sAction=="heightadjust" )
 		{
 			CSulString sVal = list.getString( 1 );
-			heightAdjust = sVal.GetFloat();
+			heightAdjust = sVal.asFloat();
 			uniformHeightAdjust->set( heightAdjust );
 		}
 
 		if ( sAction=="windfactor" )
 		{
 			CSulString sVal = list.getString( 1 );
-			windFactor = sVal.GetFloat();
+			windFactor = sVal.asFloat();
 			uniformWindFactor->set( windFactor );
 		}
 
 		if ( sAction=="stretch" )
 		{
 			CSulString sVal = list.getString( 1 );
-			grassStretch = sVal.GetFloat();
+			grassStretch = sVal.asFloat();
 			uniformGrassStretch->set( grassStretch );
 		}
 
@@ -129,7 +129,7 @@ public:
 		{
 			CSulString sVal = list.getString( 1 );
 
-			cc = sVal.GetFloat();
+			cc = sVal.asFloat();
 
 			pGeodeGrass->removeDrawable( geomGrass );
 			geomGrass = createGrassGeom();
@@ -360,7 +360,7 @@ osg::Node* CreateScene()
     pGeomGrid->Create( osg::Vec3(0,0,0), 10, 10, 1, 1, 5, 5 );
 
     osg::Geode* pGeode2 = new osg::Geode;
-    pGeode2->addDrawable( pGeomGrid->getGeometry() );
+    pGeode2->addDrawable( pGeomGrid->getDrawable() );
 
 	pGroup->addChild( pGeode2 );
 

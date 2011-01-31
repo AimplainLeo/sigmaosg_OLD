@@ -37,7 +37,7 @@ osg::Group* createScene()
 
 	
 	CSulClipTriangle triClip( CSulDataTri( p1, p2, p3 ), *pPlane );
-	for ( Sigma::uint32 i=0; i<triClip.getCount(); i++ )
+	for ( sigma::uint32 i=0; i<triClip.getCount(); i++ )
 	{
 		CSulDataTri tri = *triClip.getTriangle( i );
 

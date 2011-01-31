@@ -15,6 +15,7 @@ osg::Node* CreateScene()
 	pGroup->addChild( pGeode );
 
 	osgParticle::PrecipitationEffect* pWeather = new osgParticle::PrecipitationEffect();
+	/*
 	pWeather->setWind( osg::Vec3(0,0,0) );
 	pWeather->setParticleSpeed( -0.001f );
 	pWeather->setParticleSize( 0.03f );
@@ -25,7 +26,8 @@ osg::Node* CreateScene()
 	pWeather->setFarTransition( 40.0f );
 	pWeather->setUseFarLineSegments( false );
 	pWeather->setPosition( osg::Vec3( 0,-100,0 ) );
-	//pWeather->rain( 1.0f );
+	*/
+	pWeather->rain( 1.0f );
 	pGroup->addChild( pWeather );
 
 	return pGroup;

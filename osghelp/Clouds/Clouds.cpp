@@ -26,7 +26,7 @@ osg::Node* createClouds()
 {
 	osg::Group* pGroup = new osg::Group;
 	CSulClouds* pClouds = new CSulClouds;
-	pGroup->addChild( pClouds->create() );
+	pGroup->addChild( pClouds->getGroup() );
 	return pGroup;
 }
 
