@@ -4,9 +4,12 @@
 #include "SulGuiEventHandler.h"
 #include "SulGuiCanvas.h"
 #include "SulNodePath.h"
+#include "SulProfiler.h"
 #include <osgViewer/Viewer>
 #include <osgManipulator/Selection>
 #include <iostream>
+
+extern osg::ref_ptr<CSulProfiler>	profiler;
 
 struct eventDataTest
 {
@@ -26,6 +29,9 @@ bool sortByLayer( const eventDataTest& r1, const eventDataTest& r2 )
 CSulGuiEventHandler::CSulGuiEventHandler()
 {
 	m_bPause = false;
+
+	if ( profiler )
+		profiler->create( "CSulGuiEventHandler event MOVE" );
 }
 
 void CSulGuiEventHandler::pause( bool bPause )
@@ -65,9 +71,15 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::MOVE )
     {
+		if ( profiler.valid() )
+			profiler->start( "CSulGuiEventHandler event MOVE" );
+		
 		float mouse_x = ea.getX();
 		float mouse_y = ea.getYmax()-ea.getY();
 		signalMouseMove( mouse_x, mouse_y );
+		
+		if ( profiler.valid() )
+			profiler->end( "CSulGuiEventHandler event MOVE" );
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::DRAG )

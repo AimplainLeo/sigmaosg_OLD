@@ -8,9 +8,13 @@
 #include <SigmaUtil/SulGuiManager.h>
 #include <SigmaUtil/SulShaderColor.h>
 #include <SigmaUtil/SulGuiListBox.h>
+#include <SigmaUtil/SulProfiler.h>
+#include <SigmaUtil/SulInit.h>
 #include <iostream>
 
-osg::ref_ptr<CSulGuiManager> pGuiManager = 0;
+extern osg::ref_ptr<CSulProfiler>	profiler;
+
+osg::ref_ptr<CSulGuiManager> pGuiManager;
 
 class CKeyboardHandler : public osgGA::GUIEventHandler 
 {
@@ -22,6 +26,11 @@ public:
 		{
 			return false;
 		}
+
+		if ( ea.getEventType()==osgGA::GUIEventAdapter::FRAME )
+		{
+			profiler->frameUpdate();
+		}		
 
 		if ( ea.getEventType()==osgGA::GUIEventAdapter::KEYDOWN )
 		{
@@ -105,6 +114,8 @@ int _tmain(int argc, _TCHAR* argv[])
     rViewer->setSceneData( pRoot );
 
 	rViewer->setCameraManipulator( new osgGA::TrackballManipulator );
+
+	sulInit( rViewer );
 
 	pRoot->addChild( createGui(rViewer) );
 

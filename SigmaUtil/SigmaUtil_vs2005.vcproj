@@ -579,6 +579,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomBarChart.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomBarChart.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomBase.cpp"
 					>
 				</File>
@@ -1738,6 +1746,30 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="Profiler"
+				>
+				<File
+					RelativePath=".\SulInit.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInit.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulProfiler.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulProfiler.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulProfilerData.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 	</Files>

@@ -240,6 +240,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UpdateCallbackMaterialFade"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wireframe", "Wireframe\Wireframe.vcproj", "{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarChart", "BarChart\BarChart.vcproj", "{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -562,6 +567,10 @@ Global
 		{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}.Debug|Win32.Build.0 = Debug|Win32
 		{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}.Release|Win32.ActiveCfg = Release|Win32
 		{4B5F6E60-3297-40F5-A33B-5D5A5A4B3883}.Release|Win32.Build.0 = Release|Win32
+		{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}.Debug|Win32.Build.0 = Debug|Win32
+		{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}.Release|Win32.ActiveCfg = Release|Win32
+		{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
