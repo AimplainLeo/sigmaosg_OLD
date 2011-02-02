@@ -21,7 +21,7 @@ m_p2(p2)
 
 void CSulGeomTriangle::createDrawable()
 {
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 
 	switch ( m_type )
 	{

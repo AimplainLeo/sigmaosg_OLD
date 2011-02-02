@@ -16,7 +16,7 @@ m_colorGridDiv( 0.5f, 0.5f, 0.5f, 1.0f )
 void CSulGeomGrid::createDrawable()
 {
 	//CSulGeomBase::createGeometry();
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 
 	osg::Geometry* pGeo = getDrawable()->asGeometry();
 

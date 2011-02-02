@@ -18,7 +18,7 @@ osg::Drawable* CSulGeomBase::getDrawable()
 	return m_vecDrawable[0];
 }
 
-void CSulGeomBase::setDrawable( osg::Drawable* pDrawable )
+void CSulGeomBase::addDrawable( osg::Drawable* pDrawable )
 {
 	m_vecDrawable.push_back( pDrawable );
 }

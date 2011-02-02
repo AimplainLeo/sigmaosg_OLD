@@ -43,7 +43,7 @@ float CSulGeomQuadTiles::getHeight()
 
 void CSulGeomQuadTiles::createDrawable()
 {
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 	createTiles();
 }
 

@@ -19,7 +19,7 @@ m_v1(v1)
 
 void CSulGeomLine::createDrawable()
 {
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 
 	// vertices
 	osg::Vec3Array* verts = new osg::Vec3Array;

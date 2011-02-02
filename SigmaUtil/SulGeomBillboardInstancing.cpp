@@ -14,7 +14,7 @@ m_bUseZDirectionNormal( bUseZDirectionNormal )
 void CSulGeomBillboardInstancing::createDrawable()
 {
 	//CSulGeomBase::createGeometry();
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 
 	const float halfDimX( 0.5f*m_sizeMultiplier );
     const float halfDimZ( 0.5f*m_sizeMultiplier );

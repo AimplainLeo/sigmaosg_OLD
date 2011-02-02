@@ -11,7 +11,7 @@ m_vecVector( vecVector )
 
 void CSulGeomTriangleFan::createDrawable()
 {
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 
 	osg::Vec3Array* verts = new osg::Vec3Array;
 	osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;	

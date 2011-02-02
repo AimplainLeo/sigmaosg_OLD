@@ -23,7 +23,7 @@ m_ePlane(ePlane)
 
 void CSulGeomQuad::createDrawable()
 {
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 	create();
 }
 
@@ -78,7 +78,7 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
 	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 }
 
-void CSulGeomQuad::setColor( osg::Vec4& c )
+void CSulGeomQuad::setColor( const osg::Vec4& c )
 {
 	setColor( c.r(), c.g(), c.b(), c.a() );
 }

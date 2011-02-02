@@ -15,7 +15,9 @@ public:
 									CSulGeomBase();
 
 	osg::Drawable*					getDrawable();
-	void							setDrawable( osg::Drawable* pDrawable );
+
+	// returns only the first drawable (if any)
+	void							addDrawable( osg::Drawable* pDrawable );
 
 	osg::Geode*						createGeode();
 

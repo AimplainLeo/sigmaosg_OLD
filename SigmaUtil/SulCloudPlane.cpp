@@ -30,7 +30,7 @@ void CSulCloudPlane::createDrawable()
 	osg::ref_ptr<osg::TexMat> rTexMat = new osg::TexMat;
 	m_rCloudScrollTexture= new CCloudScrollTexture( rTexMat, getWidth() );
 	m_rCloudScrollTexture->setUseDisplayList( false );
-	setDrawable( m_rCloudScrollTexture );
+	addDrawable( m_rCloudScrollTexture );
 	create();
 	
 	osg::Program* pShaderProgram = createShaderProgram();

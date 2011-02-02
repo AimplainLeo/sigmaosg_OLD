@@ -8,19 +8,17 @@
  
 osg::Node* CreateScene()
 {
-	osg::Geode* pGeode = new osg::Geode();
-
 	CSulGeomBarChart* p = new CSulGeomBarChart;
-	pGeode->addDrawable( p->getDrawable() );
+	
+	p->createBar();
+	p->createBar();
+	p->createBar();
 
-	/*
-	// we create the simplest form of shapes in OpenSceneGraph
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Sphere(osg::Vec3(0.0f,0.0f,0.0f),0.5f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Box(osg::Vec3(2.0f,0.0f,0.0f),2.0f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cone(osg::Vec3(4.0f,0.0f,0.0f),0.5f,3.0f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(6.0f,0.0f,0.5f),0.5f,3.0f) ) );
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Capsule(osg::Vec3(8.0f,0.0f,1.0f),0.5f,3.0f) ) );
-	*/
+	p->setBarSize( 0, 100 );
+	p->setBarSize( 1, 200 );
+	p->setBarSize( 2, 300 );
+
+	osg::Geode* pGeode = p->createGeode();
 
 	return pGeode;
 }

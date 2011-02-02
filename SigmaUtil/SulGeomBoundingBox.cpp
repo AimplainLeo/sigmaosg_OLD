@@ -11,8 +11,7 @@ CSulGeomBase()
 
 void CSulGeomBoundingBox::createDrawable()
 {
-	//CSulGeomBase::createGeometry();
-	setDrawable( new osg::Geometry );
+	addDrawable( new osg::Geometry );
 
 	osg::Geometry* pGeo = getDrawable()->asGeometry();
 

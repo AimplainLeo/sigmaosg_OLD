@@ -24,5 +24,5 @@ void CSulGeomSphere::createDrawable()
 
 	rShape->setColor( m_color );
 
-	setDrawable( rShape );
+	addDrawable( rShape );
 }

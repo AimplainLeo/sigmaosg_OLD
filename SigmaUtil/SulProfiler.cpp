@@ -9,8 +9,8 @@ CSulProfiler::CSulProfiler()
 {
 	CSulGeomBarChart* p = new CSulGeomBarChart;
 
-	m_rGeode = new osg::Geode;
-	m_rGeode->addDrawable( p->getDrawable() );
+	
+	m_rGeode = p->createGeode();
 }
 
 osg::Geode* CSulProfiler::getGeode()
