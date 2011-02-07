@@ -32,11 +32,11 @@ m_height(1500)
 
 void CSulClouds::setTextureStates()
 {
-	m_rPlane->getTexture()->setUseHardwareMipMapGeneration(true);
-	m_rPlane->getTexture()->setFilter(osg::Texture::MAG_FILTER, osg::Texture::LINEAR);
-	m_rPlane->getTexture()->setFilter(osg::Texture::MIN_FILTER, osg::Texture::LINEAR_MIPMAP_LINEAR);
-	m_rPlane->getTexture()->setWrap(osg::Texture2D::WRAP_S, osg::Texture2D::REPEAT);
-	m_rPlane->getTexture()->setWrap(osg::Texture2D::WRAP_T, osg::Texture2D::REPEAT);
+	m_rPlane->getQuad()->getTexture()->setUseHardwareMipMapGeneration( true );
+	m_rPlane->getQuad()->getTexture()->setFilter( osg::Texture::MAG_FILTER, osg::Texture::LINEAR );
+	m_rPlane->getQuad()->getTexture()->setFilter( osg::Texture::MIN_FILTER, osg::Texture::LINEAR_MIPMAP_LINEAR );
+	m_rPlane->getQuad()->getTexture()->setWrap( osg::Texture2D::WRAP_S, osg::Texture2D::REPEAT );
+	m_rPlane->getQuad()->getTexture()->setWrap( osg::Texture2D::WRAP_T, osg::Texture2D::REPEAT );
 }
 
 osg::Node* CSulClouds::createPlane( float size, float height )
@@ -90,7 +90,7 @@ void CSulClouds::setCoverage( float coverage )
 	osg::Image* image = osgDB::readImageFile( texturePath );
 	if ( image )
 	{
-		m_rPlane->setTexture( image, GL_RGBA );
+		m_rPlane->getQuad()->setTexture( image, GL_RGBA );
 	}
 	else
 	{
@@ -169,7 +169,7 @@ void CSulClouds::setUV( float s )
 		return;
 	}
 
-	m_rPlane->setUV( s );
+	m_rPlane->getQuad()->setUV( s );
 }
 
 osg::Node* CSulClouds::create()

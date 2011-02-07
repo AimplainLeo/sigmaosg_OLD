@@ -8,6 +8,7 @@
 #include <osg/ref_ptr>
 #include <osg/PrimitiveSet>
 #include <osg/Geode>
+#include <osg/geometry>
 
 class SUL_EXPORT CSulGeomGrid : public osg::Geode
 {

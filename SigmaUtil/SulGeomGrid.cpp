@@ -4,7 +4,6 @@
 #include "SulGeomGrid.h"
 #include "SulTypes.h"
 #include <osg/geode>
-#include <osg/geometry>
 
 CSulGeomGrid::CSulGeomGrid() :
 osg::Geode(), 
