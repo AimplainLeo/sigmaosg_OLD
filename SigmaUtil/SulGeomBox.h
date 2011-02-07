@@ -4,13 +4,14 @@
 #define __SULGEOMBOX_H__
 
 #include "SulGeomBase.h"
+#include <osg/geode>
 
-class CSulGeomBox : public CSulGeomBase
+class CSulGeomBox : public osg::Geode
 {
 public:
 									CSulGeomBox( float extent );
 
-protected:
+private:
 	void							createDrawable();
 
 private:

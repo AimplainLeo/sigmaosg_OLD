@@ -24,7 +24,6 @@ private:
 	void							testme( osg::Node* node );
 
 private:
-	osg::ref_ptr<osg::Geode>		m_rGeode;
 	osg::ref_ptr<CSulGeomGrid>		m_rGeomGrid;
 
 	osg::ref_ptr<osg::PositionAttitudeTransform>	m_rPat;

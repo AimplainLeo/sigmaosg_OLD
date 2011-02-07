@@ -6,24 +6,29 @@
 #include <osgDB/FileUtils>
 
 CSulGeomQuad::CSulGeomQuad( float w, float h, EPLANE ePlane ) :
+osg::Geode(),
 m_vCenter(0,0,0),
 m_w(w),
 m_h(h),
 m_ePlane(ePlane)
 {
+	createDrawable();
 }
 
 CSulGeomQuad::CSulGeomQuad( const osg::Vec3& vCenter, float w, float h, EPLANE ePlane ) :
+osg::Geode(),
 m_vCenter(vCenter),
 m_w(w),
 m_h(h),
 m_ePlane(ePlane)
 {
+	createDrawable();
 }
 
 void CSulGeomQuad::createDrawable()
 {
-	addDrawable( new osg::Geometry );
+	m_rGeo = new osg::Geometry;
+	addDrawable( m_rGeo );
 	create();
 }
 
@@ -58,7 +63,7 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
 			}
 			break;
 	}
-    getDrawable()->asGeometry()->setVertexArray( m_rVerts );
+    m_rGeo->setVertexArray( m_rVerts );
 
     // create a quad primitive set
     osg::DrawElementsUInt* pPrimitiveSet = new osg::DrawElementsUInt( osg::PrimitiveSet::QUADS, 0 );
@@ -66,7 +71,7 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
     pPrimitiveSet->push_back( 2 );
     pPrimitiveSet->push_back( 1 );
     pPrimitiveSet->push_back( 0 );
-    getDrawable()->asGeometry()->addPrimitiveSet( pPrimitiveSet );
+    m_rGeo->addPrimitiveSet( pPrimitiveSet );
 
 	m_rColors = new osg::Vec4Array;
 	float f = 1.0f;
@@ -74,8 +79,8 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
-    getDrawable()->asGeometry()->setColorArray( m_rColors.get() );
-	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+    m_rGeo->setColorArray( m_rColors.get() );
+	m_rGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 }
 
 void CSulGeomQuad::setColor( const osg::Vec4& c )
@@ -94,7 +99,7 @@ void CSulGeomQuad::setColor( float r, float g, float b, float a )
 	(*m_rColors)[1].set( r, g, b, a );
 	(*m_rColors)[2].set( r, g, b, a );
 	(*m_rColors)[3].set( r, g, b, a );
-	getDrawable()->asGeometry()->dirtyDisplayList();
+	m_rGeo->dirtyDisplayList();
 }
 
 const osg::Vec4& CSulGeomQuad::getColor( sigma::uint32 index )
@@ -113,7 +118,7 @@ void CSulGeomQuad::createUV()
 		m_rUV->push_back(osg::Vec2(1, 1));
 		m_rUV->push_back(osg::Vec2(0, 1));
 
-		getDrawable()->asGeometry()->setTexCoordArray( 0, m_rUV );
+		m_rGeo->setTexCoordArray( 0, m_rUV );
 	}
 }
 
@@ -130,7 +135,7 @@ void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, sigma::
 
 	m_mapTex[unit] = pTex;
 
-    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+    m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
 void CSulGeomQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit )
@@ -139,7 +144,7 @@ void CSulGeomQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit )
 
 	m_mapTex[unit] = pTex;
 
-    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+    m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
 osg::Texture2D* CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 unit )
@@ -147,7 +152,7 @@ osg::Texture2D* CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 
 	osg::Texture2D* pTex = new osg::Texture2D;
     m_rImage = osgDB::readImageFile( osgDB::findDataFile(file.c_str()) );
     pTex->setImage( m_rImage );
-    getDrawable()->asGeometry()->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+    m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 	m_mapTex[unit] = pTex;
 	return pTex;
 }
@@ -241,9 +246,8 @@ void CSulGeomQuad::calcVertPositions()
 			break;
 	}
 
-	getDrawable()->asGeometry()->dirtyBound();
-
-//getDrawable()->asGeometry()->dirtyDisplayList();
+	m_rGeo->dirtyBound();
+//m_rGeo->dirtyDisplayList();
 }
 
 void CSulGeomQuad::setCenter( const osg::Vec3& vCenter )

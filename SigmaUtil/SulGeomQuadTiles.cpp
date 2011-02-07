@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulGeomQuadTiles.h"
 #include "SulTypes.h"
+#include <osg/geometry>
 
 CSulGeomQuadTiles::CSulGeomQuadTiles( 
 	const osg::Vec3& vCenter, 
@@ -10,6 +11,7 @@ CSulGeomQuadTiles::CSulGeomQuadTiles(
 	sigma::uint32 tileX, sigma::uint32 tileY,				// number of tiles x and y with in w and h
 	bool bFadeEdges,
 	EPLANE ePlane ) :
+osg::Geode(),
 m_vCenter(vCenter),
 m_w(w),
 m_h(h),
@@ -18,7 +20,7 @@ m_tileY(tileY),
 m_bFadeEdges(bFadeEdges),
 m_ePlane(ePlane)
 {
-	
+	createDrawable();
 }
 
 sigma::uint32 CSulGeomQuadTiles::getTileX()
@@ -43,7 +45,8 @@ float CSulGeomQuadTiles::getHeight()
 
 void CSulGeomQuadTiles::createDrawable()
 {
-	addDrawable( new osg::Geometry );
+	m_rGeo = new osg::Geometry;
+	addDrawable( m_rGeo );
 	createTiles();
 }
 
@@ -76,7 +79,7 @@ void CSulGeomQuadTiles::createTiles()
 		}
 	}
 
-	getDrawable()->asGeometry()->setVertexArray( pVerts );
+	m_rGeo->setVertexArray( pVerts );
 
 	////////////////////////////////////////////////
 	// create vertice indices
@@ -95,7 +98,7 @@ void CSulGeomQuadTiles::createTiles()
 		}
 	}
 
-	getDrawable()->asGeometry()->setVertexIndices( pCoordIndices );
+	m_rGeo->setVertexIndices( pCoordIndices );
 
 	////////////////////////////////////////////////
 	// texture coordinates
@@ -119,7 +122,7 @@ void CSulGeomQuadTiles::createTiles()
 		}
 	}
 
-	getDrawable()->asGeometry()->setTexCoordArray( 0, m_texCoords );
+	m_rGeo->setTexCoordArray( 0, m_texCoords );
 
 	////////////////////////////////////////////////
 	// colors
@@ -163,9 +166,9 @@ void CSulGeomQuadTiles::createTiles()
 		}
 	}
 
-	getDrawable()->asGeometry()->setColorIndices( colorIndices );
-	getDrawable()->asGeometry()->setColorArray( m_colors );
-	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+	m_rGeo->setColorIndices( colorIndices );
+	m_rGeo->setColorArray( m_colors );
+	m_rGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 	
 	////////////////////////////////////////////////
 	// normals
@@ -174,8 +177,8 @@ void CSulGeomQuadTiles::createTiles()
 	osg::Vec3Array* normals = new osg::Vec3Array;
 	normals->push_back(osg::Vec3(0.0f,0.0f,1.0f)); // set up a single normal for the plane
 
-	getDrawable()->asGeometry()->setNormalArray( normals );
-	getDrawable()->asGeometry()->setNormalBinding( osg::Geometry::BIND_OVERALL );
+	m_rGeo->setNormalArray( normals );
+	m_rGeo->setNormalBinding( osg::Geometry::BIND_OVERALL );
 
-	getDrawable()->asGeometry()->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::QUADS, 0, pCoordIndices->size()));
+	m_rGeo->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::QUADS, 0, pCoordIndices->size()));
 }

@@ -73,9 +73,7 @@ void CSceneBase::drawBoundingBox()
 	{
 		osg::BoundingBox bb = m_rComputeBounds->getBoundingBox();
 		CSulGeomBoundingBox* gbb = new CSulGeomBoundingBox( bb );
-		osg::Geode* bbgeode = new osg::Geode;
-		bbgeode->addDrawable( gbb->getDrawable() );
-		m_rPat->addChild( bbgeode );
+		m_rPat->addChild( gbb );
 	}
 }
 
@@ -139,9 +137,7 @@ void CSceneBase::clipLines( const CSulExtractGeometry& sceneGeometry, const sigm
 	{
 		CSulGeomLineList* pGeomLines = new CSulGeomLineList( m_vecLines );
 		pGeomLines->setColor( m_clipColor );
-		osg::Geode* pGeodeLines = new osg::Geode;
-		pGeodeLines->addDrawable( pGeomLines->getDrawable() );
-		m_rPat->addChild( pGeodeLines );
+		m_rPat->addChild( pGeomLines );
 	}
 }
 
@@ -180,11 +176,9 @@ void CSceneBase::clipTriangles( const CSulExtractGeometry& sceneGeometry, const 
 		pGeomTris->setColor( m_clipColor );
 		
 		osg::Geode* pGeodeTris = new osg::Geode;
-		pGeodeTris->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
-		pGeodeTris->getOrCreateStateSet()->setRenderingHint( osg::StateSet::TRANSPARENT_BIN );
-		pGeodeTris->addDrawable( pGeomTris->getDrawable() );
-		
-		pPat->addChild( pGeodeTris );
+		pGeomTris->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
+		pGeomTris->getOrCreateStateSet()->setRenderingHint( osg::StateSet::TRANSPARENT_BIN );
+		pPat->addChild( pGeomTris );
 		m_rPat->addChild( pPat );
 	}
 }

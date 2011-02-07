@@ -16,11 +16,8 @@ CSulGrid::CSulGrid()
 	m_rGeomGrid = new CSulGeomGrid;
 	m_rGeomGrid->Create( osg::Vec3(-2,-2,0), 4, 4, 1, 1, 5, 5 );
 
-	m_rGeode = new osg::Geode;
-	m_rGeode->addDrawable( m_rGeomGrid->getDrawable() );
-
 	m_rPat = new osg::PositionAttitudeTransform;
-	m_rPat->addChild( m_rGeode.get() );
+	m_rPat->addChild( m_rGeomGrid );
 }
 
 osg::PositionAttitudeTransform* CSulGrid::GetPAT()

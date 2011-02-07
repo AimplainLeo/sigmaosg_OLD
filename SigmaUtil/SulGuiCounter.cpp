@@ -30,7 +30,7 @@ void CSulGuiCounter::onClick( CSulGuiCanvas* pCanvas )
 		u = 0.0f;
 
 	pCanvas->getQuad()->setUV( u, u+0.1f, 0.0f, 1.0f );
-	pCanvas->getQuad()->getDrawable()->asGeometry()->dirtyDisplayList();
+	pCanvas->getQuad()->getDrawable( 0 )->asGeometry()->dirtyDisplayList();
 }
 
 void CSulGuiCounter::init()

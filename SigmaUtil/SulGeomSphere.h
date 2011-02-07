@@ -3,15 +3,15 @@
 #ifndef __SULGEOMSPHERE_H__
 #define __SULGEOMSPHERE_H__
 
-#include "SulGeomBase.h"
+#include <osg/geode>
 
-class CSulGeomSphere : public CSulGeomBase
+class CSulGeomSphere : public osg::Geode
 {
 
 public:
 				CSulGeomSphere( float radius=1.0f, osg::Vec3 pos=osg::Vec3(0,0,0)  );
 
-protected:
+private:
 	void		createDrawable();
 
 private:

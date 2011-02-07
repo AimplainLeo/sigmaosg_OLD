@@ -6,8 +6,9 @@
 #include "SulGeomBase.h"
 #include "SulTypes.h"
 #include <osg/linewidth>
-
-class CSulGeomLineStrip : public CSulGeomBase
+#include <osg/Geode>
+ 
+class CSulGeomLineStrip : public osg::Geode
 {
 public: 
 					CSulGeomLineStrip();
@@ -17,13 +18,15 @@ public:
 
 	void			setWidth( float width );
 	
-protected:
+private:
+	void			initConstructor();
 	void			createDrawable();
 
 private:
-	sigma::VEC_VEC3 m_vecVector;
+	sigma::VEC_VEC3					m_vecVector;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 	osg::ref_ptr<osg::LineWidth>	m_rLineWidth;
+	float							m_width;
 };
 
 

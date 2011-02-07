@@ -358,11 +358,7 @@ osg::Node* CreateScene()
 	////////////////
 	CSulGeomGrid* pGeomGrid = new CSulGeomGrid;
     pGeomGrid->Create( osg::Vec3(0,0,0), 10, 10, 1, 1, 5, 5 );
-
-    osg::Geode* pGeode2 = new osg::Geode;
-    pGeode2->addDrawable( pGeomGrid->getDrawable() );
-
-	pGroup->addChild( pGeode2 );
+	pGroup->addChild( pGeomGrid );
 
 	// what does this exactly do? (you would think it would disable culling,.. but it doesn't!)
 	// think it culls when an object is a certain pixel size on the screen

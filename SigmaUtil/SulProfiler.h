@@ -13,8 +13,6 @@ class CSulProfiler : public osg::Referenced
 public:
 			CSulProfiler();
 
-	osg::Geode*		getGeode();
-
 	void	create( const CSulString& name, const CSulString& groupName="" );
 
 	void	start( const CSulString& name, const CSulString& groupName="" );
@@ -32,8 +30,6 @@ private:
 	typedef std::map< CSulString, MAP_DATA*>						MAP_GROUP;
 
 	MAP_GROUP	m_mapGroup;
-
-	osg::ref_ptr<osg::Geode>		m_rGeode;
 };
 
 #endif // __SULPROFILER_H__

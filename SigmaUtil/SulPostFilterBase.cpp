@@ -55,12 +55,12 @@ osg::Texture2D* CSulPostFilterBase::createTexture( unsigned short w, unsigned sh
 	return texture;
 }
 
-osg::Geode* CSulPostFilterBase::createFilterPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
+osg::Group* CSulPostFilterBase::createFilterPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
 {
 	CSulFilterPass* pFilter = new CSulFilterPass;
-	osg::Geode* pGeode = pFilter->create( pTexIn, pTexOut, sNameRTT );
+	osg::Group* pGroup = pFilter->create( pTexIn, pTexOut, sNameRTT );
 	addChild( pFilter->getTexCam() );
-	return pGeode;
+	return pGroup;
 }
 
 void CSulPostFilterBase::addPass( CSulPass* pPass )

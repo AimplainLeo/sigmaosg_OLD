@@ -1,13 +1,18 @@
 // SulGeomBase.cpp
 
 #include "stdafx.h"
+
+#if 0
+
 #include "SulGeomBase.h"
 #include <osg/geode>
 
-CSulGeomBase::CSulGeomBase()
+CSulGeomBase::CSulGeomBase() :
+osg::Group()
 {
 }
 
+/*
 osg::Drawable* CSulGeomBase::getDrawable()
 {
 	if ( m_vecDrawable.empty() )
@@ -18,11 +23,14 @@ osg::Drawable* CSulGeomBase::getDrawable()
 	return m_vecDrawable[0];
 }
 
+
 void CSulGeomBase::addDrawable( osg::Drawable* pDrawable )
 {
 	m_vecDrawable.push_back( pDrawable );
 }
+*/
 
+/*
 osg::Geode* CSulGeomBase::createGeode()
 {
 	if ( m_vecDrawable.empty() )
@@ -40,4 +48,6 @@ osg::Geode* CSulGeomBase::createGeode()
 
 	return pGeode;
 }
+*/
 
+#endif 

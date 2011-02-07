@@ -3,15 +3,15 @@
 #ifndef __SULGEOMTRIANGLEFAN_H__
 #define __SULGEOMTRIANGLEFAN_H__
 
-#include "SulGeomBase.h"
 #include "SulTypes.h"
+#include <osg/geode>
 
-class CSulGeomTriangleFan : public CSulGeomBase
+class CSulGeomTriangleFan : public osg::Geode
 {
 public: 
 					CSulGeomTriangleFan( const sigma::VEC_VEC3& vecVector );
 
-protected:
+private:
 	void			createDrawable();
 
 private:

@@ -49,7 +49,6 @@ private:
 	
 	osg::ref_ptr<CSulCloudPlane>					m_rPlane;
 	osg::ref_ptr<osg::PositionAttitudeTransform>	m_rPat;
-	osg::ref_ptr<osg::Geode>						m_pPlaneGeode;
 	float											m_coverage;
 	float											m_size;
 	float											m_height;

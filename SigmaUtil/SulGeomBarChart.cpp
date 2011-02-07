@@ -7,11 +7,8 @@
 // we need a max length and what this should match in pixels/viewport
 
 CSulGeomBarChart::CSulGeomBarChart() :
+osg::Group(),
 m_h( 10.0f )
-{
-}
-
-void CSulGeomBarChart::createDrawable()
 {
 }
 
@@ -19,8 +16,7 @@ sigma::uint32 CSulGeomBarChart::createBar( const osg::Vec4& color )
 {
 	CSulGeomQuad* p = new CSulGeomQuad;
 	p->setColor( color );
-
-	addDrawable( p->getDrawable() );
+	addChild( p );
 
 	m_vecBar.push_back( p );
 

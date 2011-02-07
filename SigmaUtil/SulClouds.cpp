@@ -50,14 +50,11 @@ osg::Node* CSulClouds::createPlane( float size, float height )
 		m_rPlane->setSize( size );
 	}
 
-	m_pPlaneGeode = new osg::Geode;
-	m_pPlaneGeode->addDrawable( m_rPlane->getDrawable() );
-
 	setCoverage( m_coverage );
 
 	setTextureStates();
 
-	osg::StateSet* ss = m_pPlaneGeode->getOrCreateStateSet();
+	osg::StateSet* ss = m_rPlane->getOrCreateStateSet();
 
 	osg::BlendFunc *trans = new osg::BlendFunc();
 	trans->setFunction(osg::BlendFunc::SRC_ALPHA ,osg::BlendFunc::ONE_MINUS_SRC_ALPHA);
@@ -66,7 +63,7 @@ osg::Node* CSulClouds::createPlane( float size, float height )
 	// transform to height
 	m_rPat = new osg::PositionAttitudeTransform;
 	m_rPat->setPosition( osg::Vec3(0, 0, height) );
-	m_rPat->addChild( m_pPlaneGeode );
+	m_rPat->addChild( m_rPlane );
 
 	return m_rPat;
 }
@@ -208,9 +205,9 @@ osg::Node* CSulClouds::create()
 /*
 	// to keep the texture at the correct position and wind
 	osg::TexMat* texMat = new osg::TexMat();
-	osg::StateSet* stateset = m_pPlaneGeode->getOrCreateStateSet();
+	osg::StateSet* stateset = m_rPlane->getOrCreateStateSet();
 	stateset->setTextureAttribute( 0, texMat );
-	m_pPlaneGeode->setCullCallback( new CSulCloudPlaneCullback( texMat, m_size ) );
+	m_rPlane->setCullCallback( new CSulCloudPlaneCullback( texMat, m_size ) );
 */
 
 	return m_rGroup;

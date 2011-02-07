@@ -2,26 +2,29 @@
 
 #include "stdafx.h"
 #include "SulGeomTriangle.h"
+#include <osg/geometry>
 
 CSulGeomTriangle::CSulGeomTriangle( float d ) :
-CSulGeomBase(),
+osg::Geode(),
 m_type( CSulGeomTriangle::EQUILATERAL ),
 m_distance( d )
 {
 }
 
 CSulGeomTriangle::CSulGeomTriangle( const osg::Vec3& p0, const osg::Vec3& p1, const osg::Vec3& p2 ) :
-CSulGeomBase(),
+osg::Geode(),
 m_type( CSulGeomTriangle::ARBITRARY ),
 m_p0(p0),
 m_p1(p1),
 m_p2(p2)
 {
+	createDrawable();
 }
 
 void CSulGeomTriangle::createDrawable()
 {
-	addDrawable( new osg::Geometry );
+	m_rGeo = new osg::Geometry;
+	addDrawable( m_rGeo );
 
 	switch ( m_type )
 	{
@@ -48,7 +51,7 @@ void CSulGeomTriangle::createDrawable()
 	verts->push_back( m_p0 );
 	verts->push_back( m_p1 );
 	verts->push_back( m_p2 );
-	getDrawable()->asGeometry()->setVertexArray( verts );
+	m_rGeo->setVertexArray( verts );
 
     osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;
     indices->push_back(0);
@@ -60,10 +63,10 @@ void CSulGeomTriangle::createDrawable()
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
-    getDrawable()->asGeometry()->setColorArray( m_rColors.get() );
-	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+    m_rGeo->setColorArray( m_rColors.get() );
+	m_rGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 
-    getDrawable()->asGeometry()->addPrimitiveSet(
+    m_rGeo->addPrimitiveSet(
         new osg::DrawElementsUInt( 
 			GL_TRIANGLES,
             indices->size(), 
@@ -83,7 +86,7 @@ void CSulGeomTriangle::setColor( float r, float g, float b, float a )
 	(*m_rColors)[0].set( r, g, b, a );
 	(*m_rColors)[1].set( r, g, b, a );
 	(*m_rColors)[2].set( r, g, b, a );
-	getDrawable()->asGeometry()->dirtyDisplayList();
+	m_rGeo->dirtyDisplayList();
 }
 
 const CSulDataTri	CSulGeomTriangle::getTriangle() const

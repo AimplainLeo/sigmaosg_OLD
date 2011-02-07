@@ -54,12 +54,12 @@ REGISTER_DOTOSGWRAPPER(CSulRenderInstances)
 */
 
 CSulRenderInstances::CSulRenderInstances() :
-osg::Geode()
+osg::Group()
 {
 }
 
 CSulRenderInstances::CSulRenderInstances( const CSulRenderInstances& ri, const osg::CopyOp& copyop ) :
-osg::Geode( ri, copyop )
+osg::Group( ri, copyop )
 {
 	m_bSuppressTexture = ri.m_bSuppressTexture;
 	m_numInstances = ri.m_numInstances;
@@ -79,7 +79,7 @@ CSulRenderInstances::CSulRenderInstances(
 	sigma::uint32 useLights,
 	bool bUseZDirectionNormal
 ) :
-osg::Geode(),
+osg::Group(),
 m_bb( bb ),
 m_bSuppressTexture( bSuppressTexture ),
 m_texUnit( texUnit ),
@@ -101,9 +101,9 @@ void CSulRenderInstances::create()
 {
 	CSulGeomBillboardInstancing* pBillboard = new CSulGeomBillboardInstancing( m_numInstances, m_bUseZDirectionNormal );
 
-	addDrawable( pBillboard->getDrawable() );
+	addChild( pBillboard );
 
-	pBillboard->getDrawable()->setInitialBound( m_bb );
+	pBillboard->getDrawable( 0 )->setInitialBound( m_bb );
 
 	osg::StateSet* ss = getOrCreateStateSet();
 

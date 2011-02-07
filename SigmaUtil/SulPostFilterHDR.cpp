@@ -54,9 +54,9 @@ osg::Texture2D* CSulPostFilterHDR::out()
 void CSulPostFilterHDR::filterBrightPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
 	m_rFilterBrightPass = new CSulFilterPass;
-	osg::Geode* pGeode = m_rFilterBrightPass->create( pTexIn, pTexOut, "BrightPass" );
+	osg::Group* pGroup = m_rFilterBrightPass->create( pTexIn, pTexOut, "BrightPass" );
 	addChild( m_rFilterBrightPass->getTexCam() );
-	m_rShaderBrightPass = new CSulShaderBrightPass( pGeode, 1.2f );
+	m_rShaderBrightPass = new CSulShaderBrightPass( pGroup, 1.2f );
 
 /*
 	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "BrightPass" );
@@ -66,20 +66,20 @@ void CSulPostFilterHDR::filterBrightPass( osg::Texture2D* pTexIn, osg::Texture2D
 
 void CSulPostFilterHDR::filterGaussH( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "GaussH" );
-	osg::ref_ptr<CSulShaderGaussH> rShader = new CSulShaderGaussH( pGeode, pTexIn->getTextureHeight() );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "GaussH" );
+	osg::ref_ptr<CSulShaderGaussH> rShader = new CSulShaderGaussH( pGroup, pTexIn->getTextureHeight() );
 }
 
 void CSulPostFilterHDR::filterGaussV( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "GaussV" );
-	osg::ref_ptr<CSulShaderGaussV> rShader = new CSulShaderGaussV( pGeode, pTexIn->getTextureWidth() );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "GaussV" );
+	osg::ref_ptr<CSulShaderGaussV> rShader = new CSulShaderGaussV( pGroup, pTexIn->getTextureWidth() );
 }
 
 void CSulPostFilterHDR::filterCombine( osg::Texture2D* pTexOrg, osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "Compose" );
-	m_rShaderCombine = new CSulShaderCombine( pGeode, m_fExp, m_fFactor, m_fMax, pTexOrg, pTexIn );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "Compose" );
+	m_rShaderCombine = new CSulShaderCombine( pGroup, m_fExp, m_fFactor, m_fMax, pTexOrg, pTexIn );
 }
 
 CSulShaderBrightPass* CSulPostFilterHDR::getShaderBrightPass()

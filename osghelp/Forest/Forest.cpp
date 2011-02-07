@@ -35,15 +35,12 @@ static int CastsShadowTraversalMask = 0x2;
 
 #define ZOFS 4
 
-osg::Geode* createGrid()
+osg::Node* createGrid()
 {
 	CSulGeomGrid* pGeomGrid = new CSulGeomGrid;
     pGeomGrid->Create( osg::Vec3(0,0,0), 10, 10, 1, 1, 5, 5 );
 
-    osg::Geode* pGeode = new osg::Geode;
-    pGeode->addDrawable( pGeomGrid->getDrawable() );
-	
-	return pGeode;
+	return pGeomGrid;
 }
 
 osg::Geode* createShapes()

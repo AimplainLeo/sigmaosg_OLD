@@ -3,14 +3,12 @@
 #ifndef __SULGEOMARROW2D_H__
 #define __SULGEOMARROW2D_H__
 
-#include "SulGeomBase.h"
+#include <osg/group>
 
-class CSulGeomArrow2D : public CSulGeomBase
+class CSulGeomArrow2D : public osg::Group
 {
 public:
 			CSulGeomArrow2D( float len, float width, float headSize );
-
-	void	createDrawable();
 
 private:
 	float	m_len;

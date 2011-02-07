@@ -42,20 +42,15 @@ osg::Node* CreateScene()
 {
 	// create geometry quad
 	osg::ref_ptr<CSulGeomQuad> pGeomQuad = new CSulGeomQuad( osg::Vec3(110,110, 0), 100, 100, CSulGeomQuad::PLANE_XY );
-	osg::Geode* pGeode0 = new osg::Geode;
-	pGeode0->addDrawable( pGeomQuad->getDrawable() );
-	pGeode0->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+	pGeomQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	
-    // create geometry node that will contain all our drawables
-    osg::Geode* pGeode = new osg::Geode;
-    osg::StateSet* pStateSet = pGeode->getOrCreateStateSet();
+    osg::StateSet* pStateSet = pGeomQuad->getOrCreateStateSet();
     pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-    pGeode->addDrawable( pGeomQuad->getDrawable() );
 	
 	osg::MatrixTransform* mtrans = new osg::MatrixTransform;
 	mtrans->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
 	mtrans->setMatrix( osg::Matrix::identity() );
-	mtrans->addChild( pGeode );
+	mtrans->addChild( pGeomQuad );
 	
 	osg::Projection* pProj = new osg::Projection();
 	osg::Matrixd m_mOrtho = osg::Matrix::ortho2D( 0, 512, 0, 512 );

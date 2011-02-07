@@ -37,16 +37,14 @@ void CSulGuiDial::init()
 
 	CSulGeomCircle* pCircle = new CSulGeomCircle( m_radius );
 	pCircle->setOffset( osg::Vec3(m_radius, m_radius, 0.0f) );
-	osg::Geode* pGeodeCircle = new osg::Geode;
-	pGeodeCircle->addDrawable( pCircle->getDrawable() );
-	addChild( pGeodeCircle );
+	addChild( pCircle );
 
 	m_mt = new osg::MatrixTransform;
 	osg::Matrix m;
 	m.setTrans( osg::Vec3(m_radius,m_radius,0) );
 	m_mt->setMatrix( m );
 	CSulGeomArrow2D* pArrow = new CSulGeomArrow2D( m_radius, 10.0f, 10.0f );
-	m_mt->addChild( pArrow->createGeode() );
+	m_mt->addChild( pArrow );
 	addChild( m_mt );
 
 	getEventHandler()->wantEvent( this, this, CSulGuiEventHandler::EVENT_MOUSERELEASE ); 

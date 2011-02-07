@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "SulPass.h"
-#include "SulGeomQuad.h"
 #include "SulTransScreenAlign.h"
 
 CSulPass::CSulPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const CSulString& sName )
@@ -10,7 +9,7 @@ CSulPass::CSulPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const CSulS
 	create( pTexIn, pTexOut, sName );
 }
 
-osg::Geode* CSulPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
+CSulGeomQuad* CSulPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
 {
 	int texW = pTexIn->getTextureWidth();
 	int texH = pTexIn->getTextureHeight();
@@ -20,21 +19,18 @@ osg::Geode* CSulPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, c
 
 	// quad to apply shader to
 	// quad to use pTexIn
-	osg::ref_ptr<CSulGeomQuad> rQuad = new CSulGeomQuad( osg::Vec3(texW/2.0f, texH/2.0f, 0), texW, texH );
-	rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-	rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
-	rQuad->setTexture( pTexIn );
-
-	m_rGeode	= new osg::Geode;
-	m_rGeode->addDrawable( rQuad->getDrawable() );
+	m_rQuad = new CSulGeomQuad( osg::Vec3(texW/2.0f, texH/2.0f, 0), texW, texH );
+	m_rQuad->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+	m_rQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+	m_rQuad->setTexture( pTexIn );
 
 	// the quad must be aligned to the RTT camera and cover it completly
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( texW, texH );
-	rAlign->AddChild( m_rGeode );
+	rAlign->AddChild( m_rQuad );
 
 	m_rTexCam->addChild( rAlign->GetProjection() );
 
-	return m_rGeode;
+	return m_rQuad;
 }
 
 CSulTexCam* CSulPass::getTexCam()
@@ -42,7 +38,7 @@ CSulTexCam* CSulPass::getTexCam()
 	return m_rTexCam;
 }
 
-osg::Geode* CSulPass::getGeode()
+CSulGeomQuad* CSulPass::getQuad()
 {
-	return m_rGeode;
+	return m_rQuad;
 }

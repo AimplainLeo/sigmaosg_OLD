@@ -50,7 +50,7 @@ void CSulCloudPlane::createDrawable()
     pShaderProgram->addShader( vertexShader.get() );
 	pShaderProgram->addShader( fragShader.get() );
 
-	osg::ref_ptr<osg::StateSet> ss = getDrawable()->getOrCreateStateSet();
+	osg::ref_ptr<osg::StateSet> ss = getOrCreateStateSet();
 	ss->setAttribute( pShaderProgram, osg::StateAttribute::ON );
 }
 

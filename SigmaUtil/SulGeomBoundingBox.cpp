@@ -4,37 +4,37 @@
 #include "SulGeomBoundingBox.h"
 
 CSulGeomBoundingBox::CSulGeomBoundingBox( const osg::BoundingBox& bound ) :
-CSulGeomBase()
+osg::Geode()
 {
 	m_bb = bound;
+	createDrawable();
 }
 
 void CSulGeomBoundingBox::createDrawable()
 {
-	addDrawable( new osg::Geometry );
-
-	osg::Geometry* pGeo = getDrawable()->asGeometry();
+	m_rGeo = new osg::Geometry;
+	addDrawable( m_rGeo );
 
 	osg::Vec3Array* pVerts = new osg::Vec3Array;
-	pGeo->setVertexArray( pVerts );
+	m_rGeo->setVertexArray( pVerts );
 
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 0,1,2,4) );
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 1,0,5,3) );
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 2,0,3,6) );
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 3,1,2,7) );
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 4,0,5,6) );
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 5,1,4,7) );
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 6,2,4,7) );
-	pGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 7,3,5,6) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 0,1,2,4) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 1,0,5,3) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 2,0,3,6) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 3,1,2,7) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 4,0,5,6) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 5,1,4,7) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 6,2,4,7) );
+	m_rGeo->addPrimitiveSet( AddCornerLines(*pVerts, m_bb, 7,3,5,6) );
 
 	osg::Vec4Array* pColors = new osg::Vec4Array;
 	pColors->push_back( osg::Vec4(1,1,1,1) );
-	pGeo->setColorArray( pColors );
-	pGeo->setColorBinding( osg::Geometry::BIND_OVERALL );
+	m_rGeo->setColorArray( pColors );
+	m_rGeo->setColorBinding( osg::Geometry::BIND_OVERALL );
 
-	pGeo->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED );
+	m_rGeo->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED );
 
-	pGeo->setUseDisplayList( false );
+	m_rGeo->setUseDisplayList( false );
 }
 
 osg::PrimitiveSet* CSulGeomBoundingBox::AddCornerLines( osg::Vec3Array& verts, const osg::BoundingBox& bound, unsigned i0, unsigned i1, unsigned i2, unsigned i3 )
@@ -82,7 +82,7 @@ void CSulGeomBoundingBox::ModifyCornerLines( sigma::uint32 index, osg::Vec3Array
 
 void CSulGeomBoundingBox::update( const osg::BoundingBox& bound )
 {
-	osg::Vec3Array* pVerts = dynamic_cast<osg::Vec3Array*>(getDrawable()->asGeometry()->getVertexArray());
+	osg::Vec3Array* pVerts = dynamic_cast<osg::Vec3Array*>(m_rGeo->getVertexArray());
 
 	ModifyCornerLines( 0, pVerts, bound, 0,1,2,4 );
 	ModifyCornerLines( 1, pVerts, bound, 1,0,5,3 );

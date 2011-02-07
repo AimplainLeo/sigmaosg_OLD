@@ -26,13 +26,7 @@ osg::Group* createLightSource()
 	pQuad->setTexture( "sun.tga" );
 	pGroup->addChild( pQuad->getProjection() );
 
-	pQuad->getGeode()->getOrCreateStateSet()->setRenderBinDetails( -100, "RenderBin" );
-
-/*
-	osg::Geode* pGeode = new osg::Geode;
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Sphere(osg::Vec3(5.0f,5.0f,5.0f),0.2f) ) );
-	pGroup->addChild( pGeode );	
-*/
+	pQuad->getGroup()->getOrCreateStateSet()->setRenderBinDetails( -100, "RenderBin" );
 
 	return pGroup;
 }

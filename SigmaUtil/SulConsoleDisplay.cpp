@@ -51,16 +51,16 @@ void CSulConsoleDisplay::Init()
 	// create a quad for our display
 	m_rQuad = new CSulGeomQuad( osg::Vec3(m_w/2,m_h+m_h/4,0), m_w, m_h/2 );
 	m_rQuad->setColor( 0.0f, 0.0f ,0.0f, 0.5f );
-	m_rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
-	m_rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-	m_rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
+	m_rQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+	m_rQuad->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+	m_rQuad->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
 
     // create geometry node that will contain all our drawables
     m_rGeode = new osg::Geode;
-    m_rGeode->addDrawable( m_rQuad->getDrawable() );
 
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( m_w, m_h );
 	rAlign->AddChild( m_rGeode );
+	rAlign->AddChild( m_rQuad );
 
 	// save node so it can be added to a scene
 	m_rNode = rAlign->GetProjection();

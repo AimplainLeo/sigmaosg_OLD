@@ -5,6 +5,7 @@
 
 #include "SulGuiCanvas.h"
 #include "SulExport.h"
+#include <osg/group>
 
 class SUL_EXPORT CSulGuiCheckBox : public CSulGuiCanvas
 {
@@ -24,7 +25,7 @@ protected:
 	void						setMouseRelease( bool bInside );
 
 private:
-	osg::ref_ptr<osg::Geode>	m_rGeodeCross;
+	osg::ref_ptr<osg::Group>	m_rGroupCross;
 	bool						m_bActive;
 	float						m_paddingCross;
 	float						m_paddingText;

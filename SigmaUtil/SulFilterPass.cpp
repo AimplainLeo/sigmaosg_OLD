@@ -6,7 +6,7 @@
 #include "SulTransScreenAlign.h"
 #include <osg/geode>
 
-osg::Geode* CSulFilterPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
+osg::Group* CSulFilterPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
 {
 	int texW = pTexIn->getTextureWidth();
 	int texH = pTexIn->getTextureHeight();
@@ -17,20 +17,20 @@ osg::Geode* CSulFilterPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTex
 	// quad to apply shader to
 	// quad to use pTexIn
 	osg::ref_ptr<CSulGeomQuad> rQuad = new CSulGeomQuad( osg::Vec3(texW/2.0f, texH/2.0f, 0), texW, texH );
-	rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-	rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+	rQuad->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+	rQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	rQuad->setTexture( pTexIn );
 
-	m_rGeode	= new osg::Geode;
-	m_rGeode->addDrawable( rQuad->getDrawable() );
+	m_rGroup	= new osg::Group;
+	m_rGroup->addChild( rQuad );
 
 	// the quad must be aligned to the RTT camera and cover it completly
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( texW, texH );
-	rAlign->AddChild( m_rGeode );
+	rAlign->AddChild( m_rGroup );
 
 	m_rTexCam->addChild( rAlign->GetProjection() );
 
-	return m_rGeode;
+	return m_rGroup;
 }
 
 CSulTexCam* CSulFilterPass::getTexCam()
@@ -38,7 +38,7 @@ CSulTexCam* CSulFilterPass::getTexCam()
 	return m_rTexCam;
 }
 
-osg::Geode* CSulFilterPass::getGeode()
+osg::Group* CSulFilterPass::getGroup()
 {
-	return m_rGeode;
+	return m_rGroup;
 }

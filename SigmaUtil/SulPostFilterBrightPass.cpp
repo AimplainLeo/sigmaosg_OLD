@@ -27,6 +27,6 @@ osg::Texture2D* CSulPostFilterBrightPass::out()
 
 void CSulPostFilterBrightPass::filterBrightPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "BrightPass" );
-	m_rShaderBrightPass = new CSulShaderBrightPass( pGeode, 1.2f );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "BrightPass" );
+	m_rShaderBrightPass = new CSulShaderBrightPass( pGroup, 1.2f );
 }

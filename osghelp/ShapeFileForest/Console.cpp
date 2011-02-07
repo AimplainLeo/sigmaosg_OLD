@@ -106,9 +106,7 @@ void CConsole::generate()
 	
 #ifdef SHOW_BOUNDING_BOX
 	CSulGeomBoundingBox* gbb = new CSulGeomBoundingBox(b);
-	osg::Geode* bbgeode = new osg::Geode;
-	bbgeode->addDrawable(gbb->getDrawable());
-	m_rScene->addChild(bbgeode);
+	m_rScene->addChild(gbb);
 //	m_rViewer->getSceneData()->asGroup()->addChild(bbgeode);
 #endif // SHOW_BOUNDING_BOX
 

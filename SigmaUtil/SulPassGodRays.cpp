@@ -6,7 +6,7 @@
 CSulPassGodRays::CSulPassGodRays( osg::Texture2D* pTexIn, CSulTextureBuffer* pTexOut ) :
 CSulPass( pTexIn, pTexOut->getOut(), "GodRays" )
 {
-	m_rShader = new CSulShaderGodRays( getGeode() );
+	m_rShader = new CSulShaderGodRays( getQuad() );
 }
 
 CSulShaderGodRays* CSulPassGodRays::getShader()

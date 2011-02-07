@@ -6,15 +6,17 @@
 #include "SulExport.h"
 #include "SulGeomBase.h"
 #include "SulTypes.h"
+#include <osg/geometry>
+#include <osg/geode>
 
-class SUL_EXPORT CSulGeomBoundingBox : public CSulGeomBase
+class SUL_EXPORT CSulGeomBoundingBox : public osg::Geode
 {
 public:
 						CSulGeomBoundingBox( const osg::BoundingBox& bound );
 
 	void				update( const osg::BoundingBox& bound );
 
-protected:
+private:
 	virtual void		createDrawable();
 
 private:
@@ -23,7 +25,8 @@ private:
 	void				ModifyCornerLines( sigma::uint32 index, osg::Vec3Array* pVerts, const osg::BoundingBox& bound, unsigned i0, unsigned i1, unsigned i2, unsigned i3 );
 
 private:
-	osg::BoundingBox	m_bb;
+	osg::BoundingBox			m_bb;
+	osg::ref_ptr<osg::Geometry> m_rGeo;
 };
 
 #endif // __SULGEOMBOUNDINGBOX_H__

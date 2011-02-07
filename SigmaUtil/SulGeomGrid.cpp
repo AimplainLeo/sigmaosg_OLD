@@ -3,30 +3,29 @@
 #include "stdafx.h"
 #include "SulGeomGrid.h"
 #include "SulTypes.h"
-
-// FIXME: why does createGeometry have a pGeo when the base class has this?? mistake perhaps
+#include <osg/geode>
+#include <osg/geometry>
 
 CSulGeomGrid::CSulGeomGrid() :
-CSulGeomBase(), 
+osg::Geode(), 
 m_colorGrid( 1.0f, 1.0f, 1.0f, 1.0f ),
 m_colorGridDiv( 0.5f, 0.5f, 0.5f, 1.0f )
 {
+	createDrawable();
 }
 
 void CSulGeomGrid::createDrawable()
 {
-	//CSulGeomBase::createGeometry();
-	addDrawable( new osg::Geometry );
+	m_rGeo = new osg::Geometry;
+	addDrawable( m_rGeo );
 
-	osg::Geometry* pGeo = getDrawable()->asGeometry();
-
-	pGeo->setVertexArray( new osg::Vec3Array );
-    pGeo->setColorArray( new osg::Vec4Array );
-    pGeo->setColorIndices( new osg::TemplateIndexArray<unsigned int, osg::Array::UIntArrayType, 4, 4> );
-	pGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+	m_rGeo->setVertexArray( new osg::Vec3Array );
+    m_rGeo->setColorArray( new osg::Vec4Array );
+    m_rGeo->setColorIndices( new osg::TemplateIndexArray<unsigned int, osg::Array::UIntArrayType, 4, 4> );
+	m_rGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 
     m_rPrimitiveSet = new osg::DrawElementsUInt( osg::PrimitiveSet::LINES, 0 );
-    pGeo->addPrimitiveSet( m_rPrimitiveSet.get() );
+    m_rGeo->addPrimitiveSet( m_rPrimitiveSet.get() );
 }
 
 void CSulGeomGrid::Create( const osg::Vec3& vPos, float fW, float fH, float fCellW, float fCellH, float fSubDivX, float fSubDivY )
@@ -36,10 +35,10 @@ void CSulGeomGrid::Create( const osg::Vec3& vPos, float fW, float fH, float fCel
 	sigma::uint32 count = 0;
 	float x, y;
 
-	osg::Vec3Array* pVerts = dynamic_cast<osg::Vec3Array*>(getDrawable()->asGeometry()->getVertexArray());
-	osg::Vec4Array* pColors = dynamic_cast<osg::Vec4Array*>(getDrawable()->asGeometry()->getColorArray());
+	osg::Vec3Array* pVerts = dynamic_cast<osg::Vec3Array*>(m_rGeo->getVertexArray());
+	osg::Vec4Array* pColors = dynamic_cast<osg::Vec4Array*>(m_rGeo->getColorArray());
 	osg::TemplateIndexArray<unsigned int, osg::Array::UIntArrayType, 4, 4>* pColorIndices = 
-		dynamic_cast<osg::TemplateIndexArray<unsigned int, osg::Array::UIntArrayType, 4, 4>*>(getDrawable()->asGeometry()->getColorIndices());
+		dynamic_cast<osg::TemplateIndexArray<unsigned int, osg::Array::UIntArrayType, 4, 4>*>(m_rGeo->getColorIndices());
 
 	for ( x=0; x<fW+1.0f; x++ )
 	{
@@ -109,8 +108,7 @@ void CSulGeomGrid::Create( const osg::Vec3& vPos, float fW, float fH, float fCel
 		}
 	}
 
-	// FIXME: it's not the SulGeomGrid that should decide if lighting should be on or off!!!
-	getDrawable()->asGeometry()->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+	m_rGeo->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 }
 
 void CSulGeomGrid::SetGridColor( const osg::Vec4& vColor )

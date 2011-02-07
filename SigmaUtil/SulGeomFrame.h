@@ -3,9 +3,7 @@
 #ifndef __SULGEOMFRAME_H__
 #define __SULGEOMFRAME_H__
 
-#include "SulGeomBase.h"
-
-class CSulGeomFrame : public CSulGeomBase
+class CSulGeomFrame : public osg::Group
 {
 public:
 

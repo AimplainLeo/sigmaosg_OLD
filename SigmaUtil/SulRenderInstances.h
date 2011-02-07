@@ -4,11 +4,11 @@
 #define __SULRENDERINSTANCES_H__
 
 #include "SulTypes.h"
-#include <osg/geode>
+#include <osg/group>
 #include <osg/texture2d>
 #include <osg/copyop>
 
-class CSulRenderInstances : public osg::Geode
+class CSulRenderInstances : public osg::Group
 {
 public:
 				CSulRenderInstances();

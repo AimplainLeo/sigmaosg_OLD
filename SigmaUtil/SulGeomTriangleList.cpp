@@ -4,14 +4,15 @@
 #include "SulGeomTriangleList.h"
 
 CSulGeomTriangleList::CSulGeomTriangleList( const sigma::VEC_TRI& vecTri ) :
-CSulGeomBase(),
+osg::Geode(),
 m_vecTri( vecTri )
 {
 }
 
 void CSulGeomTriangleList::createDrawable()
 {
-	addDrawable( new osg::Geometry );
+	m_rGeo = new osg::Geometry;
+	addDrawable( m_rGeo );
 
 	osg::Vec3Array *verts = new osg::Vec3Array;
     osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;
@@ -37,12 +38,12 @@ void CSulGeomTriangleList::createDrawable()
 
 		++i;
 	}
-	getDrawable()->asGeometry()->setVertexArray( verts );
+	m_rGeo->setVertexArray( verts );
 
-    getDrawable()->asGeometry()->setColorArray( m_rColors.get() );
-	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+    m_rGeo->setColorArray( m_rColors.get() );
+	m_rGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 
-    getDrawable()->asGeometry()->addPrimitiveSet(
+    m_rGeo->addPrimitiveSet(
         new osg::DrawElementsUInt( 
 			GL_TRIANGLES,
             indices->size(), 
@@ -69,5 +70,5 @@ void CSulGeomTriangleList::setColor( float r, float g, float b, float a )
 		(*m_rColors)[i].set( r, g, b, a );
 	}
 
-	getDrawable()->asGeometry()->dirtyDisplayList();
+	m_rGeo->dirtyDisplayList();
 }

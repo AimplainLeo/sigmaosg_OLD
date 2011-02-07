@@ -5,8 +5,10 @@
 
 #include "SulGeomBase.h"
 #include "SulTypes.h"
+#include <osg/Geode>
+#include <osg/Geometry>
 
-class CSulGeomTriangleList : public CSulGeomBase
+class CSulGeomTriangleList : public osg::Geode
 {
 public: 
 					CSulGeomTriangleList( const sigma::VEC_TRI& vecTri );
@@ -20,6 +22,7 @@ protected:
 private:
 	sigma::VEC_TRI					m_vecTri;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
+	osg::ref_ptr<osg::Geometry>		m_rGeo;
 };
 
 #endif // __SULGEOMTRIANGLELIST_H__

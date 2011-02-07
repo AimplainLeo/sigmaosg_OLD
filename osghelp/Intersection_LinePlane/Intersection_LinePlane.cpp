@@ -15,20 +15,17 @@ osg::Group* createScene()
 
 	pGroup->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 
-	osg::Geode* pGeode = new osg::Geode;
-	pGroup->addChild( pGeode );
-
 	osg::Plane* pPlane = new osg::Plane( 0,0,1,0 );
 
 	// create and object that represents the plane
 	CSulGeomPlane* pGeomPlane = new CSulGeomPlane( *pPlane, 2.0f );
-	pGeode->addDrawable( pGeomPlane->getDrawable() );
+	pGroup->addChild( pGeomPlane );
 	
 	// create line
 	osg::Vec3 p1( 0, 0, -2  );
 	osg::Vec3 p2( 0, 0.5, 2 );
 	CSulGeomLine* pLine = new CSulGeomLine( p1, p2 );
-	pGeode->addDrawable( pLine->getDrawable() );
+	pGroup->addChild( pLine );
 
 	// calc intersection
 	osg::Vec3 pos;
@@ -36,7 +33,7 @@ osg::Group* createScene()
 
 	// create sphere and put it at the intersection position
 	CSulGeomSphere* pGeomSphere = new CSulGeomSphere( 0.1f, pos );
-	pGeode->addDrawable( pGeomSphere->getDrawable() );
+	pGroup->addChild( pGeomSphere );
 
 	return pGroup;
 }

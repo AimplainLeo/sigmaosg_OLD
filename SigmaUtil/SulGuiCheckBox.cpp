@@ -42,7 +42,7 @@ void CSulGuiCheckBox::setMouseRelease( bool bInside )
 	if ( bInside )
 	{
 		m_bActive = !m_bActive;
-		m_rGeodeCross->setNodeMask( m_bActive?0xFFFFFFFF:0 );
+		m_rGroupCross->setNodeMask( m_bActive?0xFFFFFFFF:0 );
 	}
 }
 
@@ -61,11 +61,11 @@ void CSulGuiCheckBox::init()
 	CSulGeomLine* line1 = new CSulGeomLine( osg::Vec3(m_paddingCross, d+m_boxSize-m_paddingCross, 0), osg::Vec3(m_boxSize-m_paddingCross, d+m_paddingCross, 0) );
 	line1->setWidth( 4.0f );
 
-	m_rGeodeCross = new osg::Geode;
-	m_rGeodeCross->addDrawable( line0->getDrawable() );
-	m_rGeodeCross->addDrawable( line1->getDrawable() );
-	m_rGeodeCross->setNodeMask( 0 );
-	addChild( m_rGeodeCross );
+	m_rGroupCross = new osg::Group;
+	m_rGroupCross->addChild( line0 );
+	m_rGroupCross->addChild( line1 );
+	m_rGroupCross->setNodeMask( 0 );
+	addChild( m_rGroupCross );
 
 	// draw a rectangle
 	sigma::VEC_VEC3::vector	vecPos;
@@ -78,9 +78,7 @@ void CSulGuiCheckBox::init()
 
 	CSulGeomLineStrip* pLineStrip = new CSulGeomLineStrip( vecPos );	
 	pLineStrip->setWidth( 2.0f );
-	osg::Geode* pGeodeBox = new osg::Geode;
-	pGeodeBox->addDrawable( pLineStrip->getDrawable() );
-	addChild( pGeodeBox );
+	addChild( pLineStrip );
 
 	// text
 	CSulGuiText* pGuiText = new CSulGuiText( m_sText, m_boxSize+m_paddingText, h/2.0f, m_fontSize );

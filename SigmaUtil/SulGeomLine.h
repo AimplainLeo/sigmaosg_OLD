@@ -6,8 +6,9 @@
 #include "SulGeomBase.h"
 #include <osg/linesegment>
 #include <osg/linewidth>
+#include <osg/geode>
 
-class CSulGeomLine : public CSulGeomBase
+class CSulGeomLine : public osg::Geode
 {
 public:
 				CSulGeomLine( const osg::LineSegment& line );
@@ -16,7 +17,7 @@ public:
 
 	void		setWidth( float width );
 
-protected:
+private:
 	void		createDrawable();
 
 private:

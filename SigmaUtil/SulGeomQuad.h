@@ -9,10 +9,12 @@
 #include "SulString.h"
 #include <osg/ref_ptr>
 #include <osg/Vec3>
+#include <osg/geode>
+#include <osg/geometry>
 
 // FIXME: should be able to choose between vertice colors or all_over_colors
 
-class SUL_EXPORT CSulGeomQuad : public CSulGeomBase
+class SUL_EXPORT CSulGeomQuad : public osg::Geode
 {
 public:
 	enum EPLANE
@@ -73,6 +75,8 @@ private:
 	EPLANE							m_ePlane;
 
 	osg::ref_ptr<osg::Image>		m_rImage;	// only valid if used
+
+	osg::ref_ptr<osg::Geometry>		m_rGeo;
 };
 
 #endif // __SULGEOMQUAD_H__

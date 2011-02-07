@@ -2,15 +2,20 @@
 
 #include "stdafx.h"
 #include "SulGeomBox.h"
+#include <osg/geometry>
+
 
 CSulGeomBox::CSulGeomBox( float extent ) :
+osg::Geode(),
 m_extent( extent )
 {
+	createDrawable();
 }
 
 void CSulGeomBox::createDrawable()
 {
-	addDrawable( new osg::Geometry );
+	osg::Geometry* pGeo = new osg::Geometry;
+	addDrawable( pGeo );
 
 	// vertices
 	osg::Vec3Array *verts = new osg::Vec3Array;
@@ -22,7 +27,7 @@ void CSulGeomBox::createDrawable()
 	verts->push_back(osg::Vec3(-m_extent,  m_extent, -m_extent));
 	verts->push_back(osg::Vec3( m_extent,  m_extent, -m_extent));
 	verts->push_back(osg::Vec3( m_extent, -m_extent, -m_extent));
-	getDrawable()->asGeometry()->setVertexArray( verts );
+	pGeo->setVertexArray( verts );
 
     // texture coordinates
     osg::Vec3Array *coords = new osg::Vec3Array;
@@ -34,7 +39,7 @@ void CSulGeomBox::createDrawable()
     coords->push_back(osg::Vec3(-1, -1,  1));
     coords->push_back(osg::Vec3( 1, -1,  1));
     coords->push_back(osg::Vec3( 1,  1,  1));
-	getDrawable()->asGeometry()->setTexCoordArray( 0, coords );
+	pGeo->setTexCoordArray( 0, coords );
 
     osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;
 
@@ -74,7 +79,7 @@ void CSulGeomBox::createDrawable()
     indices->push_back(7);
     indices->push_back(4);
 
-    getDrawable()->asGeometry()->addPrimitiveSet(
+    pGeo->addPrimitiveSet(
         new osg::DrawElementsUInt(GL_QUADS,
             indices->size(), &(indices->front())));
 }

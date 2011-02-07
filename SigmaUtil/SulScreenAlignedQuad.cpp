@@ -9,18 +9,18 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( const osg::Vec3& vPos, float w, fl
 	// create geometry quad
 	m_rGeomQuad = new CSulGeomQuad( vPos, w, h, CSulGeomQuad::PLANE_XY );
 
-	m_rGeomQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+	m_rGeomQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	
     // create geometry node that will contain all our drawables
-    m_rGeode = new osg::Geode;
-    osg::StateSet* pStateSet = m_rGeode->getOrCreateStateSet();
+    m_rGroup = new osg::Group;
+    osg::StateSet* pStateSet = m_rGroup->getOrCreateStateSet();
     pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-    m_rGeode->addDrawable( m_rGeomQuad->getDrawable() );
+    m_rGroup->addChild( m_rGeomQuad );
 	
 	m_rMT = new osg::MatrixTransform;
 	m_rMT->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
 	m_rMT->setMatrix( osg::Matrix::identity() );
-	m_rMT->addChild( m_rGeode.get() );
+	m_rMT->addChild( m_rGroup );
 	
 	m_rProj = new osg::Projection();
 	osg::Matrixd mOrtho = osg::Matrix::ortho2D( 0, fViewW, 0, fViewH );
@@ -33,9 +33,9 @@ osg::Projection* CSulScreenAlignedQuad::getProjection()
 	return m_rProj.get();
 }
 
-osg::Geode* CSulScreenAlignedQuad::getGeode()
+osg::Group* CSulScreenAlignedQuad::getGroup()
 {
-	return m_rGeode.get();
+	return m_rGroup.get();
 }
 
 CSulGeomQuad* CSulScreenAlignedQuad::getQuad()

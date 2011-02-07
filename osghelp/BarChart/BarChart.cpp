@@ -18,9 +18,7 @@ osg::Node* CreateScene()
 	p->setBarSize( 1, 200 );
 	p->setBarSize( 2, 300 );
 
-	osg::Geode* pGeode = p->createGeode();
-
-	return pGeode;
+	return p;
 }
 
 int _tmain(int argc, _TCHAR* argv[])

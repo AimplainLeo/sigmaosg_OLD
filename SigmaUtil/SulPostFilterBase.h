@@ -24,7 +24,7 @@ public:
 
 protected:
 	osg::Texture2D*			createTexture( unsigned short w, unsigned short h );
-	osg::Geode*				createFilterPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT );
+	osg::Group*				createFilterPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT );
 
 	void addPass( CSulPass* pPass );
 

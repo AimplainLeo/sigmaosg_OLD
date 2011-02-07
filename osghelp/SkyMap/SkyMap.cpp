@@ -121,18 +121,15 @@ osg::Node* createSkyBox()
 	float extent = 1000.0f;
 
 	CSulGeomBox* pBox = new CSulGeomBox( extent );
-
-	osg::Geode* pGeode = new osg::Geode;
-	pGeode->setCullingActive(false);
-	pGeode->addDrawable( pBox->getDrawable() );
+	pBox->setCullingActive(false);
 
 	osg::StateSet* stateset = new osg::StateSet;
     stateset->setMode(GL_LIGHTING,  osg::StateAttribute::OFF);
     stateset->setMode(GL_CULL_FACE, osg::StateAttribute::OFF);
 	stateset->setTextureAttributeAndModes( 0, texture, osg::StateAttribute::ON );
-	pGeode->setStateSet(stateset);
+	pBox->setStateSet(stateset);
 
-	return pGeode;
+	return pBox;
 }
 
 osg::Group* CreateScene( osgViewer::Viewer* pViewer )

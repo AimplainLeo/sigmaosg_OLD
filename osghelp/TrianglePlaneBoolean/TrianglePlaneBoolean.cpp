@@ -17,15 +17,12 @@ osg::Group* createScene()
 
 	pGroup->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 
-	osg::Geode* pGeode = new osg::Geode;
-	pGroup->addChild( pGeode );
-
 	osg::Plane* pPlane = new osg::Plane( 0,0,1,0 );
 
 	// create and object that represents the plane
 	CSulGeomPlane* pGeomPlane = new CSulGeomPlane( *pPlane, 2.0f );
 	pGeomPlane->setColor( 0, 0.5, 0, 1 );
-	pGeode->addDrawable( pGeomPlane->getDrawable() );
+	pGroup->addChild( pGeomPlane );
 	
 	// create triangle
 	osg::Vec3 p1( 0, 0, 2  );
@@ -33,7 +30,7 @@ osg::Group* createScene()
 	osg::Vec3 p3( 1, 0.5, -1 );
 	CSulGeomTriangle* pTri = new CSulGeomTriangle( p1, p2, p3 );
 	pTri->setColor( 0,0,1,1 );
-	pGeode->addDrawable( pTri->getDrawable() );
+	pGroup->addChild( pTri );
 
 	
 	CSulClipTriangle triClip( CSulDataTri( p1, p2, p3 ), *pPlane );
@@ -48,7 +45,7 @@ osg::Group* createScene()
 
 		CSulGeomTriangle* pTri = new CSulGeomTriangle( tri.m_p0, tri.m_p1, tri.m_p2 );
 		pTri->setColor( 1,0,0,1 );
-		pGeode->addDrawable( pTri->getDrawable() );
+		pGroup->addChild( pTri );
 	}
 
 	return pGroup;

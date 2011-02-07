@@ -20,12 +20,9 @@ osg::Node* CreateScene()
 	p->setTexture( sColorMap, 0 );
 	p->setTexture( sNormalMap, 1 );
 
-	osg::Geode* pGeode = new osg::Geode;
-	pGeode->addDrawable( p->getDrawable() );
+	CSulShaderNormalMapObjectSpace* pShader = new CSulShaderNormalMapObjectSpace( p );
 
-	CSulShaderNormalMapObjectSpace* pShader = new CSulShaderNormalMapObjectSpace( pGeode );
-
-	return pGeode;
+	return p;
 }
 
 int _tmain(int argc, _TCHAR* argv[])

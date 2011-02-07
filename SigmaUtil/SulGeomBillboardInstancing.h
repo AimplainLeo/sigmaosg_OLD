@@ -5,13 +5,14 @@
 
 #include "SulGeomBase.h"
 #include "SulTypes.h"
+#include <osg/geode>
 
-class CSulGeomBillboardInstancing :  public CSulGeomBase
+class CSulGeomBillboardInstancing :  public osg::Geode
 {
 public:
 					CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal = false, float sizeMultiplier=1.0f, float min=1.0f, float max=1.0f );
 
-protected:
+private:
 	void			createDrawable();
 
 private:

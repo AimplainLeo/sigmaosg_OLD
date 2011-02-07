@@ -58,9 +58,7 @@ void CSulGuiButton::createDownDecal()
 		osg::Vec3( w/2, h-pad, 0 ),
 		osg::Vec3( pad, pad, 0 ),
 		osg::Vec3( w-pad, pad, 0) );
-	osg::Geode* pGeode = new osg::Geode;
-	pGeode->addDrawable( pTriDown->getDrawable() );
-	addChild( pGeode );
+	addChild( pTriDown );
 }
 
 void CSulGuiButton::createUpDecal()
@@ -73,9 +71,7 @@ void CSulGuiButton::createUpDecal()
 		osg::Vec3( w/2, pad, 0 ),
 		osg::Vec3( pad, h-pad, 0 ),
 		osg::Vec3( w-pad, h-pad, 0) );
-	osg::Geode* pGeode = new osg::Geode;
-	pGeode->addDrawable( pTriDown->getDrawable() );
-	addChild( pGeode );
+	addChild( pTriDown );
 }
 
 void CSulGuiButton::setText( const CSulString& sText )

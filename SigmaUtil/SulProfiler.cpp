@@ -7,15 +7,10 @@
 
 CSulProfiler::CSulProfiler()
 {
+	/*
 	CSulGeomBarChart* p = new CSulGeomBarChart;
-
-	
 	m_rGeode = p->createGeode();
-}
-
-osg::Geode* CSulProfiler::getGeode()
-{
-	return m_rGeode;
+	*/
 }
 
 void CSulProfiler::create( const CSulString& name, const CSulString& groupName )

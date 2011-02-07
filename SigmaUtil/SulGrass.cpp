@@ -235,9 +235,7 @@ void CSulGrass::create()
 	{
 		// for debugging (show boundingbox)
 		CSulGeomBoundingBox* p = new CSulGeomBoundingBox( *m_bb );
-		osg::Geode* pGeodeBB = new osg::Geode;
-		pGeodeBB->addDrawable( p->getDrawable() );
-		m_rPat->addChild( pGeodeBB );
+		m_rPat->addChild( p );
 	}
 }
 

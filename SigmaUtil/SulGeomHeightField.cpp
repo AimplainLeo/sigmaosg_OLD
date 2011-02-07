@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "SulGeomHeightField.h"
+#include <osg/geometry>
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -15,8 +16,16 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+CSulGeomHeightField::CSulGeomHeightField() :
+osg::Geode()
+{
+}
+
 void CSulGeomHeightField::Create( CSulArray2D<float>* pArray2D, float fScaleX, float fScaleY, float fScaleH )
 {
+	osg::Geometry* pGeo = new osg::Geometry;
+	addDrawable( pGeo );
+
 	m_w = pArray2D->GetWidth();
 	m_h = pArray2D->GetHeight();
 	m_fScaleX = fScaleX;
@@ -34,7 +43,7 @@ void CSulGeomHeightField::Create( CSulArray2D<float>* pArray2D, float fScaleX, f
 			m_rVerts->push_back( osg::Vec3( x*fScaleX, y*fScaleY, h*fScaleH ) );
 		}
 	}
-	getDrawable()->asGeometry()->setVertexArray( m_rVerts.get() );
+	pGeo->setVertexArray( m_rVerts.get() );
     
 	// create triangle faces
 	osg::DrawElementsUInt* pPrimitiveSet = new osg::DrawElementsUInt( osg::PrimitiveSet::TRIANGLES, 0 );
@@ -56,13 +65,13 @@ void CSulGeomHeightField::Create( CSulArray2D<float>* pArray2D, float fScaleX, f
 			pPrimitiveSet->push_back( ofs+1 );
 		}
 	}
-	getDrawable()->asGeometry()->addPrimitiveSet( pPrimitiveSet );
+	pGeo->addPrimitiveSet( pPrimitiveSet );
 
 	// color
 	osg::Vec4Array* pColors = new osg::Vec4Array;
     pColors->push_back( osg::Vec4( 1.0f, 1.0f, 1.0f, 1.0f ) );
-    getDrawable()->asGeometry()->setColorArray( pColors );
-	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_OVERALL );
+    pGeo->setColorArray( pColors );
+	pGeo->setColorBinding( osg::Geometry::BIND_OVERALL );
 
 	// normals
 	osg::Vec3Array* pNormals = new osg::Vec3Array;
@@ -75,15 +84,15 @@ void CSulGeomHeightField::Create( CSulArray2D<float>* pArray2D, float fScaleX, f
 			pNormals->push_back( GetNormal( x, y ) );
 		}
 	}
-	getDrawable()->asGeometry()->setNormalArray( pNormals );
-	getDrawable()->asGeometry()->setNormalBinding( osg::Geometry::BIND_PER_VERTEX );
+	pGeo->setNormalArray( pNormals );
+	pGeo->setNormalBinding( osg::Geometry::BIND_PER_VERTEX );
 
 	/////////////////////////////////////////////////////////////////////////////////////////
 	// test code, can we add lines to draw normals so we can visually see what is happening
 	/////////////////////////////////////////////////////////////////////////////////////////
 	osg::DrawElementsUInt* pPrimitiveSet2 = new osg::DrawElementsUInt( osg::PrimitiveSet::LINES, 0 );
 	pNormals->getNumElements();
-	getDrawable()->asGeometry()->addPrimitiveSet( pPrimitiveSet2 );
+	pGeo->addPrimitiveSet( pPrimitiveSet2 );
 }
 
 float CSulGeomHeightField::GetHeight( sigma::int32 x, sigma::int32 y ) const

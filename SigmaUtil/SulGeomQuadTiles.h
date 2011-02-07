@@ -5,8 +5,9 @@
 
 #include "SulGeomBase.h"
 #include "SulTypes.h"
+#include <osg/geode>
 
-class CSulGeomQuadTiles : public CSulGeomBase
+class CSulGeomQuadTiles : public osg::Geode
 {
 public:
 	enum EPLANE
@@ -45,6 +46,7 @@ private:
 	sigma::uint32	m_tileY;					// number of tiles x and y with in w and h
 	bool	m_bFadeEdges;
 	EPLANE	m_ePlane;
+	osg::ref_ptr<osg::Geometry>	m_rGeo;
 };
 
 #endif // __SULGEOMQUADTILES_H__

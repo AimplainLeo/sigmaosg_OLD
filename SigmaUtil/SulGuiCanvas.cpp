@@ -82,25 +82,23 @@ void CSulGuiCanvas::init()
 		osg::Vec3( w/2.0f, getH()/2.0f, 0.0f ),
 		w, getH() );
 	m_rQuad->createUV();
-	m_rGeodeQuad = new osg::Geode;
-	m_rGeodeQuad->addDrawable( m_rQuad->getDrawable() );
 
-	osg::MatrixTransform::addChild( m_rGeodeQuad );
+	osg::MatrixTransform::addChild( m_rQuad );
 
 	// add a shader (perhaps we should move this to xml manager so we only have one shader)
-	new CSulShaderGuiFrame( m_rGeodeQuad );
+	new CSulShaderGuiFrame( m_rQuad );
 
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseTexture = new osg::Uniform( "use_texture", 0 ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseCover = new osg::Uniform( "use_cover", 1 ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseBorder = new osg::Uniform( "use_border", 1 ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformUseBackground = new osg::Uniform( "use_background", 1 ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseTexture = new osg::Uniform( "use_texture", 0 ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseCover = new osg::Uniform( "use_cover", 1 ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseBorder = new osg::Uniform( "use_border", 1 ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseBackground = new osg::Uniform( "use_background", 1 ) );
 
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", 0 ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 2.0f ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", m_cBg ) );
-	m_rGeodeQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", 0 ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 2.0f ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", m_cBg ) );
+	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
 
 	if ( !m_img.empty() )
 	{
@@ -164,14 +162,12 @@ void CSulGuiCanvas::showCanvas( bool bShow )
 
 	if ( m_bShowCanvas )
 	{
-		osg::MatrixTransform::addChild( m_rGeodeQuad );
+		osg::MatrixTransform::addChild( m_rQuad );
 	}
 	else
 	{
-		osg::MatrixTransform::removeChild( m_rGeodeQuad );
+		osg::MatrixTransform::removeChild( m_rQuad );
 	}
-
-//	m_rGeodeQuad->setNodeMask( bShow?0xFFFFFFFF:0 );
 }
 
 void CSulGuiCanvas::setBgColor( const osg::Vec4& c )

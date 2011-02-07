@@ -7,8 +7,9 @@
 #include "SulGeomBase.h"
 #include <osg/ref_ptr>
 #include <osg/PrimitiveSet>
+#include <osg/Geode>
 
-class SUL_EXPORT CSulGeomGrid : public CSulGeomBase
+class SUL_EXPORT CSulGeomGrid : public osg::Geode
 {
 public:
 			CSulGeomGrid();
@@ -19,13 +20,14 @@ public:
 	void	SetGridColor( const osg::Vec4& vColor );
 	void	SetGridDivColor( const osg::Vec4& vColor );
 
-protected:
+private:
 	virtual void createDrawable();
 
 private:
 	osg::Vec4 m_colorGrid;
 	osg::Vec4 m_colorGridDiv;
 	osg::ref_ptr<osg::DrawElementsUInt>	m_rPrimitiveSet;
+	osg::ref_ptr<osg::Geometry>	m_rGeo;
 };
 
 #endif // __SULGEOMGRID_H__

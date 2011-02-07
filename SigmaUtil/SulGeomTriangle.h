@@ -3,10 +3,10 @@
 #ifndef __SULGEOMTRIANGLE_H__
 #define __SULGEOMTRIANGLE_H__
 
-#include "SulGeomBase.h"
 #include "SulDataTri.h"
+#include <osg/geode>
 
-class CSulGeomTriangle : public CSulGeomBase
+class CSulGeomTriangle : public osg::Geode
 {
 public: 
 	enum TYPE
@@ -36,6 +36,7 @@ private:
 	osg::Vec3	m_p1;
 	osg::Vec3	m_p2;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
+	osg::ref_ptr<osg::Geometry>		m_rGeo;
 };
 
 #endif // __SULGEOMTRIANGLE_H__

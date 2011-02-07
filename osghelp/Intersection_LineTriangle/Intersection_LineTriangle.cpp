@@ -15,20 +15,17 @@ osg::Group* createScene()
 
 	pGroup->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 
-	osg::Geode* pGeode = new osg::Geode;
-	pGroup->addChild( pGeode );
-
 	// create triangle
 	CSulGeomTriangle* pGeomTriangle = new CSulGeomTriangle( 2.0f );
 	pGeomTriangle->setColor( 0, 0.7f, 0, 1 );
-	pGeode->addDrawable( pGeomTriangle->getDrawable() );
+	pGroup->addChild( pGeomTriangle );
 	
 	// create line
 	osg::Vec3 p1( 0, 0, -2  );
 	osg::Vec3 p2( 0, 0.5, 2 );
 	osg::LineSegment* pLineSeg = new osg::LineSegment( p1, p2 );
 	CSulGeomLine* pLine = new CSulGeomLine( *pLineSeg );
-	pGeode->addDrawable( pLine->getDrawable() );
+	pGroup->addChild( pLine );
 
 	// calc intersection
 	osg::Vec3 vHit;
@@ -36,7 +33,7 @@ osg::Group* createScene()
 
 	// create sphere and put it at the intersection position
 	CSulGeomSphere* pGeomSphere = new CSulGeomSphere( 0.1f, vHit );
-	pGeode->addDrawable( pGeomSphere->getDrawable() );
+	pGroup->addChild( pGeomSphere );
 
 	return pGroup;
 }

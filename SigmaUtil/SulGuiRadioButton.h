@@ -4,6 +4,7 @@
 #define __SULGUIRADIOBUTTON_H__
 
 #include "SulGuiCanvas.h"
+#include "SulGeomTriangleFan.h"
 
 class CSulGuiRadioButton : public CSulGuiCanvas
 {
@@ -23,14 +24,13 @@ protected:
 	void						setMouseRelease( bool bInside );
 
 private:
-	osg::ref_ptr<osg::Geode>	m_rGeodeCross;
 	bool						m_bActive;
-	osg::ref_ptr<osg::Geode>	m_rGeodeTriangleFan;
 	CSulString					m_sText;
 	float						m_fontSize;
 	float						m_radioSizeInner;
 	float						m_radioSizeOuter;
 	float						m_paddingText;
+	osg::ref_ptr<CSulGeomTriangleFan> m_rTriangleFan;
 };
 
 typedef std::vector< osg::ref_ptr<CSulGuiRadioButton> >	VEC_RADIOBUTTON;

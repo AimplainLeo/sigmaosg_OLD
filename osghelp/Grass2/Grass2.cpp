@@ -365,12 +365,10 @@ osg::Node* CreateScene()
 	// quad 
 	osg::ref_ptr<CSulGeomQuad> rQuad = new CSulGeomQuad( osg::Vec3(64,64,0), 128, 128 );
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( 800, 600 );
-	osg::Geode* pGeodeQuadScreen = new osg::Geode;
-	pGeodeQuadScreen->addDrawable( rQuad->getDrawable() );
-	rAlign->AddChild( pGeodeQuadScreen );
+	rAlign->AddChild( rQuad );
 	pGroup->addChild( rAlign->GetProjection() );
 	rQuad->setTexture( pRTT->getTexture() );
-	rQuad->getDrawable()->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED | osg::StateAttribute::OVERRIDE );
+	rQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED | osg::StateAttribute::OVERRIDE );
 
 	//////////////////////////
 	// simple terrain part II
@@ -452,10 +450,8 @@ osg::Node* CreateScene()
     rPat->addChild( pGeodeGrass );
 
 	// boundingbox 
-	osg::Geode* pGeodeBB = new osg::Geode;
 	CSulGeomBoundingBox* pBB = new CSulGeomBoundingBox( bb );
-	pGeodeBB->addDrawable( pBB->getDrawable() );
-	rPat->addChild( pGeodeBB );
+	rPat->addChild( pBB );
 
 	osg::Geode* pGeodeShape = new osg::Geode;
 	pGeodeShape->addDrawable( new osg::ShapeDrawable( new osg::Sphere(osg::Vec3(0.0f,0.0f,4.0f),1.0f) ) );
@@ -470,11 +466,7 @@ osg::Node* CreateScene()
 	////////////////
 	CSulGeomGrid* pGeomGrid = new CSulGeomGrid;
     pGeomGrid->Create( osg::Vec3(0,0,0), 10, 10, 1, 1, 5, 5 );
-
-    osg::Geode* pGeode2 = new osg::Geode;
-    pGeode2->addDrawable( pGeomGrid->getDrawable() );
-
-	pGroup->addChild( pGeode2 );
+	pGroup->addChild( pGeomGrid );
 
 	// what does this exactly do? (you would think it would disable culling,.. but it doesn't!)
 	// think it culls when an object is a certain pixel size on the screen

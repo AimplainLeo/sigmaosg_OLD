@@ -38,24 +38,24 @@ osg::Texture2D* CSulPostFilterBloom::out()
 
 void CSulPostFilterBloom::filterBrightPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "BrightPass" );
-	osg::ref_ptr<CSulShaderBrightPass> rShader = new CSulShaderBrightPass( pGeode, 0.4f );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "BrightPass" );
+	osg::ref_ptr<CSulShaderBrightPass> rShader = new CSulShaderBrightPass( pGroup, 0.4f );
 }
 
 void CSulPostFilterBloom::filterGaussH( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "GaussH" );
-	osg::ref_ptr<CSulShaderGaussH> rShader = new CSulShaderGaussH( pGeode, pTexIn->getTextureHeight() );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "GaussH" );
+	osg::ref_ptr<CSulShaderGaussH> rShader = new CSulShaderGaussH( pGroup, pTexIn->getTextureHeight() );
 }
 
 void CSulPostFilterBloom::filterGaussV( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "GaussV" );
-	osg::ref_ptr<CSulShaderGaussV> rShader = new CSulShaderGaussV( pGeode, pTexIn->getTextureWidth() );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "GaussV" );
+	osg::ref_ptr<CSulShaderGaussV> rShader = new CSulShaderGaussV( pGroup, pTexIn->getTextureWidth() );
 }
 
 void CSulPostFilterBloom::filterCombine( osg::Texture2D* pTexOrg, osg::Texture2D* pTexIn, osg::Texture2D* pTexOut )
 {
-	osg::Geode* pGeode = createFilterPass( pTexIn, pTexOut, "Compose" );
-	osg::ref_ptr<CSulShaderCombine> rShaderCombine = new CSulShaderCombine( pGeode, m_fExp, m_fFactor, m_fMax, pTexOrg, pTexIn );
+	osg::Group* pGroup = createFilterPass( pTexIn, pTexOut, "Compose" );
+	osg::ref_ptr<CSulShaderCombine> rShaderCombine = new CSulShaderCombine( pGroup, m_fExp, m_fFactor, m_fMax, pTexOrg, pTexIn );
 }

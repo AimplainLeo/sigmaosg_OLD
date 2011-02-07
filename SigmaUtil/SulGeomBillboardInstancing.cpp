@@ -2,24 +2,25 @@
 
 #include "stdafx.h"
 #include "SulGeomBillboardInstancing.h"
+#include <osg/geometry>
 
 CSulGeomBillboardInstancing::CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal, float sizeMultiplier, float min, float max ) :
-CSulGeomBase(),
+osg::Geode(),
 m_numInstances( numInstances ),
 m_sizeMultiplier( sizeMultiplier ),
 m_bUseZDirectionNormal( bUseZDirectionNormal )
 {
+	createDrawable();
 }
 
 void CSulGeomBillboardInstancing::createDrawable()
 {
-	//CSulGeomBase::createGeometry();
-	addDrawable( new osg::Geometry );
+	osg::Geometry* pGeo = new osg::Geometry;
+	addDrawable( pGeo );
 
 	const float halfDimX( 0.5f*m_sizeMultiplier );
     const float halfDimZ( 0.5f*m_sizeMultiplier );
 
-	osg::Geometry* pGeo = getDrawable()->asGeometry();
 	pGeo->setUseDisplayList( false );
     pGeo->setUseVertexBufferObjects( true );
 

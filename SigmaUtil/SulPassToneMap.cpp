@@ -91,7 +91,7 @@ private:
 CSulPassToneMap::CSulPassToneMap( osg::Texture2D* pTexOrg, osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, float exp, float factor, float max, CSulTexCam* pTexCamLum ) :
 CSulPass( pTexIn, pTexOut, "ToneMap" )
 {
-	m_rShader = new CSulShaderCombine( getGeode(), exp, factor, max, pTexOrg, pTexIn );
+	m_rShader = new CSulShaderCombine( getQuad(), exp, factor, max, pTexOrg, pTexIn );
 
 	// if a luminance texture is given we create an update callback to handle calculations
 	// for luminance and speed (auto exposure)

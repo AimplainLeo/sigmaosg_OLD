@@ -4,7 +4,6 @@
 #include "SulGuiRadioButton.h"
 #include "SulGuiText.h"
 #include "SulGeomLineStrip.h"
-#include "SulGeomTriangleFan.h"
 #include "SulGuiRadioButtonGroup.h"
 #include "SulGuiEventHandler.h"
 
@@ -65,9 +64,7 @@ void CSulGuiRadioButton::init()
 	// outer circle
 	CSulGeomLineStrip* pLineStrip = new CSulGeomLineStrip( vecPos );	
 	pLineStrip->setWidth( 2.0f );
-	osg::Geode* pGeodeCircle = new osg::Geode;
-	pGeodeCircle->addDrawable( pLineStrip->getDrawable() );
-	addChild( pGeodeCircle );
+	addChild( pLineStrip );
 
 	// text
 	CSulGuiText* pGuiText = new CSulGuiText( m_sText, r*2.0f+m_paddingText, h/2.0f, m_fontSize );
@@ -76,10 +73,8 @@ void CSulGuiRadioButton::init()
 	addChild( pGuiText );
 
 	// inner dot
-	CSulGeomTriangleFan* pTriangleFan = new CSulGeomTriangleFan( vecPosDots );
-	m_rGeodeTriangleFan = new osg::Geode;
-	m_rGeodeTriangleFan->addDrawable( pTriangleFan->getDrawable() );
-	addChild( m_rGeodeTriangleFan );
+	m_rTriangleFan = new CSulGeomTriangleFan( vecPosDots );
+	addChild( m_rTriangleFan );
 
 	showCanvas( false );
 }
@@ -87,7 +82,7 @@ void CSulGuiRadioButton::init()
 void CSulGuiRadioButton::removeSelect()
 {
 	m_bActive = false;
-	m_rGeodeTriangleFan->setNodeMask( 0 );
+	m_rTriangleFan->setNodeMask( 0 );
 }
 
 void CSulGuiRadioButton::setMouseRelease( bool bInside )
@@ -97,7 +92,7 @@ void CSulGuiRadioButton::setMouseRelease( bool bInside )
 		// we need to disable any other radiobutton that is active in the same group
 		CSulGuiRadioButtonGroup* pGroup = dynamic_cast<CSulGuiRadioButtonGroup*>(getParent(0));
 		pGroup->removeSelect();
-		m_rGeodeTriangleFan->setNodeMask( 0xFFFFFFFF );
+		m_rTriangleFan->setNodeMask( 0xFFFFFFFF );
 		m_bActive = true;
 	}
 }

@@ -2,26 +2,40 @@
 
 #include "stdafx.h"
 #include "SulGeomLineStrip.h"
+#include <osg/geometry>
 
 CSulGeomLineStrip::CSulGeomLineStrip() :
-CSulGeomBase()
+osg::Geode()
 {
+	initConstructor();
+	createDrawable();
 }
 
 CSulGeomLineStrip::CSulGeomLineStrip( const sigma::VEC_VEC3& vecVector ) :
-CSulGeomBase(),
+osg::Geode(),
 m_vecVector( vecVector )
 {
+	initConstructor();
+	createDrawable();
 }
 
-void CSulGeomLineStrip::setLines( const sigma::VEC_VEC3& vecVector )
+void CSulGeomLineStrip::initConstructor()
 {
-	m_vecVector = vecVector;
+	m_width = 1.0f;
 }
 
 void CSulGeomLineStrip::createDrawable()
 {
-	addDrawable( new osg::Geometry );
+	// we must have atleast two vertices
+	if ( m_vecVector.size()<1 )
+		return;
+
+	// remove any drawable that might have been created
+	if ( getNumDrawables()>0 )
+		removeDrawables( 0, getNumDrawables() );
+
+	osg::Geometry* pGeo = new osg::Geometry;
+	addDrawable( pGeo );
 
 	osg::Vec3Array* verts = new osg::Vec3Array;
 	osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;	
@@ -39,11 +53,11 @@ void CSulGeomLineStrip::createDrawable()
 		++i;
 	}
 
-	getDrawable()->asGeometry()->setVertexArray( verts );
-    getDrawable()->asGeometry()->setColorArray( m_rColors );
-	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+	pGeo->setVertexArray( verts );
+    pGeo->setColorArray( m_rColors );
+	pGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 
-    getDrawable()->asGeometry()->addPrimitiveSet(
+    pGeo->addPrimitiveSet(
         new osg::DrawElementsUInt( 
 			GL_LINE_STRIP,
             indices->size(), 
@@ -52,16 +66,18 @@ void CSulGeomLineStrip::createDrawable()
 	);
 
 	m_rLineWidth = new osg::LineWidth();
-	m_rLineWidth->setWidth( 1.0f );
-	getDrawable()->getOrCreateStateSet()->setAttributeAndModes( m_rLineWidth, osg::StateAttribute::ON );
+	m_rLineWidth->setWidth( m_width );
+	getOrCreateStateSet()->setAttributeAndModes( m_rLineWidth, osg::StateAttribute::ON );
+}
+
+void CSulGeomLineStrip::setLines( const sigma::VEC_VEC3& vecVector )
+{
+	m_vecVector = vecVector;
+	createDrawable();
 }
 
 void CSulGeomLineStrip::setWidth( float width )
 {
-	if ( !m_rLineWidth.valid() )
-	{
-		createDrawable();
-	}
-
+	m_width = width;
 	m_rLineWidth->setWidth( width );
 }

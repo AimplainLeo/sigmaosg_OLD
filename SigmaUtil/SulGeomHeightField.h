@@ -6,10 +6,13 @@
 #include "SulGeomBase.h"
 #include "SulTypes.h"
 #include "SulArray2D.h"
+#include <osg/Geode>
 
-class CSulGeomHeightField : public CSulGeomBase
+class CSulGeomHeightField : public osg::Geode
 {
 public:
+					CSulGeomHeightField();
+
 	void			Create( CSulArray2D<float>* pArray2D, float fScaleX=1.0f, float fScaleY=1.0f, float fScaleH=1.0f );
 
 	osg::Vec3		GetNormal( sigma::int32 x, sigma::int32 y ) const;

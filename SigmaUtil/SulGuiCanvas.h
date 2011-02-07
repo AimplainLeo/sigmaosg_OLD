@@ -69,9 +69,6 @@ private:
 	void			onMouseRelease( float x, float y );
 	void			onViewResize( float w, float h );
 
-public:
-	osg::ref_ptr<osg::Geode>	m_rGeodeQuad;		// FIXME: should be private
-
 private:
 	osg::ref_ptr<CSulGeomQuad>	m_rQuad;
 	

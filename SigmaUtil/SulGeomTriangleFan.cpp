@@ -2,16 +2,19 @@
 
 #include "stdafx.h"
 #include "SulGeomTriangleFan.h"
+#include <osg/geometry>
 
 CSulGeomTriangleFan::CSulGeomTriangleFan( const sigma::VEC_VEC3& vecVector ) :
-CSulGeomBase(),
+osg::Geode(),
 m_vecVector( vecVector )
 {
+	createDrawable();
 }
 
 void CSulGeomTriangleFan::createDrawable()
 {
-	addDrawable( new osg::Geometry );
+	osg::Geometry* pGeo = new osg::Geometry;
+	addDrawable( pGeo );
 
 	osg::Vec3Array* verts = new osg::Vec3Array;
 	osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;	
@@ -29,11 +32,11 @@ void CSulGeomTriangleFan::createDrawable()
 		++i;
 	}
 
-	getDrawable()->asGeometry()->setVertexArray( verts );
-    getDrawable()->asGeometry()->setColorArray( m_rColors );
-	getDrawable()->asGeometry()->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+	pGeo->setVertexArray( verts );
+    pGeo->setColorArray( m_rColors );
+	pGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 
-    getDrawable()->asGeometry()->addPrimitiveSet(
+    pGeo->addPrimitiveSet(
         new osg::DrawElementsUInt( 
 			GL_TRIANGLE_FAN,
             indices->size(), 

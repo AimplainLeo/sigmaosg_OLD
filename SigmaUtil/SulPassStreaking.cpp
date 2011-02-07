@@ -6,13 +6,13 @@
 CSulPassStreaking::CSulPassStreaking( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, float offsetFactor, float glowFactor ) :
 CSulPass( pTexIn, pTexOut, "Streaking" )
 {
-	m_rShader = new CSulShaderStreak( getGeode(), offsetFactor, glowFactor );
+	m_rShader = new CSulShaderStreak( getQuad(), offsetFactor, glowFactor );
 }
 
 CSulPassStreaking::CSulPassStreaking( CSulTextureBuffer* texBuf, float offsetFactor, float glowFactor ) :
 CSulPass( texBuf->getOut(), texBuf->getIn(), "Streaking" )
 {
-	m_rShader = new CSulShaderStreak( getGeode(), offsetFactor, glowFactor );
+	m_rShader = new CSulShaderStreak( getQuad(), offsetFactor, glowFactor );
 	texBuf->swap();
 }
 
