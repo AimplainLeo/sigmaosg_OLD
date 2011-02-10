@@ -238,3 +238,14 @@ CSulGuiDial* CSulGuiManager::getDial( const CSulString& id )
 
 	return 0;
 }
+
+CSulGuiProfiler* CSulGuiManager::getProfiler( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asProfiler();
+	}
+
+	return 0;
+}

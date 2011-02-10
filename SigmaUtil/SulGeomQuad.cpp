@@ -247,7 +247,7 @@ void CSulGeomQuad::calcVertPositions()
 	}
 
 	m_rGeo->dirtyBound();
-//m_rGeo->dirtyDisplayList();
+	m_rGeo->dirtyDisplayList();
 }
 
 void CSulGeomQuad::setCenter( const osg::Vec3& vCenter )

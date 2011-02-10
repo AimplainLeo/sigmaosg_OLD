@@ -18,6 +18,7 @@
 #include "SulGuiAlign.h"
 #include "SulGuiCounter.h"
 #include "SulGuiDial.h"
+#include "SulGuiProfiler.h"
 
 CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml )
 {
@@ -194,13 +195,17 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		pComp = new CSulGuiDial;
 	}
 
+	if ( sName=="PROFILER" )
+	{
+		pComp = new CSulGuiProfiler;
+	}
+
 	if ( pComp )
 	{
 		m_vecCompStack.push( pComp );
 
 		pComp->setupTheme( m_rThemeXml );
 		pComp->setupAttr( pAttr );
-//		pComp->setLayer( m_indent );
 		pComp->setupEventHandler( m_rEventHandler );		
 		pComp->init();
 		
@@ -230,7 +235,8 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 		sName=="TABPAGE" ||
 		sName=="ALIGN" ||
 		sName=="COUNTER" ||
-		sName=="DIAL"
+		sName=="DIAL" ||
+		sName=="PROFILER" 
 	)
 	{
 		m_vecCompStack.pop();

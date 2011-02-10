@@ -31,7 +31,10 @@ CSulGuiEventHandler::CSulGuiEventHandler()
 	m_bPause = false;
 
 	if ( profiler )
+	{
 		profiler->create( "CSulGuiEventHandler event MOVE" );
+		profiler->create( "CSulGuiEventHandler event DRAG" );
+	}
 }
 
 void CSulGuiEventHandler::pause( bool bPause )
@@ -84,9 +87,15 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::DRAG )
     {
+		if ( profiler.valid() )
+			profiler->start( "CSulGuiEventHandler event DRAG" );
+
 		float mouse_x = ea.getX();
 		float mouse_y = ea.getYmax()-ea.getY();
 		signalMouseDrag( mouse_x, mouse_y );
+
+		if ( profiler.valid() )
+			profiler->end( "CSulGuiEventHandler event DRAG" );
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::PUSH )

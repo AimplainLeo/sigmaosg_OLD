@@ -2,15 +2,16 @@
 
 #include "stdafx.h"
 #include "SulProfiler.h"
-#include "SulGeomBarChart.h"
 #include <iostream>
 
 CSulProfiler::CSulProfiler()
 {
-	/*
-	CSulGeomBarChart* p = new CSulGeomBarChart;
-	m_rGeode = p->createGeode();
-	*/
+	m_rChart = new CSulGeomBarChart;
+}
+
+CSulGeomBarChart* CSulProfiler::getChart()
+{
+	return m_rChart;
 }
 
 void CSulProfiler::create( const CSulString& name, const CSulString& groupName )
@@ -23,7 +24,7 @@ void CSulProfiler::create( const CSulString& name, const CSulString& groupName )
 
 	MAP_DATA* data = m_mapGroup[groupName];
 
-	(*data)[name] = new CSulProfilerData;
+	(*data)[name] = new CSulProfilerData( name, m_rChart );
 }
 
 void CSulProfiler::start( const CSulString& name, const CSulString& groupName )
@@ -42,7 +43,6 @@ void CSulProfiler::end( const CSulString& name, const CSulString& groupName )
 
 void CSulProfiler::frameUpdate()
 {
-	// reset all data
 	MAP_GROUP::iterator iS, iE;
 
 	iS = m_mapGroup.begin();
@@ -55,7 +55,7 @@ void CSulProfiler::frameUpdate()
 		iiE = iS->second->end();
 		while ( iiS!=iiE )
 		{
-			iiS->second->reset();
+			iiS->second->frameUpdate();
 			++iiS;
 		}
 
@@ -65,6 +65,7 @@ void CSulProfiler::frameUpdate()
 
 void CSulProfiler::dumpData( CSulProfilerData* pData )
 {
+	/*
 	MAP_GROUP::iterator iS, iE;
 
 	iS = m_mapGroup.begin();
@@ -78,12 +79,13 @@ void CSulProfiler::dumpData( CSulProfilerData* pData )
 		while ( iiS!=iiE )
 		{
 			double dt = iiS->second->getTime();
-			std::cout << "time: " << dt << std::endl;
+			//std::cout << "time: " << dt << std::endl;
 			++iiS;
 		}
 
 		++iS;
 	}
+	*/
 }
 
 void CSulProfiler::dump()

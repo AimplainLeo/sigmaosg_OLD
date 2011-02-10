@@ -5,13 +5,17 @@
 
 #include "SulString.h"
 #include "SulProfilerData.h"
+#include "SulGeomBarChart.h"
+#include "SulExport.h"
 #include <osg/referenced>
 #include <osg/geode>
 
-class CSulProfiler : public osg::Referenced
+class SUL_EXPORT CSulProfiler : public osg::Referenced
 {
 public:
 			CSulProfiler();
+
+	CSulGeomBarChart*	getChart();
 
 	void	create( const CSulString& name, const CSulString& groupName="" );
 
@@ -30,6 +34,8 @@ private:
 	typedef std::map< CSulString, MAP_DATA*>						MAP_GROUP;
 
 	MAP_GROUP	m_mapGroup;
+
+	osg::ref_ptr<CSulGeomBarChart>	m_rChart;
 };
 
 #endif // __SULPROFILER_H__

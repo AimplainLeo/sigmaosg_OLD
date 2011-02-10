@@ -38,6 +38,7 @@ public:
 	class CSulGuiComboBox*		getComboBox( const CSulString& id );
 	class CSulGuiCheckBox*		getCheckBox( const CSulString& id );
 	class CSulGuiDial*			getDial( const CSulString& id );
+	class CSulGuiProfiler*		getProfiler( const CSulString& id );
 
 	sigma::signal1<bool> signalShow;
 

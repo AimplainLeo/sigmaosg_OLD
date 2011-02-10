@@ -86,6 +86,7 @@ public:
 	virtual class CSulGuiComboBox*		asComboBox()	{ return 0; }
 	virtual class CSulGuiCheckBox*		asCheckBox()	{ return 0; }
 	virtual class CSulGuiDial*			asDial()		{ return 0; }
+	virtual class CSulGuiProfiler*		asProfiler()	{ return 0; }
 
 	sigma::signal2<float, float>	signalPositionChanged;
 

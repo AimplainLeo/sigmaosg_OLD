@@ -10,9 +10,9 @@ osg::Node* CreateScene()
 {
 	CSulGeomBarChart* p = new CSulGeomBarChart;
 	
-	p->createBar();
-	p->createBar();
-	p->createBar();
+	p->createBar( "test1" );
+	p->createBar( "test2" );
+	p->createBar( "test3" );
 
 	p->setBarSize( 0, 100 );
 	p->setBarSize( 1, 200 );

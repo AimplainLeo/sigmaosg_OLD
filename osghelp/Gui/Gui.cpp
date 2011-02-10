@@ -10,6 +10,7 @@
 #include <SigmaUtil/SulGuiListBox.h>
 #include <SigmaUtil/SulProfiler.h>
 #include <SigmaUtil/SulInit.h>
+#include <SigmaUtil/SulGuiProfiler.h>
 #include <iostream>
 
 extern osg::ref_ptr<CSulProfiler>	profiler;
@@ -95,6 +96,9 @@ osg::Group* createGui( osgViewer::Viewer* pViewer )
 		pListBox->addTextItem( "four" );
 	}
 
+	CSulGuiProfiler* pProfiler = pGuiManager->getProfiler( "myProfiler" );
+	pProfiler->setProfiler( profiler );
+
 	return pGroup;
 }
 
@@ -104,18 +108,19 @@ int _tmain(int argc, _TCHAR* argv[])
     osg::ref_ptr<osgViewer::Viewer> rViewer = new osgViewer::Viewer;
 
     // make the viewer create a 512x512 window and position it at 32, 32
-    rViewer->setUpViewInWindow( 32, 32, 1024, 512 );
+    rViewer->setUpViewInWindow( 32, 32, 1600, 800 );
 
 	osg::Group* pRoot = new osg::Group;
-
 	pRoot->addChild( createScene() );
+
+	sulInit( rViewer );
 
     // set the scene-graph data the viewer will render
     rViewer->setSceneData( pRoot );
 
 	rViewer->setCameraManipulator( new osgGA::TrackballManipulator );
 
-	sulInit( rViewer );
+	rViewer->setThreadingModel( osgViewer::ViewerBase::SingleThreaded );
 
 	pRoot->addChild( createGui(rViewer) );
 
