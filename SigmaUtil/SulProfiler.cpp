@@ -16,7 +16,21 @@ CSulGeomBarChart* CSulProfiler::getChart()
 
 void CSulProfiler::create( const CSulString& name, const CSulString& groupName )
 {
-	MAP_GROUP::iterator iFound = m_mapGroup.find( groupName );
+	MAP_GROUP::iterator iFound;
+
+	// we need to check to see if the name and groupName already exists, if it does
+	// then we do nothing
+	iFound = m_mapGroup.find( groupName );
+	if ( iFound!=m_mapGroup.end() )
+	{
+		MAP_DATA::iterator iFoundData;
+		iFoundData = iFound->second->find( name );
+		if ( iFoundData!=iFound->second->end() )
+		{
+			return;
+		}
+	}
+	
 	if ( iFound==m_mapGroup.end() )
 	{
 		m_mapGroup[groupName] = new MAP_DATA;

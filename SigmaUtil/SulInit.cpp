@@ -5,7 +5,7 @@
 #include "SulProfiler.h"
 #include <osg/group>
 
-osg::ref_ptr<CSulProfiler>	profiler;
+osg::ref_ptr<CSulProfiler>	CSulInit::profiler = 0;
 
 class CSigmaHandler : public osgGA::GUIEventHandler 
 {
@@ -14,9 +14,9 @@ public:
 	{
 		if ( ea.getEventType()==osgGA::GUIEventAdapter::FRAME )
 		{
-			profiler->dump();
+			CSulInit::profiler->dump();
 
-			profiler->frameUpdate();
+			CSulInit::profiler->frameUpdate();
 		}		
 
 		return false;
@@ -28,14 +28,19 @@ class CSulInitPostCallback : public osg::Camera::DrawCallback
 public:
 	void operator()( const osg::Camera& cam ) const
 	{
-		profiler->end( "total frame" );
-		profiler->dump();
-		profiler->frameUpdate();
-		profiler->start( "total frame" );
+		CSulInit::profiler->end( "total frame" );
+		CSulInit::profiler->dump();
+		CSulInit::profiler->frameUpdate();
+		CSulInit::profiler->start( "total frame" );
 	}
 };
 
-void sulInit( osgViewer::Viewer* pViewer )
+CSulProfiler* CSulInit::Instance()
+{
+	return profiler;
+}
+
+void CSulInit::init( osg::Camera* pCam )
 {
 	profiler = new CSulProfiler;
 
@@ -44,7 +49,9 @@ void sulInit( osgViewer::Viewer* pViewer )
 
 //	pViewer->getScene()->getSceneData()->asGroup()->addChild( profiler->getChart() );
 
-	pViewer->getCamera()->setPostDrawCallback( new CSulInitPostCallback );
+	pCam->setPostDrawCallback( new CSulInitPostCallback );
 
 //	pViewer->addEventHandler( new CSigmaHandler );
 }
+
+

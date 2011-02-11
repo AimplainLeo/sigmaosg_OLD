@@ -1690,6 +1690,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiProfiler.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiProfiler.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiRadioButton.cpp"
 						>
 					</File>

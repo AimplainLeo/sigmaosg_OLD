@@ -5,11 +5,10 @@
 #include "SulGuiCanvas.h"
 #include "SulNodePath.h"
 #include "SulProfiler.h"
+#include "SulInit.h"
 #include <osgViewer/Viewer>
 #include <osgManipulator/Selection>
 #include <iostream>
-
-extern osg::ref_ptr<CSulProfiler>	profiler;
 
 struct eventDataTest
 {
@@ -30,10 +29,10 @@ CSulGuiEventHandler::CSulGuiEventHandler()
 {
 	m_bPause = false;
 
-	if ( profiler )
+	if ( CSulInit::profiler )
 	{
-		profiler->create( "CSulGuiEventHandler event MOVE" );
-		profiler->create( "CSulGuiEventHandler event DRAG" );
+		CSulInit::profiler->create( "CSulGuiEventHandler event MOVE" );
+		CSulInit::profiler->create( "CSulGuiEventHandler event DRAG" );
 	}
 }
 
@@ -74,28 +73,28 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::MOVE )
     {
-		if ( profiler.valid() )
-			profiler->start( "CSulGuiEventHandler event MOVE" );
+		if ( CSulInit::profiler.valid() )
+			CSulInit::profiler->start( "CSulGuiEventHandler event MOVE" );
 		
 		float mouse_x = ea.getX();
 		float mouse_y = ea.getYmax()-ea.getY();
 		signalMouseMove( mouse_x, mouse_y );
 		
-		if ( profiler.valid() )
-			profiler->end( "CSulGuiEventHandler event MOVE" );
+		if ( CSulInit::profiler.valid() )
+			CSulInit::profiler->end( "CSulGuiEventHandler event MOVE" );
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::DRAG )
     {
-		if ( profiler.valid() )
-			profiler->start( "CSulGuiEventHandler event DRAG" );
+		if ( CSulInit::profiler.valid() )
+			CSulInit::profiler->start( "CSulGuiEventHandler event DRAG" );
 
 		float mouse_x = ea.getX();
 		float mouse_y = ea.getYmax()-ea.getY();
 		signalMouseDrag( mouse_x, mouse_y );
 
-		if ( profiler.valid() )
-			profiler->end( "CSulGuiEventHandler event DRAG" );
+		if ( CSulInit::profiler.valid() )
+			CSulInit::profiler->end( "CSulGuiEventHandler event DRAG" );
     }
 
     if ( ea.getEventType() & osgGA::GUIEventAdapter::PUSH )
