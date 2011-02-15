@@ -4,8 +4,9 @@
 #define __SULGUIALIGN_H__
 
 #include "SulGuiCanvas.h"
+#include "SulExport.h"
 
-class CSulGuiAlign : public CSulGuiCanvas
+class SUL_EXPORT CSulGuiAlign : public CSulGuiCanvas
 {
 public:
 	enum EALIGNV
@@ -26,6 +27,10 @@ public:
 	virtual void	setupEventHandler( CSulGuiEventHandler* pEventHandler );
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 	virtual void	init();
+
+	void			update();
+
+	CSulGuiAlign*	asAlign()		{ return this; }
 
 private:
 	void			onViewResize( float w, float h );

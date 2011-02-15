@@ -44,6 +44,7 @@ void CSulGuiTextBox::setupAttr( CSulXmlAttr* pAttr )
 	if ( pAttr->exist( "ofs_y" ) )		m_ofs_x		= pAttr->get( "ofs_y" ).asFloat();
 	if ( pAttr->exist( "font" ) )		m_font		= pAttr->get( "font" );
 	if ( pAttr->exist( "color" ) )		m_color		= pAttr->get( "color" ).asVec4();
+	if ( pAttr->exist( "text" ) )		m_sText		= pAttr->get( "text" );
 }
 
 void CSulGuiTextBox::init()

@@ -249,3 +249,14 @@ CSulGuiProfiler* CSulGuiManager::getProfiler( const CSulString& id )
 
 	return 0;
 }
+
+CSulGuiAlign* CSulGuiManager::getAlign( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asAlign();
+	}
+
+	return 0;
+}

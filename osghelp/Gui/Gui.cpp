@@ -13,8 +13,6 @@
 #include <SigmaUtil/SulGuiProfiler.h>
 #include <iostream>
 
-extern osg::ref_ptr<CSulProfiler>	profiler;
-
 osg::ref_ptr<CSulGuiManager> pGuiManager;
 
 class CKeyboardHandler : public osgGA::GUIEventHandler 
@@ -30,7 +28,7 @@ public:
 
 		if ( ea.getEventType()==osgGA::GUIEventAdapter::FRAME )
 		{
-			profiler->frameUpdate();
+			CSulInit::profiler->frameUpdate();
 		}		
 
 		if ( ea.getEventType()==osgGA::GUIEventAdapter::KEYDOWN )
@@ -97,7 +95,7 @@ osg::Group* createGui( osgViewer::Viewer* pViewer )
 	}
 
 	CSulGuiProfiler* pProfiler = pGuiManager->getProfiler( "myProfiler" );
-	pProfiler->setProfiler( profiler );
+	pProfiler->setProfiler( CSulInit::profiler );
 
 	return pGroup;
 }
@@ -113,7 +111,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	osg::Group* pRoot = new osg::Group;
 	pRoot->addChild( createScene() );
 
-	sulInit( rViewer );
+	CSulInit::init( rViewer->getCamera() );
 
     // set the scene-graph data the viewer will render
     rViewer->setSceneData( pRoot );

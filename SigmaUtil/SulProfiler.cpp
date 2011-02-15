@@ -43,15 +43,33 @@ void CSulProfiler::create( const CSulString& name, const CSulString& groupName )
 
 void CSulProfiler::start( const CSulString& name, const CSulString& groupName )
 {
-	MAP_DATA* data = m_mapGroup[groupName];
-	CSulProfilerData* p = (*data)[name];
+	MAP_GROUP::iterator iGroup = m_mapGroup.find( groupName );
+	if ( iGroup==m_mapGroup.end() )
+		return;
+
+	MAP_DATA* data = iGroup->second;
+
+	MAP_DATA::iterator iData = data->find( name );
+	if ( iData==data->end() )
+		return;
+
+	CSulProfilerData* p = iData->second;
 	p->start();
 }
 
 void CSulProfiler::end( const CSulString& name, const CSulString& groupName )
 {
-	MAP_DATA* data = m_mapGroup[groupName];
-	CSulProfilerData* p = (*data)[name];
+	MAP_GROUP::iterator iGroup = m_mapGroup.find( groupName );
+	if ( iGroup==m_mapGroup.end() )
+		return;
+
+	MAP_DATA* data = iGroup->second;
+
+	MAP_DATA::iterator iData = data->find( name );
+	if ( iData==data->end() )
+		return;
+
+	CSulProfilerData* p = iData->second;
 	p->end();
 }
 

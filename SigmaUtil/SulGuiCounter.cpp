@@ -45,8 +45,8 @@ void CSulGuiCounter::init()
 	{
 		CSulGuiCanvas* p = new CSulGuiCanvas( "digit" );
 		p->setupEventHandler( getEventHandler() );
-		p->setImage( "images/counter.png" );
 		p->init();		
+		p->setImage( "images/counter.png" );
 		p->setXY( i*20.0f, 0.0f );
 		p->setWH( 20.0f, 20.0f );
 		p->getQuad()->setUV( 0.1f, 1.0f );

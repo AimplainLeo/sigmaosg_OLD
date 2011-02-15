@@ -245,6 +245,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarChart", "BarChart\BarCha
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CloudsVolume", "CloudsVolume\CloudsVolume.vcproj", "{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -571,6 +573,10 @@ Global
 		{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}.Debug|Win32.Build.0 = Debug|Win32
 		{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}.Release|Win32.ActiveCfg = Release|Win32
 		{DE43B8D2-88D9-4A69-97B6-0D7E3BEB8710}.Release|Win32.Build.0 = Release|Win32
+		{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}.Debug|Win32.Build.0 = Debug|Win32
+		{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}.Release|Win32.ActiveCfg = Release|Win32
+		{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

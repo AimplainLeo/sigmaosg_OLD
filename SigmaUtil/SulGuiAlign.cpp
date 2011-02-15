@@ -104,6 +104,8 @@ void CSulGuiAlign::onViewResize( float w, float h )
 }
 */
 
+
+/*
 void CSulGuiAlign::onViewResize( float w, float h )
 {
 	CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getParent(0));
@@ -129,4 +131,51 @@ void CSulGuiAlign::onViewResize( float w, float h )
 			}
 		}
 	}
+}
+*/
+
+void CSulGuiAlign::update()
+{
+	sigma::uint32 count = getNumChildren();
+	for ( sigma::uint32 i=0; i<count ; i++ )
+	{
+		CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getChild(i));
+		if ( p )
+		{
+			if ( m_eAlignH==RIGHT )
+			{
+				float xx = getW() - (p->getW()+p->getX());
+
+				// we write directly to the matrixtransform
+				osg::Matrix m;
+				m = p->getMatrix();
+				osg::Vec3 pos = m.getTrans();
+				pos.x() = xx;
+				m.setTrans( pos );
+				p->setMatrix( m );	
+			}
+
+			if ( m_eAlignV==BOTTOM )
+			{
+				float yy = getH() - (p->getH()+p->getY());
+
+				// we write directly to the matrixtransform
+				osg::Matrix m;
+				m = p->getMatrix();
+				osg::Vec3 pos = m.getTrans();
+				pos.y() = yy;
+				m.setTrans( pos );
+				p->setMatrix( m );	
+			}
+		}
+	}
+}
+
+void CSulGuiAlign::onViewResize( float w, float h )
+{
+	CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getParent(0));
+	setW( p?p->getW():w );
+	setH( p?p->getH():h );
+
+	update();
 }

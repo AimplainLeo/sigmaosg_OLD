@@ -27,20 +27,13 @@ void CSulGuiComp::initConstructor()
 	m_bEditMode		= false;
 	m_bActive		= true;
 	m_renderbinNum	= 0;
-	m_attrX			= 0.0f;
-	m_attrY			= 0.0f;
-	m_attrValid		= false;
 	m_bShow			= true;
+	m_x				= 0.0f;
+	m_y				= 0.0f;
 }
 
 void CSulGuiComp::init()
 {
-	if ( m_attrValid )
-	{
-		setX( m_attrX );
-		setY( m_attrY ); 
-	}
-
 	show( m_bShow );
 }
 
@@ -89,15 +82,14 @@ CSulString CSulGuiComp::getThemeValue( const CSulString& attr )
 
 void CSulGuiComp::setupAttr( CSulXmlAttr* pAttr )
 {
+	if ( pAttr->exist( "show" ) )		m_bShow = pAttr->get( "show" ).asBool();
 	if ( pAttr->exist( "id" ) )			m_id = pAttr->get( "id" );
-	if ( pAttr->exist( "x" ) )			m_attrX = pAttr->get( "x" ).asFloat();
-	if ( pAttr->exist( "y" ) )			m_attrY = pAttr->get( "y" ).asFloat();
+	if ( pAttr->exist( "x" ) )			m_x = pAttr->get( "x" ).asFloat();
+	if ( pAttr->exist( "y" ) )			m_y = pAttr->get( "y" ).asFloat();
 	if ( pAttr->exist( "renderbin" ) )	m_renderbinNum = pAttr->get( "renderbin" ).asInt32();
 
-	if ( pAttr->exist( "x" ) || pAttr->exist( "y" ) )
-	{
-		m_attrValid = true;
-	}
+	if ( pAttr->exist( "x" ) && pAttr->exist( "y" ) )
+		setXY( m_x, m_y );
 }
 
 void CSulGuiComp::setupTheme( CSulGuiThemeXml* pThemeXml )
@@ -117,18 +109,11 @@ void CSulGuiComp::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 	pEventHandler->signalNativeDimensionsChanged.connect( this, &CSulGuiComp::onNativeDimensionsChanged );
 }
 
-float CSulGuiComp::getAttrX()
-{
-	return m_attrX;
-}
-
-float CSulGuiComp::getAttrY()
-{
-	return m_attrY;
-}
-
 void CSulGuiComp::setXY( float x, float y )
 {
+	m_x = x;
+	m_y = y;
+
 	osg::Matrix m;
 	m.setTrans( x, y, 0.0f );
 	setMatrix( m );	
@@ -138,6 +123,8 @@ void CSulGuiComp::setXY( float x, float y )
 
 void CSulGuiComp::setX( float x )
 {
+	m_x = x;
+
 	osg::Matrix m;
 	m = getMatrix();
 	osg::Vec3 pos = m.getTrans();
@@ -148,6 +135,8 @@ void CSulGuiComp::setX( float x )
 
 void CSulGuiComp::setY( float y )
 {
+	m_y = y;
+
 	osg::Matrix m;
 	m = getMatrix();
 	osg::Vec3 pos = m.getTrans();
@@ -158,18 +147,25 @@ void CSulGuiComp::setY( float y )
 
 float CSulGuiComp::getX()
 {
+	return m_x;
+	/*
 	osg::Matrix m;
 	m = getMatrix();
 	osg::Vec3 pos = m.getTrans();
 	return pos.x();
+	*/
 }
 
 float CSulGuiComp::getY()
 {
+	return m_y;
+
+	/*
 	osg::Matrix m;
 	m = getMatrix();
 	osg::Vec3 pos = m.getTrans();
 	return pos.y();
+	*/
 }
 
 float CSulGuiComp::getWorldX()

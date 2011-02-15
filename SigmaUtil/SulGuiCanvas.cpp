@@ -102,14 +102,7 @@ void CSulGuiCanvas::init()
 
 	if ( !m_img.empty() )
 	{
-		m_rQuad->setTexture( m_img, 0 );
-		m_uniformUseTexture->set( 1 );
-		
-		if ( m_w==0.0f || m_h==0.0f )
-		{
-			osg::Image* pImage = m_rQuad->getImage();
-			setWH( pImage->s(), pImage->t() );
-		}
+		setImage( m_img );
 	}
 
 	showCanvas( m_bShowCanvas );
@@ -141,6 +134,15 @@ void CSulGuiCanvas::useShaderBackground( bool bUse )
 void CSulGuiCanvas::setImage( const CSulString& imgFile )
 {
 	m_img = imgFile;
+
+	m_rQuad->setTexture( m_img, 0 );
+	m_uniformUseTexture->set( 1 );
+	
+	if ( m_w==0.0f || m_h==0.0f )
+	{
+		osg::Image* pImage = m_rQuad->getImage();
+		setWH( pImage->s(), pImage->t() );
+	}
 }
 
 CSulGuiCanvas* CSulGuiCanvas::asCanvas()

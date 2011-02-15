@@ -50,10 +50,6 @@ public:
 	osg::Vec2		getLocal( const osg::Vec2& vWorld );
 	osg::Vec2		getLocal( float xWorld, float yWorld );
 
-	// attribute x and y values (they never change)
-	float			getAttrX();
-	float			getAttrY();
-
 	virtual void	show( bool bShow );
 	virtual void	toggleShow();
 	bool			isVisible();
@@ -87,6 +83,7 @@ public:
 	virtual class CSulGuiCheckBox*		asCheckBox()	{ return 0; }
 	virtual class CSulGuiDial*			asDial()		{ return 0; }
 	virtual class CSulGuiProfiler*		asProfiler()	{ return 0; }
+	virtual class CSulGuiAlign*			asAlign()		{ return 0; }
 
 	sigma::signal2<float, float>	signalPositionChanged;
 
@@ -107,9 +104,8 @@ private:
 
 	sigma::uint32					m_renderbinNum;
 
-	float							m_attrX;			
-	float							m_attrY;	
-	bool							m_attrValid;
+	float							m_x;			
+	float							m_y;	
 
 	sigma::uint32					m_layer;
 
