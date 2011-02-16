@@ -134,6 +134,9 @@ void CSulGuiManager::setEditMode( bool bEdit )
 
 CSulGuiComp* CSulGuiManager::get( const CSulString& id )
 {
+	if ( !m_rMT.valid() )
+		return 0;
+
 	osg::ref_ptr<CSulGuiCompVisitor> nv = new CSulGuiCompVisitor( id );
 	nv->setNodeMaskOverride( 0xFFFFFFFF );
 	m_rMT->accept( *nv );

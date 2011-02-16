@@ -42,16 +42,18 @@ CSulProfiler* CSulInit::Instance()
 
 void CSulInit::init( osg::Camera* pCam )
 {
-	profiler = new CSulProfiler;
+	//profiler = new CSulProfiler;
 
-	profiler->create( "total frame" );
+	if ( profiler.valid() )
+	{
+		profiler->create( "total frame" );
 
+	//	pViewer->getScene()->getSceneData()->asGroup()->addChild( profiler->getChart() );
 
-//	pViewer->getScene()->getSceneData()->asGroup()->addChild( profiler->getChart() );
+		pCam->setPostDrawCallback( new CSulInitPostCallback );
 
-	pCam->setPostDrawCallback( new CSulInitPostCallback );
-
-//	pViewer->addEventHandler( new CSigmaHandler );
+	//	pViewer->addEventHandler( new CSigmaHandler );
+	}
 }
 
 
