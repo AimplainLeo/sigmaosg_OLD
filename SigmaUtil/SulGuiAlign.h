@@ -11,14 +11,16 @@ class SUL_EXPORT CSulGuiAlign : public CSulGuiCanvas
 public:
 	enum EALIGNV
 	{
-		TOP,
-		BOTTOM
+		V_TOP,
+		V_BOTTOM,
+		V_CENTER
 	};
 
 	enum EALIGNH
 	{
-		LEFT,
-		RIGHT
+		H_LEFT,
+		H_RIGHT,
+		H_CENTER
 	};
 
 public:

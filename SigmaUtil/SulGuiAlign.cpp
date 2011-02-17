@@ -9,8 +9,8 @@ CSulGuiCanvas( "ALIGN" )
 {
 	setName( "CSulGuiCanvas" );
 
-	m_eAlignV = TOP;
-	m_eAlignH = LEFT;
+	m_eAlignV = V_TOP;
+	m_eAlignH = H_LEFT;
 	m_xOfs = 0.0f;
 	m_yOfs = 0.0f;
 }
@@ -29,15 +29,17 @@ void CSulGuiAlign::setupAttr( CSulXmlAttr* pAttr )
 	if ( pAttr->exist( "align_h" ) )
 	{
 		CSulString s = pAttr->get( "align_h" );
-		if ( s=="left" )	m_eAlignH = LEFT;
-		if ( s=="right" )	m_eAlignH = RIGHT;
+		if ( s=="left" )	m_eAlignH = H_LEFT;
+		if ( s=="right" )	m_eAlignH = H_RIGHT;
+		if ( s=="center" )	m_eAlignH = H_CENTER;
 	}
 	
 	if ( pAttr->exist( "align_v" ) )
 	{
 		CSulString s = pAttr->get( "align_v" );
-		if ( s=="top" )		m_eAlignV = TOP;
-		if ( s=="bottom" )	m_eAlignV = BOTTOM;
+		if ( s=="top" )		m_eAlignV = V_TOP;
+		if ( s=="bottom" )	m_eAlignV = V_BOTTOM;
+		if ( s=="center" )	m_eAlignV = V_CENTER;
 	}
 
 	if ( pAttr->exist( "x_ofs" ) )
@@ -142,7 +144,20 @@ void CSulGuiAlign::update()
 		CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getChild(i));
 		if ( p )
 		{
-			if ( m_eAlignH==RIGHT )
+			if ( m_eAlignH==H_CENTER )
+			{
+				float xx = (getW()/2.0f - p->getW()/2.0) + p->getX();
+
+				// we write directly to the matrixtransform
+				osg::Matrix m;
+				m = p->getMatrix();
+				osg::Vec3 pos = m.getTrans();
+				pos.x() = xx;
+				m.setTrans( pos );
+				p->setMatrix( m );	
+			}
+
+			if ( m_eAlignH==H_RIGHT )
 			{
 				float xx = getW() - (p->getW()+p->getX());
 
@@ -155,7 +170,20 @@ void CSulGuiAlign::update()
 				p->setMatrix( m );	
 			}
 
-			if ( m_eAlignV==BOTTOM )
+			if ( m_eAlignV==V_CENTER )
+			{
+				float yy = (getH()/2.0f - p->getH()/2.0) + p->getY();
+
+				// we write directly to the matrixtransform
+				osg::Matrix m;
+				m = p->getMatrix();
+				osg::Vec3 pos = m.getTrans();
+				pos.y() = yy;
+				m.setTrans( pos );
+				p->setMatrix( m );	
+			}
+
+			if ( m_eAlignV==V_BOTTOM )
 			{
 				float yy = getH() - (p->getH()+p->getY());
 
