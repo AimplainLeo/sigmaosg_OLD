@@ -263,3 +263,14 @@ CSulGuiAlign* CSulGuiManager::getAlign( const CSulString& id )
 
 	return 0;
 }
+
+CSulGuiText* CSulGuiManager::getText( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asText();
+	}
+
+	return 0;
+}

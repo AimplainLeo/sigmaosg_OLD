@@ -40,6 +40,7 @@ public:
 	class CSulGuiDial*			getDial( const CSulString& id );
 	class CSulGuiProfiler*		getProfiler( const CSulString& id );
 	class CSulGuiAlign*			getAlign( const CSulString& id );
+	class CSulGuiText*			getText( const CSulString& id );
 
 	sigma::signal1<bool> signalShow;
 

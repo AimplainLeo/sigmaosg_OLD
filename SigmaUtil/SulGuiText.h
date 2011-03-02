@@ -4,9 +4,10 @@
 #define __SULGUITEXT_H__
 
 #include "SulGuiComp.h"
+#include "SulExport.h"
 #include <osgText/Text>
 
-class CSulGuiText : public CSulGuiComp
+class SUL_EXPORT CSulGuiText : public CSulGuiComp
 {
 public:
 								CSulGuiText( const CSulString& sName, float x, float y, float size, CSulString font="Tempest.ttf" );
@@ -24,6 +25,8 @@ public:
 	void						setFontSize( float size );
 
 	void						setColor( const osg::Vec4& color );
+
+	virtual class CSulGuiText*	asText()		{ return this; }
 
 private:
 	osg::ref_ptr<osgText::Text>	m_rText;
