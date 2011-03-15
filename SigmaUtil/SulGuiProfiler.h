@@ -14,8 +14,6 @@ public:
 
 	virtual void	setupAttr( CSulXmlAttr* pAttr );
 
-	virtual void	init();
-
 	void			setProfiler( CSulProfiler* pProfiler );
 
 	virtual class CSulGuiProfiler*			asProfiler()		{ return this; }

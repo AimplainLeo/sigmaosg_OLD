@@ -274,3 +274,36 @@ CSulGuiText* CSulGuiManager::getText( const CSulString& id )
 
 	return 0;
 }
+
+CSulGuiSliderH* CSulGuiManager::getSliderH( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asSliderH();
+	}
+
+	return 0;
+}
+
+CSulGuiTable* CSulGuiManager::getTable( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asTable();
+	}
+
+	return 0;
+}
+
+CSulGuiListView* CSulGuiManager::getListView( const CSulString& id )
+{
+	CSulGuiComp* p = get( id );
+	if ( p )
+	{
+		return p->asListView();
+	}
+
+	return 0;
+}

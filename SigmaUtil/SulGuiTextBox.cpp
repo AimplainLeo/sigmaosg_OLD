@@ -72,3 +72,15 @@ CSulString CSulGuiTextBox::getText()
 {
 	return m_rText->getText();
 }
+
+void CSulGuiTextBox::setTextOffset( float x, float y )
+{
+	m_ofs_x = x;
+	m_ofs_y = y;
+
+	if ( m_rText.valid() )
+	{
+		float h = getH();
+		m_rText->setXY( 0+m_ofs_x, h-m_ofs_y );
+	}
+}

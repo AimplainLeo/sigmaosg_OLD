@@ -22,26 +22,26 @@ m_v1(v1)
 
 void CSulGeomLine::createDrawable()
 {
-	osg::Geometry* pGeo = new osg::Geometry;
-	addDrawable( pGeo );
+	m_rGeo = new osg::Geometry;
+	addDrawable( m_rGeo );
 
 	// vertices
 	osg::Vec3Array* verts = new osg::Vec3Array;
 	verts->push_back( m_v0 );
 	verts->push_back( m_v1 );
-	pGeo->setVertexArray( verts );
+	m_rGeo->setVertexArray( verts );
 
     osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;
     indices->push_back(0);
     indices->push_back(1);
 
-	osg::Vec4Array* colors = new osg::Vec4Array;
-	colors->push_back( osg::Vec4(1,1,0,1.0f) );
-	colors->push_back( osg::Vec4(1,1,0,1.0f) );
-    pGeo->setColorArray( colors );
-	pGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+	m_rColors = new osg::Vec4Array;
+	m_rColors->push_back( osg::Vec4(1,1,0,1.0f) );
+	m_rColors->push_back( osg::Vec4(1,1,0,1.0f) );
+    m_rGeo->setColorArray( m_rColors );
+	m_rGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 
-    pGeo->addPrimitiveSet(
+    m_rGeo->addPrimitiveSet(
         new osg::DrawElementsUInt( 
 			GL_LINES,
             indices->size(), 
@@ -51,11 +51,18 @@ void CSulGeomLine::createDrawable()
 
 	m_rLineWidth = new osg::LineWidth();
 	m_rLineWidth->setWidth( 1.0f );
-	pGeo->getOrCreateStateSet()->setAttributeAndModes( m_rLineWidth, osg::StateAttribute::ON );
-
+	m_rGeo->getOrCreateStateSet()->setAttributeAndModes( m_rLineWidth, osg::StateAttribute::ON );
 }
 
 void CSulGeomLine::setWidth( float width )
 {
 	m_rLineWidth->setWidth( width );
+}
+
+void CSulGeomLine::setColor( const osg::Vec4& color )
+{
+	(*m_rColors)[0].set( color.r(),color.g(),color.b(),color.a() );
+	(*m_rColors)[1].set( color.r(),color.g(),color.b(),color.a() );
+
+	m_rGeo->dirtyDisplayList();
 }

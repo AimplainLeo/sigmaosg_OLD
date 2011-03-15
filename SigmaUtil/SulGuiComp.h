@@ -85,6 +85,9 @@ public:
 	virtual class CSulGuiProfiler*		asProfiler()	{ return 0; }
 	virtual class CSulGuiAlign*			asAlign()		{ return 0; }
 	virtual class CSulGuiText*			asText()		{ return 0; }
+	virtual class CSulGuiSliderH*		asSliderH()		{ return 0; }
+	virtual class CSulGuiTable*			asTable()		{ return 0; }
+	virtual class CSulGuiListView*		asListView()	{ return 0; }
 
 	sigma::signal2<float, float>	signalPositionChanged;
 

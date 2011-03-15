@@ -1690,6 +1690,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiListView.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiListView.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiProfiler.cpp"
 						>
 					</File>
@@ -1722,11 +1730,27 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulGuiSliderH.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiSliderH.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulGuiTab.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\SulGuiTab.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiTable.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGuiTable.h"
 						>
 					</File>
 					<File

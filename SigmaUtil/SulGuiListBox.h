@@ -41,6 +41,8 @@ public:
 	void				setSelectedIndex( sigma::uint32 index );
 	sigma::int32		getSelectedIndex();
 
+	CSulGuiItem*		getSelectedItem();
+
 	virtual class CSulGuiListBox*	asListBox() { return this; }
 
 	sigma::signal1<CSulGuiItem*>	signalItemClicked;

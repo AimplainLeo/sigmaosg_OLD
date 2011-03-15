@@ -19,6 +19,9 @@
 #include "SulGuiCounter.h"
 #include "SulGuiDial.h"
 #include "SulGuiProfiler.h"
+#include "SulGuiSliderH.h"
+#include "SulGuiTable.h"
+#include "SulGuiListView.h"
 
 CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml )
 {
@@ -200,6 +203,21 @@ void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		pComp = new CSulGuiProfiler;
 	}
 
+	if ( sName=="SLIDERH" )
+	{
+		pComp = new CSulGuiSliderH;
+	}
+
+	if ( sName=="TABLE" )
+	{
+		pComp = new CSulGuiTable;
+	}
+
+	if ( sName=="LISTVIEW" )
+	{
+		pComp = new CSulGuiListView;
+	}
+
 	if ( pComp )
 	{
 		m_vecCompStack.push( pComp );
@@ -236,7 +254,10 @@ void CSulGuiXml::elementEnd( const CSulString& sName )
 		sName=="ALIGN" ||
 		sName=="COUNTER" ||
 		sName=="DIAL" ||
-		sName=="PROFILER" 
+		sName=="PROFILER" ||
+		sName=="SLIDERH" ||
+		sName=="TABLE" ||
+		sName=="LISTVIEW"
 	)
 	{
 		m_vecCompStack.pop();

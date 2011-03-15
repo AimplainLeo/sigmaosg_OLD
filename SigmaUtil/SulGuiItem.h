@@ -4,8 +4,9 @@
 #define __SULGUIITEM_H__
 
 #include "SulGuiCanvas.h"
+#include "SulExport.h"
 
-class CSulGuiItem : public osg::Referenced
+class SUL_EXPORT CSulGuiItem : public osg::Referenced
 {
 public:
 					CSulGuiItem( CSulGuiCanvas* pItem );

@@ -54,9 +54,9 @@ public:
 
 	virtual class CSulGuiCanvas*	asCanvas();
 
-	sigma::signal1<CSulGuiCanvas*>	signalClicked;
+	sigma::signal1<CSulGuiCanvas*>							signalClicked;
 	sigma::signal5<CSulGuiCanvas*,float,float,float,float>	signalClickedExt;
-	sigma::signal1<bool>			signalHover;
+	sigma::signal1<bool>									signalHover;
 
 	virtual bool eventMouseRelease( CSulGuiCanvas* pCanvas, float local_x, float local_y, float x, float y );
 

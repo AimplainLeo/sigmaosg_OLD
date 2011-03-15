@@ -16,6 +16,14 @@ std::string()
 	assign( buf );
 }
 
+CSulString::CSulString( sigma::int32 i ) :
+std::string()
+{
+	char buf[16];
+	itoa( i, buf, 10 );
+	assign( buf );
+}
+
 CSulString::CSulString( const sigma::int8* pszText ) :
 std::string( pszText )
 {
@@ -47,10 +55,11 @@ CSulString::CSulString( sigma::int64 c )
 	assign( s.c_str() );
 } 
 
-CSulString::CSulString( float f )
+CSulString::CSulString( float f, sigma::uint32 decimalCount )
 {
 	CSulString s;
-	s.Format( "%f", f );
+	CSulString fmt = "%."+CSulString(decimalCount)+"f";
+	s.Format( fmt.c_str(), f );
 	assign( s.c_str() );
 }
 
@@ -98,27 +107,27 @@ void CSulString::Trim()
 	assign(s);
 }
 
-float CSulString::asFloat()
+float CSulString::asFloat() const
 {
 	return (float)atof( c_str() );
 }
 
-double CSulString::asDouble()
+double CSulString::asDouble() const
 {
 	return (float)strtod( c_str(), 0 );
 }
 
-sigma::uint32 CSulString::asUint32()
+sigma::uint32 CSulString::asUint32() const
 {
 	return (sigma::uint32)atoi( c_str() );
 }
 
-sigma::int32 CSulString::asInt32()
+sigma::int32 CSulString::asInt32() const
 {
 	return (sigma::int32)atoi( c_str() );
 }
 
-sigma::int64 CSulString::asInt64()
+sigma::int64 CSulString::asInt64() const
 {
 	// FIXME: very microsofty
 	return (sigma::int64)_strtoi64( c_str(), 0, 10 );
@@ -130,7 +139,7 @@ CSulString CSulString::GetStartWord( char c )
 	return substr( 0, i );
 }
 
-bool CSulString::asBool()
+bool CSulString::asBool() const
 {
 	if ( empty() )
 	{
@@ -147,7 +156,7 @@ bool CSulString::asBool()
 	return false;
 }
 
-osg::Vec4 CSulString::asVec4()
+osg::Vec4 CSulString::asVec4() const
 {
 	if ( !empty() )
 	{
