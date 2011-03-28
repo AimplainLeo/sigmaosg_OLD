@@ -26,7 +26,9 @@ void CSulGuiListView::init()
 	{
 		addRow();
 
-		CSulStringList list( m_header );
+		CSulStringList list;
+
+		list.Tokenize( m_header );
 		sigma::uint32 col = getColCount();
 		for ( sigma::uint32 x=0; x<col; x++ )
 		{

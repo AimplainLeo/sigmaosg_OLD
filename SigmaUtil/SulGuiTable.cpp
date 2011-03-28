@@ -76,3 +76,6 @@ sigma::uint32 CSulGuiTable::getColCount()
 {
 	return m_cols;
 }
+
+// we need to handle hover
+// we need to handle row selection

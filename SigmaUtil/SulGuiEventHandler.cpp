@@ -152,8 +152,9 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
 			
 			// HACK: this checks that the mouse position is also inside the parents canvas (need a better way to handle this)
 			bool bCheck = true;			
-			//Need to check if there is a parent or we will get a zero index crash 
-			if (!pCanvas->getParents().empty())
+
+			// Need to check if there is a parent or we will get a zero index crash 
+			if ( !pCanvas->getParents().empty() )
 			{
 				CSulGuiCanvas* pParent = dynamic_cast<CSulGuiCanvas*>(pCanvas->getParent(0));
 				if ( pParent )

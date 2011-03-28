@@ -61,6 +61,7 @@ void CSulGuiCanvas::setupAttr( CSulXmlAttr* pAttr )
 	if ( pAttr->exist( "show_canvas" ) )	m_bShowCanvas = pAttr->get( "show_canvas" ).asBool();
 }
 
+// FIXME: not all components need all these events!!!
 void CSulGuiCanvas::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiComp::setupEventHandler( pEventHandler );

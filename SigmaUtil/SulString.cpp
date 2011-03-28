@@ -2,6 +2,9 @@
 
 #include "stdafx.h"
 #include "SulString.h"
+#include <iomanip>
+#include <sstream>
+#include <iostream>
 
 CSulString::CSulString() :
 std::string()
@@ -61,6 +64,13 @@ CSulString::CSulString( float f, sigma::uint32 decimalCount )
 	CSulString fmt = "%."+CSulString(decimalCount)+"f";
 	s.Format( fmt.c_str(), f );
 	assign( s.c_str() );
+}
+
+CSulString::CSulString( double d, sigma::uint32 decimalCount )
+{
+	std::ostringstream oss;
+	oss << std::setprecision( decimalCount ) << d;
+	assign( oss.str() );
 }
 
 void CSulString::Format( const char* Format, ... )

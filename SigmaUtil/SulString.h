@@ -22,6 +22,7 @@ public:
 					CSulString( sigma::int32 i );
 					CSulString( sigma::int64 c );
 					CSulString( float f, sigma::uint32 decimalCount=0 );
+					CSulString( double d, sigma::uint32 decimalCount=0 );
 
 	// modifiers
 	void			Format( const char* Format, ... );

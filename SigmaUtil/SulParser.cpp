@@ -123,6 +123,11 @@ void CSulParser::RemoveCharToken( sigma::int8 cChar )
 	m_cTokens[(unsigned int) cChar] = 0;
 }
 
+void CSulParser::RemoveCharDelimiter( char cChar )
+{
+	m_cDelimiters[(unsigned int) cChar] = 0;
+}
+
 void CSulParser::AddCommentStart( char* lpszCommentStart )
 {
 	string strTmp;

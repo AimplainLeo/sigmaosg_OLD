@@ -70,6 +70,7 @@ public:
 	void AddSentenceCharStart( char cChar );
 	void AddSentenceCharEnd( char cChar );
 
+	void RemoveCharDelimiter( char cChar );
 	void RemoveCharToken( sigma::int8 cChar );
 
 	bool IsCommentStart( char* lpszText );

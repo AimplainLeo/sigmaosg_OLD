@@ -4,6 +4,7 @@
 #define __SULGUITABLE_H__
 
 #include "SulGuiCanvas.h"
+#include "SulSigSlots.h"
 #include "SulExport.h"
 
 class SUL_EXPORT CSulGuiTable : public CSulGuiCanvas
@@ -22,6 +23,8 @@ public:
 
 	sigma::uint32					getRowCount();
 	sigma::uint32					getColCount();
+
+//	signal1<sigma::uint32>			signalRowSelected;
 
 	virtual class CSulGuiTable*		asTable()		{ return this; }
 
