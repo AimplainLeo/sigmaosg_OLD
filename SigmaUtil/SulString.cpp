@@ -68,9 +68,17 @@ CSulString::CSulString( float f, sigma::uint32 decimalCount )
 
 CSulString::CSulString( double d, sigma::uint32 decimalCount )
 {
+	// FIXME: not a double, can't find a good metod to convert to a double text
+	CSulString s;
+	CSulString fmt = "%."+CSulString(decimalCount)+"f";
+	s.Format( fmt.c_str(), (float)d );
+	assign( s.c_str() );
+
+	/*
 	std::ostringstream oss;
 	oss << std::setprecision( decimalCount ) << d;
 	assign( oss.str() );
+	*/
 }
 
 void CSulString::Format( const char* Format, ... )
