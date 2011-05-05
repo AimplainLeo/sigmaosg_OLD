@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulSceneManager.h"
 #include "SulSceneManagerXml.h"
+#include "SulStringList.h"
 
 bool CSulSceneManager::Load( const CSulString& sXml )
 {
@@ -201,4 +202,33 @@ osg::StateAttribute* CSulSceneManager::getAttribute( const CSulString& sName )
 	return 0;
 }
 
+sigma::uint32 CSulSceneManager::calcCullMask(const std::string& maskNames)
+{
+	CSulStringList sl( maskNames );
 
+	const CSulStringList::VECTOR_STRING& vecStr = sl.getList();
+	CSulStringList::VECTOR_STRING::const_iterator i, e;
+
+	i = vecStr.begin();
+	e = vecStr.end();
+
+	sigma::uint32 val = 0;
+	while ( i!=e )
+	{
+		val += m_mapMask[*i];
+		++i;
+	}
+
+	return val;
+}
+
+unsigned int CSulSceneManager::getOrCreateMaskValue(const CSulString& name)
+{
+	std::map<std::string,int>::const_iterator it = m_mapMask.find(name);
+	if (it != m_mapMask.end())
+	{
+		return it->second;
+	}
+	assert(m_mapMask.size() < sizeof(unsigned int)*8); // ran out of bits!
+	return m_mapMask[name] = 0x01 << m_mapMask.size();
+}

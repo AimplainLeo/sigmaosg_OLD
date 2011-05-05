@@ -50,6 +50,12 @@ public:
 	virtual	void			addAttribute( const CSulString& sName, osg::StateAttribute* pAttr );
 	osg::StateAttribute*	getAttribute( const CSulString& sName );
 
+	////////////////////////////////////////////////////////////////////////////////////
+	// use to manage node masks
+	////////////////////////////////////////////////////////////////////////////////////
+	sigma::uint32	calcCullMask( const std::string& maskNames );
+	unsigned int	getOrCreateMaskValue(const CSulString& name);
+
 private:
 	bool			IsNodeInLayout( osg::Node* pNode );
 
@@ -57,6 +63,7 @@ private:
 	MAP_NODE							m_mapNode;
 	MAP_STATESET						m_mapStateSet;
 	sigma::MAP_STRING_STATEATTRIBUTE	m_mapStateAttribute;
+	std::map<std::string,int>			m_mapMask;
 };
 
 #endif // __SULSCENEMANAGER_H__

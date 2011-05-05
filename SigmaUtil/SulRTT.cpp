@@ -116,12 +116,12 @@ void CSulRTT::setupShadow()
 
 osg::Texture2D* CSulRTT::getTexture()
 {
-	return m_rTex.get();
+	return m_rTex;
 }
 
 osg::Camera* CSulRTT::getCamera()
 {
-	return m_rCam.get();
+	return m_rCam;
 }
 
 bool CSulRTT::AddChildToCamera( osg::Node* pNode )
