@@ -22,6 +22,7 @@ CSulGuiComp::CSulGuiComp( const CSulString& sCompName, float x, float y )
 
 void CSulGuiComp::initConstructor()
 {
+	m_pEventHandler = 0;
 	m_pParentLast	= 0;
 	m_layer			= 0;
 	m_bEditMode		= false;

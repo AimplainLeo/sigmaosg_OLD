@@ -41,6 +41,9 @@ public:
 	class CSulGuiProfiler*		getProfiler( const CSulString& id );
 	class CSulGuiAlign*			getAlign( const CSulString& id );
 	class CSulGuiText*			getText( const CSulString& id );
+	class CSulGuiSliderH*		getSliderH( const CSulString& id );
+	class CSulGuiTable*			getTable( const CSulString& id );
+	class CSulGuiListView*		getListView( const CSulString& id );
 
 	sigma::signal1<bool> signalShow;
 
