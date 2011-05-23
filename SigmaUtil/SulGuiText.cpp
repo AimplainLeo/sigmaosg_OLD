@@ -25,6 +25,7 @@ void CSulGuiText::setupAttr( CSulXmlAttr* pAttr )
 
 	if ( pAttr->exist( "font_size" ) )	m_size = pAttr->get( "font_size" ).asFloat();
 	if ( pAttr->exist( "font" ) )		m_font = pAttr->get( "font" );
+	if ( pAttr->exist( "color" ) )		m_color	= pAttr->get( "color" ).asVec4();
 }
 
 void CSulGuiText::init()

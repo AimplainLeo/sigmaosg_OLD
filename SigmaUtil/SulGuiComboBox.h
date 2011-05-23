@@ -31,6 +31,11 @@ public:
 	void			setSelectedIndex( sigma::uint32 index );
 	sigma::int32	getSelectedIndex();
 
+	CSulString		getSelectedText();
+	CSulGuiItem*	getSelectedItem();
+
+	sigma::signal1<CSulGuiItem*> signalChanged;
+
 	virtual class CSulGuiComboBox*		asComboBox()	{ return this; }
 
 private:

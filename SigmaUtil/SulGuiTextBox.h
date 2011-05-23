@@ -21,6 +21,8 @@ public:
 	void			setText( const CSulString& text );
 	CSulString		getText();
 
+	void			setTextOffset( float x, float y );
+
 	CSulGuiTextBox*	asTextBox() { return this; }
 
 private:

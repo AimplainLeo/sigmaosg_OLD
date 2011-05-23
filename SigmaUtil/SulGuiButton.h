@@ -11,26 +11,26 @@
 class SUL_EXPORT CSulGuiButton : public CSulGuiCanvas
 {
 public:
-					CSulGuiButton();
-					CSulGuiButton( const CSulString& sText, float x, float y, float w, float h );
-					CSulGuiButton( float x, float y, float w, float h );
+						CSulGuiButton();
+						CSulGuiButton( const CSulString& sText, float x, float y, float w, float h );
+						CSulGuiButton( float x, float y, float w, float h );
 
-	virtual void	setupTheme( CSulGuiThemeXml* pThemeXml );
-	virtual void	setupAttr( CSulXmlAttr* pAttr );
+	virtual void		setupTheme( CSulGuiThemeXml* pThemeXml );
+	virtual void		setupAttr( CSulXmlAttr* pAttr );
 
-	virtual void	init();
+	virtual void		init();
 
-	void			setText( const CSulString& sText );
+	void				setText( const CSulString& sText );
 	const CSulString& getText() const;
-	void			setFontSize( float size );
+	void				setFontSize( float size );
 
-	void			createDownDecal();
-	void			createUpDecal();
+	void				createDownDecal();
+	void				createUpDecal();
 
-	CSulGuiButton*	asButton() { return this; }
+	CSulGuiButton*		asButton() { return this; }
 
 protected:
-	void			onHover( bool bHover );
+	void				onHover( bool bHover );
 
 private:
 	osg::ref_ptr<CSulGuiText>	m_rText;

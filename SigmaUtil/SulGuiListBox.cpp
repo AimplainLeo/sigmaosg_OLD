@@ -331,3 +331,9 @@ sigma::int32 CSulGuiListBox::getSelectedIndex()
 
 	return -1;
 }
+
+CSulGuiItem* CSulGuiListBox::getSelectedItem()
+{
+	sigma::int32 i = getSelectedIndex();
+	return m_vecItem[i];
+}

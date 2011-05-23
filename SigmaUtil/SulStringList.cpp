@@ -4,6 +4,10 @@
 #include "SulStringList.h"
 #include "SulParser.h"
 
+CSulStringList::CSulStringList()
+{
+}
+
 CSulStringList::CSulStringList( const CSulString& s )
 {
 	Tokenize( s );
@@ -14,6 +18,8 @@ void CSulStringList::Tokenize( const CSulString& s )
 	osg::ref_ptr<CSulParser> rParser = new CSulParser;
 	rParser->RemoveCharToken( ',' );
 	rParser->AddCharDelimiter( ',' );
+
+	rParser->RemoveCharDelimiter( ' ' );
 
 	rParser->InitStringParse( s );
 

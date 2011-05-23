@@ -13,6 +13,7 @@ public:
 	typedef std::vector<std::string>	VECTOR_STRING;
 
 public:
+							CSulStringList();
 							CSulStringList( const class CSulString& s );
 
 	void					Tokenize( const CSulString& s );

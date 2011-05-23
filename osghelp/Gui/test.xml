@@ -88,6 +88,12 @@
 
   <PROFILER id="myProfiler" x="32" y="450" w="900" h="200"/>
 
+  <LISTVIEW x="1014" y="450" w="300" h="300" rows="12" cols="4" header="HEAD 0,HEAD 1,HEAD 2,HEAD 3">
+    <COLUMN>
+      
+    </COLUMN>
+  </LISTVIEW>
+  
     
 </ROOT>
 

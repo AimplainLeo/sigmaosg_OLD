@@ -119,6 +119,9 @@ void CSulGuiComboBox::onItemChanged( CSulGuiItem* pItem )
 	{
 		m_rTextBox->setText( pButton->getText() );
 	}
+
+	// notify that we haved changed selection
+	signalChanged( pItem );
 }
 
 void CSulGuiComboBox::onItemClicked( CSulGuiItem* pItem )
@@ -134,4 +137,14 @@ void CSulGuiComboBox::setSelectedIndex( sigma::uint32 index )
 sigma::int32 CSulGuiComboBox::getSelectedIndex()
 {
 	return m_rListBox->getSelectedIndex();
+}
+
+CSulString CSulGuiComboBox::getSelectedText()
+{
+	return m_rListBox->getSelectedText();
+}
+
+CSulGuiItem* CSulGuiComboBox::getSelectedItem()
+{
+	return m_rListBox->getSelectedItem();
 }

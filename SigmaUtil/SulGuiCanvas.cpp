@@ -61,6 +61,7 @@ void CSulGuiCanvas::setupAttr( CSulXmlAttr* pAttr )
 	if ( pAttr->exist( "show_canvas" ) )	m_bShowCanvas = pAttr->get( "show_canvas" ).asBool();
 }
 
+// FIXME: not all components need all these events!!!
 void CSulGuiCanvas::setupEventHandler( CSulGuiEventHandler* pEventHandler )
 {
 	CSulGuiComp::setupEventHandler( pEventHandler );
@@ -144,6 +145,13 @@ void CSulGuiCanvas::setImage( const CSulString& imgFile )
 		setWH( pImage->s(), pImage->t() );
 	}
 }
+
+void CSulGuiCanvas::setTexture( osg::Texture2D* pTex )
+{
+	m_rQuad->setTexture( pTex );
+	m_uniformUseTexture->set( 1 );
+}
+
 
 CSulGuiCanvas* CSulGuiCanvas::asCanvas()
 {

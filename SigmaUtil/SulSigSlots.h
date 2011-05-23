@@ -386,7 +386,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit() = 0;
+		virtual void sigma_emit() = 0;
 		virtual _connection_base0* clone() = 0;
 		virtual _connection_base0* duplicate(has_slots<mt_policy>* pnewdest) = 0;
 	};
@@ -396,7 +396,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type) = 0;
+		virtual void sigma_emit(arg1_type) = 0;
 		virtual _connection_base1<arg1_type, mt_policy>* clone() = 0;
 		virtual _connection_base1<arg1_type, mt_policy>* duplicate(has_slots<mt_policy>* pnewdest) = 0;
 	};
@@ -406,7 +406,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type, arg2_type) = 0;
+		virtual void sigma_emit(arg1_type, arg2_type) = 0;
 		virtual _connection_base2<arg1_type, arg2_type, mt_policy>* clone() = 0;
 		virtual _connection_base2<arg1_type, arg2_type, mt_policy>* duplicate(has_slots<mt_policy>* pnewdest) = 0;
 	};
@@ -416,7 +416,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type, arg2_type, arg3_type) = 0;
+		virtual void sigma_emit(arg1_type, arg2_type, arg3_type) = 0;
 		virtual _connection_base3<arg1_type, arg2_type, arg3_type, mt_policy>* clone() = 0;
 		virtual _connection_base3<arg1_type, arg2_type, arg3_type, mt_policy>* duplicate(has_slots<mt_policy>* pnewdest) = 0;
 	};
@@ -426,7 +426,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type, arg2_type, arg3_type, arg4_type) = 0;
+		virtual void sigma_emit(arg1_type, arg2_type, arg3_type, arg4_type) = 0;
 		virtual _connection_base4<arg1_type, arg2_type, arg3_type, arg4_type, mt_policy>* clone() = 0;
 		virtual _connection_base4<arg1_type, arg2_type, arg3_type, arg4_type, mt_policy>* duplicate(has_slots<mt_policy>* pnewdest) = 0;
 	};
@@ -437,7 +437,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type, arg2_type, arg3_type, arg4_type, 
+		virtual void sigma_emit(arg1_type, arg2_type, arg3_type, arg4_type, 
 			arg5_type) = 0;
 		virtual _connection_base5<arg1_type, arg2_type, arg3_type, arg4_type,
 			arg5_type, mt_policy>* clone() = 0;
@@ -451,7 +451,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type, arg2_type, arg3_type, arg4_type, arg5_type,
+		virtual void sigma_emit(arg1_type, arg2_type, arg3_type, arg4_type, arg5_type,
 			arg6_type) = 0;
 		virtual _connection_base6<arg1_type, arg2_type, arg3_type, arg4_type,
 			arg5_type, arg6_type, mt_policy>* clone() = 0;
@@ -465,7 +465,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type, arg2_type, arg3_type, arg4_type, arg5_type,
+		virtual void sigma_emit(arg1_type, arg2_type, arg3_type, arg4_type, arg5_type,
 			arg6_type, arg7_type) = 0;
 		virtual _connection_base7<arg1_type, arg2_type, arg3_type, arg4_type,
 			arg5_type, arg6_type, arg7_type, mt_policy>* clone() = 0;
@@ -479,7 +479,7 @@ namespace sigma {
 	{
 	public:
 		virtual has_slots<mt_policy>* getdest() const = 0;
-		virtual void emit(arg1_type, arg2_type, arg3_type, arg4_type, arg5_type,
+		virtual void sigma_emit(arg1_type, arg2_type, arg3_type, arg4_type, arg5_type,
 			arg6_type, arg7_type, arg8_type) = 0;
 		virtual _connection_base8<arg1_type, arg2_type, arg3_type, arg4_type,
 			arg5_type, arg6_type, arg7_type, arg8_type, mt_policy>* clone() = 0;
@@ -1602,7 +1602,7 @@ namespace sigma {
 			return new _connection0<dest_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit()
+		virtual void sigma_emit()
 		{
 			(m_pobject->*m_pmemfun)();
 		}
@@ -1643,7 +1643,7 @@ namespace sigma {
 			return new _connection1<dest_type, arg1_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1)
+		virtual void sigma_emit(arg1_type a1)
 		{
 			(m_pobject->*m_pmemfun)(a1);
 		}
@@ -1685,7 +1685,7 @@ namespace sigma {
 			return new _connection2<dest_type, arg1_type, arg2_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1, arg2_type a2)
+		virtual void sigma_emit(arg1_type a1, arg2_type a2)
 		{
 			(m_pobject->*m_pmemfun)(a1, a2);
 		}
@@ -1727,7 +1727,7 @@ namespace sigma {
 			return new _connection3<dest_type, arg1_type, arg2_type, arg3_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1, arg2_type a2, arg3_type a3)
+		virtual void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3)
 		{
 			(m_pobject->*m_pmemfun)(a1, a2, a3);
 		}
@@ -1771,7 +1771,7 @@ namespace sigma {
 			return new _connection4<dest_type, arg1_type, arg2_type, arg3_type, arg4_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1, arg2_type a2, arg3_type a3, 
+		virtual void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, 
 			arg4_type a4)
 		{
 			(m_pobject->*m_pmemfun)(a1, a2, a3, a4);
@@ -1821,7 +1821,7 @@ namespace sigma {
 				arg5_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		virtual void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5)
 		{
 			(m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5);
@@ -1871,7 +1871,7 @@ namespace sigma {
 				arg5_type, arg6_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		virtual void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5, arg6_type a6)
 		{
 			(m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6);
@@ -1921,7 +1921,7 @@ namespace sigma {
 				arg5_type, arg6_type, arg7_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		virtual void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5, arg6_type a6, arg7_type a7)
 		{
 			(m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7);
@@ -1973,7 +1973,7 @@ namespace sigma {
 				arg5_type, arg6_type, arg7_type, arg8_type, mt_policy>((dest_type *)pnewdest, m_pmemfun);
 		}
 
-		virtual void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		virtual void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5, arg6_type a6, arg7_type a7, arg8_type a8)
 		{
 			(m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7, a8);
@@ -2015,7 +2015,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit()
+		void sigma_emit()
 		{
 			lock_block<mt_policy> lock(this);
 			connections_list::const_iterator itNext, it = m_connected_slots.begin();
@@ -2026,7 +2026,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit();
+				(*it)->sigma_emit();
 
 				it = itNext;
 			}
@@ -2043,7 +2043,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit();
+				(*it)->sigma_emit();
 
 				it = itNext;
 			}
@@ -2075,7 +2075,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1)
+		void sigma_emit(arg1_type a1)
 		{
 			lock_block<mt_policy> lock(this);
 			connections_list::const_iterator itNext, it = m_connected_slots.begin();
@@ -2086,7 +2086,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1);
+				(*it)->sigma_emit(a1);
 
 				it = itNext;
 			}
@@ -2103,7 +2103,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1);
+				(*it)->sigma_emit(a1);
 
 				it = itNext;
 			}
@@ -2136,7 +2136,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1, arg2_type a2)
+		void sigma_emit(arg1_type a1, arg2_type a2)
 		{
 			lock_block<mt_policy> lock(this);
 			connections_list::const_iterator itNext, it = m_connected_slots.begin();
@@ -2147,7 +2147,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2);
+				(*it)->sigma_emit(a1, a2);
 
 				it = itNext;
 			}
@@ -2164,7 +2164,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2);
+				(*it)->sigma_emit(a1, a2);
 
 				it = itNext;
 			}
@@ -2198,7 +2198,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1, arg2_type a2, arg3_type a3)
+		void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3)
 		{
 			lock_block<mt_policy> lock(this);
 			connections_list::const_iterator itNext, it = m_connected_slots.begin();
@@ -2209,7 +2209,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3);
+				(*it)->sigma_emit(a1, a2, a3);
 
 				it = itNext;
 			}
@@ -2226,7 +2226,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3);
+				(*it)->sigma_emit(a1, a2, a3);
 
 				it = itNext;
 			}
@@ -2261,7 +2261,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4)
+		void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4)
 		{
 			lock_block<mt_policy> lock(this);
 			connections_list::const_iterator itNext, it = m_connected_slots.begin();
@@ -2272,7 +2272,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4);
+				(*it)->sigma_emit(a1, a2, a3, a4);
 
 				it = itNext;
 			}
@@ -2289,7 +2289,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4);
+				(*it)->sigma_emit(a1, a2, a3, a4);
 
 				it = itNext;
 			}
@@ -2327,7 +2327,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5)
 		{
 			lock_block<mt_policy> lock(this);
@@ -2339,7 +2339,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5);
 
 				it = itNext;
 			}
@@ -2357,7 +2357,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5);
 
 				it = itNext;
 			}
@@ -2397,7 +2397,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5, arg6_type a6)
 		{
 			lock_block<mt_policy> lock(this);
@@ -2409,7 +2409,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5, a6);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5, a6);
 
 				it = itNext;
 			}
@@ -2427,7 +2427,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5, a6);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5, a6);
 
 				it = itNext;
 			}
@@ -2467,7 +2467,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5, arg6_type a6, arg7_type a7)
 		{
 			lock_block<mt_policy> lock(this);
@@ -2479,7 +2479,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5, a6, a7);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5, a6, a7);
 
 				it = itNext;
 			}
@@ -2497,7 +2497,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5, a6, a7);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5, a6, a7);
 
 				it = itNext;
 			}
@@ -2538,7 +2538,7 @@ namespace sigma {
 			pclass->signalConnect(this);
 		}
 
-		void emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
+		void sigma_emit(arg1_type a1, arg2_type a2, arg3_type a3, arg4_type a4,
 			arg5_type a5, arg6_type a6, arg7_type a7, arg8_type a8)
 		{
 			lock_block<mt_policy> lock(this);
@@ -2550,7 +2550,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5, a6, a7, a8);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5, a6, a7, a8);
 
 				it = itNext;
 			}
@@ -2568,7 +2568,7 @@ namespace sigma {
 				itNext = it;
 				++itNext;
 
-				(*it)->emit(a1, a2, a3, a4, a5, a6, a7, a8);
+				(*it)->sigma_emit(a1, a2, a3, a4, a5, a6, a7, a8);
 
 				it = itNext;
 			}

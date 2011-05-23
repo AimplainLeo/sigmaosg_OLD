@@ -49,7 +49,8 @@ bool CSulGuiTab::addChild( Node *child )
 
 	// position and size tabpage
 	page->setXY( 0.0f, getH() );
-	page->setWH( getW(), 256.0f );
+	//page->setWH( getW(), 256.0f );
+	page->setW( getW() );
 
 	// hide/show page (first one by default is visible )
 	page->show( m_mapButton.size()==1?true:false );
