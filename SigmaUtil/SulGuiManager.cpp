@@ -117,6 +117,10 @@ void CSulGuiManager::show( bool bShow )
 	{
 		if ( !m_pParent )
 		{
+			// safety check
+			if ( !getNumParents() )
+				return;
+
 			m_pParent = getParent(0);
 			m_pParent->removeChild( this );
 		}
