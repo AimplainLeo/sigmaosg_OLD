@@ -146,6 +146,13 @@ void CSulGuiCanvas::setImage( const CSulString& imgFile )
 	}
 }
 
+void CSulGuiCanvas::setTexture( osg::Texture2D* pTex )
+{
+	m_rQuad->setTexture( pTex );
+	m_uniformUseTexture->set( 1 );
+}
+
+
 CSulGuiCanvas* CSulGuiCanvas::asCanvas()
 {
 	return this;

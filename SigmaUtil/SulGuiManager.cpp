@@ -96,9 +96,11 @@ void CSulGuiManager::onViewResize( float w, float h )
 
 void CSulGuiManager::show( bool bShow )
 {
+	/*
 	// safety check
 	if ( !getNumParents() )
 		return;
+		*/
 
 	signalShow( bShow );
 

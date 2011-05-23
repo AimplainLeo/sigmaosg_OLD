@@ -25,6 +25,7 @@ public:
 	void							useShaderBackground( bool bUse );
 
 	void							setImage( const CSulString& imgFile );
+	void							setTexture( osg::Texture2D* pTex );
 
 	void							setDraggable( bool bDraggable );
 
