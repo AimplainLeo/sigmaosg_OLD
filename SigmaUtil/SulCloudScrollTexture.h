@@ -3,10 +3,11 @@
 #ifndef __SULCLOUDSCROLLTEXTURE_H__
 #define __SULCLOUDSCROLLTEXTURE_H__
 
+#include "SulExport.h"
 #include <osg/geometry>
 #include <osg/TexMat>
 
-class CCloudScrollTexture : public osg::Geometry
+class SUL_EXPORT CCloudScrollTexture : public osg::Geometry
 {
 public:
 	CCloudScrollTexture( osg::TexMat* pTexMat, float fPlaneSize ) :

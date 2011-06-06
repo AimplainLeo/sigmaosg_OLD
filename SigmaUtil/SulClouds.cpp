@@ -44,6 +44,7 @@ osg::Node* CSulClouds::createPlane( float size, float height )
 	if ( !m_rPlane.valid() )
 	{
 		m_rPlane = new CSulCloudPlane( size );
+		m_rPlane->create();
 	}
 	else
 	{

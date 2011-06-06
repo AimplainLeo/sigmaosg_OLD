@@ -28,18 +28,15 @@ osg::Program* CSulCloudPlane::createShaderProgram()
 
 void CSulCloudPlane::create()
 {
-	m_rQuad = new CSulGeomQuad( m_size, m_size );
-	addChild( m_rQuad );
-
 	// create geom with has a osg::TexMat
 	osg::ref_ptr<osg::TexMat> rTexMat = new osg::TexMat;
-	m_rCloudScrollTexture= new CCloudScrollTexture( rTexMat, m_rQuad->getWidth() );
-	m_rCloudScrollTexture->setUseDisplayList( false );
-	osg::Geode* pGeodeCloudScrollTexture = new osg::Geode;
-	pGeodeCloudScrollTexture->addDrawable( m_rCloudScrollTexture );
-	addChild( m_rQuad );
+
+	m_rQuad = new CSulGeomQuad( m_size, m_size );
 	m_rQuad->create();
-	
+	m_rQuad->getGeometry()->setUseDisplayList( false );
+	m_rQuad->getGeometry()->setDrawCallback( m_mytestass = new mytest( rTexMat, m_rQuad->getWidth() ) );
+	addChild( m_rQuad );
+
 	osg::Program* pShaderProgram = createShaderProgram();
 
 	bool bRet;
@@ -66,15 +63,23 @@ void CSulCloudPlane::setSize( float s )
 	m_rQuad->setWidth( s );
 	m_rQuad->setHeight( s );
 
+	/*
 	if ( m_rCloudScrollTexture.valid() )
 	{
 		m_rCloudScrollTexture->setPlaneSize( s );
 	}
+	*/
+
+	if ( m_mytestass.valid() )
+		m_mytestass->setPlaneSize( s );
 }
 
 void CSulCloudPlane::setWind( float x, float y )
 {
-	m_rCloudScrollTexture->setWind( x, y );
+	//m_rCloudScrollTexture->setWind( x, y );
+
+	if ( m_mytestass.valid() )
+		m_mytestass->setWind( x, y );
 }
 
 CSulGeomQuad* CSulCloudPlane::getQuad()

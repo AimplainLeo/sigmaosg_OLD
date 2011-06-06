@@ -255,3 +255,8 @@ void CSulGeomQuad::setCenter( const osg::Vec3& vCenter )
 	m_vCenter = vCenter;
 	calcVertPositions();
 }
+
+osg::Geometry* CSulGeomQuad::getGeometry()
+{
+	return m_rGeo;
+}

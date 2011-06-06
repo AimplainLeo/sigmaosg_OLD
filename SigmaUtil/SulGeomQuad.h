@@ -60,6 +60,7 @@ public:
 	void							setCenter( const osg::Vec3& vCenter );
 
 	virtual void					createDrawable();
+	osg::Geometry*					getGeometry();
 
 private:
 	void							calcVertPositions();
