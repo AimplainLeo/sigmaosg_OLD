@@ -26,10 +26,10 @@ void CSulTransScreenAlign::AddChild( osg::Node* pNode )
 
 osg::MatrixTransform* CSulTransScreenAlign::GetMatrixTransform()
 {
-	return m_rTrans.get();
+	return m_rTrans;
 }
 
 osg::Projection* CSulTransScreenAlign::GetProjection()
 {
-	return m_rProj.get();
+	return m_rProj;
 }

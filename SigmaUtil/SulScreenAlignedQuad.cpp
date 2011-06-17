@@ -30,12 +30,12 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( const osg::Vec3& vPos, float w, fl
 
 osg::Projection* CSulScreenAlignedQuad::getProjection()
 {
-	return m_rProj.get();
+	return m_rProj;
 }
 
 osg::Group* CSulScreenAlignedQuad::getGroup()
 {
-	return m_rGroup.get();
+	return m_rGroup;
 }
 
 CSulGeomQuad* CSulScreenAlignedQuad::getQuad()

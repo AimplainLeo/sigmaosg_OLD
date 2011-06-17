@@ -9,7 +9,7 @@ CSulGenerateHeightTexture::~CSulGenerateHeightTexture()
 {
 	if ( m_rRoot.valid() )
 	{
-		m_rRoot->removeChild( m_rRTT->getCamera() );
+		m_rRoot->removeChild( m_rRTT );
 	}
 }
 
@@ -34,15 +34,15 @@ void CSulGenerateHeightTexture::create(
 	*/
 	m_rRTT->getTexture()->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::NEAREST);
 	m_rRTT->getTexture()->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::NEAREST);
-	m_rRTT->getCamera()->setClearColor( osg::Vec4(0,0,0,1) );
-	pRootGroup->addChild( m_rRTT->getCamera() );
+	m_rRTT->setClearColor( osg::Vec4(0,0,0,1) );
+	pRootGroup->addChild( m_rRTT );
 
 	// need to ortho camera
 	float l = sXY/2.0f;
 	float r = -l;
 	float b = l;
 	float t = -l;
-	m_rRTT->getCamera()->setProjectionMatrixAsOrtho( l, r, b, t, 0.1f, 1000000.0f  );
+	m_rRTT->setProjectionMatrixAsOrtho( l, r, b, t, 0.1f, 1000000.0f  );
 
 	// RTT camera should follow main camera
 	osg::Matrix mViewMatrix;
@@ -55,7 +55,7 @@ void CSulGenerateHeightTexture::create(
 	};
 	mViewMatrix.set( m );
 	mViewMatrix.setTrans( y, -x, -100 );
-	m_rRTT->getCamera()->setViewMatrix( mViewMatrix );
+	m_rRTT->setViewMatrix( mViewMatrix );
 
 	////////////////////////////////////////////////////////////////////
 	// shader to make the render height instead of texture
@@ -95,7 +95,7 @@ void CSulGenerateHeightTexture::create(
     program->addShader( vertexShader.get() );
 	program->addShader( fragShader.get() );
 
-	osg::Uniform* uniformInverseViewMatrix = new osg::Uniform( "viewInverseMatrixCam", m_rRTT->getCamera()->getInverseViewMatrix() );
+	osg::Uniform* uniformInverseViewMatrix = new osg::Uniform( "viewInverseMatrixCam", m_rRTT->getInverseViewMatrix() );
     ss->addUniform( uniformInverseViewMatrix );
 
 	ss->setAttribute( program.get(), osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE );
@@ -107,12 +107,12 @@ void CSulGenerateHeightTexture::create(
 
 	m_rImage->setInternalTextureFormat( GL_LUMINANCE32F_ARB );
 
-	m_rRTT->getCamera()->attach( osg::Camera::COLOR_BUFFER, m_rImage );
+	m_rRTT->attach( osg::Camera::COLOR_BUFFER, m_rImage );
 }
 
 osg::Camera* CSulGenerateHeightTexture::getCamera()
 {
-	return m_rRTT->getCamera();
+	return m_rRTT;
 }
 
 osg::Texture2D*	CSulGenerateHeightTexture::getTexture()

@@ -16,8 +16,8 @@ m_size_squared( 1024 )
 void CSulShadowTexture::init()
 {
 	m_rRTT = new CSulRTT( m_size_squared, m_size_squared, CSulRTT::SETUP_SHADOW );
-	m_rRTT->AddChildToCamera( m_rRenderMe );
-	m_rGroup->addChild( m_rRTT->getCamera() );
+	m_rRTT->addChild( m_rRenderMe );
+	m_rGroup->addChild( m_rRTT );
 
 /**/
 //		osg::Uniform* pTemp = m_rRTT->getCamera()->getOrCreateStateSet()->getOrCreateUniform(  "osg_ViewMatrixInverse", osg::Uniform::FLOAT_MAT4 );
@@ -25,7 +25,7 @@ void CSulShadowTexture::init()
 /**/
 
 	// this adjusts the camera to cover the object area to be shadowed
-	m_rShadowTextureNodeCallback = new CSulShadowTextureNodeCallback( m_rShadowMapBounds, m_rRenderMe, m_rRTT->getCamera(), m_rTexGenNode, m_pos );
+	m_rShadowTextureNodeCallback = new CSulShadowTextureNodeCallback( m_rShadowMapBounds, m_rRenderMe, m_rRTT, m_rTexGenNode, m_pos );
 	m_rGroup->setUpdateCallback( m_rShadowTextureNodeCallback );
 }
 
@@ -46,7 +46,7 @@ osg::Node* CSulShadowTexture::getNode()
 
 osg::Camera* CSulShadowTexture::getCamera()
 {
-	return m_rRTT->getCamera();
+	return m_rRTT;
 }
 
 osg::Texture2D*	CSulShadowTexture::getTexture()

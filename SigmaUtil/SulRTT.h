@@ -7,7 +7,7 @@
 #include <osg/Referenced>
 #include <osg/Texture2D>
 
-class SUL_EXPORT CSulRTT : public osg::Referenced
+class SUL_EXPORT CSulRTT : public osg::Camera
 {
 public:
 	enum ESETUP
@@ -24,18 +24,12 @@ public:
 
 	osg::Texture2D*					getTexture();
 
-	osg::Camera*					getCamera();
-
-	bool							AddChildToCamera( osg::Node* pNode );
-	bool							RemoveChildFromCamera( osg::Node* pNode );
-
 	// specialize methods
 	void							setupStandard();
 	void							setupShadow();
 
 private:
 	osg::ref_ptr<osg::Texture2D>	m_rTex;
-	osg::ref_ptr<osg::Camera>		m_rCam;
 
 	float							m_w;
 	float							m_h;
