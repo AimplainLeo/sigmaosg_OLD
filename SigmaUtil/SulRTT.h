@@ -6,6 +6,7 @@
 #include "SulExport.h"
 #include <osg/Referenced>
 #include <osg/Texture2D>
+#include <osg/Camera>
 
 class SUL_EXPORT CSulRTT : public osg::Camera
 {

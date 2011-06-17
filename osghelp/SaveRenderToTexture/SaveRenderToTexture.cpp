@@ -121,11 +121,11 @@ osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 	rRTT->getTexture()->setSourceType( GL_FLOAT );
 	rRTT->getTexture()->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::NEAREST);
 	rRTT->getTexture()->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::NEAREST);
-	rRTT->getCamera()->setClearColor( osg::Vec4(0,0,0,1) );
+	rRTT->setClearColor( osg::Vec4(0,0,0,1) );
 	//rRTT->AddChildToCamera( pGeode );
-	rRTT->AddChildToCamera( pLoadedModel );
-	rRTT->getCamera()->setUpdateCallback( new CSulNodeCallbackCameraSync( pViewer->getCamera() ) );
-	rGroup->addChild( rRTT->getCamera() );
+	rRTT->addChild( pLoadedModel );
+	rRTT->setUpdateCallback( new CSulNodeCallbackCameraSync( pViewer->getCamera() ) );
+	rGroup->addChild( rRTT );
 
 	// display our texture on a quad
 	osg::ref_ptr<CSulScreenAlignedQuad> rQuad = new CSulScreenAlignedQuad( osg::Vec3(128,128,0), 256, 256, 800, 600 );
@@ -136,8 +136,7 @@ osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 	rImage = new osg::Image;
 	rImage->allocateImage( 256, 256, 1,  GL_LUMINANCE, GL_FLOAT );
 	rImage->setInternalTextureFormat( GL_LUMINANCE32F_ARB );
-	rRTT->getCamera()->attach( osg::Camera::COLOR_BUFFER, rImage );
-
+	rRTT->attach( osg::Camera::COLOR_BUFFER, rImage );
 
     return rGroup;
 }

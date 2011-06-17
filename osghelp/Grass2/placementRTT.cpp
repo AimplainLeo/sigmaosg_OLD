@@ -16,12 +16,12 @@ void CPlacementRTT::init( osg::Camera* pCam, osg::Node* pRenderMe )
 	m_rRTT->getTexture()->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::NEAREST);
 	m_rRTT->getTexture()->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::NEAREST);
 
-	m_rRTT->getCamera()->setClearColor( osg::Vec4(0,0,0,1) );
-	m_rRTT->getCamera()->setUpdateCallback( new CSulNodeCallbackCameraSync( pCam ) );
+	m_rRTT->setClearColor( osg::Vec4(0,0,0,1) );
+	m_rRTT->setUpdateCallback( new CSulNodeCallbackCameraSync( pCam ) );
 
 
 	osg::Group* pGroupRenderMe = new osg::Group;
-	m_rRTT->AddChildToCamera( pGroupRenderMe );
+	m_rRTT->addChild( pGroupRenderMe );
 
 	pGroupRenderMe->addChild( pRenderMe );
 	getCamera()->addChild( pGroupRenderMe );
@@ -39,16 +39,16 @@ void CPlacementRTT::init( osg::Camera* pCam, osg::Node* pRenderMe )
     program->addShader( vertexShader.get() );
 	program->addShader( fragShader.get() );
 
-	osg::Uniform* uniformInverseViewMatrix = new osg::Uniform( "viewInverseMatrixCam", m_rRTT->getCamera()->getInverseViewMatrix() );
+	osg::Uniform* uniformInverseViewMatrix = new osg::Uniform( "viewInverseMatrixCam", m_rRTT->getInverseViewMatrix() );
     ss->addUniform( uniformInverseViewMatrix );
 
-	ss->setAttribute( program.get(), osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
+	ss->setAttribute( program, osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
 
 }
 
 osg::Camera* CPlacementRTT::getCamera()
 {
-	return m_rRTT->getCamera();
+	return m_rRTT;
 }
 
 osg::Texture2D*	CPlacementRTT::getTexture()

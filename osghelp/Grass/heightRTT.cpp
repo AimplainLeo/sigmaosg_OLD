@@ -82,7 +82,7 @@ void CHeightRTT::init( osgViewer::Viewer* pViewer, osgText::Text* pTextCam, osg:
 //	rRTT = new CSulRTT( 256, 256, GL_LUMINANCE32F_ARB, GL_FLOAT ); 
 	rRTT = new CSulRTT( 1024, 1024, GL_LUMINANCE, GL_FLOAT ); 
 
-	osg::ref_ptr<CKeyboardHandler> rKeyboardHandler = new CKeyboardHandler( rRTT->getCamera() );
+	osg::ref_ptr<CKeyboardHandler> rKeyboardHandler = new CKeyboardHandler( rRTT );
 	pViewer->addEventHandler( rKeyboardHandler );
 
 	rRTT->getTexture()->setInternalFormat( GL_LUMINANCE32F_ARB );
@@ -90,8 +90,8 @@ void CHeightRTT::init( osgViewer::Viewer* pViewer, osgText::Text* pTextCam, osg:
 	rRTT->getTexture()->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::NEAREST);
 	rRTT->getTexture()->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::NEAREST);
 
-	rRTT->getCamera()->setClearColor( osg::Vec4(0,0,0,1) );
-	pGroup->addChild( rRTT->getCamera() );
+	rRTT->setClearColor( osg::Vec4(0,0,0,1) );
+	pGroup->addChild( rRTT );
 	
 	// quad to show rendered texture on screen (for debugging)
 	/*
@@ -112,7 +112,7 @@ void CHeightRTT::init( osgViewer::Viewer* pViewer, osgText::Text* pTextCam, osg:
 	float r = -l;
 	float b = l;
 	float t = -l;
-	rRTT->getCamera()->setProjectionMatrixAsOrtho( l, r, b, t, 0.1f, 1000000.0f  );
+	rRTT->setProjectionMatrixAsOrtho( l, r, b, t, 0.1f, 1000000.0f  );
 
 	// RTT camera should follow main camera
 	osg::Matrix mViewMatrix;
@@ -124,7 +124,7 @@ void CHeightRTT::init( osgViewer::Viewer* pViewer, osgText::Text* pTextCam, osg:
 		 0, 0,-100, 1
 	};
 	mViewMatrix.set( m );
-	rRTT->getCamera()->setViewMatrix( mViewMatrix );
+	rRTT->setViewMatrix( mViewMatrix );
 
 	////////////////////////////////////////////////////////////////////
 	// shader to make the render height instead of texture
@@ -148,7 +148,7 @@ void CHeightRTT::init( osgViewer::Viewer* pViewer, osgText::Text* pTextCam, osg:
     program->addShader( vertexShader.get() );
 	program->addShader( fragShader.get() );
 
-	osg::Uniform* uniformInverseViewMatrix = new osg::Uniform( "viewInverseMatrixCam", rRTT->getCamera()->getInverseViewMatrix() );
+	osg::Uniform* uniformInverseViewMatrix = new osg::Uniform( "viewInverseMatrixCam", rRTT->getInverseViewMatrix() );
     ss->addUniform( uniformInverseViewMatrix );
 
 	ss->setAttribute( program.get(), osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
@@ -164,12 +164,12 @@ void CHeightRTT::setOrtho( float cc, float sp )
 	float r = -l;
 	float b = l;
 	float t = -l;
-	rRTT->getCamera()->setProjectionMatrixAsOrtho( l, r, b, t, 0.1f, 1000000.0f  );
+	rRTT->setProjectionMatrixAsOrtho( l, r, b, t, 0.1f, 1000000.0f  );
 }
 
 osg::Camera* CHeightRTT::getCamera()
 {
-	return rRTT->getCamera();
+	return rRTT;
 }
 
 osg::Texture2D*	CHeightRTT::getTexture()
@@ -181,10 +181,10 @@ void CHeightRTT::setLock( bool bLock )
 {
 	if ( bLock )
 	{
-		rRTT->getCamera()->setUpdateCallback( new CCamSync( m_pTextCam, m_pMainCam, CSulNodeCallbackCameraSync::MODE_POSITION_XY ) );
+		rRTT->setUpdateCallback( new CCamSync( m_pTextCam, m_pMainCam, CSulNodeCallbackCameraSync::MODE_POSITION_XY ) );
 	}
 	else
 	{
-		rRTT->getCamera()->setUpdateCallback( 0 );
+		rRTT->setUpdateCallback( 0 );
 	}
 }
