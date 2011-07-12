@@ -26,7 +26,7 @@ m_bRenderMe( bRenderMe )
 		{
 			m_rCoordLatLon = new CSulCoordLatLon( m_loc->latitude(), m_loc->longitude() );
 		}
-
+		
 		m_rComputeBounds = new osg::ComputeBoundsVisitor;
 		m_rScene->accept( *m_rComputeBounds );
 	}
@@ -170,7 +170,7 @@ void CSceneBase::clipTriangles( const CSulExtractGeometry& sceneGeometry, const 
 	if ( m_vecTriangles.size() )
 	{
 		osg::PositionAttitudeTransform* pPat = new osg::PositionAttitudeTransform;
-		pPat->setPosition( osg::Vec3(0,0,50) );
+		pPat->setPosition( osg::Vec3(0,0,20) );
 
 		CSulGeomTriangleList* pGeomTris = new CSulGeomTriangleList( m_vecTriangles );
 		pGeomTris->setColor( m_clipColor );

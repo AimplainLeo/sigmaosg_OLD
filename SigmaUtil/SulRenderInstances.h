@@ -13,11 +13,9 @@ class CSulRenderInstances : public osg::Group
 public:
 				CSulRenderInstances();
 
-				CSulRenderInstances( osg::Image* pImagePositions, sigma::uint32 numInst, osg::BoundingBox& bb, float min=3.0f, float max=3.0f, bool bSuppressTexture=false, sigma::uint32 texUnit=0, sigma::uint32 texSizeSquared=256, sigma::uint32 useLights=0x00000001, bool bUseZDirectionNormal = false);
+				CSulRenderInstances( osg::Image* pImagePositions, sigma::uint32 numInst, osg::BoundingBox& bb, float min=3.0f, float max=3.0f, bool bSuppressTexture=false, sigma::uint32 texUnit=0, sigma::uint32 texSizeSquared=256, sigma::uint32 useLights=0x00000001, bool bUseZDirectionNormal=false, bool bSuppressShaders=false );
 
 				CSulRenderInstances( const CSulRenderInstances& ri, const osg::CopyOp& copyop=osg::CopyOp::SHALLOW_COPY );
-
-	//			META_Node( , CSulRenderInstances );
 
 	sigma::uint32			getNumInstances() const;
 	const osg::BoundingBox&	getBB() const;
@@ -39,6 +37,7 @@ private:
 	float							m_min;
 	float							m_max;
 	bool							m_bUseZDirectionNormal;
+	bool							m_bSuppressShaders;
 };
 
 #endif // __SULRENDERINSTANCES_H__

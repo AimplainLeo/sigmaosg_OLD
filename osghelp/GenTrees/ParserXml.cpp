@@ -13,7 +13,9 @@ m_showPivots( false ),
 m_useLights( 0 ),
 m_minTree( 3.0f ),
 m_maxTree( 3.0f ),
-m_bColGeom( false )
+m_bColGeom( false ),
+m_bIgnoreGeo( false ),
+m_bSuppressShaders( false )
 {
 }
 
@@ -21,9 +23,11 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
 	if ( sName=="GEN" )
 	{
-		m_useLights		= strtoul( pAttr->get( "uselights" ).c_str(), 0, 2 );
-		m_areaPadding	= pAttr->get( "areapadding" ).asFloat();		
-		m_bColGeom		= pAttr->get( "col_geom" ).asBool();
+		m_useLights			= strtoul( pAttr->get( "uselights" ).c_str(), 0, 2 );
+		m_areaPadding		= pAttr->get( "areapadding" ).asFloat();		
+		m_bColGeom			= pAttr->get( "col_geom" ).asBool();
+		m_bIgnoreGeo		= pAttr->get( "no_geo" ).asBool();
+		m_bSuppressShaders	= pAttr->get( "suppress_shaders" ).asBool();
 	}
 
 	if ( sName=="TEXTURE_TREE" )
@@ -44,11 +48,14 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		bool bRenderMe = pAttr->get( "renderme" ).asBool();
 		m_rSceneTerrain = new CSceneTerrain( sTerrainFile, bRenderMe, offsetX, offsetY );
 
-		// we create a lat lon reference point that the other flt files will be relative to
-		m_rWorldUTM = new CSulCoordUTM( *m_rSceneTerrain->getCoordLatLonObject() );
+		if ( !m_bIgnoreGeo )
+		{
+			// we create a lat lon reference point that the other flt files will be relative to
+			m_rWorldUTM = new CSulCoordUTM( *m_rSceneTerrain->getCoordLatLonObject() );
 
-		// adjust position of terrain
-		m_rSceneTerrain->adjustPosition( m_rWorldUTM );
+			// adjust position of terrain
+			m_rSceneTerrain->adjustPosition( m_rWorldUTM );
+		}
 
 		// get boundingbox planes
 		m_vecBoundingBoxPlanes = m_rSceneTerrain->getBoundingBoxPlanes();
@@ -60,7 +67,11 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		bool bRenderMe = pAttr->get( "renderme" ).asBool();
 
 		m_rSceneShape = new CSceneShape( sShapeFile, bRenderMe );
-		m_rSceneShape->adjustPosition( m_rWorldUTM );
+		
+		if ( !m_bIgnoreGeo )
+		{
+			m_rSceneShape->adjustPosition( m_rWorldUTM );
+		}
 
 		if ( pAttr->exist( "offsetz" ) )
 		{
@@ -78,7 +89,11 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		float lineDist = pAttr->get( "linedist" ).asFloat();
 		
 		CSceneShapeMask* pSceneShapeMask = new CSceneShapeMask( sShapeFile, bRenderMe, lineDist );
-		pSceneShapeMask->adjustPosition( m_rWorldUTM );
+
+		if ( !m_bIgnoreGeo )
+		{
+			pSceneShapeMask->adjustPosition( m_rWorldUTM );
+		}
 
 		if ( pAttr->exist( "offsetz" ) )
 		{
@@ -123,6 +138,21 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		m_vecNodeIgnoreList.push_back( pAttr->get("name") );
 	}
 
+	if ( sName=="UNIFORM" )
+	{
+		CSulString sName = pAttr->get( "name" );
+		CSulString sValue = pAttr->get( "value" );
+		CSulString sType = pAttr->get( "type" );
+
+		CUniformData* u = new CUniformData( sName, sValue, sType );
+
+		m_vecUniformList.push_back( u );
+	}
+}
+
+const CParserXml::VEC_UNIFORMDATA& CParserXml::getUniformDataList()
+{
+	return m_vecUniformList;
 }
 
 void CParserXml::SetInputFileOverride(const CSulString& filename)
@@ -157,7 +187,7 @@ void CParserXml::loadFinished()
 	}
 
 	m_gen = new CSulGenTextureWithPositions(
-		m_rSceneTerrain->getPat(),
+		m_rSceneTerrain.valid()?m_rSceneTerrain->getPat():0,
 		m_rSceneShape->getClippedLineList(),
 		m_rSceneShape->getClippedTriangleList(),
 		m_radiusBetweenTrees,
@@ -221,4 +251,9 @@ float CParserXml::getMaxTree()
 bool CParserXml::hasColGeom()
 {
 	return m_bColGeom;
+}
+
+bool CParserXml::getSuppressShaders()
+{
+	return m_bSuppressShaders;
 }

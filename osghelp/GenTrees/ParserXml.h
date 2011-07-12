@@ -6,6 +6,7 @@
 #include "SceneTerrain.h"
 #include "SceneShape.h"
 #include "SceneShapeMask.h"
+#include "UniformData.h"
 #include <SigmaUtil/SulDataShapeMask.h>
 #include <SigmaUtil/SulXmlParser.h>
 #include <SigmaUtil/SulCoordLatLon.h>
@@ -15,14 +16,16 @@
 
 class CParserXml : public CSulXmlParser
 {
-private:
-	typedef std::vector< CSulString >									VEC_STRING;
-
+public:
+	typedef std::vector< CSulString >	VEC_STRING;
+	typedef std::vector< osg::ref_ptr<CUniformData> >	VEC_UNIFORMDATA;
 
 public:
 						CParserXml();
 
 	void				elementStart( const CSulString& sName, CSulXmlAttr* pAttr );
+
+	const VEC_UNIFORMDATA&		getUniformDataList();
 
 	void				SetInputFileOverride(const CSulString& filename);
 	void				SetOutputFileOverride(const CSulString& filename);
@@ -48,6 +51,8 @@ public:
 
 	float				getMinTree();
 	float				getMaxTree();
+
+	bool				getSuppressShaders();
 
 private:
 	void				loadFinished();
@@ -84,6 +89,11 @@ private:
 	bool										m_bColGeom;
 
 	VEC_STRING									m_vecNodeIgnoreList;
+
+	bool										m_bSuppressShaders;
+	bool										m_bIgnoreGeo;
+
+	VEC_UNIFORMDATA								m_vecUniformList;
 };
 
 #endif // __PARSERXML_H__

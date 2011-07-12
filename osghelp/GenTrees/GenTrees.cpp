@@ -45,6 +45,23 @@ osg::ref_ptr<osg::Node> createTreeCollisionGeometry( const std::vector<osg::Vec3
 	return builder.build();
 }
 
+void writeFile( osg::Node* pInstances, osg::Node* pGeomCol, const CSulString& sFile )
+{
+	osg::ref_ptr<osg::Group> pGroupSave = new osg::Group;
+	pGroupSave->addChild( pInstances );
+	
+	if ( pGeomCol )
+	{
+		pGroupSave->addChild( pGeomCol );
+	}
+
+	// save file
+	osgDB::writeNodeFile( *pGroupSave, sFile );
+
+// for debugging
+//	osgDB::writeNodeFile( *pGroupSave, "debug.osg" );
+}
+
 int _tmain( int argc, char** argv )
 {
 	// create paths from environment variable
@@ -133,7 +150,8 @@ int _tmain( int argc, char** argv )
 	osg::BoundingBox bb				= rXml->getSceneTerrain()->getBoundingBoxWorld();
 	float minTree					= rXml->getMinTree();
 	float maxTree					= rXml->getMaxTree();
-	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights, true );
+	bool bSuppressShaders			= rXml->getSuppressShaders();
+	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights, true, bSuppressShaders );
 	pRenderInstances->create();
 	//rRoot->addChild( pRenderInstances );
 	rXml->getSceneTerrain()->getPat()->addChild( pRenderInstances );
@@ -146,16 +164,36 @@ int _tmain( int argc, char** argv )
 		rGeomCol->getOrCreateStateSet()->setMode(GL_CULL_FACE, osg::StateAttribute::OFF);
 	}
 
+	// add uniforms here
+	const CParserXml::VEC_UNIFORMDATA& vecUniformDataList = rXml->getUniformDataList();
+	osg::StateSet* ss = pRenderInstances->getOrCreateStateSet();
+	CParserXml::VEC_UNIFORMDATA::const_iterator i = vecUniformDataList.begin();
+	CParserXml::VEC_UNIFORMDATA::const_iterator iE = vecUniformDataList.end();
+	while ( i!=iE )
+	{
+		CUniformData* p = (*i);
+		osg::Uniform* pUniform = p->createUniform();
+		ss->addUniform( pUniform );
+
+		++i;
+	}
+
 	// we should write the output file here
 	if ( !rXml->getOutputFile().empty() )
 	{
+		writeFile( pRenderInstances, rGeomCol, rXml->getOutputFile() );
+
+		/*
 		osg::ref_ptr<osg::Group> pGroupSave = new osg::Group;
 		pGroupSave->addChild( pRenderInstances );
 		if ( rGeomCol.valid() )
 		{
 			pGroupSave->addChild( rGeomCol );
 		}
+
+		// save file
 		osgDB::writeNodeFile( *pGroupSave, rXml->getOutputFile() );
+		*/
 	}
 
 	// if the xml doesn't have viewer suppression then we show the result

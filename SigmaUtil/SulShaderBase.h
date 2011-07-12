@@ -10,7 +10,7 @@
 class SUL_EXPORT CSulShaderBase : public osg::Referenced
 {
 public:
-			CSulShaderBase( osg::Node* pNode, osg::Program* pProg=0 );
+			CSulShaderBase( osg::Node* pNode, osg::Program* pProg=0, bool bSuppressShader=false );
 
 	void	enable( bool bEnable=true );
 
@@ -22,6 +22,7 @@ protected:
 	osg::ref_ptr<osg::Program>		m_rProgDefault;
 	osg::ref_ptr<osg::StateSet>		m_rSS;
 	bool							m_bEnable;
+	bool							m_bSuppressShader;
 };
 
 #endif // __SULSHADERBASE_H__

@@ -1,8 +1,14 @@
 <GEN
-  uselights="000000001"
+  uselights="000000001"           
   col_geom="true"
+  no_geo="true"
+  suppress_shaders="true"
   >
 
+  <UNIFORM name="use_light" value="false" type="boolean"/>
+  <UNIFORM name="use_fog" value="false" type="boolean"/>
+  <UNIFORM name="use_tree_shader" value="true" type="boolean"/>
+    
   <TEXTURE_TREE 
     suppress="false"
     unit="0"
@@ -16,15 +22,16 @@
     distance_between_trees_line="10.0"
   />
 
-  <TERRAIN 
-    file="d:/TKG/FACTerrain_levhegn5_2.flt"
-    offsetx="10240"
-    offsety="10240"
+  <TERRAIN
+    file="grid20x20.osg"
+    offsetx="0"
+    offsety="0"
   />
-  
+
   <SHAPE 
-    file="d:/TKG/s_(0).flt"
-    offsetz="100"
+    file="quad10x10.osg"
+    offsetz="10"
+    renderme="true"
   />
   
   <IGNORE_NODE name="windmill" />
@@ -61,12 +68,12 @@
   <MASK file="flt\vindmill.flt" linedist="4" offsetz="150"/>
  -->
  
-  <OUTPUT file="myass.osg" />
+  <OUTPUT file="myass.ive" />
   
   <VIEWER suppress="false" />
   
   <DEBUGGING 
-    showpivots="false"
+    showpivots="true"
   />
     
 </GEN>

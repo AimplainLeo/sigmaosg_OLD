@@ -220,6 +220,14 @@
 				RelativePath=".\targetver.h"
 				>
 			</File>
+			<File
+				RelativePath=".\UniformData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\UniformData.h"
+				>
+			</File>
 			<Filter
 				Name="Scene"
 				>

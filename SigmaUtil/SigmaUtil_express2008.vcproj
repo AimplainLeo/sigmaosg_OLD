@@ -1671,6 +1671,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Data\shaders\instancing_billboards_collision.frag"
+						>
+					</File>
+					<File
 						RelativePath=".\Data\shaders\streak.frag"
 						>
 					</File>

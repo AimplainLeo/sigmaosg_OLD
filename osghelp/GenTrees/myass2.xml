@@ -13,13 +13,13 @@
   />
   
   <TERRAIN 
-    file="d:\data_files\FACTerrain\master.flt"
+    file="grid20x20.osg"
     offsetx="1280"
     offsety="1280"
   />
   
   <SHAPE 
-    file="d:\data_files\flt\trees_all.flt"
+    file="quad10x10.osg"
     offsetz="100"
   />
 

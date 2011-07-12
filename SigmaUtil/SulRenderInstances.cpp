@@ -42,16 +42,6 @@ bool SulRenderInstances_writeLocalData(const osg::Object& obj, osgDB::Output& fw
 */
 	return true;
 }
-/*
-REGISTER_DOTOSGWRAPPER(CSulRenderInstances)
-(
-    new CSulRenderInstances,
-    "CSulRenderInstances",
-    "Object Node Geode CSulRenderInstances",
-    &SulRenderInstances_readLocalData,
-    &SulRenderInstances_writeLocalData
-);
-*/
 
 CSulRenderInstances::CSulRenderInstances() :
 osg::Group()
@@ -77,7 +67,8 @@ CSulRenderInstances::CSulRenderInstances(
 	sigma::uint32 texUnit,
 	sigma::uint32 texSizeSquared,
 	sigma::uint32 useLights,
-	bool bUseZDirectionNormal
+	bool bUseZDirectionNormal,
+	bool bSuppressShaders
 ) :
 osg::Group(),
 m_bb( bb ),
@@ -87,6 +78,7 @@ m_texSizeSquared( texSizeSquared ),
 m_useLights( useLights ),
 m_min( min ),
 m_max( max ),
+m_bSuppressShaders( bSuppressShaders ),
 m_bUseZDirectionNormal( bUseZDirectionNormal )
 {
 	m_rTexturePositions = new osg::Texture2D( pImagePositions );
@@ -139,7 +131,7 @@ void CSulRenderInstances::create()
 
 void CSulRenderInstances::createShaders()
 {
-	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights, m_min, m_max );
+	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights, m_min, m_max, 0, m_bSuppressShaders );
 }
 
 sigma::uint32 CSulRenderInstances::getNumInstances() const

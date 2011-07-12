@@ -4,12 +4,16 @@
 #include "SulShaderBase.h"
 #include <osgDB/FileUtils>
 
-CSulShaderBase::CSulShaderBase( osg::Node* pNode, osg::Program* pProg ) :
-m_bEnable( false )
+CSulShaderBase::CSulShaderBase( osg::Node* pNode, osg::Program* pProg, bool bSuppressShader ) :
+m_bEnable( false ),
+m_bSuppressShader( bSuppressShader )
 {
-	// create shader program
-	m_rProg = pProg ? pProg : new osg::Program;
-	m_rProgDefault	= new osg::Program;
+	if ( !bSuppressShader )
+	{
+		// create shader program
+		m_rProg = pProg ? pProg : new osg::Program;
+		m_rProgDefault	= new osg::Program;
+	}
 
 	m_rSS = pNode->getOrCreateStateSet();
 
@@ -43,6 +47,9 @@ void CSulShaderBase::enable( bool bEnable )
 
 void CSulShaderBase::addShaderFrag( const std::string& file )
 {
+	if ( m_bSuppressShader )
+		return;
+
 	// vertex shader to use
 	osg::ref_ptr<osg::Shader> f = new osg::Shader( osg::Shader::FRAGMENT );
 	std::string fileFrag = osgDB::findDataFile( file );
@@ -60,6 +67,9 @@ void CSulShaderBase::addShaderFrag( const std::string& file )
 
 void CSulShaderBase::addShaderVert( const std::string& file )
 {
+	if ( m_bSuppressShader )
+		return;
+
 	// vertex shader to use
 	osg::ref_ptr<osg::Shader> v = new osg::Shader( osg::Shader::VERTEX );
 	std::string fileVert = osgDB::findDataFile( file );

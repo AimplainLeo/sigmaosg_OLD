@@ -9,7 +9,7 @@
 class CSulShaderInstancingBillboards : public CSulShaderBase
 {
 public:
-	CSulShaderInstancingBillboards( osg::Node* pNode, sigma::int32 numInstances, sigma::int32 texUnit=0, sigma::int32 texSizeSquared=256, unsigned int useLights=0x00000001, float min=1.0f, float max=1.0f, osg::Program* pProg=0 );
+	CSulShaderInstancingBillboards( osg::Node* pNode, sigma::int32 numInstances, sigma::int32 texUnit=0, sigma::int32 texSizeSquared=256, unsigned int useLights=0x00000001, float min=1.0f, float max=1.0f, osg::Program* pProg=0, bool bSuppressShader=false );
 
 private:
 	osg::ref_ptr<osg::Uniform>		m_rUniform_windFactor;

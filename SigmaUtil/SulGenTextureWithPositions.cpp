@@ -40,9 +40,12 @@ m_distance_between_trees_line( distance_between_trees_line ),
 m_areaPadding( areaPadding ),
 m_vecMask( vecMask )
 {
-	osg::ref_ptr<CSulGenNodeMaskVisitor>	tmp = new CSulGenNodeMaskVisitor( vecIgnoreNodeList );
-
-	m_rSceneTerrain->accept( *tmp );
+	// remove all nodes we do not want to effect our tree placement (CSulGenNodeMaskVisitor will set the node mask to zero for each node name that matches in the vecInforeNodeList)
+	if ( m_rSceneTerrain.valid() )
+	{
+		osg::ref_ptr<CSulGenNodeMaskVisitor>	tmp = new CSulGenNodeMaskVisitor( vecIgnoreNodeList );
+		m_rSceneTerrain->accept( *tmp );
+	}
 
 	process();
 }
@@ -67,37 +70,51 @@ void CSulGenTextureWithPositions::processLine( osg::LineSegment* pLine )
 
 	vSeg.normalize();
 
-	// HACK: the +1 fills in the last spot on the line segment
-	// apparently the math to calculate the number of trees isnt' right :(
-	for ( sigma::uint32 i=0; i<numTrees+1; i++ )
+	if ( m_rSceneTerrain.valid() )
 	{
-		float z = 0.0f;
-		osg::Vec3 plant_pos = pLine->start() + vSeg*(spc*i);
-	
-		// we need to calculate a true z position
-		// plant_pos is local to scene
-		osg::LineSegment* ls = new osg::LineSegment;
-		osg::Vec3 s = plant_pos;
-		osg::Vec3 e = plant_pos;
-		s.z() = 1000.0f;
-		e.z() = -1000.0f;
-		ls->set( s, e );
-
-		osgUtil::IntersectVisitor iv;
-		iv.addLineSegment( ls );
-		m_rSceneTerrain->accept( iv );
-		if ( iv.hits() )
+		// HACK: the +1 fills in the last spot on the line segment
+		// apparently the math to calculate the number of trees isnt' right :(
+		for ( sigma::uint32 i=0; i<numTrees+1; i++ )
 		{
-			osgUtil::IntersectVisitor::HitList hitList = iv.getHitList( ls );
-			osg::Vec3 hit = hitList[0].getWorldIntersectPoint();
+			float z = 0.0f;
+			osg::Vec3 plant_pos = pLine->start() + vSeg*(spc*i);
+		
+			// we need to calculate a true z position
+			// plant_pos is local to scene
+			osg::LineSegment* ls = new osg::LineSegment;
+			osg::Vec3 s = plant_pos;
+			osg::Vec3 e = plant_pos;
+			s.z() = 1000.0f;
+			e.z() = -1000.0f;
+			ls->set( s, e );
 
-			z = hit.z(); 
+			osgUtil::IntersectVisitor iv;
+			iv.addLineSegment( ls );
+			m_rSceneTerrain->accept( iv );
+			if ( iv.hits() )
+			{
+				osgUtil::IntersectVisitor::HitList hitList = iv.getHitList( ls );
+				osg::Vec3 hit = hitList[0].getWorldIntersectPoint();
+
+				z = hit.z(); 
+
+				m_vecPos.push_back( osg::Vec3(plant_pos.x(), plant_pos.y(), z) );
+			}
+			else
+			{
+				osg::notify(osg::NOTICE) << "missed (line)" << std::endl;
+			}
+		}
+	}
+	else
+	{
+		// no terrain given then we plant all trees at z position of zero
+		for ( sigma::uint32 i=0; i<numTrees+1; i++ )
+		{
+			float z = 0.0f;
+			osg::Vec3 plant_pos = pLine->start() + vSeg*(spc*i);
 
 			m_vecPos.push_back( osg::Vec3(plant_pos.x(), plant_pos.y(), z) );
-		}
-		else
-		{
-			osg::notify(osg::NOTICE) << "missed (line)" << std::endl;
 		}
 	}
 }
@@ -174,25 +191,44 @@ void CSulGenTextureWithPositions::processTriangles()
 		e.z() = -1000.0f;
 		ls->set( s, e );
 
-		// intersect with scene
-		osgUtil::IntersectVisitor iv;
-		iv.addLineSegment( ls );
-		m_rSceneTerrain->accept( iv );
-		if ( iv.hits() )
+		if ( m_rSceneTerrain.valid() )
 		{
-			osgUtil::IntersectVisitor::HitList hitList = iv.getHitList( ls );
-			osg::Vec3 hit = hitList[0].getWorldIntersectPoint();
+			// intersect with scene
+			osgUtil::IntersectVisitor iv;
+			iv.addLineSegment( ls );
+			m_rSceneTerrain->accept( iv );
+			if ( iv.hits() )
+			{
+				osgUtil::IntersectVisitor::HitList hitList = iv.getHitList( ls );
+				osg::Vec3 hit = hitList[0].getWorldIntersectPoint();
 
+				m_vecPos.push_back( 				
+					osg::Vec3(
+						iPos->x(), 
+						iPos->y(), 
+						 hit.z() )		
+					);
+			}
+			else
+			{
+				m_vecPos.push_back( 				
+					osg::Vec3(
+						iPos->x(), 
+						iPos->y(), 
+						 0.0f )		
+					);
+				osg::notify(osg::NOTICE)  << "missed (poly)" << std::endl;
+			}
+		}
+		else
+		{
+			float z = 0.0f;
 			m_vecPos.push_back( 				
 				osg::Vec3(
 					iPos->x(), 
 					iPos->y(), 
-					 hit.z() )		
+					 z )		
 				);
-		}
-		else
-		{
-			osg::notify(osg::NOTICE)  << "missed (poly)" << std::endl;
 		}
 
 		++iPos;
@@ -214,9 +250,15 @@ void CSulGenTextureWithPositions::processTexture()
 
 	float* p = reinterpret_cast<float*>(m_rImage->data());
 
-	osg::NodePathList parentNodePathList = m_rSceneTerrain->getParentalNodePaths();
-	osg::Matrix mWL = osg::computeWorldToLocal(parentNodePathList[0]);
-	osg::notify(osg::NOTICE) << mWL.getTrans() << std::endl;
+	osg::Matrix mWL	= osg::Matrix::identity();
+
+	// if no terrain supplied, then it falls back to default identity matrix
+	if ( m_rSceneTerrain.valid() )
+	{
+		osg::NodePathList parentNodePathList = m_rSceneTerrain->getParentalNodePaths();
+		mWL = osg::computeWorldToLocal(parentNodePathList[0]);
+		osg::notify(osg::NOTICE) << mWL.getTrans() << std::endl;
+	}
 
 	m_posCount = 0;
 	i = m_vecPos.begin();
