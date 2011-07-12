@@ -5,9 +5,9 @@
   suppress_shaders="true"
   >
 
-  <UNIFORM name="use_light" value="false" type="boolean"/>
-  <UNIFORM name="use_fog" value="false" type="boolean"/>
-  <UNIFORM name="use_tree_shader" value="true" type="boolean"/>
+  <UNIFORM name="use_light" value="false" type="BOOL"/>
+  <UNIFORM name="use_fog" value="false" type="BOOL"/>
+  <UNIFORM name="use_tree_shader" value="true" type="BOOL"/>
     
   <TEXTURE_TREE 
     suppress="false"
