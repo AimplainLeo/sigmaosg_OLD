@@ -4,7 +4,7 @@
 #include "SulGeomLaser.h"
 #include <osg/billboard>
 
-osg::Geometry* CSulGeomLaser::createQuad(float fThickness)
+osg::Geometry* CSulGeomLaser::createQuad( float fThickness )
 {
 	// create drawable geometry object
 	osg::Geometry* pGeo = new osg::Geometry;
@@ -51,15 +51,31 @@ osg::Geometry* CSulGeomLaser::createQuad(float fThickness)
 
 void CSulGeomLaser::init()
 {
+	// this is the group we toggle
+	m_rLaserGroup = new osg::Group;
+	addChild( m_rLaserGroup );
+	
+
 	static const float defaultScale = 0.01f;
 	m_rPat = new osg::PositionAttitudeTransform;
 	m_rPat->addChild( createBillboard(defaultScale) );
 	m_rPat->setDataVariance(osg::Object::DYNAMIC); // children are modified via setRadius
+	m_rLaserGroup->addChild( m_rPat );
+
+	// we want to add laser pulsing
+	// (1.0/2.0)/2.0 :		1.0/2.0 = toggle every ½ second  .... divide by 2 again to get full pulse 
+	m_rPulse = new CSulUpdateCallbackToggleNode( m_rLaserGroup, 0.0 );
+	setUpdateCallback( m_rPulse );
 }
 
-osg::Node* CSulGeomLaser::getNode()
+void CSulGeomLaser::setPulseFrequency( double pulse )
 {
-	return m_rPat;
+	m_rPulse->setPulseFrequency( pulse );
+}
+
+osg::Group* CSulGeomLaser::getLaserNode()
+{
+	return m_rLaserGroup;
 }
 
 void CSulGeomLaser::setPosition( const osg::Vec3& v )
@@ -98,13 +114,13 @@ void CSulGeomLaser::enabled( bool bEnable )
 	m_rPat->setNodeMask( bEnable ? 0xFFFFFFFF:0 );
 }
 
-void CSulGeomLaser::setRadius(float fRadius)
+void CSulGeomLaser::setRadius( float fRadius )
 {
 	m_rPat->removeChildren(0, 1);
-	m_rPat->addChild(createBillboard(fRadius));
+	m_rPat->addChild( createBillboard(fRadius) );
 }
 
-osg::Billboard* CSulGeomLaser::createBillboard(float radius)
+osg::Billboard* CSulGeomLaser::createBillboard( float radius )
 {
 	osg::Billboard* pBillboard = new osg::Billboard;
 	pBillboard->setMode( osg::Billboard::AXIAL_ROT );

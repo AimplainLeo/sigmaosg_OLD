@@ -946,6 +946,10 @@
 					RelativePath=".\SulNodeCallbackCameraSync.h"
 					>
 				</File>
+				<File
+					RelativePath=".\SulUpdateCallbackToggleNode.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Traversing"
