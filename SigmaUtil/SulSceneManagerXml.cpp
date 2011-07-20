@@ -264,6 +264,11 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		{
 			uniform = new osg::Uniform( sUniformName.c_str(), pAttr->get( "value" ).asBool() );
 		}
+		else if ( type=="SAMPLER_2D" )
+		{
+			uniform = new osg::Uniform( osg::Uniform::SAMPLER_2D, sUniformName.c_str() );
+			uniform->set( pAttr->get( "value" ).asInt32() );
+		}
 
 		m_pCurrentStateSet->addUniform( uniform );
 	}
