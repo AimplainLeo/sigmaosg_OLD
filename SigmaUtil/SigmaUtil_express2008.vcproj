@@ -1675,6 +1675,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Data\shaders\spotlight.frag"
+						>
+					</File>
+					<File
+						RelativePath=".\Data\shaders\spotlight.vert"
+						>
+					</File>
+					<File
 						RelativePath=".\Data\shaders\streak.frag"
 						>
 					</File>

@@ -26,9 +26,9 @@ public:
 	void			enabled( bool bEnable );
 
 private:
-	osg::Geometry*	createQuad(float fThickness);
+	osg::Geometry*	createQuad( float fThickness );
 	void			calcRot();
-	osg::Billboard* createBillboard(float radius);
+	osg::Billboard* createBillboard( float radius );
 
 private:
 	osg::ref_ptr<osg::Group>						m_rLaserGroup;

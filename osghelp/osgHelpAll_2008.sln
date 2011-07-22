@@ -247,6 +247,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarChart", "BarChart\BarCha
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CloudsVolume", "CloudsVolume\CloudsVolume.vcproj", "{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderSpotlight", "ShaderSpotlight\ShaderSpotlight.vcproj", "{D6BB9AD7-5117-487E-8230-0BB65B868249}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -577,6 +579,10 @@ Global
 		{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}.Debug|Win32.Build.0 = Debug|Win32
 		{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}.Release|Win32.ActiveCfg = Release|Win32
 		{59D30F9A-D17A-45A1-BFBA-E9E64F53E08B}.Release|Win32.Build.0 = Release|Win32
+		{D6BB9AD7-5117-487E-8230-0BB65B868249}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D6BB9AD7-5117-487E-8230-0BB65B868249}.Debug|Win32.Build.0 = Debug|Win32
+		{D6BB9AD7-5117-487E-8230-0BB65B868249}.Release|Win32.ActiveCfg = Release|Win32
+		{D6BB9AD7-5117-487E-8230-0BB65B868249}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
