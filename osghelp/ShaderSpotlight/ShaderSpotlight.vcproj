@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH)"
+				AdditionalIncludeDirectories="$(OSG_INCLUDE_PATH);$(SIGMAOSG_ROOT_PATH)"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib osgDbd.lib"
+				AdditionalDependencies="osgd.lib osgViewerd.lib osgDbd.lib SigmaUtil_x2008d.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OSG_LIB_PATH)"
+				AdditionalLibraryDirectories="$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"

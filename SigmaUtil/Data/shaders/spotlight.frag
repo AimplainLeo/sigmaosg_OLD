@@ -2,26 +2,33 @@
 
 #extension GL_EXT_gpu_shader4 : enable
 
-uniform vec3	light_pos[10];
-uniform vec4	light_diffuse[10];
-uniform float	light_attConstant[10];
-uniform float	light_attLinear[10];
-uniform float	light_attQuadratic[10];
-uniform float	light_id[10];
-uniform float	light_enabled[10];
+uniform vec3	light_pos[2];
+uniform vec4	light_diffuse[2];
+uniform float	light_attConstant[2];
+uniform float	light_attLinear[2];
+uniform float	light_attQuadratic[2];
 
-uniform vec3	light_direction[10];
-uniform float	light_spotCutOff[10];
+uniform vec3	light_direction[2];
+uniform float	light_spotCutOff[2];
 
-uniform int countLights = int(0);
+uniform int		light_type[2];		// 0 = omni, 1 = spotlight
 
-uniform mat4		osg_ViewMatrix;
+uniform int		countLights = int(0);
+
+uniform mat4	osg_ViewMatrix;
 
 varying vec4 v;				// varying vertex in view space
 varying vec3 n;
 
 // good article about gl_NormalMatrix
 // http://www.lighthouse3d.com/tutorials/glsl-tutorial/the-normal-matrix/
+
+vec4 calcLighting( vec3 pos, float attConstant, float attLinear, float attQuadratic, vec4 lightDiffuse, float NdotL )
+{
+	float d = length(pos - v);	
+	float att = 1.0 / (attConstant + attLinear*d + attQuadratic * (d*d));
+	return (att * (lightDiffuse) ) * NdotL;				
+}
 
 vec4 calcLightingIntensity( vec4 v )
 {
@@ -33,19 +40,31 @@ vec4 calcLightingIntensity( vec4 v )
 	int i;
 	for ( i=0; i<countLights; i++ )
 	{
-		vec3 spotPos = osg_ViewMatrix * vec4( light_pos[i], 1.0 );							// spot position in view space
-		vec3 lightDir = normalize( spotPos - v );											// light direction to varying vertex
-		vec3 spotDir = gl_NormalMatrix * light_direction[i];
+		vec3 test = light_pos[i];
+	
+		vec3 pos = osg_ViewMatrix * vec4( test, 1.0 );							// spot position in view space
+		vec3 lightDir = normalize( pos - v );											// light direction to varying vertex
 		
 		float NdotL = max( dot(normal,lightDir), 0.0 );
-		if ( NdotL > 0.0 )
+
+		float attConstant	= light_attConstant[i];
+		float attLinear		= light_attLinear[i];
+		float attQuadratic	= light_attQuadratic[i];
+		vec4 lightDiffuse	= light_diffuse[i];
+		vec3 spotDir		= gl_NormalMatrix * light_direction[i];
+		float cutOff		= light_spotCutOff[i];
+		int type			= light_type[i];
+		
+		if ( type==0 )
+		{
+			c += calcLighting( pos, attConstant, attLinear, attQuadratic, lightDiffuse, NdotL );
+		}
+		else if ( type==1 )
 		{
 			float f = dot( spotDir, -lightDir );
-			if (  f > light_spotCutOff[i] )
+			if (  f > cutOff )
 			{	
-				float d = length(spotPos - v);	
-				float att = 1.0 / (light_attConstant[i] + light_attLinear[i]*d + light_attQuadratic[i] * (d*d));
-				c += att * (light_diffuse[i]);				
+				c += calcLighting( pos, attConstant, attLinear, attQuadratic, lightDiffuse, NdotL );
 			}
 		}
 	}

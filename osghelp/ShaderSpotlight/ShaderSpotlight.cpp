@@ -2,10 +2,11 @@
 //
 
 #include "stdafx.h"
+#include <SigmaUtil/SulUniformArrayHack.h>
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
 #include <osgDB/FileUtils>
- 
+
 osg::Node* createScene()
 {
 	osg::Geode* pGeode = new osg::Geode();
@@ -36,40 +37,26 @@ osg::Node* createScene()
 	// setup up a test light
 	osg::StateSet* ss = pGeode->getOrCreateStateSet();
 
-	/*
-	ss->addUniform( new osg::Uniform( "light_pos", osg::Vec3(0,25,20) ) );
-	ss->addUniform( new osg::Uniform( "light_diffuse", osg::Vec4(0,1,0,1) ) );
-	ss->addUniform( new osg::Uniform( "light_attConstant", 0.0f ) );
-	ss->addUniform( new osg::Uniform( "light_attLinear", 0.09f ) );
-	ss->addUniform( new osg::Uniform( "light_attQuadratic", 0.0f ) );
-*/
+	CSulUniformArrayHack* rPos			= new CSulUniformArrayHack( "light_pos",			2, osg::Uniform::FLOAT_VEC3, ss );
+	CSulUniformArrayHack* rDiffuse		= new CSulUniformArrayHack( "light_diffuse",		2, osg::Uniform::FLOAT_VEC4, ss );
+	CSulUniformArrayHack* rAttConstant	= new CSulUniformArrayHack( "light_attConstant",	2, osg::Uniform::FLOAT, ss );
+	CSulUniformArrayHack* rAttLinear	= new CSulUniformArrayHack( "light_attLinear",		2, osg::Uniform::FLOAT, ss );
+	CSulUniformArrayHack* rAttQuadratic	= new CSulUniformArrayHack( "light_attQuadratic",	2, osg::Uniform::FLOAT, ss );
+	CSulUniformArrayHack* rDir			= new CSulUniformArrayHack( "light_direction",		2, osg::Uniform::FLOAT_VEC3, ss );
+	CSulUniformArrayHack* rSpotCutOff	= new CSulUniformArrayHack( "light_spotCutOff",		2, osg::Uniform::FLOAT, ss );
+	CSulUniformArrayHack* rType			= new CSulUniformArrayHack( "light_type",			2, osg::Uniform::INT, ss );
 
-	// we need to use setElement when working with arrays in GLSL
-
-	osg::ref_ptr<osg::Uniform> rPos				= new osg::Uniform( osg::Uniform::FLOAT_VEC3,	"light_pos",			10 );
-	osg::ref_ptr<osg::Uniform> rDiffuse			= new osg::Uniform( osg::Uniform::FLOAT_VEC4,	"light_diffuse",		10 );
-	osg::ref_ptr<osg::Uniform> rAttConstant		= new osg::Uniform( osg::Uniform::FLOAT,		"light_attConstant",	10 );
-	osg::ref_ptr<osg::Uniform> rAttLinear		= new osg::Uniform( osg::Uniform::FLOAT,		"light_attLinear",		10 );
-	osg::ref_ptr<osg::Uniform> rAttQuadratic	= new osg::Uniform( osg::Uniform::FLOAT,		"light_attQuadratic",	10 );
-	osg::ref_ptr<osg::Uniform> rDir				= new osg::Uniform( osg::Uniform::FLOAT_VEC3,	"light_direction",		10 );
-	osg::ref_ptr<osg::Uniform> rSpotCutOff		= new osg::Uniform( osg::Uniform::FLOAT,		"light_spotCutOff",		10 );
-
-	ss->addUniform( rPos );
-	ss->addUniform( rDiffuse );
-	ss->addUniform( rAttConstant );
-	ss->addUniform( rAttLinear );
-	ss->addUniform( rAttQuadratic );
-	ss->addUniform( rDir );
-	ss->addUniform( rSpotCutOff );
+	osg::Vec3 dirTest = osg::Vec3( 1, 1, 0 );
+	dirTest.normalize();
 
 	rPos->setElement(			0, osg::Vec3(0,0,20) );
 	rDiffuse->setElement(		0, osg::Vec4(0,1,0,1) );
 	rAttConstant->setElement(	0, 0.0f );
 	rAttLinear->setElement(		0, 0.2f );
 	rAttQuadratic->setElement(	0, 0.0f );
-	rDir->setElement(			0, osg::Vec3f(0,0,-1) );
+	rDir->setElement(			0, /*osg::Vec3f(0,0,-1)*/ dirTest );
 	rSpotCutOff->setElement(	0, (float)cos( osg::DegreesToRadians(60.0) ) );
-
+	rType->setElement(			0, 1 );
 
 	rPos->setElement(			1, osg::Vec3(20,20,20) );
 	rDiffuse->setElement(		1, osg::Vec4(1,0,0,1) );
@@ -78,23 +65,9 @@ osg::Node* createScene()
 	rAttQuadratic->setElement(	1, 0.0f );
 	rDir->setElement(			1, osg::Vec3f(0,0,-1) );
 	rSpotCutOff->setElement(	1, (float)cos( osg::DegreesToRadians(60.0) ) );
-
-
-	/*
-	ss->addUniform( new osg::Uniform( "light_pos", osg::Vec3(0,0,15) ) );
-	ss->addUniform( new osg::Uniform( "light_diffuse", osg::Vec4(0,1,0,1) ) );
-	ss->addUniform( new osg::Uniform( "light_attConstant", 0.0f ) );
-	ss->addUniform( new osg::Uniform( "light_attLinear", 0.2f ) );
-	ss->addUniform( new osg::Uniform( "light_attQuadratic", 0.0f ) );
-
-	ss->addUniform( new osg::Uniform( "light_direction", osg::Vec3f(0,0,-1) ) );
-	ss->addUniform( new osg::Uniform( "light_spotCutOff", (float)cos( osg::DegreesToRadians(60.0) ) ) );
-	*/
-	
-
+	rType->setElement(			1, 1 );
 
 	ss->addUniform( new osg::Uniform( "countLights", (int)2 ) );
-
 
 	return pGeode;
 }

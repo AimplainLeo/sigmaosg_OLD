@@ -579,6 +579,22 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomArrow3D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomArrow3D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomAxis.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomAxis.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomBarChart.cpp"
 					>
 				</File>
@@ -1072,6 +1088,14 @@
 				</File>
 				<File
 					RelativePath=".\SulShadeMono.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulUniformArrayHack.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulUniformArrayHack.h"
 					>
 				</File>
 				<Filter
