@@ -17,7 +17,10 @@ public:
 
 	void			setPosition( const osg::Vec3& v );
 	void			setTarget( const osg::Vec3& v );
-	void			setRadius(float fRadius);
+
+	void			setRadius( float radius );
+	void			setRadiusStart( float radius );
+	void			setRadiusEnd( float radius );
 
 	osg::Vec3		getTarget();
 
@@ -26,9 +29,9 @@ public:
 	void			enabled( bool bEnable );
 
 private:
-	osg::Geometry*	createQuad( float fThickness );
+	osg::Geometry*	createQuad( float radiusStart, float radiusEnd );
 	void			calcRot();
-	osg::Billboard* createBillboard( float radius );
+	osg::Billboard* createBillboard( float radiusStart, float radiusEnd );
 
 private:
 	osg::ref_ptr<osg::Group>						m_rLaserGroup;
@@ -36,6 +39,9 @@ private:
 	osg::Vec3										m_vP;		// position
 	osg::Vec3										m_vT;		// target
 	osg::ref_ptr<CSulUpdateCallbackToggleNode>		m_rPulse;
+
+	float											m_radiusStart;
+	float											m_radiusEnd;
 };
 
 #endif // __SULGEOMLASER_H__

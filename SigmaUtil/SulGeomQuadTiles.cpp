@@ -180,5 +180,5 @@ void CSulGeomQuadTiles::createTiles()
 	m_rGeo->setNormalArray( normals );
 	m_rGeo->setNormalBinding( osg::Geometry::BIND_OVERALL );
 
-	m_rGeo->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::QUADS, 0, pCoordIndices->size()));
+	m_rGeo->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::QUADS, 0, pCoordIndices->size()) );
 }
