@@ -51,7 +51,7 @@ vec4 calcLightingIntensity( vec4 v )
 		float attLinear		= light_attLinear[i];
 		float attQuadratic	= light_attQuadratic[i];
 		vec4 lightDiffuse	= light_diffuse[i];
-		vec3 spotDir		= gl_NormalMatrix * light_direction[i];
+		vec3 spotDir		= vec3(osg_ViewMatrix * vec4(light_direction[i],0.0));
 		float cutOff		= light_spotCutOff[i];
 		int type			= light_type[i];
 		

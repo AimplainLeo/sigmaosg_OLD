@@ -9,7 +9,7 @@
 class SUL_EXPORT CSulGeomAxis : public osg::Group
 {
 public:
-	CSulGeomAxis( float len );
+	CSulGeomAxis( float len=1.0f );
 
 private:
 	void createDrawable();
