@@ -12,18 +12,18 @@ class SUL_EXPORT CSulIntersectGraph : public osg::Referenced
 public:
 											CSulIntersectGraph();
 
-	void									SetGraph( osg::Node* pNode );
-	void									SetLine( const osg::Vec3& v0, const osg::Vec3& v1 );
+	void									setGraph( osg::Node* pNode );
+	void									setLine( const osg::Vec3& v0, const osg::Vec3& v1 );
 
-	osg::LineSegment*						GetLine();
+	osg::LineSegment*						getLine();
 
 	// resets only the intersection list
-	void									Reset();
+	void									reset();
 
-	bool									Update();
+	bool									update();
 
-	osg::Vec3								GetWorldIntersectPoint();
-	osgUtil::Hit							GetHit();
+	osg::Vec3								getWorldIntersectPoint();
+	osgUtil::Hit							getHit();
 
 private:
 	osg::ref_ptr<osgUtil::IntersectVisitor>	m_iv;
