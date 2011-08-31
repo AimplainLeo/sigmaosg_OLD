@@ -4,10 +4,11 @@
 #define __SULGEOMCONE_H__
 
 #include "SulTypes.h"
+#include "SulExport.h"
 #include <osg/geode>
 #include <osg/geometry>
 
-class CSulGeomCone : public osg::Geode
+class SUL_EXPORT CSulGeomCone : public osg::Geode
 {
 public:
 	// slices : The number of subdivisions around the Z axis
@@ -18,6 +19,10 @@ public:
 
 	void setColorBottom( const osg::Vec4& color );
 	void setColorTop( const osg::Vec4& color );
+
+	void setLength( float len );
+	void setRadiusBottom( float radius );
+	void setRadiusTop( float radius );
 
 private:
 	void createDrawable();

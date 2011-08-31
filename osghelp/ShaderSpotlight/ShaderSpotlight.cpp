@@ -13,7 +13,7 @@
 
 osg::Vec3 pos( 0, 0, 20 );
 osg::Vec3 target( 20, 20, -20 );
-float angle = 60.0f;
+float angle = 20.0f;
 float coneLen = 30.0f;
 
 osg::Group* createScene()

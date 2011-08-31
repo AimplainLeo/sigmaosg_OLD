@@ -38,6 +38,27 @@ void CSulGeomCone::setColorTop( const osg::Vec4& color )
 	m_rGeo->dirtyDisplayList();
 }
 
+void CSulGeomCone::setLength( float len )
+{
+	m_len = len;
+	removeDrawables( 0, 1 );
+	createDrawable();
+}
+
+void CSulGeomCone::setRadiusBottom( float radius )
+{
+	m_radiusBottom = radius;
+	removeDrawables( 0, 1 );
+	createDrawable();
+}
+
+void CSulGeomCone::setRadiusTop( float radius )
+{
+	m_radiusTop = radius;
+	removeDrawables( 0, 1 );
+	createDrawable();
+}
+
 void CSulGeomCone::createDrawable()
 {
 	m_rGeo = new osg::Geometry;
@@ -45,8 +66,8 @@ void CSulGeomCone::createDrawable()
 
 	// colors
 	m_colors = new osg::Vec4Array;
-	m_colors->push_back(osg::Vec4(1.0f,0.0f,0.0f,1.0f));
-	m_colors->push_back(osg::Vec4(0.0f,1.0f,0.0f,1.0f));
+	m_colors->push_back( m_colorBottom );
+	m_colors->push_back( m_colorTop );
 
 	// color indices
 	osg::UByteArray* colorIndices = new osg::UByteArray();

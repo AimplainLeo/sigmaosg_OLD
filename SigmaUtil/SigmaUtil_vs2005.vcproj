@@ -643,6 +643,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomCone.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomCone.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomFrame.cpp"
 					>
 				</File>
