@@ -150,6 +150,9 @@ void CSulGeomQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit )
 osg::Texture2D* CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 unit )
 {
 	osg::Texture2D* pTex = new osg::Texture2D;
+	pTex->setResizeNonPowerOfTwoHint( false );
+	pTex->setFilter( osg::Texture::MIN_FILTER,osg::Texture::LINEAR );
+	pTex->setFilter( osg::Texture::MAG_FILTER,osg::Texture::LINEAR );
     m_rImage = osgDB::readImageFile( osgDB::findDataFile(file.c_str()) );
     pTex->setImage( m_rImage );
     m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
