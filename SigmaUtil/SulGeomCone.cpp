@@ -19,11 +19,6 @@ m_colorBottom( 1,1,1,1 )
 	getOrCreateStateSet()->setAttributeAndModes( cull, osg::StateAttribute::ON );
 }
 
-void CSulGeomCone::enableBlend()
-{
-	getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
-}
-
 void CSulGeomCone::setColorBottom( const osg::Vec4& color )
 {
 	m_colorBottom = color;

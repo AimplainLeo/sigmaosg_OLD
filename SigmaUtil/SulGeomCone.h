@@ -4,18 +4,16 @@
 #define __SULGEOMCONE_H__
 
 #include "SulTypes.h"
+#include "SulGeomGeode.h"
 #include "SulExport.h"
-#include <osg/geode>
 #include <osg/geometry>
 
-class SUL_EXPORT CSulGeomCone : public osg::Geode
+class SUL_EXPORT CSulGeomCone : public CSulGeomGeode
 {
 public:
 	// slices : The number of subdivisions around the Z axis
 	// stacks : The number of subdivisions along the Z axis
 	CSulGeomCone( float len, float radiusBottom, float radiusTop, sigma::uint32 slices=16, sigma::uint32 stacks=1 );
-
-	void enableBlend();
 
 	void setColorBottom( const osg::Vec4& color );
 	void setColorTop( const osg::Vec4& color );
