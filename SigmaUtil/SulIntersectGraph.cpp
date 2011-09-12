@@ -5,8 +5,9 @@
 
 CSulIntersectGraph::CSulIntersectGraph()
 {
-	m_iv = new osgUtil::IntersectVisitor;
-	m_rLineSeg = new osg::LineSegment;
+	m_rLineSeg = new osgUtil::LineSegmentIntersector( osg::Vec3(0,0,0), osg::Vec3(1,1,1) );
+	m_iv = new osgUtil::IntersectionVisitor;
+	m_iv->setIntersector( m_rLineSeg );
 }
 
 void CSulIntersectGraph::setGraph( osg::Node* pNode )
@@ -21,13 +22,16 @@ void CSulIntersectGraph::reset()
 
 void CSulIntersectGraph::setLine( const osg::Vec3& v0, const osg::Vec3& v1 )
 {
-	m_rLineSeg->set( v0, v1 );
+	m_rLineSeg->setStart( v0 );
+	m_rLineSeg->setEnd( v1 );
 }
 
+/*
 osg::LineSegment* CSulIntersectGraph::getLine()
 {
 	return m_rLineSeg.get();
 }
+*/
 
 bool CSulIntersectGraph::update()
 {
@@ -37,10 +41,10 @@ bool CSulIntersectGraph::update()
 	}
 
 	reset();
-	m_iv->addLineSegment( m_rLineSeg.get() );
+//	m_iv->addLineSegment( m_rLineSeg.get() );
 	m_rGraph->accept( *m_iv );
 
-	if ( m_iv->hits() )
+	if ( m_iv->getIntersector()->containsIntersections() )
 	{
 		return true;
 	}
@@ -50,16 +54,21 @@ bool CSulIntersectGraph::update()
 
 osg::Vec3 CSulIntersectGraph::getWorldIntersectPoint()
 {
+	return m_rLineSeg->getFirstIntersection().getWorldIntersectPoint();
+
+		/*
 	osgUtil::IntersectVisitor::HitList hitList = m_iv->getHitList( m_rLineSeg.get() );
 	return hitList[0].getWorldIntersectPoint();
+	*/
 }
 
-
+/*
 osgUtil::Hit CSulIntersectGraph::getHit()
 {
 	osgUtil::IntersectVisitor::HitList hitList = m_iv->getHitList( m_rLineSeg.get() );
 	return hitList[0];
 }
+*/
 
 
 

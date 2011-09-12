@@ -5,7 +5,9 @@
 
 #include "SulExport.h"
 #include <osg/Referenced>
-#include <osgUtil/IntersectVisitor>
+#include <osgUtil/IntersectionVisitor>
+#include <osgUtil/LineSegmentIntersector>
+//#include <osg/LineSegment>
 
 class SUL_EXPORT CSulIntersectGraph : public osg::Referenced
 {
@@ -15,7 +17,7 @@ public:
 	void									setGraph( osg::Node* pNode );
 	void									setLine( const osg::Vec3& v0, const osg::Vec3& v1 );
 
-	osg::LineSegment*						getLine();
+//	osg::LineSegment						getLine();
 
 	// resets only the intersection list
 	void									reset();
@@ -23,12 +25,13 @@ public:
 	bool									update();
 
 	osg::Vec3								getWorldIntersectPoint();
-	osgUtil::Hit							getHit();
+
+//	osgUtil::Hit							getHit();
 
 private:
-	osg::ref_ptr<osgUtil::IntersectVisitor>	m_iv;
-	osg::ref_ptr<osg::Node>					m_rGraph;
-	osg::ref_ptr<osg::LineSegment>			m_rLineSeg;
+	osg::ref_ptr<osgUtil::IntersectionVisitor>	m_iv;
+	osg::ref_ptr<osg::Node>						m_rGraph;
+	osg::ref_ptr<osgUtil::LineSegmentIntersector>	m_rLineSeg;
 };
 
 #endif // __SULINTERSECTGRAPH_H__
