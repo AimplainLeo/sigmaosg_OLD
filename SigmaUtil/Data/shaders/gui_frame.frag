@@ -49,6 +49,7 @@ void main( void )
 		vec2 st = gl_TexCoord[0].st;
 		st[1] = 1.0-st[1];
 		vec4 color0 = texture2D( tex0, st );
+		//color0.a = 1.0;
 		gl_FragColor = color0;
 	}
 }
