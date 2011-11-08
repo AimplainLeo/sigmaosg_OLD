@@ -5,7 +5,7 @@
 #include <osg/shapedrawable>
 
 CSulGeomSphere::CSulGeomSphere( float radius, osg::Vec3 pos ) :
-osg::Geode(),
+CSulGeomGeode(),
 m_radius( radius ),
 m_pos( pos ),
 m_color( 1,0,0,1 )

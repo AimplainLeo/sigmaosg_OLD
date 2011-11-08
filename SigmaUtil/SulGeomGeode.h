@@ -11,6 +11,7 @@ class SUL_EXPORT CSulGeomGeode : public osg::Geode
 public:
 	void enableBlend();
 	void zbuffer( bool bEnable );
+	void enableDebugTexture();
 };
 
 #endif // __SULGEOMGEODE_H__
