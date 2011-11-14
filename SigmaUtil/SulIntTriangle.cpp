@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulIntTriangle.h"
 
-bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, osg::Vec3& vHit, float Epsilon )
+bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, osg::Vec3& vHit, bool treatLineSegmentAsInfinity, float Epsilon )
 {
 	osg::Vec3    u, v, n;				// triangle vectors
     osg::Vec3    dir, w0, w;			// ray vectors
@@ -46,15 +46,18 @@ bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, osg::
     wv = w * v;
     D = uv * uv - uu * vv;
 
-    // get and test parametric coords
-    float s, t;
-    s = (uv * wv - vv * wu) / D;
-    if (s < 0.0 || s > 1.0)        // I is outside T
-        return false;
+	if ( !treatLineSegmentAsInfinity )
+	{
+		// get and test parametric coords
+		float s, t;
+		s = (uv * wv - vv * wu) / D;
+		if (s < 0.0 || s > 1.0)        // I is outside T
+			return false;
 
-	t = (uv * wu - uu * wv) / D;
-    if (t < 0.0 || (s + t) > 1.0)  // I is outside T
-        return false;
+		t = (uv * wu - uu * wv) / D;
+		if (t < 0.0 || (s + t) > 1.0)  // I is outside T
+			return false;
+	}
 
 	return true;
 
@@ -63,5 +66,5 @@ bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, osg::
 bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, float Epsilon )
 {
 	osg::Vec3 vHit;
-	return sulIntTriangle( line, tri, vHit, Epsilon );
+	return sulIntTriangle( line, tri, vHit, false, Epsilon );
 }

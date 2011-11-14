@@ -9,3 +9,10 @@ m_plane( plane ),
 m_extent( extent )
 {
 }
+
+CSulGeomPlane::CSulGeomPlane( const osg::Plane& plane, float extent, const osg::Vec3& pos ) :
+CSulGeomQuad( pos, extent, extent ),
+m_plane( plane ),
+m_extent( extent )
+{
+}

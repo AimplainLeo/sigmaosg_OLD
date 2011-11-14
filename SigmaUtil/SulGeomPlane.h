@@ -10,6 +10,8 @@ class CSulGeomPlane : public CSulGeomQuad
 public:
 					CSulGeomPlane( const osg::Plane& plane, float extent );
 
+					CSulGeomPlane( const osg::Plane& plane, float extent, const osg::Vec3& pos );
+
 private:
 	osg::Plane		m_plane;
 	float			m_extent;

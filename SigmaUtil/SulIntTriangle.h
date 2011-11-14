@@ -6,7 +6,7 @@
 #include "SulDataTri.h"
 #include <osg/linesegment>
 
-bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, osg::Vec3& vHit, float Epsilon=0.0001f );
+bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, osg::Vec3& vHit, bool treatLineSegmentAsInfinity=false, float Epsilon=0.0001f );
 
 bool sulIntTriangle( const osg::LineSegment& line, const CSulDataTri& tri, float Epsilon=0.0001f );
 

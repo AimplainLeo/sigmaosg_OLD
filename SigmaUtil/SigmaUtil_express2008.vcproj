@@ -1119,6 +1119,26 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Intersectors"
+					>
+					<File
+						RelativePath=".\SulSphereIntersector.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulSphereIntersector.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulSphereIntersectorTriangle.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulSphereIntersectorTriangle.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="NodeCallbacks"
@@ -1807,6 +1827,10 @@
 			<Filter
 				Name="Data"
 				>
+				<File
+					RelativePath=".\SulDataRay.h"
+					>
+				</File>
 				<File
 					RelativePath=".\SulDataTri.cpp"
 					>
