@@ -7,7 +7,6 @@
 #include <osg/Referenced>
 #include <osgUtil/IntersectionVisitor>
 #include <osgUtil/LineSegmentIntersector>
-//#include <osg/LineSegment>
 
 class SUL_EXPORT CSulIntersectGraph : public osg::Referenced
 {
@@ -17,16 +16,12 @@ public:
 	void									setGraph( osg::Node* pNode );
 	void									setLine( const osg::Vec3& v0, const osg::Vec3& v1 );
 
-//	osg::LineSegment						getLine();
-
 	// resets only the intersection list
 	void									reset();
 
 	bool									update();
 
 	osg::Vec3								getWorldIntersectPoint();
-
-//	osgUtil::Hit							getHit();
 
 private:
 	osg::ref_ptr<osgUtil::IntersectionVisitor>	m_iv;

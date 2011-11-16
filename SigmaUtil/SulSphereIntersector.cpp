@@ -8,13 +8,23 @@
 #include <osg/shapedrawable>
 #include <assert.h>
 
+CSulSphereIntersector::CSulSphereIntersector() :
+_parent(0),
+m_debug(false)
+{
+}
+
 osgUtil::Intersector* CSulSphereIntersector::clone( osgUtil::IntersectionVisitor& iv )
 {
-	CSulSphereIntersector* p = new CSulSphereIntersector;
+	osg::ref_ptr<CSulSphereIntersector> p = new CSulSphereIntersector;
 	p->setPosition( m_pos );
 	p->setRadius( m_radius );
+	p->m_hit = m_hit;
+	p->m_debug = m_debug;
+	p->m_debugGroup = m_debugGroup;
+	p->_parent = this;
 
-	return p;
+	return p.release();
 }
 
 void CSulSphereIntersector::setRadius( float r )
@@ -56,6 +66,13 @@ bool CSulSphereIntersector::intersects( const osg::BoundingSphere& bs )
     return true;
 }
 
+osg::Node* CSulSphereIntersector::enableDebug()
+{
+	m_debug = true;
+	m_debugGroup = new osg::Group;
+	return m_debugGroup;
+}
+
 void CSulSphereIntersector::intersect( osgUtil::IntersectionVisitor& iv, osg::Drawable* drawable )
 {
     osg::KdTree* kdTree = iv.getUseKdTreeWhenAvailable() ? dynamic_cast<osg::KdTree*>(drawable->getShape()) : 0;
@@ -65,20 +82,37 @@ void CSulSphereIntersector::intersect( osgUtil::IntersectionVisitor& iv, osg::Dr
 		return;
 	}
 
+	if (iv.getDoDummyTraversal()) return;
+
 	osg::TriangleFunctor<CSulSphereIntersectorTriangle> ti;
-    ti.set( m_pos, m_radius );
+	if ( m_debug ) 
+	{
+		m_debugGroup->addChild( ti.enableDebug() );
+	}
+
+/**/
+		osg::Matrix matrix;
+		if (iv.getViewMatrix()) matrix.preMult( *iv.getViewMatrix() );
+		if (iv.getModelMatrix()) matrix.preMult( *iv.getModelMatrix() );
+		osg::Matrix inverse;
+		inverse.invert(matrix);
+/**/
+
+    ti.set( m_pos * inverse, m_radius );
     drawable->accept( ti );
 
-	osg::ShapeDrawable* p = dynamic_cast<osg::ShapeDrawable*>(drawable);
+//	osg::ShapeDrawable* p = dynamic_cast<osg::ShapeDrawable*>(drawable);
 	
 	if ( ti.hit() )
 	{
-		p->setColor( osg::Vec4(0,1,0,1) );
+//		p->setColor( osg::Vec4(0,1,0,1) );
 
-		m_hit = true;
+		if ( _parent ) _parent->m_hit = true; else m_hit = true;
 	}
 	else
-		p->setColor( osg::Vec4(1,1,1,1) );
+	{
+	//	p->setColor( osg::Vec4(1,1,1,1) );
+	}
 
 }
 

@@ -25,6 +25,8 @@ public:
 
 	void		setColor( float r, float g, float b, float a );
 
+	void		setVertices( const osg::Vec3& p0, const osg::Vec3& p1, const osg::Vec3& p2 );
+
 	const CSulDataTri	getTriangle() const;
 
 	virtual void		createDrawable();
@@ -35,6 +37,7 @@ private:
 	osg::Vec3	m_p0;
 	osg::Vec3	m_p1;
 	osg::Vec3	m_p2;
+	osg::ref_ptr<osg::Vec3Array>	m_verts;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 	osg::ref_ptr<osg::Geometry>		m_rGeo;
 };

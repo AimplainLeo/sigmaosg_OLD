@@ -8,14 +8,21 @@
 #include <osg/vec3>
 #include <osg/plane>
 
-extern osg::Group* pGG;
-
 class CSulSphereIntersectorTriangle
 {
 public:
 	CSulSphereIntersectorTriangle()
 	{
 		m_hit = false;
+	}
+
+	osg::Node* enableDebug()
+	{
+		// note: the triangle is drawn in model space (you are probably viewing it in view space!)
+		osg::Vec3 v( 0, 0, 0 );
+		m_debugTri = new CSulGeomTriangle( v, v, v );
+		m_debugTri->setColor( 0, 0, 1, 1 );
+		return m_debugTri;
 	}
 
 	void set( const osg::Vec3& pos, float r )
@@ -49,15 +56,20 @@ public:
 			return;
 
 		// create a ray from m_pos with planes normal and test that the ray interestects the triangle
-		osg::ref_ptr<osg::LineSegment> ls = new osg::LineSegment( m_pos-plane.getNormal()*1000.0f, m_pos+plane.getNormal()*1000.0f );
+		// FIXME: currently a 1000.0f+1000.0f line segment,..needs to be a ray!
+		osg::Vec3 s = (m_pos-plane.getNormal()*1000.0f);
+		osg::Vec3 e = (m_pos+plane.getNormal()*1000.0f);
+
+		osg::ref_ptr<osg::LineSegment> ls = new osg::LineSegment( s, e );
 		CSulDataTri tri( v1, v2, v3 );
 		osg::Vec3 vHit;
 		if ( sulIntTriangle( *ls, tri, vHit, false ) )
 		{
-			CSulGeomTriangle* p = new CSulGeomTriangle( v1, v2, v3 );
-			p->setColor( 0, 0, 1, 1 );
-			pGG->addChild( p );
-
+			// debugging
+			if ( m_debugTri.valid() )
+			{
+				m_debugTri->setVertices( v1, v2, v3 );
+			}
 			
 			m_hit = true;
 			return;
@@ -68,6 +80,7 @@ private:
 	float m_radius;
 	osg::Vec3 m_pos;
 	bool m_hit;
+	osg::ref_ptr<CSulGeomTriangle>	m_debugTri;
 };
 
 #endif // __SULSPHEREINTERSECTORTRIANGLE_H__

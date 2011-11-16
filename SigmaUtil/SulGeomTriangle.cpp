@@ -47,11 +47,11 @@ void CSulGeomTriangle::createDrawable()
 	}
 
 	// vertices
-	osg::Vec3Array *verts = new osg::Vec3Array;
-	verts->push_back( m_p0 );
-	verts->push_back( m_p1 );
-	verts->push_back( m_p2 );
-	m_rGeo->setVertexArray( verts );
+	m_verts = new osg::Vec3Array;
+	m_verts->push_back( m_p0 );
+	m_verts->push_back( m_p1 );
+	m_verts->push_back( m_p2 );
+	m_rGeo->setVertexArray( m_verts );
 
     osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;
     indices->push_back(0);
@@ -86,6 +86,19 @@ void CSulGeomTriangle::setColor( float r, float g, float b, float a )
 	(*m_rColors)[0].set( r, g, b, a );
 	(*m_rColors)[1].set( r, g, b, a );
 	(*m_rColors)[2].set( r, g, b, a );
+	m_rGeo->dirtyDisplayList();
+}
+
+void CSulGeomTriangle::setVertices( const osg::Vec3& p0, const osg::Vec3& p1, const osg::Vec3& p2 )
+{
+	if ( !m_verts.valid() )
+	{
+		createDrawable();
+	}
+
+	(*m_verts)[0] = p0;
+	(*m_verts)[1] = p1;
+	(*m_verts)[2] = p2;
 	m_rGeo->dirtyDisplayList();
 }
 

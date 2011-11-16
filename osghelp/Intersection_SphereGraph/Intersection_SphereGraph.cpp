@@ -117,6 +117,7 @@ osg::Node* CreateScene()
 
 	// test collision
 	g_pSI = new CSulSphereIntersector;
+	pGG->addChild( g_pSI->enableDebug() );
 	g_iv = new osgUtil::IntersectionVisitor;
 	g_iv->setIntersector( g_pSI );
 
