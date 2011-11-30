@@ -22,6 +22,9 @@ public:
 	void setRadiusBottom( float radius );
 	void setRadiusTop( float radius );
 
+	// setLength, setRadiusBottom, setRadiusTop will first be applied when this method has been called
+	void rebuildDrawable();
+
 private:
 	void createDrawable();
 

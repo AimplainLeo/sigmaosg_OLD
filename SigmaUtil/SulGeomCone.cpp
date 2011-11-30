@@ -36,20 +36,20 @@ void CSulGeomCone::setColorTop( const osg::Vec4& color )
 void CSulGeomCone::setLength( float len )
 {
 	m_len = len;
-	removeDrawables( 0, 1 );
-	createDrawable();
 }
 
 void CSulGeomCone::setRadiusBottom( float radius )
 {
 	m_radiusBottom = radius;
-	removeDrawables( 0, 1 );
-	createDrawable();
 }
 
 void CSulGeomCone::setRadiusTop( float radius )
 {
 	m_radiusTop = radius;
+}
+
+void CSulGeomCone::rebuildDrawable()
+{
 	removeDrawables( 0, 1 );
 	createDrawable();
 }

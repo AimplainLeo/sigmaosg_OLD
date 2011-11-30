@@ -50,6 +50,7 @@ void CSulSphereIntersector::leave()
 
 bool CSulSphereIntersector::intersects( const osg::BoundingSphere& bs )
 {
+	// fixme:
 	return true;
     // if bs not valid then return true based on the assumption that an invalid sphere is yet to be defined.
     if (!bs.valid()) return true; 
