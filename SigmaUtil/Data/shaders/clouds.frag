@@ -10,9 +10,12 @@ vec4 clouds_process()
 	vec2 vLen = st-vec2(0.5,0.5);
 	float len = 1.0-length( vLen )*2.0;
 
-	vec4 fragOut = vec4( frag.a, frag.a, frag.a, frag.a );
+//	vec4 fragOut = vec4( frag.a, frag.a, frag.a, frag.a );
+//	fragOut.a = fragOut.a*len;
+	
+vec4 fragOut = vec4( frag.r, frag.r, frag.r, frag.r*len );
 
-	fragOut.a = fragOut.a*len;
+
 
 	return fragOut;
 }

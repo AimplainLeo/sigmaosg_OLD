@@ -456,6 +456,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SulTokenizer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SulTokenizer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SulTokenManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SulTokenManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SulTypes.h"
 				>
 			</File>
@@ -510,40 +526,12 @@
 					RelativePath=".\SulStringList.h"
 					>
 				</File>
-			</Filter>
-			<Filter
-				Name="Xml"
-				>
 				<File
-					RelativePath=".\SulXmlAttr.cpp"
+					RelativePath=".\SulStringParam.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\SulXmlAttr.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulXmlDataInfo.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulXmlDataInfo.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulXmlParser.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulXmlParser.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulXmlWriter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulXmlWriter.h"
+					RelativePath=".\SulStringParam.h"
 					>
 				</File>
 			</Filter>
@@ -823,14 +811,6 @@
 				Name="Parsers"
 				>
 				<File
-					RelativePath=".\SulInifileParser.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulInifileParser.h"
-					>
-				</File>
-				<File
 					RelativePath=".\SulParser.cpp"
 					>
 				</File>
@@ -838,6 +818,102 @@
 					RelativePath=".\SulParser.h"
 					>
 				</File>
+				<Filter
+					Name="Xml"
+					>
+					<File
+						RelativePath=".\SulXmlAttr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlAttr.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlDataInfo.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlDataInfo.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlParser.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlParser.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlWriter.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlWriter.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Json"
+					>
+					<File
+						RelativePath=".\SulJson.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJson.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonArray.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonArray.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonObject.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonString.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonString.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonUtil.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonUtil.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonValue.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Ini"
+					>
+					<File
+						RelativePath=".\SulInifileParser.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulInifileParser.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Grid"
@@ -894,6 +970,30 @@
 			<Filter
 				Name="Textures"
 				>
+				<File
+					RelativePath=".\SulPerlinNoise1D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPerlinNoise1D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPerlinNoise2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPerlinNoise2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPerlinNoiseBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPerlinNoiseBase.h"
+					>
+				</File>
 				<File
 					RelativePath=".\SulTexImage.cpp"
 					>

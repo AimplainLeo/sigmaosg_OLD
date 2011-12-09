@@ -10,6 +10,13 @@
 class CSulPerlinNoise2D : public CSulPerlinNoiseBase
 {
 public:
+	CSulPerlinNoise2D();
+
+	void setWidth( sigma::uint32 w );
+	void setHeight( sigma::uint32 h );
+	void setScale( float s );
+	void setOfs( float o );
+
 	void CreateArray2D( CSulArray2D<float>* p, float fScale=1.0f )
 	{
 		m_iOctaves = 4;
@@ -60,12 +67,20 @@ public:
 
 	void CreateArray2D( CSulTexImage* pTexImage, float fScale=1.0f, float fOfs=128.0f, sigma::uint32 iMin=0, sigma::uint32 iMax=255 );
 
+	void create( osg::Image* pImage );
+
 private:
 	float				IntNoise( sigma::int32 x, sigma::int32 y );
 	float				IntNoiseLoop( sigma::int32 x, sigma::int32 y, float freq );
 	float				CosInterpolate( float a, float b, float t );
 	float				InterpolatedNoise( float x, float y, float freq );
 	float				PerlinNoise( float x, float y );
+
+private:
+	sigma::uint32		m_w;	// width
+	sigma::uint32		m_h;	// height
+	float				m_s;	// scale
+	float				m_o;	// offset
 };
 
 #endif // __SULPERLINNOISE2D_H__

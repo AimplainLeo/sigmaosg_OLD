@@ -251,6 +251,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intersection_Graph", "Inter
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intersection_SphereGraph", "Intersection_SphereGraph\Intersection_SphereGraph.vcproj", "{AA8904CC-F7C6-4E24-AB90-C6A97A760765}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CustomTextureFloat", "CustomTextureFloat\CustomTextureFloat.vcproj", "{14D628BC-7A1E-4A71-A127-CE4794E08CA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -589,6 +591,10 @@ Global
 		{AA8904CC-F7C6-4E24-AB90-C6A97A760765}.Debug|Win32.Build.0 = Debug|Win32
 		{AA8904CC-F7C6-4E24-AB90-C6A97A760765}.Release|Win32.ActiveCfg = Release|Win32
 		{AA8904CC-F7C6-4E24-AB90-C6A97A760765}.Release|Win32.Build.0 = Release|Win32
+		{14D628BC-7A1E-4A71-A127-CE4794E08CA4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{14D628BC-7A1E-4A71-A127-CE4794E08CA4}.Debug|Win32.Build.0 = Debug|Win32
+		{14D628BC-7A1E-4A71-A127-CE4794E08CA4}.Release|Win32.ActiveCfg = Release|Win32
+		{14D628BC-7A1E-4A71-A127-CE4794E08CA4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

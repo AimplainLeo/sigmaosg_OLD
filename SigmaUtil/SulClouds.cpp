@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "SulClouds.h"
-#include "SulPerlinNoise2D.h"
 #include "SulScreenAlignedQuad.h"
 #include "SulGeomQuadTiles.h"
 #include "SulTransToEye.h"
@@ -22,6 +21,22 @@ m_size( 20000.0f ),
 m_wind( 0, 0 ),
 m_height(1500)
 {
+	//m_rTexImage = new CSulTexImage( 256, 256 );
+	m_rPerlin = new CSulPerlinNoise2D;
+
+	m_rImage = new osg::Image;
+	m_rImage->setPixelFormat( GL_ALPHA );
+	/*
+	m_rImage->setImage(
+        256, 256, 1,                                                // 1=r? depth perhaps?
+		GL_ALPHA,                                                   // internal format
+        GL_ALPHA, GL_FLOAT,			                                // pixelformat, type
+        reinterpret_cast<unsigned char*>(m_pData),							// data
+        osg::Image::NO_DELETE, 
+        1 );                                                        // packing
+*/
+
+
 	if ( pCloudPlane )
 	{
 		setCloudPlane( pCloudPlane );
@@ -53,10 +68,10 @@ osg::Node* CSulClouds::createPlane( float size, float height )
 
 	setCoverage( m_coverage );
 
-	setTextureStates();
+//	setTextureStates();
+
 
 	osg::StateSet* ss = m_rPlane->getOrCreateStateSet();
-
 	osg::BlendFunc *trans = new osg::BlendFunc();
 	trans->setFunction(osg::BlendFunc::SRC_ALPHA ,osg::BlendFunc::ONE_MINUS_SRC_ALPHA);
 	ss->setAttributeAndModes( trans );
@@ -84,6 +99,7 @@ void CSulClouds::setCoverage( float coverage )
 		return;
 	}
 
+	/*
 	// m_coverage is a value from 0.0-1.0 we need to map this to values between 0-10
 	int cloudNumber = osg::clampBetween( m_coverage*10.0f, 0.0f, 10.0f );
 	CSulString texturePath;
@@ -97,8 +113,59 @@ void CSulClouds::setCoverage( float coverage )
 	{
 		osg::notify(osg::WARN) << "ERROR: CSulClouds::setCoverage image not found: " << texturePath << std::endl;
 	}
+	*/
+	
+
+	// create perlin noise cloud
+	/*
+	CSulPerlinNoise2D* pPerlin = new CSulPerlinNoise2D;
+	pPerlin->CreateArray2D( m_rTexImage, 100.0f, 128, 0, 255 ); 
+	m_rTexImage->Process();
+	m_rPlane->getQuad()->setTexture( m_rTexImage->getTexture() );
+	*/
+
+	m_rPerlin->SetOctave( 8 );
+	m_rPerlin->create( m_rImage );
+	m_rPlane->getQuad()->setTexture( m_rImage, GL_LUMINANCE );
 
 	setTextureStates();
+}
+
+void CSulClouds::setOctave( float o )
+{
+	m_rPerlin->SetOctave( o );
+}
+
+void CSulClouds::setPersistence( float p )
+{
+	m_rPerlin->SetPersistence( p );
+}
+
+void CSulClouds::setScale( float s )
+{
+	m_rPerlin->setScale( s );
+}
+
+void CSulClouds::setOfs( float o )
+{
+	m_rPerlin->setOfs( o );
+}
+
+void CSulClouds::generate()
+{
+	m_rPerlin->create( m_rImage );
+	m_rPlane->getQuad()->setTexture( m_rImage, GL_LUMINANCE );
+	setTextureStates();
+}
+
+CSulTexImage* CSulClouds::getTexImage()
+{
+	return m_rTexImage;
+}
+
+osg::Image* CSulClouds::getImage()
+{
+	return m_rImage;
 }
 
 float CSulClouds::getCoverage()
@@ -177,11 +244,11 @@ osg::Node* CSulClouds::create()
 {
 	/*
 	// create perlin noise cloud
-	m_rImage = new CSulTexImage( 256, 256 );
+	m_rTexImage = new CSulTexImage( 256, 256 );
 
 	CSulPerlinNoise2D* pPerlin = new CSulPerlinNoise2D;
-	pPerlin->CreateArray2D( m_rImage, 100.0f, 128, 0, 255 ); 
-	m_rImage->Process();
+	pPerlin->CreateArray2D( m_rTexImage, 100.0f, 128, 0, 255 ); 
+	m_rTexImage->Process();
 */
 
 	m_rGroup = new osg::Group;	
@@ -191,7 +258,7 @@ osg::Node* CSulClouds::create()
 	/*
 	// debug create screen aligned quad to see clouds
 	CSulScreenAlignedQuad* pQuad = new CSulScreenAlignedQuad( osg::Vec3(128,128,0), 256, 256, 800, 600 );
-	pQuad->setTexture( m_rImage->getTexture() );
+	pQuad->setTexture( m_rTexImage->getTexture() );
 	pGroup->addChild( pQuad->getProjection() );
 */
 

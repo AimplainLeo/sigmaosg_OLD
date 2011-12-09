@@ -6,6 +6,7 @@
 #include "SulCloudPlane.h"
 #include "SulTexImage.h"
 #include "SulExport.h"
+#include "SulPerlinNoise2D.h"
 #include <osg/node>
 #include <osg/referenced>
 
@@ -37,6 +38,16 @@ public:
 	// must call this before create if you have a custom cloudplane
 	void		setCloudPlane( CSulCloudPlane* pCloudPlane );
 
+	// work in progress,. used by perlin noise
+	CSulTexImage* getTexImage();
+	void			setOctave( float o );
+	void			setPersistence( float p );
+	void			setScale( float s );
+	void			setOfs( float o );
+	void			generate();
+
+	osg::Image*		getImage();
+
 private:
 	void		setTextureStates();
 
@@ -45,7 +56,11 @@ private:
 
 private:
 	// work in progress for self perlin noise cloud generation
-	osg::ref_ptr<CSulTexImage> m_rImage;
+	osg::ref_ptr<CSulTexImage> m_rTexImage;
+	osg::ref_ptr<osg::Image>	m_rImage;
+	float*						m_pData;
+
+	osg::ref_ptr<CSulPerlinNoise2D> m_rPerlin;
 	
 	osg::ref_ptr<CSulCloudPlane>					m_rPlane;
 	osg::ref_ptr<osg::PositionAttitudeTransform>	m_rPat;

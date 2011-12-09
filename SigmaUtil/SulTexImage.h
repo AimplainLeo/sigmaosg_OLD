@@ -4,10 +4,11 @@
 #define __SULTEXIMAGE_H__
 
 #include "SulArray2D.h"
+#include "SulExport.h"
 #include <osg/Referenced>
 #include <osg/Texture2D>
 
-class CSulTexImage : public osg::Referenced
+class SUL_EXPORT CSulTexImage : public osg::Referenced
 {
 public:
 						CSulTexImage( sigma::uint32 w, sigma::uint32 h );
