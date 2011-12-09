@@ -109,6 +109,7 @@ CSulJson* CSulJsonUtil::create( const CSulString& json )
 	osg::ref_ptr<CSulParser> parser = new CSulParser;
 	parser->AddCharToken( '{' );
 	parser->AddCharToken( '}' );
+	parser->AddCharToken( ':' );
 	parser->AddSentenceCharStart( 39 );  // '
 	parser->AddSentenceCharEnd( 39 );  // '
 	parser->InitStringParse( json );
