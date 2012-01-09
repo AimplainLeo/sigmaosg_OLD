@@ -1142,6 +1142,14 @@
 					RelativePath=".\SulCloudScrollTexture.h"
 					>
 				</File>
+				<File
+					RelativePath=".\SulCloudsTexture.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulCloudsTexture.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Grass"

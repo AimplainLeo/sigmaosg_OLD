@@ -9,14 +9,13 @@ vec4 clouds_process()
 	vec2 st = gl_TexCoord[1].st;
 	vec2 vLen = st-vec2(0.5,0.5);
 	float len = 1.0-length( vLen )*2.0;
-
-//	vec4 fragOut = vec4( frag.a, frag.a, frag.a, frag.a );
-//	fragOut.a = fragOut.a*len;
 	
-vec4 fragOut = vec4( frag.r, frag.r, frag.r, frag.r*len );
+	//Texture
+	vec4 fragOut = vec4( frag.a, frag.a, frag.a, frag.a );
+	fragOut.a = fragOut.a*len;
 
-
-
+	//Perlin	
+	//vec4 fragOut = vec4( frag.r, frag.r, frag.r, frag.r*len );
 	return fragOut;
 }
 
