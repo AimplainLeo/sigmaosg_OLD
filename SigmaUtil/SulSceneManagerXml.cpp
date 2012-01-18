@@ -4,6 +4,7 @@
 #include "SulSceneManagerXml.h"
 #include "SulXmlAttr.h"
 #include "SulParser.h"
+#include "SulStringList.h"
 #include <osg/Fog>
 
 CSulSceneManagerXml::CSulSceneManagerXml( CSulSceneManager* pSceneManager ):
@@ -169,6 +170,34 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 	{
 		CSulString s = pAttr->get( "name" );
 		m_rSceneManager->AddStateSet( s, m_pCurrentStateSet = new osg::StateSet );
+
+		if ( pAttr->exist( "merge" ) )
+		{
+			CSulString ss = pAttr->get( "merge" );
+
+			// split the string into it parts
+			osg::ref_ptr<CSulStringList> rList = new CSulStringList( ss );
+			CSulStringList::VECTOR_STRING::const_iterator iS = rList->getList().begin();
+			CSulStringList::VECTOR_STRING::const_iterator iE = rList->getList().end();
+
+			// merge each part into the current stateset
+			while ( iS!=iE )
+			{
+				CSulString s = *iS;
+
+				osg::StateSet* pSS = m_rSceneManager->GetStateSet( s );
+				if ( !pSS )
+				{
+					osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::elementStart -> STATESET: can not merge stateset [" << s << "]" << std::endl;
+					++iS;
+					continue;
+				}
+
+				m_pCurrentStateSet->merge( *pSS );
+
+				++iS;
+			}
+		}
 	}
 
 	if ( sName=="FOG" )
@@ -270,7 +299,13 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 			uniform->set( pAttr->get( "value" ).asInt32() );
 		}
 
-		m_pCurrentStateSet->addUniform( uniform );
+		osg::StateAttribute::Values stateValue = osg::StateAttribute::ON;
+		if ( pAttr->exist( "state" ) )
+		{
+			stateValue = GetStateAttribute( pAttr->get( "state" ) );
+		}
+
+		m_pCurrentStateSet->addUniform( uniform, stateValue );
 	}
 }
 
