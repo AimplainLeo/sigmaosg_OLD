@@ -7,7 +7,7 @@
 
   <UNIFORM name="use_light" value="false" type="BOOL"/>
   <UNIFORM name="use_fog" value="false" type="BOOL"/>
-  <UNIFORM name="use_tree_shader" value="true" type="BOOL"/>
+  <UNIFORM name="use_tree_shader" value="1" type="BOOL"/>
     
   <TEXTURE_TREE 
     suppress="false"

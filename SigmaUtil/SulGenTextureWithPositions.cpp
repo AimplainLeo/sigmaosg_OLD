@@ -179,6 +179,7 @@ void CSulGenTextureWithPositions::processTriangles()
 	// we need to clamp the z values for the positions, because the shape file may not be aligned correctly in 
 	// the z direction
 
+	sigma::uint32 countMissedPoly = 0;
 	sigma::VEC_VEC3::iterator iPos;
 	iPos = vecPositions.begin();
 	while ( iPos!=vecPositions.end() )
@@ -217,7 +218,8 @@ void CSulGenTextureWithPositions::processTriangles()
 						iPos->y(), 
 						 0.0f )		
 					);
-				osg::notify(osg::NOTICE)  << "missed (poly)" << std::endl;
+
+				countMissedPoly++;
 			}
 		}
 		else
@@ -233,6 +235,9 @@ void CSulGenTextureWithPositions::processTriangles()
 
 		++iPos;
 	}
+
+	if ( countMissedPoly )
+		osg::notify(osg::NOTICE)  << "missed (poly) count: " << countMissedPoly << std::endl;
 }
 
 void CSulGenTextureWithPositions::processTexture()

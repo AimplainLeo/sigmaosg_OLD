@@ -4,7 +4,7 @@
 #include "SulGeomBillboardInstancing.h"
 #include <osg/geometry>
 
-CSulGeomBillboardInstancing::CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal, float sizeMultiplier, float min, float max ) :
+CSulGeomBillboardInstancing::CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal, float sizeMultiplier ) :
 osg::Geode(),
 m_numInstances( numInstances ),
 m_sizeMultiplier( sizeMultiplier ),
@@ -23,7 +23,7 @@ void CSulGeomBillboardInstancing::createDrawable()
 
 	pGeo->setUseDisplayList( false );
     pGeo->setUseVertexBufferObjects( true );
-
+	
     osg::Vec3Array* v = new osg::Vec3Array;
     v->resize( 4 );
     pGeo->setVertexArray( v );

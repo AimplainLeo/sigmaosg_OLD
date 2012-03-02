@@ -38,6 +38,10 @@ public:
 		//osg::Drawable::DrawCallback::drawImplementation( renderInfo, drawable );
 		//return;
 
+#include <gl/gl.h>
+
+		glColor4us(1,1,1,1);
+
 		osg::FrameStamp* pFrameStamp = renderInfo.getView()->getFrameStamp();
 		double simTime = pFrameStamp->getSimulationTime();
 

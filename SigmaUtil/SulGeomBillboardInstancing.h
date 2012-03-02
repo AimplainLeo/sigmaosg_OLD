@@ -10,7 +10,7 @@
 class CSulGeomBillboardInstancing :  public osg::Geode
 {
 public:
-					CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal = false, float sizeMultiplier=1.0f, float min=1.0f, float max=1.0f );
+					CSulGeomBillboardInstancing( sigma::uint32 numInstances, bool bUseZDirectionNormal=false, float sizeMultiplier=1.0f );
 
 private:
 	void			createDrawable();

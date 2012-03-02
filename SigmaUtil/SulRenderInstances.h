@@ -11,20 +11,18 @@
 class CSulRenderInstances : public osg::Group
 {
 public:
-				CSulRenderInstances();
+							CSulRenderInstances();
 
-				CSulRenderInstances( osg::Image* pImagePositions, sigma::uint32 numInst, osg::BoundingBox& bb, float min=3.0f, float max=3.0f, bool bSuppressTexture=false, sigma::uint32 texUnit=0, sigma::uint32 texSizeSquared=256, sigma::uint32 useLights=0x00000001, bool bUseZDirectionNormal=false, bool bSuppressShaders=false );
+							CSulRenderInstances( osg::Image* pImagePositions, sigma::uint32 numInst, osg::BoundingBox& bb, float min=3.0f, float max=3.0f, bool bSuppressTexture=false, sigma::uint32 texUnit=0, sigma::uint32 texSizeSquared=256, sigma::uint32 useLights=0x00000001, bool bUseZDirectionNormal=false, bool bSuppressShaders=false );
 
-				CSulRenderInstances( const CSulRenderInstances& ri, const osg::CopyOp& copyop=osg::CopyOp::SHALLOW_COPY );
+							CSulRenderInstances( const CSulRenderInstances& ri, const osg::CopyOp& copyop=osg::CopyOp::SHALLOW_COPY );
 
 	sigma::uint32			getNumInstances() const;
 	const osg::BoundingBox&	getBB() const;
 	osg::Texture2D*			getTexturePositions() const;
 
-	void		create();
-
-protected:
-	virtual void createShaders();
+	void					createCrossQuad();
+	void					createBillboard();
 
 private:
 	osg::ref_ptr<osg::Texture2D>	m_rTexturePositions;

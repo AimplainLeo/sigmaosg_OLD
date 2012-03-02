@@ -296,6 +296,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomCrossQuadInstancing.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomCrossQuadInstancing.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomFrame.cpp"
 					>
 				</File>

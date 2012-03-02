@@ -17,6 +17,10 @@ class CSceneBase : public osg::Group
 {
 public:
 									CSceneBase( const CSulString& sFile, bool bRenderMe, const osg::Vec4& clipColor=osg::Vec4(0,0,1,0.5f) );
+									CSceneBase( bool bRenderMe, const osg::Vec4& clipColor=osg::Vec4(0,0,1,0.5f) );
+
+	// use this method when using constructor without sFile
+	void							create( osg::Node* pScene );
 
 	bool							isRenderMe();
 

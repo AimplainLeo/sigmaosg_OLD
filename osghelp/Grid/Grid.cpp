@@ -36,10 +36,13 @@ int _tmain(int argc, _TCHAR* argv[])
     viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
 	// set the scene-graph data the viewer will render
-	osg::Node* pScene = createScene();
-    viewer->setSceneData( pScene );
+//	osg::Node* pScene = createScene();
+	osg::Node* pScene = createSceneQuad();
+  
+	viewer->setSceneData( pScene );
 
-	osgDB::writeNodeFile( *pScene, "grid20x20.osg" );
+//	osgDB::writeNodeFile( *pScene, "grid20x20.osg" );
+	osgDB::writeNodeFile( *pScene, "guad10x10.osg" );
 
 	// execute main loop
 	return viewer->run();

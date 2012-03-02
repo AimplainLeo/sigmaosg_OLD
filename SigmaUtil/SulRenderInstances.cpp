@@ -4,6 +4,7 @@
 #include "SulRenderInstances.h"
 #include "SulGeomBillboardInstancing.h"
 #include "SulShaderInstancingBillboards.h"
+#include "SulGeomCrossQuadInstancing.h"
 #include <osg/copyop>
 #include <osg/shapedrawable>
 #include <osg/io_utils>
@@ -89,10 +90,61 @@ m_bUseZDirectionNormal( bUseZDirectionNormal )
 	m_numInstances = numInst;
 }
 
-void CSulRenderInstances::create()
+void CSulRenderInstances::createCrossQuad()
+{
+	CSulGeomCrossQuadInstancing* pCrossQuad = new CSulGeomCrossQuadInstancing( m_numInstances, m_bUseZDirectionNormal );
+	addChild( pCrossQuad );
+
+	pCrossQuad->getDrawable( 0 )->setInitialBound( m_bb );
+
+	osg::StateSet* ss = getOrCreateStateSet();
+
+	// texture positions
+	ss->setTextureAttributeAndModes( 1, m_rTexturePositions, osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
+
+	if ( !m_bSuppressTexture )
+	{
+		// texture tree
+		//std::string sFileTree = osgDB::findDataFile( "images/tree_aligned_256.png" );
+		std::string sFileTree = osgDB::findDataFile( "images/trees.png" );
+		if ( sFileTree.empty() )
+		{
+			std::cout << "WARNING: CSulRenderInstances::create can not find image " << sFileTree << std::endl;
+		}
+		else
+		{
+			osg::Image* pImageTree = osgDB::readImageFile( sFileTree );
+			osg::Texture2D* pTex = new osg::Texture2D( pImageTree );
+			pTex->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::LINEAR);
+			pTex->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::LINEAR);
+			pTex->setResizeNonPowerOfTwoHint(false);
+			ss->setTextureAttributeAndModes( 0, pTex, osg::StateAttribute::ON );
+		}
+	}
+
+	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
+	ss->setMode( GL_ALPHA_TEST, osg::StateAttribute::ON );
+	ss->setAttribute( new osg::AlphaFunc(osg::AlphaFunc::GREATER, 0.9f), osg::StateAttribute::ON );
+
+	ss->addUniform( new osg::Uniform( "use_tree_shader", 2 ) );
+	
+	osg::Uniform* tmp = new osg::Uniform( osg::Uniform::SAMPLER_2D, "tex" );
+	tmp->set( (int)m_texUnit );
+	ss->addUniform( tmp );
+
+	tmp = new osg::Uniform( osg::Uniform::SAMPLER_2D, "texPositions" );
+	tmp->set( (int)1 );
+	ss->addUniform( tmp );
+
+	ss->addUniform( new osg::Uniform( "texSizeSquared", (int)m_texSizeSquared ) );
+	ss->addUniform( new osg::Uniform( "numInstances", (int)m_numInstances ) );
+	ss->addUniform( new osg::Uniform( "minSize", m_min ) );
+	ss->addUniform( new osg::Uniform( "maxSize", m_max ) );
+}
+
+void CSulRenderInstances::createBillboard()
 {
 	CSulGeomBillboardInstancing* pBillboard = new CSulGeomBillboardInstancing( m_numInstances, m_bUseZDirectionNormal );
-
 	addChild( pBillboard );
 
 	pBillboard->getDrawable( 0 )->setInitialBound( m_bb );
@@ -126,12 +178,23 @@ void CSulRenderInstances::create()
 	ss->setMode( GL_ALPHA_TEST, osg::StateAttribute::ON );
 	ss->setAttribute( new osg::AlphaFunc(osg::AlphaFunc::GREATER, 0.9f), osg::StateAttribute::ON );
 
-	createShaders();
-}
 
-void CSulRenderInstances::createShaders()
-{
-	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights, m_min, m_max, 0, m_bSuppressShaders );
+	ss->addUniform( new osg::Uniform( "use_tree_shader", 1 ) );
+	
+	osg::Uniform* tmp = new osg::Uniform( osg::Uniform::SAMPLER_2D, "tex" );
+	tmp->set( (int)m_texUnit );
+	ss->addUniform( tmp );
+
+	tmp = new osg::Uniform( osg::Uniform::SAMPLER_2D, "texPositions" );
+	tmp->set( 1 );
+	ss->addUniform( tmp );
+
+	ss->addUniform( new osg::Uniform( "texSizeSquared", (int)m_texSizeSquared ) );
+	ss->addUniform( new osg::Uniform( "numInstances", (int)m_numInstances ) );
+	ss->addUniform( new osg::Uniform( "minSize", m_min ) );
+	ss->addUniform( new osg::Uniform( "maxSize", m_max ) );
+
+//	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights, m_min, m_max, 0, m_bSuppressShaders );
 }
 
 sigma::uint32 CSulRenderInstances::getNumInstances() const

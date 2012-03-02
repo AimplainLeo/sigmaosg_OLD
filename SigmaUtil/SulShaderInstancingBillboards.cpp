@@ -6,12 +6,14 @@
 CSulShaderInstancingBillboards::CSulShaderInstancingBillboards( osg::Node* pNode, sigma::int32 numInstances, sigma::int32 texUnit, sigma::int32 texSizeSquared, unsigned int useLights, float min, float max, osg::Program* pProg, bool bSuppressShader ) :
 CSulShaderBase( pNode, 0, bSuppressShader )
 {
+	/*
 	if ( !pProg )
 	{
 		addShaderFrag( "shaders/instancing_billboards_collision.frag" );
 		addShaderVert( "shaders/instancing_billboards.vert" );
 	}
-		
+	*/
+
 	m_rUniform_windFactor = new osg::Uniform( "windFactor", 1.0f );
 	//m_rUniform_windFactor->set( 1.0f );
 	m_rSS->addUniform( m_rUniform_windFactor );

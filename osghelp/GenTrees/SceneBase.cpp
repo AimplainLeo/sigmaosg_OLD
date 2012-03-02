@@ -36,6 +36,23 @@ m_bRenderMe( bRenderMe )
 	}
 }
 
+CSceneBase::CSceneBase( bool bRenderMe, const osg::Vec4& clipColor ) :
+m_clipColor( clipColor ),
+m_bRenderMe( bRenderMe )
+{
+}
+
+void CSceneBase::create( osg::Node* pScene )
+{
+	m_rPat = new osg::PositionAttitudeTransform;
+	m_rScene = pScene;
+	m_rPat->addChild( m_rScene );
+	addChild( m_rPat );
+
+	m_rComputeBounds = new osg::ComputeBoundsVisitor;
+	m_rScene->accept( *m_rComputeBounds );
+}
+
 double CSceneBase::getLat()
 {
 	return m_loc->latitude();
@@ -170,7 +187,7 @@ void CSceneBase::clipTriangles( const CSulExtractGeometry& sceneGeometry, const 
 	if ( m_vecTriangles.size() )
 	{
 		osg::PositionAttitudeTransform* pPat = new osg::PositionAttitudeTransform;
-		pPat->setPosition( osg::Vec3(0,0,20) );
+		pPat->setPosition( osg::Vec3(0,0,10) );
 
 		CSulGeomTriangleList* pGeomTris = new CSulGeomTriangleList( m_vecTriangles );
 		pGeomTris->setColor( m_clipColor );

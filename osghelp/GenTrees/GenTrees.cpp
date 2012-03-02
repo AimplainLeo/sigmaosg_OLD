@@ -5,6 +5,7 @@
 #include "ParserXml.h"
 #include "SceneTerrain.h"
 #include <SigmaUtil/SulRenderInstances.h>
+#include <SigmaUtil/SulGeomAxis.h>
 #include <osg/ArgumentParser>
 #include <osgViewer/Viewer>
 #include <osgDB/FileUtils>
@@ -17,7 +18,7 @@
 #include "AddGeometryFromPrototypeFunctor.h"
 #include "GeometryInstancingBuilder.h"
 
-osg::ref_ptr<osg::Geometry> createSingleTreeCollisionGeometry(float s)
+osg::ref_ptr<osg::Geometry> createSingleTreeCollisionGeometry( float s )
 {
 	osg::ref_ptr<osg::Vec3Array> vertices = new osg::Vec3Array;
 	vertices->push_back( osg::Vec3(-0.5f, 0.0f, 0.0f) * s );
@@ -45,11 +46,11 @@ osg::ref_ptr<osg::Node> createTreeCollisionGeometry( const std::vector<osg::Vec3
 	return builder.build();
 }
 
-void writeFile( osg::Node* pInstances, osg::Node* pGeomCol, const CSulString& sFile )
+void writeFile( osg::Node* pInstances, osg::Node* pGeomCol, const CSulString& sFile, CParserXml* xml )
 {
 	osg::ref_ptr<osg::Group> pGroupSave = new osg::Group;
 	pGroupSave->addChild( pInstances );
-	
+
 	if ( pGeomCol )
 	{
 		pGroupSave->addChild( pGeomCol );
@@ -59,7 +60,7 @@ void writeFile( osg::Node* pInstances, osg::Node* pGeomCol, const CSulString& sF
 	osgDB::writeNodeFile( *pGroupSave, sFile );
 
 // for debugging
-//	osgDB::writeNodeFile( *pGroupSave, "debug.osg" );
+	//osgDB::writeNodeFile( *pGroupSave, "debug.osg" );
 }
 
 int _tmain( int argc, char** argv )
@@ -152,8 +153,8 @@ int _tmain( int argc, char** argv )
 	float maxTree					= rXml->getMaxTree();
 	bool bSuppressShaders			= rXml->getSuppressShaders();
 	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights, true, bSuppressShaders );
-	pRenderInstances->create();
-	//rRoot->addChild( pRenderInstances );
+	pRenderInstances->createBillboard();
+	//pRenderInstances->createCrossQuad();
 	rXml->getSceneTerrain()->getPat()->addChild( pRenderInstances );
 
 	osg::ref_ptr<osg::Node> rGeomCol; 
@@ -178,10 +179,23 @@ int _tmain( int argc, char** argv )
 		++i;
 	}
 
+	////////////////////////////////////////////
+	// add shader if requested here
+	////////////////////////////////////////////
+
+	osg::Program* program = rXml->getProgram();
+	if ( program )
+	{
+		pRenderInstances->getOrCreateStateSet()->setAttribute( program );
+	}
+
+	////////////////////////////////////////////
 	// we should write the output file here
+	////////////////////////////////////////////
+
 	if ( !rXml->getOutputFile().empty() )
 	{
-		writeFile( pRenderInstances, rGeomCol, rXml->getOutputFile() );
+		writeFile( pRenderInstances, rGeomCol, rXml->getOutputFile(), rXml );
 
 		/*
 		osg::ref_ptr<osg::Group> pGroupSave = new osg::Group;
@@ -196,9 +210,17 @@ int _tmain( int argc, char** argv )
 		*/
 	}
 
+	std::cout << "Number of trees: " << pRenderInstances->getNumInstances() << std::endl;
+
 	// if the xml doesn't have viewer suppression then we show the result
 	if ( !rXml->isViewerSuppressed() )
 	{
+		if ( rXml->pivotVisible() )
+		{
+			CSulGeomAxis* p = new CSulGeomAxis( 1.0f );
+			rRoot->addChild( p );
+		}
+
 		rRoot->addChild( rXml->getSceneTerrain() );
 
 		if ( rXml->getSceneShape()->isRenderMe() )

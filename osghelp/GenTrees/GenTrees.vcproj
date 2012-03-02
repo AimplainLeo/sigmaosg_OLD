@@ -185,6 +185,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\myass2.xml"
+				>
+			</File>
+			<File
 				RelativePath=".\ParserXml.cpp"
 				>
 			</File>
@@ -281,6 +285,46 @@
 				</File>
 				<File
 					RelativePath=".\GeometryInstancingBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="shaders"
+				>
+				<File
+					RelativePath=".\shaders\funcFogOpenGL.frag"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\funcLighting.frag"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\funcLighting.vert"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\funcLightingOpenGL.frag"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\funcLightingOpenGL.vert"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\funcTree.frag"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\funcTree.vert"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\main_standard.frag"
+					>
+				</File>
+				<File
+					RelativePath=".\shaders\main_standard.vert"
 					>
 				</File>
 			</Filter>

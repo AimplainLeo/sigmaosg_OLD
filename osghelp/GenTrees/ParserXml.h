@@ -54,6 +54,10 @@ public:
 
 	bool				getSuppressShaders();
 
+	osg::Program*		getProgram();
+
+	bool				pivotVisible();
+
 private:
 	void				loadFinished();
 
@@ -94,6 +98,8 @@ private:
 	bool										m_bIgnoreGeo;
 
 	VEC_UNIFORMDATA								m_vecUniformList;
+
+	osg::ref_ptr<osg::Program>					m_rShaderProgram;
 };
 
 #endif // __PARSERXML_H__

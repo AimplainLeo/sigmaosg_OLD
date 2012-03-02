@@ -21,6 +21,30 @@ m_bSuppressShaders( false )
 
 void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
+	if ( sName=="SHADER" )
+	{
+		CSulString sType = pAttr->get( "type" );
+		CSulString sFile = pAttr->get( "file" );
+
+		if ( !m_rShaderProgram.valid() )
+			m_rShaderProgram = new osg::Program;
+
+		osg::Shader* p = 0;
+
+		if ( sType=="vertex" )
+		{
+			p = new osg::Shader( osg::Shader::VERTEX );
+		}
+
+		if ( sType=="fragment" )
+		{
+			p = new osg::Shader( osg::Shader::FRAGMENT );
+		}
+
+		p->loadShaderSourceFromFile( sFile );
+		m_rShaderProgram->addShader( p );
+	}
+
 	if ( sName=="GEN" )
 	{
 		m_useLights			= strtoul( pAttr->get( "uselights" ).c_str(), 0, 2 );
@@ -38,15 +62,36 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 
 	if ( sName=="TERRAIN" )
 	{
-		CSulString sTerrainFile = pAttr->get( "file" );
-		if (!m_sInputFileOverride.empty())
-		{
-			sTerrainFile = m_sInputFileOverride;
-		}
+		// if bDebug is true it means that there will be no file associated with the terrain, but a user generated grid
+		bool bDebug = false;
+		if ( pAttr->exist( "debug" ) )
+			bDebug = pAttr->get( "debug" ).asBool();
+
 		float offsetX = pAttr->get( "offsetx" ).asFloat();
 		float offsetY = pAttr->get( "offsety" ).asFloat();
 		bool bRenderMe = pAttr->get( "renderme" ).asBool();
-		m_rSceneTerrain = new CSceneTerrain( sTerrainFile, bRenderMe, offsetX, offsetY );
+
+		if ( !bDebug )
+		{
+			CSulString sTerrainFile = pAttr->get( "file" );
+			if (!m_sInputFileOverride.empty())
+			{
+				sTerrainFile = m_sInputFileOverride;
+			}
+			m_rSceneTerrain = new CSceneTerrain( sTerrainFile, bRenderMe, offsetX, offsetY );
+		}
+		else
+		{
+			sigma::uint32 gx = pAttr->get( "gridx" ).asUint32();
+			sigma::uint32 gy = pAttr->get( "gridy" ).asUint32();
+			float cellw = pAttr->get( "cellw" ).asFloat();
+			float cellh = pAttr->get( "cellw" ).asFloat();
+			sigma::uint32 subx = pAttr->get( "subx" ).asUint32();
+			sigma::uint32 suby = pAttr->get( "suby" ).asUint32();
+
+			// debug
+			m_rSceneTerrain = new CSceneTerrain( gx, gy, cellw, cellh, subx, suby, bRenderMe, offsetX, offsetY );
+		}
 
 		if ( !m_bIgnoreGeo )
 		{
@@ -59,6 +104,23 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 
 		// get boundingbox planes
 		m_vecBoundingBoxPlanes = m_rSceneTerrain->getBoundingBoxPlanes();
+	}
+
+	if ( sName=="SHAPE_QUAD" )
+	{
+		float w = pAttr->get( "w" ).asFloat();
+		float h = pAttr->get( "h" ).asFloat();
+		bool bRenderMe = pAttr->get( "renderme" ).asBool();
+
+		m_rSceneShape = new CSceneShape( w, h, bRenderMe );
+
+		if ( pAttr->exist( "offsetz" ) )
+		{
+			m_rSceneShape->addOffset( 0, 0, pAttr->get( "offsetz" ).asFloat() );
+		}
+
+		// clip shape to scenes boundingbox planes
+		m_rSceneShape->clip( m_vecBoundingBoxPlanes );
 	}
 
 	if ( sName=="SHAPE" )
@@ -256,4 +318,14 @@ bool CParserXml::hasColGeom()
 bool CParserXml::getSuppressShaders()
 {
 	return m_bSuppressShaders;
+}
+
+osg::Program* CParserXml::getProgram()
+{
+	return m_rShaderProgram;
+}
+
+bool CParserXml::pivotVisible()
+{
+	return m_showPivots;
 }
