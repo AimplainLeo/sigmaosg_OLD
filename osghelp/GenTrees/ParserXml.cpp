@@ -15,12 +15,21 @@ m_minTree( 3.0f ),
 m_maxTree( 3.0f ),
 m_bColGeom( false ),
 m_bIgnoreGeo( false ),
-m_bSuppressShaders( false )
+m_bSuppressShaders( false ),
+m_bCells( false )
 {
 }
 
 void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 {
+	if ( sName=="CELL" )
+	{
+		CSulString sx = pAttr->get( "cx" );
+		CSulString sy = pAttr->get( "cy" );
+		m_cellxy.set( sx.asFloat(), sy.asFloat() );
+		m_bCells = true;
+	}
+
 	if ( sName=="SHADER" )
 	{
 		CSulString sType = pAttr->get( "type" );
@@ -328,4 +337,14 @@ osg::Program* CParserXml::getProgram()
 bool CParserXml::pivotVisible()
 {
 	return m_showPivots;
+}
+
+osg::Vec2 CParserXml::getCellXY()
+{
+	return m_cellxy;
+}
+
+bool CParserXml::cells()
+{
+	return m_bCells;
 }

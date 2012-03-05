@@ -193,8 +193,6 @@ void CSulRenderInstances::createBillboard()
 	ss->addUniform( new osg::Uniform( "numInstances", (int)m_numInstances ) );
 	ss->addUniform( new osg::Uniform( "minSize", m_min ) );
 	ss->addUniform( new osg::Uniform( "maxSize", m_max ) );
-
-//	CSulShaderInstancingBillboards* p = new CSulShaderInstancingBillboards( this, m_numInstances, m_texUnit, m_texSizeSquared, m_useLights, m_min, m_max, 0, m_bSuppressShaders );
 }
 
 sigma::uint32 CSulRenderInstances::getNumInstances() const

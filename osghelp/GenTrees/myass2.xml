@@ -10,7 +10,7 @@
   
   <TREE 
     sizemultiplier="4.0" 
-    radius_between_trees="1.0"
+    radius_between_trees="5.0"
     min="3.0"
     max="5.0"
   />
@@ -19,29 +19,25 @@
     debug="true"
     gridx="2"
     gridy="2"
-    cellw="1000"
-    cellh="1000"
+    cellw="100"
+    cellh="100"
     subx="5"
     suby="5"
   />
 
   <SHAPE_QUAD
-    w="1000"
-    h="1000"
+    w="100"
+    h="100"
     offsetz="5"
-    renderme="false"
+    renderme="true"
   />
-
-  <!--
-  <UNIFORM name="use_tree_shader" value="1"     type="INT"/>
-  <UNIFORM name="tex"             value="0"     type="SAMPLER_2D"/>
-  <UNIFORM name="texPositions"    value="1"     type="SAMPLER_2D"/>
-  <UNIFORM name="texSizeSquared"  value="8"     type="INT"/>
-  <UNIFORM name="numInstances"    value="20"    type="INT"/>
-  <UNIFORM name="minSize"         value="3"     type="FLOAT"/>
-  <UNIFORM name="maxSize"         value="5"     type="FLOAT"/>
-  -->
-
+  
+ 
+  <CELL 
+    cx="2"  
+    cy="2"
+  />
+ 
 
   <SHADER type="vertex"   file="shaders/funcTree.vert"/>
   <SHADER type="vertex"   file="shaders/funcLightingOpenGL.vert"/>

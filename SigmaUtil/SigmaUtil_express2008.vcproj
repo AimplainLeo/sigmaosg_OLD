@@ -1279,6 +1279,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulRenderCellInstances.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulRenderCellInstances.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulRenderInstances.cpp"
 						>
 					</File>

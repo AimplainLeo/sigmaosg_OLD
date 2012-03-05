@@ -58,6 +58,9 @@ public:
 
 	bool				pivotVisible();
 
+	bool				cells();
+	osg::Vec2			getCellXY();
+
 private:
 	void				loadFinished();
 
@@ -100,6 +103,9 @@ private:
 	VEC_UNIFORMDATA								m_vecUniformList;
 
 	osg::ref_ptr<osg::Program>					m_rShaderProgram;
+
+	osg::Vec2									m_cellxy;
+	bool										m_bCells;
 };
 
 #endif // __PARSERXML_H__

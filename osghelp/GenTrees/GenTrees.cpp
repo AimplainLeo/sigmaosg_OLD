@@ -6,6 +6,7 @@
 #include "SceneTerrain.h"
 #include <SigmaUtil/SulRenderInstances.h>
 #include <SigmaUtil/SulGeomAxis.h>
+#include <SigmaUtil/SulRenderCellInstances.h>
 #include <osg/ArgumentParser>
 #include <osgViewer/Viewer>
 #include <osgDB/FileUtils>
@@ -144,7 +145,7 @@ int _tmain( int argc, char** argv )
 	// these are the actual trees that are generated
 	sigma::uint32 texUnit			= rXml->getTexUnit();
 	bool bSuppressTexture			= rXml->isTextureSuppressed();
-	osg::Image* pImage				= rXml->getGen()->getImage();
+	osg::Image* pImage				= rXml->getGen()->getImage();			// this is the texture that contains the positions for the trees
 	sigma::uint32 posCount			= rXml->getGen()->getCount();
 	sigma::uint32 texSizeSquared	= rXml->getGen()->getTexSizeSquared();
 	sigma::uint32 useLights			= rXml->getUseLights();
@@ -152,9 +153,29 @@ int _tmain( int argc, char** argv )
 	float minTree					= rXml->getMinTree();
 	float maxTree					= rXml->getMaxTree();
 	bool bSuppressShaders			= rXml->getSuppressShaders();
-	CSulRenderInstances* pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights, true, bSuppressShaders );
-	pRenderInstances->createBillboard();
-	//pRenderInstances->createCrossQuad();
+	
+//	CSulRenderInstances* pRenderInstances = 0;
+	osg::Group* pRenderInstances = 0;
+
+	bool bUseZDirectionNormal = true;
+
+	if ( rXml->cells() )
+	{
+		osg::Vec2 cellXY = rXml->getCellXY();
+
+		pRenderInstances = new CSulRenderCellInstances( cellXY, pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, bUseZDirectionNormal, bSuppressShaders );
+		//((CSulRenderCellInstances*)pRenderInstances)->createCrossQuad();
+		((CSulRenderCellInstances*)pRenderInstances)->process();
+	}
+	else
+	{
+		pRenderInstances = new CSulRenderInstances( pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, texSizeSquared, useLights, true, bSuppressShaders );
+		//pRenderInstances->createBillboard();
+		((CSulRenderInstances*)pRenderInstances)->createCrossQuad();
+	}
+
+	std::cout << "Number of trees: " << posCount << std::endl;
+
 	rXml->getSceneTerrain()->getPat()->addChild( pRenderInstances );
 
 	osg::ref_ptr<osg::Node> rGeomCol; 
@@ -209,8 +230,6 @@ int _tmain( int argc, char** argv )
 		osgDB::writeNodeFile( *pGroupSave, rXml->getOutputFile() );
 		*/
 	}
-
-	std::cout << "Number of trees: " << pRenderInstances->getNumInstances() << std::endl;
 
 	// if the xml doesn't have viewer suppression then we show the result
 	if ( !rXml->isViewerSuppressed() )
