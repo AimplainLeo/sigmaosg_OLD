@@ -29,13 +29,15 @@
     w="100"
     h="100"
     offsetz="5"
-    renderme="true"
+    renderme="false"
   />
   
  
   <CELL 
     cx="2"  
     cy="2"
+    lod_dist_min="100"
+    lod_dist_max="200"
   />
  
 

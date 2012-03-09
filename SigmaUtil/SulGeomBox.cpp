@@ -6,8 +6,19 @@
 
 
 CSulGeomBox::CSulGeomBox( float extent ) :
-osg::Geode(),
-m_extent( extent )
+CSulGeomGeode(),
+m_extentX( extent ),
+m_extentY( extent ),
+m_extentZ( extent )
+{
+	createDrawable();
+}
+
+CSulGeomBox::CSulGeomBox( float extentX, float extentY, float extentZ ) :
+CSulGeomGeode(),
+m_extentX( extentX ),
+m_extentY( extentY ),
+m_extentZ( extentZ )
 {
 	createDrawable();
 }
@@ -19,14 +30,14 @@ void CSulGeomBox::createDrawable()
 
 	// vertices
 	osg::Vec3Array *verts = new osg::Vec3Array;
-	verts->push_back(osg::Vec3(-m_extent, -m_extent,  m_extent));
-	verts->push_back(osg::Vec3(-m_extent,  m_extent,  m_extent));
-	verts->push_back(osg::Vec3( m_extent,  m_extent,  m_extent));
-	verts->push_back(osg::Vec3( m_extent, -m_extent,  m_extent));
-	verts->push_back(osg::Vec3(-m_extent, -m_extent, -m_extent));
-	verts->push_back(osg::Vec3(-m_extent,  m_extent, -m_extent));
-	verts->push_back(osg::Vec3( m_extent,  m_extent, -m_extent));
-	verts->push_back(osg::Vec3( m_extent, -m_extent, -m_extent));
+	verts->push_back(osg::Vec3(-m_extentX, -m_extentY,  m_extentZ));
+	verts->push_back(osg::Vec3(-m_extentX,  m_extentY,  m_extentZ));
+	verts->push_back(osg::Vec3( m_extentX,  m_extentY,  m_extentZ));
+	verts->push_back(osg::Vec3( m_extentX, -m_extentY,  m_extentZ));
+	verts->push_back(osg::Vec3(-m_extentX, -m_extentY, -m_extentZ));
+	verts->push_back(osg::Vec3(-m_extentX,  m_extentY, -m_extentZ));
+	verts->push_back(osg::Vec3( m_extentX,  m_extentY, -m_extentZ));
+	verts->push_back(osg::Vec3( m_extentX, -m_extentY, -m_extentZ));
 	pGeo->setVertexArray( verts );
 
     // texture coordinates

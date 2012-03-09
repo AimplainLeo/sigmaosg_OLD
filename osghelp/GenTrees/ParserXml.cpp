@@ -16,7 +16,9 @@ m_maxTree( 3.0f ),
 m_bColGeom( false ),
 m_bIgnoreGeo( false ),
 m_bSuppressShaders( false ),
-m_bCells( false )
+m_bCells( false ),
+m_lodDist_min( 0.0f ),
+m_lodDist_max( 0.0f )
 {
 }
 
@@ -28,6 +30,12 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		CSulString sy = pAttr->get( "cy" );
 		m_cellxy.set( sx.asFloat(), sy.asFloat() );
 		m_bCells = true;
+
+		if ( pAttr->exist( "lod_dist_min" ) && pAttr->exist( "lod_dist_max" ) )
+		{
+			m_lodDist_min = pAttr->get( "lod_dist_min" ).asFloat();
+			m_lodDist_max = pAttr->get( "lod_dist_max" ).asFloat();
+		}
 	}
 
 	if ( sName=="SHADER" )
@@ -347,4 +355,14 @@ osg::Vec2 CParserXml::getCellXY()
 bool CParserXml::cells()
 {
 	return m_bCells;
+}
+
+float CParserXml::getLodDistMin()
+{
+	return m_lodDist_min;
+}
+
+float CParserXml::getLodDistMax()
+{
+	return m_lodDist_max;
 }

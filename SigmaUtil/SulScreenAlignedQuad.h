@@ -14,7 +14,7 @@ class SUL_EXPORT CSulScreenAlignedQuad : public osg::Referenced
 public:
 										CSulScreenAlignedQuad( const osg::Vec3& vPos, float w, float h, float fViewW, float fViewH );
 
-	osg::Projection*					getProjection();
+	osg::Projection*					getProjection();	// this is what you usually want to add to your scene
 	osg::Group*							getGroup();
 	CSulGeomQuad*						getQuad();
 

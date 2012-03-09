@@ -61,6 +61,9 @@ public:
 	bool				cells();
 	osg::Vec2			getCellXY();
 
+	float				getLodDistMin();
+	float				getLodDistMax();
+
 private:
 	void				loadFinished();
 
@@ -106,6 +109,9 @@ private:
 
 	osg::Vec2									m_cellxy;
 	bool										m_bCells;
+
+	float										m_lodDist_min;
+	float										m_lodDist_max;
 };
 
 #endif // __PARSERXML_H__

@@ -7,6 +7,10 @@
 #include <SigmaUtil/SulRenderInstances.h>
 #include <SigmaUtil/SulGeomAxis.h>
 #include <SigmaUtil/SulRenderCellInstances.h>
+#include <SigmaUtil/SulRTT.h>
+#include <SigmaUtil/SulScreenAlignedQuad.h>
+#include <SigmaUtil/SulNodeCallbackCameraSync.h>
+#include <SigmaUtil/SulGeomBox.h>
 #include <osg/ArgumentParser>
 #include <osgViewer/Viewer>
 #include <osgDB/FileUtils>
@@ -14,10 +18,16 @@
 #include <osgGA/StateSetManipulator>
 #include <osgGA/TerrainManipulator>
 #include <osgViewer/ViewerEventHandlers>
+#include <osg/ShapeDrawable>
+#include <osg/TextureCubeMap>
+#include <osg/lod>
 #include <iostream>
 
 #include "AddGeometryFromPrototypeFunctor.h"
 #include "GeometryInstancingBuilder.h"
+
+osg::ref_ptr<osgViewer::Viewer> rViewer;
+osg::ref_ptr<osg::Group>		rRoot;
 
 osg::ref_ptr<osg::Geometry> createSingleTreeCollisionGeometry( float s )
 {
@@ -49,7 +59,23 @@ osg::ref_ptr<osg::Node> createTreeCollisionGeometry( const std::vector<osg::Vec3
 
 void writeFile( osg::Node* pInstances, osg::Node* pGeomCol, const CSulString& sFile, CParserXml* xml )
 {
-	osg::ref_ptr<osg::Group> pGroupSave = new osg::Group;
+	osg::ref_ptr<osg::Group> pGroupSave;
+
+	if ( xml->getLodDistMin()>0 )
+	{
+		osg::LOD* p = new osg::LOD;
+		pGroupSave = p;
+
+		float min = xml->getLodDistMin();
+		float max = xml->getLodDistMax();
+		p->setRange( 0, min, max );
+	}
+	else
+	{
+		pGroupSave = new osg::Group;
+	}
+
+	
 	pGroupSave->addChild( pInstances );
 
 	if ( pGeomCol )
@@ -62,6 +88,213 @@ void writeFile( osg::Node* pInstances, osg::Node* pGeomCol, const CSulString& sF
 
 // for debugging
 	//osgDB::writeNodeFile( *pGroupSave, "debug.osg" );
+}
+
+enum ORTHOVIEW
+{
+	FRONT,
+	BACK,
+	LEFT,
+	RIGHT,
+	TOP,
+	BOTTOM
+};
+
+//osg::Texture2D* createTextureFromOrthoView( osgViewer::Viewer* viewer, sigma::uint32 texW, sigma::uint32 texH, osg::Node* pRenderMe, ORTHOVIEW eOrthoView )
+osg::ref_ptr<osg::Image> createTextureFromOrthoView( osgViewer::Viewer* viewer, sigma::uint32 texW, sigma::uint32 texH, osg::Node* pRenderMe, ORTHOVIEW eOrthoView )
+{
+	//osg::ref_ptr<CSulRTT> rtt = new CSulRTT( texW, texH, CSulRTT::SETUP_ORTHO_FRONT );
+	CSulRTT* rtt = new CSulRTT( texW, texH, CSulRTT::SETUP_ORTHO_FRONT );
+	rtt->setClearColor( osg::Vec4(0,0,0,0) );
+	rtt->addChild( pRenderMe );
+
+	// bounding box
+	osg::ComputeBoundsVisitor* tmp = new osg::ComputeBoundsVisitor;
+	pRenderMe->accept( *tmp );
+	osg::BoundingBox bb = tmp->getBoundingBox();
+
+
+	// force camera into ortha and look at trees
+	float l;
+	float r;
+	float t = bb.zMax();
+	float b = bb.zMin();
+	
+	osg::Matrix m;
+	switch ( eOrthoView )
+	{
+		case FRONT:
+			{
+				float mm[16] =
+				{
+					 1, 0,  0, 0,		// x,y,z
+					 0, 0, -1, 0,
+					 0, 1,  0, 0,
+					 0, 0,  bb.yMin(), 1
+				};
+				
+				m.set( mm );
+
+				l = bb.xMin();
+				r = bb.xMax();
+				
+				t = bb.zMin();
+				b = bb.zMax();
+			}
+			break;
+
+		case LEFT:
+			{
+				float mm[16] =
+				{
+					  0, 0, -1, 0,		// x,y,z
+					  0, 1,  0, 0,
+					  1, 0,  0, 0,
+					  0, 0,  bb.xMin(), 1
+				};
+
+				m.set( mm );
+				t = bb.yMax();
+				b = bb.yMin();
+
+				r = bb.zMin();
+				l = bb.zMax();
+			}
+			break;
+
+		case RIGHT:
+			{
+				float mm[16] =
+				{
+					  0, 0, 1, 0,		// x,y,z
+					  0, 1,  0, 0,
+					  1, 0,  0, 0,
+					  0, 0,  -bb.xMax(), 1
+				};
+				m.set( mm );
+
+				r = bb.zMax();
+				l = bb.zMin();
+
+				b = bb.yMin();
+				t = bb.yMax();
+			}
+			break;
+
+		case BACK:
+			{
+				float mm[16] =
+				{
+					 -1, 0,  0, 0,		// x,y,z
+					  0, 0,  1, 0,
+					  0, 1,  0, 0,
+					  0, 0,  -bb.yMax(), 1
+				};
+				m.set( mm );
+				r = -bb.xMax();
+				l = -bb.xMin();
+			}
+			break;
+
+		case TOP:
+			{
+				float mm[16] =
+				{
+					  1, 0,  0, 0,		// x,y,z
+					  0, 1,  0, 0,
+					  0, 0,  1, 0,
+					  0, 0,  -bb.zMax(), 1
+				};
+				m.set( mm );
+				r = bb.xMin();
+				l = bb.xMax();
+				t = bb.yMax();
+				b = bb.yMin();
+			}
+			break;
+
+		case BOTTOM:
+			{
+				float mm[16] =
+				{
+					  1, 0,  0, 0,		// x,y,z
+					  0, -1,  0, 0,
+					  0, 0,  -1, 0,
+					  0, 0,  bb.zMin(), 1
+				};
+				m.set( mm );
+				l = bb.xMin();
+				r = bb.xMax();
+				b = -bb.yMin();
+				t = -bb.yMax();
+			}
+			break;
+
+	}
+	rtt->setViewMatrix( m );
+
+	rtt->setProjectionMatrixAsOrtho( l, r, b, t, -100000.1f, 1000000.0f  );
+
+
+	osg::ref_ptr<osg::Image> img = new osg::Image;
+	rtt->attach( osg::Camera:: COLOR_BUFFER, img );
+
+	rRoot->addChild( rtt );
+	viewer->frame();
+	rRoot->removeChild( rtt );	
+
+//	return rtt->getTexture();
+	return img;
+}
+
+void test( osg::Node* pRenderInstances )
+{
+	float w = 512;
+	float h = 256;
+
+	/*
+	osg::Texture2D* texTop = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, TOP );
+	osg::Texture2D* texBottom = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, BOTTOM );
+	osg::Texture2D* texLeft = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, LEFT );
+	osg::Texture2D* texRight = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, RIGHT );
+	osg::Texture2D* texFront = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, FRONT );
+	osg::Texture2D* texBack = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, BACK );
+	*/
+
+	osg::ref_ptr<osg::Image> imgTop = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, TOP );
+	osg::ref_ptr<osg::Image> imgBottom = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, BOTTOM );
+	osg::ref_ptr<osg::Image> imgLeft = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, LEFT );
+	osg::ref_ptr<osg::Image> imgRight = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, RIGHT );
+	osg::ref_ptr<osg::Image> imgFront = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, FRONT );
+	osg::ref_ptr<osg::Image> imgBack = createTextureFromOrthoView( rViewer, w, h, pRenderInstances, BACK );
+
+	// now we need to create a cube and add textures
+	osg::TextureCubeMap* pTexCube = new osg::TextureCubeMap;
+	pTexCube->setImage( osg::TextureCubeMap::POSITIVE_X, imgRight );
+	pTexCube->setImage( osg::TextureCubeMap::NEGATIVE_X, imgLeft );
+	pTexCube->setImage( osg::TextureCubeMap::POSITIVE_Y, imgFront );
+	pTexCube->setImage( osg::TextureCubeMap::NEGATIVE_Y, imgBack );
+	pTexCube->setImage( osg::TextureCubeMap::POSITIVE_Z, imgBottom );
+	pTexCube->setImage( osg::TextureCubeMap::NEGATIVE_Z, imgTop );
+
+	osg::ComputeBoundsVisitor* tmp = new osg::ComputeBoundsVisitor;
+	pRenderInstances->accept( *tmp );
+	osg::BoundingBox bb = tmp->getBoundingBox();
+
+	CSulGeomBox* pBox = new CSulGeomBox( (bb.xMax()-bb.xMin())/2.0f, (bb.yMax()-bb.yMin())/2.0f, (bb.zMax()-bb.zMin())/2.0f );
+	pBox->zbuffer( false );
+	pBox->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
+	pBox->getOrCreateStateSet()->setTextureAttributeAndModes( 0, pTexCube, osg::StateAttribute::ON );
+	pBox->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+	rRoot->addChild( pBox );
+
+
+	
+	/*
+	osg::ref_ptr<CSulScreenAlignedQuad> test = new CSulScreenAlignedQuad( osg::Vec3(w/2, h/2, 0), w, h, 800, 600 );
+	test->setTexture( tex );
+	rRoot->addChild( test->getProjection() );
+	*/
 }
 
 int _tmain( int argc, char** argv )
@@ -140,7 +373,7 @@ int _tmain( int argc, char** argv )
 	}
 	rXml->load( xmlFile );
 
-	osg::ref_ptr<osg::Group> rRoot = new osg::Group;
+	rRoot = new osg::Group;
  
 	// these are the actual trees that are generated
 	sigma::uint32 texUnit			= rXml->getTexUnit();
@@ -154,7 +387,6 @@ int _tmain( int argc, char** argv )
 	float maxTree					= rXml->getMaxTree();
 	bool bSuppressShaders			= rXml->getSuppressShaders();
 	
-//	CSulRenderInstances* pRenderInstances = 0;
 	osg::Group* pRenderInstances = 0;
 
 	bool bUseZDirectionNormal = true;
@@ -164,7 +396,6 @@ int _tmain( int argc, char** argv )
 		osg::Vec2 cellXY = rXml->getCellXY();
 
 		pRenderInstances = new CSulRenderCellInstances( cellXY, pImage, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, bUseZDirectionNormal, bSuppressShaders );
-		//((CSulRenderCellInstances*)pRenderInstances)->createCrossQuad();
 		((CSulRenderCellInstances*)pRenderInstances)->process();
 	}
 	else
@@ -177,6 +408,10 @@ int _tmain( int argc, char** argv )
 	std::cout << "Number of trees: " << posCount << std::endl;
 
 	rXml->getSceneTerrain()->getPat()->addChild( pRenderInstances );
+
+	///////////////////////////////////////////////////////////////
+	// collision geometry
+	///////////////////////////////////////////////////////////////
 
 	osg::ref_ptr<osg::Node> rGeomCol; 
 	if ( rXml->hasColGeom() )
@@ -209,6 +444,35 @@ int _tmain( int argc, char** argv )
 	{
 		pRenderInstances->getOrCreateStateSet()->setAttribute( program );
 	}
+
+	///////////////////////////////////////////////////////////////
+	// lod?
+	//
+	//	test by creating a cube of the boundingbox
+	//	
+	///////////////////////////////////////////////////////////////
+
+	rViewer = new osgViewer::Viewer;
+	rViewer->init();
+	rViewer->setThreadingModel( osgViewer::ViewerBase::SingleThreaded );
+	rViewer->setUpViewInWindow( 32, 32, 800, 600 );
+	rViewer->setSceneData( rRoot );
+
+	/*
+	osg::Geode* pGeode = new osg::Geode();
+
+	// we create the simplest form of shapes in OpenSceneGraph
+    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Sphere(osg::Vec3(-10.0f,-10.0f,0.0f),0.5f) ) );
+    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Box(osg::Vec3(-5.0f,-5.0f,0.0f),2.0f) ) );
+    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cone(osg::Vec3(0.0f,0.0f,0.0f),0.5f,3.0f) ) );
+    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(2.0f,2.0f,0.5f),0.5f,3.0f) ) );
+    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Capsule(osg::Vec3(5.0f,5.0f,1.0f),0.5f,3.0f) ) );
+	rRoot->addChild( pGeode );
+
+	test( pGeode );
+	*/
+	//test( pRenderInstances );
+
 
 	////////////////////////////////////////////
 	// we should write the output file here
@@ -260,10 +524,6 @@ int _tmain( int argc, char** argv )
 			++i;
 		}
 
-	    osg::ref_ptr<osgViewer::Viewer> rViewer = new osgViewer::Viewer;
-		rViewer->setUpViewInWindow( 32, 32, 800, 600 );
-
-		rViewer->setSceneData( rRoot );
 
 		// setup an event handle for statistics
 		rViewer->addEventHandler( new osgViewer::StatsHandler );

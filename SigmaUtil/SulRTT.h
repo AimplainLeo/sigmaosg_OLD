@@ -15,7 +15,8 @@ public:
 	{
 		SETUP_STANDARD,
 		SETUP_SHADOW,
-		SETUP_HDR
+		SETUP_HDR,
+		SETUP_ORTHO_FRONT
 	};
 
 public:
@@ -28,6 +29,9 @@ public:
 	// specialize methods
 	void							setupStandard();
 	void							setupShadow();
+
+private:
+	void							setupOrthoFront();
 
 private:
 	osg::ref_ptr<osg::Texture2D>	m_rTex;

@@ -40,7 +40,8 @@ CSulRTT::CSulRTT( float w, float h, ESETUP eSetup )
 	switch ( eSetup )
 	{
 		case SETUP_SHADOW: setupShadow(); break;
-		
+
+		case SETUP_ORTHO_FRONT:
 		case SETUP_STANDARD: 
 			{
 				m_format = GL_RGBA;
@@ -62,6 +63,11 @@ CSulRTT::CSulRTT( float w, float h, ESETUP eSetup )
 	}
 
 	setViewport( 0, 0, w, h );
+}
+
+void CSulRTT::setupOrthoFront()
+{
+	
 }
 
 void CSulRTT::setupStandard()
