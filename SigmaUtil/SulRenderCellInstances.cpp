@@ -34,7 +34,7 @@ m_cellXY( cellXY )
 
 }
 
-void CSulRenderCellInstances::createCrossQuad( sigma::uint32 x, sigma::uint32 y )
+osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createCrossQuadCell( sigma::uint32 x, sigma::uint32 y )
 {
 	float xmin = m_bb.xMin();
 	float xmax = m_bb.xMax();
@@ -93,10 +93,7 @@ void CSulRenderCellInstances::createCrossQuad( sigma::uint32 x, sigma::uint32 y 
 
 	// as usual
 
-	CSulGeomCrossQuadInstancing* pCrossQuad = new CSulGeomCrossQuadInstancing( m_numInstances, m_bUseZDirectionNormal );
-	addChild( pCrossQuad );
-
-	pCrossQuad->getDrawable( 0 )->setInitialBound( bb );
+	CSulGeomCrossQuadInstancing* pCrossQuad = new CSulGeomCrossQuadInstancing( (int)vecList.size(), m_bUseZDirectionNormal );
 
 	osg::StateSet* ss = pCrossQuad->getOrCreateStateSet();
 
@@ -141,6 +138,13 @@ void CSulRenderCellInstances::createCrossQuad( sigma::uint32 x, sigma::uint32 y 
 	ss->addUniform( new osg::Uniform( "numInstances", (int)vecList.size() ) );
 	ss->addUniform( new osg::Uniform( "minSize", m_min ) );
 	ss->addUniform( new osg::Uniform( "maxSize", m_max ) );
+
+	// disable the computebound
+	pCrossQuad->getDrawable( 0 )->setComputeBoundingBoxCallback(new osg::Drawable::ComputeBoundingBoxCallback);
+
+	pCrossQuad->getDrawable( 0 )->setInitialBound( bb );
+
+	return pCrossQuad;
 }
 
 void CSulRenderCellInstances::process()
@@ -148,6 +152,7 @@ void CSulRenderCellInstances::process()
 	for ( sigma::uint32 y=0; y<m_cellXY.y(); y++ )
 		for ( sigma::uint32 x=0; x<m_cellXY.x(); x++ )
 		{
-			createCrossQuad( x, y );
+			osg::Node* p = createCrossQuadCell( x, y );
+			addChild( p );
 		}
 }

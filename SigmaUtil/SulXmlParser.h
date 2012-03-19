@@ -16,6 +16,7 @@ public:
 					CSulXmlParser();
 	virtual			~CSulXmlParser();
 
+	virtual bool	loadString( const CSulString& sXmlString );
 	virtual bool	load( const class CSulString& sXmlFile );
 
 	virtual void	elementStart( const CSulString& sName, CSulXmlAttr* pAttr ) {}
@@ -26,6 +27,8 @@ public:
 
 private:
 	bool			parseElement( CSulParser* pSulParser );
+
+	bool			process( CSulParser* pParser );
 
 private:
 	// because ParseElement is called a lot these variables are only created one instance of for faster usage

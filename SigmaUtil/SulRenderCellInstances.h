@@ -13,8 +13,7 @@ public:
 
 	void							process();
 
-private:
-	void							createCrossQuad( sigma::uint32 x, sigma::uint32 y );
+	osg::ref_ptr<osg::Geode>			createCrossQuadCell( sigma::uint32 x, sigma::uint32 y );
 
 private:
 	osg::ref_ptr<osg::Image>		m_rImagePositions;

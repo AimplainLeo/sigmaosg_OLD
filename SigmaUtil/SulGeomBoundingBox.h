@@ -12,6 +12,7 @@
 class SUL_EXPORT CSulGeomBoundingBox : public osg::Geode
 {
 public:
+						CSulGeomBoundingBox();
 						CSulGeomBoundingBox( const osg::BoundingBox& bound );
 
 	void				update( const osg::BoundingBox& bound );

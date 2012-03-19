@@ -6,20 +6,54 @@
 
 
 CSulGeomBox::CSulGeomBox( float extent ) :
-CSulGeomGeode(),
-m_extentX( extent ),
-m_extentY( extent ),
-m_extentZ( extent )
+CSulGeomGeode()
 {
+	m_minX = -extent;
+	m_maxX =  extent;
+	m_minY = -extent;
+	m_maxY =  extent;
+	m_minZ = -extent;
+	m_maxZ =  extent;
+
 	createDrawable();
 }
 
 CSulGeomBox::CSulGeomBox( float extentX, float extentY, float extentZ ) :
-CSulGeomGeode(),
-m_extentX( extentX ),
-m_extentY( extentY ),
-m_extentZ( extentZ )
+CSulGeomGeode()
 {
+	m_minX = -extentX;
+	m_maxX =  extentX;
+	m_minY = -extentY;
+	m_maxY =  extentY;
+	m_minZ = -extentZ;
+	m_maxZ =  extentZ;
+
+	createDrawable();
+}
+
+CSulGeomBox::CSulGeomBox( float minX, float maxX, float minY, float maxY, float minZ, float maxZ ) :
+CSulGeomGeode()
+{
+	m_minX = minX;
+	m_maxX = maxX;
+	m_minY = minY;
+	m_maxY = maxY;
+	m_minZ = minZ;
+	m_maxZ = maxZ;
+
+	createDrawable();
+}
+
+CSulGeomBox::CSulGeomBox( const osg::BoundingBox& bb ) :
+CSulGeomGeode()
+{
+	m_minX = bb.xMin();
+	m_maxX = bb.xMax();
+	m_minY = bb.yMin();
+	m_maxY = bb.yMax();
+	m_minZ = bb.zMin();
+	m_maxZ = bb.zMax();
+
 	createDrawable();
 }
 
@@ -30,14 +64,14 @@ void CSulGeomBox::createDrawable()
 
 	// vertices
 	osg::Vec3Array *verts = new osg::Vec3Array;
-	verts->push_back(osg::Vec3(-m_extentX, -m_extentY,  m_extentZ));
-	verts->push_back(osg::Vec3(-m_extentX,  m_extentY,  m_extentZ));
-	verts->push_back(osg::Vec3( m_extentX,  m_extentY,  m_extentZ));
-	verts->push_back(osg::Vec3( m_extentX, -m_extentY,  m_extentZ));
-	verts->push_back(osg::Vec3(-m_extentX, -m_extentY, -m_extentZ));
-	verts->push_back(osg::Vec3(-m_extentX,  m_extentY, -m_extentZ));
-	verts->push_back(osg::Vec3( m_extentX,  m_extentY, -m_extentZ));
-	verts->push_back(osg::Vec3( m_extentX, -m_extentY, -m_extentZ));
+	verts->push_back(osg::Vec3( m_minX, m_minY,  m_maxZ ));
+	verts->push_back(osg::Vec3( m_minX, m_maxY,  m_maxZ));
+	verts->push_back(osg::Vec3( m_maxX, m_maxY,  m_maxZ));
+	verts->push_back(osg::Vec3( m_maxX, m_minY,  m_maxZ));
+	verts->push_back(osg::Vec3( m_minX, m_minY,  m_minZ));
+	verts->push_back(osg::Vec3( m_minX, m_maxY,  m_minZ));
+	verts->push_back(osg::Vec3( m_maxX, m_maxY,  m_minZ));
+	verts->push_back(osg::Vec3( m_maxX, m_minY,  m_minZ));
 	pGeo->setVertexArray( verts );
 
     // texture coordinates

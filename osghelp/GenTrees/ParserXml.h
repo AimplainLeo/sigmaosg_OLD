@@ -64,6 +64,8 @@ public:
 	float				getLodDistMin();
 	float				getLodDistMax();
 
+	CSulString			getCellJson();
+
 private:
 	void				loadFinished();
 
@@ -112,6 +114,8 @@ private:
 
 	float										m_lodDist_min;
 	float										m_lodDist_max;
+
+	CSulString									m_sCellJson;
 };
 
 #endif // __PARSERXML_H__

@@ -519,6 +519,66 @@
 					RelativePath=".\SulTokenManager.h"
 					>
 				</File>
+				<Filter
+					Name="json"
+					>
+					<File
+						RelativePath=".\SulJson.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJson.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonArray.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonArray.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonObject.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonString.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonString.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonUtil.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonUtil.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulJsonValue.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="ini"
+					>
+					<File
+						RelativePath=".\SulInifileParser.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulInifileParser.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="IO"
@@ -639,6 +699,14 @@
 			<Filter
 				Name="RTT"
 				>
+				<File
+					RelativePath=".\SulCrossQuad.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulCrossQuad.h"
+					>
+				</File>
 				<File
 					RelativePath=".\SulRTT.cpp"
 					>
@@ -923,6 +991,10 @@
 			<Filter
 				Name="Helpers"
 				>
+				<File
+					RelativePath=".\SulBB.h"
+					>
+				</File>
 				<File
 					RelativePath=".\SulCalcBoundingBox.cpp"
 					>

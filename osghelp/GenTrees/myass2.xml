@@ -10,7 +10,7 @@
   
   <TREE 
     sizemultiplier="4.0" 
-    radius_between_trees="5.0"
+    radius_between_trees="0.1"
     min="3.0"
     max="5.0"
   />
@@ -26,19 +26,37 @@
   />
 
   <SHAPE_QUAD
-    w="100"
-    h="100"
+    w="200"
+    h="200"
     offsetz="5"
     renderme="false"
   />
-  
- 
-  <CELL 
-    cx="2"  
-    cy="2"
-    lod_dist_min="100"
-    lod_dist_max="200"
+
+
+  <CELL
+    cx="5"
+    cy="5"
+    lod_dist_min="0"
+    lod_dist_max="512"
+    json="
+            [
+              {
+                'level'     : 1,
+                'texW'      : 512,
+                'texH'      : 256,
+                'minRange'  : 512,
+                'maxRange'  : 1024
+              },
+              {
+                'level'     : 2,
+                'texW'      : 64,
+                'texH'      : 32,
+                'minRange'  : 1024,
+                'maxRange'  : 8192
+              }
+            ]"
   />
+  
  
 
   <SHADER type="vertex"   file="shaders/funcTree.vert"/>
@@ -55,7 +73,7 @@
   <VIEWER suppress="false" />
   
   <DEBUGGING 
-    showpivots="true"
+    showpivots="false"
   />
     
 </GEN>

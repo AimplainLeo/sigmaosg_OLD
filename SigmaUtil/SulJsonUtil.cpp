@@ -59,10 +59,9 @@ CSulJson* CSulJsonUtil::create( CSulParser* parser, CSulJson* curJson )
 
 				// we need to find out if it's a string or object
 				sigma::int8* pp = parser->PeekToken();
-				CSulString ss( pp );
 
 				CSulJson* val = 0;
-				if ( pp=="{" || pp=="[" )
+				if ( *pp=='{' || *pp=='[' )
 				{
 					// object
 					val = create( parser, curJson );

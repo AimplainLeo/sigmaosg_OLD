@@ -53,6 +53,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Forest", "Forest\Forest.vcp
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenTrees", "GenTrees\GenTrees.vcproj", "{2E38469D-975D-4290-9C3E-B895BE0A21E7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeographicLocationFromOpenFlight", "GeographicLocationFromOpenFlight\GeographicLocationFromOpenFlight.vcproj", "{407474C1-6025-4387-A0F6-5CDC1301FA29}"
 EndProject

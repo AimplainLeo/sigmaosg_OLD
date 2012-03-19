@@ -53,6 +53,16 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
 			}
 			break;
 
+		case PLANE_YZ:
+			{
+				osg::Vec3 vHalf( 0, w/2.0f, h/2.0f );
+				m_rVerts->push_back( vCenter+(osg::Vec3( 0, 0, 0 )-vHalf) );
+				m_rVerts->push_back( vCenter+(osg::Vec3( 0, w, 0 )-vHalf) );
+				m_rVerts->push_back( vCenter+(osg::Vec3( 0, w, h )-vHalf) );
+				m_rVerts->push_back( vCenter+(osg::Vec3( 0, 0, h )-vHalf) );
+			}
+			break;
+
 		case PLANE_XY:
 			{
 				osg::Vec3 vHalf( w/2.0f, h/2.0f, 0 );
@@ -234,6 +244,17 @@ void CSulGeomQuad::calcVertPositions()
 				(*m_rVerts)[0].set( m_vCenter+(osg::Vec3( 0, 0, 0 )-vHalf) );
 				(*m_rVerts)[1].set( m_vCenter+(osg::Vec3( m_w, 0, 0 )-vHalf) );
 				(*m_rVerts)[2].set( m_vCenter+(osg::Vec3( m_w, 0, m_h )-vHalf) );
+				(*m_rVerts)[3].set( m_vCenter+(osg::Vec3( 0, 0, m_h )-vHalf) );
+			}
+			break;
+
+		case PLANE_YZ:
+			{
+				osg::Vec3 vHalf( 0, m_w/2.0f, m_h/2.0f );
+
+				(*m_rVerts)[0].set( m_vCenter+(osg::Vec3( 0, 0, 0 )-vHalf) );
+				(*m_rVerts)[1].set( m_vCenter+(osg::Vec3( 0, m_w, 0 )-vHalf) );
+				(*m_rVerts)[2].set( m_vCenter+(osg::Vec3( 0, m_w, m_h )-vHalf) );
 				(*m_rVerts)[3].set( m_vCenter+(osg::Vec3( 0, 0, m_h )-vHalf) );
 			}
 			break;

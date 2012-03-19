@@ -36,6 +36,11 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 			m_lodDist_min = pAttr->get( "lod_dist_min" ).asFloat();
 			m_lodDist_max = pAttr->get( "lod_dist_max" ).asFloat();
 		}
+
+		if ( pAttr->exist( "json" ) )
+		{
+			m_sCellJson = pAttr->get( "json" );
+		}
 	}
 
 	if ( sName=="SHADER" )
@@ -365,4 +370,9 @@ float CParserXml::getLodDistMin()
 float CParserXml::getLodDistMax()
 {
 	return m_lodDist_max;
+}
+
+CSulString CParserXml::getCellJson()
+{
+	return m_sCellJson;
 }

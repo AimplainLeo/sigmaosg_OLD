@@ -3,6 +3,12 @@
 #include "stdafx.h"
 #include "SulGeomBoundingBox.h"
 
+CSulGeomBoundingBox::CSulGeomBoundingBox() :
+osg::Geode()
+{
+	createDrawable();
+}
+
 CSulGeomBoundingBox::CSulGeomBoundingBox( const osg::BoundingBox& bound ) :
 osg::Geode()
 {

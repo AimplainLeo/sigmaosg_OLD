@@ -3,7 +3,9 @@
 #ifndef __SULJSON_H__
 #define __SULJSON_H__
 
-class CSulJson
+#include <osg/referenced>
+
+class CSulJson : public osg::Referenced
 {
 public:
 	CSulJson();

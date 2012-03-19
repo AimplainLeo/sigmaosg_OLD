@@ -200,6 +200,63 @@ bool CSulXmlParser::parseElement( CSulParser* pSulParser )
 	return true;
 }
 
+bool CSulXmlParser::process( CSulParser* pParser )
+{
+	char* pszToken;
+
+	pszToken = pParser->PeekToken();
+	while ( pszToken )
+	{
+		// FIXME: if anything else besides "<" is peeked at the end of this scope, will cause
+		// this routine to hang in an infinite loop
+
+		// we are only interested in the start of an element
+		if ( !STRICMP( pszToken, "<" ) )
+		{
+			if ( !parseElement( pParser ) )
+			{
+				return false;
+			}
+		}
+		else
+		{
+			// if we get here we have data (because everything is tokenized we can not process this),
+			// so currently we do not support data between elements (perhaps it's time to create a new xml parser)
+		}
+
+		pszToken = pParser->PeekToken();
+	}
+
+	loadFinished();
+
+	return true;
+}
+
+bool CSulXmlParser::loadString( const CSulString& sXmlString )
+{
+	osg::ref_ptr<CSulParser> rSulParser = new CSulParser;
+
+	////////////////////////////////////////////////////////
+	// define delimitors for an xml file
+	////////////////////////////////////////////////////////
+
+	rSulParser->AddCharToken( '<' );
+	rSulParser->AddCharToken( '>' );
+	rSulParser->AddCharToken( '?' );
+	rSulParser->AddCharToken( '/' );
+
+	////////////////////////////////////////////////////////
+	// load it and parse
+	////////////////////////////////////////////////////////
+
+	if ( !rSulParser->InitStringParse( sXmlString ) )
+	{
+		return false;
+	}
+
+	return process( rSulParser );
+}
+
 bool CSulXmlParser::load( const CSulString& sXmlFile )
 {
 	osg::ref_ptr<CSulParser> rSulParser = new CSulParser;
@@ -216,34 +273,13 @@ bool CSulXmlParser::load( const CSulString& sXmlFile )
 	////////////////////////////////////////////////////////
 	// load it and parse
 	////////////////////////////////////////////////////////
-	char* pszToken;
-
+	
 	if ( !rSulParser->Init( sXmlFile ) )
 	{
 		return false;
 	}
 
-	pszToken = rSulParser->PeekToken();
-	while ( pszToken )
-	{
-		// FIXME: if anything else besides "<" is peeked at the end of this scope, will cause
-		// this routine to hang in an infinite loop
-
-		// we are only interested in the start of an element
-		if ( !STRICMP( pszToken, "<" ) )
-		{
-			if ( !parseElement( rSulParser.get() ) )
-			{
-				return false;
-			}
-		}
-
-		pszToken = rSulParser->PeekToken();
-	}
-
-	loadFinished();
-
-	return true;
+	return process( rSulParser );
 }
 
 

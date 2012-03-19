@@ -20,7 +20,8 @@ public:
 	enum EPLANE
 	{
 		PLANE_XY,
-		PLANE_XZ
+		PLANE_XZ,
+		PLANE_YZ
 	};
 
 public:
