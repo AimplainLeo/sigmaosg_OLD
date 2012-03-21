@@ -46,26 +46,26 @@ m_pBB( pBB )
 	{
 		CSulJsonUtil json;
 		jsonArray = json.create( m_sJson )->asArray();
-	}
 
-	sigma::uint32 count = jsonArray->getCount();
+		sigma::uint32 count = jsonArray->getCount();
 
-	for ( sigma::uint32 i=0; i<count; i++ )
-	{
-		CSulJsonObject* pObj = jsonArray->get( i )->asObject();
+		for ( sigma::uint32 i=0; i<count; i++ )
+		{
+			CSulJsonObject* pObj = jsonArray->get( i )->asObject();
 
-		sigma::uint32 level		= pObj->get( "level" )->asString()->get().asUint32();
-		sigma::uint32 texW		= pObj->get( "texW" )->asString()->get().asUint32();
-		sigma::uint32 texH		= pObj->get( "texH" )->asString()->get().asUint32();
-		sigma::uint32 minRange	= pObj->get( "minRange" )->asString()->get().asUint32();
-		sigma::uint32 maxRange	= pObj->get( "maxRange" )->asString()->get().asUint32();
+			sigma::uint32 level		= pObj->get( "level" )->asString()->get().asUint32();
+			sigma::uint32 texW		= pObj->get( "texW" )->asString()->get().asUint32();
+			sigma::uint32 texH		= pObj->get( "texH" )->asString()->get().asUint32();
+			sigma::uint32 minRange	= pObj->get( "minRange" )->asString()->get().asUint32();
+			sigma::uint32 maxRange	= pObj->get( "maxRange" )->asString()->get().asUint32();
 
-		m_mapDataLod[level] = new CDataLod(
-			texW,
-			texH,
-			minRange,
-			maxRange
-		);
+			m_mapDataLod[level] = new CDataLod(
+				texW,
+				texH,
+				minRange,
+				maxRange
+			);
+		}
 	}
 
 	process();
