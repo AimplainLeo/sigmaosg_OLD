@@ -76,8 +76,12 @@ osg::ref_ptr<osg::Texture2D> CSulCrossQuad::createTextureFromOrthoView2( sigma::
 {
 	osg::ref_ptr<CSulRTT> rtt = new CSulRTT( texW, texH, CSulRTT::SETUP_ORTHO_FRONT );
 	rtt->setComputeNearFarMode( osg::CullSettings::DO_NOT_COMPUTE_NEAR_FAR );
-//	rtt->setClearColor( osg::Vec4(1,0,0,1) );
-	rtt->setClearColor( osg::Vec4(0,0,0,0) );
+
+	if ( m_bShowLodBB )
+		rtt->setClearColor( osg::Vec4(1,0,0,1) );
+	else
+		rtt->setClearColor( osg::Vec4(0,0,0,0) );
+
 	rtt->addChild( pRenderMe );
 
 	// bounding box
