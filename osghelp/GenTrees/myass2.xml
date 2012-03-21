@@ -34,6 +34,7 @@
 
 
   <CELL
+    debug="true"
     cx="5"
     cy="5"
     lod_dist_min="0"

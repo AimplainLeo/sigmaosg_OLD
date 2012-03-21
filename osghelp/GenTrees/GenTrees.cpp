@@ -364,22 +364,24 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 
 	if ( xml->cells() )
 	{
+		// how many cells
 		osg::Vec2 cellXY = xml->getCellXY();
 
+		// create object to create cell instances
 		osg::ref_ptr<CSulRenderCellInstances> cellInst = new CSulRenderCellInstances( cellXY, pImagePositions, posCount, bb, minTree, maxTree, bSuppressTexture, texUnit, bUseZDirectionNormal, bSuppressShaders );
 
 		for ( sigma::uint32 y=0; y<cellXY.y(); y++ )
 			for ( sigma::uint32 x=0; x<cellXY.x(); x++ )
 			{
+				// create a cell that render tree instances (1 drawable)
 				osg::ref_ptr<osg::Geode> p = cellInst->createCrossQuadCell( x, y );
-				//group->addChild( p );
 
 				osg::BoundingBox bbb = p->getDrawable(0)->getInitialBound();
 
-				// create tmp shade
+				// create tmp shade (we need to make sure that the trees use the correct render)
 				tmp->addChild( p );
 
-				osg::ref_ptr<CSulCrossQuad> lod = new CSulCrossQuad( rViewer, tmp, &bbb, xml->getCellJson() );
+				osg::ref_ptr<CSulCrossQuad> lod = new CSulCrossQuad( rViewer, tmp, &bbb, xml->getCellJson(), xml->getUseCellDebug() );
 				group->addChild( lod );
 				
 				lod->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", 0 ) );

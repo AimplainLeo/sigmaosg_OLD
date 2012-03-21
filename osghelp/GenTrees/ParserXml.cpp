@@ -41,6 +41,11 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 		{
 			m_sCellJson = pAttr->get( "json" );
 		}
+
+		if ( pAttr->exist( "debug" ) )
+		{
+			m_bUseCellDebug = pAttr->get( "debug" ).asBool();
+		}
 	}
 
 	if ( sName=="SHADER" )
@@ -375,4 +380,9 @@ float CParserXml::getLodDistMax()
 CSulString CParserXml::getCellJson()
 {
 	return m_sCellJson;
+}
+
+bool CParserXml::getUseCellDebug()
+{
+	return m_bUseCellDebug;
 }

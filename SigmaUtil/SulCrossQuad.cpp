@@ -33,12 +33,13 @@ typedef std::map< sigma::uint32, osg::ref_ptr<CDataLod> > MAP_DATALOD;
 
 static MAP_DATALOD m_mapDataLod;
 
-CSulCrossQuad::CSulCrossQuad( osgViewer::Viewer* pViewer, osg::Node* pRender, osg::BoundingBox* pBB, const CSulString& sJson ) :
+CSulCrossQuad::CSulCrossQuad( osgViewer::Viewer* pViewer, osg::Node* pRender, osg::BoundingBox* pBB, const CSulString& sJson, bool bShowLodBB ) :
 osg::Group(),
 m_rViewer( pViewer ),
 m_rRender( pRender ),
 m_sJson( sJson ),
-m_pBB( pBB )
+m_pBB( pBB ),
+m_bShowLodBB( bShowLodBB )
 {
 	CSulJsonArray* jsonArray = 0;
 
@@ -202,7 +203,6 @@ void CSulCrossQuad::process()
 		sigma::uint32 texH = m_mapDataLod[i]->m_texH;
 
 		// number of slices
-		//sigma::uint32 n = (sigma::uint32)pow( 2.0f, (float)i)-1;
 		sigma::uint32 n = (sigma::uint32)pow( 2.0f, (float)(numLevels+1)-i)-1;
 
 		float subL = l / n;
@@ -229,6 +229,12 @@ void CSulCrossQuad::process()
 		lod->setRange( 0, min, max_range );
 		lod->addChild( group );
 		addChild( lod );
+
+		if ( m_bShowLodBB )
+		{
+			CSulBB* pDrawBB = new CSulBB( lod );
+			addChild( pDrawBB );
+		}
 	}
 
 }
