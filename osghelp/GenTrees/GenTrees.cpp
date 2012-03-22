@@ -318,15 +318,53 @@ void test2( osg::Node* pRenderMe )
 
 osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 {
+	osg::Image* pImagePositions		= xml->getGen()->getImage();						// this is the texture that contains the positions for the trees
+	sigma::uint32 posCount			= xml->getGen()->getCount();						// number of positions in pImage
+	osg::BoundingBox bb				= xml->getSceneTerrain()->getBoundingBoxWorld();
+	float minTree					= xml->getMinTree();
+	float maxTree					= xml->getMaxTree();
+	bool bSuppressTexture			= xml->isTextureSuppressed();
+	bool bSuppressShaders			= xml->getSuppressShaders();
+	sigma::uint32 texUnit			= xml->getTexUnit();
+	sigma::uint32 texSizeSquared	= xml->getGen()->getTexSizeSquared();
+	sigma::uint32 useLights			= xml->getUseLights();
+
 	osg::ref_ptr<osg::Group> group = new osg::Group;
 
-				osg::ref_ptr<osg::Group> tmp = new osg::Group;
-				osg::Program* program = xml->getProgram();
-				if ( program )
-				{
-					tmp->getOrCreateStateSet()->setAttribute( program );
-				}
+	// create a temporary group with the tree shader (we use this to render the trees to texture)
+	osg::ref_ptr<osg::Group> tmp = new osg::Group;
+	osg::Program* program = xml->getProgram();
+	if ( program )
+	{
+		tmp->getOrCreateStateSet()->setAttribute( program );
+	}
 
+/////////////
+	if ( !bSuppressTexture )
+	{
+		// texture tree
+		//std::string sFileTree = osgDB::findDataFile( "images/tree_aligned_256.png" );
+		std::string sFileTree = osgDB::findDataFile( "images/trees.png" );
+		if ( sFileTree.empty() )
+		{
+			std::cout << "WARNING: CSulRenderCellInstances::create can not find image " << sFileTree << std::endl;
+		}
+		else
+		{
+			osg::Image* pImageTree = osgDB::readImageFile( sFileTree );
+			osg::Texture2D* pTex = new osg::Texture2D( pImageTree );
+			pTex->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::LINEAR);
+			pTex->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::LINEAR);
+			pTex->setResizeNonPowerOfTwoHint(false);
+			group->getOrCreateStateSet()->setTextureAttributeAndModes( texUnit, pTex, osg::StateAttribute::ON );
+		}
+	}
+
+	osg::Uniform* u = new osg::Uniform( osg::Uniform::SAMPLER_2D, "tex" );
+	u->set( (int)texUnit );
+	group->getOrCreateStateSet()->addUniform( u );
+
+////////////
 
 	// texture of trees
 	std::string sFileTree = osgDB::findDataFile( "images/trees.png" );
@@ -345,18 +383,6 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 		tmp->getOrCreateStateSet()->setTextureAttributeAndModes( 0, pTex, osg::StateAttribute::ON );
 	}
 
-
-	osg::Image* pImagePositions		= xml->getGen()->getImage();						// this is the texture that contains the positions for the trees
-	sigma::uint32 posCount			= xml->getGen()->getCount();						// number of positions in pImage
-	osg::BoundingBox bb				= xml->getSceneTerrain()->getBoundingBoxWorld();
-	float minTree					= xml->getMinTree();
-	float maxTree					= xml->getMaxTree();
-	bool bSuppressTexture			= xml->isTextureSuppressed();
-	bool bSuppressShaders			= xml->getSuppressShaders();
-	sigma::uint32 texUnit			= xml->getTexUnit();
-	sigma::uint32 texSizeSquared	= xml->getGen()->getTexSizeSquared();
-	sigma::uint32 useLights			= xml->getUseLights();
-	
 	bb.zMax() += maxTree;
 
 	bSuppressTexture = true;
@@ -381,7 +407,7 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 				// create tmp shade (we need to make sure that the trees use the correct render)
 				tmp->addChild( p );
 
-				osg::ref_ptr<CSulCrossQuad> lod = new CSulCrossQuad( rViewer, tmp, &bbb, xml->getCellJson(), xml->getUseCellDebug() );
+				osg::ref_ptr<CSulCrossQuad> lod = new CSulCrossQuad( rViewer, tmp, &bbb, xml->getCellJson(), xml->getUseCellDebug(), texUnit );
 				group->addChild( lod );
 				
 				lod->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", 0 ) );

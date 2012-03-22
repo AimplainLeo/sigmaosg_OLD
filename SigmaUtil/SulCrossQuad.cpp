@@ -33,13 +33,14 @@ typedef std::map< sigma::uint32, osg::ref_ptr<CDataLod> > MAP_DATALOD;
 
 static MAP_DATALOD m_mapDataLod;
 
-CSulCrossQuad::CSulCrossQuad( osgViewer::Viewer* pViewer, osg::Node* pRender, osg::BoundingBox* pBB, const CSulString& sJson, bool bShowLodBB ) :
+CSulCrossQuad::CSulCrossQuad( osgViewer::Viewer* pViewer, osg::Node* pRender, osg::BoundingBox* pBB, const CSulString& sJson, bool bShowLodBB, sigma::int32 texUnit ) :
 osg::Group(),
 m_rViewer( pViewer ),
 m_rRender( pRender ),
 m_sJson( sJson ),
 m_pBB( pBB ),
-m_bShowLodBB( bShowLodBB )
+m_bShowLodBB( bShowLodBB ),
+m_texUnit( texUnit )
 {
 	CSulJsonArray* jsonArray = 0;
 
@@ -173,7 +174,7 @@ osg::Node* CSulCrossQuad::createQuad( sigma::uint32 texW, sigma::uint32 texH, co
 		ov = LEFT;
 
 	osg::Texture2D* pTex = createTextureFromOrthoView2( texW, texH, m_rRender, ov, pos, far );
-	p->setTexture( pTex );
+	p->setTexture( pTex, m_texUnit );
 
 	return p;
 }
@@ -237,7 +238,7 @@ void CSulCrossQuad::process()
 		if ( m_bShowLodBB )
 		{
 			CSulBB* pDrawBB = new CSulBB( lod );
-			addChild( pDrawBB );
+			group->addChild( pDrawBB );
 		}
 	}
 

@@ -21,7 +21,7 @@ private:
 	};
 
 public:
-							CSulCrossQuad( osgViewer::Viewer* pViewer, osg::Node* pRender, osg::BoundingBox* pBB, const CSulString& sJson, bool bShowLodBB );
+	CSulCrossQuad( osgViewer::Viewer* pViewer, osg::Node* pRender, osg::BoundingBox* pBB, const CSulString& sJson, bool bShowLodBB, sigma::int32 texUnit );
 
 	void					process();
 
@@ -36,6 +36,7 @@ private:
 	osg::BoundingBox*				m_pBB;
 	CSulString						m_sJson;
 	bool							m_bShowLodBB;	// for debugging
+	sigma::int32					m_texUnit;
 };
 
 #endif // __SULCROSSQUAD_H__

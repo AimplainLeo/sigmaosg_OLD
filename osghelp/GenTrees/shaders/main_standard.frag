@@ -52,8 +52,8 @@ vec4 calcPerPixelLighting( vec4 frag )
 
 void main( void )
 {
-	vec4 frag = texture2D( tex, gl_TexCoord[0].st );
 
+	vec4 frag = texture2D( tex, gl_TexCoord[0].st );
 
 	gl_FragData[0] = frag;
 	return;
