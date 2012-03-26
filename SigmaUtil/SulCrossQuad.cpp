@@ -161,7 +161,12 @@ osg::ref_ptr<osg::Texture2D> CSulCrossQuad::createTextureFromOrthoView2( sigma::
 	m_rViewer->frame();
 	m_rViewer->getSceneData()->asGroup()->removeChild( rtt );	
 
+	//osg::ref_ptr<osg::Texture2D> newTex = new osg::Texture2D( img );
+
+	rtt->getTexture()->setImage( img );
 	return rtt->getTexture();
+
+	//return newTex;
 }
 
 osg::Node* CSulCrossQuad::createQuad( sigma::uint32 texW, sigma::uint32 texH, const osg::Vec3& pos, float l, float h, float far, float near, CSulGeomQuad::EPLANE ePlane )
@@ -173,8 +178,8 @@ osg::Node* CSulCrossQuad::createQuad( sigma::uint32 texW, sigma::uint32 texH, co
 	if ( ePlane==CSulGeomQuad::PLANE_YZ )
 		ov = LEFT;
 
-	osg::Texture2D* pTex = createTextureFromOrthoView2( texW, texH, m_rRender, ov, pos, far );
-	p->setTexture( pTex, m_texUnit );
+	osg::ref_ptr<osg::Texture2D> rTex = createTextureFromOrthoView2( texW, texH, m_rRender, ov, pos, far );
+	p->setTexture( rTex, m_texUnit );
 
 	return p;
 }
