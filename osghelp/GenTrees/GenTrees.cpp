@@ -410,7 +410,7 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 				osg::ref_ptr<CSulCrossQuad> lod = new CSulCrossQuad( rViewer, tmp, &bbb, xml->getCellJson(), xml->getUseCellDebug(), texUnit );
 				group->addChild( lod );
 				
-				lod->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", 0 ) );
+				lod->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", 3 ) );
 				lod->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
 
 				osg::Depth* depth = new osg::Depth;
@@ -650,6 +650,22 @@ int _tmain( int argc, char** argv )
 			++i;
 		}
 
+		if ( rXml->getUseSun() )
+		{
+			osg::Light *light = new osg::Light();
+
+			// each light must have a unique number
+			light->setLightNum( 3 );
+
+			light->setDirection( osg::Vec3(1,0,0) );
+			light->setDiffuse( osg::Vec4(1,0,0,1) );
+			light->setSpecular( osg::Vec4(1.0, 1.0, 1.0, 1.0) );
+			light->setAmbient( osg::Vec4(0.0, 0.0, 0.0, 1.0) );
+
+			osg::LightSource * lightsource = new osg::LightSource();
+			lightsource->setLight(light);
+			rRoot->addChild( lightsource );
+		}
 
 		// setup an event handle for statistics
 		rViewer->addEventHandler( new osgViewer::StatsHandler );

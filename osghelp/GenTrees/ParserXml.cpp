@@ -18,7 +18,8 @@ m_bIgnoreGeo( false ),
 m_bSuppressShaders( false ),
 m_bCells( false ),
 m_lodDist_min( 0.0f ),
-m_lodDist_max( 0.0f )
+m_lodDist_max( 0.0f ),
+m_bSun( false )
 {
 }
 
@@ -220,6 +221,8 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 	if ( sName=="DEBUGGING" )
 	{
 		m_showPivots = pAttr->get( "showpivots" ).asBool();
+
+		m_bSun = pAttr->exist( "sun" )?pAttr->get( "sun" ).asBool():false;
 	}
 
 	if ( sName=="IGNORE_NODE" )
@@ -385,4 +388,9 @@ CSulString CParserXml::getCellJson()
 bool CParserXml::getUseCellDebug()
 {
 	return m_bUseCellDebug;
+}
+
+bool CParserXml::getUseSun()
+{
+	return m_bSun;
 }

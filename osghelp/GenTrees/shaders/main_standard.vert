@@ -9,6 +9,7 @@ varying vec4 vertexLightingColor;
 // prototypes
 vec4 calcTree();
 vec4 calcTree2();
+vec4 calcVertexLightingOpenGL( int i, vec4 vsVertexPosition );
 vec4 calcBillboardLightingOpenGL(int i, vec4 vsVertexPosition);
 vec4 calcBillboardLighting(vec4 vsVertexPosition);
 
@@ -57,6 +58,8 @@ void main( void )
 	// ambient
 	ambient = gl_LightModel.ambient + gl_LightSource[2].ambient + gl_LightSource[3].ambient;
 
+	// billboard
+	// instancing + quad alignment + vertex lighting
 	if ( use_tree_shader==1 )
 	{
 		v = calcTree();
@@ -65,13 +68,24 @@ void main( void )
 		//vertexLightingColor = calcBillboardLighting(v);
 	}
 	
+	// cross tree
+	// instancing + vertex lighting
 	if ( use_tree_shader==2 )
 	{
 		v = calcTree2();
-		
 		vertexLightingColor = calcBillboardLightingOpenGL(2, v) + calcBillboardLightingOpenGL(3, v);
 	}
 	
+	// cross grid
+	// vertex lighting
+	if ( use_tree_shader==3 )
+	{
+		vec4 posView = gl_ModelViewMatrix * gl_Vertex;
+		vertexLightingColor = calcVertexLightingOpenGL( 3, posView );
+		gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+	}
+	
+	// normal
 	if ( use_tree_shader==0 )
 	{
 		/*

@@ -1,5 +1,13 @@
 // main_standard.frag
 
+/*
+	use_tree_shader : 0 = no tree shader processing (also used by standard grid cross polygons by genTrees)
+	use_tree_shader : 1 = billboards
+	use_tree_shader : 2 = cross trees
+	use_tree_shader : 3 = cross cell
+
+*/
+
 varying vec3			n;
 varying vec4			v;
 varying vec4			vertexLightingColor;
@@ -52,20 +60,37 @@ vec4 calcPerPixelLighting( vec4 frag )
 
 void main( void )
 {
+	bool fog = false;
 
 	vec4 frag = texture2D( tex, gl_TexCoord[0].st );
 
+/*
 	gl_FragData[0] = frag;
 	return;
+*/
 
 	if ( use_tree_shader==1 )
 	{
 		frag = frag*vertexLightingColor;
-		frag = calcFogLinear( frag );
+		
+		if ( fog )
+			frag = calcFogLinear( frag );
 	}
 	
 	if ( use_tree_shader==2 )
 	{
+		frag = frag*vertexLightingColor;
+		
+		if ( fog )
+			frag = calcFogLinear( frag );
+	}
+	
+	if ( use_tree_shader==3 )
+	{
+		frag = frag*vertexLightingColor;
+		
+		if ( fog )
+			frag = calcFogLinear( frag );
 	}
 	
 	if ( use_tree_shader==0 )
@@ -73,7 +98,9 @@ void main( void )
 		if ( !bThermal )
 		{
 			frag = calcPerPixelLighting( frag );
-			frag = calcFogLinear( frag );
+			
+			if ( fog )
+				frag = calcFogLinear( frag );
 		}
 	}
 

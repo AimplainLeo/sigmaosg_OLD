@@ -99,27 +99,7 @@ osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createCrossQuadCell( sigma::ui
 
 	// texture positions
 	ss->setTextureAttributeAndModes( 1, rTexturePositions, osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
-/*
-	if ( !m_bSuppressTexture )
-	{
-		// texture tree
-		//std::string sFileTree = osgDB::findDataFile( "images/tree_aligned_256.png" );
-		std::string sFileTree = osgDB::findDataFile( "images/trees.png" );
-		if ( sFileTree.empty() )
-		{
-			std::cout << "WARNING: CSulRenderCellInstances::create can not find image " << sFileTree << std::endl;
-		}
-		else
-		{
-			osg::Image* pImageTree = osgDB::readImageFile( sFileTree );
-			osg::Texture2D* pTex = new osg::Texture2D( pImageTree );
-			pTex->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::LINEAR);
-			pTex->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::LINEAR);
-			pTex->setResizeNonPowerOfTwoHint(false);
-			ss->setTextureAttributeAndModes( 0, pTex, osg::StateAttribute::ON );
-		}
-	}
-*/
+
 	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
 	ss->setMode( GL_ALPHA_TEST, osg::StateAttribute::ON );
 	ss->setAttribute( new osg::AlphaFunc(osg::AlphaFunc::GREATER, 0.9f), osg::StateAttribute::ON );
@@ -127,12 +107,6 @@ osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createCrossQuadCell( sigma::ui
 	ss->addUniform( new osg::Uniform( "use_tree_shader", 2 ) );
 
 	osg::Uniform* tmp = 0;
-
-	/*
-	tmp = new osg::Uniform( osg::Uniform::SAMPLER_2D, "tex" );
-	tmp->set( (int)m_texUnit );
-	ss->addUniform( tmp );
-	*/
 
 	tmp = new osg::Uniform( osg::Uniform::SAMPLER_2D, "texPositions" );
 	tmp->set( (int)1 );

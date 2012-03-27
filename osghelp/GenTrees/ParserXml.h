@@ -67,6 +67,8 @@ public:
 	CSulString			getCellJson();
 	bool				getUseCellDebug();
 
+	bool				getUseSun();
+
 private:
 	void				loadFinished();
 
@@ -118,6 +120,8 @@ private:
 
 	CSulString									m_sCellJson;
 	bool										m_bUseCellDebug;
+
+	bool										m_bSun;
 };
 
 #endif // __PARSERXML_H__
