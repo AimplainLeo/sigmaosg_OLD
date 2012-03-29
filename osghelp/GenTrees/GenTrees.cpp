@@ -382,7 +382,6 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 		pTex->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::LINEAR);
 		pTex->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::LINEAR);
 		pTex->setResizeNonPowerOfTwoHint(false);
-		group->getOrCreateStateSet()->setTextureAttributeAndModes( 0, pTex, osg::StateAttribute::ON );
 		tmp->getOrCreateStateSet()->setTextureAttributeAndModes( 0, pTex, osg::StateAttribute::ON );
 	}
 
@@ -402,8 +401,13 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 		for ( sigma::uint32 y=0; y<cellXY.y(); y++ )
 			for ( sigma::uint32 x=0; x<cellXY.x(); x++ )
 			{
+				osg::ref_ptr<osg::Geode> p;
+
 				// create a cell that render tree instances (1 drawable)
-				osg::ref_ptr<osg::Geode> p = cellInst->createCrossQuadCell( x, y );
+				if ( xml->getTreeType()==CParserXml::TREETYPE_CROSSQUAD )
+					p = cellInst->createCrossQuadCell( x, y );
+				else
+					p = cellInst->createBillboardCell( x, y );
 
 				osg::BoundingBox bbb = p->getDrawable(0)->getInitialBound();
 
@@ -422,7 +426,7 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 
 
 				osg::ref_ptr<osg::LOD> lod_org = new osg::LOD;
-				lod_org->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", 2 ) );
+				lod_org->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", xml->getTreeType()==CParserXml::TREETYPE_CROSSQUAD?2:1 ) );
 				lod_org->addChild( p );
 				lod_org->setRange( 0, xml->getLodDistMin(), xml->getLodDistMax() );
 				group->addChild( lod_org );

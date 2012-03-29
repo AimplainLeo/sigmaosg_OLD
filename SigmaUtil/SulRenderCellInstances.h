@@ -13,7 +13,20 @@ public:
 
 	void							process();
 
-	osg::ref_ptr<osg::Geode>			createCrossQuadCell( sigma::uint32 x, sigma::uint32 y );
+	osg::ref_ptr<osg::Geode>		createCrossQuadCell( sigma::uint32 x, sigma::uint32 y );
+
+	osg::ref_ptr<osg::Geode>		createBillboardCell( sigma::uint32 x, sigma::uint32 y );
+
+private:
+	void							setStateSetData( osg::Node* pNode );
+
+	osg::BoundingBox				calcBB( sigma::uint32 x, sigma::uint32 y );
+
+	sigma::uint32					calcTexturedSquared( sigma::uint32 count );
+
+	osg::ref_ptr<osg::Texture2D>	createTextureForPositions( std::vector<osg::Vec3> vecList );
+
+	std::vector<osg::Vec3>			createListOfPositionsForCell( sigma::uint32 x, sigma::uint32 y );
 
 private:
 	osg::ref_ptr<osg::Image>		m_rImagePositions;

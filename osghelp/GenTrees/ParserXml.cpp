@@ -19,7 +19,8 @@ m_bSuppressShaders( false ),
 m_bCells( false ),
 m_lodDist_min( 0.0f ),
 m_lodDist_max( 0.0f ),
-m_bSun( false )
+m_bSun( false ),
+m_eTreeType( TREETYPE_CROSSQUAD )
 {
 }
 
@@ -211,6 +212,16 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
 
 		m_minTree = pAttr->get( "min" ).asFloat();
 		m_maxTree = pAttr->get( "max" ).asFloat();
+
+		if ( pAttr->exist( "type" ) )
+		{
+			sigma::uint32 i = pAttr->get( "type" ).asUint32();
+			switch ( i )
+			{
+				case 1: m_eTreeType = TREETYPE_BILLBOARD; break;
+				case 2: m_eTreeType = TREETYPE_CROSSQUAD; break;
+			}
+		}
 	}
 
 	if ( sName=="VIEWER" )
@@ -393,4 +404,9 @@ bool CParserXml::getUseCellDebug()
 bool CParserXml::getUseSun()
 {
 	return m_bSun;
+}
+
+CParserXml::ETREETYPE CParserXml::getTreeType()
+{
+	return m_eTreeType;
 }

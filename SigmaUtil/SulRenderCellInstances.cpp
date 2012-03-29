@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulRenderCellInstances.h"
 #include "SulGeomCrossQuadInstancing.h"
+#include "SulGeomBillboardInstancing.h"
 #include <osgDB/ReadFile>
 #include <osgDB/FileUtils>
 #include <iostream>
@@ -34,6 +35,166 @@ m_cellXY( cellXY )
 
 }
 
+osg::BoundingBox CSulRenderCellInstances::calcBB( sigma::uint32 x, sigma::uint32 y )
+{
+	float xmin = m_bb.xMin();
+	float xmax = m_bb.xMax();
+	float ymin = m_bb.yMin();
+	float ymax = m_bb.yMax();
+	float cellw = (xmax-xmin) / m_cellXY.x();
+	float celld = (ymax-ymin) / m_cellXY.y();
+
+	// calc bounding box for cell
+	float xmin_cell = xmin+cellw*x;
+	float xmax_cell = xmin_cell+cellw;
+	float ymin_cell = ymin+celld*y;
+	float ymax_cell = ymin_cell+celld;
+	osg::BoundingBox bb( xmin_cell, ymin_cell, m_bb.zMin(), xmax_cell, ymax_cell, m_bb.zMax() );
+
+	return bb;
+}
+
+std::vector<osg::Vec3> CSulRenderCellInstances::createListOfPositionsForCell( sigma::uint32 x, sigma::uint32 y )
+{
+	float xmin = m_bb.xMin();
+	float xmax = m_bb.xMax();
+	float ymin = m_bb.yMin();
+	float ymax = m_bb.yMax();
+	float cellw = (xmax-xmin) / m_cellXY.x();
+	float celld = (ymax-ymin) / m_cellXY.y();
+
+	// calc bounding box for cell
+	float xmin_cell = xmin+cellw*x;
+	float xmax_cell = xmin_cell+cellw;
+	float ymin_cell = ymin+celld*y;
+	float ymax_cell = ymin_cell+celld;
+	osg::BoundingBox bb( xmin_cell, ymin_cell, m_bb.zMin(), xmax_cell, ymax_cell, m_bb.zMax() );
+
+	std::vector<osg::Vec3>	vecList;
+
+	// find all the positions that are within the boundingbox of our cell
+	float* p = reinterpret_cast<float*>(m_rImagePositions->data());
+	for ( sigma::uint32 i=0; i<m_numInstances; i++ )
+	{
+		osg::Vec3 v;
+
+		v.x() = p[0+i*3];
+		v.y() = p[1+i*3];
+		v.z() = p[2+i*3];
+
+		if ( v.x()>xmin_cell && v.x()<xmax_cell && v.y()>ymin_cell && v.y()<ymax_cell )
+		{
+			vecList.push_back( v );
+		}
+	}
+
+	return vecList;
+}
+
+sigma::uint32 CSulRenderCellInstances::calcTexturedSquared( sigma::uint32 count )
+{
+	sigma::uint32 sqr_root = sqrt( (float)count )+1;
+	sigma::uint32 texSizeSquared = nexthigher<sigma::uint32>( sqr_root );
+	return texSizeSquared;
+}
+
+osg::ref_ptr<osg::Texture2D> CSulRenderCellInstances::createTextureForPositions( std::vector<osg::Vec3> vecList )
+{
+	// calc a good texture size for the positions
+	sigma::uint32 texSizeSquared = calcTexturedSquared( vecList.size() );
+
+	osg::ref_ptr<osg::Image> rImage = new osg::Image;
+	rImage->allocateImage( texSizeSquared, texSizeSquared, 1,  GL_RGB, GL_FLOAT );	
+	rImage->setInternalTextureFormat( GL_RGB32F_ARB );
+
+	float* p = reinterpret_cast<float*>(rImage->data());
+
+	osg::ref_ptr<osg::Texture2D> rTexturePositions = new osg::Texture2D( rImage );
+	rTexturePositions->setInternalFormat( GL_RGB32F_ARB );
+	rTexturePositions->setSourceFormat( GL_FLOAT );
+	rTexturePositions->setFilter(osg::Texture2D::MIN_FILTER, osg::Texture2D::NEAREST);
+	rTexturePositions->setFilter(osg::Texture2D::MAG_FILTER, osg::Texture2D::NEAREST);
+
+	for ( sigma::uint32 i=0; i<vecList.size(); i++ )
+	{
+		p[i*3+0] = vecList[i].x();
+		p[i*3+1] = vecList[i].y();
+		p[i*3+2] = vecList[i].z();
+	}
+
+	return rTexturePositions;
+}
+
+void CSulRenderCellInstances::setStateSetData( osg::Node* pNode )
+{
+	osg::StateSet* ss = pNode->getOrCreateStateSet();
+
+	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
+	ss->setMode( GL_ALPHA_TEST, osg::StateAttribute::ON );
+	ss->setAttribute( new osg::AlphaFunc(osg::AlphaFunc::GREATER, 0.9f), osg::StateAttribute::ON );
+
+	osg::Uniform* tmp = 0;
+	tmp = new osg::Uniform( osg::Uniform::SAMPLER_2D, "texPositions" );
+	tmp->set( (int)1 );
+	ss->addUniform( tmp );
+
+	ss->addUniform( new osg::Uniform( "minSize", m_min ) );
+	ss->addUniform( new osg::Uniform( "maxSize", m_max ) );
+}
+
+osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createBillboardCell( sigma::uint32 x, sigma::uint32 y )
+{
+	std::vector<osg::Vec3> vecList = createListOfPositionsForCell( x, y );
+
+	osg::ref_ptr<osg::Texture2D> rTexturePositions = createTextureForPositions( vecList );
+
+	CSulGeomBillboardInstancing* pQuad = new CSulGeomBillboardInstancing( (int)vecList.size(), m_bUseZDirectionNormal );
+
+	setStateSetData( pQuad );
+
+	osg::StateSet* ss = pQuad->getOrCreateStateSet();
+
+	// texture positions
+	ss->setTextureAttributeAndModes( 1, rTexturePositions, osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
+
+	ss->addUniform( new osg::Uniform( "texSizeSquared", (int)calcTexturedSquared( vecList.size() ) ) );
+	ss->addUniform( new osg::Uniform( "numInstances", (int)vecList.size() ) );
+
+	// disable the computebound
+	pQuad->getDrawable( 0 )->setComputeBoundingBoxCallback(new osg::Drawable::ComputeBoundingBoxCallback);
+
+	pQuad->getDrawable( 0 )->setInitialBound( calcBB( x, y ) );
+
+	return pQuad;
+}
+
+osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createCrossQuadCell( sigma::uint32 x, sigma::uint32 y )
+{
+	std::vector<osg::Vec3> vecList = createListOfPositionsForCell( x, y );
+
+	osg::ref_ptr<osg::Texture2D> rTexturePositions = createTextureForPositions( vecList );
+
+	CSulGeomCrossQuadInstancing* pCrossQuad = new CSulGeomCrossQuadInstancing( (int)vecList.size(), m_bUseZDirectionNormal );
+
+	setStateSetData( pCrossQuad );
+
+	osg::StateSet* ss = pCrossQuad->getOrCreateStateSet();
+
+	// texture positions
+	ss->setTextureAttributeAndModes( 1, rTexturePositions, osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
+
+	ss->addUniform( new osg::Uniform( "texSizeSquared", (int)calcTexturedSquared( vecList.size() ) ) );
+	ss->addUniform( new osg::Uniform( "numInstances", (int)vecList.size() ) );
+
+	// disable the computebound
+	pCrossQuad->getDrawable( 0 )->setComputeBoundingBoxCallback(new osg::Drawable::ComputeBoundingBoxCallback);
+
+	pCrossQuad->getDrawable( 0 )->setInitialBound( calcBB( x, y ) );
+
+	return pCrossQuad;
+}
+
+/*
 osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createCrossQuadCell( sigma::uint32 x, sigma::uint32 y )
 {
 	float xmin = m_bb.xMin();
@@ -124,6 +285,7 @@ osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createCrossQuadCell( sigma::ui
 
 	return pCrossQuad;
 }
+*/
 
 void CSulRenderCellInstances::process()
 {

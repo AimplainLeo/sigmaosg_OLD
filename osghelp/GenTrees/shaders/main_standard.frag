@@ -65,10 +65,10 @@ void main( void )
 
 	vec4 frag = texture2D( tex, gl_TexCoord[0].st );
 
-/*
+
 	gl_FragData[0] = frag;
 	return;
-	*/
+	
 	
 	// cross trees (no light)
 	if ( use_tree_shader==4 )

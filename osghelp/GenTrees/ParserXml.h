@@ -20,6 +20,12 @@ public:
 	typedef std::vector< CSulString >	VEC_STRING;
 	typedef std::vector< osg::ref_ptr<CUniformData> >	VEC_UNIFORMDATA;
 
+	enum ETREETYPE
+	{
+		TREETYPE_BILLBOARD,
+		TREETYPE_CROSSQUAD
+	};
+
 public:
 						CParserXml();
 
@@ -68,6 +74,8 @@ public:
 	bool				getUseCellDebug();
 
 	bool				getUseSun();
+
+	CParserXml::ETREETYPE getTreeType();
 
 private:
 	void				loadFinished();
@@ -122,6 +130,8 @@ private:
 	bool										m_bUseCellDebug;
 
 	bool										m_bSun;
+
+	ETREETYPE									m_eTreeType;
 };
 
 #endif // __PARSERXML_H__
