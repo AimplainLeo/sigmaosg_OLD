@@ -172,7 +172,7 @@ osg::ref_ptr<osg::Texture2D> CSulCrossQuad::createTextureFromOrthoView2( sigma::
 osg::Node* CSulCrossQuad::createQuad( sigma::uint32 texW, sigma::uint32 texH, const osg::Vec3& pos, float l, float h, float far, float near, CSulGeomQuad::EPLANE ePlane )
 {
 	CSulGeomQuad* p = new CSulGeomQuad( pos, l, h, ePlane );
-	p->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+//	p->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 
 	ORTHOVIEW ov = FRONT;
 	if ( ePlane==CSulGeomQuad::PLANE_YZ )
