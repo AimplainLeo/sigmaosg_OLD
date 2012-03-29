@@ -104,7 +104,7 @@ osg::ref_ptr<osg::Geode> CSulRenderCellInstances::createCrossQuadCell( sigma::ui
 	ss->setMode( GL_ALPHA_TEST, osg::StateAttribute::ON );
 	ss->setAttribute( new osg::AlphaFunc(osg::AlphaFunc::GREATER, 0.9f), osg::StateAttribute::ON );
 
-	ss->addUniform( new osg::Uniform( "use_tree_shader", 2 ) );
+	//ss->addUniform( new osg::Uniform( "use_tree_shader", 2 ) );
 
 	osg::Uniform* tmp = 0;
 

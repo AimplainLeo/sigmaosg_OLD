@@ -338,6 +338,9 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 	{
 		tmp->getOrCreateStateSet()->setAttribute( program );
 	}
+	tmp->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", 4 ) );
+
+	
 
 /////////////
 	if ( !bSuppressTexture )
@@ -419,6 +422,7 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 
 
 				osg::ref_ptr<osg::LOD> lod_org = new osg::LOD;
+				lod_org->getOrCreateStateSet()->addUniform( new osg::Uniform( "use_tree_shader", 2 ) );
 				lod_org->addChild( p );
 				lod_org->setRange( 0, xml->getLodDistMin(), xml->getLodDistMax() );
 				group->addChild( lod_org );

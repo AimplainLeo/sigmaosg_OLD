@@ -5,6 +5,7 @@
 	use_tree_shader : 1 = billboards
 	use_tree_shader : 2 = cross trees
 	use_tree_shader : 3 = cross cell
+	use_tree_shader : 4 = cross cell (only texture)
 
 */
 
@@ -67,8 +68,16 @@ void main( void )
 /*
 	gl_FragData[0] = frag;
 	return;
-*/
+	*/
+	
+	// cross trees (no light)
+	if ( use_tree_shader==4 )
+	{
+		gl_FragData[0] = frag;
+		return;
+	}
 
+	// billboards
 	if ( use_tree_shader==1 )
 	{
 		frag = frag*vertexLightingColor;
@@ -77,6 +86,7 @@ void main( void )
 			frag = calcFogLinear( frag );
 	}
 	
+	// cross trees
 	if ( use_tree_shader==2 )
 	{
 		frag = frag*vertexLightingColor;
@@ -85,6 +95,7 @@ void main( void )
 			frag = calcFogLinear( frag );
 	}
 	
+	// cross grid
 	if ( use_tree_shader==3 )
 	{
 		frag = frag*vertexLightingColor;

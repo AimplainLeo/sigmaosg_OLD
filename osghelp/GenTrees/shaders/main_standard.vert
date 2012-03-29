@@ -70,7 +70,7 @@ void main( void )
 	
 	// cross tree
 	// instancing + vertex lighting
-	if ( use_tree_shader==2 )
+	if ( use_tree_shader==2 || use_tree_shader==4 )
 	{
 		v = calcTree2();
 		vertexLightingColor = calcBillboardLightingOpenGL(2, v) + calcBillboardLightingOpenGL(3, v);
@@ -80,8 +80,7 @@ void main( void )
 	// vertex lighting
 	if ( use_tree_shader==3 )
 	{
-		vec4 posView = gl_ModelViewMatrix * gl_Vertex;
-		vertexLightingColor = calcVertexLightingOpenGL( 3, posView );
+		vertexLightingColor = calcBillboardLightingOpenGL(2, v) + calcVertexLightingOpenGL( 3, v );
 		gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 	}
 	
