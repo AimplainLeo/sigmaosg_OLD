@@ -4,8 +4,9 @@
 #define __SULGEOMARROW3D_H__
 
 #include <osg/geode>
+#include "SulExport.h"
 
-class CSulGeomArrow3D : public osg::Geode
+class SUL_EXPORT CSulGeomArrow3D : public osg::Geode
 {
 public:
 				CSulGeomArrow3D( float len, const osg::Vec4& colorHead=osg::Vec4(1,0,0,1), const osg::Vec4& colorBody=osg::Vec4(1,0,0,1) );

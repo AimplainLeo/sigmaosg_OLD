@@ -697,30 +697,46 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="RTT"
+				Name="Lights"
 				>
 				<File
-					RelativePath=".\SulCrossQuad.cpp"
+					RelativePath=".\Data\shaders\sulFuncLightPoint.frag"
 					>
 				</File>
 				<File
-					RelativePath=".\SulCrossQuad.h"
+					RelativePath=".\Data\shaders\sulFuncLightSpot.frag"
 					>
 				</File>
 				<File
-					RelativePath=".\SulRTT.cpp"
+					RelativePath=".\SulLightBase.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\SulRTT.h"
+					RelativePath=".\SulLightBase.h"
 					>
 				</File>
 				<File
-					RelativePath=".\SulTexCam.cpp"
+					RelativePath=".\SulLightManager.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\SulTexCam.h"
+					RelativePath=".\SulLightManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightPoint.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightPoint.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightSpot.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightSpot.h"
 					>
 				</File>
 			</Filter>
@@ -1071,6 +1087,14 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Workload"
+					>
+					<File
+						RelativePath=".\SulWorkload.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Array"
@@ -1399,6 +1423,14 @@
 			<Filter
 				Name="Rendering"
 				>
+				<File
+					RelativePath=".\SulCrossQuad.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulCrossQuad.h"
+					>
+				</File>
 				<File
 					RelativePath=".\SulRenderTransparent.cpp"
 					>
@@ -1847,6 +1879,26 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="RTT"
+					>
+					<File
+						RelativePath=".\SulRTT.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulRTT.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulTexCam.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulTexCam.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Coordinates"
@@ -1949,6 +2001,26 @@
 				</File>
 				<File
 					RelativePath=".\SulProfilerData.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Particles"
+				>
+				<File
+					RelativePath=".\SulParticle.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulParticleSystem.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulParticleUpdater.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulParticleUpdater.h"
 					>
 				</File>
 			</Filter>

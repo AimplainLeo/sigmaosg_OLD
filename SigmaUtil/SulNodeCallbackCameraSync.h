@@ -17,7 +17,8 @@ public:
 		MODE_FULL,
 		MODE_SIMPLE,
 		MODE_POSITION_XY,			// sync only positions xy (not sure this mode is working correctly)
-		MODE_VIEWMATRIX
+		MODE_VIEWMATRIX,
+		MODE_SIMPLE_OFFSET
 	};
 
 public:
@@ -54,8 +55,18 @@ public:
 
 		if ( m_eMode==MODE_SIMPLE )
 		{
-			osg::Matrixd mView							= m_pCam->getViewMatrix();
+			osg::Matrixd mView		= m_pCam->getViewMatrix();
 			osg::Camera* pFollowCam = dynamic_cast<osg::Camera*>(node);
+			pFollowCam->setViewMatrix( mView );
+		}
+
+		if ( m_eMode==MODE_SIMPLE_OFFSET )
+		{
+			osg::Matrixd mView		= m_pCam->getViewMatrix();
+			osg::Camera* pFollowCam = dynamic_cast<osg::Camera*>(node);
+
+//			osg::Matrix m = osg::Matrix::rotate( osg::PI_2, osg::Vec3(0,0,1) );
+
 			pFollowCam->setViewMatrix( mView );
 		}
 

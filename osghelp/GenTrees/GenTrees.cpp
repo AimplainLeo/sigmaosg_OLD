@@ -411,7 +411,7 @@ osg::ref_ptr<osg::Group> generateTrees( CParserXml* xml )
 
 				osg::BoundingBox bbb = p->getDrawable(0)->getInitialBound();
 
-				// create tmp shade (we need to make sure that the trees use the correct render)
+				// create tmp shader (we need to make sure that the trees use the correct shader render)
 				tmp->addChild( p );
 
 				osg::ref_ptr<CSulCrossQuad> lod = new CSulCrossQuad( rViewer, tmp, &bbb, xml->getCellJson(), xml->getUseCellDebug(), texUnit );
