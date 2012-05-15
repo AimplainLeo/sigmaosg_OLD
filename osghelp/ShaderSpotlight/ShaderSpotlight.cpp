@@ -1,6 +1,10 @@
 // ShaderSpotlight.cpp : Defines the entry point for the console application.
 //
 
+//
+// DEPRECATED!!!!!!!!
+// 
+
 #include "stdafx.h"
 #include <SigmaUtil/SulUniformArrayHack.h>
 #include <osgViewer/Viewer>

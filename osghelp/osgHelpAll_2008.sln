@@ -262,6 +262,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiViewStatePush", "Multi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManyLights", "ManyLights\ManyLights.vcproj", "{857607DB-17A8-4AA4-8FC2-65A309643225}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManySpotLights", "ManySpotLights\ManySpotLights.vcproj", "{D7D88237-6445-4037-B1CE-2E5425BCBCED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MT Static|Win32 = Debug MT Static|Win32
@@ -2016,6 +2018,26 @@ Global
 		{857607DB-17A8-4AA4-8FC2-65A309643225}.Release MTDLL|Win32.Build.0 = Release|Win32
 		{857607DB-17A8-4AA4-8FC2-65A309643225}.Release|Win32.ActiveCfg = Release|Win32
 		{857607DB-17A8-4AA4-8FC2-65A309643225}.Release|Win32.Build.0 = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MT Static|Win32.ActiveCfg = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MT Static|Win32.Build.0 = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MT|Win32.ActiveCfg = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MT|Win32.Build.0 = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MTDLL Static|Win32.ActiveCfg = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MTDLL Static|Win32.Build.0 = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MTDLL|Win32.ActiveCfg = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug MTDLL|Win32.Build.0 = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Debug|Win32.Build.0 = Debug|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MT Static|Win32.ActiveCfg = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MT Static|Win32.Build.0 = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MT|Win32.ActiveCfg = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MT|Win32.Build.0 = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MTDLL Static|Win32.ActiveCfg = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MTDLL Static|Win32.Build.0 = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MTDLL|Win32.ActiveCfg = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release MTDLL|Win32.Build.0 = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release|Win32.ActiveCfg = Release|Win32
+		{D7D88237-6445-4037-B1CE-2E5425BCBCED}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
