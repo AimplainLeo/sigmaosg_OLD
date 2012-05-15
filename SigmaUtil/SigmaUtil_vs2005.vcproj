@@ -2007,6 +2007,42 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Lights"
+				>
+				<File
+					RelativePath=".\SulLightBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightPoint.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightPoint.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightSpot.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulLightSpot.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

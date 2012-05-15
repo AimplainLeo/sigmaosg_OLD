@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "SulLightSpot.h"
+#include "SulLightManager.h"
 
 CSulLightSpot::CSulLightSpot( CSulLightManager* lm ) :
 CSulLightBase( lm )
@@ -51,5 +52,7 @@ void CSulLightSpot::traverse( osg::NodeVisitor& nv )
 		osg::RefMatrix* pMV = cv->getModelViewMatrix();
 
 		m_dirViewMatrix = osg::Matrix::transform3x3( m_dir, *pMV );
+
+		m_lm->addVisible( this );
 	}
 }

@@ -80,7 +80,7 @@ vec4 sulCalcLightSpot( vec4 v, vec3 n )
 			
 				c+= sulCalcLightingAttSpot( pos, attConstant, attLinear, attQuadratic, diffuseColor, NdotL, v.xyz ) * test; 
 				
-				return vec4(1,0,0,1);
+				//return vec4(1,0,0,1);
 			}
 		
 		}
