@@ -11,7 +11,7 @@ uniform sampler2DRect	texLightPoint;
 
 uniform mat4			osg_ViewMatrix;
 
-uniform bool light4;					// we are using light4 for helmet 
+uniform bool light4;					// we are using light4 for helmet & lasers
 
 vec4 sulCalcLightingAttSpot( vec3 pos, float attConstant, float attLinear, float attQuadratic, vec4 lightDiffuse, float NdotL, vec3 v )
 {
@@ -20,7 +20,7 @@ vec4 sulCalcLightingAttSpot( vec3 pos, float attConstant, float attLinear, float
 	return (att * (lightDiffuse) ) * NdotL;				
 }
 
-vec4 sulCalcLightSpot( vec4 v, vec3 n )
+vec4 sulCalcLightSpot( vec4 v, vec3 n, bool ignoreNormal )
 {
 	vec4 c = vec4(0.0,0.0,0.0,0.0);
 
@@ -62,6 +62,10 @@ vec4 sulCalcLightSpot( vec4 v, vec3 n )
 		vec3 lightDir = normalize( pos - v.xyz );			// light direction from frag
 		float NdotL = max( dot(n,lightDir), 0.0 );			// dot product between light and normal
 		
+		if ( ignoreNormal )
+			NdotL = 1.0;
+
+		// NdotL > 0.0 means the frag is in front of the light
 		if ( NdotL > 0.0 )
 		{
 			vec3 spotDir;		// direction of spot in viewspace
@@ -73,14 +77,14 @@ vec4 sulCalcLightSpot( vec4 v, vec3 n )
 		
 			float f = dot( spotDir, -lightDir );
 			if (  f > cutOff )
-			{	
+			{
 				// do a linear fade to cutOff
 				float m = (1.0/(1.0-cutOff));
 				float test = m*f - (m*cutOff);
 			
 				c+= sulCalcLightingAttSpot( pos, attConstant, attLinear, attQuadratic, diffuseColor, NdotL, v.xyz ) * test; 
 				
-				//return vec4(1,0,0,1);
+				//return vec4( 1,0,0,1 );
 			}
 		
 		}

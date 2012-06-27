@@ -5,7 +5,7 @@
 
 #include "SulPostFilterBase.h"
 
-class CSulPostFilterStreaking : public CSulPostFilterBase
+class CSulPostFilterStreaking : public CSulPostFilter
 {
 public:
 

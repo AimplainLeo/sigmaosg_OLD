@@ -70,6 +70,7 @@ void CSulLightBase::setPosition( const osg::Vec3& pos )
 {
 	m_pos = pos;
 	m_dirty = true;
+	dirtyBound();
 }
 
 const osg::Vec3& CSulLightBase::getPosition() const
@@ -92,18 +93,21 @@ void CSulLightBase::setConstantAtt( float att )
 {
 	m_attConstant = att;
 	m_dirty = true;
+	dirtyBound();
 }
 
 void CSulLightBase::setLinearAtt( float att )
 {
 	m_attLinear = att;
 	m_dirty = true;
+	dirtyBound();
 }
 
 void CSulLightBase::setQuadraticAtt( float att )
 {
 	m_attQuadratic = att;
 	m_dirty = true;
+	dirtyBound();
 }
 
 float CSulLightBase::getConstantAtt() const
@@ -144,6 +148,8 @@ osg::BoundingSphere CSulLightBase::computeBound() const
 		d = std::numeric_limits<float>::max();
 	}
 
+	//d = 10000000.0f;
+	//d = 1.0f;
 	osg::BoundingSphere bs( m_pos, d );
 	return bs;
 }

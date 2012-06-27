@@ -15,8 +15,10 @@ public:
 		m_rDisplay = p;
 	}
 
-	virtual void operator() ( osg::Node* pNode, osg::NodeVisitor* nv )
+	virtual void operator() ( osg::Node* node, osg::NodeVisitor* nv )
     {
+		traverse(node,nv);
+
         int i = ((int)osg::Timer::instance()->time_s()%2);
 		m_rDisplay->SetCursor( i?"_":" " );
 	}
@@ -74,7 +76,7 @@ void CSulConsoleDisplay::Init()
 	m_rAniPathCallback = new CSulAnimationPathCallback;
 	m_rPath->setLoopMode( osg::AnimationPath::NO_LOOPING );
 	m_rAniPathCallback->SetPath( m_rPath.get() );
-	rAlign->GetMatrixTransform()->setUpdateCallback( m_rAniPathCallback.get() );
+	rAlign->GetMatrixTransform()->addUpdateCallback( m_rAniPathCallback.get() );
 	
 	// create a text we will use for input
 	m_rText = new osgText::Text;
@@ -90,7 +92,7 @@ void CSulConsoleDisplay::Init()
 	m_rGeode->addDrawable( m_rText.get() );
 
 	// make the cursor blink
-	m_rGeode->setUpdateCallback( new CCursorUpdate( this ) );
+	m_rGeode->addUpdateCallback( new CCursorUpdate( this ) );
 
 	// manage input
 	m_rViewer->addEventHandler( new CSulConsoleInputHandler( this ) );

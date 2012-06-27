@@ -19,7 +19,7 @@ public:
 	virtual bool	loadString( const CSulString& sXmlString );
 	virtual bool	load( const class CSulString& sXmlFile );
 
-	virtual void	elementStart( const CSulString& sName, CSulXmlAttr* pAttr ) {}
+	virtual void	elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData ) {}
 	virtual void	elementEnd( const CSulString& sName, CSulXmlAttr* pAttr  ) {}
 	virtual void	elementEnd( const CSulString& sName ) {}
 

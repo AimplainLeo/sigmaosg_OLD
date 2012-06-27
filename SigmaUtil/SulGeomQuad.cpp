@@ -12,6 +12,7 @@ m_w(w),
 m_h(h),
 m_ePlane(ePlane)
 {
+	setName( "CSulGeomQuad" );
 	createDrawable();
 }
 
@@ -22,6 +23,7 @@ m_w(w),
 m_h(h),
 m_ePlane(ePlane)
 {
+	setName( "CSulGeomQuad" );
 	createDrawable();
 }
 
@@ -148,17 +150,24 @@ void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, sigma::
     m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
-void CSulGeomQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit )
+void CSulGeomQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit, const CSulString& uniformName )
 {
 	createUV();
-
 	m_mapTex[unit] = pTex;
-
     m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+
+	if ( !uniformName.empty() )
+	{
+		osg::Uniform* u = new osg::Uniform( osg::Uniform::SAMPLER_2D , uniformName );
+		u->set( (int)unit );
+		getOrCreateStateSet()->addUniform( u );
+	}
 }
 
 osg::Texture2D* CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 unit )
 {
+	createUV();
+
 	osg::Texture2D* pTex = new osg::Texture2D;
 	pTex->setResizeNonPowerOfTwoHint( false );
 	pTex->setFilter( osg::Texture::MIN_FILTER,osg::Texture::LINEAR );

@@ -615,6 +615,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulGeomCrossQuadInstancing.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomCrossQuadInstancing.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomFrame.cpp"
 					>
 				</File>
@@ -1207,6 +1215,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulProgramShaders.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulProgramShaders.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulScreenAlignedQuad.cpp"
 					>
 				</File>
@@ -1228,6 +1244,22 @@
 				</File>
 				<File
 					RelativePath=".\SulUniformArrayHack.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewQuad.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewQuad.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewRTT.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewRTT.h"
 					>
 				</File>
 				<Filter
@@ -1327,6 +1359,22 @@
 					</File>
 					<File
 						RelativePath=".\SulPostFilterHDR2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterNightVision.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterNightVision.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterThermal.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterThermal.h"
 						>
 					</File>
 					<File
@@ -1727,6 +1775,18 @@
 					</File>
 					<File
 						RelativePath=".\Data\shaders\z.vert"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Deferred"
+					>
+					<File
+						RelativePath=".\SulDeferredCamera.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulDeferredCamera.h"
 						>
 					</File>
 				</Filter>

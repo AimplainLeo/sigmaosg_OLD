@@ -16,7 +16,7 @@ public:
 
 	CSulString		getValue( const CSulString& element, const CSulString& attr );
 
-	void			elementStart( const class CSulString& sName, class CSulXmlAttr* pAttr );
+	void			elementStart( const class CSulString& sName, class CSulXmlAttr* pAttr, CSulString sData );
 
 private:
 	MAP_ELEMENT		m_mapElement;

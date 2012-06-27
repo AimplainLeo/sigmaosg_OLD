@@ -193,7 +193,7 @@ void CSulIniFileParser::ParseSection( CSulParser* parser )
 {
 	parser->GetToken(); // eat open bracket
 	CSulString sectionName = parser->GetStringToken();
-	sectionName.MakeLower();
+	sectionName.makeLower();
 	parser->GetToken(); // eat closing bracket
 
 	// add new section to the section map if one does not already exist
@@ -212,7 +212,7 @@ void CSulIniFileParser::ParseKeyValuePair( CSulParser* parser )
 	CSulString val = parser->GetStringToken();
 	val = val.substr(0, val.find(';')); // strip possible comments from the value
 	val.Trim(); // trim leading and trailing white space
-	key.MakeLower();
+	key.makeLower();
 	AddKeyValuePair(key, val, m_sCurrentSection);
 }
 

@@ -19,7 +19,7 @@ CSulString CSulGuiThemeXml::getValue( const CSulString& element, const CSulStrin
 	return "";
 }
 
-void CSulGuiThemeXml::elementStart( const class CSulString& sName, class CSulXmlAttr* pAttr )
+void CSulGuiThemeXml::elementStart( const class CSulString& sName, class CSulXmlAttr* pAttr, CSulString sData )
 {
 	if ( sName!="THEME" )
 	{

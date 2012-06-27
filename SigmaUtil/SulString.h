@@ -26,7 +26,7 @@ public:
 
 	// modifiers
 	void			Format( const char* Format, ... );
-	void			MakeLower();
+	void			makeLower();
 	void			Trim();
 	void			replaceAll( const std::string& searchFor, const std::string& changeTo );
 
@@ -50,7 +50,11 @@ public:
 	CSulString		urlGetDecode() const;
 	CSulString		urlGetEncode() const;
 
+	// find first string until character match (FIXME: method should be renamed to better describe what it is doing)
 	CSulString		GetStartWord( char c ) ;
+
+	// returns extension afer the period at the end of the string (ex. "myfile.exe" would return "exe")
+	CSulString		getExtension();
 	
 };
 

@@ -15,7 +15,9 @@ public:
 	void setMultiB( float f );
 	void setIntensity( float f );
 
+	void setInvert( bool bInvert );
 private:
+	osg::ref_ptr<osg::Uniform>	m_uniformInvert;
 	osg::ref_ptr<osg::Uniform>	m_rUniform_multiR;
 	osg::ref_ptr<osg::Uniform>	m_rUniform_multiG;
 	osg::ref_ptr<osg::Uniform>	m_rUniform_multiB;

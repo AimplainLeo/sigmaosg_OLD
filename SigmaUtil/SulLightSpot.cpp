@@ -45,7 +45,7 @@ void CSulLightSpot::traverse( osg::NodeVisitor& nv )
 {
 	CSulLightBase::traverse( nv );
 
-	if( nv.getVisitorType()==osg::NodeVisitor::CULL_VISITOR )
+	if ( nv.getVisitorType()==osg::NodeVisitor::CULL_VISITOR )
 	{
 		osgUtil::CullVisitor* cv = dynamic_cast<osgUtil::CullVisitor*>(&nv);
 

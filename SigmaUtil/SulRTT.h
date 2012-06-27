@@ -3,6 +3,8 @@
 #ifndef __SULRTT_H__
 #define __SULRTT_H__
 
+// deprecated,.. use CSulTexCam
+
 #include "SulExport.h"
 #include <osg/Referenced>
 #include <osg/Texture2D>
@@ -16,7 +18,8 @@ public:
 		SETUP_STANDARD,
 		SETUP_SHADOW,
 		SETUP_HDR,
-		SETUP_ORTHO_FRONT
+		SETUP_ORTHO_FRONT,
+		SETUP_32F_NEAREST
 	};
 
 public:
@@ -31,6 +34,7 @@ public:
 	void							setupShadow();
 
 private:
+	void							initConstructor();
 	void							setupOrthoFront();
 
 private:
@@ -40,6 +44,8 @@ private:
 	float							m_h;
 	GLint							m_format;
 	GLenum							m_source_type;
+	osg::Texture::FilterMode		m_filterMin;
+	osg::Texture::FilterMode		m_filterMax;
 };
 
 #endif // __SULRTT_H__

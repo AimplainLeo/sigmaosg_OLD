@@ -1028,6 +1028,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulProgramShaders.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulProgramShaders.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulScreenAlignedQuad.cpp"
 					>
 				</File>
@@ -1036,11 +1044,39 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SulTestGeoms.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulUniformArrayHack.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\SulUniformArrayHack.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewQuad.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewQuad.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewRTT.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewRTT.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewTexture.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulViewTexture.h"
 					>
 				</File>
 				<Filter
@@ -1499,11 +1535,27 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulPostFilterNightVision.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterNightVision.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulPostFilterStreaking.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\SulPostFilterStreaking.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterThermal.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterThermal.h"
 						>
 					</File>
 					<File
@@ -1547,6 +1599,14 @@
 						</File>
 						<File
 							RelativePath=".\SulPassCombineTex.h"
+							>
+						</File>
+						<File
+							RelativePath=".\SulPassDeferredRendering.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\SulPassDeferredRendering.h"
 							>
 						</File>
 						<File
@@ -1664,6 +1724,14 @@
 					</File>
 					<File
 						RelativePath=".\SulShaderCombineTex.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderDeferredRendering.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulShaderDeferredRendering.h"
 						>
 					</File>
 					<File
@@ -1855,6 +1923,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Data\shaders\intensity.frag"
+						>
+					</File>
+					<File
+						RelativePath=".\Data\shaders\intensity.vert"
+						>
+					</File>
+					<File
 						RelativePath=".\Data\shaders\spotlight.frag"
 						>
 					</File>
@@ -1896,6 +1972,18 @@
 					</File>
 					<File
 						RelativePath=".\SulTexCam.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Deferred"
+					>
+					<File
+						RelativePath=".\SulDeferredCamera.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulDeferredCamera.h"
 						>
 					</File>
 				</Filter>

@@ -13,7 +13,7 @@
 #include "SulString.h"
 #include "SulExport.h"
 
-class SUL_EXPORT CSulPostFilterHDR2 : public CSulPostFilterBase
+class SUL_EXPORT CSulPostFilterHDR2 : public CSulPostFilter
 {
 public:
 							CSulPostFilterHDR2();

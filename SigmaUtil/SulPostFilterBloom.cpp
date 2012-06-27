@@ -9,14 +9,14 @@
 #include <osg/geode>
 
 CSulPostFilterBloom::CSulPostFilterBloom() :
-CSulPostFilterBase(),
+CSulPostFilter(),
 m_fExp( 2.0f ),
 m_fFactor( 1.0f ),
 m_fMax( 1.0f )
 {
 }
 
-void CSulPostFilterBloom::in( osg::Texture2D* pTex, int iDownSampleSize )
+void CSulPostFilterBloom::in( osg::Texture2D* pTex, sigma::int32 iDownSampleSize )
 {
 	// we create a texture to be used for the final combined image
 	m_rTex = createTexture( pTex->getTextureWidth(), pTex->getTextureHeight() );

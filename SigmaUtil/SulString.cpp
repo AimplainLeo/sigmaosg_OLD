@@ -100,7 +100,7 @@ void CSulString::Format( const char* Format, ... )
 #endif
 }
 
-void CSulString::MakeLower()
+void CSulString::makeLower()
 {
 	std::transform( begin(), end(), begin(), tolower );
 }
@@ -108,19 +108,22 @@ void CSulString::MakeLower()
 void CSulString::Trim()
 {
 	//@TKG Test to make sure that we don't have a "" string with only white space
-	if (size()== 0)
+	if ( size()==0 )
 	{
 		return;
 	}
+
 	char* ws = " \t\n\r";
 	std::string s(*this);
 	std::string::size_type i = s.find_first_not_of(ws);
 	std::string::size_type j = s.find_last_not_of(ws);
-	//@TKG Test to make sure that if we only have white space that we dont do some nasty stuff
-	if (i == j)
+	
+	// @TKG Test to make sure that if we only have white space that we dont do some nasty stuff
+	if ( i==j )
 	{
 		return;
 	}
+
 	s = s.substr(i, j-i+1);
 	assign(s);
 }
@@ -165,7 +168,7 @@ bool CSulString::asBool() const
 	}
 
 	CSulString tmp = *this;
-	tmp.MakeLower();
+	tmp.makeLower();
 
 	if ( tmp=="1" ) return true;
 	if ( tmp=="true" ) return true;
@@ -349,4 +352,9 @@ CSulString CSulString::char2hex( char dec ) const
     r.append( &dig1, 1);
     r.append( &dig2, 1);
     return r;
+}
+
+CSulString CSulString::getExtension()
+{
+	return substr(find_last_of( "." ) + 1);
 }

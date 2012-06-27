@@ -72,7 +72,7 @@ osg::Group* createShowMRT()
 	osg::ref_ptr<CSulScreenAlignedQuad> rQuad = new CSulScreenAlignedQuad( osg::Vec3(128,128,0), 256, 256, 512, 512 );
 	rQuad->setTexture( textureRect[0] );
 	//rQuad->setTexture( pCam->getTexture() );
-	pGroup->addChild( rQuad->getProjection() );
+	pGroup->addChild( rQuad );
 
 	return pGroup;
 }

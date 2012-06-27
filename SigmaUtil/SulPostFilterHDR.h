@@ -9,7 +9,7 @@
 #include "SulFilterPass.h"
 #include "SulString.h"
 
-class CSulPostFilterHDR : public CSulPostFilterBase
+class CSulPostFilterHDR : public CSulPostFilter
 {
 public:
 							CSulPostFilterHDR();

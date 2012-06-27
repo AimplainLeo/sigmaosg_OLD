@@ -55,7 +55,7 @@ public:
 				// display image
 				CSulScreenAlignedQuad* quad = new CSulScreenAlignedQuad( osg::Vec3(64+256+128,64,0), 128, 128, 800, 600 );
 				quad->setTexture( rImage );
-				rGroup->addChild( quad->getProjection() );
+				rGroup->addChild( quad );
 
 				std::cout << "writeImageFile done." << std::endl;
 
@@ -75,7 +75,7 @@ public:
 				// display image
 				CSulScreenAlignedQuad* quad = new CSulScreenAlignedQuad( osg::Vec3(64+256+256+128,64,0), 128, 128, 800, 600 );
 				quad->setTexture( pImage );
-				rGroup->addChild( quad->getProjection() );
+				rGroup->addChild( quad );
 
 				std::cout << "readImageFile done." << std::endl;
 	
@@ -130,7 +130,7 @@ osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 	// display our texture on a quad
 	osg::ref_ptr<CSulScreenAlignedQuad> rQuad = new CSulScreenAlignedQuad( osg::Vec3(128,128,0), 256, 256, 800, 600 );
 	rQuad->setTexture( rRTT->getTexture() );
-	rGroup->addChild( rQuad->getProjection() );
+	rGroup->addChild( rQuad );
 
 	// attach image to rtt
 	rImage = new osg::Image;

@@ -7,7 +7,7 @@
 #include <osg/Camera>
 
 // usage example:
-// pMyCam->setUpdateCallback( new CSulNodeCallbackCameraSync( pCamToSyncWith ) );
+// pMyCam->addUpdateCallback( new CSulNodeCallbackCameraSync( pCamToSyncWith ) );
 
 class CSulNodeCallbackCameraSync : public osg::NodeCallback
 {

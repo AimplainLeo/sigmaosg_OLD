@@ -24,6 +24,12 @@ public:
 
 	void	buildTextureData();
 
+	osg::Uniform*		getUniformTexLightData();
+	osg::Uniform*		getUniformCountLightPoints();
+	osg::Uniform*		getUniformCountLightSpots();
+
+	osg::TextureRectangle*	getTextureData();
+
 private:
 	void	traverse( osg::NodeVisitor& nv );
 

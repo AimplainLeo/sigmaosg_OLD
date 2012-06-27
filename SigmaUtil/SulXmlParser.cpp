@@ -179,10 +179,29 @@ bool CSulXmlParser::parseElement( CSulParser* pSulParser )
 	// process element
 	//////////////////////////////
 
+	// only TAGSTART elements can have data between start and end tags, so we check
+	// FIXME: return and newlines are tokenized :(  ... we should include the whole data not just tokens
+	// basically this means that all delimeters are not included in the data section.
+	// The way the tokenizer is used in conjuction with the xml parser makes this impossible to solve with
+	// the current design. I'm going to create a new parser that will handle the data section.. also the new
+	// parser will be used to create a xml dom object.
+	CSulString sData;
+	if ( eElementType==TAGSTART )
+	{
+		while ( 1 )
+		{
+			sigma::int8* p = pSulParser->PeekToken();
+			if ( !p || p[0]=='<' )
+				break;
+
+			sData+= pSulParser->GetToken();
+		}
+	}
+
 	switch ( eElementType )
 	{
 		case TAGSTART:
-			elementStart( strElementName, rAttr.get() );
+			elementStart( strElementName, rAttr.get(), sData );
 			break;
 
 		case TAGEND:
@@ -191,7 +210,7 @@ bool CSulXmlParser::parseElement( CSulParser* pSulParser )
 			break;
 
 		case TAGBOTH:
-			elementStart( strElementName, rAttr.get() );
+			elementStart( strElementName, rAttr.get(), sData );
 			elementEnd( strElementName, rAttr.get() );
 			elementEnd( strElementName );
 			break;

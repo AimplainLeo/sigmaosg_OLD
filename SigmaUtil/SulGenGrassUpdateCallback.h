@@ -10,7 +10,7 @@ class CSulGenGrassUpdateCallback : public osg::NodeCallback
 public:
 	CSulGenGrassUpdateCallback( CSulGrass* pGrass, osg::Group* pRoot, osg::Node* pTerrain, const osg::Vec3& pos )
 	{
-		pGrass->getGeode()->setUpdateCallback( this );
+		pGrass->getGeode()->addUpdateCallback( this );
 
 		m_rGrass = pGrass;
 		m_rRoot = pRoot;

@@ -5,12 +5,12 @@
 
 #include "SulPostFilterBase.h"
 
-class CSulPostFilterBloom : public CSulPostFilterBase
+class CSulPostFilterBloom : public CSulPostFilter
 {
 public:
 					CSulPostFilterBloom();
 
-	void			in( osg::Texture2D* pTex, int iDownSampleSize );
+	void			in( osg::Texture2D* pTex, sigma::int32 iDownSampleSize );
 	osg::Texture2D* out();
 
 private:

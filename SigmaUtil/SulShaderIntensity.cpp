@@ -27,7 +27,16 @@ CSulShaderBase( pNode )
 		m_rUniform_intensity = new osg::Uniform( osg::Uniform::FLOAT, "intensity" );
 		m_rUniform_intensity->set( fIntensity );
 		m_rSS->addUniform( m_rUniform_intensity );
+
+		m_uniformInvert = new osg::Uniform( osg::Uniform::BOOL, "bInvert" );
+		m_uniformInvert->set( false );
+		m_rSS->addUniform( m_uniformInvert );
 	}
+}
+
+void CSulShaderIntensity::setInvert( bool bInvert )
+{
+	m_uniformInvert->set( bInvert );
 }
 
 void CSulShaderIntensity::setMultiR( float f )

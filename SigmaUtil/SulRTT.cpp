@@ -5,6 +5,8 @@
 
 CSulRTT::CSulRTT( osg::Texture2D* pTex, ESETUP eSetup )
 {
+	initConstructor();
+
 	m_rTex = pTex;
 
 	float w = pTex->getTextureWidth();
@@ -22,6 +24,8 @@ CSulRTT::CSulRTT( osg::Texture2D* pTex, ESETUP eSetup )
 
 CSulRTT::CSulRTT( float w, float h, GLint format, GLenum source_type )
 {
+	initConstructor();
+
 	m_w = w;
 	m_h = h;
 	m_format = format;
@@ -34,6 +38,8 @@ CSulRTT::CSulRTT( float w, float h, GLint format, GLenum source_type )
 
 CSulRTT::CSulRTT( float w, float h, ESETUP eSetup )
 {
+	initConstructor();
+
 	m_w = w;
 	m_h = h;
 
@@ -57,12 +63,28 @@ CSulRTT::CSulRTT( float w, float h, ESETUP eSetup )
 				setupStandard(); 
 			}
 			break;
+
+		case SETUP_32F_NEAREST:
+			{
+				m_format = GL_RGBA32F_ARB;
+				m_source_type = GL_FLOAT;
+				m_filterMin = osg::Texture2D::NEAREST;
+				m_filterMax = osg::Texture2D::NEAREST;
+				setupStandard();
+			}
+			break;
 		
 		default:
 			assert( 0 ); // not supported yet
 	}
 
 	setViewport( 0, 0, w, h );
+}
+
+void CSulRTT::initConstructor()
+{
+	m_filterMin = osg::Texture2D::LINEAR;
+	m_filterMax = osg::Texture2D::LINEAR;
 }
 
 void CSulRTT::setupOrthoFront()
@@ -80,8 +102,8 @@ void CSulRTT::setupStandard()
 	m_rTex->setSourceFormat( m_format );
 	m_rTex->setInternalFormat( m_format );
 	m_rTex->setSourceType( m_source_type );
-	m_rTex->setFilter( osg::Texture2D::MIN_FILTER,osg::Texture2D::LINEAR );
-	m_rTex->setFilter( osg::Texture2D::MAG_FILTER,osg::Texture2D::LINEAR );
+	m_rTex->setFilter( osg::Texture2D::MIN_FILTER, osg::Texture2D::LINEAR );
+	m_rTex->setFilter( osg::Texture2D::MAG_FILTER, osg::Texture2D::LINEAR );
 
 	// cam to render to texture
 	setRenderOrder( osg::Camera::PRE_RENDER );

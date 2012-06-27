@@ -38,7 +38,7 @@ osg::Node* CreateScene()
 }
 */
 
-osg::Node* CreateScene()
+osg::Node* createScene()
 {
 	// create geometry quad
 	osg::ref_ptr<CSulGeomQuad> pGeomQuad = new CSulGeomQuad( osg::Vec3(110,110, 0), 100, 100, CSulGeomQuad::PLANE_XY );
@@ -75,7 +75,7 @@ int _tmain(int argc, _TCHAR* argv[])
     viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render
-    viewer->setSceneData( CreateScene() );
+    viewer->setSceneData( createScene() );
 
     // execute main loop
     return viewer->run();

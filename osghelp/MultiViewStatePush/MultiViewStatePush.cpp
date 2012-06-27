@@ -48,11 +48,11 @@ osg::Node* createScene( osgViewer::Viewer* viewer )
 
 	osg::ref_ptr<CSulScreenAlignedQuad> quad1 = new CSulScreenAlignedQuad( osg::Vec3(150, 100, 0), 300, 200, 800, 600 );
 	quad1->setTexture( cam1->getTexture() );
-	root->addChild( quad1->getProjection() );
+	root->addChild( quad1 );
 
 	osg::ref_ptr<CSulScreenAlignedQuad> quad2 = new CSulScreenAlignedQuad( osg::Vec3(650, 100, 0), 300, 200, 800, 600 );
 	quad2->setTexture( cam2->getTexture() );
-	root->addChild( quad2->getProjection() );
+	root->addChild( quad2 );
 
 	////////////////////////////////////////////////////////////////////////
 	// create ligting stuff here

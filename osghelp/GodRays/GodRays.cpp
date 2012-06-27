@@ -24,7 +24,7 @@ osg::Group* createLightSource()
 		800, 600
 	);
 	pQuad->setTexture( "sun.tga" );
-	pGroup->addChild( pQuad->getProjection() );
+	pGroup->addChild( pQuad );
 
 	pQuad->getGroup()->getOrCreateStateSet()->setRenderBinDetails( -100, "RenderBin" );
 
@@ -72,7 +72,7 @@ osg::Group* createGodRays( osgViewer::Viewer* pViewer, osg::Node* pRender_occlud
 		800, 600
 	);
 	pQuad_occluding->setTexture( pRTT_occluding->getTexture() );
-	pGroup->addChild( pQuad_occluding->getProjection() );
+	pGroup->addChild( pQuad_occluding );
 
 	// postfilter here
 	CSulPostFilterGodRays* pGodRays = new CSulPostFilterGodRays;
@@ -86,7 +86,7 @@ osg::Group* createGodRays( osgViewer::Viewer* pViewer, osg::Node* pRender_occlud
 		800, 600
 	);
 	pQuad_normal->setTexture( pRTT_normal->getTexture() );
-	pGroup->addChild( pQuad_normal->getProjection() );
+	pGroup->addChild( pQuad_normal );
 
 
 	// have a quad to visualize texture (godrays)
@@ -96,7 +96,7 @@ osg::Group* createGodRays( osgViewer::Viewer* pViewer, osg::Node* pRender_occlud
 		800, 600
 	);
 	pQuad->setTexture( pGodRays->out() );
-	pGroup->addChild( pQuad->getProjection() );
+	pGroup->addChild( pQuad );
 
 	// some debug stuff
 	osg::ref_ptr<CDebugMenu> rDebugMenu = new CDebugMenu( pGodRays );

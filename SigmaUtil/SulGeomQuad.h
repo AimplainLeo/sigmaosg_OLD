@@ -40,8 +40,8 @@ public:
 
 	// FIXME: these texture methods should be moved to the base class (they are very generic)
 	void							setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB, sigma::uint32 unit=0 );
-	void							setTexture( osg::Texture* pTex, sigma::uint32 unit=0 );
-	osg::Texture2D*					setTexture( const CSulString& file, sigma::uint32 unit );
+	void							setTexture( osg::Texture* pTex, sigma::uint32 unit=0, const CSulString& uniformName="" );
+	osg::Texture2D*					setTexture( const CSulString& file, sigma::uint32 unit=0 );
 
 	osg::Texture*					getTexture( sigma::uint32 unit=0 );
 

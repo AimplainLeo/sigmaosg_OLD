@@ -18,6 +18,8 @@ public:
 
 	void					Tokenize( const CSulString& s );
 
+	void					explode( const CSulString& s, char delimiter=',' );
+
 	const VECTOR_STRING&	getList() const;
 
 	CSulString				getString( sigma::uint32 index );

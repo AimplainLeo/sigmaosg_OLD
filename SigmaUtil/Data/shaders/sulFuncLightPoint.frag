@@ -19,21 +19,23 @@ vec4 sulCalcLightingAtt( vec3 pos, float attConstant, float attLinear, float att
 	return (att * (lightDiffuse) ) * NdotL;				
 }
 
-vec4 sulCalcLightPoint( vec4 v, vec3 n )
+vec4 sulCalcLightPoint( vec4 v, vec3 n, bool ignoreNormal )
 {
 	vec4 c = vec4(0.0,0.0,0.0,0.0);
-	
+
 	for ( int i=0; i<countLightPoints; i++ )
 	{
 		bool enabled = bool(texture2DRect( texLightPoint, vec2( 2, i ) ).b);
 		if ( !enabled )
 			continue;
-	
+
 		float id = texture2DRect( texLightPoint, vec2( 2, i ) ).a;	
 	
 		// special case, light4 is for the helment and can only be seen in nightvision
+		/*
 		if ( id==4 && !light4 )
 			continue;
+			*/
 
 		vec3		pos;
 		vec4		diffuseColor;
@@ -62,6 +64,9 @@ vec4 sulCalcLightPoint( vec4 v, vec3 n )
 		
 		vec3 lightDir = normalize( posLight - v.xyz );
 		float NdotL = max( dot(n,lightDir), 0.0 );
+		
+		if ( ignoreNormal )
+			NdotL = 1.0;		
 		
 		c+= sulCalcLightingAtt( posLight, attConstant, attLinear, attQuadratic, diffuseColor, NdotL, v.xyz ); 
 	}

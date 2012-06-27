@@ -9,7 +9,7 @@
 #include <osg/geode>
 
 CSulPostFilterHDR::CSulPostFilterHDR() :
-CSulPostFilterBase(),
+CSulPostFilter(),
 m_fExp( 1.0f ),
 m_fFactor( 1.0f ),
 m_fMax( 1.0f ),

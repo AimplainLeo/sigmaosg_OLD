@@ -5,7 +5,7 @@
 
 #include "SulPostFilterBase.h"
 
-class CSulPostFilterGhost : public CSulPostFilterBase
+class CSulPostFilterGhost : public CSulPostFilter
 {
 public:
 	void			in( osg::Texture2D* pTex );

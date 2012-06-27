@@ -199,7 +199,7 @@ osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 	);
 
 
-	pBG->getProjection()->getOrCreateStateSet()->setRenderBinDetails( -100, "RenderBin" );
+	pBG->getOrCreateStateSet()->setRenderBinDetails( -100, "RenderBin" );
 //pBG->setTexture( "sunset.jpg", GL_RGBA16F_ARB );
 //pBG->setTexture( "memorial.hdr", GL_RGBA16F_ARB );
 pBG->setTexture( "vinesunset.hdr", GL_RGBA16F_ARB );
@@ -208,10 +208,10 @@ pBG->setTexture( "vinesunset.hdr", GL_RGBA16F_ARB );
 //pBG->setTexture( "test.hdr", GL_RGBA16F_ARB );
 
 	//pBG->getQuad()->getTexture()->setInternalFormat( GL_RGBA16F_ARB );
-	pScene->addChild( pBG->getProjection() );
+	pScene->addChild( pBG );
 
 	// add amplifier shader
-	m_amp = new CSulShaderAmplifier( pBG->getProjection(), 1.0f, false );
+	m_amp = new CSulShaderAmplifier( pBG, 1.0f, false );
 
 	//////////////////////////////////////////////////////////////////
 	// we create a RTT that is going to be our HDR view 	
@@ -251,7 +251,7 @@ pBG->setTexture( "vinesunset.hdr", GL_RGBA16F_ARB );
 		800, 600
 	);
 //	pQuad->setTexture( pTex );
-	pGroup->addChild( pQuad->getProjection() );
+	pGroup->addChild( pQuad );
 
 	pRTT->setUpdateCallback( new CSulNodeCallbackCameraSync( pViewer->getCamera() ) );
 

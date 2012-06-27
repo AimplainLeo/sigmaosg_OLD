@@ -32,6 +32,11 @@ osg::Group()
 	getOrCreateStateSet()->addUniform( m_uniformCountLightSpots );
 
 //	createTextureData( 8, 1024 ); // support for 1024 lights
+
+	// create one default texture 
+	createTextureData( 8, 1024 );		
+	m_vecImage.push_back( m_rImage );
+	m_vecTextureRectangle.push_back( m_rTextureData );
 }
 
 const VEC_LIGHT_POINT& CSulLightManager::getLightPointList()
@@ -77,6 +82,26 @@ void CSulLightManager::createTextureData( sigma::uint32 sizeX, sigma::uint32 siz
 	m_rTextureData->setFilter( osg::Texture2D::MAG_FILTER, osg::Texture2D::NEAREST );
 
 //	getOrCreateStateSet()->setTextureAttributeAndModes( 7, m_rTextureData, osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
+}
+
+osg::Uniform* CSulLightManager::getUniformTexLightData()
+{
+	return m_uniformTexLightPoint;
+}
+
+osg::Uniform* CSulLightManager::getUniformCountLightPoints()
+{
+	return m_uniformCountLightPoints;
+}
+
+osg::Uniform* CSulLightManager::getUniformCountLightSpots()
+{
+	return m_uniformCountLightSpots;
+}
+
+osg::TextureRectangle* CSulLightManager::getTextureData()
+{
+	return m_rTextureData;
 }
 
 void CSulLightManager::buildTextureData()
@@ -229,6 +254,7 @@ void CSulLightManager::traverse( osg::NodeVisitor& nv )
 
 		reset();
 		osg::Group::traverse( nv );
+
 		buildTextureData();
 
 		cv->popStateSet();

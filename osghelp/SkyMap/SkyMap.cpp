@@ -71,7 +71,7 @@ osg::Group* createLumThing( CSulPostFilterHDR2* pHDR )
 		800, 600
 	);
 	pQuad->setTexture( pHDR->texLum->getOut() );
-	pGroup->addChild( pQuad->getProjection() );
+	pGroup->addChild( pQuad );
 
 	return pGroup;
 }
@@ -103,7 +103,7 @@ osg::Node* createHDR( osg::Node* pRenderMe, osgViewer::Viewer* pViewer )
 		800, 600
 	);
 	pQuad->setTexture( pHDR->out() );
-	pGroup->addChild( pQuad->getProjection() );
+	pGroup->addChild( pQuad );
 
 	// some debug stuff
 	osg::ref_ptr<CDebugMenu> rDebugMenu = new CDebugMenu( pHDR );

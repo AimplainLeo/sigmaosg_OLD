@@ -111,7 +111,7 @@ void CSulGeomLaser::init()
 	// we want to add laser pulsing
 	// (1.0/2.0)/2.0 :		1.0/2.0 = toggle every ½ second  .... divide by 2 again to get full pulse 
 	m_rPulse = new CSulUpdateCallbackToggleNode( m_rLaserGroup, 0.0 );
-	setUpdateCallback( m_rPulse );
+	addUpdateCallback( m_rPulse );
 }
 
 void CSulGeomLaser::setPulseFrequency( double pulse )

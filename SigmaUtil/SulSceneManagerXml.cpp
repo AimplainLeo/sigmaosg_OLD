@@ -5,7 +5,13 @@
 #include "SulXmlAttr.h"
 #include "SulParser.h"
 #include "SulStringList.h"
+#include "SulTexCam.h"
+#include "SulScreenAlignedQuad.h"
+#include "SulDeferredCamera.h"
+#include "SulTestGeoms.h"
+#include "SulGeomSphere.h"
 #include <osg/Fog>
+#include <iostream>
 
 CSulSceneManagerXml::CSulSceneManagerXml( CSulSceneManager* pSceneManager ):
 m_pCurrentStateSet(0)
@@ -14,7 +20,7 @@ m_pCurrentStateSet(0)
 	m_vecNodeStack.push_back( 0 );
 }
 
-osg::StateAttribute::Values CSulSceneManagerXml::GetStateAttribute( const CSulString& s )
+osg::StateAttribute::Values CSulSceneManagerXml::getStateAttribute( const CSulString& s )
 {
 	osg::ref_ptr<CSulParser> rParser = new CSulParser;
 	rParser->AddCharDelimiter( '|' );
@@ -104,7 +110,7 @@ osg::AlphaFunc::ComparisonFunction CSulSceneManagerXml::GetAlphaFuncFunction( co
 	}
 }
 
-osg::Node* CSulSceneManagerXml::GetLastNode()
+osg::Node* CSulSceneManagerXml::getLastNode()
 {
 	if ( !m_vecNodeStack.size() )
 	{
@@ -114,8 +120,177 @@ osg::Node* CSulSceneManagerXml::GetLastNode()
 	return m_vecNodeStack[m_vecNodeStack.size()-1];
 }
 
-void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
+void CSulSceneManagerXml::addTexture2D( const CSulString& sName, osg::Texture2D* tex )
 {
+	m_mapTexture2D[sName] = tex;
+}
+
+osg::Texture2D* CSulSceneManagerXml::getTexture2D( const CSulString& sName )
+{
+	if ( m_mapTexture2D.find( sName )==m_mapTexture2D.end() )
+	{
+		return 0;
+	}
+
+	return m_mapTexture2D[sName];
+}
+
+void CSulSceneManagerXml::add( CSulString sName, osg::Node* node )
+{
+	// make sure the name does not already exist
+	if ( m_mapNode.find( sName )!=m_mapNode.end() )
+	{
+		std::cout << "ERROR: CSulSceneManager::add -> name given already exists: " << sName << std::endl;
+		return;
+	}
+
+	m_sLastNodeName = sName;
+	osg::Group* pParentGroup = dynamic_cast<osg::Group*>(m_vecNodeStack[m_vecNodeStack.size()-1]);
+	m_rSceneManager->Create( m_sLastNodeName, pParentGroup, node );
+	m_vecNodeStack.push_back( node );
+	m_mapNode[sName] = node;
+}
+
+osg::Node* CSulSceneManagerXml::get( const CSulString& sName )
+{
+	return m_mapNode[sName];
+}
+
+void CSulSceneManagerXml::addProgramShaders( const CSulString& sName, CSulProgramShaders* programShaders )
+{
+	m_mapProgramShaders[sName] = programShaders;
+}
+
+CSulProgramShaders* CSulSceneManagerXml::getProgramShaders( const CSulString& sName )
+{
+	return m_mapProgramShaders[sName];
+}
+
+void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData )
+{
+	if ( sName=="SULPROGRAMSHADERS" )
+	{
+		CSulString sN = pAttr->get( "name" );
+
+		CSulString shaders = pAttr->get( "shaders" );
+		CSulProgramShaders* programShaders = new CSulProgramShaders( shaders );
+		addProgramShaders( sN, programShaders );
+
+		programShaders->setParameter( GL_GEOMETRY_VERTICES_OUT_EXT, 6 );
+		programShaders->setParameter( GL_GEOMETRY_INPUT_TYPE_EXT, GL_TRIANGLES );
+		programShaders->setParameter( GL_GEOMETRY_OUTPUT_TYPE_EXT, GL_LINE_STRIP );
+
+		m_rSceneManager->addAttribute( sN, programShaders );
+	}
+
+	if ( sName=="TEXTURE2D" )
+	{
+		sigma::uint32 w = pAttr->getUint32( "w", 256 );
+		sigma::uint32 h = pAttr->getUint32( "h", 256 );
+		bool resizePowerTwoHint = pAttr->getBool( "ResizeNonPowerOfTwoHint", false );
+
+		sigma::uint32 internalFormat = GL_RGBA;
+		if ( pAttr->exist( "InternalFormat" ) )
+		{
+			CSulString s = pAttr->get( "InternalFormat" );
+			if ( s=="GL_DEPTH_COMPONENT" )
+				internalFormat = GL_DEPTH_COMPONENT;
+		}
+
+		osg::Texture2D* tex = new osg::Texture2D;
+		tex->setTextureSize( w, h );
+		tex->setInternalFormat( internalFormat );
+		tex->setResizeNonPowerOfTwoHint( resizePowerTwoHint );
+
+		CSulString sN = pAttr->get( "name" );
+		addTexture2D( sN, tex );
+	}
+
+	if ( sName=="TEXCAM" )
+	{
+		osg::Group* pParentGroup = dynamic_cast<osg::Group*>(m_vecNodeStack[m_vecNodeStack.size()-1]);
+
+		CSulString sN = pAttr->get( "name" );
+		sigma::uint32 w = pAttr->getUint32( "w", 256 );
+		sigma::uint32 h = pAttr->getUint32( "h", 256 );
+
+		CSulTexCam* texcam = new CSulTexCam( w, h );
+		add( sN, texcam );
+
+		if ( pAttr->exist("attach_depth_buffer") )
+		{
+			osg::Texture2D* tex = getTexture2D( pAttr->get("attach_depth_buffer") );
+			assert( tex );
+			texcam->attach( osg::Camera::DEPTH_BUFFER, tex );
+		}
+
+		if ( pAttr->exist("attach_color_buffer") )
+		{
+			osg::Texture2D* tex = getTexture2D( pAttr->get("attach_color_buffer") );
+			assert( tex );
+			texcam->attach( osg::Camera::COLOR_BUFFER, tex );
+		}
+	
+		sigma::uint32 clearMask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
+		if ( pAttr->exist("clearz") )
+		{
+			// remove the bit
+			clearMask = clearMask & (~GL_DEPTH_BUFFER_BIT);
+			if ( pAttr->get( "clearz" ).asBool() )
+				clearMask |= GL_DEPTH_BUFFER_BIT;
+		}
+		if ( pAttr->exist("clearbg") )
+		{
+			// remove the bit
+			clearMask = clearMask & (~GL_COLOR_BUFFER_BIT);
+			if ( pAttr->get( "clearbg" ).asBool() )
+				clearMask |= GL_COLOR_BUFFER_BIT;
+		}
+		texcam->setClearMask( clearMask );
+
+		// debug bar
+		//texcam->addChild( new CSulScreenAlignedQuad( 800, 600, 0, 0, 100, 800, 50 ) );		// bar over
+	}
+
+	if ( sName=="SCREENQUAD" )
+	{
+		CSulString sN = pAttr->get( "name" );
+
+		sigma::uint32 x = pAttr->getUint32( "x", 0 );
+		sigma::uint32 y = pAttr->getUint32( "y", 0 );
+		sigma::uint32 z = pAttr->getUint32( "z", 0 );
+		sigma::uint32 w = pAttr->getUint32( "w", 256 );
+		sigma::uint32 h = pAttr->getUint32( "h", 256 );
+
+		// terrible way of  handling the view sizes, but I have no idea how to make this better
+		sigma::uint32 view_w = pAttr->getUint32( "view_w", 800 );
+		sigma::uint32 view_h = pAttr->getUint32( "view_h", 600 );
+
+		osg::Texture2D* tex = 0;
+		if ( pAttr->exist( "texture" ) )
+		{
+			tex = getTexture2D( pAttr->get("texture") );
+			if ( !tex )
+			{
+				osg::Node* node = get( pAttr->get("texture") );
+				if ( node )
+				{
+					CSulTexCam* texcam = dynamic_cast<CSulTexCam*>(node);
+					tex = texcam->getTexture(0);
+				}
+			}
+		}
+
+		CSulScreenAlignedQuad* quad = new CSulScreenAlignedQuad( view_w, view_h, tex, osg::Vec3(x,y,z), w, h );
+		add( sN, quad );
+
+		if ( pAttr->exist( "renderbin_num" ) )
+		{
+			sigma::uint32 i = pAttr->get( "renderbin_num" ).asUint32();
+			quad->getQuad()->getGeometry()->getOrCreateStateSet()->setRenderBinDetails( i, "RenderBin" );
+		}
+	}
+
 	if ( sName=="NODE" )
 	{
 		// create group
@@ -135,6 +310,17 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 			}
 			pNode->setStateSet( m_rSceneManager->GetStateSet(name) );
 		}
+
+		if ( pAttr->exist("mask") )
+		{
+			pNode->setNodeMask( m_rSceneManager->calcCullMask( pAttr->get("mask") ) );
+		}
+
+		if ( pAttr->exist( "renderbin_num" ) )
+		{
+			unsigned long i = pAttr->get( "renderbin_num" ).asUint32();
+			pNode->getOrCreateStateSet()->setRenderBinDetails( i, "RenderBin" );
+		}
 	}
 
 	if ( sName=="ADD" )
@@ -149,7 +335,7 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 
 		// @PWM the m_sLastNodeName is not the current parent node! it's the name of the node last created!
 		//m_rSceneManager->AddToGroup( m_sLastNodeName, pNode );
-		osg::Group* pGroup = dynamic_cast<osg::Group*>(GetLastNode());
+		osg::Group* pGroup = dynamic_cast<osg::Group*>(getLastNode());
 		pGroup->addChild( pNode );
 	}
 
@@ -245,7 +431,7 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 			}
 			else
 			{
-				m_pCurrentStateSet->setMode( mode, GetStateAttribute(sValue) );
+				m_pCurrentStateSet->setMode( mode, getStateAttribute(sValue) );
 			}
 		}
 	}
@@ -302,7 +488,7 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		osg::StateAttribute::Values stateValue = osg::StateAttribute::ON;
 		if ( pAttr->exist( "state" ) )
 		{
-			stateValue = GetStateAttribute( pAttr->get( "state" ) );
+			stateValue = getStateAttribute( pAttr->get( "state" ) );
 		}
 
 		m_pCurrentStateSet->addUniform( uniform, stateValue );
@@ -311,6 +497,16 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 
 void CSulSceneManagerXml::elementEnd( const CSulString& sName )
 {
+	if ( sName=="TEXCAM" )
+	{
+		m_vecNodeStack.pop_back();
+	}
+
+	if ( sName=="SCREENQUAD" )
+	{
+		m_vecNodeStack.pop_back();
+	}
+
 	if ( sName=="NODE" )
 	{
 		m_vecNodeStack.pop_back();

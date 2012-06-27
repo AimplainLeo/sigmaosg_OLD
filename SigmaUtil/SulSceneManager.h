@@ -53,8 +53,9 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////
 	// use to manage node masks
 	////////////////////////////////////////////////////////////////////////////////////
+
 	sigma::uint32	calcCullMask( const std::string& maskNames );
-	unsigned int	getOrCreateMaskValue(const CSulString& name);
+	sigma::uint32	getOrCreateMaskValue(const CSulString& name);
 
 private:
 	bool			IsNodeInLayout( osg::Node* pNode );

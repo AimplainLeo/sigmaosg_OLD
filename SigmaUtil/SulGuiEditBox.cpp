@@ -47,7 +47,7 @@ void CSulGuiEditBox::init()
 {
 	CSulGuiCanvas::init();
 
-	setUpdateCallback( new CSulGuiTextUpdateCallback( this ) );
+	addUpdateCallback( new CSulGuiTextUpdateCallback( this ) );
 
 	float h = getH();
 

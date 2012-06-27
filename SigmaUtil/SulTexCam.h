@@ -7,6 +7,7 @@
 #include "SulExport.h"
 #include <osg/camera>
 #include <osg/texture2d>
+#include <osgViewer/Viewer>
 
 class SUL_EXPORT CSulTexCam : public osg::Camera
 {
@@ -17,28 +18,45 @@ public:
 		SHADOW,
 		HDR,
 		ZVALUE_WITH_IMAGE,			// draws the scene using the vertex z values
-		ZVALUE_FROM_DEPTH
+		ZVALUE_FROM_DEPTH,
+		DEFERRED_RENDERING,
+		ORTHO
 	};
 
 public:
+						CSulTexCam( ESETUP eSetup=ORTHO );
+
+						CSulTexCam( osgViewer::Viewer* viewer, ESETUP eSetup=STANDARD );
+
 						CSulTexCam( sigma::uint32 w, sigma::uint32 h, ESETUP eSetup=STANDARD );
 						CSulTexCam( osg::Texture2D* pTex, ESETUP eSetup=STANDARD );
 
-	void				setTexture( osg::Texture2D* pTex );
-	osg::Texture2D*		getTexture();
+	void				setWidth( sigma::uint32 w );
+	void				setHeight( sigma::uint32 h );
+
+	void				setTexture( osg::Texture2D* pTex, sigma::uint32 index=0 );
+	sigma::uint32		addTexture( osg::Texture2D* pTex );
+	osg::Texture2D*		getTexture( sigma::uint32 index=0 );
 
 	osg::Image*			getImage();
 
-private:
+	void				setTextureSize( sigma::uint32 w, sigma::uint32 h );
+
 	void				initTex();
 	void				initCam();
 
 private:
-	osg::ref_ptr<osg::Texture2D>	m_rTex;
+	typedef std::vector< osg::ref_ptr< osg::Texture2D > >	VEC_TEX;
+
+	VEC_TEX							m_vecTex;
+
 	osg::ref_ptr<osg::Image>		m_rImage;
 	sigma::uint32					m_w;
 	sigma::uint32					m_h;
 	ESETUP							m_eSetup;
+
+	sigma::uint32					m_texW;
+	sigma::uint32					m_texH;
 };
 
 #endif // __SULTEXCAM_H__

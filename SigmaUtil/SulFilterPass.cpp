@@ -12,7 +12,7 @@ osg::Group* CSulFilterPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTex
 	int texH = pTexIn->getTextureHeight();
 
 	m_rTexCam = new CSulTexCam( pTexOut, CSulTexCam::HDR );
-	m_rTexCam->setName( std::string("CIuPostFilter-Cam-")+sNameRTT );
+	m_rTexCam->setName( std::string("CSulFilterPass-Cam-")+sNameRTT );
 
 	// quad to apply shader to
 	// quad to use pTexIn
@@ -24,7 +24,7 @@ osg::Group* CSulFilterPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTex
 	m_rGroup	= new osg::Group;
 	m_rGroup->addChild( rQuad );
 
-	// the quad must be aligned to the RTT camera and cover it completly
+	// the quad must be aligned to the RTT camera and cover it completely
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( texW, texH );
 	rAlign->AddChild( m_rGroup );
 

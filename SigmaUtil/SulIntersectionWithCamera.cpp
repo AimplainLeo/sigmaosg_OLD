@@ -28,7 +28,7 @@ CSulIntersectionWithCamera::CSulIntersectionWithCamera( osg::Node* pNode, CSulIn
 
 	// we need an update callback to ensure that we don't get threading problems with the drawcallback
 	m_rSulIntersectionWithCameraCallback = new CSulIntersectionWithCameraCallback( m_rDrawCallback );
-	setUpdateCallback( m_rSulIntersectionWithCameraCallback );
+	addUpdateCallback( m_rSulIntersectionWithCameraCallback );
 
 	setCullCallback( new CSulIntersectionCullCallback( m_rDrawCallback ) );
 }

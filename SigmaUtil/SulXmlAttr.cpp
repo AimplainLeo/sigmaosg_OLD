@@ -85,6 +85,30 @@ void CSulXmlAttr::add( const CSulString& sName, bool bVal )
 	p->strValue.Format( "%s", bVal?"true":"false" );
 }
 
+float CSulXmlAttr::getFloat( const CSulString& sName, float defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName ).asFloat();
+
+	return defaultValue;
+}
+
+sigma::uint32 CSulXmlAttr::getUint32( const CSulString& sName, sigma::uint32 defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName ).asUint32();
+
+	return defaultValue;
+}
+
+bool CSulXmlAttr::getBool( const CSulString& sName, bool defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName ).asBool();
+
+	return defaultValue;
+}
+
 CSulString& CSulXmlAttr::get( const CSulString& sName )
 {
 	VECTOR_ATTR_PTR::iterator iAttr;
@@ -171,7 +195,7 @@ bool CSulXmlAttr::get( const CSulString& sName, bool& b )
 	}
 
 	CSulString s = get( sName );
-	s.MakeLower();
+	s.makeLower();
 
 	if ( s=="true" )
 	{

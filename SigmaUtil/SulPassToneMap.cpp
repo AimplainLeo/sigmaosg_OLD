@@ -97,7 +97,7 @@ CSulPass( pTexIn, pTexOut, "ToneMap" )
 	// for luminance and speed (auto exposure)
 	if ( pTexCamLum )
 	{
-		//getGeode()->setUpdateCallback( new CSulFixMe( pTexLum, m_rShader ) );
+		//getGeode()->addUpdateCallback( new CSulFixMe( pTexLum, m_rShader ) );
 
 
 		osg::Image* image = new osg::Image;

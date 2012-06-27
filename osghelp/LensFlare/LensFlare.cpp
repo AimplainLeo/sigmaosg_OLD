@@ -37,7 +37,7 @@ osg::Group* CreateScene( osgViewer::Viewer* pViewer )
 		800, 600
 	);
 	pQuad->setTexture( pPostFilterGhost->out() );
-	pGroup->addChild( pQuad->getProjection() );
+	pGroup->addChild( pQuad );
 
 	return pGroup;
 }

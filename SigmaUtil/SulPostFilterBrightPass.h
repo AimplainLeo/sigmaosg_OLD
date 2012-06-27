@@ -6,7 +6,7 @@
 #include "SulPostFilterBase.h"
 #include "SulShaderBrightPass.h"
 
-class CSulPostFilterBrightPass : public CSulPostFilterBase
+class CSulPostFilterBrightPass : public CSulPostFilter
 {
 public:
 					CSulPostFilterBrightPass();

@@ -15,7 +15,7 @@ class CSulGuiXml : public CSulXmlParser
 public:
 					CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandler, float viewW, float viewH, CSulGuiThemeXml* pThemeXml );
 
-	void			elementStart( const class CSulString& sName, class CSulXmlAttr* pAttr );
+	void			elementStart( const class CSulString& sName, class CSulXmlAttr* pAttr, CSulString sData );
 
 	void			elementEnd( const CSulString& sName );
 

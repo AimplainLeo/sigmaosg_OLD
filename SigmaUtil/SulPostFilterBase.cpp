@@ -9,38 +9,38 @@
 #include "SulFilterPass.h"
 #include <osg/geode>
 
-CSulPostFilterBase::CSulPostFilterBase() :
+CSulPostFilter::CSulPostFilter() :
 m_texFormatInternal( GL_RGBA ),
 m_texFormatSource( GL_RGBA ),
 m_texSourceType( GL_UNSIGNED_BYTE )
 {
 }
 
-void CSulPostFilterBase::in( osg::Texture2D* pTex )
+void CSulPostFilter::in( osg::Texture2D* pTex )
 {
 }
 
-osg::Texture2D* CSulPostFilterBase::out()
+osg::Texture2D* CSulPostFilter::out()
 {
 	return 0;
 }
 
-void CSulPostFilterBase::setTexFormatInternal( GLint texFormat )
+void CSulPostFilter::setTexFormatInternal( GLint texFormat )
 {
 	m_texFormatInternal = texFormat;
 }
 
-void CSulPostFilterBase::setTexFormatSource( GLint texFormat )
+void CSulPostFilter::setTexFormatSource( GLint texFormat )
 {
 	m_texFormatSource = texFormat;
 }
 
-void CSulPostFilterBase::setTexSourceType( GLenum texSourceType )
+void CSulPostFilter::setTexSourceType( GLenum texSourceType )
 {
 	m_texSourceType = texSourceType;
 }
 
-osg::Texture2D* CSulPostFilterBase::createTexture( unsigned short w, unsigned short h )
+osg::Texture2D* CSulPostFilter::createTexture( unsigned short w, unsigned short h )
 {
 	osg::Texture2D* texture = new osg::Texture2D;
 	texture->setTextureSize( w, h );
@@ -55,7 +55,7 @@ osg::Texture2D* CSulPostFilterBase::createTexture( unsigned short w, unsigned sh
 	return texture;
 }
 
-osg::Group* CSulPostFilterBase::createFilterPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
+osg::Group* CSulPostFilter::createFilterPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT )
 {
 	CSulFilterPass* pFilter = new CSulFilterPass;
 	osg::Group* pGroup = pFilter->create( pTexIn, pTexOut, sNameRTT );
@@ -63,7 +63,7 @@ osg::Group* CSulPostFilterBase::createFilterPass( osg::Texture2D* pTexIn, osg::T
 	return pGroup;
 }
 
-void CSulPostFilterBase::addPass( CSulPass* pPass )
+void CSulPostFilter::addPass( CSulPass* pPass )
 {
 	addChild( pPass->getTexCam() );
 }

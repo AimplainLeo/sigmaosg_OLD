@@ -6,6 +6,8 @@ uniform float multiG;
 uniform float multiB;
 uniform float intensity;
 
+uniform bool bInvert;
+
 void main( void )
 {
 	vec4 texelColor = texture2D( tex, gl_TexCoord[0].xy );
@@ -15,5 +17,8 @@ void main( void )
     
     luminance = luminance*intensity;
     
-	gl_FragColor = vec4( luminance*multiR, luminance*multiG, luminance*multiB, texelColor.a );
+	if ( bInvert )
+		gl_FragColor = vec4( 1.0 - luminance*multiR, 1.0 - luminance*multiG, 1.0 - luminance*multiB, texelColor.a );
+	else
+		gl_FragColor = vec4( luminance*multiR, luminance*multiG, luminance*multiB, texelColor.a );
 }

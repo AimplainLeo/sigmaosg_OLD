@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "SulStringList.h"
 #include "SulParser.h"
+#include <iosfwd>
+#include <sstream>
 
 CSulStringList::CSulStringList()
 {
@@ -60,3 +62,15 @@ sigma::uint32 CSulStringList::getIndex( const CSulString& s )
 
 	return 0;
 }
+
+void CSulStringList::explode( const CSulString& s, char delimiter )
+{
+	std::stringstream ss(s);
+    
+	std::string item;
+    while ( std::getline(ss, item, delimiter) )
+	{
+        m_vecString.push_back(item);
+    }
+}
+

@@ -202,7 +202,7 @@ osg::StateAttribute* CSulSceneManager::getAttribute( const CSulString& sName )
 	return 0;
 }
 
-sigma::uint32 CSulSceneManager::calcCullMask(const std::string& maskNames)
+sigma::uint32 CSulSceneManager::calcCullMask( const std::string& maskNames )
 {
 	CSulStringList sl( maskNames );
 
@@ -222,13 +222,14 @@ sigma::uint32 CSulSceneManager::calcCullMask(const std::string& maskNames)
 	return val;
 }
 
-unsigned int CSulSceneManager::getOrCreateMaskValue(const CSulString& name)
+sigma::uint32 CSulSceneManager::getOrCreateMaskValue( const CSulString& name )
 {
 	std::map<std::string,int>::const_iterator it = m_mapMask.find(name);
 	if (it != m_mapMask.end())
 	{
 		return it->second;
 	}
+
 	assert(m_mapMask.size() < sizeof(unsigned int)*8); // ran out of bits!
 	return m_mapMask[name] = 0x01 << m_mapMask.size();
 }

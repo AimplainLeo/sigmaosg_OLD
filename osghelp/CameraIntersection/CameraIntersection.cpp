@@ -103,7 +103,7 @@ osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 	// debugging so I can see what we are aiming at
 	osg::ref_ptr<CSulScreenAlignedQuad> rQuad = new CSulScreenAlignedQuad( osg::Vec3(64,64,0), 128, 128, 800, 600 );
 	rQuad->setTexture( camInt->getTexture() );
-	pGroup->addChild( rQuad->getProjection() );
+	pGroup->addChild( rQuad );
 
 	return pGroup;
 }

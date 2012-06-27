@@ -26,7 +26,7 @@ void CSulShadowTexture::init()
 
 	// this adjusts the camera to cover the object area to be shadowed
 	m_rShadowTextureNodeCallback = new CSulShadowTextureNodeCallback( m_rShadowMapBounds, m_rRenderMe, m_rRTT, m_rTexGenNode, m_pos );
-	m_rGroup->setUpdateCallback( m_rShadowTextureNodeCallback );
+	m_rGroup->addUpdateCallback( m_rShadowTextureNodeCallback );
 }
 
 void CSulShadowTexture::setShadowMapBounds( osg::Node* pNode )

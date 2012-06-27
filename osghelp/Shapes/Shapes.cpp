@@ -5,7 +5,7 @@
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
  
-osg::Node* CreateScene()
+osg::Node* createScene()
 {
 	osg::Geode* pGeode = new osg::Geode();
 
@@ -28,7 +28,7 @@ int _tmain(int argc, _TCHAR* argv[])
     viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render
-    viewer->setSceneData( CreateScene() );
+    viewer->setSceneData( createScene() );
 
     // execute main loop
     return viewer->run();

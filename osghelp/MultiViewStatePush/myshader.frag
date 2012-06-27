@@ -20,7 +20,6 @@ void main( void )
 	
 	frag.a = 1.0;
 	
-	frag.b = 1.0;
-	
 	gl_FragColor = frag;
+//	gl_FragData[0] = frag;
 }

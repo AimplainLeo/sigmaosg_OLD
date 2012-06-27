@@ -178,7 +178,7 @@ public:
 			// lets see the result of the image
 			CSulScreenAlignedQuad* quad = new CSulScreenAlignedQuad( osg::Vec3(64+256,64,0), 128, 128, 800, 600 );
 			quad->setTexture( pGen->getTexture() );
-			m_rGroup->addChild( quad->getProjection() );
+			m_rGroup->addChild( quad );
 		}
 
 		if ( sAction=="l" )
@@ -198,7 +198,7 @@ public:
 			// lets see the result of the image
 			CSulScreenAlignedQuad* quad = new CSulScreenAlignedQuad( osg::Vec3(64+256+256,64,0), 128, 128, 800, 600 );
 			quad->setTexture( pTex );
-			m_rGroup->addChild( quad->getProjection() );
+			m_rGroup->addChild( quad );
 			
 			// apply it
 			ss->setTextureAttributeAndModes( 1, pTex, osg::StateAttribute::ON );

@@ -34,7 +34,7 @@ CSulGuiXml::CSulGuiXml( osg::Group* pRootGroup, CSulGuiEventHandler* pEventHandl
 	m_curGroup = pRootGroup;
 }
 
-void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
+void CSulGuiXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData )
 {
 	CSulGuiComp* pComp = 0;
 

@@ -5,7 +5,7 @@
 #include <osg/geode>
 
 CSulPostFilterBrightPass::CSulPostFilterBrightPass() :
-CSulPostFilterBase()
+CSulPostFilter()
 {
 	setTexFormatInternal( GL_RGBA16F_ARB );
 	setTexFormatSource( GL_RGBA );

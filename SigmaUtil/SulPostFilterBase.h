@@ -3,6 +3,8 @@
 #ifndef __SULPOSTFILTERBASE_H__
 #define __SULPOSTFILTERBASE_H__
 
+// FIXME: rename this file to SulPostFilter.h
+
 #include "SulShaderStreak.h"
 #include "SulShaderCombineTex.h"
 #include "SulShaderBrightPass.h"
@@ -10,10 +12,10 @@
 #include <osg/group>
 #include <osg/Texture2D>
 
-class CSulPostFilterBase : public osg::Group
+class CSulPostFilter : public osg::Group
 {
 public:
-							CSulPostFilterBase();
+							CSulPostFilter();
 			
 	void					setTexFormatInternal( GLint texFormat );
 	void					setTexFormatSource( GLint texFormat );

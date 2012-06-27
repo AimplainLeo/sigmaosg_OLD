@@ -38,7 +38,7 @@ osg::Node* CreateScene( osgViewer::Viewer* pViewer )
 		800, 600
 	);
 	pQuad->setTexture( pStreaking->out() );
-	pGroup->addChild( pQuad->getProjection() );
+	pGroup->addChild( pQuad );
 
 	return pGroup;
 }

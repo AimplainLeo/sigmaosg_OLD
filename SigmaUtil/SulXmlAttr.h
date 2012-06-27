@@ -43,6 +43,10 @@ public:
 	bool			get( const CSulString& sName, sigma::uint32& i );
 	bool			get( const CSulString& sName, CSulString& s );
 
+	float			getFloat( const CSulString& sName, float defaultValue );
+	sigma::uint32	getUint32( const CSulString& sName, sigma::uint32 defaultValue );
+	bool			getBool( const CSulString& sName, bool defaultValue );
+
 	bool			exist( const CSulString& sName );
 
 private:
