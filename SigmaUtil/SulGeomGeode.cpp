@@ -9,11 +9,16 @@ void CSulGeomGeode::enableBlend()
 	getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
 }
 
-void CSulGeomGeode::zbuffer( bool bEnable )
+void CSulGeomGeode::zbufferWrite( bool bEnable )
 {
 	osg::Depth* depth = new osg::Depth;
 	depth->setWriteMask( bEnable?true:false );
 	getOrCreateStateSet()->setAttributeAndModes( depth, osg::StateAttribute::ON );
+}
+
+void CSulGeomGeode::lighting( bool bEnable )
+{
+	getOrCreateStateSet()->setMode( GL_LIGHTING, bEnable ? osg::StateAttribute::ON : osg::StateAttribute::OFF );
 }
 
 void CSulGeomGeode::enableDebugTexture()

@@ -1602,14 +1602,6 @@
 							>
 						</File>
 						<File
-							RelativePath=".\SulPassDeferredRendering.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\SulPassDeferredRendering.h"
-							>
-						</File>
-						<File
 							RelativePath=".\SulPassGaussH.cpp"
 							>
 						</File>
@@ -1724,14 +1716,6 @@
 					</File>
 					<File
 						RelativePath=".\SulShaderCombineTex.h"
-						>
-					</File>
-					<File
-						RelativePath=".\SulShaderDeferredRendering.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\SulShaderDeferredRendering.h"
 						>
 					</File>
 					<File

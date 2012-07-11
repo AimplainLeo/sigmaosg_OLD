@@ -218,6 +218,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\SigmaUtil\Data\shaders\sulFuncLightPoint.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\SigmaUtil\Data\shaders\sulFuncLightSpot.frag"
+				>
+			</File>
+			<File
 				RelativePath=".\targetver.h"
 				>
 			</File>

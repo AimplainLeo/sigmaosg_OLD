@@ -225,7 +225,7 @@ void CSulLightManager::buildTextureData()
 
 void CSulLightManager::traverse( osg::NodeVisitor& nv )
 {
-	if( nv.getVisitorType()==osg::NodeVisitor::CULL_VISITOR )
+	if ( nv.getVisitorType()==osg::NodeVisitor::CULL_VISITOR )
 	{
 		// if we get to here.. then it is because the light is visible in the scene for this camera
 		osgUtil::CullVisitor* cv = dynamic_cast<osgUtil::CullVisitor*>(&nv);

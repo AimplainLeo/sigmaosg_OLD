@@ -13,12 +13,28 @@ CSulTexCam( w, h, CSulTexCam::DEFERRED_RENDERING )
 	// first pass (create g buffers)
 //	getOrCreateStateSet()->setAttribute( new CSulProgramShaders( "shaders/sulDeferredRendering.frag,shaders/sulDeferredRendering.vert" ) );
 
+	////////////////////////////////////
 	// second pass (composite)
+	////////////////////////////////////
+
+	m_comp = new CSulTexCam( w, h );
+	m_comp->setRenderOrder( osg::Camera::POST_RENDER );
+
+	m_quad = new CSulScreenAlignedQuad( osg::Vec3(w/2,h/2,0), w, h, w, h );
+	m_quad->getQuad()->lighting( false );
+	m_quad->getQuad()->zbufferWrite( false );
+	m_quad->getQuad()->getGeometry()->setName( "Composite Quad" );
+
+
+	/*
 	m_comp = new CSulTexCam( w, h, CSulTexCam::ORTHO );
 	m_comp->setRenderOrder( osg::Camera::POST_RENDER );
 
 	m_quad = new CSulGeomQuad( 2, 2 );
+	m_quad->lighting( false );
+	m_quad->zbufferWrite( false );
 	m_quad->getGeometry()->setName( "Composite Quad" );
+	*/
 
 	m_quad->setTexture( getTexture(0), 0, "texPositions" );
 	m_quad->setTexture( getTexture(1), 1, "texNormals" );

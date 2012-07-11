@@ -7,6 +7,7 @@
 #include "SulGeomBase.h"
 #include "SulTypes.h"
 #include "SulString.h"
+#include "SulGeomGeode.h"
 #include <osg/ref_ptr>
 #include <osg/Vec3>
 #include <osg/geode>
@@ -14,7 +15,7 @@
 
 // FIXME: should be able to choose between vertice colors or all_over_colors
 
-class SUL_EXPORT CSulGeomQuad : public osg::Geode
+class SUL_EXPORT CSulGeomQuad : public CSulGeomGeode
 {
 public:
 	enum EPLANE

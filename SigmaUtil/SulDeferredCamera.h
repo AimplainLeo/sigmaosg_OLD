@@ -24,7 +24,8 @@ private:
 
 private:
 	osg::ref_ptr<CSulLightManager>		m_lm;
-	osg::ref_ptr<CSulGeomQuad>			m_quad;
+	//osg::ref_ptr<CSulGeomQuad>			m_quad;
+	osg::ref_ptr<CSulScreenAlignedQuad>	m_quad;
 	osg::ref_ptr<CSulTexCam>			m_comp;
 };
 

@@ -7,10 +7,8 @@
 #include <SigmaUtil/SulScreenAlignedQuad.h>
 #include <SigmaUtil/SulViewQuad.h>
 #include <SigmaUtil/SulProgramShaders.h>
-#include <osgViewer/Viewer>
-
-#include <SigmaUtil/SulPostFilterDeferredRendering.h>
 #include <SigmaUtil/SulLightManager.h>
+#include <osgViewer/Viewer>
 
 osg::Node* createScene( osgViewer::Viewer* viewer )
 {

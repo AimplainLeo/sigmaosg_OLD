@@ -76,6 +76,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grass", "Grass\Grass.vcproj
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grass2", "Grass2\Grass2.vcproj", "{DB853E4A-735E-436A-9682-12B922FDFE47}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grass3", "Grass3\Grass3.vcproj", "{15D4618E-20B2-44AD-85C8-90D16E757AC0}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -249,8 +252,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarChart", "BarChart\BarCha
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderSpotlight", "ShaderSpotlight\ShaderSpotlight.vcproj", "{D6BB9AD7-5117-487E-8230-0BB65B868249}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intersection_Graph", "Intersection_Graph\Intersection_Graph.vcproj", "{F6BB148F-DFE0-44C0-9A30-68F256BA01B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intersection_SphereGraph", "Intersection_SphereGraph\Intersection_SphereGraph.vcproj", "{AA8904CC-F7C6-4E24-AB90-C6A97A760765}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -262,10 +271,19 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Imposters", "Imposters\Imposters.vcproj", "{37150BC8-7CDF-4681-A694-9ABB9017C9A4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiViewStatePush", "MultiViewStatePush\MultiViewStatePush.vcproj", "{612F3332-D107-4ACC-A88E-079F2C0D8CDB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManyLights", "ManyLights\ManyLights.vcproj", "{857607DB-17A8-4AA4-8FC2-65A309643225}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManySpotLights", "ManySpotLights\ManySpotLights.vcproj", "{D7D88237-6445-4037-B1CE-2E5425BCBCED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeferredRendering", "DeferredRendering\DeferredRendering.vcproj", "{849A0BA0-5752-4A7D-B20D-D209F929CB08}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -283,10 +301,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScreenAlignQuadFullscreen",
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiCameraDepthBuffer", "MultiCameraDepthBuffer\MultiCameraDepthBuffer.vcproj", "{0AC7D2C9-80C1-41AD-89E2-AB438EEBCAEF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PostFilter_NightVision", "PostFilter_NightVision\PostFilter_NightVision.vcproj", "{B27CFF8B-D88E-4C38-B102-1776044F5D8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PostFilter_Thermal", "PostFilter_Thermal\PostFilter_Thermal.vcproj", "{82F67F0B-834E-4CC4-AB93-4E2DF85EE406}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,7 @@
 #include <osgDB/FileUtils>
 
 CSulGeomQuad::CSulGeomQuad( float w, float h, EPLANE ePlane ) :
-osg::Geode(),
+CSulGeomGeode(),
 m_vCenter(0,0,0),
 m_w(w),
 m_h(h),
@@ -17,7 +17,7 @@ m_ePlane(ePlane)
 }
 
 CSulGeomQuad::CSulGeomQuad( const osg::Vec3& vCenter, float w, float h, EPLANE ePlane ) :
-osg::Geode(),
+CSulGeomGeode(),
 m_vCenter(vCenter),
 m_w(w),
 m_h(h),

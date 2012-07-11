@@ -278,7 +278,7 @@ void test( osg::Node* pTrees )
 	rRoot->addChild( pBB );
 
 	CSulGeomBox* pBox = new CSulGeomBox( bb );
-	pBox->zbuffer( false );
+	pBox->zbufferWrite( false );
 	pBox->getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
 	pBox->getOrCreateStateSet()->setTextureAttributeAndModes( 0, pTexCube, osg::StateAttribute::ON );
 	pBox->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );

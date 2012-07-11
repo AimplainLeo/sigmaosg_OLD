@@ -28,8 +28,8 @@ public:
 	CSulGeomQuad*						getQuad();
 
 	void								setTexture( const std::string& sFile, GLint internalFormat=GL_RGB );
-	void								setTexture( osg::Texture* pTex, sigma::uint32 unit=0 );
-	void								setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB );
+	void								setTexture( osg::Texture* pTex, sigma::uint32 unit=0, const CSulString& uniformName="" );
+	void								setTexture( osg::Image* pImage, GLint internalFormat=GL_RGB, sigma::uint32 unit=0 );
 
 private:
 	void								initConstructor();

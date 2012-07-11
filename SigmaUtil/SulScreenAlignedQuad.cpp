@@ -79,7 +79,6 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( const osg::Vec3& vPos, float w, fl
 	// create geometry quad
 	m_rGeomQuad = new CSulGeomQuad( vPos, w, h, CSulGeomQuad::PLANE_XY );
 
-	// FIXME: hmmm why did I put this here?!?! it should be the application that decides this!??!
 	m_rGeomQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	
     // create geometry node that will contain all our drawables
@@ -112,6 +111,9 @@ void CSulScreenAlignedQuad::initConstructor()
 
     // create geometry node that will contain all our drawables
     m_rGroup = new osg::Group;
+
+	m_rGeomQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+
     osg::StateSet* pStateSet = m_rGroup->getOrCreateStateSet();
     pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
     m_rGroup->addChild( m_rGeomQuad );
@@ -140,12 +142,12 @@ void CSulScreenAlignedQuad::setTexture( const std::string& sFile, GLint internal
 	setTexture( pImage, internalFormat );
 }
 
-void CSulScreenAlignedQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit )
+void CSulScreenAlignedQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit, const CSulString& uniformName )
 {
-	m_rGeomQuad->setTexture( pTex, unit );
+	m_rGeomQuad->setTexture( pTex, unit, uniformName );
 }
 
-void CSulScreenAlignedQuad::setTexture( osg::Image* pImage, GLint internalFormat )
+void CSulScreenAlignedQuad::setTexture( osg::Image* pImage, GLint internalFormat, sigma::uint32 unit )
 {
-	m_rGeomQuad->setTexture( pImage, internalFormat );
+	m_rGeomQuad->setTexture( pImage, internalFormat, unit );
 }

@@ -6,7 +6,7 @@
 #include "SulPostFilterBase.h"
 #include "SulPassGodRays.h"
 
-class CSulPostFilterGodRays : public CSulPostFilterBase
+class CSulPostFilterGodRays : public CSulPostFilter
 {
 public:
 	void			in( osg::Texture2D* pTex_normal, osg::Texture2D* pTex_occluding );
