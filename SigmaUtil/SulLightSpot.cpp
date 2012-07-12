@@ -7,6 +7,7 @@
 CSulLightSpot::CSulLightSpot( CSulLightManager* lm ) :
 CSulLightBase( lm )
 {
+	setName( "CSulLightSpot" );
 }
 
 void CSulLightSpot::setDirection( const osg::Vec3& dir )

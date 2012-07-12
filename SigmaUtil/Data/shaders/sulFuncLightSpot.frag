@@ -11,8 +11,6 @@ uniform sampler2DRect	texLightPoint;
 
 uniform mat4			osg_ViewMatrix;
 
-uniform bool light4;					// we are using light4 for helmet & lasers
-
 vec4 sulCalcLightingAttSpot( vec3 pos, float attConstant, float attLinear, float attQuadratic, vec4 lightDiffuse, float NdotL, vec3 v )
 {
 	float d = length(pos - v);	
@@ -29,13 +27,10 @@ vec4 sulCalcLightSpot( vec4 v, vec3 n, bool ignoreNormal )
 		bool enabled = bool(texture2DRect( texLightPoint, vec2( 2, i ) ).b);
 		if ( !enabled )
 			continue;
-	
+
+		// id currently not used for anything	
 		float id = texture2DRect( texLightPoint, vec2( 2, i ) ).a;	
 	
-		// special case, light4 is for the helment and can only be seen in nightvision
-		if ( id==4 && !light4 )
-			continue;
-
 		vec3		pos;
 		vec4		diffuseColor;
 		vec4		ambientColor;

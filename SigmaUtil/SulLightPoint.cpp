@@ -7,6 +7,7 @@
 CSulLightPoint::CSulLightPoint( CSulLightManager* lm ) :
 CSulLightBase( lm )
 {
+	setName( "CSulLightPoint" );
 }
 
 void CSulLightPoint::traverse( osg::NodeVisitor& nv )

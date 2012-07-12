@@ -11,6 +11,7 @@ CSulLightBase::CSulLightBase( CSulLightManager* lm )
 	m_dirty = true;
 	m_enabled = true;
 	m_ambientColor.set( 0, 0, 0, 0 );
+	dirtyBound();
 }
 
 void CSulLightBase::setDiffuseColor( const osg::Vec4& color )
@@ -148,7 +149,7 @@ osg::BoundingSphere CSulLightBase::computeBound() const
 		d = std::numeric_limits<float>::max();
 	}
 
-	//d = 10000000.0f;
+	d = 10000000.0f;
 	//d = 1.0f;
 	osg::BoundingSphere bs( m_pos, d );
 	return bs;
