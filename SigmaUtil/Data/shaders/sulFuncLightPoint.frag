@@ -20,7 +20,7 @@ vec4 sulCalcLightingAtt( vec3 pos, float attConstant, float attLinear, float att
 vec4 sulCalcLightPoint( vec4 v, vec3 n, bool ignoreNormal )
 {
 	vec4 c = vec4(0.0,0.0,0.0,0.0);
-
+	
 	for ( int i=0; i<countLightPoints; i++ )
 	{
 		bool enabled = bool(texture2DRect( texLightPoint, vec2( 2, i ) ).b);

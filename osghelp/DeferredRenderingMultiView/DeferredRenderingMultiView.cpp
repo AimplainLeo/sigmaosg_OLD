@@ -57,12 +57,14 @@ osg::Node* createScene( osgViewer::Viewer* viewer )
     pGeodeFloor->addDrawable( new osg::ShapeDrawable( new osg::Box(osg::Vec3(0.0f,0.0f,0.0f), 50.0f, 50.0f, 0.1f ) ) );
 	lm->addChild( pGeodeFloor );
 
-	lm->addChild( 
-		createSpotLight( lm, osg::Vec3(0,0,5), osg::Vec3( 0, 0, -1 ), osg::Vec4(0,1,0,1) )
-	);
+	// spot light
+	osg::Node* spotLight = createSpotLight( lm, osg::Vec3(0,0,5), osg::Vec3( 0, 0, -1 ), osg::Vec4(0,1,0,1) );
+	spotLight->setNodeMask( 1 );
+	lm->addChild( spotLight );
 
-	// test light
+	// point light
 	CSulLightPoint* light = new CSulLightPoint( lm );
+	light->setNodeMask( 1 );
 	light->setPosition( osg::Vec3(6.0f,0.0f,2.5f) );
 	light->setDiffuseColor( osg::Vec4(1,0,0,1) );
 	light->setConstantAtt( 0.0005f );
@@ -73,6 +75,8 @@ osg::Node* createScene( osgViewer::Viewer* viewer )
 
 	// deferred rendering
 	CSulDeferredCamera* d1 = new CSulDeferredCamera( lm );
+	d1->setCullMask( 1 );
+//	d1->getCompositeCamera()->setCullMask( 1 );
 
 	d1->getOrCreateStateSet()->setAttribute( new CSulProgramShaders( "shaders/sulDeferredRendering.frag,shaders/sulDeferredRendering.vert" ) );
 
@@ -91,6 +95,29 @@ osg::Node* createScene( osgViewer::Viewer* viewer )
 	root->addChild( new CSulScreenAlignedQuad( viewer, d1->getTexture(1),	200 ) );
 	root->addChild( new CSulScreenAlignedQuad( viewer, d1->getTexture(2),	400 ) );
 	root->addChild( new CSulScreenAlignedQuad( viewer, d1->getFinalTexture(),	1000 ) );
+
+	///////////////////////////////
+	// setup up view number two
+	///////////////////////////////
+
+	// deferred rendering
+	CSulDeferredCamera* d2 = new CSulDeferredCamera( lm );
+	d2->setCullMask( 2 );
+//	d2->getCompositeCamera()->setCullMask( 2 );
+
+	d2->getOrCreateStateSet()->setAttribute( new CSulProgramShaders( "shaders/sulDeferredRendering.frag,shaders/sulDeferredRendering.vert" ) );
+
+	// we add shaders to the final composite camera, because it is up to the application how to handle the deferred rendering
+	d2->getCompositeCamera()->getOrCreateStateSet()->setAttribute( new CSulProgramShaders( 
+		"mycomposite.frag,"
+		"mycomposite.vert,"
+		"shaders/sulFuncLightPoint.frag,"
+		"shaders/sulFuncLightSpot.frag"
+	) );
+	d2->addChild( lm );
+	root->addChild( d2 );
+
+	root->addChild( new CSulScreenAlignedQuad( viewer, d2->getFinalTexture(),	1000, 300 ) );
 
 	return root;
 }
@@ -159,7 +186,8 @@ int _tmain(int argc, _TCHAR* argv[])
     viewer->setUpViewInWindow( 32, 32, 1200, 800 );
 
     // set the scene-graph data the viewer will render
-    viewer->setSceneData( createOpenLightTest(viewer) );
+//    viewer->setSceneData( createOpenLightTest(viewer) );
+	viewer->setSceneData( createScene(viewer) );
 
 	viewer->setThreadingModel( osgViewer::ViewerBase::SingleThreaded );
 

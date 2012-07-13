@@ -26,7 +26,7 @@ osg::Group()
 	getOrCreateStateSet()->addUniform( m_uniformTexLightPoint );
 
 	m_uniformCountLightPoints = new osg::Uniform( osg::Uniform::INT, "countLightPoints" );
-	getOrCreateStateSet()->addUniform( m_uniformCountLightPoints );
+	//getOrCreateStateSet()->addUniform( m_uniformCountLightPoints );
 
 	m_uniformCountLightSpots = new osg::Uniform( osg::Uniform::INT, "countLightSpots" );
 	getOrCreateStateSet()->addUniform( m_uniformCountLightSpots );
@@ -58,15 +58,15 @@ void CSulLightManager::reset()
 void CSulLightManager::addVisible( CSulLightPoint* pLight )
 {
 	m_lightPoint.push_back( pLight );
-	buildTextureData();
-	m_uniformCountLightPoints->set( (int)m_lightPoint.size() );
+//	buildTextureData();
+//	m_uniformCountLightPoints->set( (int)m_lightPoint.size() );
 }
 
 void CSulLightManager::addVisible( CSulLightSpot* pLight )
 {
 	m_lightSpot.push_back( pLight );
-	buildTextureData();
-	m_uniformCountLightSpots->set( (int)m_lightSpot.size() );
+//	buildTextureData();
+//	m_uniformCountLightSpots->set( (int)m_lightSpot.size() );
 }
 
 void CSulLightManager::createTextureData( sigma::uint32 sizeX, sigma::uint32 sizeY )
@@ -230,6 +230,7 @@ void CSulLightManager::traverse( osg::NodeVisitor& nv )
 		// if we get to here.. then it is because the light is visible in the scene for this camera
 		osgUtil::CullVisitor* cv = dynamic_cast<osgUtil::CullVisitor*>(&nv);
 
+		// we create a double buffer, so we don't overwrite because of threading
 		sigma::int32 frame = cv->getFrameStamp()->getFrameNumber();
 		if ( frame > m_lastFrame+1 )
 		{
@@ -247,9 +248,9 @@ void CSulLightManager::traverse( osg::NodeVisitor& nv )
 		m_rImage = m_vecImage[ m_countCameras ];
 		m_rTextureData = m_vecTextureRectangle[ m_countCameras ];
 
+		// support forward shading
 		osg::ref_ptr<osg::StateSet> ss = new osg::StateSet;
 		ss->setTextureAttributeAndModes( 7, m_rTextureData, osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
-
 		cv->pushStateSet( ss );
 
 		reset();

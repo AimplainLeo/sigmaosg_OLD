@@ -149,7 +149,7 @@ osg::BoundingSphere CSulLightBase::computeBound() const
 		d = std::numeric_limits<float>::max();
 	}
 
-	d = 10000000.0f;
+	//d = 10000000.0f;
 	//d = 1.0f;
 	osg::BoundingSphere bs( m_pos, d );
 	return bs;

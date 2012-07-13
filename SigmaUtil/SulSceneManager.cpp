@@ -233,3 +233,23 @@ sigma::uint32 CSulSceneManager::getOrCreateMaskValue( const CSulString& name )
 	assert(m_mapMask.size() < sizeof(unsigned int)*8); // ran out of bits!
 	return m_mapMask[name] = 0x01 << m_mapMask.size();
 }
+
+CSulSceneManager::VEC_STRING CSulSceneManager::getMaskNames( sigma::uint32 mask )
+{
+	std::map<std::string,int>::iterator i = m_mapMask.begin();
+	std::map<std::string,int>::iterator ie = m_mapMask.end();
+	
+	CSulSceneManager::VEC_STRING vecString;
+
+	while ( i!=ie )
+	{
+		if ( i->second & mask )
+		{
+			vecString.push_back( i->first );	
+		}
+
+		++i;
+	}
+
+	return vecString;
+}

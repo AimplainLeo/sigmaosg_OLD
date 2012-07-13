@@ -40,8 +40,8 @@ CSulTexCam( w, h, CSulTexCam::DEFERRED_RENDERING )
 	m_quad->setTexture( getTexture(1), 1, "texNormals" );
 	m_quad->setTexture( getTexture(2), 2, "texColors" );
 	m_quad->getOrCreateStateSet()->addUniform( m_lm->getUniformTexLightData() );
-	m_quad->getOrCreateStateSet()->addUniform( m_lm->getUniformCountLightPoints() );
-	m_quad->getOrCreateStateSet()->addUniform( m_lm->getUniformCountLightSpots() );
+	//m_quad->getOrCreateStateSet()->addUniform( m_lm->getUniformCountLightPoints() );
+	//m_quad->getOrCreateStateSet()->addUniform( m_lm->getUniformCountLightSpots() );
 	m_comp->addChild( m_quad );
 
 /*
@@ -81,7 +81,23 @@ void CSulDeferredCamera::traverse( osg::NodeVisitor& nv )
 		osgUtil::CullVisitor* cv = dynamic_cast<osgUtil::CullVisitor*>(&nv);
 
 		osg::ref_ptr<osg::StateSet> ss = new osg::StateSet;
-		ss->setTextureAttributeAndModes( 7, m_lm->getTextureData(), osg::StateAttribute::ON | osg::StateAttribute::PROTECTED );
+		ss->setTextureAttributeAndModes( 7, m_lm->getTextureData(), osg::StateAttribute::ON /*| osg::StateAttribute::PROTECTED*/ );
+
+	//	ss->addUniform( static_cast<osg::Uniform*>(m_lm->getUniformCountLightPoints()->clone( osg::CopyOp::DEEP_COPY_ALL )) );
+		
+		//osg::Uniform* u0 = new osg::Uniform( osg::Uniform::SAMPLER_2D, "texLightPoint" );
+		//u0->set( (int)7 );
+		//ss->addUniform( u0 );
+
+		osg::Uniform* u1 = new osg::Uniform( osg::Uniform::INT, "countLightPoints" );
+		u1->set( (int)m_lm->getLightPointList().size() );
+		//u1->set( 1 );
+		ss->addUniform( u1 );
+
+		osg::Uniform* u2 = new osg::Uniform( osg::Uniform::INT, "countLightSpots" );
+		u2->set( (int)m_lm->getLightSpotList().size() );
+		ss->addUniform( u2 );
+		
 		cv->pushStateSet( ss );
 
 		m_comp->accept( nv );

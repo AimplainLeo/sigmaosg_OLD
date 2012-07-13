@@ -55,7 +55,10 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////
 
 	sigma::uint32	calcCullMask( const std::string& maskNames );
-	sigma::uint32	getOrCreateMaskValue(const CSulString& name);
+	sigma::uint32	getOrCreateMaskValue( const CSulString& name );
+
+	typedef std::vector<CSulString>	VEC_STRING;
+	virtual VEC_STRING getMaskNames( sigma::uint32 mask );
 
 private:
 	bool			IsNodeInLayout( osg::Node* pNode );
