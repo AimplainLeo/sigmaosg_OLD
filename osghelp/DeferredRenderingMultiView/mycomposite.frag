@@ -43,8 +43,8 @@ void main( void )
 	
 //	frag = tColors * (sulCalcLightPoint( tPos, tNormals.xyz, false )+sulCalcLightSpot( tPos, tNormals.xyz, false ));
 
-	vec4 iLS = sulCalcLightSpot( tPos, tNormals.xyz, false );
-	vec4 iLP = sulCalcLightPoint( tPos, tNormals.xyz, false );
+	vec4 iLS = sulCalcLightSpot( tPos, tNormals.xyz, true );
+	vec4 iLP = sulCalcLightPoint( tPos, tNormals.xyz, true );
 	vec4 iOpenGL_light2 = vec4( calcLightingIntensityOpenGL_new( 2, tPos, tNormals.xyz, lightDir2 ), 1.0 );
 	vec4 iOpenGL_light3 = vec4( calcLightingIntensityOpenGL_new( 3, tPos, tNormals.xyz, lightDir3 ), 1.0 );
 	frag = tColors * (iLP+iLS+iOpenGL_light2+iOpenGL_light3);

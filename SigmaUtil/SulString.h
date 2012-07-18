@@ -23,6 +23,7 @@ public:
 					CSulString( sigma::int64 c );
 					CSulString( float f, sigma::uint32 decimalCount=10 );
 					CSulString( double d, sigma::uint32 decimalCount=10 );
+					CSulString( const osg::Vec3 v, sigma::uint32 decimalCount=10 );
 
 	// modifiers
 	void			Format( const char* Format, ... );

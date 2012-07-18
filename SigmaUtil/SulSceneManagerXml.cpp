@@ -248,6 +248,12 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		}
 		texcam->setClearMask( clearMask );
 
+		if ( pAttr->exist( "compute_near_far" ) )
+		{
+			if ( !pAttr->get("compute_near_far").asBool() )
+				texcam->setComputeNearFarMode( osg::CullSettings::DO_NOT_COMPUTE_NEAR_FAR );
+		}
+
 		// debug bar
 		//texcam->addChild( new CSulScreenAlignedQuad( 800, 600, 0, 0, 100, 800, 50 ) );		// bar over
 	}
@@ -288,6 +294,17 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		{
 			sigma::uint32 i = pAttr->get( "renderbin_num" ).asUint32();
 			quad->getQuad()->getGeometry()->getOrCreateStateSet()->setRenderBinDetails( i, "RenderBin" );
+		}
+
+		// StateSet
+		if ( pAttr->exist("stateset") )
+		{
+			CSulString name = pAttr->get("stateset");
+			if ( quad->getStateSet() )
+			{
+				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::elementStart -> non-empty stateset on node ["<<quad->getName()<<"] will be overridden!" << std::endl;
+			}
+			quad->setStateSet( m_rSceneManager->GetStateSet(name) );
 		}
 	}
 

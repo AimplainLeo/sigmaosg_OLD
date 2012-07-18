@@ -5,7 +5,6 @@ uniform sampler2D	tex;
 
 void main( void )
 {
-
     vec4 texelColor = texture2D( tex, gl_TexCoord[0].xy );
     vec4 grayScaleWeights = vec4(0.3, 0.59, 0.11, 0.0);
     vec4 scaledColor = texelColor * grayScaleWeights;

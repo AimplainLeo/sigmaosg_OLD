@@ -1346,6 +1346,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulPostFilterGhost.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterGhost.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulPostFilterHDR.cpp"
 						>
 					</File>
@@ -1367,6 +1375,14 @@
 					</File>
 					<File
 						RelativePath=".\SulPostFilterNightVision.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterStreaking.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulPostFilterStreaking.h"
 						>
 					</File>
 					<File
@@ -1466,22 +1482,6 @@
 						</File>
 						<File
 							RelativePath=".\SulPassToneMap.h"
-							>
-						</File>
-						<File
-							RelativePath=".\SulPostFilterGhost.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\SulPostFilterGhost.h"
-							>
-						</File>
-						<File
-							RelativePath=".\SulPostFilterStreaking.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\SulPostFilterStreaking.h"
 							>
 						</File>
 					</Filter>
