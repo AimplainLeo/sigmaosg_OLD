@@ -3,10 +3,17 @@
 #include "stdafx.h"
 #include "SulGeomGeode.h"
 #include <osg/depth>
+#include <osg/BlendFunc>
 
 void CSulGeomGeode::enableBlend()
 {
 	getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
+
+	/*
+	osg::BlendFunc* trans = new osg::BlendFunc();
+	trans->setFunction( osg::BlendFunc::SRC_ALPHA ,osg::BlendFunc::ONE_MINUS_SRC_ALPHA );
+	getOrCreateStateSet()->setAttributeAndModes( trans );
+	*/
 }
 
 void CSulGeomGeode::zbufferWrite( bool bEnable )

@@ -57,8 +57,8 @@ osg::Node* CSulCloudsTexture::createPlane( float size, float height )
 
 	osg::StateSet* ss = m_rPlane->getOrCreateStateSet();
 
-	osg::BlendFunc *trans = new osg::BlendFunc();
-	trans->setFunction(osg::BlendFunc::SRC_ALPHA ,osg::BlendFunc::ONE_MINUS_SRC_ALPHA);
+	osg::BlendFunc* trans = new osg::BlendFunc();
+	trans->setFunction( osg::BlendFunc::SRC_ALPHA ,osg::BlendFunc::ONE_MINUS_SRC_ALPHA );
 	ss->setAttributeAndModes( trans );
 
 	// transform to height

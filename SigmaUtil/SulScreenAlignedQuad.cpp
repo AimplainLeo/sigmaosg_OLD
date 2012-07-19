@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "SulScreenAlignedQuad.h"
 #include <osgDB/ReadFile>
+#include <osgDB/FileUtils>
 
 CSulScreenAlignedQuad::CSulScreenAlignedQuad()
 {
@@ -138,7 +139,13 @@ CSulGeomQuad* CSulScreenAlignedQuad::getQuad()
 
 void CSulScreenAlignedQuad::setTexture( const std::string& sFile, GLint internalFormat )
 {
-	osg::Image* pImage = osgDB::readImageFile( sFile );
+	osg::Image* pImage = osgDB::readImageFile( osgDB::findDataFile(sFile) );
+	if ( !pImage )
+	{
+		osg::notify(osg::ALWAYS) << "ERROR: CSulScreenAlignedQuad -> could not load texture: " << sFile << std::endl;
+		return;
+	}
+
 	setTexture( pImage, internalFormat );
 }
 

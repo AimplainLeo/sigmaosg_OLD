@@ -254,6 +254,12 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 				texcam->setComputeNearFarMode( osg::CullSettings::DO_NOT_COMPUTE_NEAR_FAR );
 		}
 
+		if ( pAttr->exist("bgcolor") )
+		{
+			osg::Vec4 c = pAttr->get("bgcolor").asVec4();
+			texcam->setClearColor( c );
+		}
+
 		// debug bar
 		//texcam->addChild( new CSulScreenAlignedQuad( 800, 600, 0, 0, 100, 800, 50 ) );		// bar over
 	}
@@ -289,6 +295,12 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 
 		CSulScreenAlignedQuad* quad = new CSulScreenAlignedQuad( view_w, view_h, tex, osg::Vec3(x,y,z), w, h );
 		add( sN, quad );
+
+		if ( pAttr->exist( "texture_file" ) )
+		{
+			quad->setTexture( pAttr->get("texture_file") );
+			quad->getQuad()->enableBlend();
+		}
 
 		if ( pAttr->exist( "renderbin_num" ) )
 		{
