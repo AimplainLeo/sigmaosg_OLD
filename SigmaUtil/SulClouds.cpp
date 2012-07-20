@@ -45,6 +45,11 @@ m_height(1500)
 	create();
 }
 
+CSulCloudPlane*	CSulClouds::getCloudPlane()
+{
+	return m_rPlane;
+}
+
 void CSulClouds::setTextureStates()
 {
 	m_rPlane->getQuad()->getTexture()->setUseHardwareMipMapGeneration( true );

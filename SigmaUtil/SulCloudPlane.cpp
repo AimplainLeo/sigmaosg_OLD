@@ -26,6 +26,11 @@ osg::Program* CSulCloudPlane::createShaderProgram()
 	return program;
 }
 
+osg::Program* CSulCloudPlane::getShaderProgram()
+{
+	return m_prgShaders;
+}
+
 void CSulCloudPlane::create()
 {
 	// create geom with has a osg::TexMat
@@ -37,7 +42,8 @@ void CSulCloudPlane::create()
 	m_rQuad->getGeometry()->setDrawCallback( m_mytestass = new mytest( rTexMat, m_rQuad->getWidth() ) );
 	addChild( m_rQuad );
 
-	osg::Program* pShaderProgram = createShaderProgram();
+	m_prgShaders = createShaderProgram();
+	m_prgShaders->setName( "CSulCloudPlane Shader Program" );
 
 	bool bRet;
 
@@ -51,11 +57,11 @@ void CSulCloudPlane::create()
     bRet = fragShader->loadShaderSourceFromFile( osgDB::findDataFile("shaders/clouds.frag") );
 	assert( bRet );
 
-    pShaderProgram->addShader( vertexShader.get() );
-	pShaderProgram->addShader( fragShader.get() );
+    m_prgShaders->addShader( vertexShader.get() );
+	m_prgShaders->addShader( fragShader.get() );
 
 	osg::ref_ptr<osg::StateSet> ss = getOrCreateStateSet();
-	ss->setAttribute( pShaderProgram, osg::StateAttribute::ON );
+	ss->setAttribute( m_prgShaders, osg::StateAttribute::ON );
 }
 
 void CSulCloudPlane::setSize( float s )

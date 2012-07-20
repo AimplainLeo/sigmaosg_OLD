@@ -69,6 +69,18 @@ CSulString::CSulString( const osg::Vec3 v, sigma::uint32 decimalCount )
 	assign( s.c_str() );
 }
 
+CSulString::CSulString( const osg::Vec4 v, sigma::uint32 decimalCount )
+{
+	CSulString s;
+	CSulString fmt = 
+		"%."+CSulString(decimalCount)+"f, " +
+		"%."+CSulString(decimalCount)+"f, " +
+		"%."+CSulString(decimalCount)+"f, " +
+		"%."+CSulString(decimalCount)+"f";
+	s.Format( fmt.c_str(), v.r(), v.g(), v.b(), v.a() );
+	assign( s.c_str() );
+}
+
 CSulString::CSulString( float f, sigma::uint32 decimalCount )
 {
 	CSulString s;

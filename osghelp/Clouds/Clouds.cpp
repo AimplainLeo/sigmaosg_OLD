@@ -14,6 +14,7 @@
 #include <osgGA/KeySwitchMatrixManipulator>
 
 
+
 osg::Node* createScene()
 {
 	osg::Group* pGroup = new osg::Group;
@@ -25,8 +26,22 @@ osg::Node* createScene()
 osg::Node* createClouds()
 {
 	osg::Group* pGroup = new osg::Group;
+
 	CSulClouds* pClouds = new CSulClouds;
 	pGroup->addChild( pClouds->getGroup() );
+
+	osg::Program* prg = pClouds->getCloudPlane()->getShaderProgram();
+
+	osg::Shader* shaderV = new osg::Shader( osg::Shader::VERTEX );
+	shaderV->loadShaderSourceFromFile( "main.vert" );
+	shaderV->setName( "main.vert" );
+	prg->addShader( shaderV );
+
+	osg::Shader* shaderF = new osg::Shader( osg::Shader::FRAGMENT );
+	shaderF->loadShaderSourceFromFile( "main.frag" );
+	shaderF->setName( "main.frag" );
+	prg->addShader( shaderF );
+
 	return pGroup;
 }
 

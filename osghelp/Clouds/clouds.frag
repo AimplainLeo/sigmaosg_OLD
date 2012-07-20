@@ -1,5 +1,5 @@
 // clouds.frag
-
+/*
 uniform sampler2D tex;
 
 void main()
@@ -13,3 +13,4 @@ void main()
 	
 	gl_FragColor = vec4( frag.a, frag.a, frag.a, frag.a*len ) ;
 }
+*/

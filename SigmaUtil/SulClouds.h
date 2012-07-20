@@ -48,6 +48,8 @@ public:
 
 	osg::Image*		getImage();
 
+	CSulCloudPlane*	getCloudPlane();
+
 private:
 	void		setTextureStates();
 

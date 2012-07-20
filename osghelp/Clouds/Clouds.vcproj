@@ -189,6 +189,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\main.frag"
+				>
+			</File>
+			<File
+				RelativePath=".\main.vert"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration

@@ -82,7 +82,6 @@ private:
 };
 
 
-
 class SUL_EXPORT CSulCloudPlane : public osg::Group
 {
 public:
@@ -97,6 +96,8 @@ public:
 
 	CSulGeomQuad*	getQuad();
 
+	osg::Program*	getShaderProgram();
+
 protected:
 	virtual osg::Program* createShaderProgram();
 
@@ -105,8 +106,8 @@ private:
 	osg::ref_ptr<CCloudScrollTexture>	m_rCloudScrollTexture;
 	float								m_size;
 	float								m_height;
-
 	osg::ref_ptr<mytest>				m_mytestass;
+	osg::ref_ptr<osg::Program>			m_prgShaders;
 };
 
 
