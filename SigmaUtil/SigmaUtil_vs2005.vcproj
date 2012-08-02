@@ -607,14 +607,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\SulGeomGeode.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomGeode.h"
-					>
-				</File>
-				<File
 					RelativePath=".\SulGeomGrid.cpp"
 					>
 				</File>
