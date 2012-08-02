@@ -3,7 +3,7 @@
 #ifndef __SULGEOMHEIGHTFIELD_H__
 #define __SULGEOMHEIGHTFIELD_H__
 
-#include "SulGeomBase.h"
+#include "SulGeom.h"
 #include "SulTypes.h"
 #include "SulArray2D.h"
 #include <osg/Geode>

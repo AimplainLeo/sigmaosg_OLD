@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "SulGuiDial.h"
-#include "SulGeomCircle.h"
+#include "SulGeodeCircle.h"
 #include "SulGeomArrow2D.h"
 #include "SulGuiEventHandler.h"
 #include "SulMath.h"
@@ -35,7 +35,7 @@ void CSulGuiDial::init()
 
 	setWH( m_radius*2.0f, m_radius*2.0f );
 
-	CSulGeomCircle* pCircle = new CSulGeomCircle( m_radius );
+	CSulGeodeCircle* pCircle = new CSulGeodeCircle( m_radius );
 	pCircle->setOffset( osg::Vec3(m_radius, m_radius, 0.0f) );
 	addChild( pCircle );
 

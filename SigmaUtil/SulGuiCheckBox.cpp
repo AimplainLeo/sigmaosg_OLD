@@ -5,7 +5,7 @@
 #include "SulGuiText.h"
 #include "SulGeomLine.h"
 #include "SulGuiEventHandler.h"
-#include "SulGeomLineStrip.h"
+#include "SulGeodeLineStrip.h"
 
 CSulGuiCheckBox::CSulGuiCheckBox( const CSulString& sText, float x, float y, float w, float h ) :
 CSulGuiCanvas( "CHECKBOX", x, y, w, h )
@@ -76,7 +76,7 @@ void CSulGuiCheckBox::init()
 	vecPos.push_back( osg::Vec3(m_boxSize,d,0) );
 	vecPos.push_back( osg::Vec3(0,d,0) );
 
-	CSulGeomLineStrip* pLineStrip = new CSulGeomLineStrip( vecPos );	
+	CSulGeodeLineStrip* pLineStrip = new CSulGeodeLineStrip( vecPos );	
 	pLineStrip->setWidth( 2.0f );
 	addChild( pLineStrip );
 

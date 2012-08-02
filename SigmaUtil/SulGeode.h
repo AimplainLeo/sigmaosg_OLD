@@ -1,12 +1,12 @@
-// SulGeomGeode.h
+// SulGeode.h
 
-#ifndef __SULGEOMGEODE_H__
-#define __SULGEOMGEODE_H__
+#ifndef __SULGEODE_H__
+#define __SULGEODE_H__
 
 #include "SulExport.h"
 #include <osg/geode>
 
-class SUL_EXPORT CSulGeomGeode : public osg::Geode
+class SUL_EXPORT CSulGeode : public osg::Geode
 {
 public:
 	void enableBlend();
@@ -15,4 +15,5 @@ public:
 	void lighting( bool bEnable );
 };
 
-#endif // __SULGEOMGEODE_H__
+
+#endif // __SULGEODE_H__

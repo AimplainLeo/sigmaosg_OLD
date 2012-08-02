@@ -110,14 +110,35 @@ void CSulGeomGrid::Create( const osg::Vec3& vPos, float fW, float fH, float fCel
 	m_rGeo->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 }
 
-void CSulGeomGrid::SetGridColor( const osg::Vec4& vColor )
+void CSulGeomGrid::setColor( const osg::Vec4& color )
 {
-	m_colorGrid = vColor;
+	m_colorGrid = color;
+	m_colorGridDiv = color;
+
+	if ( m_rGeo.valid() )
+	{
+		// first half of the colors are for the grid (last half subgrid)
+		osg::Vec4Array* c = dynamic_cast<osg::Vec4Array*>(m_rGeo->getColorArray());
+
+		sigma::uint32 s = c->size();
+
+		for ( sigma::uint32 i=0; i<s; i++ )
+		{
+			(*c)[i] = color;
+		}
+
+		m_rGeo->dirtyDisplayList();
+	}
 }
 
-void CSulGeomGrid::SetGridDivColor( const osg::Vec4& vColor )
+void CSulGeomGrid::SetGridColor( const osg::Vec4& color )
 {
-	m_colorGridDiv = vColor;
+	m_colorGrid = color;
+}
+
+void CSulGeomGrid::SetGridDivColor( const osg::Vec4& color )
+{
+	m_colorGridDiv = color;
 }
 
 

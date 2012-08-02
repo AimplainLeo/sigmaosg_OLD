@@ -4,11 +4,11 @@
 #define __SULGEOMCONE_H__
 
 #include "SulTypes.h"
-#include "SulGeomGeode.h"
+#include "SulGeode.h"
 #include "SulExport.h"
 #include <osg/geometry>
 
-class SUL_EXPORT CSulGeomCone : public CSulGeomGeode
+class SUL_EXPORT CSulGeomCone : public CSulGeode
 {
 public:
 	// slices : The number of subdivisions around the Z axis

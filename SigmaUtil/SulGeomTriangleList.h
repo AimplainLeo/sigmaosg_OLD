@@ -3,7 +3,7 @@
 #ifndef __SULGEOMTRIANGLELIST_H__
 #define __SULGEOMTRIANGLELIST_H__
 
-#include "SulGeomBase.h"
+#include "SulGeom.h"
 #include "SulTypes.h"
 #include <osg/Geode>
 #include <osg/Geometry>

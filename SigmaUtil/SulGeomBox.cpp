@@ -6,7 +6,7 @@
 
 
 CSulGeomBox::CSulGeomBox( float extent ) :
-CSulGeomGeode()
+CSulGeode()
 {
 	m_minX = -extent;
 	m_maxX =  extent;
@@ -19,7 +19,7 @@ CSulGeomGeode()
 }
 
 CSulGeomBox::CSulGeomBox( float extentX, float extentY, float extentZ ) :
-CSulGeomGeode()
+CSulGeode()
 {
 	m_minX = -extentX;
 	m_maxX =  extentX;
@@ -32,7 +32,7 @@ CSulGeomGeode()
 }
 
 CSulGeomBox::CSulGeomBox( float minX, float maxX, float minY, float maxY, float minZ, float maxZ ) :
-CSulGeomGeode()
+CSulGeode()
 {
 	m_minX = minX;
 	m_maxX = maxX;
@@ -45,7 +45,7 @@ CSulGeomGeode()
 }
 
 CSulGeomBox::CSulGeomBox( const osg::BoundingBox& bb ) :
-CSulGeomGeode()
+CSulGeode()
 {
 	m_minX = bb.xMin();
 	m_maxX = bb.xMax();

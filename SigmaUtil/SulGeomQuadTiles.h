@@ -3,7 +3,7 @@
 #ifndef __SULGEOMQUADTILES_H__
 #define __SULGEOMQUADTILES_H__
 
-#include "SulGeomBase.h"
+#include "SulGeom.h"
 #include "SulTypes.h"
 #include <osg/geode>
 

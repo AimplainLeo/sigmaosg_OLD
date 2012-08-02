@@ -3,10 +3,10 @@
 #ifndef __SULGEOMBOX_H__
 #define __SULGEOMBOX_H__
 
-#include "SulGeomBase.h"
-#include "SulGeomGeode.h"
+#include "SulGeom.h"
+#include "SulGeode.h"
 
-class CSulGeomBox : public CSulGeomGeode
+class CSulGeomBox : public CSulGeode
 {
 public:
 									CSulGeomBox( float extent );

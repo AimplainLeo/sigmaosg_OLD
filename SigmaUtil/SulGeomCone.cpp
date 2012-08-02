@@ -5,6 +5,7 @@
 #include <osg/cullface>
 
 CSulGeomCone::CSulGeomCone( float len, float radiusBottom, float radiusTop, sigma::uint32 slices, sigma::uint32 stacks ) :
+CSulGeode(),
 m_len(len),
 m_radiusBottom( radiusBottom ),
 m_radiusTop( radiusTop ),

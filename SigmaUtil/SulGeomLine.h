@@ -3,7 +3,7 @@
 #ifndef __SULGEOMLINE_H__
 #define __SULGEOMLINE_H__
 
-#include "SulGeomBase.h"
+#include "SulGeom.h"
 #include <osg/linesegment>
 #include <osg/linewidth>
 #include <osg/geode>

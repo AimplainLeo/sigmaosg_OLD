@@ -216,6 +216,22 @@
 				Name="Geoms"
 				>
 				<File
+					RelativePath=".\SulGeode.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeode.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeom.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeom.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SulGeomArrow2D.cpp"
 					>
 				</File>
@@ -248,14 +264,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\SulGeomBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomBase.h"
-					>
-				</File>
-				<File
 					RelativePath=".\SulGeomBillboardInstancing.cpp"
 					>
 				</File>
@@ -277,14 +285,6 @@
 				</File>
 				<File
 					RelativePath=".\SulGeomBox.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomCircle.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomCircle.h"
 					>
 				</File>
 				<File
@@ -312,19 +312,19 @@
 					>
 				</File>
 				<File
-					RelativePath=".\SulGeomGeode.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomGeode.h"
-					>
-				</File>
-				<File
 					RelativePath=".\SulGeomGrid.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\SulGeomGrid.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomGriddedText.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulGeomGriddedText.h"
 					>
 				</File>
 				<File
@@ -341,30 +341,6 @@
 				</File>
 				<File
 					RelativePath=".\SulGeomLaser.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomLine.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomLine.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomLineList.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomLineList.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomLineStrip.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomLineStrip.h"
 					>
 				</File>
 				<File
@@ -423,6 +399,102 @@
 					RelativePath=".\SulGeomTriangleList.h"
 					>
 				</File>
+				<Filter
+					Name="lines"
+					>
+					<File
+						RelativePath=".\SulGeodeLineStrip.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeodeLineStrip.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLine.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLine.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLineList.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLineList.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLines.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLines.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLineStrip.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomLineStrip.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="crosshairs"
+					>
+					<File
+						RelativePath=".\SulGeodeCrosshairs.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeodeCrosshairs.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomCrosshairSimple.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomCrosshairSimple.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="circles"
+					>
+					<File
+						RelativePath=".\SulGeodeCircle.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeodeCircle.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomCircle.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomCircle.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="tickmarks"
+					>
+					<File
+						RelativePath=".\SulGeomTickMarksHorizontal.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomTickMarksHorizontal.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Grid"

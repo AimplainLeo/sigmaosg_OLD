@@ -3,11 +3,11 @@
 #ifndef __SULGEOMSPHERE_H__
 #define __SULGEOMSPHERE_H__
 
-#include "SulGeomGeode.h"
+#include "SulGeode.h"
 #include "SulExport.h"
 #include <osg/shapedrawable>
 
-class SUL_EXPORT CSulGeomSphere : public CSulGeomGeode
+class SUL_EXPORT CSulGeomSphere : public CSulGeode
 {
 
 public:

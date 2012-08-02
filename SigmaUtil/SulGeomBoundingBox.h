@@ -4,7 +4,7 @@
 #define __SULGEOMBOUNDINGBOX_H__
 
 #include "SulExport.h"
-#include "SulGeomBase.h"
+#include "SulGeom.h"
 #include "SulTypes.h"
 #include <osg/geometry>
 #include <osg/geode>

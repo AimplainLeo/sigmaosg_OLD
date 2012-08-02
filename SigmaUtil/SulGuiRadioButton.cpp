@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulGuiRadioButton.h"
 #include "SulGuiText.h"
-#include "SulGeomLineStrip.h"
+#include "SulGeodeLineStrip.h"
 #include "SulGuiRadioButtonGroup.h"
 #include "SulGuiEventHandler.h"
 
@@ -62,7 +62,7 @@ void CSulGuiRadioButton::init()
 	}
 
 	// outer circle
-	CSulGeomLineStrip* pLineStrip = new CSulGeomLineStrip( vecPos );	
+	CSulGeodeLineStrip* pLineStrip = new CSulGeodeLineStrip( vecPos );	
 	pLineStrip->setWidth( 2.0f );
 	addChild( pLineStrip );
 

@@ -3,7 +3,7 @@
 #ifndef __SULGEOMBILLBOARDINSTANCING_H__
 #define __SULGEOMBILLBOARDINSTANCING_H__
 
-#include "SulGeomBase.h"
+#include "SulGeom.h"
 #include "SulTypes.h"
 #include <osg/geode>
 

@@ -3,7 +3,7 @@
 #ifndef __SULGEOMCROSSQUADINSTANCING_H__
 #define __SULGEOMCROSSQUADINSTANCING_H__
 
-#include "SulGeomBase.h"
+#include "SulGeom.h"
 #include "SulTypes.h"
 #include <osg/geode>
 

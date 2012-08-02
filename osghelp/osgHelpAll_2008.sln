@@ -315,6 +315,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PostFilter_Thermal", "PostF
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GridedTextBoxes", "GridedTextBoxes\GridedTextBoxes.vcproj", "{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MT Static|Win32 = Debug MT Static|Win32
@@ -2209,6 +2214,26 @@ Global
 		{82F67F0B-834E-4CC4-AB93-4E2DF85EE406}.Release MTDLL|Win32.Build.0 = Release|Win32
 		{82F67F0B-834E-4CC4-AB93-4E2DF85EE406}.Release|Win32.ActiveCfg = Release|Win32
 		{82F67F0B-834E-4CC4-AB93-4E2DF85EE406}.Release|Win32.Build.0 = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MT Static|Win32.ActiveCfg = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MT Static|Win32.Build.0 = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MT|Win32.ActiveCfg = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MT|Win32.Build.0 = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MTDLL Static|Win32.ActiveCfg = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MTDLL Static|Win32.Build.0 = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MTDLL|Win32.ActiveCfg = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug MTDLL|Win32.Build.0 = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Debug|Win32.Build.0 = Debug|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MT Static|Win32.ActiveCfg = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MT Static|Win32.Build.0 = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MT|Win32.ActiveCfg = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MT|Win32.Build.0 = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MTDLL Static|Win32.ActiveCfg = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MTDLL Static|Win32.Build.0 = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MTDLL|Win32.ActiveCfg = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MTDLL|Win32.Build.0 = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release|Win32.ActiveCfg = Release|Win32
+		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

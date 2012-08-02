@@ -1,11 +1,12 @@
-// SulGeomGeode.cpp
+// SulGeode.cpp
 
 #include "stdafx.h"
-#include "SulGeomGeode.h"
+#include "SulGeode.h"
+
 #include <osg/depth>
 #include <osg/BlendFunc>
 
-void CSulGeomGeode::enableBlend()
+void CSulGeode::enableBlend()
 {
 	getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );
 
@@ -16,19 +17,19 @@ void CSulGeomGeode::enableBlend()
 	*/
 }
 
-void CSulGeomGeode::zbufferWrite( bool bEnable )
+void CSulGeode::zbufferWrite( bool bEnable )
 {
 	osg::Depth* depth = new osg::Depth;
 	depth->setWriteMask( bEnable?true:false );
 	getOrCreateStateSet()->setAttributeAndModes( depth, osg::StateAttribute::ON );
 }
 
-void CSulGeomGeode::lighting( bool bEnable )
+void CSulGeode::lighting( bool bEnable )
 {
 	getOrCreateStateSet()->setMode( GL_LIGHTING, bEnable ? osg::StateAttribute::ON : osg::StateAttribute::OFF );
 }
 
-void CSulGeomGeode::enableDebugTexture()
+void CSulGeode::enableDebugTexture()
 {
 	int s = 64;
 	unsigned char* pData = new unsigned char[s*s*3];
