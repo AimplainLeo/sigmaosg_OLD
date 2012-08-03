@@ -38,10 +38,16 @@ osg::Group()
 	// characters
 	////////////////////////////////////////////////////////////////////////////////
 
-	osg::Geode* pGeodeText = new osg::Geode();
-	m_mt->addChild( pGeodeText );
-
 	for ( sigma::uint32 y=0; y<cellCountY; y++ )
+	{
+		// create a geode for each line
+		osg::Geode* pGeodeText = new osg::Geode();
+		m_mt->addChild( pGeodeText );
+
+		CSulGeomGriddedTextUpdateCallback* updateCallback = new CSulGeomGriddedTextUpdateCallback( pGeodeText );
+		addUpdateCallback( updateCallback );
+		m_vecUpdateCallback.push_back( updateCallback );
+
 		for ( sigma::uint32 x=0; x<cellCountX; x++ )
 		{
 			osgText::Text* pText = new  osgText::Text;
@@ -59,6 +65,7 @@ osg::Group()
 
 			m_vecText.push_back( pText );
 		}
+	}
 
 	////////////////////////////////////////////////////////////////////////////////
 	// turn off lighting, has always been a pain to decide if I should do it here
@@ -140,3 +147,7 @@ void CSulGeomGriddedText::setColor( osg::Vec4& color )
 	m_grid->setColor( color );
 }
 
+void CSulGeomGriddedText::blink( sigma::uint32 line, bool bBlink )
+{
+	m_vecUpdateCallback[line]->blink( bBlink );
+}

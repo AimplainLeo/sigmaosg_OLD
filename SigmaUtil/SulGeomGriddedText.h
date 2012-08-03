@@ -7,6 +7,7 @@
 #include "SulTypes.h"
 #include "SulString.h"
 #include "SulGeomGrid.h"
+#include "SulGeomGriddedTextUpdateCallback.h"
 #include <osg/group>
 #include <osgText/Text>
 
@@ -27,6 +28,8 @@ public:
 	void			setPosition( sigma::int32 x, sigma::int32 y );
 	void			setColor( osg::Vec4& color );
 
+	void			blink( sigma::uint32 line, bool bBlink );
+
 private:
 	osg::ref_ptr<osg::MatrixTransform>	m_mt;
 	
@@ -39,6 +42,9 @@ private:
 	VEC_TEXT											m_vecText;
 
 	osg::ref_ptr<CSulGeomGrid>							m_grid;
+
+	typedef std::vector< osg::ref_ptr< CSulGeomGriddedTextUpdateCallback > >	VEC_CB;
+	VEC_CB																		m_vecUpdateCallback;
 };
 
 #endif // __SULGEOMGRIDDEDTEXT_H__

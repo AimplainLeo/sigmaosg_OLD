@@ -615,14 +615,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\SulGeomGriddedText.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomGriddedText.h"
-					>
-				</File>
-				<File
 					RelativePath=".\SulGeomHeightField.cpp"
 					>
 				</File>
@@ -815,6 +807,22 @@
 					</File>
 					<File
 						RelativePath=".\SulGeomTickMarksHorizontal.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="specials"
+					>
+					<File
+						RelativePath=".\SulGeomGriddedText.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomGriddedText.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulGeomGriddedTextUpdateCallback.h"
 						>
 					</File>
 				</Filter>
