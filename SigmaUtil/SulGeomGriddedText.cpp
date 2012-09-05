@@ -77,6 +77,9 @@ osg::Group()
 
 bool CSulGeomGriddedText::setText( const CSulString& text, sigma::uint32 line, CSulGeomGriddedText::EALIGN eAlign )
 {
+	// save for future reference
+	m_mapLineText[line] = text;
+
 	///////////////////////////
 	// sanity checks
 	///////////////////////////
@@ -122,6 +125,11 @@ bool CSulGeomGriddedText::setText( const CSulString& text, sigma::uint32 line, C
 	}
 
 	return true;
+}
+
+CSulString CSulGeomGriddedText::getText( sigma::uint32 line )
+{
+	return m_mapLineText[line];
 }
 
 void CSulGeomGriddedText::setPosition( sigma::int32 x, sigma::int32 y )
