@@ -8,7 +8,7 @@
 class SUL_EXPORT CSulNodeTraverse
 {
 public:
-	static osg::Node* FindNodeByName( osg::Node* pNode, const std::string& sName );
+	static osg::Node* findNodeByName( osg::Node* pNode, const std::string& sName );
 };
 
 #endif // __SULNODETRAVERSE_H__

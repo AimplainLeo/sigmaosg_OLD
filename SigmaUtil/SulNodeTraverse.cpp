@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "SulNodeTraverse.h"
 
-osg::Node* CSulNodeTraverse::FindNodeByName( osg::Node* pNode, const std::string& sName )
+osg::Node* CSulNodeTraverse::findNodeByName( osg::Node* pNode, const std::string& sName )
 {
 	if ( !pNode )
 	{
@@ -20,7 +20,7 @@ osg::Node* CSulNodeTraverse::FindNodeByName( osg::Node* pNode, const std::string
     {
         for ( unsigned int i=0; i<pGroup->getNumChildren(); i++ )
         {
-            osg::Node* pFound = FindNodeByName( pGroup->getChild(i), sName );
+            osg::Node* pFound = findNodeByName( pGroup->getChild(i), sName );
             if ( pFound )
             {
                 return pFound;
