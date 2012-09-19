@@ -14,7 +14,7 @@
 class SUL_EXPORT CSulGuiManager : public osg::Projection, public sigma::has_slots<>
 {
 public:
-						CSulGuiManager( osgViewer::View* pViewer );
+						CSulGuiManager( osgViewer::View* pViewer, bool bFlipTopBottom=false );
 
 	bool				load( const CSulString& sFileXml, osg::Group* pParent=0, CSulString sFileThemeXml="" );
 
@@ -56,8 +56,8 @@ private:
 	osg::ref_ptr<CSulGuiEventHandler>	m_rEventHandler;
 	float m_viewW;
 	float m_viewH;
-
 	osg::Group* m_pParent;
+	bool		m_bFlipTopBottom;
 };
 
 #endif // __SULGUIMANAGER_H__

@@ -8,9 +8,10 @@
 #include "SulGuiCompEditModeVisitor.h"
 #include <osgDB/FileUtils>
 
-CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
+CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer, bool bFlipTopBottom )
 {
 	m_pParent = 0;
+	m_bFlipTopBottom = bFlipTopBottom;
 
 	m_viewW = pViewer->getCamera()->getViewport()->width();
 	m_viewH = pViewer->getCamera()->getViewport()->height();
@@ -27,7 +28,10 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer )
 
 	// create projection matrix
 	setName( "CSulGuiManager -> Projection" );
-	setMatrix( osg::Matrix::ortho2D( 0, m_viewW, m_viewH, 0) );
+	if ( bFlipTopBottom )
+		setMatrix( osg::Matrix::ortho2D( 0, m_viewW, 0, m_viewH ) );
+	else
+		setMatrix( osg::Matrix::ortho2D( 0, m_viewW, m_viewH, 0) );
 
 	// set reference to absolute
 	m_rMT->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
@@ -85,7 +89,11 @@ void CSulGuiManager::onViewResize( float w, float h )
 {
 	m_viewW = w;
 	m_viewH = h;
-	setMatrix( osg::Matrix::ortho2D( 0, w, h, 0) );
+
+	if ( m_bFlipTopBottom )
+		setMatrix( osg::Matrix::ortho2D( 0, w, 0, h) );
+	else
+		setMatrix( osg::Matrix::ortho2D( 0, w, h, 0) );
 }
 
 // note, in this order
