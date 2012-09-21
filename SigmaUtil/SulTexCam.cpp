@@ -25,6 +25,17 @@ m_eSetup( eSetup )
 	initCam();
 }
 
+CSulTexCam::CSulTexCam( osg::Vec2 wh, ESETUP eSetup ) :
+m_w( wh.x() ),
+m_h( wh.y() ),
+m_texW( wh.x() ),
+m_texH( wh.y() ),
+m_eSetup( eSetup )
+{
+	initTex();
+	initCam();
+}
+
 CSulTexCam::CSulTexCam( sigma::uint32 w, sigma::uint32 h, ESETUP eSetup ) :
 m_w( w ),
 m_h( h ),

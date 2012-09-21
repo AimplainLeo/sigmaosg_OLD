@@ -25,8 +25,9 @@ bool sortByLayer( const eventDataTest& r1, const eventDataTest& r2 )
 	return r1.pCanvas->getLayer() > r2.pCanvas->getLayer();
 }
 
-CSulGuiEventHandler::CSulGuiEventHandler()
+CSulGuiEventHandler::CSulGuiEventHandler( osg::Vec2 fixedDimensions )
 {
+	m_fixedDimensions = fixedDimensions;
 	m_bPause = false;
 
 	if ( CSulInit::profiler )
@@ -47,6 +48,13 @@ bool CSulGuiEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAc
     {
 		float windowWidth = ea.getWindowWidth();
 		float windowHeight = ea.getWindowHeight();
+
+		if ( m_fixedDimensions.x()>0 && m_fixedDimensions.y()>0 )
+		{
+			windowWidth = m_fixedDimensions.x();
+			windowHeight = m_fixedDimensions.y();
+		}
+
 		signalViewResize( windowWidth, windowHeight );
 	}
 

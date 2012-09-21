@@ -8,20 +8,30 @@
 #include "SulGuiCompEditModeVisitor.h"
 #include <osgDB/FileUtils>
 
-CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer, bool bFlipTopBottom )
+CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer, bool bFlipTopBottom, osg::Vec2 fixedDimensions )
 {
 	m_pParent = 0;
+	m_noResize = false;
 	m_bFlipTopBottom = bFlipTopBottom;
 
-	m_viewW = pViewer->getCamera()->getViewport()->width();
-	m_viewH = pViewer->getCamera()->getViewport()->height();
+	if ( fixedDimensions.x()>0 && fixedDimensions.y()>0 )
+	{
+		m_viewW = fixedDimensions.x();
+		m_viewH = fixedDimensions.y();
+	}
+	else
+	{
+		m_viewW = pViewer->getCamera()->getViewport()->width();
+		m_viewH = pViewer->getCamera()->getViewport()->height();
+	}
+
 	m_rViewer = pViewer;
 
 	m_rMT = new osg::MatrixTransform;
 	m_rMT->setDataVariance( osg::Object::DYNAMIC );
 	m_rMT->setMatrix( osg::Matrix::identity() );
 
-	m_rEventHandler = new CSulGuiEventHandler;
+	m_rEventHandler = new CSulGuiEventHandler( fixedDimensions );
 	m_rEventHandler->setIgnoreHandledEventsMask( 0 );
 	m_rEventHandler->signalViewResize.connect( this, &CSulGuiManager::onViewResize );
     pViewer->addEventHandler( m_rEventHandler );
@@ -42,6 +52,11 @@ CSulGuiManager::CSulGuiManager( osgViewer::View* pViewer, bool bFlipTopBottom )
 	ss->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 	ss->setMode( GL_BLEND, osg::StateAttribute::ON );
 	ss->setRenderBinDetails( 1000000, "DepthSortedBin" );	
+}
+
+void CSulGuiManager::noResize()
+{
+	m_noResize = true;
 }
 
 float CSulGuiManager::getViewW()
@@ -87,6 +102,9 @@ bool CSulGuiManager::load( const CSulString& sFileXml, osg::Group* pParent, CSul
 
 void CSulGuiManager::onViewResize( float w, float h )
 {
+	if ( m_noResize )
+		return;
+
 	m_viewW = w;
 	m_viewH = h;
 

@@ -42,6 +42,7 @@ private:
 	EALIGNV			m_eAlignV;
 	float			m_xOfs;
 	float			m_yOfs;
+	bool			m_noResize;
 };
 
 #endif // __SULGUIALIGN_H__

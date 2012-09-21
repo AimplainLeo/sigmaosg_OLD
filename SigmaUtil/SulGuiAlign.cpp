@@ -9,6 +9,7 @@ CSulGuiCanvas( "ALIGN" )
 {
 	setName( "CSulGuiCanvas" );
 
+	m_noResize = false;
 	m_eAlignV = V_TOP;
 	m_eAlignH = H_LEFT;
 	m_xOfs = 0.0f;
@@ -51,6 +52,11 @@ void CSulGuiAlign::setupAttr( CSulXmlAttr* pAttr )
 	{
 		m_yOfs = pAttr->get( "y_ofs" ).asFloat();
 	}
+
+	if ( pAttr->exist( "no_resize" ) )
+	{
+		m_noResize = pAttr->get( "no_resize" ).asBool();
+	}
 }
 
 void CSulGuiAlign::init()
@@ -59,82 +65,6 @@ void CSulGuiAlign::init()
 
 	showCanvas( false );
 }
-
-/*
-void CSulGuiAlign::onViewResize( float w, float h )
-{
-	CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getParent(0));
-	setW( p?p->getW():w );
-	setH( p?p->getH():h );
-		
-	// reposition children horizontal
-	float acc_w = 0.0f;
-	float acc_h = 0.0f;
-	sigma::uint32 count = getNumChildren();
-	for ( sigma::uint32 i=0; i<count ; i++ )
-	{
-		CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getChild(i));
-		if ( p )
-		{
-			if ( m_eAlignH==RIGHT )
-			{
-				acc_w += p->getW();
-				float xx = getW()-acc_w;
-				p->setX( xx-m_xOfs );
-			}
-			else 
-			{
-				float xx = acc_w;
-				p->setX( xx+m_xOfs );	
-				acc_w += p->getW();
-			}
-
-			if ( m_eAlignV==BOTTOM )
-			{
-				acc_h += p->getH();
-				float yy = getH()-acc_h;
-				p->setY( yy-m_yOfs );
-			}
-			else 
-			{
-				float yy = acc_h;
-				p->setY( yy+m_yOfs );	
-				acc_h += p->getH();
-			}
-		}
-	}
-}
-*/
-
-
-/*
-void CSulGuiAlign::onViewResize( float w, float h )
-{
-	CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getParent(0));
-	setW( p?p->getW():w );
-	setH( p?p->getH():h );
-		
-	sigma::uint32 count = getNumChildren();
-	for ( sigma::uint32 i=0; i<count ; i++ )
-	{
-		CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getChild(i));
-		if ( p )
-		{
-			if ( m_eAlignH==RIGHT )
-			{
-				float xx = getW() - (p->getW()+p->getAttrX());
-				p->setX( xx );
-			}
-
-			if ( m_eAlignV==BOTTOM )
-			{
-				float yy = getH() - (p->getH()+p->getAttrY());
-				p->setY( yy );
-			}
-		}
-	}
-}
-*/
 
 void CSulGuiAlign::update()
 {
@@ -201,6 +131,11 @@ void CSulGuiAlign::update()
 
 void CSulGuiAlign::onViewResize( float w, float h )
 {
+	// the align element doesn't have a size,.. so we need to create a size for it
+	// right now if there is a parent window we use that size, otherwise we use the size of
+	// the application window
+	// NOTE: this is not correct.. when rendering to a texture the highest window is not the
+	// application but the RTT texture
 	CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getParent(0));
 	setW( p?p->getW():w );
 	setH( p?p->getH():h );

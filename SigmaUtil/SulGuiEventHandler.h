@@ -20,7 +20,7 @@ public:
 	typedef std::vector< osg::ref_ptr<CSulGuiEvent> > VEC_EVENT;	
 
 public:
-	CSulGuiEventHandler();
+	CSulGuiEventHandler( osg::Vec2 fixedDimensions=osg::Vec2(-1,-1) );
 
 	void pause( bool bPause );
 
@@ -43,6 +43,7 @@ private:
 
 	osg::ref_ptr<osg::Node>	m_rootNode;
 	bool						m_bPause;
+	osg::Vec2 m_fixedDimensions;
 };
 
 #endif // __SULGUIEVENTHANDLER_H__

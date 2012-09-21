@@ -28,6 +28,7 @@ public:
 
 						CSulTexCam( osgViewer::Viewer* viewer, ESETUP eSetup=STANDARD );
 
+						CSulTexCam( osg::Vec2 wh, ESETUP eSetup=STANDARD );
 						CSulTexCam( sigma::uint32 w, sigma::uint32 h, ESETUP eSetup=STANDARD );
 						CSulTexCam( osg::Texture2D* pTex, ESETUP eSetup=STANDARD );
 
