@@ -91,6 +91,33 @@ public:
 
 	sigma::signal2<float, float>	signalPositionChanged;
 
+	/*
+	template<class TComp>
+	TComp* find( sigma::uint32 index )
+	{
+		if ( dynamic_cast<TComp*>(this) )
+		{
+			if ( index==0 )
+				return dynamic_cast<TComp*>(this);
+
+			--index;
+		}
+			
+		for ( sigma::uint32 i=0; i<getNumChildren(); i++ ) 
+		{
+			CSulGuiComp* comp = dynamic_cast<CSulGuiComp*>(getChild(i));
+			if ( comp )
+			{
+				TComp* pFound = comp->find<TComp>( index );
+				if ( pFound )
+					return pFound;
+			}
+		}
+
+		return 0;
+	}
+*/
+
 private:
 	void			initConstructor();
 
