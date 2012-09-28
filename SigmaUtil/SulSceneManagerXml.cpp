@@ -11,6 +11,7 @@
 #include "SulTestGeoms.h"
 #include "SulGeomSphere.h"
 #include <osg/Fog>
+#include <osgText/Text>
 #include <iostream>
 
 CSulSceneManagerXml::CSulSceneManagerXml( CSulSceneManager* pSceneManager ):
@@ -168,6 +169,35 @@ CSulProgramShaders* CSulSceneManagerXml::getProgramShaders( const CSulString& sN
 
 void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData )
 {
+	if ( sName=="SCREENLABEL" )
+	{
+		osg::Camera* camera = new osg::Camera;
+		camera->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
+		camera->setProjectionMatrixAsOrtho2D(0,800,0,600);
+		camera->setViewMatrix(osg::Matrix::identity());
+		camera->setClearMask(GL_DEPTH_BUFFER_BIT);
+		camera->getOrCreateStateSet()->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
+		
+		osg::Geode* geode = new osg::Geode;
+		camera->addChild( geode );
+
+		CSulString sN = pAttr->get( "name" );
+		CSulString sT = pAttr->get( "text" );
+
+		add( sN, camera );
+
+		osgText::Text* t = new  osgText::Text;
+		t->setColor( osg::Vec4( 1.0f, 1.0f, 0.0f, 1.0f ) );
+		t->setText( sT );
+		t->setBackdropType( osgText::Text::OUTLINE );
+		geode->addDrawable( t );
+
+		float x, y;
+		x = pAttr->getFloat( "x", 0.0f );
+		y = pAttr->getFloat( "y", 0.0f );
+		t->setPosition( osg::Vec3( x, 600-y, 0.0f ) );
+	}
+
 	if ( sName=="SULPROGRAMSHADERS" )
 	{
 		CSulString sN = pAttr->get( "name" );
@@ -526,6 +556,9 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 
 void CSulSceneManagerXml::elementEnd( const CSulString& sName )
 {
+	if ( sName=="SCREENLABEL" )
+		m_vecNodeStack.pop_back();
+
 	if ( sName=="TEXCAM" )
 	{
 		m_vecNodeStack.pop_back();
