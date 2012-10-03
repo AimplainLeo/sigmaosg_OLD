@@ -9,7 +9,8 @@
 // light should not effect output
 
 CSulPostFilterThermal::CSulPostFilterThermal() :
-m_intensity( 1.0f )
+m_intensity( 1.0f ),
+m_bWhiteHot( true )
 {
 
 }
@@ -41,7 +42,12 @@ osg::Texture2D* CSulPostFilterThermal::out()
 
 void CSulPostFilterThermal::setWhiteHot( bool bWhiteHot )
 {
+	m_bWhiteHot = bWhiteHot;
 	m_rShaderIntensity->setInvert( !bWhiteHot );
 }
 
+bool CSulPostFilterThermal::isWhiteHot()
+{
+	return m_bWhiteHot;
+}
 

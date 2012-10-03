@@ -16,6 +16,7 @@ public:
 	osg::Texture2D* out();
 
 	void			setWhiteHot( bool bWhiteHot );
+	bool			isWhiteHot();
 
 private:
 	void			filterIntensity( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut );
@@ -24,6 +25,7 @@ private:
 	osg::ref_ptr<osg::Texture2D>		m_rTex;
 	float								m_intensity;
 	osg::ref_ptr<CSulShaderIntensity>	m_rShaderIntensity;
+	bool								m_bWhiteHot;
 };
 
 #endif // __SULPOSTFILTERTHERMAL_H__
