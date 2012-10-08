@@ -51,3 +51,7 @@ bool CSulPostFilterThermal::isWhiteHot()
 	return m_bWhiteHot;
 }
 
+void CSulPostFilterThermal::setIntensity( float intensity )
+{
+	m_rShaderIntensity->setIntensity( intensity );
+}

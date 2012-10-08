@@ -18,6 +18,8 @@ public:
 	void			setWhiteHot( bool bWhiteHot );
 	bool			isWhiteHot();
 
+	void			setIntensity( float intensity );
+
 private:
 	void			filterIntensity( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut );
 
