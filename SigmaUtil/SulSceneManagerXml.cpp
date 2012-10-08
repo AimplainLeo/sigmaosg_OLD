@@ -305,8 +305,8 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		sigma::uint32 h = pAttr->getUint32( "h", 256 );
 
 		// terrible way of  handling the view sizes, but I have no idea how to make this better
-		sigma::uint32 view_w = pAttr->getUint32( "view_w", 800 );
-		sigma::uint32 view_h = pAttr->getUint32( "view_h", 600 );
+		sigma::uint32 view_w = pAttr->getUint32( "view_w", 1920 );
+		sigma::uint32 view_h = pAttr->getUint32( "view_h", 1080 );
 
 		osg::Texture2D* tex = 0;
 		if ( pAttr->exist( "texture" ) )
