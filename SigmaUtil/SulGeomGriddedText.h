@@ -23,6 +23,8 @@ public:
 public:
 					CSulGeomGriddedText( sigma::uint32 cellCountX, sigma::uint32 cellCountY, sigma::uint32 cellW, sigma::uint32 cellH, sigma::uint32 viewW, sigma::uint32 viewH );
 
+	void			noGrid();
+
 	bool			setText( const CSulString& text, sigma::uint32 line, CSulGeomGriddedText::EALIGN eAlign );
 	CSulString		getText( sigma::uint32 line );
 

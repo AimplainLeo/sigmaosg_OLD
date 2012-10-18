@@ -75,6 +75,11 @@ osg::Group()
 	getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
 }
 
+void CSulGeomGriddedText::noGrid()
+{
+	m_grid->setNodeMask( 0 );
+}
+
 bool CSulGeomGriddedText::setText( const CSulString& text, sigma::uint32 line, CSulGeomGriddedText::EALIGN eAlign )
 {
 	// save for future reference
