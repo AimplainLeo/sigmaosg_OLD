@@ -128,6 +128,7 @@ float CSulLightBase::getQuadraticAtt() const
 
 osg::BoundingSphere CSulLightBase::computeBound() const
 {
+	//BoundingSphere bsphere(Group::computeBound());
 	// http://www.wolframalpha.com/input/?i=solve+a%3D1%2F%28C%2BL*d%2BQ*d%5E2%29+for+d
 
 	float a = 0.0001f;
