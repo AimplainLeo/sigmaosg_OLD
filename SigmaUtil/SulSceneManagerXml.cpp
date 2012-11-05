@@ -551,6 +551,8 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		}
 
 		m_pCurrentStateSet->addUniform( uniform, stateValue );
+
+		m_mapUniform[sUniformName] = uniform;
 	}
 }
 
@@ -580,3 +582,7 @@ void CSulSceneManagerXml::elementEnd( const CSulString& sName )
 	}
 }
 
+osg::Uniform* CSulSceneManagerXml::getUniform( const CSulString& name )
+{
+	return m_mapUniform[name];
+}

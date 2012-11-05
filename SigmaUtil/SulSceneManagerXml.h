@@ -33,6 +33,8 @@ public:
 	void								add( CSulString sName, osg::Node* node );
 	osg::Node*							get( const CSulString& sName );
 
+	osg::Uniform*						getUniform( const CSulString& name );
+
 protected:
 	osg::StateAttribute::Values			getStateAttribute( const CSulString& s );
 	osg::AlphaFunc::ComparisonFunction	GetAlphaFuncFunction(const CSulString& s );
@@ -50,6 +52,9 @@ protected:
 	MAP_TEXTURE2D						m_mapTexture2D;
 	MAP_NODE							m_mapNode;
 	MAP_PROGRAMSHADERS					m_mapProgramShaders;
+
+	typedef std::map< CSulString, osg::ref_ptr<osg::Uniform> >	MAP_UNIFORM;
+	MAP_UNIFORM													m_mapUniform;
 };
 
 #endif // __SULSCENEMANAGERXML_H__

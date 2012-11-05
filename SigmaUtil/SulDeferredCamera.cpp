@@ -10,6 +10,8 @@ CSulTexCam( w, h, CSulTexCam::DEFERRED_RENDERING )
 {
 	m_lm = lightManager;
 
+//	m_gamma = 1.0f;
+
 	// first pass (create g buffers)
 //	getOrCreateStateSet()->setAttribute( new CSulProgramShaders( "shaders/sulDeferredRendering.frag,shaders/sulDeferredRendering.vert" ) );
 
@@ -19,6 +21,13 @@ CSulTexCam( w, h, CSulTexCam::DEFERRED_RENDERING )
 
 	m_comp = new CSulTexCam( w, h );
 	m_comp->setRenderOrder( osg::Camera::POST_RENDER );
+
+	/*
+	// gamma
+	m_uniformGamma = new osg::Uniform( osg::Uniform::FLOAT, "gamma" );
+	m_uniformGamma->set( (float)m_gamma );
+	m_comp->getOrCreateStateSet()->addUniform( m_uniformGamma );
+	*/
 
 	m_quad = new CSulScreenAlignedQuad( osg::Vec3(w/2,h/2,0), w, h, w, h );
 	m_quad->getQuad()->lighting( false );
@@ -69,6 +78,14 @@ CSulTexCam( w, h, CSulTexCam::DEFERRED_RENDERING )
 	) );
 	*/
 }
+
+/*
+void CSulDeferredCamera::setGamma( float gamma )
+{
+	m_gamma = gamma;
+	m_uniformGamma->set( (float)m_gamma );
+}
+*/
 
 void CSulDeferredCamera::traverse( osg::NodeVisitor& nv )
 {

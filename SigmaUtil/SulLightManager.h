@@ -51,7 +51,6 @@ private:
 	sigma::int32						m_lastFrame;
 	sigma::int32						m_countCameras;
 
-private:
 	typedef std::vector< osg::ref_ptr< osg::Image> >	VEC_IMAGE;
 	typedef std::vector< osg::ref_ptr< osg::TextureRectangle > > VEC_TEXTURERECTANGLE;
 

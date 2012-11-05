@@ -14,6 +14,8 @@ class SUL_EXPORT CSulDeferredCamera : public CSulTexCam
 public:
 	CSulDeferredCamera( CSulLightManager* lightManager, sigma::uint32 w=200, sigma::uint32 h=150 );
 
+//	void setGamma( float gamma );
+
 	// final composite texture
 	osg::Texture2D* getFinalTexture();
 
@@ -27,6 +29,9 @@ private:
 	//osg::ref_ptr<CSulGeomQuad>			m_quad;
 	osg::ref_ptr<CSulScreenAlignedQuad>	m_quad;
 	osg::ref_ptr<CSulTexCam>			m_comp;
+
+//	osg::ref_ptr<osg::Uniform>			m_uniformGamma;
+//	float								m_gamma;
 };
 
 
