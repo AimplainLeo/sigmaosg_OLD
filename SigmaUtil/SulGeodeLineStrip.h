@@ -13,7 +13,7 @@ class SUL_EXPORT CSulGeodeLineStrip : public CSulGeode
 {
 public:
 					CSulGeodeLineStrip();
-					CSulGeodeLineStrip( const sigma::VEC_VEC3& vecVector );
+					CSulGeodeLineStrip( const sigma::VEC_VEC3& vecVector, const osg::Vec4& color=osg::Vec4(1,1,1,1) );
 
 	void			setLines( const sigma::VEC_VEC3& vecVector );
 
@@ -27,6 +27,7 @@ private:
 	osg::ref_ptr<CSulGeomLineStrip>	m_geomLineStrip;
 
 	sigma::VEC_VEC3					m_vecVector;
+	osg::Vec4						m_color;
 	osg::ref_ptr<osg::Vec4Array>	m_rColors;
 	osg::ref_ptr<osg::LineWidth>	m_rLineWidth;
 	float							m_width;

@@ -12,7 +12,18 @@ m_color( color )
 }
 
 CSulGeomLineStrip::CSulGeomLineStrip( const sigma::VEC_VEC3& vecVector ) :
-CSulGeom()
+CSulGeom(),
+m_vecVector( vecVector ),
+m_color( 1,1,1,1 )
+{
+	initConstructor();
+	createDrawable();
+}
+
+CSulGeomLineStrip::CSulGeomLineStrip( const sigma::VEC_VEC3& vecVector, const osg::Vec4& color ) :
+CSulGeom(),
+m_vecVector( vecVector ),
+m_color( color )
 {
 	initConstructor();
 	createDrawable();

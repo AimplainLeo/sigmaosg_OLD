@@ -2195,6 +2195,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="PositionPlotter"
+				>
+				<File
+					RelativePath=".\SulPositionPlotter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPositionPlotter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPositionPlotterManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulPositionPlotterManager.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
