@@ -200,6 +200,18 @@ bool CSulString::asBool() const
 	return false;
 }
 
+osg::Vec3 CSulString::asVec3() const
+{
+	if ( !empty() )
+	{
+		float r, g, b;
+		sscanf( c_str(), "%f,%f,%f,%f", &r, &g, &b ); 
+		return osg::Vec3( r, g, b );
+	}
+
+	return osg::Vec3( 1, 1, 1 );
+}
+
 osg::Vec4 CSulString::asVec4() const
 {
 	if ( !empty() )

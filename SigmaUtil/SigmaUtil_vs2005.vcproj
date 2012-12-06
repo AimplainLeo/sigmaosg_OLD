@@ -2215,6 +2215,46 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Inventory"
+				>
+				<File
+					RelativePath=".\SulInventory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventoryHelper.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventoryHelper.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventoryHelperAction.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventoryItem.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventoryItem.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventoryItemData.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulInventoryUpdateCallback.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

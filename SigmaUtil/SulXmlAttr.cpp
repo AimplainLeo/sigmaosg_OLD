@@ -101,10 +101,50 @@ sigma::uint32 CSulXmlAttr::getUint32( const CSulString& sName, sigma::uint32 def
 	return defaultValue;
 }
 
+sigma::int32 CSulXmlAttr::getInt32( const CSulString& sName, sigma::int32 defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName ).asInt32();
+
+	return defaultValue;
+}
+
 bool CSulXmlAttr::getBool( const CSulString& sName, bool defaultValue )
 {
 	if ( exist( sName ) )
 		return get( sName ).asBool();
+
+	return defaultValue;
+}
+
+CSulString CSulXmlAttr::getString( const CSulString& sName, bool defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName );
+
+	return defaultValue;
+}
+
+osg::Vec3 CSulXmlAttr::getVec3( const CSulString& sName, osg::Vec3 defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName ).asVec3();
+
+	return defaultValue;
+}
+
+osg::Vec4 CSulXmlAttr::getVec4( const CSulString& sName, osg::Vec4 defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName ).asVec4();
+
+	return defaultValue;
+}
+
+double CSulXmlAttr::getDouble( const CSulString& sName, double defaultValue )
+{
+	if ( exist( sName ) )
+		return get( sName ).asDouble();
 
 	return defaultValue;
 }

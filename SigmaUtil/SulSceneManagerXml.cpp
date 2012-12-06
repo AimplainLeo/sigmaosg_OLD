@@ -169,6 +169,114 @@ CSulProgramShaders* CSulSceneManagerXml::getProgramShaders( const CSulString& sN
 
 void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData )
 {
+	if ( sName=="CAMERA" )
+	{
+		CSulString sN = pAttr->get( "name" );
+
+		osg::Camera* camera = new osg::Camera;
+		add( sN, camera );
+
+		bool bAddToRoot = pAttr->getBool( "add_to_root", false );
+		if ( bAddToRoot )
+		{
+			m_vecRootNodes.push_back( camera );
+		}
+
+		// StateSet
+		if ( pAttr->exist("stateset") )
+		{
+			CSulString name = pAttr->get("stateset");
+			if ( camera->getStateSet() )
+			{
+				osg::notify(osg::WARN) << "WARNING: CSulSceneManagerXml::elementStart -> non-empty stateset on node ["<<camera->getName()<<"] will be overridden!" << std::endl;
+			}
+			camera->setStateSet( m_rSceneManager->GetStateSet(name) );
+		}
+
+		//////////////////////////////////////////////
+		// background color
+		//////////////////////////////////////////////
+
+		osg::Vec4 bgcolor = pAttr->getVec4( "bgcolor", osg::Vec4(0,0,0,0) );
+		camera->setClearColor( bgcolor );
+
+		//////////////////////////////////////////////
+		// compute near far mode
+		//////////////////////////////////////////////
+
+		CSulString sNearFar = pAttr->getString( "computer_near_far_mode", "COMPUTE_NEAR_FAR_USING_BOUNDING_VOLUMES" );
+		if ( sNearFar=="COMPUTE_NEAR_FAR_USING_BOUNDING_VOLUMES" )
+			camera->setComputeNearFarMode( osg::CullSettings::COMPUTE_NEAR_FAR_USING_BOUNDING_VOLUMES );
+		else if ( sNearFar=="COMPUTE_NEAR_FAR_USING_PRIMITIVES" )
+			camera->setComputeNearFarMode( osg::CullSettings::COMPUTE_NEAR_FAR_USING_PRIMITIVES );
+		else
+			camera->setComputeNearFarMode( osg::CullSettings::DO_NOT_COMPUTE_NEAR_FAR );
+
+		//////////////////////////////////////////////
+		// render order
+		//////////////////////////////////////////////
+
+		CSulString sRenderOrder = pAttr->getString( "render_order", "POST_RENDER" );
+		sigma::int32 ron		= pAttr->getInt32( "render_order_num", 0 );
+		osg::Camera::RenderOrder ro = osg::Camera::POST_RENDER;
+		if ( sRenderOrder=="PRE_RENDER" )
+			ro = osg::Camera::PRE_RENDER;
+		else if ( sRenderOrder=="NESTED_RENDER" )
+			ro = osg::Camera::NESTED_RENDER;
+		camera->setRenderOrder( ro, ron );
+
+		//////////////////////////////////////////////
+		// clear masks
+		//////////////////////////////////////////////
+
+		sigma::uint32 clearMask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
+
+		// clear z buffer
+		bool clearz = pAttr->getBool( "clearz", true );
+		clearMask = clearMask & (~GL_DEPTH_BUFFER_BIT);
+		if ( clearz )
+			clearMask |= GL_DEPTH_BUFFER_BIT;
+
+		// clear background color
+		bool clearbg = pAttr->getBool( "clearbg", true );
+		clearMask = clearMask & (~GL_COLOR_BUFFER_BIT);
+		if ( clearbg )
+			clearMask |= GL_COLOR_BUFFER_BIT;
+
+		camera->setClearMask( clearMask );
+
+		//////////////////////////////////////////////
+		// projection
+		//////////////////////////////////////////////
+
+		double fovy = pAttr->getDouble( "fovy", 45.0 );
+		double near = pAttr->getDouble( "near", 0.1 );
+		double far = pAttr->getDouble( "far", 10000 );
+		double aspect = pAttr->getDouble( "aspect", 4.0/3.0 );
+		camera->setProjectionMatrixAsPerspective( fovy, aspect, near, far );
+
+		//////////////////////////////////////////////
+		// viewmatrix
+		//////////////////////////////////////////////
+
+		osg::Vec3 eye = pAttr->getVec3( "eye", osg::Vec3(0,0,0) );
+		osg::Vec3 center = pAttr->getVec3( "center", osg::Vec3(0,10,0.1) );
+		osg::Vec3 up = pAttr->getVec3( "up", osg::Vec3(0,0,1) );
+		camera->setViewMatrixAsLookAt( eye, center, up );
+
+		//////////////////////////////////////////////
+		// reference frame
+		//////////////////////////////////////////////
+
+		CSulString sRefFrame = pAttr->getString( "reference_frame", "RELATIVE_RF" );
+		osg::Transform::ReferenceFrame rf = osg::Transform::RELATIVE_RF;
+		if ( sRefFrame=="ABSOLUTE_RF" )
+			rf = osg::Transform::ABSOLUTE_RF;
+		else if ( sRefFrame=="ABSOLUTE_RF_INHERIT_VIEWPOINT" )
+			rf = osg::Transform::ABSOLUTE_RF_INHERIT_VIEWPOINT;
+		camera->setReferenceFrame( rf );
+	}
+
 	if ( sName=="SCREENLABEL" )
 	{
 		osg::Camera* camera = new osg::Camera;
@@ -558,6 +666,10 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 
 void CSulSceneManagerXml::elementEnd( const CSulString& sName )
 {
+	if ( sName=="CAMERA" )
+		m_vecNodeStack.pop_back();
+
+
 	if ( sName=="SCREENLABEL" )
 		m_vecNodeStack.pop_back();
 

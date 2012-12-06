@@ -320,6 +320,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GridedTextBoxes", "GridedTe
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Raymarching", "Raymarching\Raymarching.vcproj", "{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MT Static|Win32 = Debug MT Static|Win32
@@ -2234,6 +2236,26 @@ Global
 		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release MTDLL|Win32.Build.0 = Release|Win32
 		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release|Win32.ActiveCfg = Release|Win32
 		{72ADA08D-7218-4E33-8BD7-BE5BDD2E4EB6}.Release|Win32.Build.0 = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MT Static|Win32.ActiveCfg = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MT Static|Win32.Build.0 = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MT|Win32.ActiveCfg = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MT|Win32.Build.0 = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MTDLL Static|Win32.ActiveCfg = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MTDLL Static|Win32.Build.0 = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MTDLL|Win32.ActiveCfg = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug MTDLL|Win32.Build.0 = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Debug|Win32.Build.0 = Debug|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MT Static|Win32.ActiveCfg = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MT Static|Win32.Build.0 = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MT|Win32.ActiveCfg = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MT|Win32.Build.0 = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MTDLL Static|Win32.ActiveCfg = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MTDLL Static|Win32.Build.0 = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MTDLL|Win32.ActiveCfg = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release MTDLL|Win32.Build.0 = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release|Win32.ActiveCfg = Release|Win32
+		{0728140B-DCA0-41E5-ACFF-F40C5607CB5B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

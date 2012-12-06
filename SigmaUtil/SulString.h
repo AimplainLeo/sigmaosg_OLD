@@ -39,6 +39,7 @@ public:
 	sigma::int32	asInt32() const;
 	sigma::int64	asInt64() const;
 	bool			asBool() const;
+	osg::Vec3		asVec3() const;
 	osg::Vec4		asVec4() const;
 
 	CSulString		char2hex( char dec ) const;

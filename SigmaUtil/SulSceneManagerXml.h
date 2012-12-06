@@ -55,6 +55,10 @@ protected:
 
 	typedef std::map< CSulString, osg::ref_ptr<osg::Uniform> >	MAP_UNIFORM;
 	MAP_UNIFORM													m_mapUniform;
+
+public:
+	typedef std::vector< osg::ref_ptr<osg::Node> >				VEC_ROOTNODES;
+	VEC_ROOTNODES												m_vecRootNodes;
 };
 
 #endif // __SULSCENEMANAGERXML_H__

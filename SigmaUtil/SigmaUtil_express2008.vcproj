@@ -2176,6 +2176,10 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Raymarching"
+				>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

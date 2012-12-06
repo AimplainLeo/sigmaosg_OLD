@@ -45,7 +45,12 @@ public:
 
 	float			getFloat( const CSulString& sName, float defaultValue );
 	sigma::uint32	getUint32( const CSulString& sName, sigma::uint32 defaultValue );
+	sigma::int32	getInt32( const CSulString& sName, sigma::int32 defaultValue );
 	bool			getBool( const CSulString& sName, bool defaultValue );
+	CSulString		getString( const CSulString& sName, bool defaultValue );
+	osg::Vec3		getVec3( const CSulString& sName, osg::Vec3 defaultValue );
+	osg::Vec4		getVec4( const CSulString& sName, osg::Vec4 defaultValue );
+	double			getDouble( const CSulString& sName, double defaultValue );
 
 	bool			exist( const CSulString& sName );
 
