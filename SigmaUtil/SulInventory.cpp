@@ -92,6 +92,7 @@ void CSulInventory::add( CSulInventoryItem* item )
 	addChild( item->getMatrixTransform() );
 	m_vecItems.push_back( item );
 	calcWheel();
+	snap();
 }
 
 void CSulInventory::remove( CSulInventoryItem* item )
@@ -105,6 +106,7 @@ void CSulInventory::remove( CSulInventoryItem* item )
 	m_vecItems.erase( iFound );
 
 	calcWheel();
+	snap();
 }
 
 void CSulInventory::calcWheel()
