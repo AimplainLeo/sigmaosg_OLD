@@ -96,6 +96,8 @@ void CSulInventory::add( CSulInventoryItem* item )
 
 void CSulInventory::remove( CSulInventoryItem* item )
 {
+	m_iCurrentIndex = 0;
+
 	removeChild( item->getMatrixTransform() );
 
 	VEC_ITEMS::iterator iFound = std::find( m_vecItems.begin(), m_vecItems.end(), item );
