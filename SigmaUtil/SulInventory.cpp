@@ -92,105 +92,7 @@ void CSulInventory::add( CSulInventoryItem* item )
 	addChild( item->getMatrixTransform() );
 	m_vecItems.push_back( item );
 	calcWheel();
-// SulInventory.cpp
-
-#include "stdafx.h"
-#include "SulInventory.h"
-#include "SulInventoryUpdateCallback.h"
-
-CSulInventory::CSulInventory( CSulInventory* parent ) :
-m_dist( 1.0f ),
-m_iTargetIndex(0),
-m_fWheelRotAng(0.0f),
-m_iRotDir(0),
-m_iCurrentIndex(0),
-m_distFactor(1.0)
-{
-	m_inventoryParent = parent;
-
-	addUpdateCallback( new CSulInventoryUpdateCallback( this ) );
-
-	m_pos.set( 0.0f, 3.0f, -0.5f );
-
-	osg::Matrix m;
-	m.makeTranslate( m_pos );
-	setMatrix( m );
-
-	setNodeMask( 0 );
-}
-
-CSulInventory* CSulInventory::getParentInventory()
-{
-	return m_inventoryParent;
-}
-
-void CSulInventory::setDistanceFactor( double factor )
-{
-	m_distFactor = factor;
-	calcWheel();
-}
-
-void CSulInventory::show()
-{
-	setNodeMask( 0xFFFFFFFF );
-}
-
-void CSulInventory::hide()
-{
-	setNodeMask( 0 );
-}
-
-void CSulInventory::toggle()
-{
-	setNodeMask( getNodeMask()?0:0xFFFFFFFF );
-}
-
-bool CSulInventory::isVisible()
-{
-	return getNodeMask()?true:false;
-}
-
-sigma::int32 CSulInventory::count()
-{
-	return m_vecItems.size();
-}
-
-void CSulInventory::rotateRight()
-{
-	// already rotating
-	if ( m_iRotDir==1 )
-	{
-		m_iTargetIndex++;
-		return;
-	}
-
-	m_iRotDir = 1;
-	m_iTargetIndex = 1;
-}
-
-void CSulInventory::rotateLeft()
-{
-	// already rotating
-	if ( m_iRotDir==-1 )
-	{
-		m_iTargetIndex++;
-		return;
-	}
-
-	m_iRotDir = -1;
-	m_iTargetIndex = 1;
-}
-
-void CSulInventory::add( CSulInventoryItem* item )
-{
-	addChild( item->getMatrixTransform() );
-	m_vecItems.push_back( item );
-	calcWheel();
 	snap();
-}
-
-void CSulInventory::remove( CSulInventoryItem* item )
-{
 }
 
 void CSulInventory::remove( CSulInventoryItem* item )
@@ -204,6 +106,7 @@ void CSulInventory::remove( CSulInventoryItem* item )
 	m_vecItems.erase( iFound );
 
 	calcWheel();
+	snap();
 }
 
 void CSulInventory::calcWheel()
