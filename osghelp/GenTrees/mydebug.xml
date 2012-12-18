@@ -25,11 +25,26 @@
     suby="5"
   />
 
+  <!--
   <SHAPE_QUAD
     w="200"
     h="200"
     offsetz="5"
     renderme="false"
+  />
+  -->
+  
+
+  <SHAPE_LINE
+    p0="0,0,0"
+    p1="200,200,0"
+    renderme="true"
+  />
+
+  <SHAPE_LINE
+    p0="0,0,0"
+    p1="200,-200,0"
+    renderme="true"
   />
 
   <SHADER type="vertex"   file="shaders/funcTree.vert"/>

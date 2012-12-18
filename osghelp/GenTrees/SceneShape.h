@@ -11,6 +11,8 @@ public:
 	CSceneShape( const CSulString& sfile, bool bRenderMe );
 
 	CSceneShape( float w, float h, bool bRenderMe );
+
+	CSceneShape( const osg::Vec3& p0, const osg::Vec3& p1, bool bRenderMe );
 };
 
 #endif // __SCENESHAPE_H__

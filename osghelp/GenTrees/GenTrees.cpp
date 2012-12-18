@@ -645,7 +645,7 @@ int _tmain( int argc, char** argv )
 
 		rRoot->addChild( rXml->getSceneTerrain() );
 
-		if ( rXml->getSceneShape()->isRenderMe() )
+		if ( rXml->getSceneShape() && rXml->getSceneShape()->isRenderMe() )
 		{
 			rRoot->addChild( rXml->getSceneShape() );
 		}

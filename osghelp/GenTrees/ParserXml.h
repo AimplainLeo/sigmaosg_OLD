@@ -81,6 +81,9 @@ private:
 	void				loadFinished();
 
 private:
+	typedef std::vector< osg::ref_ptr<CSceneShape> >	VEC_SHAPES;
+	VEC_SHAPES											m_vecShapes;
+
 	VEC_SHAPEMASK								m_vecShapeMasks;
 	
 	bool										m_bSuppressTextureTree;

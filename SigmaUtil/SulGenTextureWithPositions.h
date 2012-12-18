@@ -40,6 +40,9 @@ private:
 	void	processMaskLines( CSulGenPositionMask* pMask );
 	void	processMaskTri( CSulGenPositionMask* pMask );
 	void	processTexture();
+	void	processCleanup();
+
+	bool	isProximityLess( const osg::Vec3& point, float dist, sigma::VEC_VEC3::iterator i, sigma::VEC_VEC3::iterator ie );
 
 private:
 	osg::ref_ptr<osg::PositionAttitudeTransform>		m_rSceneTerrain;
@@ -48,7 +51,7 @@ private:
 	float							m_radius;						// radius between trees on a patch
 	float							m_distance_between_trees_line;	// distance between trees on a line
 	float							m_areaPadding;
-	sigma::VEC_VEC3					m_vecPos;						// positions are in world space
+	sigma::VEC_VEC3					m_vecPos;						// position of all trees, positions are in world space
 	sigma::uint32					m_texSizeSquared;
 	osg::ref_ptr<osg::Image>		m_rImage;
 	sigma::uint32					m_posCount;

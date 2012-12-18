@@ -135,6 +135,20 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSul
 		m_vecBoundingBoxPlanes = m_rSceneTerrain->getBoundingBoxPlanes();
 	}
 
+	if ( sName=="SHAPE_LINE" )
+	{
+		bool bRenderMe	= pAttr->getBool( "renderme", false );
+		osg::Vec3 p0	= pAttr->getVec3( "p0", osg::Vec3(0,0,0) );
+		osg::Vec3 p1	= pAttr->getVec3( "p1", osg::Vec3(0,0,0) );
+
+		CSceneShape* shape = new CSceneShape( p0, p1, bRenderMe );
+
+		// clip shape to scenes boundingbox planes
+		shape->clip( m_vecBoundingBoxPlanes );
+
+		m_vecShapes.push_back( shape );
+	}
+
 	if ( sName=="SHAPE_QUAD" )
 	{
 		float w = pAttr->get( "w" ).asFloat();
@@ -208,7 +222,8 @@ void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSul
 	if ( sName=="TREE" )
 	{
 		m_radiusBetweenTrees = pAttr->get( "radius_between_trees" ).asFloat();
-		m_distance_between_trees_line = pAttr->get( "distance_between_trees_line" ).asFloat();
+		//m_distance_between_trees_line = pAttr->get( "distance_between_trees_line" ).asFloat();
+		m_distance_between_trees_line = pAttr->getFloat( "distance_between_trees_line", 2.0f );
 
 		m_minTree = pAttr->get( "min" ).asFloat();
 		m_maxTree = pAttr->get( "max" ).asFloat();
@@ -289,10 +304,30 @@ void CParserXml::loadFinished()
 		++i;
 	}
 
+	// linelist for itself from all scenshapes
+	// trianglelist for itself from all sceneshapes
+	sigma::VEC_LINESEGMENT vecLineSegments;
+	sigma::VEC_TRI vecTriangles;
+	if ( m_rSceneShape.valid() )
+	{
+		vecTriangles.insert( vecTriangles.end(), m_rSceneShape->getClippedTriangleList().begin(), m_rSceneShape->getClippedTriangleList().end() );
+		vecLineSegments.insert( vecLineSegments.end(), m_rSceneShape->getClippedLineList().begin(), m_rSceneShape->getClippedLineList().end() );
+	}
+
+	VEC_SHAPES::iterator ii = m_vecShapes.begin();
+	VEC_SHAPES::iterator iie = m_vecShapes.end();
+	while ( ii!=iie )
+	{
+		vecTriangles.insert( vecTriangles.end(), (*ii)->getClippedTriangleList().begin(), (*ii)->getClippedTriangleList().end() );
+		vecLineSegments.insert( vecLineSegments.end(), (*ii)->getClippedLineList().begin(), (*ii)->getClippedLineList().end() );
+
+		++ii;
+	}
+
 	m_gen = new CSulGenTextureWithPositions(
 		m_rSceneTerrain.valid()?m_rSceneTerrain->getPat():0,
-		m_rSceneShape->getClippedLineList(),
-		m_rSceneShape->getClippedTriangleList(),
+		vecLineSegments,
+		vecTriangles,
 		m_radiusBetweenTrees,
 		m_distance_between_trees_line,
 		m_areaPadding,

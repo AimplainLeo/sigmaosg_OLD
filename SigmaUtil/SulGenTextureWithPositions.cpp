@@ -55,7 +55,52 @@ void CSulGenTextureWithPositions::process()
 	processLines();
 	processTriangles();
 	processMasks();
+	processCleanup();
 	processTexture();
+}
+
+bool CSulGenTextureWithPositions::isProximityLess( const osg::Vec3& point, float dist, sigma::VEC_VEC3::iterator i, sigma::VEC_VEC3::iterator ie )
+{
+	if ( i==m_vecPos.end() )
+		return false;
+
+	while ( i!=ie )
+	{
+		osg::Vec3& otherPoint = (*i);
+
+		osg::Vec3 d = point-otherPoint;
+
+		if ( d.length()<dist )
+			return true;
+
+		++i;
+	}
+
+	return false;
+}
+
+// remove any trees that should happen to be to close to each other
+// this usually happens with shape files that have line segments
+void CSulGenTextureWithPositions::processCleanup()
+{
+	float min_dist = m_radius;
+
+	sigma::VEC_VEC3::iterator i = m_vecPos.begin();
+	sigma::VEC_VEC3::iterator ie = m_vecPos.end();
+
+	while ( i!=ie )
+	{
+		osg::Vec3& point = (*i);
+
+		if ( isProximityLess( point, min_dist, i+1, ie ) )
+		{
+			i = m_vecPos.erase( i );
+			ie = m_vecPos.end();
+			continue;
+		}
+
+		++i;
+	}
 }
 
 void CSulGenTextureWithPositions::processLine( osg::LineSegment* pLine )
@@ -72,37 +117,45 @@ void CSulGenTextureWithPositions::processLine( osg::LineSegment* pLine )
 
 	if ( m_rSceneTerrain.valid() )
 	{
-		// HACK: the +1 fills in the last spot on the line segment
-		// apparently the math to calculate the number of trees isnt' right :(
-		for ( sigma::uint32 i=0; i<numTrees+1; i++ )
+		if ( numTrees )
 		{
-			float z = 0.0f;
-			osg::Vec3 plant_pos = pLine->start() + vSeg*(spc*i);
-		
-			// we need to calculate a true z position
-			// plant_pos is local to scene
-			osg::LineSegment* ls = new osg::LineSegment;
-			osg::Vec3 s = plant_pos;
-			osg::Vec3 e = plant_pos;
-			s.z() = 1000.0f;
-			e.z() = -1000.0f;
-			ls->set( s, e );
-
-			osgUtil::IntersectVisitor iv;
-			iv.addLineSegment( ls );
-			m_rSceneTerrain->accept( iv );
-			if ( iv.hits() )
+			// HACK: the +1 fills in the last spot on the line segment
+			// apparently the math to calculate the number of trees isnt' right :(
+			for ( sigma::uint32 i=0; i<numTrees+1; i++ )
 			{
-				osgUtil::IntersectVisitor::HitList hitList = iv.getHitList( ls );
-				osg::Vec3 hit = hitList[0].getWorldIntersectPoint();
+				float z = 0.0f;
+				osg::Vec3 plant_pos = pLine->start() + vSeg*(spc*i);
+			
+				// we need to calculate a true z position
+				// plant_pos is local to scene
+				osg::LineSegment* ls = new osg::LineSegment;
+				osg::Vec3 s = plant_pos;
+				osg::Vec3 e = plant_pos;
+				s.z() = 1000.0f;
+				e.z() = -1000.0f;
+				ls->set( s, e );
 
-				z = hit.z(); 
+				osgUtil::IntersectVisitor iv;
+				iv.addLineSegment( ls );
+				m_rSceneTerrain->accept( iv );
+				if ( iv.hits() )
+				{
+					osgUtil::IntersectVisitor::HitList hitList = iv.getHitList( ls );
+					osg::Vec3 hit = hitList[0].getWorldIntersectPoint();
 
-				m_vecPos.push_back( osg::Vec3(plant_pos.x(), plant_pos.y(), z) );
-			}
-			else
-			{
-				osg::notify(osg::NOTICE) << "missed (line)" << std::endl;
+					z = hit.z(); 
+
+					m_vecPos.push_back( osg::Vec3(plant_pos.x(), plant_pos.y(), z) );
+				}
+				else
+				{
+					m_vecPos.push_back( osg::Vec3(
+						s.x(), 
+						s.y(), 
+						0.0f 
+					));
+					osg::notify(osg::NOTICE) << "missed (line)" << std::endl;
+				}
 			}
 		}
 	}
