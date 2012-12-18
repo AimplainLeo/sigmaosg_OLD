@@ -3,19 +3,19 @@
   no_geo="true"
   >
 
-  <TEXTURE_TREE 
+  <TEXTURE_TREE
     suppress="false"
     unit="0"
   />
-  
-  <TREE 
-    sizemultiplier="4.0" 
-    radius_between_trees="0.1"
+
+  <TREE
+    sizemultiplier="4.0"
+    radius_between_trees="1.0"
     min="3.0"
     max="5.0"
   />
-  
-  <TERRAIN 
+
+  <TERRAIN
     debug="true"
     gridx="2"
     gridy="2"
@@ -32,33 +32,6 @@
     renderme="false"
   />
 
-  <CELL
-    debug="true"
-    cx="5"
-    cy="5"
-    lod_dist_min="0"
-    lod_dist_max="512"
-    json="
-            [
-              {
-                'level'     : 1,
-                'texW'      : 512,
-                'texH'      : 256,
-                'minRange'  : 512,
-                'maxRange'  : 1024
-              },
-              {
-                'level'     : 2,
-                'texW'      : 64,
-                'texH'      : 32,
-                'minRange'  : 1024,
-                'maxRange'  : 8192
-              }
-            ]"
-  />
-  
- 
-
   <SHADER type="vertex"   file="shaders/funcTree.vert"/>
   <SHADER type="vertex"   file="shaders/funcLightingOpenGL.vert"/>
   <SHADER type="vertex"   file="shaders/funcLighting.vert"/>
@@ -67,15 +40,11 @@
   <SHADER type="fragment" file="shaders/funcLightingOpenGL.frag"/>
   <SHADER type="vertex"   file="shaders/main_standard.vert"/>
   <SHADER type="fragment" file="shaders/main_standard.frag"/>
-  
+
   <OUTPUT file="myass.ive" />
-  
+
   <VIEWER suppress="false" />
-  
-  <DEBUGGING 
-    showpivots="false"
-  />
-  
+
+  <DEBUGGING showpivots="false" />
+
 </GEN>
-
-

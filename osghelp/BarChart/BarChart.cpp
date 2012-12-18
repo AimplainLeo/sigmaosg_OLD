@@ -18,6 +18,9 @@ osg::Node* CreateScene()
 	p->setBarSize( 1, 200 );
 	p->setBarSize( 2, 300 );
 
+	// turn off lighting
+	p->getOrCreateStateSet()->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+
 	return p;
 }
 
@@ -26,7 +29,7 @@ int _tmain(int argc, _TCHAR* argv[])
     // construct the viewer
     osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
 
-    // make the viewer create a 512x512 window and position it at 32, 32
+    // make the viewer create window and position it
     viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render

@@ -533,7 +533,12 @@ int _tmain( int argc, char** argv )
 	{
 		rXml->SetOutputFileOverride(outputfile);
 	}
-	rXml->load( xmlFile );
+	
+	if ( !rXml->load( xmlFile ) )
+	{
+		std::cout << "ERROR: could not load xml file" << std::endl;
+		return -1;
+	}
 
 	rXml->getSceneTerrain()->getPat()->addChild( rTreeContainer );
 

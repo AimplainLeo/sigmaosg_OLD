@@ -29,7 +29,7 @@ public:
 public:
 						CParserXml();
 
-	void				elementStart( const CSulString& sName, CSulXmlAttr* pAttr );
+	void				elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData );
 
 	const VEC_UNIFORMDATA&		getUniformDataList();
 

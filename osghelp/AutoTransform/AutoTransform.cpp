@@ -72,7 +72,7 @@ osg::Node* CreateAutoTransform( float x, float y, float z, float scale )
 	return pAutoTransform;
 }
 
-osg::Node* CreateScene()
+osg::Node* createScene()
 {
 	osg::Group* pGroup = new osg::Group;
 
@@ -94,11 +94,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	// construct the viewer
 	osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
 
-	// make the viewer create a 512x512 window and position it at 32, 32
+	// make the viewer create a window and position it
 	viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
 	// set the scene-graph data the viewer will render
-	viewer->setSceneData( CreateScene() );
+	viewer->setSceneData( createScene() );
 
 	// execute main loop
 	return viewer->run();

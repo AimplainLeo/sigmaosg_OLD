@@ -189,6 +189,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\mydebug.xml"
+				>
+			</File>
+			<File
 				RelativePath=".\ParserXml.cpp"
 				>
 			</File>

@@ -122,6 +122,7 @@ void CSulGenTextureWithPositions::processLine( osg::LineSegment* pLine )
 void CSulGenTextureWithPositions::processLines()
 {
 	sigma::VEC_LINESEGMENT::const_iterator i;
+
 	i = m_vecLine.begin();
 	while ( i!=m_vecLine.end() )
 	{

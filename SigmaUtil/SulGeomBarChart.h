@@ -15,7 +15,7 @@ private:
 public:
 					CSulGeomBarChart();
 
-					sigma::uint32	createBar( const CSulString& name, const osg::Vec4& color=osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) );
+	sigma::uint32	createBar( const CSulString& name, const osg::Vec4& color=osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f), float zBiasText=-0.1f );
 
 	void			setBarSize( sigma::uint32 index, float size );
 

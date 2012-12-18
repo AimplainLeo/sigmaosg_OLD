@@ -15,14 +15,14 @@ m_h( 20.0f )
 {
 }
 
-sigma::uint32 CSulGeomBarChart::createBar( const CSulString& name, const osg::Vec4& color )
+sigma::uint32 CSulGeomBarChart::createBar( const CSulString& name, const osg::Vec4& color, float zBiasText )
 {
 	osgText::Text* t = new osgText::Text;
 	t->setDataVariance( osg::Object::DYNAMIC );		// FIXME: the code should be able to choose this
 	t->setCharacterSize( m_h );
 	t->setFont( "Tempest.ttf" );
 	t->setText( name );
-	t->setPosition( osg::Vec3(5, -(m_vecBar.size()*(m_h+2.0f))-6, 0.0f) );
+	t->setPosition( osg::Vec3(5, -(m_vecBar.size()*(m_h+2.0f))-6, zBiasText) );
 	t->setColor( osg::Vec4(1,1,1,1) );
 
 	osg::Geode* pGeode = new osg::Geode;

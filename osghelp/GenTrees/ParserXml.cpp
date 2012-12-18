@@ -24,7 +24,7 @@ m_eTreeType( TREETYPE_CROSSQUAD )
 {
 }
 
-void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr )
+void CParserXml::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData )
 {
 	if ( sName=="CELL" )
 	{

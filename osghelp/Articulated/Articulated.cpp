@@ -43,11 +43,11 @@ osg::MatrixTransform* AddMatrixTransform( osg::Node* pNode )
 		osg::ref_ptr<osg::Node> pNodeTmp = pNode;
 
 		// remove pNode from parent
-		pGroup->removeChild( pNodeTmp.get() );
+		pGroup->removeChild( pNodeTmp );
 
 		// create matrixtransform and do connections
 		osg::MatrixTransform* pMT = new osg::MatrixTransform;
-		pMT->addChild( pNodeTmp.get() );
+		pMT->addChild( pNodeTmp );
 		pGroup->addChild( pMT );
 		return pMT;
 	}
@@ -59,50 +59,38 @@ osg::Node* createScene()
 {
 	// load our model
 	std::string file = osgDB::findDataFile( "htest.3ds" );
-	if ( file.empty() )
-		return 0;
-	
-	osg::Node* pModel =  osgDB::readNodeFile( file );
+	osg::Node* model =  osgDB::readNodeFile( file );
 
 	// find the node for the cannon
-	osg::Node* pFound = FindNodeByName( pModel, "LOD01_g6_c" );
+	osg::Node* found = FindNodeByName( model, "LOD01_g6_c" );
 
 	// add a matrixtransform to the cannon
-	osg::MatrixTransform* pMT = AddMatrixTransform( pFound );
+	osg::MatrixTransform* mt = AddMatrixTransform( found );
 
 	// create simple animation path to demostrate transformation
-	osg::ref_ptr<osg::AnimationPath> rPath = new osg::AnimationPath;
-	rPath->setLoopMode( osg::AnimationPath::SWING );
+	osg::ref_ptr<osg::AnimationPath> path = new osg::AnimationPath;
+	path->setLoopMode( osg::AnimationPath::SWING );
 	osg::AnimationPath::ControlPoint c0(osg::Vec3(0,0,0), osg::Quat(0, osg::Vec3(1,0,0)) );
 	osg::AnimationPath::ControlPoint c1(osg::Vec3(0,0,0), osg::Quat(osg::PI/6.0f, osg::Vec3(1,0,0))); 
-	rPath->insert( 0.0f, c0 );
-	rPath->insert( 4.0f, c1 );
-	osg::ref_ptr<osg::AnimationPathCallback> rAniCallback = new osg::AnimationPathCallback( rPath.get() );
-	pMT->setUpdateCallback( rAniCallback.get() );
+	path->insert( 0.0f, c0 );
+	path->insert( 4.0f, c1 );
+	osg::ref_ptr<osg::AnimationPathCallback> cb = new osg::AnimationPathCallback( path );
+	mt->setUpdateCallback( cb );
 
-
-	return pModel;
+	return model;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
     // construct the viewer
-    osg::ref_ptr<osgViewer::Viewer> rViewer = new osgViewer::Viewer;
+    osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
 
-    // make the viewer create a 512x512 window and position it at 32, 32
-    rViewer->setUpViewInWindow( 32, 32, 512, 512 );
+    // make the viewer create a window and position it
+    viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render
-	osg::Node* pNode = createScene();
-	if ( pNode )
-	{
-		rViewer->setSceneData( pNode );
-	}
-	else
-	{
-		std::cout << "WARNING: scene not created. Perhaps a missing file" << std::endl;
-	}
+	viewer->setSceneData( createScene() );
 
     // execute main loop
-    return rViewer->run();
+    return viewer->run();
 }

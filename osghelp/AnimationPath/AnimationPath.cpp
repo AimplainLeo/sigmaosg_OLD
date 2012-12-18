@@ -7,25 +7,25 @@
 #include <osg/matrixtransform>
 #include <osg/ShapeDrawable>
 
-osg::Node* CreateScene()
+osg::Node* createScene()
 {
-    osg::Geode* pGeode = new osg::Geode();
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Box(osg::Vec3(0.0f,0.0f,0.0f),2.0f) ) );
+    osg::Geode* geode = new osg::Geode();
+    geode->addDrawable( new osg::ShapeDrawable( new osg::Box(osg::Vec3(0.0f,0.0f,0.0f),2.0f) ) );
 
-    osg::MatrixTransform* pMatTrans = new osg::MatrixTransform;
-    pMatTrans->addChild( pGeode );
+	osg::MatrixTransform* mt = new osg::MatrixTransform;
+    mt->addChild( geode );
     
-	osg::ref_ptr<osg::AnimationPath> rPath = new osg::AnimationPath;
-	rPath->setLoopMode( osg::AnimationPath::SWING );
-	osg::AnimationPath::ControlPoint c0(osg::Vec3(-1,0,0));
-	osg::AnimationPath::ControlPoint c1(osg::Vec3( 1,0,0));
-	rPath->insert( 0.0f, c0 );
-	rPath->insert( 2.0f, c1 );
-	
-	osg::ref_ptr<osg::AnimationPathCallback> rAniCallback = new osg::AnimationPathCallback( rPath.get() );
-	pMatTrans->setUpdateCallback( rAniCallback.get() );
+	osg::ref_ptr<osg::AnimationPath> path = new osg::AnimationPath;
+	path->setLoopMode( osg::AnimationPath::SWING );
+	osg::AnimationPath::ControlPoint pointA(osg::Vec3(-1,0,0));
+	osg::AnimationPath::ControlPoint pointB(osg::Vec3( 1,0,0));
+	path->insert( 0.0f, pointA );
+	path->insert( 2.0f, pointB );
 
-    return pMatTrans;
+	osg::ref_ptr<osg::AnimationPathCallback> cb = new osg::AnimationPathCallback( path );
+	mt->setUpdateCallback( cb );
+
+    return mt;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -33,11 +33,11 @@ int _tmain(int argc, _TCHAR* argv[])
     // construct the viewer
     osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
 
-    // make the viewer create a 512x512 window and position it at 32, 32
-    viewer->setUpViewInWindow( 32, 32, 512, 512 );
+    // make the viewer create a window and position it
+	viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render
-    viewer->setSceneData( CreateScene() );
+    viewer->setSceneData( createScene() );
 
     // execute main loop
     return viewer->run();
