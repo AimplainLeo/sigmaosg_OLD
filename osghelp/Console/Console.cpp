@@ -41,14 +41,14 @@ int _tmain(int argc, _TCHAR* argv[])
     rViewer->setUpViewInWindow( 32, 32, 512, 512 );
 
 	// create a console
-	osg::ref_ptr<CSulConsoleDisplay> rConsoleDisplay = new CSulConsoleDisplay( rViewer.get() );
+	osg::ref_ptr<CSulConsoleDisplay> rConsoleDisplay = new CSulConsoleDisplay( rViewer );
 	rConsoleDisplay->Init();
 	
 	osg::Group* pGroup = new osg::Group;
 	pGroup->addChild( rConsoleDisplay->GetNode() );
 
 	// create object to receive console commands
-	osg::ref_ptr<CMyTestClass> rTest = new CMyTestClass( rConsoleDisplay.get(), pGroup, rViewer.get() );
+	osg::ref_ptr<CMyTestClass> rTest = new CMyTestClass( rConsoleDisplay, pGroup, rViewer );
 
     // set the scene-graph data the viewer will render
     rViewer->setSceneData( pGroup );
