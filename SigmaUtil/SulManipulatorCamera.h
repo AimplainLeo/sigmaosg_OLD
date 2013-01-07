@@ -3,9 +3,9 @@
 #ifndef __SULMANIPULATORCAMERA_H__
 #define __SULMANIPULATORCAMERA_H__
 
-#include <osgGA/MatrixManipulator>
+#include <osgGA/CameraManipulator>
 
-class CSulManipulatorCamera : public osgGA::MatrixManipulator
+class CSulManipulatorCamera : public osgGA::CameraManipulator
 {
 public:
 				CSulManipulatorCamera();

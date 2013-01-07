@@ -9,7 +9,7 @@
 #define BOX_SIZE	(10)
 #define BOX_SPACING	(3)
 
-class CMyCameraManipulator : public osgGA::MatrixManipulator
+class CMyCameraManipulator : public osgGA::CameraManipulator
 {
 public:
 	CMyCameraManipulator() :
