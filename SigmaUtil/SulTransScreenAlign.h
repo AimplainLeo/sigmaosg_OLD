@@ -9,11 +9,12 @@
 class SUL_EXPORT CSulTransScreenAlign : public osg::Referenced
 {
 public:
+										CSulTransScreenAlign( float left, float right, float bottom, float top );
 										CSulTransScreenAlign( float w, float h );
 
-	void								AddChild( osg::Node* pNode );
-	osg::MatrixTransform*				GetMatrixTransform();
-	osg::Projection*					GetProjection();
+	void								addChild( osg::Node* pNode );
+	osg::MatrixTransform*				getMatrixTransform();
+	osg::Projection*					getProjection();
 
 private:
 	osg::ref_ptr<osg::MatrixTransform>	m_rTrans;

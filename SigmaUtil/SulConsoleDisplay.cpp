@@ -61,11 +61,11 @@ void CSulConsoleDisplay::Init()
     m_rGeode = new osg::Geode;
 
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( m_w, m_h );
-	rAlign->AddChild( m_rGeode );
-	rAlign->AddChild( m_rQuad );
+	rAlign->addChild( m_rGeode );
+	rAlign->addChild( m_rQuad );
 
 	// save node so it can be added to a scene
-	m_rNode = rAlign->GetProjection();
+	m_rNode = rAlign->getProjection();
 
 	// create an animation path that allows us to scroll the display up and down
 	osg::AnimationPath::ControlPoint c0(osg::Vec3(0,0,0));
@@ -76,7 +76,7 @@ void CSulConsoleDisplay::Init()
 	m_rAniPathCallback = new CSulAnimationPathCallback;
 	m_rPath->setLoopMode( osg::AnimationPath::NO_LOOPING );
 	m_rAniPathCallback->SetPath( m_rPath.get() );
-	rAlign->GetMatrixTransform()->addUpdateCallback( m_rAniPathCallback.get() );
+	rAlign->getMatrixTransform()->addUpdateCallback( m_rAniPathCallback.get() );
 	
 	// create a text we will use for input
 	m_rText = new osgText::Text;

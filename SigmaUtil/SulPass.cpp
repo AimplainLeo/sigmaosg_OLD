@@ -26,9 +26,9 @@ CSulGeomQuad* CSulPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut,
 
 	// the quad must be aligned to the RTT camera and cover it completly
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( texW, texH );
-	rAlign->AddChild( m_rQuad );
+	rAlign->addChild( m_rQuad );
 
-	m_rTexCam->addChild( rAlign->GetProjection() );
+	m_rTexCam->addChild( rAlign->getProjection() );
 
 	return m_rQuad;
 }

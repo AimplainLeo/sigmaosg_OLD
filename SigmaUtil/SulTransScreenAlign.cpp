@@ -3,6 +3,22 @@
 #include "stdafx.h"
 #include "SulTransScreenAlign.h"
 
+CSulTransScreenAlign::CSulTransScreenAlign( float left, float right, float bottom, float top )
+{
+	// make our quad screen aligned
+	m_rTrans = new osg::MatrixTransform;
+	m_rTrans->setName( "CSulTransScreenAlign-T" );
+	m_rTrans->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
+	m_rTrans->setMatrix( osg::Matrix::identity() );
+	
+	// make our quad aligned to an ortho view
+	m_rProj = new osg::Projection();
+	m_rProj->setName( "CSulTransScreenAlign-P" );
+	osg::Matrixd mOrtho = osg::Matrix::ortho2D( left, right, bottom, top );
+	m_rProj->addChild( m_rTrans.get() );
+	m_rProj->setMatrix( mOrtho );
+}
+
 CSulTransScreenAlign::CSulTransScreenAlign( float w, float h )
 {
 	// make our quad screen aligned
@@ -19,17 +35,17 @@ CSulTransScreenAlign::CSulTransScreenAlign( float w, float h )
 	m_rProj->setMatrix( mOrtho );
 }
 
-void CSulTransScreenAlign::AddChild( osg::Node* pNode )
+void CSulTransScreenAlign::addChild( osg::Node* pNode )
 {
 	m_rTrans->addChild( pNode );
 }
 
-osg::MatrixTransform* CSulTransScreenAlign::GetMatrixTransform()
+osg::MatrixTransform* CSulTransScreenAlign::getMatrixTransform()
 {
 	return m_rTrans;
 }
 
-osg::Projection* CSulTransScreenAlign::GetProjection()
+osg::Projection* CSulTransScreenAlign::getProjection()
 {
 	return m_rProj;
 }

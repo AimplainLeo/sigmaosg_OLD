@@ -26,9 +26,9 @@ osg::Group* CSulFilterPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTex
 
 	// the quad must be aligned to the RTT camera and cover it completely
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( texW, texH );
-	rAlign->AddChild( m_rGroup );
+	rAlign->addChild( m_rGroup );
 
-	m_rTexCam->addChild( rAlign->GetProjection() );
+	m_rTexCam->addChild( rAlign->getProjection() );
 
 	return m_rGroup;
 }
