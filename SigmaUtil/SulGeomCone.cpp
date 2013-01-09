@@ -20,6 +20,12 @@ m_colorBottom( 1,1,1,1 )
 	getOrCreateStateSet()->setAttributeAndModes( cull, osg::StateAttribute::ON );
 }
 
+void CSulGeomCone::setColor( const osg::Vec4& color )
+{
+	setColorBottom( color );
+	setColorTop( color );
+}
+
 void CSulGeomCone::setColorBottom( const osg::Vec4& color )
 {
 	m_colorBottom = color;

@@ -15,6 +15,7 @@ public:
 	// stacks : The number of subdivisions along the Z axis
 	CSulGeomCone( float len, float radiusBottom, float radiusTop, sigma::uint32 slices=16, sigma::uint32 stacks=1 );
 
+	void setColor( const osg::Vec4& color );
 	void setColorBottom( const osg::Vec4& color );
 	void setColorTop( const osg::Vec4& color );
 

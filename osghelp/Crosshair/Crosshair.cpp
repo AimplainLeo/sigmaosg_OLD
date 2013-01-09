@@ -5,12 +5,23 @@
 #include <osgViewer/Viewer>
 #include <SigmaUtil/SulGeodeCrosshairs.h>
 #include <SigmaUtil/SulTransScreenAlign.h>
-
+#include <SigmaUtil/SulGeomCone.h>
 #include <osg/matrixtransform>
 
 osg::Node* createScene()
 {
+	// make sure our scope parts are screen aligned
 	CSulTransScreenAlign* align = new CSulTransScreenAlign( -256, 256, -256, 256 );
+
+	// create simple scope with a hole in it
+	float radiusTop = 256.0f;
+	float radiusBottom = 500.0f;
+	sigma::uint16 slices = 64;
+	CSulGeomCone* cone = new CSulGeomCone( 1, radiusBottom, radiusTop, slices );
+	cone->setColor( osg::Vec4(0,0,0,0) );
+	align->addChild( cone );
+
+	// create sights and tick marks
 	align->addChild( new CSulGeodeCrosshairs( CSulGeodeCrosshairs::TYPE_M99, 512.0f ) );
 	return align->getProjection();
 }
