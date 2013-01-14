@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "SulFile.h"
+#include <osgDB/FileUtils>
 
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -23,6 +24,10 @@
 
 bool CSulFile::Open( CSulString sFile, EMODE eMode )
 {
+	CSulString fileFound = osgDB::findDataFile( sFile );
+	if ( fileFound.empty() )
+		return false;
+
 	CSulString	sMode;
 	switch ( eMode )
 	{
@@ -35,7 +40,7 @@ bool CSulFile::Open( CSulString sFile, EMODE eMode )
 
 	errno_t			err;
 
-	err = fopen_s( &m_pFile, sFile.c_str(), sMode.c_str() );
+	err = fopen_s( &m_pFile, fileFound.c_str(), sMode.c_str() );
 	if ( err )
 	{
 		return false;
@@ -121,7 +126,11 @@ sigma::uint8* CSulFile::Load( const CSulString& sFile )
 
 	if ( !pFile )
 	{
-		err = fopen_s( &pFile, sFile.c_str(), "rb" );
+		CSulString fileFound = osgDB::findDataFile( sFile );
+		if ( fileFound.empty() )
+			return false;
+
+		err = fopen_s( &pFile, fileFound.c_str(), "rb" );
 		if ( err )
 		{
 			return 0;

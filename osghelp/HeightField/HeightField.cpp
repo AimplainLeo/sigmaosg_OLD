@@ -6,7 +6,7 @@
 #include <osg/ShapeDrawable>
 #include <SigmaUtil/SulPlasma.h>
  
-osg::Node* CreateScene()
+osg::Node* createScene()
 {
 	int x = 256;
 	int y = 256;
@@ -17,16 +17,12 @@ osg::Node* CreateScene()
 
 	osg::HeightField* pHeightField = new osg::HeightField;
     pHeightField->allocate( x, y );
-    pHeightField->setXInterval( 8.0f );
-    pHeightField->setYInterval( 8.0f );
+    pHeightField->setXInterval( 10.0f );
+    pHeightField->setYInterval( 10.0f );
 
 	for ( int yy=0; yy<y; yy++ )
-	{
 		for ( int xx=0; xx<x; xx++ )
-		{
 			pHeightField->setHeight( xx, yy, rPlasma->GetValue( xx, yy ) );
-		}
-	}
 
 	pGeode->addDrawable( new osg::ShapeDrawable(pHeightField) );
 
@@ -42,7 +38,7 @@ int _tmain(int argc, _TCHAR* argv[])
     viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render
-    viewer->setSceneData( CreateScene() );
+    viewer->setSceneData( createScene() );
 
     // execute main loop
     return viewer->run();
