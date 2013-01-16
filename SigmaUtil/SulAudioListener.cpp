@@ -10,17 +10,27 @@
 void CSulAudioListener::init()
 {
 	m_bFirstInit = true;
+
+	// set some defaults
+	float listenerOri[] = {0,0,-1, 0.0,0.0,1.0};	// orientation (it seems that the ori is a direction and an up vector)
+	alListenerfv( AL_ORIENTATION, listenerOri );
+	alListener3f( AL_POSITION, 0,0,0 );
+	alListener3f( AL_VELOCITY, 0,0,0 );
 }
 
 void CSulAudioListener::operator()( osg::Node* node, osg::NodeVisitor* nv )
 {
 	traverse( node, nv );
 
+	osg::Camera* cam = dynamic_cast<osg::Camera*>(node);
+	osg::Matrix w = cam->getInverseViewMatrix();
+
 	// handle timing
 	if ( m_bFirstInit )
 	{
 		m_bFirstInit = false;
 		m_lastTicks = osg::Timer::instance()->tick();
+		osg::Vec3f m_pos = w.getTrans();
 		return;
 	}
 
@@ -33,12 +43,9 @@ void CSulAudioListener::operator()( osg::Node* node, osg::NodeVisitor* nv )
 
 	//osg::Matrix w = osg::computeLocalToWorld( nv->getNodePath() );
 
-	osg::Camera* cam = dynamic_cast<osg::Camera*>(node);
-	osg::Matrix w = cam->getInverseViewMatrix();
-
 	// velocity (we base the velocity time and distance moved from last time)
 	osg::Vec3f vel = (w.getTrans()-m_pos)/dt;
-	alListenerfv( AL_ORIENTATION, (float*)&vel );
+	alListenerfv( AL_VELOCITY, (float*)&vel );
 
 	// position
 	m_pos = w.getTrans();
@@ -46,7 +53,7 @@ void CSulAudioListener::operator()( osg::Node* node, osg::NodeVisitor* nv )
 
 	// orientation
 	osg::Quat q = w.getRotate();
-	osg::Vec3f dir(0,1,0);
+	osg::Vec3f dir(0,0,-1);
 	dir = q * dir;	// now rotate this dir
 	float listenerOri[] = {dir.x(),dir.y(),dir.z(), 0.0,0.0,1.0};	// orientation (it seems that the ori is a direction and an up vector)
 	alListenerfv( AL_ORIENTATION, listenerOri );

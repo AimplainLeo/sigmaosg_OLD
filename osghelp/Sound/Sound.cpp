@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 #include <SigmaUtil/SulGeomGrid.h>
-#include <SigmaUtil/SulWAV.h>
 #include <SigmaUtil/SulAudioManager.h>
 #include <SigmaUtil/SulAudioListener.h>
 #include <SigmaUtil/SulAudioSource.h>
@@ -18,6 +17,8 @@
 
 #include <iostream>
 
+CSulAudioManager* audioManager = 0;
+
 enum ESHAPE
 {
 	SHAPE_SPHERE,
@@ -27,7 +28,7 @@ enum ESHAPE
 	SHAPE_CAPSULE
 };
 
-osg::Node* createShape( const osg::Vec3& pos, ESHAPE eShape )
+osg::Node* createShape( const osg::Vec3& pos, ESHAPE eShape, const CSulString& bufferName )
 {
 	osg::Geode* geode = new osg::Geode;
 
@@ -60,6 +61,11 @@ osg::Node* createShape( const osg::Vec3& pos, ESHAPE eShape )
 	osg::Matrix m;
 	m.setTrans( pos );
 	mt->setMatrix( m );
+
+	CSulAudioSource* audioSource = new CSulAudioSource( audioManager->getBuffer( bufferName ) );
+	audioSource->init();
+	audioSource->play();
+	mt->addUpdateCallback( audioSource );
 
 	return mt;
 }
@@ -101,27 +107,27 @@ void errorCheck( CSulString prefixString )
 void setupSound( osgViewer::Viewer* viewer )
 {
 	// setup the audio manager
-	CSulAudioManager* audioManager = new CSulAudioManager;
+	audioManager = new CSulAudioManager;
 	audioManager->init();
 	//audioManager->createBuffer( "background", "c:/ThunderStormRain_S08WT.99_short.wav" );
 	audioManager->createBuffer( "background", "C:/Projects/sigmaOsg/osghelp/Data/tank.wav" );
 	
-
 	// there is only one listen for each application (that being you), we attach our listener to the camera
 	CSulAudioListener* audioListener = new CSulAudioListener;
 	audioListener->init();
 	viewer->getCamera()->addUpdateCallback( audioListener );
 
+	// show an axis at 0,0,0
 	osg::Group* group = viewer->getSceneData()->asGroup();
 	group->addChild( new CSulGeomAxis( 1.0f ) );
 
-	osg::Node* s1 = createShape( osg::Vec3(10,10,0), SHAPE_SPHERE );
-	group->addChild( s1 );
+	group->addChild( createShape( osg::Vec3(10,10,0), SHAPE_SPHERE, "background" ) );
+	
+	/*
 	CSulAudioSource* audioSource1 = new CSulAudioSource( audioManager->getBuffer( "background" ) );
 	audioSource1->init();
 	s1->addUpdateCallback( audioSource1 );
-
-	audioSource1->play();
+	*/
 
 	/*
 	osg::Node* s2 = createShape( osg::Vec3(10,-10,0), SHAPE_BOX );

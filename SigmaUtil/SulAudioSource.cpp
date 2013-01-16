@@ -22,19 +22,23 @@ void CSulAudioSource::init()
 	alSourcei( m_source, AL_SOURCE_RELATIVE , AL_FALSE );
 	
 	alSourcef( m_source, AL_ROLLOFF_FACTOR, 0.5f );
-	//alSourcef( m_source, AL_REFERENCE_DISTANCE, 0.00001f );
-
+	
+	alSource3f( m_source, AL_POSITION, 0, 0, 0 );
+	alSource3f( m_source, AL_VELOCITY, 0, 0, 0 );
 }
 
 void CSulAudioSource::operator()( osg::Node* node, osg::NodeVisitor* nv )
 {
 	traverse( node, nv );
 
+	osg::Matrix w = osg::computeLocalToWorld( nv->getNodePath() );
+
 	// handle timing
 	if ( m_bFirstInit )
 	{
 		m_bFirstInit = false;
 		m_lastTicks = osg::Timer::instance()->tick();
+		osg::Vec3f m_pos = w.getTrans();
 		return;
 	}
 
@@ -42,12 +46,13 @@ void CSulAudioSource::operator()( osg::Node* node, osg::NodeVisitor* nv )
 	double dt = osg::Timer::instance()->delta_s( m_lastTicks, ticks );
 	m_lastTicks = ticks;
 
-	alSource3f( m_source, AL_POSITION, 0, 0, 0 );
-	alSource3f( m_source, AL_VELOCITY, 0, 0, 0 );
+	// velocity (we base the velocity time and distance moved from last time)
+	osg::Vec3f vel = (w.getTrans()-m_pos)/dt;
+	alSourcefv( m_source, AL_VELOCITY, (float*)&vel );
 
-	
-	
-	
+	// position
+	m_pos = w.getTrans();
+	alSourcefv( m_source, AL_POSITION, (float*)&m_pos );
 }
 
 void CSulAudioSource::play()
