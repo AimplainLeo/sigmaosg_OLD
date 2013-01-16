@@ -17,6 +17,13 @@ void CSulAudioSource::init()
 
 	alSourcef( m_source, AL_PITCH, 1 );
 	alSourcef( m_source, AL_GAIN, 1 );
+	alSourcei(m_source, AL_LOOPING, AL_TRUE);
+
+	alSourcei( m_source, AL_SOURCE_RELATIVE , AL_FALSE );
+	
+	alSourcef( m_source, AL_ROLLOFF_FACTOR, 0.5f );
+	//alSourcef( m_source, AL_REFERENCE_DISTANCE, 0.00001f );
+
 }
 
 void CSulAudioSource::operator()( osg::Node* node, osg::NodeVisitor* nv )
@@ -35,9 +42,12 @@ void CSulAudioSource::operator()( osg::Node* node, osg::NodeVisitor* nv )
 	double dt = osg::Timer::instance()->delta_s( m_lastTicks, ticks );
 	m_lastTicks = ticks;
 
-	alSource3f(m_source, AL_POSITION, 0, 0, 0);
-	alSource3f(m_source, AL_VELOCITY, 0, 0, 0);
-	alSourcei(m_source, AL_LOOPING, AL_FALSE);
+	alSource3f( m_source, AL_POSITION, 0, 0, 0 );
+	alSource3f( m_source, AL_VELOCITY, 0, 0, 0 );
+
+	
+	
+	
 }
 
 void CSulAudioSource::play()

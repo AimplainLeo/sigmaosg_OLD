@@ -31,7 +31,10 @@ void CSulAudioListener::operator()( osg::Node* node, osg::NodeVisitor* nv )
 	// 1. we need to update position, velocity and orientation
 	// 2. should update at a certain frequency
 
-	osg::Matrix w = osg::computeLocalToWorld( nv->getNodePath() );
+	//osg::Matrix w = osg::computeLocalToWorld( nv->getNodePath() );
+
+	osg::Camera* cam = dynamic_cast<osg::Camera*>(node);
+	osg::Matrix w = cam->getInverseViewMatrix();
 
 	// velocity (we base the velocity time and distance moved from last time)
 	osg::Vec3f vel = (w.getTrans()-m_pos)/dt;
@@ -45,12 +48,8 @@ void CSulAudioListener::operator()( osg::Node* node, osg::NodeVisitor* nv )
 	osg::Quat q = w.getRotate();
 	osg::Vec3f dir(0,1,0);
 	dir = q * dir;	// now rotate this dir
-	float listenerOri[] = {dir.x(),dir.y(),dir.z(), 0.0,1.0,0.0};	// orientation (it seems that the ori is a direction and an up vector)
+	float listenerOri[] = {dir.x(),dir.y(),dir.z(), 0.0,0.0,1.0};	// orientation (it seems that the ori is a direction and an up vector)
 	alListenerfv( AL_ORIENTATION, listenerOri );
-
-
-
-
 }
 
 

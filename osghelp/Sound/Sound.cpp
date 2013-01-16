@@ -7,6 +7,7 @@
 #include <SigmaUtil/SulAudioManager.h>
 #include <SigmaUtil/SulAudioListener.h>
 #include <SigmaUtil/SulAudioSource.h>
+#include <SigmaUtil/SulGeomAxis.h>
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
 #include <osg/MatrixTransform>
@@ -102,7 +103,9 @@ void setupSound( osgViewer::Viewer* viewer )
 	// setup the audio manager
 	CSulAudioManager* audioManager = new CSulAudioManager;
 	audioManager->init();
-	audioManager->createBuffer( "background", "c:/ThunderStormRain_S08WT.99_short.wav" );
+	//audioManager->createBuffer( "background", "c:/ThunderStormRain_S08WT.99_short.wav" );
+	audioManager->createBuffer( "background", "C:/Projects/sigmaOsg/osghelp/Data/tank.wav" );
+	
 
 	// there is only one listen for each application (that being you), we attach our listener to the camera
 	CSulAudioListener* audioListener = new CSulAudioListener;
@@ -110,6 +113,7 @@ void setupSound( osgViewer::Viewer* viewer )
 	viewer->getCamera()->addUpdateCallback( audioListener );
 
 	osg::Group* group = viewer->getSceneData()->asGroup();
+	group->addChild( new CSulGeomAxis( 1.0f ) );
 
 	osg::Node* s1 = createShape( osg::Vec3(10,10,0), SHAPE_SPHERE );
 	group->addChild( s1 );
