@@ -122,12 +122,6 @@ void setupSound( osgViewer::Viewer* viewer )
 	group->addChild( new CSulGeomAxis( 1.0f ) );
 
 	group->addChild( createShape( osg::Vec3(10,10,0), SHAPE_SPHERE, "background" ) );
-	
-	/*
-	CSulAudioSource* audioSource1 = new CSulAudioSource( audioManager->getBuffer( "background" ) );
-	audioSource1->init();
-	s1->addUpdateCallback( audioSource1 );
-	*/
 
 	/*
 	osg::Node* s2 = createShape( osg::Vec3(10,-10,0), SHAPE_BOX );
@@ -146,8 +140,6 @@ void setupSound( osgViewer::Viewer* viewer )
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	//alutInit (&argc, (char**)argv);
-
     // construct the viewer
     osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
 
