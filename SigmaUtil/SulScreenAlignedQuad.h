@@ -25,7 +25,8 @@ public:
 										CSulScreenAlignedQuad( osgViewer::Viewer* viewer );
 
 	osg::Group*							getGroup();
-	CSulGeomQuad*						getQuad();
+	CSulGeode*							getGeode();
+	CSulGeomQuad*						getGeom();
 
 	void								setTexture( const std::string& sFile, GLint internalFormat=GL_RGB );
 	void								setTexture( osg::Texture* pTex, sigma::uint32 unit=0, const CSulString& uniformName="" );
@@ -36,6 +37,7 @@ private:
 
 private:
 	osg::ref_ptr<CSulGeomQuad>			m_rGeomQuad;
+	osg::ref_ptr<CSulGeode>				m_geodeQuad;
 	osg::ref_ptr<osg::Group>			m_rGroup;
 	osg::ref_ptr<osg::MatrixTransform>	m_rMT;
 };

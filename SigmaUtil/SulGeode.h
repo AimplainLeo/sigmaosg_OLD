@@ -9,6 +9,9 @@
 class SUL_EXPORT CSulGeode : public osg::Geode
 {
 public:
+	CSulGeode();
+	CSulGeode( osg::Drawable* geom );
+
 	void enableBlend();
 	void zbufferWrite( bool bEnable );
 	void enableDebugTexture();

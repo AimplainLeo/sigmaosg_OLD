@@ -181,7 +181,7 @@ osg::Node* CSulCrossQuad::createQuad( sigma::uint32 texW, sigma::uint32 texH, co
 	osg::ref_ptr<osg::Texture2D> rTex = createTextureFromOrthoView2( texW, texH, m_rRender, ov, pos, far );
 	p->setTexture( rTex, m_texUnit );
 
-	return p;
+	return new CSulGeode(p);
 }
 
 void CSulCrossQuad::process()

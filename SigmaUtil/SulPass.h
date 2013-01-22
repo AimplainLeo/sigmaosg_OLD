@@ -14,14 +14,14 @@ public:
 								CSulPass( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const CSulString& sName );
 
 	CSulTexCam*					getTexCam();
-	CSulGeomQuad*				getQuad();
+	CSulGeode*					getQuad();
 
 protected:
 	CSulGeomQuad*				create( osg::Texture2D* pTexIn, osg::Texture2D* pTexOut, const std::string& sNameRTT );
 
 private:
 	osg::ref_ptr<CSulTexCam>	m_rTexCam;
-	osg::ref_ptr<CSulGeomQuad>	m_rQuad;
+	osg::ref_ptr<CSulGeode>		m_rQuad;
 };
 
 #endif // __SULPASS_H__

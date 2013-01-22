@@ -26,7 +26,7 @@ osg::Node* createScene2()
 
 	// render objects to a texture
 	CSulTexCam* texCam = new CSulTexCam;
-	texCam->addChild( quad );
+	texCam->addChild( new CSulGeode(quad) );
 	group->addChild( texCam );
 
 	// let's see the rendered texture
@@ -41,7 +41,7 @@ osg::Node* createScene3()
 {
 	// deprecated
 	CSulViewQuad* quad = new CSulViewQuad;
-	quad->getQuad()->setTexture( "osghelptex.tga" );
+	quad->getGeom()->setTexture( "osghelptex.tga" );
 	return quad;
 }
 

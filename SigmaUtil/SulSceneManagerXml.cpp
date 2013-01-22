@@ -437,13 +437,13 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		if ( pAttr->exist( "texture_file" ) )
 		{
 			quad->setTexture( pAttr->get("texture_file") );
-			quad->getQuad()->enableBlend();
+			quad->getGeode()->enableBlend();
 		}
 
 		if ( pAttr->exist( "renderbin_num" ) )
 		{
 			sigma::uint32 i = pAttr->get( "renderbin_num" ).asUint32();
-			quad->getQuad()->getGeometry()->getOrCreateStateSet()->setRenderBinDetails( i, "RenderBin" );
+			quad->getOrCreateStateSet()->setRenderBinDetails( i, "RenderBin" );
 		}
 
 		// StateSet

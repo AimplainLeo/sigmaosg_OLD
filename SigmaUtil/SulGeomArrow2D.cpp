@@ -12,6 +12,6 @@ osg::Group()
 	m_headSize = headSize;
 
 	CSulGeomQuad* pQuad = new CSulGeomQuad( osg::Vec3( m_len/2.0f, 0, 0 ), m_len, m_width );
-	addChild( pQuad );
+	addChild( new CSulGeode(pQuad) );
 }
 

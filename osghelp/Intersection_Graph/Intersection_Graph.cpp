@@ -20,7 +20,8 @@ osg::Group* createScene()
 
 	// create and object that represents the plane
 	CSulGeomPlane* pGeomPlane = new CSulGeomPlane( *pPlane, 2.0f );
-	pGroup->addChild( pGeomPlane );
+	CSulGeode* geodePlane = new CSulGeode(pGeomPlane);
+	pGroup->addChild( geodePlane );
 	
 	// create line
 	osg::Vec3 p1( 0, 0, -2  );
@@ -30,7 +31,7 @@ osg::Group* createScene()
 
 	// calc intersection
 	osg::ref_ptr<CSulIntersectGraph> intersect = new CSulIntersectGraph;
-	intersect->setGraph( pGeomPlane );
+	intersect->setGraph( geodePlane );
 	intersect->setLine( p1, p2 );
 
 	if ( intersect->update() )

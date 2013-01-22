@@ -14,9 +14,11 @@ osg::Node* CreateScene()
 	p->setTexture( "images/BubblyBricks-ColorMap.png", 0 );
 	p->setTexture( "images/BubblyBricks-NormalMap.png", 1 );
 
-	CSulShaderNormalMapTangentSpace* pShader = new CSulShaderNormalMapTangentSpace( p );
+	CSulGeode* geode = new CSulGeode( p );
 
-	return p;
+	CSulShaderNormalMapTangentSpace* pShader = new CSulShaderNormalMapTangentSpace( geode );
+
+	return geode;
 }
 
 int _tmain(int argc, _TCHAR* argv[])

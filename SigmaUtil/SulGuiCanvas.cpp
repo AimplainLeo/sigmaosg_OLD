@@ -79,27 +79,30 @@ void CSulGuiCanvas::init()
 
 	float w = getW();
 
-	m_rQuad = new CSulGeomQuad(
+	m_geodeQuad = new CSulGeode;
+	m_geomQuad = new CSulGeomQuad(
 		osg::Vec3( w/2.0f, getH()/2.0f, 0.0f ),
 		w, getH() );
-	m_rQuad->createUV();
+	m_geomQuad->createUV();
 
-	osg::MatrixTransform::addChild( m_rQuad );
+	m_geodeQuad->addDrawable( m_geomQuad );
+
+	osg::MatrixTransform::addChild( m_geodeQuad );
 
 	// add a shader (perhaps we should move this to xml manager so we only have one shader)
-	new CSulShaderGuiFrame( m_rQuad );
+	new CSulShaderGuiFrame( m_geodeQuad );
 
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseTexture = new osg::Uniform( "use_texture", 0 ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseCover = new osg::Uniform( "use_cover", 1 ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseBorder = new osg::Uniform( "use_border", 1 ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformUseBackground = new osg::Uniform( "use_background", 1 ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformUseTexture = new osg::Uniform( "use_texture", 0 ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformUseCover = new osg::Uniform( "use_cover", 1 ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformUseBorder = new osg::Uniform( "use_border", 1 ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformUseBackground = new osg::Uniform( "use_background", 1 ) );
 
-	m_rQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", 0 ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 2.0f ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", m_cBg ) );
-	m_rQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "cover", 0 ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformW = new osg::Uniform( "w", getW() ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformH = new osg::Uniform( "h", getH() ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( new osg::Uniform( "border", 2.0f ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformBgColor = new osg::Uniform( "bg_color", m_cBg ) );
+	m_geomQuad->getOrCreateStateSet()->addUniform( m_uniformBorderColor = new osg::Uniform( "border_color", osg::Vec4(0,0,1,1) ) );
 
 	if ( !m_img.empty() )
 	{
@@ -136,19 +139,19 @@ void CSulGuiCanvas::setImage( const CSulString& imgFile )
 {
 	m_img = imgFile;
 
-	m_rQuad->setTexture( m_img, 0 );
+	m_geomQuad->setTexture( m_img, 0 );
 	m_uniformUseTexture->set( 1 );
 	
 	if ( m_w==0.0f || m_h==0.0f )
 	{
-		osg::Image* pImage = m_rQuad->getImage();
+		osg::Image* pImage = m_geomQuad->getImage();
 		setWH( pImage->s(), pImage->t() );
 	}
 }
 
 void CSulGuiCanvas::setTexture( osg::Texture2D* pTex )
 {
-	m_rQuad->setTexture( pTex );
+	m_geomQuad->setTexture( pTex );
 	m_uniformUseTexture->set( 1 );
 }
 
@@ -172,11 +175,11 @@ void CSulGuiCanvas::showCanvas( bool bShow )
 
 	if ( m_bShowCanvas )
 	{
-		osg::MatrixTransform::addChild( m_rQuad );
+		osg::MatrixTransform::addChild( m_geodeQuad );
 	}
 	else
 	{
-		osg::MatrixTransform::removeChild( m_rQuad );
+		osg::MatrixTransform::removeChild( m_geodeQuad );
 	}
 }
 
@@ -205,11 +208,11 @@ void CSulGuiCanvas::setWH( float w, float h )
 	m_w = w;
 	m_h = h;
 
-	if ( m_rQuad.valid() )
+	if ( m_geomQuad.valid() )
 	{
-		m_rQuad->setCenter( osg::Vec3( w/2.0f, h/2.0f, 0.0f ) );
-		m_rQuad->setWidth( m_w );
-		m_rQuad->setHeight( m_h );
+		m_geomQuad->setCenter( osg::Vec3( w/2.0f, h/2.0f, 0.0f ) );
+		m_geomQuad->setWidth( m_w );
+		m_geomQuad->setHeight( m_h );
 		m_uniformW->set( m_w );
 		m_uniformH->set( m_h );
 	}
@@ -218,10 +221,10 @@ void CSulGuiCanvas::setWH( float w, float h )
 void CSulGuiCanvas::setW( float w )
 {
 	m_w = w;
-	if ( m_rQuad.valid() )
+	if ( m_geomQuad.valid() )
 	{
-		m_rQuad->setCenter( osg::Vec3( m_w/2.0f, m_h/2.0f, 0.0f ) );
-		m_rQuad->setWidth( m_w );
+		m_geomQuad->setCenter( osg::Vec3( m_w/2.0f, m_h/2.0f, 0.0f ) );
+		m_geomQuad->setWidth( m_w );
 		m_uniformW->set( m_w );
 	}
 }
@@ -229,10 +232,10 @@ void CSulGuiCanvas::setW( float w )
 void CSulGuiCanvas::setH( float h )
 {
 	m_h = h;
-	if ( m_rQuad.valid() )
+	if ( m_geomQuad.valid() )
 	{
-		m_rQuad->setCenter( osg::Vec3( m_w/2.0f, m_h/2.0f, 0.0f ) );
-		m_rQuad->setHeight( m_h );
+		m_geomQuad->setCenter( osg::Vec3( m_w/2.0f, m_h/2.0f, 0.0f ) );
+		m_geomQuad->setHeight( m_h );
 		m_uniformH->set( m_h );
 	}
 }
@@ -448,9 +451,14 @@ void CSulGuiCanvas::onMouseDrag( float x, float y )
 	}
 }
 
-CSulGeomQuad* CSulGuiCanvas::getQuad()
+CSulGeomQuad* CSulGuiCanvas::getGeom()
 {
-	return m_rQuad;
+	return m_geomQuad;
+}
+
+CSulGeode* CSulGuiCanvas::getGeode()
+{
+	return m_geodeQuad;
 }
 
 void CSulGuiCanvas::onViewResize( float w, float h  )
@@ -461,10 +469,10 @@ return;
 	float ww = m_w * (d.x()/w);
 	float hh = m_h * (d.y()/h);
 
-	m_rQuad->setCenter( osg::Vec3( ww/2.0f, hh/2.0f, 0.0f ) );
+	m_geomQuad->setCenter( osg::Vec3( ww/2.0f, hh/2.0f, 0.0f ) );
 
-	m_rQuad->setWidth( ww );
-	m_rQuad->setHeight( hh );
+	m_geomQuad->setWidth( ww );
+	m_geomQuad->setHeight( hh );
 
 	//osg::notify(osg::NOTICE) << "ww= " << ww << "   hh= " << hh << std::endl;
 	osg::notify(osg::NOTICE) << "m_w= " << m_w << "   m_h= " << m_h << std::endl;

@@ -62,7 +62,7 @@ void CSulConsoleDisplay::Init()
 
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( m_w, m_h );
 	rAlign->addChild( m_rGeode );
-	rAlign->addChild( m_rQuad );
+	rAlign->addChild( new CSulGeode(m_rQuad) );
 
 	// save node so it can be added to a scene
 	m_rNode = rAlign->getProjection();

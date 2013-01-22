@@ -38,9 +38,9 @@ void CSulCloudPlane::create()
 
 	m_rQuad = new CSulGeomQuad( m_size, m_size );
 	m_rQuad->create();
-	m_rQuad->getGeometry()->setUseDisplayList( false );
-	m_rQuad->getGeometry()->setDrawCallback( m_mytestass = new mytest( rTexMat, m_rQuad->getWidth() ) );
-	addChild( m_rQuad );
+	m_rQuad->setUseDisplayList( false );
+	m_rQuad->setDrawCallback( m_mytestass = new mytest( rTexMat, m_rQuad->getWidth() ) );
+	addChild( new CSulGeode(m_rQuad) );
 
 	m_prgShaders = createShaderProgram();
 	m_prgShaders->setName( "CSulCloudPlane Shader Program" );

@@ -6,33 +6,37 @@
 #include <osgDB/FileUtils>
 
 CSulGeomQuad::CSulGeomQuad( float w, float h, EPLANE ePlane ) :
-CSulGeode(),
+CSulGeom(),
 m_vCenter(0,0,0),
 m_w(w),
 m_h(h),
 m_ePlane(ePlane)
 {
 	setName( "CSulGeomQuad" );
-	createDrawable();
+//	createDrawable();
+	create();
 }
 
 CSulGeomQuad::CSulGeomQuad( const osg::Vec3& vCenter, float w, float h, EPLANE ePlane ) :
-CSulGeode(),
+CSulGeom(),
 m_vCenter(vCenter),
 m_w(w),
 m_h(h),
 m_ePlane(ePlane)
 {
 	setName( "CSulGeomQuad" );
-	createDrawable();
+//	createDrawable();
+	create();
 }
 
+/*
 void CSulGeomQuad::createDrawable()
 {
 	m_rGeo = new osg::Geometry;
 	addDrawable( m_rGeo );
 	create();
 }
+*/
 
 void CSulGeomQuad::create()
 {
@@ -75,7 +79,7 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
 			}
 			break;
 	}
-    m_rGeo->setVertexArray( m_rVerts );
+    setVertexArray( m_rVerts );
 
     // create a quad primitive set
     osg::DrawElementsUInt* pPrimitiveSet = new osg::DrawElementsUInt( osg::PrimitiveSet::QUADS, 0 );
@@ -83,7 +87,7 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
     pPrimitiveSet->push_back( 2 );
     pPrimitiveSet->push_back( 1 );
     pPrimitiveSet->push_back( 0 );
-    m_rGeo->addPrimitiveSet( pPrimitiveSet );
+    addPrimitiveSet( pPrimitiveSet );
 
 	m_rColors = new osg::Vec4Array;
 	float f = 1.0f;
@@ -91,8 +95,8 @@ void CSulGeomQuad::Create( const osg::Vec3& vCenter, float w, float h, EPLANE eP
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
 	m_rColors->push_back( osg::Vec4(f,f,f,1.0f) );
-    m_rGeo->setColorArray( m_rColors.get() );
-	m_rGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+    setColorArray( m_rColors.get() );
+	setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 }
 
 void CSulGeomQuad::setColor( const osg::Vec4& c )
@@ -111,7 +115,7 @@ void CSulGeomQuad::setColor( float r, float g, float b, float a )
 	(*m_rColors)[1].set( r, g, b, a );
 	(*m_rColors)[2].set( r, g, b, a );
 	(*m_rColors)[3].set( r, g, b, a );
-	m_rGeo->dirtyDisplayList();
+	dirtyDisplayList();
 }
 
 const osg::Vec4& CSulGeomQuad::getColor( sigma::uint32 index )
@@ -130,7 +134,7 @@ void CSulGeomQuad::createUV()
 		m_rUV->push_back(osg::Vec2(1, 1));
 		m_rUV->push_back(osg::Vec2(0, 1));
 
-		m_rGeo->setTexCoordArray( 0, m_rUV );
+		setTexCoordArray( 0, m_rUV );
 	}
 }
 
@@ -147,14 +151,14 @@ void CSulGeomQuad::setTexture( osg::Image* pImage, GLint internalFormat, sigma::
 
 	m_mapTex[unit] = pTex;
 
-    m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+    getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 }
 
 void CSulGeomQuad::setTexture( osg::Texture* pTex, sigma::uint32 unit, const CSulString& uniformName )
 {
 	createUV();
 	m_mapTex[unit] = pTex;
-    m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+    getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 
 	if ( !uniformName.empty() )
 	{
@@ -174,7 +178,7 @@ osg::Texture2D* CSulGeomQuad::setTexture( const CSulString& file, sigma::uint32 
 	pTex->setFilter( osg::Texture::MAG_FILTER,osg::Texture::LINEAR );
     m_rImage = osgDB::readImageFile( osgDB::findDataFile(file.c_str()) );
     pTex->setImage( m_rImage );
-    m_rGeo->getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
+    getOrCreateStateSet()->setTextureAttributeAndModes( unit, pTex, osg::StateAttribute::ON );
 	m_mapTex[unit] = pTex;
 	return pTex;
 }
@@ -279,8 +283,8 @@ void CSulGeomQuad::calcVertPositions()
 			break;
 	}
 
-	m_rGeo->dirtyBound();
-	m_rGeo->dirtyDisplayList();
+	dirtyBound();
+	dirtyDisplayList();
 }
 
 void CSulGeomQuad::setCenter( const osg::Vec3& vCenter )
@@ -289,7 +293,3 @@ void CSulGeomQuad::setCenter( const osg::Vec3& vCenter )
 	calcVertPositions();
 }
 
-osg::Geometry* CSulGeomQuad::getGeometry()
-{
-	return m_rGeo;
-}

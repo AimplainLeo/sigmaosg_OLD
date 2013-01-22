@@ -364,8 +364,9 @@ osg::Node* CreateScene()
 
 	// quad 
 	osg::ref_ptr<CSulGeomQuad> rQuad = new CSulGeomQuad( osg::Vec3(64,64,0), 128, 128 );
+	osg::ref_ptr<CSulGeode>		geode = new CSulGeode( rQuad );
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( 800, 600 );
-	rAlign->addChild( rQuad );
+	rAlign->addChild( geode );
 	pGroup->addChild( rAlign->getProjection() );
 	rQuad->setTexture( pRTT->getTexture() );
 	rQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED | osg::StateAttribute::OVERRIDE );

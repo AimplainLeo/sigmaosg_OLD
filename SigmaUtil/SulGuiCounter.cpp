@@ -23,14 +23,14 @@ void CSulGuiCounter::setupAttr( CSulXmlAttr* pAttr )
 
 void CSulGuiCounter::onClick( CSulGuiCanvas* pCanvas )
 {
-	float u = pCanvas->getQuad()->getU();
+	float u = pCanvas->getGeom()->getU();
 
 	u += 0.1f;
 	if ( u>=1.0f )
 		u = 0.0f;
 
-	pCanvas->getQuad()->setUV( u, u+0.1f, 0.0f, 1.0f );
-	pCanvas->getQuad()->getDrawable( 0 )->asGeometry()->dirtyDisplayList();
+	pCanvas->getGeom()->setUV( u, u+0.1f, 0.0f, 1.0f );
+	pCanvas->getGeom()->dirtyDisplayList();
 }
 
 void CSulGuiCounter::init()
@@ -49,7 +49,7 @@ void CSulGuiCounter::init()
 		p->setImage( "images/counter.png" );
 		p->setXY( i*20.0f, 0.0f );
 		p->setWH( 20.0f, 20.0f );
-		p->getQuad()->setUV( 0.1f, 1.0f );
+		p->getGeom()->setUV( 0.1f, 1.0f );
 		p->signalClicked.connect( this, &CSulGuiCounter::onClick );
 		
 		addChild( p );
@@ -69,7 +69,7 @@ sigma::uint32 CSulGuiCounter::getValue()
 		CSulGuiCanvas* p = dynamic_cast<CSulGuiCanvas*>(getChild(i));
 		if ( p )
 		{
-			val += int(p->getQuad()->getU()*dig);
+			val += int(p->getGeom()->getU()*dig);
 			dig /= 10.0f;
 		}
 	}	

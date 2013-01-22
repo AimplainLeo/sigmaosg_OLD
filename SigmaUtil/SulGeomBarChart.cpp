@@ -39,7 +39,9 @@ sigma::uint32 CSulGeomBarChart::createBar( const CSulString& name, const osg::Ve
 	CSulGeomQuad* p = new CSulGeomQuad;
 	p->setColor( color );
 	p->setHeight( m_h );
-	addChild( p );
+	CSulGeode* geode = new CSulGeode;
+	geode->addDrawable( p );
+	addChild( geode );
 
 	m_vecBar.push_back( p );
 

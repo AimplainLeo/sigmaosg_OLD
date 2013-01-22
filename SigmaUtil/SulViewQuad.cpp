@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "SulViewQuad.h"
+#include "SulGeomQuad.h"
 
 CSulViewQuad::CSulViewQuad()
 {
@@ -31,7 +32,12 @@ CSulViewQuad::CSulViewQuad( osgViewer::Viewer* viewer )
 	addChild( m_saq );
 }
 
-CSulGeomQuad* CSulViewQuad::getQuad()
+CSulGeode* CSulViewQuad::getQuad()
 {
-	return m_saq->getQuad();
+	return m_saq->getGeode();
+}
+
+CSulGeomQuad* CSulViewQuad::getGeom()
+{
+	return m_saq->getGeom();
 }

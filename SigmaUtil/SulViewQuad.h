@@ -19,7 +19,8 @@ public:
 	// creates a quad that covers the whole view
 	CSulViewQuad( osgViewer::Viewer* viewer );
 
-	CSulGeomQuad* getQuad();
+	CSulGeode*	getQuad();
+	class CSulGeomQuad*	getGeom();
 
 private:
 	osg::ref_ptr<CSulScreenAlignedQuad>	m_saq;

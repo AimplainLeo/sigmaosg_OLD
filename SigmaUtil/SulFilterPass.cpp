@@ -22,7 +22,7 @@ osg::Group* CSulFilterPass::create( osg::Texture2D* pTexIn, osg::Texture2D* pTex
 	rQuad->setTexture( pTexIn );
 
 	m_rGroup	= new osg::Group;
-	m_rGroup->addChild( rQuad );
+	m_rGroup->addChild( new CSulGeode(rQuad) );
 
 	// the quad must be aligned to the RTT camera and cover it completely
 	osg::ref_ptr<CSulTransScreenAlign> rAlign = new CSulTransScreenAlign( texW, texH );

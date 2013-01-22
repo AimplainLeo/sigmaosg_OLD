@@ -53,15 +53,19 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( osgViewer::Viewer* viewer, osg::Te
 	float fViewW = viewer->getCamera()->getViewport()->width();
 	float fViewH = viewer->getCamera()->getViewport()->height();
 
+	m_geodeQuad = new CSulGeode;
+
 	// create geometry quad
 	m_rGeomQuad = new CSulGeomQuad( osg::Vec3( x + w/2.0f, fViewH - (y+h/2.0f) , 0 ), w, h, CSulGeomQuad::PLANE_XY );
+	m_geodeQuad->addDrawable( m_rGeomQuad );
+
 	m_rGeomQuad->setTexture( tex );
 
     // create geometry node that will contain all our drawables
     m_rGroup = new osg::Group;
     osg::StateSet* pStateSet = m_rGroup->getOrCreateStateSet();
     pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-    m_rGroup->addChild( m_rGeomQuad );
+    m_rGroup->addChild( m_geodeQuad );
 	
 	m_rMT = new osg::MatrixTransform;
 	m_rMT->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
@@ -80,6 +84,9 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( const osg::Vec3& vPos, float w, fl
 	// create geometry quad
 	m_rGeomQuad = new CSulGeomQuad( vPos, w, h, CSulGeomQuad::PLANE_XY );
 
+	m_geodeQuad = new CSulGeode;
+	m_geodeQuad->addDrawable( m_rGeomQuad );
+
 	m_rGeomQuad->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
 	
     // create geometry node that will contain all our drawables
@@ -88,7 +95,7 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( const osg::Vec3& vPos, float w, fl
 
     osg::StateSet* pStateSet = m_rGroup->getOrCreateStateSet();
     pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-    m_rGroup->addChild( m_rGeomQuad );
+    m_rGroup->addChild( m_geodeQuad );
 	
 	m_rMT = new osg::MatrixTransform;
 	m_rMT->setName( "CSulScreenAlignedQuad -> osg::MatrixTransform" );
@@ -117,7 +124,7 @@ void CSulScreenAlignedQuad::initConstructor()
 
     osg::StateSet* pStateSet = m_rGroup->getOrCreateStateSet();
     pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-    m_rGroup->addChild( m_rGeomQuad );
+    m_rGroup->addChild( m_geodeQuad );
 	
 	m_rMT = new osg::MatrixTransform;
 	m_rMT->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
@@ -132,7 +139,12 @@ osg::Group* CSulScreenAlignedQuad::getGroup()
 	return m_rGroup;
 }
 
-CSulGeomQuad* CSulScreenAlignedQuad::getQuad()
+CSulGeode* CSulScreenAlignedQuad::getGeode()
+{
+	return m_geodeQuad;
+}
+
+CSulGeomQuad* CSulScreenAlignedQuad::getGeom()
 {
 	return m_rGeomQuad;
 }

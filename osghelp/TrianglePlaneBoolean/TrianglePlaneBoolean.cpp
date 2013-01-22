@@ -22,7 +22,7 @@ osg::Group* createScene()
 	// create and object that represents the plane
 	CSulGeomPlane* pGeomPlane = new CSulGeomPlane( *pPlane, 2.0f );
 	pGeomPlane->setColor( 0, 0.5, 0, 1 );
-	pGroup->addChild( pGeomPlane );
+	pGroup->addChild( new CSulGeode(pGeomPlane) );
 	
 	// create triangle
 	osg::Vec3 p1( 0, 0, 2  );

@@ -30,9 +30,9 @@ CSulTexCam( w, h, CSulTexCam::DEFERRED_RENDERING )
 	*/
 
 	m_quad = new CSulScreenAlignedQuad( osg::Vec3(w/2,h/2,0), w, h, w, h );
-	m_quad->getQuad()->lighting( false );
-	m_quad->getQuad()->zbufferWrite( false );
-	m_quad->getQuad()->getGeometry()->setName( "Composite Quad" );
+	m_quad->getGeode()->lighting( false );
+	m_quad->getGeode()->zbufferWrite( false );
+	m_quad->setName( "Composite Quad" );
 
 
 	/*

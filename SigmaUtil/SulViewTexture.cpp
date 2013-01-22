@@ -25,7 +25,7 @@ CSulViewTexture::CSulViewTexture( osgViewer::Viewer* viewer )
 	addChild( m_saq );
 }
 
-CSulGeomQuad* CSulViewTexture::getQuad()
+CSulGeode* CSulViewTexture::getQuad()
 {
-	return m_saq->getQuad();
+	return m_saq->getGeode();
 }

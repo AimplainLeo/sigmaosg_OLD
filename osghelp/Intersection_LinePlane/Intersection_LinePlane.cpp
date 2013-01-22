@@ -19,7 +19,7 @@ osg::Group* createScene()
 
 	// create and object that represents the plane
 	CSulGeomPlane* pGeomPlane = new CSulGeomPlane( *pPlane, 2.0f );
-	pGroup->addChild( pGeomPlane );
+	pGroup->addChild( new CSulGeode(pGeomPlane) );
 	
 	// create line
 	osg::Vec3 p1( 0, 0, -2  );

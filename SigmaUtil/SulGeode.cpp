@@ -6,6 +6,15 @@
 #include <osg/depth>
 #include <osg/BlendFunc>
 
+CSulGeode::CSulGeode()
+{
+}
+
+CSulGeode::CSulGeode( osg::Drawable* geom )
+{
+	addDrawable( geom );
+}
+
 void CSulGeode::enableBlend()
 {
 	getOrCreateStateSet()->setMode( GL_BLEND, osg::StateAttribute::ON );

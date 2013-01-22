@@ -51,7 +51,8 @@ public:
 
 	virtual void					setMouseRelease( bool bInside );
 
-	CSulGeomQuad*					getQuad();
+	CSulGeode*						getGeode();
+	CSulGeomQuad*					getGeom();
 
 	virtual class CSulGuiCanvas*	asCanvas();
 
@@ -71,7 +72,8 @@ private:
 	void			onViewResize( float w, float h );
 
 private:
-	osg::ref_ptr<CSulGeomQuad>	m_rQuad;
+	osg::ref_ptr<CSulGeode>		m_geodeQuad;
+	osg::ref_ptr<CSulGeomQuad>	m_geomQuad;
 	
 	osg::ref_ptr<osg::Uniform>	m_uniformUseTexture;
 	osg::ref_ptr<osg::Uniform>	m_uniformUseCover;

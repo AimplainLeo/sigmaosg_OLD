@@ -20,9 +20,11 @@ osg::Node* CreateScene()
 	p->setTexture( sColorMap, 0 );
 	p->setTexture( sNormalMap, 1 );
 
-	CSulShaderNormalMapObjectSpace* pShader = new CSulShaderNormalMapObjectSpace( p );
+	CSulGeode* geode = new CSulGeode( p );
 
-	return p;
+	CSulShaderNormalMapObjectSpace* pShader = new CSulShaderNormalMapObjectSpace( geode );
+
+	return geode;
 }
 
 int _tmain(int argc, _TCHAR* argv[])

@@ -50,7 +50,7 @@ osg::Node* createScene()
 	osg::MatrixTransform* mtrans = new osg::MatrixTransform;
 	mtrans->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
 	mtrans->setMatrix( osg::Matrix::identity() );
-	mtrans->addChild( pGeomQuad );
+	mtrans->addChild( new CSulGeode(pGeomQuad) );
 	
 	osg::Projection* pProj = new osg::Projection();
 	osg::Matrixd m_mOrtho = osg::Matrix::ortho2D( 0, 512, 0, 512 );

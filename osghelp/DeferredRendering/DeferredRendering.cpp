@@ -74,9 +74,9 @@ osg::Node* createScene( osgViewer::Viewer* viewer )
 			"shaders/sulFuncLightPoint.frag"
 		) 
 	);
-	alignedQuad->getQuad()->setTexture( viewRTT->getTexture(0), 0 );
-	alignedQuad->getQuad()->setTexture( viewRTT->getTexture(1), 1 );
-	alignedQuad->getQuad()->setTexture( viewRTT->getTexture(2), 2 );
+	alignedQuad->getGeom()->setTexture( viewRTT->getTexture(0), 0 );
+	alignedQuad->getGeom()->setTexture( viewRTT->getTexture(1), 1 );
+	alignedQuad->getGeom()->setTexture( viewRTT->getTexture(2), 2 );
 
 	osg::Uniform* u0 = new osg::Uniform( osg::Uniform::SAMPLER_2D , "texPositions" );
 	u0->set( 0 );
@@ -92,7 +92,7 @@ osg::Node* createScene( osgViewer::Viewer* viewer )
 	alignedQuad->getOrCreateStateSet()->addUniform( lm->getUniformTexLightData() );
 	alignedQuad->getOrCreateStateSet()->addUniform( lm->getUniformCountLightPoints() );
 	alignedQuad->getOrCreateStateSet()->addUniform( lm->getUniformCountLightSpots() );
-	alignedQuad->getQuad()->setTexture( lm->getTextureData(), 7 );
+	alignedQuad->getGeom()->setTexture( lm->getTextureData(), 7 );
 
 	return root;
 }
