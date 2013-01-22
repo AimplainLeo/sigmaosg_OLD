@@ -14,6 +14,8 @@ public:
 	void			setColor( const osg::Vec4& color );
 	void			setColor( float r, float g, float b, float a );
 
+	void			add( const osg::Vec3& v, const osg::Vec3& n );
+
 	virtual	void	createDrawable();
 
 protected:
@@ -24,6 +26,7 @@ protected:
 
 	osg::ref_ptr<osg::Vec3Array>	m_verts;
 	osg::ref_ptr<osg::Vec4Array>	m_colors;
+	osg::ref_ptr<osg::Vec3Array>	m_normals;
 };
 
 #endif // __SULGEOM_H__

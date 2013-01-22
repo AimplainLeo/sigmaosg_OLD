@@ -11,6 +11,9 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad()
 
 	m_rGeomQuad = new CSulGeomQuad;
 
+	m_geodeQuad = new CSulGeode;
+	m_geodeQuad->addDrawable( m_rGeomQuad );
+
 	osg::Matrixd mOrtho = osg::Matrix::ortho2D( -0.5f, 0.5f, -0.5f, 0.5f );
 	setMatrix( mOrtho );
 
@@ -22,6 +25,9 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( float fViewW, float fViewH, osg::T
 	// create geometry quad
 	m_rGeomQuad = new CSulGeomQuad( osg::Vec3( x + w/2.0f, fViewH - (y+h/2.0f) , 0 ), w, h, CSulGeomQuad::PLANE_XY );
 	m_rGeomQuad->setTexture( tex );
+
+	m_geodeQuad = new CSulGeode;
+	m_geodeQuad->addDrawable( m_rGeomQuad );
 
 	osg::Matrixd mOrtho = osg::Matrix::ortho2D( 0, fViewW, 0, fViewH );
 	setMatrix( mOrtho );
@@ -38,6 +44,9 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad( float fViewW, float fViewH, osg::T
 	// create geometry quad
 	m_rGeomQuad = new CSulGeomQuad( osg::Vec3( x + w/2.0f, fViewH - (y+h/2.0f) , z ), w, h, CSulGeomQuad::PLANE_XY );
 	m_rGeomQuad->setTexture( tex );
+
+	m_geodeQuad = new CSulGeode;
+	m_geodeQuad->addDrawable( m_rGeomQuad );
 
 	osg::Matrixd mOrtho = osg::Matrix::ortho2D( 0, fViewW, 0, fViewH );
 	setMatrix( mOrtho );

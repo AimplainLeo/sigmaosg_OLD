@@ -211,6 +211,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Billboard with SigmaUtil", 
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shapes with SigmaUtil", "Shapes with SigmaUtil\Shapes with SigmaUtil.vcxproj", "{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MT Static|Win32 = Debug MT Static|Win32
@@ -2205,6 +2210,26 @@ Global
 		{61CCCD07-8311-4DD8-9748-5513D45EBC58}.Release MTDLL|Win32.Build.0 = Release|Win32
 		{61CCCD07-8311-4DD8-9748-5513D45EBC58}.Release|Win32.ActiveCfg = Release|Win32
 		{61CCCD07-8311-4DD8-9748-5513D45EBC58}.Release|Win32.Build.0 = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MT Static|Win32.ActiveCfg = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MT Static|Win32.Build.0 = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MT|Win32.ActiveCfg = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MT|Win32.Build.0 = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MTDLL Static|Win32.ActiveCfg = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MTDLL Static|Win32.Build.0 = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MTDLL|Win32.ActiveCfg = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug MTDLL|Win32.Build.0 = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Debug|Win32.Build.0 = Debug|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MT Static|Win32.ActiveCfg = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MT Static|Win32.Build.0 = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MT|Win32.ActiveCfg = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MT|Win32.Build.0 = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MTDLL Static|Win32.ActiveCfg = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MTDLL Static|Win32.Build.0 = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MTDLL|Win32.ActiveCfg = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release MTDLL|Win32.Build.0 = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release|Win32.ActiveCfg = Release|Win32
+		{6BFB6C03-195F-400A-9586-D20A5FFE6BAA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
