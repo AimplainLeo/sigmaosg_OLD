@@ -10,11 +10,27 @@ m_color( color )
 	m_verts = new osg::Vec3Array;
 	m_normals = new osg::Vec3Array;
 
-	setColorArray( m_colors );
 	setVertexArray( m_verts );
-	setNormalArray( m_normals );
+	
+	m_texCoords = new osg::Vec2Array;
+	//setTexCoordArray( 0, m_texCoords );
 
-	setNormalBinding( osg::Geometry::BIND_PER_VERTEX );
+	//setNormalBinding( osg::Geometry::BIND_PER_VERTEX );	// note: this will crash the render if no normals are given and you use this method
+}
+
+void CSulGeom::useColorArray()
+{
+	setColorArray( m_colors );
+}
+
+void CSulGeom::useNormalArray()
+{
+	setNormalArray( m_normals );
+}
+
+void CSulGeom::useTextureCoordArray()
+{
+	setTexCoordArray( 0, m_texCoords );
 }
 
 void CSulGeom::setColor( const osg::Vec4& color )
@@ -32,10 +48,33 @@ void CSulGeom::removeAllPrimitiveSets()
 	removePrimitiveSet( 0, getNumPrimitiveSets() );
 }
 
-void CSulGeom::add( const osg::Vec3& v, const osg::Vec3& n )
+void CSulGeom::addV( const osg::Vec3& v )
+{
+	m_verts->push_back( v );
+}
+
+void CSulGeom::addVN( const osg::Vec3& v, const osg::Vec3& n )
 {
 	m_verts->push_back( v );
 	m_normals->push_back( n );
+}
+
+void CSulGeom::addVC( const osg::Vec3& v, const osg::Vec4& c )
+{
+	m_verts->push_back( v );
+	m_colors->push_back( c );
+}
+
+void CSulGeom::addVNT( const osg::Vec3& v, const osg::Vec3& n, const osg::Vec2& t )
+{
+	m_verts->push_back( v );
+	m_normals->push_back( n );
+	m_texCoords->push_back( t );
+}
+
+sigma::uint32 CSulGeom::getNumVertices()
+{
+	return m_verts->size();
 }
 
 void CSulGeom::createDrawable()

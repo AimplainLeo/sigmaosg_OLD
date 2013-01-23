@@ -14,6 +14,7 @@ public:
 					CSulGeomLines( const sigma::VEC_LINESEGMENT& vecLines );
 
 	// NOTE: remember to call createDrawable
+	void			addLine( const osg::Vec3& pos );
 	void			setLines( const sigma::VEC_LINESEGMENT& vecLines );
 
 	// only call if needed (constructors call this automatically)

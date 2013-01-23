@@ -27,37 +27,27 @@ void CSulGeomLines::createDrawable()
 	if ( m_vecLines.size()==0 )
 		return;
 
-	osg::ref_ptr<osg::UIntArray> indices = new osg::UIntArray;	
+	removeAllPrimitiveSets();
 
-	sigma::uint32 count = 0;
 	sigma::VEC_LINESEGMENT::const_iterator i;
 	i = m_vecLines.begin();
 	while ( i!=m_vecLines.end() )
 	{
-		m_verts->push_back( (*i)->start() );
-		m_verts->push_back( (*i)->end() );
-
-		indices->push_back( count++ );
-		indices->push_back( count++ );
-
-		m_colors->push_back( m_color );
-		m_colors->push_back( m_color );
-
+		addVC( (*i)->start(), m_color );
+		addVC( (*i)->end(), m_color );
 		++i;
 	}
 
-	setColorBinding( osg::Geometry::BIND_PER_VERTEX );
-
-    addPrimitiveSet(
-        new osg::DrawElementsUInt( 
-			GL_LINES,
-            indices->size(), 
-			&(indices->front())
-		)
-	);
+	addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINES, 0, m_vecLines.size()*2 ) );
 }
 
 void CSulGeomLines::setLines( const sigma::VEC_LINESEGMENT& vecLines )
 {
 	m_vecLines = vecLines;
+}
+
+void CSulGeomLines::addLine( const osg::Vec3& pos )
+{
+	osg::LineSegment* ls = new  osg::LineSegment( osg::Vec3(0,0,0), pos );
+	m_vecLines.push_back( ls );
 }
