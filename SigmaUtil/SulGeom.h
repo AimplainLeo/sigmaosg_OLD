@@ -25,15 +25,19 @@ public:
 	void			addV( const osg::Vec3& v );
 	void			addVN( const osg::Vec3& v, const osg::Vec3& n );
 	void			addVC( const osg::Vec3& v, const osg::Vec4& c );
-
+	void			addVNC( const osg::Vec3& v, const osg::Vec3& n, const osg::Vec4& c );
 	void			addVNT( const osg::Vec3& v, const osg::Vec3& n, const osg::Vec2& t );
 
 	sigma::uint32	getNumVertices();
 
 	virtual	void	createDrawable();
 
+	void			applyMatrix( const osg::Matrix& m );
+
 protected:
 	void			removeAllPrimitiveSets();
+	void			transformVerts( const osg::Matrix& m );
+	void			transformNormals( const osg::Matrix& m );
 
 protected:
 	osg::Vec4						m_color;

@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <SigmaUtil/SulGeode.h>
 #include <SigmaUtil/SulGeomHemiSphere.h>
+#include <SigmaUtil/SulGeomCylinder.h>
 #include <SigmaUtil/SulGeodeParachute.h>
 #include <SigmaUtil/SulGeomGrid.h>
 #include <osgViewer/Viewer>
@@ -14,6 +15,8 @@
 osg::Node* createScene()
 {
 	osg::Group* group = new osg::Group;
+
+	//group->addChild( new CSulGeode(new CSulGeomCylinder) );
 
 	group->addChild( new CSulGeodeParachute() );
 
@@ -35,9 +38,12 @@ m->setEmission(osg::Material::FRONT_AND_BACK, osg::Vec4(0, 0.1, 0, 1));
 m->setShininess(osg::Material::FRONT_AND_BACK, 1.0f);  
 group->getOrCreateStateSet()->setAttributeAndModes( m, osg::StateAttribute::ON );  
 */
+
+
 osg::LightModel* ltModel = new osg::LightModel;  
 ltModel->setTwoSided(true);  
 group->getOrCreateStateSet()->setAttribute(ltModel); 
+
 
 
 	CSulGeomGrid* grid = new CSulGeomGrid;

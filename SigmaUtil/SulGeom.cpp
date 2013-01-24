@@ -65,6 +65,13 @@ void CSulGeom::addVC( const osg::Vec3& v, const osg::Vec4& c )
 	m_colors->push_back( c );
 }
 
+void CSulGeom::addVNC( const osg::Vec3& v, const osg::Vec3& n, const osg::Vec4& c )
+{
+	m_verts->push_back( v );
+	m_normals->push_back( n );
+	m_colors->push_back( c );
+}
+
 void CSulGeom::addVNT( const osg::Vec3& v, const osg::Vec3& n, const osg::Vec2& t )
 {
 	m_verts->push_back( v );
@@ -79,4 +86,34 @@ sigma::uint32 CSulGeom::getNumVertices()
 
 void CSulGeom::createDrawable()
 {
+}
+
+void CSulGeom::transformVerts( const osg::Matrix& m )
+{
+	osg::Vec3Array::iterator i = m_verts->begin();
+	osg::Vec3Array::iterator ie = m_verts->end();
+
+	while ( i!=ie )
+	{
+		(*i) = (*i)*m;
+		++i;
+	}
+}
+
+void CSulGeom::transformNormals( const osg::Matrix& m )
+{
+	osg::Vec3Array::iterator i = m_normals->begin();
+	osg::Vec3Array::iterator ie = m_normals->end();
+
+	while ( i!=ie )
+	{
+		(*i) = (*i)*m;
+		++i;
+	}
+}
+
+void CSulGeom::applyMatrix( const osg::Matrix& m )
+{
+	transformVerts( m );
+	transformNormals( m );
 }
