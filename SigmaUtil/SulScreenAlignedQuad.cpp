@@ -20,6 +20,29 @@ CSulScreenAlignedQuad::CSulScreenAlignedQuad()
 	initConstructor();
 }
 
+CSulScreenAlignedQuad::CSulScreenAlignedQuad( float fViewW, float fViewH, const CSulString& fileTexture )
+{
+	setName( "CSulScreenAlignedQuad" );
+
+	osg::ref_ptr<osg::Image> image = osgDB::readImageFile( osgDB::findDataFile(fileTexture.c_str()) );
+
+	float x = 0.0f;
+	float y = 0.0f;
+	float w = image->s();
+	float h = image->t();
+
+	m_rGeomQuad = new CSulGeomQuad( osg::Vec3( x + w/2.0f, fViewH - (y+h/2.0f) , 0 ), w, h, CSulGeomQuad::PLANE_XY );
+	m_rGeomQuad->setTexture( image );
+
+	m_geodeQuad = new CSulGeode;
+	m_geodeQuad->addDrawable( m_rGeomQuad );
+
+	osg::Matrixd mOrtho = osg::Matrix::ortho2D( 0, fViewW, 0, fViewH );
+	setMatrix( mOrtho );
+
+	initConstructor();
+}
+
 CSulScreenAlignedQuad::CSulScreenAlignedQuad( float fViewW, float fViewH, osg::Texture2D* tex, sigma::int32 x, sigma::int32 y, sigma::uint32 w, sigma::uint32 h )
 {
 	// create geometry quad

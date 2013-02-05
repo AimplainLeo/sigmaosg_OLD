@@ -14,7 +14,9 @@ class SUL_EXPORT CSulScreenAlignedQuad : public osg::Projection
 {
 public:
 										CSulScreenAlignedQuad();
-										
+
+										CSulScreenAlignedQuad( float fViewW, float fViewH, const CSulString& fileTexture );
+
 										CSulScreenAlignedQuad( float fViewW, float fViewH, osg::Texture2D* tex, sigma::int32 x=0, sigma::int32 y=0, sigma::uint32 w=200, sigma::uint32 h=150 );
 										CSulScreenAlignedQuad( float fViewW, float fViewH, osg::Texture2D* tex, const osg::Vec3& pos, sigma::uint32 w=200, sigma::uint32 h=150 );
 

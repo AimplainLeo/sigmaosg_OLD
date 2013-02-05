@@ -23,9 +23,9 @@ osg::Node* CreateScene()
 	osg::Group* pGroup = new osg::Group;
 
 	// osg:Light allows us to set default parameter values to be used by osg::LightSource
+	// note: we do not use light number 0, because we do not want to override the osg default headlights
 	osg::Light* pLight = new osg::Light;
-	pLight->setLightNum( 4 );
-	pLight->setAmbient( osg::Vec4d(0.0, 0.0, 0.0, 0.0) ); 
+	pLight->setLightNum( 4 );						
 	pLight->setDiffuse( osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) );
 	pLight->setPosition( osg::Vec4(1,0,0,0) );		// last param	w = 0.0 directional light (direction)
 													//				w = 1.0 point light (position)

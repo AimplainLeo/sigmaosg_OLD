@@ -5,16 +5,16 @@
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
  
-osg::Node* CreateScene()
+osg::Node* createScene()
 {
-    osg::Geode* pGeode = new osg::Geode();
+    osg::Geode* geode = new osg::Geode();
 
-    pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(-2.0f,0.0f,-2.0f),1.5f,2.0f) ) );
-	pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(2.0f,0.0f,-2.0f),1.5f,2.0f) ) );
-	pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(2.0f,0.0f,2.0f),1.5f,2.0f) ) );
-	pGeode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(-2.0f,0.0f,2.0f),1.5f,2.0f) ) );
+    geode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(-2.0f,0.0f,-2.0f),1.5f,2.0f) ) );
+	geode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(2.0f,0.0f,-2.0f),1.5f,2.0f) ) );
+	geode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(2.0f,0.0f,2.0f),1.5f,2.0f) ) );
+	geode->addDrawable( new osg::ShapeDrawable( new osg::Cylinder(osg::Vec3(-2.0f,0.0f,2.0f),1.5f,2.0f) ) );
 
-    return pGeode;
+    return geode;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -29,7 +29,7 @@ int _tmain(int argc, _TCHAR* argv[])
     viewer->setUpViewInWindow( 32, 32, 512, 512 );
 
     // set the scene-graph data the viewer will render
-    viewer->setSceneData( CreateScene() );
+    viewer->setSceneData( createScene() );
 
     // execute main loop
     return viewer->run();

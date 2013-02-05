@@ -47,7 +47,7 @@ osg::Geometry* CLaser::CreateQuad()
 	osg::StateSet* pStateSet = pGeo->getOrCreateStateSet();
 	pStateSet->setMode( GL_BLEND, osg::StateAttribute::ON );
 	pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-
+	
 	return pGeo;
 }
 
