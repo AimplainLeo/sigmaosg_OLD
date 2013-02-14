@@ -84,6 +84,7 @@
     <ClCompile Include="SulAudioManager.cpp" />
     <ClCompile Include="SulAudioSource.cpp" />
     <ClCompile Include="SulAudioSourceNode.cpp" />
+    <ClCompile Include="SulCameraManipulatorDebugger.cpp" />
     <ClCompile Include="SulExtractGeometry.cpp" />
     <ClCompile Include="SulGeodeParachute.cpp" />
     <ClCompile Include="SulGeomCylinder.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="SulAudioManager.h" />
     <ClInclude Include="SulAudioSource.h" />
     <ClInclude Include="SulAudioSourceNode.h" />
+    <ClInclude Include="SulCameraManipulatorDebugger.h" />
     <ClInclude Include="SulExtractGeometry.h" />
     <ClInclude Include="SulFuncExtractor.h" />
     <ClInclude Include="SulGeodeParachute.h" />

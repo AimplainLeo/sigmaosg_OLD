@@ -6,7 +6,7 @@
 #include <SigmaUtil/SulGeomGrid.h>
 #include <SigmaUtil/SulGeode.h>
 #include <SigmaUtil/SulScreenAlignedQuad.h>
-#include <SigmaUtil/SulManipulatorCamera.h>
+#include <SigmaUtil/SulCameraManipulatorDebugger.h>
 #include <osgViewer/Viewer>
 #include <osgParticle/particle>
 #include <osgParticle/SmokeTrailEffect>
@@ -536,7 +536,7 @@ int _tmain(int argc, _TCHAR* argv[])
     // add the handler to the viewer
     viewer->addEventHandler( new CInputHandler );
 
-	CSulManipulatorCamera* m = new CSulManipulatorCamera;
+	CSulCameraManipulatorDebugger* m = new CSulCameraManipulatorDebugger;
 	m->setHomePosition(
 		osg::Vec3(20,20,5),
 		osg::Vec3(0,0,0),
