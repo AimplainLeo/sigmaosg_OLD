@@ -93,7 +93,6 @@
   <ItemGroup>
     <None Include="myshader.frag" />
     <None Include="myshader.vert" />
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="particles.h" />

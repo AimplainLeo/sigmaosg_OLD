@@ -13,12 +13,21 @@
     <ClInclude Include="targetver.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleDebrisSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDebris.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDebrisSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

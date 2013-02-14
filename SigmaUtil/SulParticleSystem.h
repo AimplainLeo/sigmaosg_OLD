@@ -4,23 +4,52 @@
 #define __SULPARTICLESYSTEM_H__
 
 #include "SulParticleUpdater.h"
+#include "SulParticleEmitter.h"
 #include "SulMath.h"
 #include "SulParticle.h"
 #include "SulTypes.h"
 #include <algorithm>
+#include <osg/group>
+#include <osg/MatrixTransform>
 
-class CSulParticleSystem : public osg::Group
+/*
+
+	CSulParticleSystem
+		numParticles	: maximum number of particles the system can work with
+
+*/
+
+class CSulParticleSystem : public osg::MatrixTransform
 {
 public:
 	CSulParticleSystem( sigma::uint32 numParticles )
 	{
 		m_numParticles = numParticles;
 		m_emitterVelocityFlux.set( 10.0f, 10.0f, 10.0f );		// fluxation on velocity when created
-		m_emitterVelocity.set( 0,0,10 );		// distance per second
+		m_emitterVelocity.set( 0,0,3 );		// distance per second
+	}
+
+	void init()
+	{
+		// create default emitter, if one is not supplied
+		if ( !m_emitter.valid() )
+		{
+			m_emitter = new CSulParticleEmitter;
+		}
+
+		for ( sigma::uint32 i=0; i<m_numParticles; i++ )
+		{
+			createParticle( createVelocity() );
+		}
 
 		addUpdateCallback( new CSulParticleUpdater( this ) );
 	}
 
+	void setEmitter( CSulParticleEmitter* emitter )	
+	{
+		m_emitter = emitter;
+	}
+	
 	osg::Vec3 createVelocity()
 	{
 		float x = m_emitterVelocityFlux.x()*sigma::rand0to1() - m_emitterVelocityFlux.x()/2.0f;
@@ -30,14 +59,6 @@ public:
 			m_emitterVelocity.x() + x,
 			m_emitterVelocity.y() + y,
 			m_emitterVelocity.z() + z );
-	}
-
-	void init()
-	{
-		for ( sigma::uint32 i=0; i<m_numParticles; i++ )
-		{
-			createParticle( createVelocity() );
-		}
 	}
 
 	void add( CSulParticle* p )
@@ -116,6 +137,8 @@ public:
 	virtual void createParticle( const osg::Vec3& velocity ) {}
 
 private:
+	osg::ref_ptr<CSulParticleEmitter>	m_emitter;
+
 	sigma::uint32	m_numParticles;
 	osg::Vec3		m_emitterVelocity;
 	osg::Vec3		m_emitterVelocityFlux;

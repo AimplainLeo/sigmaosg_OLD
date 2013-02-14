@@ -223,6 +223,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Explosion", "Explosion\Expl
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParticlesAnimatedSmoke", "ParticlesAnimatedSmoke\ParticlesAnimatedSmoke.vcxproj", "{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MT Static|Win32 = Debug MT Static|Win32
@@ -2277,6 +2282,26 @@ Global
 		{57F315FB-6D06-4C2D-99E7-70588ADB4DE6}.Release MTDLL|Win32.Build.0 = Release|Win32
 		{57F315FB-6D06-4C2D-99E7-70588ADB4DE6}.Release|Win32.ActiveCfg = Release|Win32
 		{57F315FB-6D06-4C2D-99E7-70588ADB4DE6}.Release|Win32.Build.0 = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MT Static|Win32.ActiveCfg = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MT Static|Win32.Build.0 = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MT|Win32.ActiveCfg = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MT|Win32.Build.0 = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MTDLL Static|Win32.ActiveCfg = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MTDLL Static|Win32.Build.0 = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MTDLL|Win32.ActiveCfg = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug MTDLL|Win32.Build.0 = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Debug|Win32.Build.0 = Debug|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MT Static|Win32.ActiveCfg = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MT Static|Win32.Build.0 = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MT|Win32.ActiveCfg = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MT|Win32.Build.0 = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MTDLL Static|Win32.ActiveCfg = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MTDLL Static|Win32.Build.0 = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MTDLL|Win32.ActiveCfg = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MTDLL|Win32.Build.0 = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release|Win32.ActiveCfg = Release|Win32
+		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

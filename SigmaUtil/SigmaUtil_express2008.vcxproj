@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>SigmaUtil</ProjectName>
+    <ProjectGuid>{3EB97355-D1CB-4537-9255-2DEBF2777FE1}</ProjectGuid>
+    <RootNamespace>SigmaUtil</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug_express2008\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug_express2008\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(OSG_INCLUDE_PATH);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(SIGMAOSG_ROOT_PATH)\libs\SigmaUtil_x2008d.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(OSG_INCLUDE_PATH);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(SIGMAOSG_ROOT_PATH)\libs\SigmaUtil_x2008.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SulAudioListener.cpp" />
+    <ClCompile Include="SulAudioManager.cpp" />
+    <ClCompile Include="SulAudioSource.cpp" />
+    <ClCompile Include="SulAudioSourceNode.cpp" />
+    <ClCompile Include="SulExtractGeometry.cpp" />
+    <ClCompile Include="SulGeodeParachute.cpp" />
+    <ClCompile Include="SulGeomCylinder.cpp" />
+    <ClCompile Include="SulGeomHemiSphere.cpp" />
+    <ClCompile Include="SulNodePath.cpp" />
+    <ClCompile Include="SulGeode.cpp" />
+    <ClCompile Include="SulGeom.cpp" />
+    <ClCompile Include="SulGeomArrow2D.cpp" />
+    <ClCompile Include="SulGeomArrow3D.cpp" />
+    <ClCompile Include="SulGeomAxis.cpp" />
+    <ClCompile Include="SulGeomBarChart.cpp" />
+    <ClCompile Include="SulGeomBillboardInstancing.cpp" />
+    <ClCompile Include="SulGeomBoundingBox.cpp" />
+    <ClCompile Include="SulGeomBox.cpp" />
+    <ClCompile Include="SulGeomCone.cpp" />
+    <ClCompile Include="SulGeomCrossQuadInstancing.cpp" />
+    <ClCompile Include="SulGeomFrame.cpp" />
+    <ClCompile Include="SulGeomGrid.cpp" />
+    <ClCompile Include="SulGeomGriddedText.cpp" />
+    <ClCompile Include="SulGeomHeightField.cpp" />
+    <ClCompile Include="SulGeomLaser.cpp" />
+    <ClCompile Include="SulGeomPlane.cpp" />
+    <ClCompile Include="SulGeomQuad.cpp" />
+    <ClCompile Include="SulGeomQuadTiles.cpp" />
+    <ClCompile Include="SulGeomSphere.cpp" />
+    <ClCompile Include="SulGeomTriangle.cpp" />
+    <ClCompile Include="SulGeomTriangleFan.cpp" />
+    <ClCompile Include="SulGeomTriangleList.cpp" />
+    <ClCompile Include="SulGeodeLineStrip.cpp" />
+    <ClCompile Include="SulGeomLine.cpp" />
+    <ClCompile Include="SulGeomLineList.cpp" />
+    <ClCompile Include="SulGeomLines.cpp" />
+    <ClCompile Include="SulGeomLineStrip.cpp" />
+    <ClCompile Include="SulGeodeCrosshairs.cpp" />
+    <ClCompile Include="SulGeomCrosshairSimple.cpp" />
+    <ClCompile Include="SulGeodeCircle.cpp" />
+    <ClCompile Include="SulGeomCircle.cpp" />
+    <ClCompile Include="SulGeomTickMarksHorizontal.cpp" />
+    <ClCompile Include="SulGrid.cpp" />
+    <ClCompile Include="SulParticleEmitter.cpp" />
+    <ClCompile Include="SulString.cpp" />
+    <ClCompile Include="SulStringList.cpp" />
+    <ClCompile Include="SulWAV.cpp" />
+    <ClCompile Include="SulXmlAttr.cpp" />
+    <ClCompile Include="SulXmlDataInfo.cpp" />
+    <ClCompile Include="SulXmlParser.cpp" />
+    <ClCompile Include="SulXmlWriter.cpp" />
+    <ClCompile Include="SulParser.cpp" />
+    <ClCompile Include="SulTokenizer.cpp" />
+    <ClCompile Include="SulTokenManager.cpp" />
+    <ClCompile Include="SulJson.cpp" />
+    <ClCompile Include="SulJsonArray.cpp" />
+    <ClCompile Include="SulJsonObject.cpp" />
+    <ClCompile Include="SulJsonString.cpp" />
+    <ClCompile Include="SulJsonUtil.cpp" />
+    <ClCompile Include="SulInifileParser.cpp" />
+    <ClCompile Include="SulFile.cpp" />
+    <ClCompile Include="SulFile_1.cpp" />
+    <ClCompile Include="SulFile_2.cpp" />
+    <ClCompile Include="SulPaths.cpp" />
+    <ClCompile Include="SulAnimationPath.cpp" />
+    <ClCompile Include="SulAnimationPathVisitor.cpp" />
+    <ClCompile Include="SulConsoleDisplay.cpp" />
+    <ClCompile Include="SulConsoleInputHandler.cpp" />
+    <ClCompile Include="SulSceneManager.cpp" />
+    <ClCompile Include="SulSceneManagerXml.cpp" />
+    <ClCompile Include="SulTransScreenAlign.cpp" />
+    <ClCompile Include="SulTransToEye.cpp" />
+    <ClCompile Include="SulLightBase.cpp" />
+    <ClCompile Include="SulLightManager.cpp" />
+    <ClCompile Include="SulLightPoint.cpp" />
+    <ClCompile Include="SulLightSpot.cpp" />
+    <ClCompile Include="SulGuiEventHandler.cpp" />
+    <ClCompile Include="SulGuiManager.cpp" />
+    <ClCompile Include="SulGuiThemeXml.cpp" />
+    <ClCompile Include="SulGuiXml.cpp" />
+    <ClCompile Include="SulGuiAlign.cpp" />
+    <ClCompile Include="SulGuiButton.cpp" />
+    <ClCompile Include="SulGuiCanvas.cpp" />
+    <ClCompile Include="SulGuiCheckBox.cpp" />
+    <ClCompile Include="SulGuiComboBox.cpp" />
+    <ClCompile Include="SulGuiComp.cpp" />
+    <ClCompile Include="SulGuiCounter.cpp" />
+    <ClCompile Include="SulGuiDial.cpp" />
+    <ClCompile Include="SulGuiEditBox.cpp" />
+    <ClCompile Include="SulGuiItem.cpp" />
+    <ClCompile Include="SulGuiListBox.cpp" />
+    <ClCompile Include="SulGuiListView.cpp" />
+    <ClCompile Include="SulGuiProfiler.cpp" />
+    <ClCompile Include="SulGuiRadioButton.cpp" />
+    <ClCompile Include="SulGuiRadioButtonGroup.cpp" />
+    <ClCompile Include="SulGuiScrollBar.cpp" />
+    <ClCompile Include="SulGuiSliderH.cpp" />
+    <ClCompile Include="SulGuiTab.cpp" />
+    <ClCompile Include="SulGuiTable.cpp" />
+    <ClCompile Include="SulGuiTabPage.cpp" />
+    <ClCompile Include="SulGuiText.cpp" />
+    <ClCompile Include="SulGuiTextBox.cpp" />
+    <ClCompile Include="SulPerlinNoise1D.cpp" />
+    <ClCompile Include="SulPerlinNoise2D.cpp" />
+    <ClCompile Include="SulPerlinNoiseBase.cpp" />
+    <ClCompile Include="SulCalcBoundingBox.cpp" />
+    <ClCompile Include="SulGenHeightTexture.cpp" />
+    <ClCompile Include="SulProgramShaders.cpp" />
+    <ClCompile Include="SulScreenAlignedQuad.cpp" />
+    <ClCompile Include="SulUniformArrayHack.cpp" />
+    <ClCompile Include="SulViewQuad.cpp" />
+    <ClCompile Include="SulViewRTT.cpp" />
+    <ClCompile Include="SulViewTexture.cpp" />
+    <ClCompile Include="SulDebugMenu.cpp" />
+    <ClCompile Include="SulDebugMenuKeyboardHandler.cpp" />
+    <ClCompile Include="SulDebugValueBase.cpp" />
+    <ClCompile Include="SulDebugValueFloat.cpp" />
+    <ClCompile Include="SulDebugValueText.cpp" />
+    <ClCompile Include="SulManipulatorCamera.cpp" />
+    <ClCompile Include="SulTexImage.cpp" />
+    <ClCompile Include="SulVerticalCrossMap.cpp" />
+    <ClCompile Include="SulDistancePointAndLine.cpp" />
+    <ClCompile Include="sulDistancePointAndTriangle2d.cpp" />
+    <ClCompile Include="SulIntersectGraph.cpp" />
+    <ClCompile Include="SulIntersectGraphMouse.cpp" />
+    <ClCompile Include="SulIntLine.cpp" />
+    <ClCompile Include="SulIntPlane.cpp" />
+    <ClCompile Include="SulIntTriangle.cpp" />
+    <ClCompile Include="SulIntersectionWithCamera.cpp" />
+    <ClCompile Include="SulSphereIntersector.cpp" />
+    <ClCompile Include="SulSphereIntersectorTriangle.cpp" />
+    <ClCompile Include="SulPlasma.cpp" />
+    <ClCompile Include="SulCloudPlane.cpp" />
+    <ClCompile Include="SulClouds.cpp" />
+    <ClCompile Include="SulCloudsTexture.cpp" />
+    <ClCompile Include="SulGenerateHeightTexture.cpp" />
+    <ClCompile Include="SulGrass.cpp" />
+    <ClCompile Include="SulGenPositionMask.cpp" />
+    <ClCompile Include="SulGenPositionTextures.cpp" />
+    <ClCompile Include="SulGenTextureWithPositions.cpp" />
+    <ClCompile Include="SulNodeVisitorExtractLines.cpp" />
+    <ClCompile Include="SulRenderCellInstances.cpp" />
+    <ClCompile Include="SulRenderInstances.cpp" />
+    <ClCompile Include="SulShadow.cpp" />
+    <ClCompile Include="SulShadowTexture.cpp" />
+    <ClCompile Include="SulShadowTextureNodeCallback.cpp" />
+    <ClCompile Include="SulCrossQuad.cpp" />
+    <ClCompile Include="SulRenderTransparent.cpp" />
+    <ClCompile Include="SulPostFilterBase.cpp" />
+    <ClCompile Include="SulPostFilterBloom.cpp" />
+    <ClCompile Include="SulPostFilterBrightPass.cpp" />
+    <ClCompile Include="SulPostFilterGhost.cpp" />
+    <ClCompile Include="SulPostFilterGodRays.cpp" />
+    <ClCompile Include="SulPostFilterHDR.cpp" />
+    <ClCompile Include="SulPostFilterHDR2.cpp" />
+    <ClCompile Include="SulPostFilterNightVision.cpp" />
+    <ClCompile Include="SulPostFilterStreaking.cpp" />
+    <ClCompile Include="SulPostFilterThermal.cpp" />
+    <ClCompile Include="SulTextureBuffer.cpp" />
+    <ClCompile Include="SulFilterPass.cpp" />
+    <ClCompile Include="SulPass.cpp" />
+    <ClCompile Include="SulPassBrightPass.cpp" />
+    <ClCompile Include="SulPassCombineTex.cpp" />
+    <ClCompile Include="SulPassGaussH.cpp" />
+    <ClCompile Include="SulPassGaussV.cpp" />
+    <ClCompile Include="SulPassGhost.cpp" />
+    <ClCompile Include="SulPassGodRays.cpp" />
+    <ClCompile Include="SulPassNormal.cpp" />
+    <ClCompile Include="SulPassStreaking.cpp" />
+    <ClCompile Include="SulPassToneMap.cpp" />
+    <ClCompile Include="SulShaderAmplifier.cpp" />
+    <ClCompile Include="SulShaderBase.cpp" />
+    <ClCompile Include="SulShaderBrightPass.cpp" />
+    <ClCompile Include="SulShaderBW.cpp" />
+    <ClCompile Include="SulShaderColor.cpp" />
+    <ClCompile Include="SulShaderCombine.cpp" />
+    <ClCompile Include="SulShaderCombineTex.cpp" />
+    <ClCompile Include="SulShaderGaussH.cpp" />
+    <ClCompile Include="SulShaderGaussV.cpp" />
+    <ClCompile Include="SulShaderGhost.cpp" />
+    <ClCompile Include="SulShaderGodRays.cpp" />
+    <ClCompile Include="SulShaderGuiFrame.cpp" />
+    <ClCompile Include="SulShaderInstancingBillboards.cpp" />
+    <ClCompile Include="SulShaderIntensity.cpp" />
+    <ClCompile Include="SulShaderNormalMapObjectSpace.cpp" />
+    <ClCompile Include="SulShaderNormalMapTangentSpace.cpp" />
+    <ClCompile Include="SulShaderStreak.cpp" />
+    <ClCompile Include="SulShaderZ.cpp" />
+    <ClCompile Include="SulRTT.cpp" />
+    <ClCompile Include="SulTexCam.cpp" />
+    <ClCompile Include="SulDeferredCamera.cpp" />
+    <ClCompile Include="SulCoordGeodetic.cpp" />
+    <ClCompile Include="SulCoordLatLon.cpp" />
+    <ClCompile Include="SulCoordUTM.cpp" />
+    <ClCompile Include="SulTranverseMercatorParameters.cpp" />
+    <ClCompile Include="SulClipLines.cpp" />
+    <ClCompile Include="SulClipTriangle.cpp" />
+    <ClCompile Include="SulDataTri.cpp" />
+    <ClCompile Include="SulInit.cpp" />
+    <ClCompile Include="SulProfiler.cpp" />
+    <ClCompile Include="SulParticleUpdater.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SulAudioListener.h" />
+    <ClInclude Include="SulAudioManager.h" />
+    <ClInclude Include="SulAudioSource.h" />
+    <ClInclude Include="SulAudioSourceNode.h" />
+    <ClInclude Include="SulExtractGeometry.h" />
+    <ClInclude Include="SulFuncExtractor.h" />
+    <ClInclude Include="SulGeodeParachute.h" />
+    <ClInclude Include="SulGeomCylinder.h" />
+    <ClInclude Include="SulGeomHemiSphere.h" />
+    <ClInclude Include="SulNodePath.h" />
+    <ClInclude Include="SulParticleEmitter.h" />
+    <ClInclude Include="SulSigSlots.h" />
+    <ClInclude Include="SulTypes.h" />
+    <ClInclude Include="SulWAV.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="SulGeode.h" />
+    <ClInclude Include="SulGeom.h" />
+    <ClInclude Include="SulGeomArrow2D.h" />
+    <ClInclude Include="SulGeomArrow3D.h" />
+    <ClInclude Include="SulGeomAxis.h" />
+    <ClInclude Include="SulGeomBarChart.h" />
+    <ClInclude Include="SulGeomBillboardInstancing.h" />
+    <ClInclude Include="SulGeomBoundingBox.h" />
+    <ClInclude Include="SulGeomBox.h" />
+    <ClInclude Include="SulGeomCone.h" />
+    <ClInclude Include="SulGeomCrossQuadInstancing.h" />
+    <ClInclude Include="SulGeomFrame.h" />
+    <ClInclude Include="SulGeomGrid.h" />
+    <ClInclude Include="SulGeomGriddedText.h" />
+    <ClInclude Include="SulGeomHeightField.h" />
+    <ClInclude Include="SulGeomLaser.h" />
+    <ClInclude Include="SulGeomPlane.h" />
+    <ClInclude Include="SulGeomQuad.h" />
+    <ClInclude Include="SulGeomQuadTiles.h" />
+    <ClInclude Include="SulGeomSphere.h" />
+    <ClInclude Include="SulGeomTriangle.h" />
+    <ClInclude Include="SulGeomTriangleFan.h" />
+    <ClInclude Include="SulGeomTriangleList.h" />
+    <ClInclude Include="SulGeodeLineStrip.h" />
+    <ClInclude Include="SulGeomLine.h" />
+    <ClInclude Include="SulGeomLineList.h" />
+    <ClInclude Include="SulGeomLines.h" />
+    <ClInclude Include="SulGeomLineStrip.h" />
+    <ClInclude Include="SulGeodeCrosshairs.h" />
+    <ClInclude Include="SulGeomCrosshairSimple.h" />
+    <ClInclude Include="SulGeodeCircle.h" />
+    <ClInclude Include="SulGeomCircle.h" />
+    <ClInclude Include="SulGeomTickMarksHorizontal.h" />
+    <ClInclude Include="SulGrid.h" />
+    <ClInclude Include="SulString.h" />
+    <ClInclude Include="SulStringList.h" />
+    <ClInclude Include="SulXmlAttr.h" />
+    <ClInclude Include="SulXmlDataInfo.h" />
+    <ClInclude Include="SulXmlParser.h" />
+    <ClInclude Include="SulXmlWriter.h" />
+    <ClInclude Include="SulParser.h" />
+    <ClInclude Include="SulTokenizer.h" />
+    <ClInclude Include="SulTokenManager.h" />
+    <ClInclude Include="SulJson.h" />
+    <ClInclude Include="SulJsonArray.h" />
+    <ClInclude Include="SulJsonObject.h" />
+    <ClInclude Include="SulJsonString.h" />
+    <ClInclude Include="SulJsonUtil.h" />
+    <ClInclude Include="SulJsonValue.h" />
+    <ClInclude Include="SulInifileParser.h" />
+    <ClInclude Include="SulFile.h" />
+    <ClInclude Include="SulPaths.h" />
+    <ClInclude Include="SulAnimationPath.h" />
+    <ClInclude Include="SulAnimationPathFunctor.h" />
+    <ClInclude Include="SulAnimationPathVisitor.h" />
+    <ClInclude Include="SulConsoleDisplay.h" />
+    <ClInclude Include="SulConsoleFunctor.h" />
+    <ClInclude Include="SulConsoleInputHandler.h" />
+    <ClInclude Include="SulSceneManager.h" />
+    <ClInclude Include="SulSceneManagerXml.h" />
+    <ClInclude Include="SulTransScreenAlign.h" />
+    <ClInclude Include="SulTransToEye.h" />
+    <ClInclude Include="SulLightBase.h" />
+    <ClInclude Include="SulLightManager.h" />
+    <ClInclude Include="SulLightPoint.h" />
+    <ClInclude Include="SulLightSpot.h" />
+    <ClInclude Include="SulGuiCompEditModeVisitor.h" />
+    <ClInclude Include="SulGuiCompVisitor.h" />
+    <ClInclude Include="SulGuiEvent.h" />
+    <ClInclude Include="SulGuiEventHandler.h" />
+    <ClInclude Include="SulGuiManager.h" />
+    <ClInclude Include="SulGuiThemeXml.h" />
+    <ClInclude Include="SulGuiXml.h" />
+    <ClInclude Include="SulGuiAlign.h" />
+    <ClInclude Include="SulGuiButton.h" />
+    <ClInclude Include="SulGuiCanvas.h" />
+    <ClInclude Include="SulGuiCheckBox.h" />
+    <ClInclude Include="SulGuiComboBox.h" />
+    <ClInclude Include="SulGuiComp.h" />
+    <ClInclude Include="SulGuiCounter.h" />
+    <ClInclude Include="SulGuiDial.h" />
+    <ClInclude Include="SulGuiEditBox.h" />
+    <ClInclude Include="SulGuiItem.h" />
+    <ClInclude Include="SulGuiListBox.h" />
+    <ClInclude Include="SulGuiListView.h" />
+    <ClInclude Include="SulGuiProfiler.h" />
+    <ClInclude Include="SulGuiRadioButton.h" />
+    <ClInclude Include="SulGuiRadioButtonGroup.h" />
+    <ClInclude Include="SulGuiScrollBar.h" />
+    <ClInclude Include="SulGuiSliderH.h" />
+    <ClInclude Include="SulGuiTab.h" />
+    <ClInclude Include="SulGuiTable.h" />
+    <ClInclude Include="SulGuiTabPage.h" />
+    <ClInclude Include="SulGuiText.h" />
+    <ClInclude Include="SulGuiTextBox.h" />
+    <ClInclude Include="SulGuiTextUpdateCallback.h" />
+    <ClInclude Include="SulPerlinNoise1D.h" />
+    <ClInclude Include="SulPerlinNoise2D.h" />
+    <ClInclude Include="SulPerlinNoiseBase.h" />
+    <ClInclude Include="SulBB.h" />
+    <ClInclude Include="SulCalcBoundingBox.h" />
+    <ClInclude Include="SulGenHeightTexture.h" />
+    <ClInclude Include="SulProgramShaders.h" />
+    <ClInclude Include="SulScreenAlignedQuad.h" />
+    <ClInclude Include="SulTestGeoms.h" />
+    <ClInclude Include="SulUniformArrayHack.h" />
+    <ClInclude Include="SulViewQuad.h" />
+    <ClInclude Include="SulViewRTT.h" />
+    <ClInclude Include="SulViewTexture.h" />
+    <ClInclude Include="SulDebugMenu.h" />
+    <ClInclude Include="SulDebugMenuKeyboardHandler.h" />
+    <ClInclude Include="SulDebugValueBase.h" />
+    <ClInclude Include="SulDebugValueFloat.h" />
+    <ClInclude Include="SulDebugValueText.h" />
+    <ClInclude Include="SulWorkload.h" />
+    <ClInclude Include="SulArray2D.h" />
+    <ClInclude Include="SulManipulatorCamera.h" />
+    <ClInclude Include="SulTexImage.h" />
+    <ClInclude Include="SulVerticalCrossMap.h" />
+    <ClInclude Include="SulDistancePointAndLine.h" />
+    <ClInclude Include="sulDistancePointAndTriangle2d.h" />
+    <ClInclude Include="SulIntersectGraph.h" />
+    <ClInclude Include="SulIntersectGraphMouse.h" />
+    <ClInclude Include="SulIntLine.h" />
+    <ClInclude Include="SulIntPlane.h" />
+    <ClInclude Include="SulIntTriangle.h" />
+    <ClInclude Include="SulIntersectionCullCallback.h" />
+    <ClInclude Include="SulIntersectionDrawCallback.h" />
+    <ClInclude Include="SulIntersectionInfo.h" />
+    <ClInclude Include="SulIntersectionWithCamera.h" />
+    <ClInclude Include="SulIntersectionWithCameraCallback.h" />
+    <ClInclude Include="SulSphereIntersector.h" />
+    <ClInclude Include="SulSphereIntersectorTriangle.h" />
+    <ClInclude Include="SulNodeCallbackCameraSync.h" />
+    <ClInclude Include="SulPlasma.h" />
+    <ClInclude Include="SulCloudPlane.h" />
+    <ClInclude Include="SulClouds.h" />
+    <ClInclude Include="SulCloudScrollTexture.h" />
+    <ClInclude Include="SulCloudsTexture.h" />
+    <ClInclude Include="SulGenerateHeightTexture.h" />
+    <ClInclude Include="sulgengrassupdatecallback.h" />
+    <ClInclude Include="SulGrass.h" />
+    <ClInclude Include="SulDataShapeMask.h" />
+    <ClInclude Include="SulGenNodeMaskVisitor.h" />
+    <ClInclude Include="SulGenPositionMask.h" />
+    <ClInclude Include="SulGenPositionTextures.h" />
+    <ClInclude Include="SulGenTextureWithPositions.h" />
+    <ClInclude Include="SulNodeVisitorExtractLines.h" />
+    <ClInclude Include="SulRenderCellInstances.h" />
+    <ClInclude Include="SulRenderInstances.h" />
+    <ClInclude Include="SulShadow.h" />
+    <ClInclude Include="SulShadowTexture.h" />
+    <ClInclude Include="SulShadowTextureNodeCallback.h" />
+    <ClInclude Include="SulCrossQuad.h" />
+    <ClInclude Include="SulRenderTransparent.h" />
+    <ClInclude Include="SulPostFilterBase.h" />
+    <ClInclude Include="SulPostFilterBloom.h" />
+    <ClInclude Include="SulPostFilterBrightPass.h" />
+    <ClInclude Include="SulPostFilterGhost.h" />
+    <ClInclude Include="SulPostFilterGodRays.h" />
+    <ClInclude Include="SulPostFilterHDR.h" />
+    <ClInclude Include="SulPostFilterHDR2.h" />
+    <ClInclude Include="SulPostFilterNightVision.h" />
+    <ClInclude Include="SulPostFilterStreaking.h" />
+    <ClInclude Include="SulPostFilterThermal.h" />
+    <ClInclude Include="SulTextureBuffer.h" />
+    <ClInclude Include="SulFilterPass.h" />
+    <ClInclude Include="SulPass.h" />
+    <ClInclude Include="SulPassBrightPass.h" />
+    <ClInclude Include="SulPassCombineTex.h" />
+    <ClInclude Include="SulPassGaussH.h" />
+    <ClInclude Include="SulPassGaussV.h" />
+    <ClInclude Include="SulPassGhost.h" />
+    <ClInclude Include="SulPassGodRays.h" />
+    <ClInclude Include="SulPassNormal.h" />
+    <ClInclude Include="SulPassStreaking.h" />
+    <ClInclude Include="SulPassToneMap.h" />
+    <ClInclude Include="SulShaderAmplifier.h" />
+    <ClInclude Include="SulShaderBase.h" />
+    <ClInclude Include="SulShaderBrightPass.h" />
+    <ClInclude Include="SulShaderBW.h" />
+    <ClInclude Include="SulShaderColor.h" />
+    <ClInclude Include="SulShaderCombine.h" />
+    <ClInclude Include="SulShaderCombineTex.h" />
+    <ClInclude Include="SulShaderGaussH.h" />
+    <ClInclude Include="SulShaderGaussV.h" />
+    <ClInclude Include="SulShaderGhost.h" />
+    <ClInclude Include="SulShaderGodRays.h" />
+    <ClInclude Include="SulShaderGuiFrame.h" />
+    <ClInclude Include="SulShaderInstancingBillboards.h" />
+    <ClInclude Include="SulShaderIntensity.h" />
+    <ClInclude Include="SulShaderNormalMapObjectSpace.h" />
+    <ClInclude Include="SulShaderNormalMapTangentSpace.h" />
+    <ClInclude Include="SulShaderStreak.h" />
+    <ClInclude Include="SulShaderZ.h" />
+    <ClInclude Include="SulRTT.h" />
+    <ClInclude Include="SulTexCam.h" />
+    <ClInclude Include="SulDeferredCamera.h" />
+    <ClInclude Include="SulCoordGeodetic.h" />
+    <ClInclude Include="SulCoordLatLon.h" />
+    <ClInclude Include="SulCoordUTM.h" />
+    <ClInclude Include="SulTranverseMercatorParameters.h" />
+    <ClInclude Include="SulMath.h" />
+    <ClInclude Include="SulClipLines.h" />
+    <ClInclude Include="SulClipTriangle.h" />
+    <ClInclude Include="SulDataRay.h" />
+    <ClInclude Include="SulDataTri.h" />
+    <ClInclude Include="SulInit.h" />
+    <ClInclude Include="SulProfiler.h" />
+    <ClInclude Include="SulProfilerData.h" />
+    <ClInclude Include="SulParticle.h" />
+    <ClInclude Include="SulParticleSystem.h" />
+    <ClInclude Include="SulParticleUpdater.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\shaders\sulFuncLightPoint.frag" />
+    <None Include="Data\shaders\sulFuncLightSpot.frag" />
+    <None Include="Data\default_theme.xml" />
+    <None Include="..\..\osghelp\Grass3\grass.frag" />
+    <None Include="..\..\osghelp\Grass3\grass.vert" />
+    <None Include="..\..\osghelp\Grass3\height_render.frag" />
+    <None Include="..\..\osghelp\Grass3\height_render.vert" />
+    <None Include="Data\shaders\amplifier.frag" />
+    <None Include="Data\shaders\amplifier.vert" />
+    <None Include="Data\shaders\brightpass.frag" />
+    <None Include="Data\shaders\brightpass.vert" />
+    <None Include="Data\shaders\bw.frag" />
+    <None Include="Data\shaders\bw.vert" />
+    <None Include="Data\shaders\color.frag" />
+    <None Include="Data\shaders\combinetex.frag" />
+    <None Include="Data\shaders\combinetex.vert" />
+    <None Include="Data\shaders\compose.frag" />
+    <None Include="Data\shaders\compose.vert" />
+    <None Include="Data\shaders\gaussh.frag" />
+    <None Include="Data\shaders\gaussh.vert" />
+    <None Include="Data\shaders\gaussv.frag" />
+    <None Include="Data\shaders\gaussv.vert" />
+    <None Include="Data\shaders\ghost.frag" />
+    <None Include="Data\shaders\ghost.vert" />
+    <None Include="Data\shaders\godrays.frag" />
+    <None Include="Data\shaders\godrays.vert" />
+    <None Include="Data\shaders\gui_frame.frag" />
+    <None Include="Data\shaders\gui_frame.vert" />
+    <None Include="Data\shaders\instancing_billboards.frag" />
+    <None Include="Data\shaders\instancing_billboards.vert" />
+    <None Include="Data\shaders\instancing_billboards_collision.frag" />
+    <None Include="Data\shaders\intensity.frag" />
+    <None Include="Data\shaders\intensity.vert" />
+    <None Include="Data\shaders\spotlight.frag" />
+    <None Include="Data\shaders\spotlight.vert" />
+    <None Include="Data\shaders\streak.frag" />
+    <None Include="Data\shaders\streak.vert" />
+    <None Include="Data\shaders\z.frag" />
+    <None Include="Data\shaders\z.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -5,6 +5,7 @@
 
 #include "SulExport.h"
 #include <osg/timer>
+#include <osg/NodeCallback>
 
 class SUL_EXPORT CSulParticleUpdater : public osg::NodeCallback
 {
