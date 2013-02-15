@@ -7,6 +7,7 @@
 #include <SigmaUtil/SulGeode.h>
 #include <SigmaUtil/SulScreenAlignedQuad.h>
 #include <SigmaUtil/SulCameraManipulatorDebugger.h>
+#include <SigmaUtil/SulGeomAxis.h>
 #include <osgViewer/Viewer>
 #include <osgParticle/particle>
 #include <osgParticle/SmokeTrailEffect>
@@ -19,12 +20,26 @@
 #include <osgParticle/FluidProgram>
 #include <osgParticle/ParticleSystemUpdater>
 #include <osgParticle/ConnectedParticleSystem>
+#include <osg/PositionAttitudeTransform>
 
 // convienence global variable
 static osg::Group* group = 0;
 static osg::Vec3 wind( 1,0,0 );
+static osg::PositionAttitudeTransform* gizmo = 0;
 
+// forward declare
 osg::Node* createExplosion( const osg::Vec3& pos );
+
+class CMyCamera : public CSulCameraManipulatorDebugger
+{
+public:
+	virtual bool calcHitPoint( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit )
+	{
+		bool ret = CSulCameraManipulatorDebugger::calcHitPoint( ea, aa, hit );
+		gizmo->setPosition( hit );
+		return ret;
+	}
+};
 
 class CInputHandler : public osgGA::GUIEventHandler 
 {
@@ -519,6 +534,12 @@ osg::Node* createScene()
 	grid->Create( osg::Vec3(-2,-2,0), 40, 40, 1, 1, 5, 5 );
 	group->addChild( grid );
 
+
+	gizmo = new osg::PositionAttitudeTransform;
+	gizmo->addChild( new CSulGeomAxis );
+	group->addChild( gizmo );
+
+
     return group;
 }
 
@@ -536,7 +557,7 @@ int _tmain(int argc, _TCHAR* argv[])
     // add the handler to the viewer
     viewer->addEventHandler( new CInputHandler );
 
-	CSulCameraManipulatorDebugger* m = new CSulCameraManipulatorDebugger;
+	CMyCamera* m = new CMyCamera;
 	m->setHomePosition(
 		osg::Vec3(20,20,5),
 		osg::Vec3(0,0,0),

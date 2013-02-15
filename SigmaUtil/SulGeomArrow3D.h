@@ -3,13 +3,13 @@
 #ifndef __SULGEOMARROW3D_H__
 #define __SULGEOMARROW3D_H__
 
-#include <osg/geode>
+#include "SulGeode.h"
 #include "SulExport.h"
 
-class SUL_EXPORT CSulGeomArrow3D : public osg::Geode
+class SUL_EXPORT CSulGeomArrow3D : public CSulGeode
 {
 public:
-				CSulGeomArrow3D( float len, const osg::Vec4& colorHead=osg::Vec4(1,0,0,1), const osg::Vec4& colorBody=osg::Vec4(1,0,0,1) );
+				CSulGeomArrow3D( float len=1.0f, const osg::Vec4& colorHead=osg::Vec4(1,0,0,1), const osg::Vec4& colorBody=osg::Vec4(1,0,0,1) );
 
 private:
 	void		createDrawable();

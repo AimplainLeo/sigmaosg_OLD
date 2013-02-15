@@ -5,7 +5,7 @@
 #include <osg/shapedrawable>
 
 CSulGeomArrow3D::CSulGeomArrow3D( float len, const osg::Vec4& colorHead, const osg::Vec4& colorBody ) :
-osg::Geode(),
+CSulGeode(),
 m_colorHead( colorHead ),
 m_colorBody( colorBody )
 {
