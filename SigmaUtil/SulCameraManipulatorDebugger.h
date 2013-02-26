@@ -41,6 +41,10 @@ protected:
 	virtual bool handleMouseDrag( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa );
 	virtual bool handleMouseRelease( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa );
 	virtual bool performMovementLeftMouseButton( const double eventTimeDelta, const double dx, const double dy );
+	virtual bool handleMouseWheel( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us );
+	virtual bool performMovementMiddleMouseButton( const double eventTimeDelta, const double dx, const double dy );
+
+	void zoom( float factor );
 
 private:
 	osg::Vec3d										m_hit;
@@ -57,6 +61,9 @@ private:
 	osg::Matrixd									m_inverseMatrix;
 
 	float											m_distance;
+
+	double											m_wheelZoomFactor;
+	double											m_panFactor;
 };
 
 #endif // __SULCAMERAMANIPULATORDEBUGGER_H__

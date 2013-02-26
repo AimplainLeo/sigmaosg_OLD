@@ -14,6 +14,9 @@ CSulCameraManipulatorDebugger::CSulCameraManipulatorDebugger()
 	m_bMousePush = false;
 	m_mouseLastX = 0;
 	m_mouseLastY = 0;
+
+	m_wheelZoomFactor = 2.0;
+	m_panFactor = 3.0;
 }
 
 // overrides standard maniluplator
@@ -306,5 +309,57 @@ bool CSulCameraManipulatorDebugger::performMovementLeftMouseButton( const double
 	
 	m_inverseMatrix = r * m_inverseMatrix;
 
+	return true;
+}
+
+void CSulCameraManipulatorDebugger::zoom( float factor )
+{
+	osg::Matrixd m;
+	
+	m.setTrans( 0, 0, factor );
+
+	m_inverseMatrix = m_inverseMatrix * m;
+}
+
+bool CSulCameraManipulatorDebugger::handleMouseWheel( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
+{
+    osgGA::GUIEventAdapter::ScrollingMotion sm = ea.getScrollingMotion();
+
+	switch( sm )
+    {
+        // mouse scroll up event
+        case osgGA::GUIEventAdapter::SCROLL_UP:
+        {
+            // perform zoom
+            zoom( m_wheelZoomFactor );
+            us.requestRedraw();
+            us.requestContinuousUpdate( isAnimating() || _thrown );
+            return true;
+        }
+
+        // mouse scroll down event
+        case osgGA::GUIEventAdapter::SCROLL_DOWN:
+        {
+            // perform zoom
+            zoom( - m_wheelZoomFactor);
+            us.requestRedraw();
+            us.requestContinuousUpdate( false );
+            return true;
+        }
+
+        // unhandled mouse scrolling motion
+        default:
+            return false;
+   }
+}
+
+bool CSulCameraManipulatorDebugger::performMovementMiddleMouseButton( const double eventTimeDelta, const double dx, const double dy )
+{
+	osg::Matrixd m;
+	
+	m.setTrans( dx*m_panFactor, dy*m_panFactor, 0 );
+
+	m_inverseMatrix = m_inverseMatrix * m;
+	
 	return true;
 }

@@ -29,6 +29,9 @@ static osg::PositionAttitudeTransform* gizmo = 0;
 
 // forward declare
 osg::Node* createExplosion( const osg::Vec3& pos );
+osg::Node* createAnimatedInitialSmoke( const osg::Vec3& pos, int binNum );
+osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum );
+osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum );
 
 class CMyCamera : public CSulCameraManipulatorDebugger
 {
@@ -36,6 +39,8 @@ public:
 	CMyCamera()
 	{
 		m_key1 = false;
+		m_key2 = false;
+		m_key3 = false;
 	}
 
 	virtual bool calcHitPoint( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit )
@@ -48,18 +53,22 @@ public:
 	virtual bool handleKeyDown( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
 	{
 		if ( ea.getKey()=='1' ) m_key1 = true;
+		if ( ea.getKey()=='2' ) m_key2 = true;
+		if ( ea.getKey()=='3' ) m_key3 = true;
 		return CSulCameraManipulatorDebugger::handleKeyDown( ea, us );
 	}
 
 	virtual bool handleKeyUp( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
 	{
 		if ( ea.getKey()=='1' ) m_key1 = false;
+		if ( ea.getKey()=='2' ) m_key2 = false;
+		if ( ea.getKey()=='3' ) m_key3 = false;
 		return CSulCameraManipulatorDebugger::handleKeyUp( ea, us );
 	}
 
 	virtual bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
 	{
-		if ( m_key1 && ea.getEventType()==osgGA::GUIEventAdapter::DRAG )
+		if ( (m_key1 || m_key2 || m_key3) && ea.getEventType()==osgGA::GUIEventAdapter::DRAG )
 		{
 			return true;
 		}
@@ -68,8 +77,21 @@ public:
         {
 			osg::Vec3d hit;
 			calcHitPoint( ea, us, hit );
-			group->addChild( createExplosion( hit ) );
-			return true;
+			group->addChild( createFlyingDebris( hit, 3000 ) );
+		}
+
+		if ( m_key2 && ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
+        {
+			osg::Vec3d hit;
+			calcHitPoint( ea, us, hit );
+			group->addChild( createAnimatedInitialSmoke(hit, 5000)  );
+		}
+
+		if ( m_key3 && ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
+        {
+			osg::Vec3d hit;
+			calcHitPoint( ea, us, hit );
+			group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );
 		}
 
 		return CSulCameraManipulatorDebugger::handle( ea, us );
@@ -77,6 +99,8 @@ public:
 
 private:
 	bool m_key1;
+	bool m_key2;
+	bool m_key3;
 };
 
 osg::Node* createFireBall( const osg::Vec3& pos, int binNum )

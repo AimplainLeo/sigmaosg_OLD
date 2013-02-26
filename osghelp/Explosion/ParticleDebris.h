@@ -15,7 +15,7 @@ osgParticle::SmokeEffect* mycreateFireBall( const osg::Vec3& pos, int binNum )
 	smoke->setPosition( pos );
 	smoke->setIntensity( 20.0f );
 	smoke->setScale( 0.8f );
-	smoke->setParticleDuration( 4.0f );
+	smoke->setParticleDuration( 3.0f );
 	smoke->setEmitterDuration( 2.5f );
 	//smoke->setUseLocalParticleSystem( false );
 	smoke->buildEffect();
