@@ -18,6 +18,6 @@ void CParticleDebrisSystem::createParticle( const osg::Vec3& velocity )
 
 void CParticleDebrisSystem::remitParticle( CSulParticle* p )
 {
-	p->reset();
-	p->setVelocity( createVelocity() );	
+//	p->reset();
+//	p->setVelocity( createVelocity() );	
 }

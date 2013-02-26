@@ -16,6 +16,64 @@ CSulCameraManipulatorDebugger::CSulCameraManipulatorDebugger()
 	m_mouseLastY = 0;
 }
 
+// overrides standard maniluplator
+void CSulCameraManipulatorDebugger::setTransformation( const osg::Vec3d& eye, const osg::Quat& rotation )
+{
+//    _center = eye + rotation * osg::Vec3d( 0., 0., -_distance );
+    m_rotation = rotation;
+	/*
+    // fix current rotation
+    if( getVerticalAxisFixed() )
+        fixVerticalAxis( _center, _rotation, true );
+		*/
+}
+
+// overrides standard maniluplator
+void CSulCameraManipulatorDebugger::setTransformation( const osg::Vec3d& eye, const osg::Vec3d& center, const osg::Vec3d& up )
+{
+    osg::Vec3d lv( center - eye );
+
+    osg::Vec3d f( lv );
+    f.normalize();
+    osg::Vec3d s( f^up );
+    s.normalize();
+    osg::Vec3d u( s^f );
+    u.normalize();
+
+    osg::Matrixd rotation_matrix( s[0], u[0], -f[0], 0.0f,
+                            s[1], u[1], -f[1], 0.0f,
+                            s[2], u[2], -f[2], 0.0f,
+                            0.0f, 0.0f,  0.0f, 1.0f );
+
+    m_center = center;
+	m_distance = lv.length();
+    m_rotation = rotation_matrix.getRotate().inverse();
+
+	/*
+    // fix current rotation
+    if( getVerticalAxisFixed() )
+        fixVerticalAxis( _center, _rotation, true );
+		*/
+
+	m_inverseMatrix = osg::Matrixd::translate( -center ) *
+           osg::Matrixd::rotate( m_rotation.inverse() ) *
+           osg::Matrixd::translate( 0.0, 0.0, -m_distance );
+
+}
+
+void CSulCameraManipulatorDebugger::getTransformation( osg::Vec3d& eye, osg::Quat& rotation ) const
+{
+   // eye = _center - _rotation * osg::Vec3d( 0., 0., -_distance );
+    rotation = m_rotation;
+}
+
+void CSulCameraManipulatorDebugger::getTransformation( osg::Vec3d& eye, osg::Vec3d& center, osg::Vec3d& up ) const
+{
+//    center = _center;
+//    eye = _center + _rotation * osg::Vec3d( 0., 0., _distance );
+    up = m_rotation * osg::Vec3d( 0., 1., 0. );
+}
+
 void CSulCameraManipulatorDebugger::setByMatrix( const osg::Matrixd& matrix )
 {
 	// FIXME:
@@ -34,12 +92,35 @@ osg::Matrixd CSulCameraManipulatorDebugger::getMatrix() const
 
 osg::Matrixd CSulCameraManipulatorDebugger::getInverseMatrix() const
 {
+	return m_inverseMatrix;
+
+	/*
+	// calc rotation matrix around hit point
+	osg::Matrixd r = osg::Matrixd::translate( -m_hit );
+	r = r *  osg::Matrixd::rotate( m_rotationNew.inverse() );
+	r = r * osg::Matrixd::translate( m_hit );
+
+	m_inverseMatrix = r * m_inverseMatrix;
+
+	return m_inverseMatrix;
+	*/
+
+
+	/*
+	return osg::Matrixd::translate( -m_hit ) *
+           osg::Matrixd::rotate( m_rotation.inverse() ) *
+           osg::Matrixd::translate( 0.0, 0.0, -m_distance );
+		   */
+
+	/*
 	osg::Vec3 eye( 20, 20, 5 );
 	osg::Vec3d lv( m_hit - eye );
 	float distance = lv.length();
 	return osg::Matrixd::translate( -m_hit ) *
            osg::Matrixd::rotate( m_rotation.inverse() ) *
            osg::Matrixd::translate( 0.0, 0.0, -distance );
+
+		   */
 
 	 /*
 
@@ -71,7 +152,7 @@ bool CSulCameraManipulatorDebugger::calcHitPoint(  const osgGA::GUIEventAdapter&
 
 	return false;
 }
-
+/*
 bool CSulCameraManipulatorDebugger::handleMouseDrag( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa )
 {
     unsigned int buttonMask = ea.getButtonMask();
@@ -163,4 +244,67 @@ bool CSulCameraManipulatorDebugger::handle( const osgGA::GUIEventAdapter& ea, os
     }
 	
     return false;
+}
+*/
+
+bool CSulCameraManipulatorDebugger::handleMouseRelease( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa )
+{
+	m_bMousePush = false;
+	return osgGA::StandardManipulator::handleMouseRelease( ea, aa );
+}
+
+bool CSulCameraManipulatorDebugger::handleMouseDrag( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa )
+{
+	if ( !m_bMousePush && calcHitPoint( ea, aa, m_hit ) )
+	{
+		osgViewer::Viewer* viewer = dynamic_cast<osgViewer::Viewer*>(&aa);
+		osg::Camera* cam = viewer->getCamera();
+
+		osg::Vec3 v = m_hit - cam->getInverseViewMatrix().getTrans();
+		//m_distance = v.length();
+
+		m_bMousePush = true;
+		return true;
+	}
+
+	return osgGA::StandardManipulator::handleMouseDrag( ea, aa );
+}
+
+bool CSulCameraManipulatorDebugger::performMovementLeftMouseButton( const double eventTimeDelta, const double dx, const double dy )
+{
+	osg::Quat rot;
+	rotateYawPitch( rot, dx, dy, osg::Z_AXIS );
+
+	//////////////////////////////////////////////
+	// rotate yaw
+	//////////////////////////////////////////////
+
+	osg::Quat rotateYaw( -dx, osg::Z_AXIS );
+
+	// create rotation around point
+	osg::Matrixd r = osg::Matrixd::translate( -m_hit );
+	r = r * osg::Matrixd::rotate( rotateYaw.inverse() );
+	r = r * osg::Matrixd::translate( m_hit );
+
+	m_inverseMatrix = r * m_inverseMatrix;
+
+	//////////////////////////////////////////////
+	// rotate pitch
+	//////////////////////////////////////////////
+
+	// we need viewspace x axis to control pitch
+	osg::Matrixd viewMatrix = m_inverseMatrix.inverse( m_inverseMatrix );
+	osg::Vec3 axis = osg::X_AXIS;
+	axis = axis * osg::Matrixd( viewMatrix.getRotate() );
+
+	osg::Quat rotatePitch( dy, axis );
+
+	// create rotation around point
+	r = osg::Matrixd::translate( -m_hit );
+	r = r * osg::Matrixd::rotate( rotatePitch.inverse() );
+	r = r * osg::Matrixd::translate( m_hit );
+	
+	m_inverseMatrix = r * m_inverseMatrix;
+
+	return true;
 }

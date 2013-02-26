@@ -33,56 +33,51 @@ osg::Node* createExplosion( const osg::Vec3& pos );
 class CMyCamera : public CSulCameraManipulatorDebugger
 {
 public:
+	CMyCamera()
+	{
+		m_key1 = false;
+	}
+
 	virtual bool calcHitPoint( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit )
 	{
 		bool ret = CSulCameraManipulatorDebugger::calcHitPoint( ea, aa, hit );
 		gizmo->setPosition( hit );
 		return ret;
 	}
-};
 
-class CInputHandler : public osgGA::GUIEventHandler 
-{
-public:
-	CInputHandler()
+	virtual bool handleKeyDown( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
 	{
-		osg::Plane plane( osg::Vec3(0,0,1), osg::Vec3(0,0,0) );
-		m_rPlaneProj = new osgManipulator::PlaneProjector;
-		m_rPlaneProj->setPlane( plane );
+		if ( ea.getKey()=='1' ) m_key1 = true;
+		return CSulCameraManipulatorDebugger::handleKeyDown( ea, us );
 	}
 
-    virtual bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object* pObject, osg::NodeVisitor* pNodeVisitor )
-    {
-        osgViewer::Viewer* pViewer = dynamic_cast<osgViewer::Viewer*>(&aa);
-        if ( !pViewer )
+	virtual bool handleKeyUp( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
+	{
+		if ( ea.getKey()=='1' ) m_key1 = false;
+		return CSulCameraManipulatorDebugger::handleKeyUp( ea, us );
+	}
+
+	virtual bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
+	{
+		if ( m_key1 && ea.getEventType()==osgGA::GUIEventAdapter::DRAG )
+		{
+			return true;
+		}
+
+		if ( m_key1 && ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
         {
-            return false;
-        }
+			osg::Vec3d hit;
+			calcHitPoint( ea, us, hit );
+			group->addChild( createExplosion( hit ) );
+			return true;
+		}
 
-		if ( ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
-        {
-            osg::Camera* cam = pViewer->getCamera();
-
-			osg::Vec3d v;
-			osgManipulator::PointerInfo pi;
-		
-			pi.reset();
-			pi.setCamera( cam );
-			pi.setMousePosition( ea.getX(), ea.getY() );
-			m_rPlaneProj->project( pi, v );
-			
-			group->addChild( createExplosion( v ) );
-
-            return true; // return true, event handled
-        }
-
-        return false;
-    }
+		return CSulCameraManipulatorDebugger::handle( ea, us );
+	}
 
 private:
-	osg::ref_ptr<osgManipulator::PlaneProjector> m_rPlaneProj;
+	bool m_key1;
 };
-
 
 osg::Node* createFireBall( const osg::Vec3& pos, int binNum )
 {
@@ -495,9 +490,11 @@ osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum )
 
 	CParticleDebrisSystem* p = new CParticleDebrisSystem;
 	p->init();
+
 	osg::Matrix m;
 	m.makeTranslate( pos );
 	p->setMatrix( m );
+
 	group->addChild( p );
 
 	return group;
@@ -553,9 +550,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
     // set the scene-graph data the viewer will render
     viewer->setSceneData( createScene() );
-
-    // add the handler to the viewer
-    viewer->addEventHandler( new CInputHandler );
 
 	CMyCamera* m = new CMyCamera;
 	m->setHomePosition(
