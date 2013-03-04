@@ -10,9 +10,11 @@ CSulGeode::CSulGeode()
 {
 }
 
-CSulGeode::CSulGeode( osg::Drawable* geom )
+CSulGeode::CSulGeode( osg::Drawable* geom, bool enableLighting )
 {
 	addDrawable( geom );
+
+	lighting( enableLighting );
 }
 
 void CSulGeode::enableBlend()

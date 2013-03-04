@@ -15,8 +15,8 @@ CSulCameraManipulatorDebugger::CSulCameraManipulatorDebugger()
 	m_mouseLastX = 0;
 	m_mouseLastY = 0;
 
-	m_wheelZoomFactor = 2.0;
-	m_panFactor = 3.0;
+	m_wheelZoomFactor = 5.0;
+	m_panFactor = 10.0;
 }
 
 // overrides standard maniluplator

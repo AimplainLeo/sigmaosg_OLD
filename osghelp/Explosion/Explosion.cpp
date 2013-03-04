@@ -3,11 +3,14 @@
 
 #include "stdafx.h"
 #include "ParticleDebrisSystem.h"
+#include <SigmaUtil/SulGeomQuad.h>
 #include <SigmaUtil/SulGeomGrid.h>
 #include <SigmaUtil/SulGeode.h>
+#include <SigmaUtil/SulGeomBox.h>
 #include <SigmaUtil/SulScreenAlignedQuad.h>
 #include <SigmaUtil/SulCameraManipulatorDebugger.h>
 #include <SigmaUtil/SulGeomAxis.h>
+#include <SigmaUtil/SulGeomPlane.h>
 #include <osgViewer/Viewer>
 #include <osgParticle/particle>
 #include <osgParticle/SmokeTrailEffect>
@@ -21,86 +24,94 @@
 #include <osgParticle/ParticleSystemUpdater>
 #include <osgParticle/ConnectedParticleSystem>
 #include <osg/PositionAttitudeTransform>
+#include <iostream>
 
 // convienence global variable
 static osg::Group* group = 0;
 static osg::Vec3 wind( 1,0,0 );
 static osg::PositionAttitudeTransform* gizmo = 0;
+static CSulGeomGrid* grid = 0;
+static CSulGeomBox* cube = 0;
+static CSulGeomPlane* plane = 0;
+static CSulGeomQuad* quad = 0;
 
 // forward declare
 osg::Node* createExplosion( const osg::Vec3& pos );
 osg::Node* createAnimatedInitialSmoke( const osg::Vec3& pos, int binNum );
 osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum );
 osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum );
+osg::Node* createFireBall( const osg::Vec3& pos, int binNum );
 
 class CMyCamera : public CSulCameraManipulatorDebugger
 {
 public:
 	CMyCamera()
 	{
-		m_key1 = false;
-		m_key2 = false;
-		m_key3 = false;
-	}
-
-	virtual bool calcHitPoint( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit )
-	{
-		bool ret = CSulCameraManipulatorDebugger::calcHitPoint( ea, aa, hit );
-		gizmo->setPosition( hit );
-		return ret;
 	}
 
 	virtual bool handleKeyDown( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
 	{
-		if ( ea.getKey()=='1' ) m_key1 = true;
-		if ( ea.getKey()=='2' ) m_key2 = true;
-		if ( ea.getKey()=='3' ) m_key3 = true;
+		VEC_KEY::iterator i = std::find( m_key.begin(), m_key.end(), ea.getKey() );
+		if ( i==m_key.end() )
+			m_key.push_back( ea.getKey() );
+
 		return CSulCameraManipulatorDebugger::handleKeyDown( ea, us );
 	}
 
 	virtual bool handleKeyUp( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
 	{
-		if ( ea.getKey()=='1' ) m_key1 = false;
-		if ( ea.getKey()=='2' ) m_key2 = false;
-		if ( ea.getKey()=='3' ) m_key3 = false;
+		VEC_KEY::iterator i = std::find( m_key.begin(), m_key.end(), ea.getKey() );
+		if ( i!=m_key.end() )
+			m_key.erase( i );
+
 		return CSulCameraManipulatorDebugger::handleKeyUp( ea, us );
 	}
 
 	virtual bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us )
 	{
-		if ( (m_key1 || m_key2 || m_key3) && ea.getEventType()==osgGA::GUIEventAdapter::DRAG )
+		switch ( ea.getEventType() )
 		{
+			case osgGA::GUIEventAdapter::KEYDOWN:
+				return handleKeyDown( ea, us );
+
+			case osgGA::GUIEventAdapter::KEYUP:
+				return handleKeyUp( ea, us );
+
+			case osgGA::GUIEventAdapter::PUSH:
+				osg::Vec3d hit;
+				if ( ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
+				{
+					calcHitPoint( ea, us, hit );
+					gizmo->setPosition( hit );
+
+					VEC_KEY::iterator i = m_key.begin();
+					VEC_KEY::iterator ie = m_key.end();
+					while ( i!=ie )
+					{
+						switch (*i)
+						{
+							case '1': group->addChild( createFlyingDebris( hit, 3000 ) );			break;
+							case '2': group->addChild( createFireBall(hit, 4000 ) );				break;
+							case '3': group->addChild( createAnimatedInitialSmoke(hit, 5000)  );	break;
+							case '4': group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );	break;
+						}
+
+						++i;
+					}
+				}
+				return true;
+		}
+
+		// prevent camera manipulation if the user is pressing a key
+		if ( m_key.size() )
 			return true;
-		}
-
-		if ( m_key1 && ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
-        {
-			osg::Vec3d hit;
-			calcHitPoint( ea, us, hit );
-			group->addChild( createFlyingDebris( hit, 3000 ) );
-		}
-
-		if ( m_key2 && ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
-        {
-			osg::Vec3d hit;
-			calcHitPoint( ea, us, hit );
-			group->addChild( createAnimatedInitialSmoke(hit, 5000)  );
-		}
-
-		if ( m_key3 && ea.getEventType()==osgGA::GUIEventAdapter::PUSH )
-        {
-			osg::Vec3d hit;
-			calcHitPoint( ea, us, hit );
-			group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );
-		}
 
 		return CSulCameraManipulatorDebugger::handle( ea, us );
 	}
 
 private:
-	bool m_key1;
-	bool m_key2;
-	bool m_key3;
+	typedef std::vector<sigma::int32>	VEC_KEY;
+	VEC_KEY								m_key;
 };
 
 osg::Node* createFireBall( const osg::Vec3& pos, int binNum )
@@ -550,16 +561,24 @@ osg::Node* createScene()
 {
 	group = new osg::Group;
 
+	quad = new CSulGeomQuad(40, 40 );
+	quad->setColor( 0.8, 0.8, 0.8, 1 );
+	group->addChild( new CSulGeode(quad, false) );
+	quad->getOrCreateStateSet()->setRenderBinDetails( 1, "RenderBin" );
+
+
 	// create a simple grid
-	CSulGeomGrid* grid = new CSulGeomGrid;
-	grid->Create( osg::Vec3(-2,-2,0), 40, 40, 1, 1, 5, 5 );
+	grid = new CSulGeomGrid;
+	grid->Create( osg::Vec3(-20,-20,0), 40, 40, 1, 1, 0, 0 );
 	group->addChild( grid );
+	grid->getOrCreateStateSet()->setMode( GL_DEPTH_TEST, osg::StateAttribute::OFF );
+	grid->getOrCreateStateSet()->setRenderBinDetails( 2, "RenderBin" );
 
 
 	gizmo = new osg::PositionAttitudeTransform;
 	gizmo->addChild( new CSulGeomAxis );
 	group->addChild( gizmo );
-
+	gizmo->getOrCreateStateSet()->setRenderBinDetails( 3, "RenderBin" );
 
     return group;
 }
