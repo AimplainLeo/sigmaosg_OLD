@@ -24,6 +24,7 @@
 #include <osgParticle/ParticleSystemUpdater>
 #include <osgParticle/ConnectedParticleSystem>
 #include <osg/PositionAttitudeTransform>
+#include <osgDB/FileUtils>
 #include <iostream>
 
 // convienence global variable
@@ -41,6 +42,7 @@ osg::Node* createAnimatedInitialSmoke( const osg::Vec3& pos, int binNum );
 osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum );
 osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum );
 osg::Node* createFireBall( const osg::Vec3& pos, int binNum );
+osg::Node* createDarkSmoke( const osg::Vec3& pos, int binNum  );
 
 class CMyCamera : public CSulCameraManipulatorDebugger
 {
@@ -94,6 +96,7 @@ public:
 							case '2': group->addChild( createFireBall(hit, 4000 ) );				break;
 							case '3': group->addChild( createAnimatedInitialSmoke(hit, 5000)  );	break;
 							case '4': group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );	break;
+							case '5': group->addChild( createDarkSmoke(hit, 8000 ) );				break;
 						}
 
 						++i;
@@ -149,7 +152,7 @@ osg::Node* createFireBall( const osg::Vec3& pos, int binNum )
 	fluid->setFluidDensity(1.0f);	
 	fluid->setWind( wind );
 
-	smoke->getParticleSystem()->setDefaultAttributes( "c:/myexp.png" );
+	smoke->getParticleSystem()->setDefaultAttributes( osgDB::findDataFile("images/myexp.png") );
 
 	return smoke;
 }
@@ -177,7 +180,7 @@ osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum )
 
 	// particle system
 	osgParticle::ParticleSystem *ps = new osgParticle::ParticleSystem;
-	ps->setDefaultAttributes("c:/animated_smoke.png", false, false);
+	ps->setDefaultAttributes( osgDB::findDataFile("images/animated_smoke.png"), false, false);
 	
     osgParticle::ParticleSystemUpdater *psu = new osgParticle::ParticleSystemUpdater;
     psu->addParticleSystem(ps);
@@ -228,55 +231,10 @@ osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum )
 	return group;
 }
 
-
-osg::Node* createDarkSmoke( const osg::Vec3& pos )
+osg::Node* createDarkSmoke( const osg::Vec3& pos, int binNum )
 {
 	osgParticle::SmokeEffect* smoke =  new osgParticle::SmokeEffect(false);
-	smoke->setTextureFileName( "c:/smoke.png" );
-	smoke->getOrCreateStateSet()->setRenderBinDetails( 10000, "DepthSortedBin" );
-	smoke->setPosition( pos );
-	smoke->setIntensity( 50.0f );
-	smoke->setScale( 1.5f );
-	smoke->setParticleDuration( 20.5f );
-	smoke->setEmitterDuration( 2.0f );
-	smoke->buildEffect();
-	/*
-	// make smoke dark
-	osgParticle::Particle& ptemplate = smoke->getParticleSystem()->getDefaultParticleTemplate();
-	ptemplate.setColorRange(osgParticle::rangev4(
-                            osg::Vec4(0.5f, 0.5f, 0.5f, 1.0f), 
-                            osg::Vec4(0.2f, 0.2f, 0.2f, 0.5f)));
-	
-
-	// make smoke disapear downwards
-	//ptemplate.setAlphaRange(osgParticle::rangef(1.0f, -1.0f));
-	ptemplate.setAlphaRange(osgParticle::rangef(0.2f, 1.0f));
-	*/
-	osgParticle::ModularEmitter* me = dynamic_cast<osgParticle::ModularEmitter*>(smoke->getEmitter());
-
-	osgParticle::RadialShooter* shooter = dynamic_cast<osgParticle::RadialShooter*>(me->getShooter());
-	osgParticle::rangef r = shooter->getThetaRange();
-
-	// I think osg has reversed the mening of theta and phi
-	shooter->setThetaRange( 0.0f, osg::PI_2 );		// up/down
-	shooter->setPhiRange( 0.0f, 2.0f*osg::PI );		// around
-	shooter->setInitialSpeedRange( 0, 4 );
-
-	osgParticle::SectorPlacer* placer = dynamic_cast<osgParticle::SectorPlacer*>(me->getPlacer());
-	placer->setRadiusRange(0.0f,2.0f);
-
-	osgParticle::FluidProgram* fluid = dynamic_cast<osgParticle::FluidProgram*>(smoke->getProgram());
-	fluid->setFluidDensity(1.0f);	
-
-	//smoke->getParticleSystem()->setDefaultAttributes( "Images/smoke.rgb" );
-
-	return smoke;
-}
-
-osg::Node* createDarkSmoke2( const osg::Vec3& pos, int binNum )
-{
-	osgParticle::SmokeEffect* smoke =  new osgParticle::SmokeEffect(false);
-	smoke->setTextureFileName( "c:/smoke.png" );
+	smoke->setTextureFileName( osgDB::findDataFile("images/smoke.png")  );
 	smoke->getOrCreateStateSet()->setRenderBinDetails( binNum, "DepthSortedBin" );
 	smoke->setPosition( pos );
 	smoke->setIntensity( 50.0f );
@@ -353,7 +311,7 @@ osg::Node* createAnimatedInitialSmoke( const osg::Vec3& pos, int binNum )
 
 	// particle system
 	osgParticle::ParticleSystem *ps = new osgParticle::ParticleSystem;
-	ps->setDefaultAttributes("c:/animated_smoke.png", false, false);
+	ps->setDefaultAttributes( osgDB::findDataFile("images/animated_smoke.png"), false, false);
 	
     osgParticle::ParticleSystemUpdater *psu = new osgParticle::ParticleSystemUpdater;
     psu->addParticleSystem(ps);
@@ -423,100 +381,6 @@ osg::Node* createImpactRing( const osg::Vec3& pos, int binNum )
 	return mt;
 }
 
-osg::Node* createFlyingDebris_old( const osg::Vec3& pos, int binNum )
-{
-	osg::Group* group = new osg::Group;
-	group->getOrCreateStateSet()->setRenderBinDetails( binNum, "DepthSortedBin" );
-
-	osgParticle::Particle pexplosion;
-	pexplosion.setLifeTime(3);
-    pexplosion.setSizeRange(osgParticle::rangef(0.3f, 0.0f));
-    pexplosion.setAlphaRange(osgParticle::rangef(1.0f, 1.0f));
-    pexplosion.setColorRange(osgParticle::rangev4(
-        osg::Vec4(1, 1, 1, 1), 
-        osg::Vec4(1, 1, 1, 1))
-	);
-	pexplosion.setRadius(0.5f);
-	 pexplosion.setMass(1/1.2f);
-	pexplosion.setTextureTileRange(
-		4, 4, 
-		0, 15
-	);
-
-	// particle system
-	osgParticle::ParticleSystem *ps = new osgParticle::ConnectedParticleSystem;
-	ps->setDefaultAttributes("c:/animated_smoke.png", false, false);
-	
-    osgParticle::ParticleSystemUpdater *psu = new osgParticle::ParticleSystemUpdater;
-    psu->addParticleSystem(ps);
-	group->addChild(psu);
-
-	// emitter
-    osgParticle::ModularEmitter *emitter = new osgParticle::ModularEmitter;
-	emitter->setNumParticlesToCreateMovementCompensationRatio(100);
-	group->addChild( emitter );
-	//emitter->setNumParticlesToCreateMovementCompensationRatio(1.5f);
-	emitter->setEndless( false );
-	emitter->setStartTime( 0 );
-	emitter->setLifeTime( 3 );
-    emitter->setParticleSystem(ps);
-    emitter->setParticleTemplate(pexplosion);
-
-	// counter
-    osgParticle::RandomRateCounter* counter = new osgParticle::RandomRateCounter;
-    counter->setRateRange(100, 100);
-    emitter->setCounter(counter);
-
-	// sector
-    osgParticle::SectorPlacer *placer = new osgParticle::SectorPlacer;
-    placer->setCenter( pos );
-    placer->setRadiusRange(0, 0);
-	placer->setPhiRange(0, 0);    // 360° angle to make a circle
-    emitter->setPlacer(placer);
-
-	// shooter
-    osgParticle::RadialShooter *shooter = new osgParticle::RadialShooter;
-    shooter->setInitialSpeedRange(10, 10);
-    shooter->setInitialRotationalSpeedRange(osgParticle::rangev3(
-       osg::Vec3(0, 0, -5),
-       osg::Vec3(0, 0, 5)));
-	shooter->setThetaRange( 1.5, 1.5 );		// up/down
-	shooter->setPhiRange( 1.5, 1.5 );		// around
-    emitter->setShooter(shooter);
-
-	osgParticle::FluidProgram *program = new osgParticle::FluidProgram;
-	program->setParticleSystem(ps);
-	program->setFluidToAir();
-	//program->setWind(wind);
-	group->addChild(program);
-    
-    osg::Geode *geode = new osg::Geode;
-    geode->addDrawable(ps);
-	group->addChild( geode );
-
-	return group;
-}
-
-osg::Node* createFlyingDebris_2( const osg::Vec3& pos, int binNum )
-{
-	osg::Group* group = new osg::Group;
-	group->getOrCreateStateSet()->setRenderBinDetails( binNum, "DepthSortedBin" );
-
-
-	float scale = 1.0f;
-	float intensity = 1.0f;
-	osgParticle::SmokeTrailEffect* p = new osgParticle::SmokeTrailEffect( pos, scale, intensity );
-	group->addChild( p );
-
-
-	osgParticle::ModularEmitter* emitter = dynamic_cast<osgParticle::ModularEmitter*>(p->getEmitter());
-	osgParticle::RadialShooter* shooter = dynamic_cast<osgParticle::RadialShooter*>(emitter->getShooter());
-
-	shooter->setThetaRange( 0, 2*osg::PI );
-	shooter->setPhiRange(  0, 2*osg::PI );
-
-	return group;
-}
 
 osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum )
 {

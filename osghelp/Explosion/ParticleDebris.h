@@ -7,6 +7,7 @@
 #include <SigmaUtil/SulGeomSphere.h>
 #include <osgParticle/SmokeEffect>
 #include <osgParticle/SectorPlacer>
+#include <osgDB/FileUtils>
 
 osgParticle::SmokeEffect* mycreateFireBall( const osg::Vec3& pos, int binNum )
 {
@@ -45,7 +46,7 @@ osgParticle::SmokeEffect* mycreateFireBall( const osg::Vec3& pos, int binNum )
 	fluid->setFluidDensity(1.0f);	
 //	fluid->setWind( wind );
 
-	smoke->getParticleSystem()->setDefaultAttributes( "c:/myexp.png" );
+	smoke->getParticleSystem()->setDefaultAttributes( osgDB::findDataFile("images/myexp.png") );
 
 	return smoke;
 }
