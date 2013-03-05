@@ -228,6 +228,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParticlesAnimatedSmoke", "P
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloJavaDLL", "HelloJavaDLL\HelloJavaDLL.vcxproj", "{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MT Static|Win32 = Debug MT Static|Win32
@@ -2302,6 +2304,26 @@ Global
 		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release MTDLL|Win32.Build.0 = Release|Win32
 		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release|Win32.ActiveCfg = Release|Win32
 		{3CE11C72-0ECB-4384-97FD-9ADE14A2DB9E}.Release|Win32.Build.0 = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MT Static|Win32.ActiveCfg = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MT Static|Win32.Build.0 = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MT|Win32.ActiveCfg = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MT|Win32.Build.0 = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MTDLL Static|Win32.ActiveCfg = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MTDLL Static|Win32.Build.0 = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MTDLL|Win32.ActiveCfg = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug MTDLL|Win32.Build.0 = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Debug|Win32.Build.0 = Debug|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MT Static|Win32.ActiveCfg = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MT Static|Win32.Build.0 = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MT|Win32.ActiveCfg = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MT|Win32.Build.0 = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MTDLL Static|Win32.ActiveCfg = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MTDLL Static|Win32.Build.0 = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MTDLL|Win32.ActiveCfg = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release MTDLL|Win32.Build.0 = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release|Win32.ActiveCfg = Release|Win32
+		{9E3D22FC-0DE3-4189-B3C9-A9269BB9D255}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
