@@ -93,6 +93,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="test.html" />
     <None Include="test.java" />
     <None Include="test.php" />
   </ItemGroup>
