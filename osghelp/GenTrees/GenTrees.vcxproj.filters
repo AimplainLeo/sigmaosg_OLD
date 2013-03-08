@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{4da82683-ef04-4bcb-97f1-59bda3807b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ColGeom">
+      <UniqueIdentifier>{81bf0e9e-6bc6-432a-bdb5-b328a70b5172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shaders">
+      <UniqueIdentifier>{0dcd98d9-a5ab-4c87-a1db-212d27978264}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GenTrees.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParserXml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBase.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneShape.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneShapeMask.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTerrain.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="AddGeometryFromPrototypeFunctor.cpp">
+      <Filter>Source Files\ColGeom</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryInstancingBuilder.cpp">
+      <Filter>Source Files\ColGeom</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="myass.xml">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="myass2.xml">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="mydebug.xml">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="shaders\funcFogOpenGL.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\funcLighting.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\funcLighting.vert">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\funcLightingOpenGL.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\funcLightingOpenGL.vert">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\funcTree.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\funcTree.vert">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\main_standard.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\main_standard.vert">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ParserXml.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformData.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBase.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneShape.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneShapeMask.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTerrain.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AddGeometryFromPrototypeFunctor.h">
+      <Filter>Source Files\ColGeom</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryInstancingBuilder.h">
+      <Filter>Source Files\ColGeom</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

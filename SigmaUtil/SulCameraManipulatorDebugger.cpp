@@ -141,6 +141,18 @@ osg::Matrixd CSulCameraManipulatorDebugger::getInverseMatrix() const
 
 bool CSulCameraManipulatorDebugger::calcHitPoint(  const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit )
 {
+	osgViewer::View* view = dynamic_cast<osgViewer::View*>(&aa);
+	if ( view )
+	{
+		osgManipulator::PointerInfo pi;
+		pi.reset();
+		pi.setCamera( view->getCamera() );
+		pi.setMousePosition( ea.getX(), ea.getY() );
+		m_planeProjector->project( pi, hit );
+		return true;
+	}
+
+	/*
 	// if not overrided then we will create a zero plane and intersect with that
 	osgViewer::Viewer* viewer = dynamic_cast<osgViewer::Viewer*>(&aa);
 	if ( viewer )
@@ -152,6 +164,7 @@ bool CSulCameraManipulatorDebugger::calcHitPoint(  const osgGA::GUIEventAdapter&
 		m_planeProjector->project( pi, hit );
 		return true;
 	}
+	*/
 
 	return false;
 }
@@ -260,8 +273,10 @@ bool CSulCameraManipulatorDebugger::handleMouseDrag( const osgGA::GUIEventAdapte
 {
 	if ( !m_bMousePush && calcHitPoint( ea, aa, m_hit ) )
 	{
-		osgViewer::Viewer* viewer = dynamic_cast<osgViewer::Viewer*>(&aa);
-		osg::Camera* cam = viewer->getCamera();
+		osgViewer::View* view = dynamic_cast<osgViewer::View*>(&aa);
+		osg::Camera* cam = view->getCamera();
+		//osgViewer::Viewer* viewer = dynamic_cast<osgViewer::Viewer*>(&aa);
+		//osg::Camera* cam = viewer->getCamera();
 
 		osg::Vec3 v = m_hit - cam->getInverseViewMatrix().getTrans();
 		//m_distance = v.length();

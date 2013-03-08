@@ -8,7 +8,7 @@
 class CParticleDebrisSystem : public CSulParticleSystem
 {
 public:
-	CParticleDebrisSystem();
+	CParticleDebrisSystem( sigma::uint32 numParticles=10 );
 
 protected:
 	void createParticle( const osg::Vec3& velocity );

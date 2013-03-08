@@ -4,10 +4,8 @@
 #include "ParticleDebrisSystem.h"
 #include "ParticleDebris.h"
 
-#define NUM_PARTICLES (10)
-
-CParticleDebrisSystem::CParticleDebrisSystem() :
-CSulParticleSystem( NUM_PARTICLES )
+CParticleDebrisSystem::CParticleDebrisSystem( sigma::uint32 numParticles ) :
+CSulParticleSystem( numParticles )
 {
 }
 

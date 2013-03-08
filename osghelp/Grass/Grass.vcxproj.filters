@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\shaders">
+      <UniqueIdentifier>{a993f12a-b1e4-4d6c-be90-9f34225ee5e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="camsync.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="heightRTT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="camsync.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="heightRTT.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="terrain.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="grass.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="grass.vert">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="height_render.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="height_render.vert">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="terrain.frag">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="terrain.vert">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

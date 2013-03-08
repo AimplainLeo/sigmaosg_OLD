@@ -2,6 +2,24 @@
 //
 
 #include "stdafx.h"
+
+#include "propertySheet.h"
+#include "ParticleFlyingDebris.h"
+
+#include <QtCore/QTimer>
+#include <QtGui/QApplication>
+#include <QtGui/QPainter>
+#include <QtGui/QtEvents>
+#include <QtGui/QMessageBox>
+#include <QtGui/QGridLayout>
+#include <QtGui/qsplitter.h>
+
+#include <osgQt/GraphicsWindowQt>
+#include <osgViewer/CompositeViewer>
+#include <osgViewer/ViewerEventHandlers>
+#include <osgGA/TrackballManipulator>
+
+
 #include "ParticleDebrisSystem.h"
 #include <SigmaUtil/SulGeomQuad.h>
 #include <SigmaUtil/SulGeomGrid.h>
@@ -27,6 +45,8 @@
 #include <osgDB/FileUtils>
 #include <iostream>
 
+
+
 // convienence global variable
 static osg::Group* group = 0;
 static osg::Vec3 wind( 1,0,0 );
@@ -36,6 +56,8 @@ static CSulGeomBox* cube = 0;
 static CSulGeomPlane* plane = 0;
 static CSulGeomQuad* quad = 0;
 
+static CParticleFlyingDebris* particleFlyingDebris = 0;
+
 // forward declare
 osg::Node* createExplosion( const osg::Vec3& pos );
 osg::Node* createAnimatedInitialSmoke( const osg::Vec3& pos, int binNum );
@@ -43,6 +65,8 @@ osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum );
 osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum );
 osg::Node* createFireBall( const osg::Vec3& pos, int binNum );
 osg::Node* createDarkSmoke( const osg::Vec3& pos, int binNum  );
+
+CPropertySheet* g_sheetFlyingDebris = 0;
 
 class CMyCamera : public CSulCameraManipulatorDebugger
 {
@@ -55,7 +79,20 @@ public:
 	{
 		VEC_KEY::iterator i = std::find( m_key.begin(), m_key.end(), ea.getKey() );
 		if ( i==m_key.end() )
-			m_key.push_back( ea.getKey() );
+		{
+			int key = ea.getKey();
+
+			// hide all propertysheet
+			particleFlyingDebris->getPropertySheet()->hide();
+
+			// show propertysheet that we are currently using
+			switch (key)
+			{
+				case '1': 	particleFlyingDebris->getPropertySheet()->show(); break;
+			}
+
+			m_key.push_back( key );
+		}
 
 		return CSulCameraManipulatorDebugger::handleKeyDown( ea, us );
 	}
@@ -92,7 +129,7 @@ public:
 					{
 						switch (*i)
 						{
-							case '1': group->addChild( createFlyingDebris( hit, 3000 ) );			break;
+							case '1': group->addChild( particleFlyingDebris->create( hit ) );		break;
 							case '2': group->addChild( createFireBall(hit, 4000 ) );				break;
 							case '3': group->addChild( createAnimatedInitialSmoke(hit, 5000)  );	break;
 							case '4': group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );	break;
@@ -202,7 +239,7 @@ osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum )
     emitter->setCounter(counter);
 
 	// sector
-    osgParticle::SectorPlacer *placer = new osgParticle::SectorPlacer;
+    osgParticle::SectorPlacer* placer = new osgParticle::SectorPlacer;
     placer->setCenter( pos );
     placer->setRadiusRange(0, 2.5);
 	placer->setPhiRange(0, 2 * osg::PI);    // 360° angle to make a circle
@@ -447,8 +484,12 @@ osg::Node* createScene()
     return group;
 }
 
+/*
 int _tmain(int argc, _TCHAR* argv[])
 {
+	// Qt requires that we construct the global QApplication before creating any widgets.
+    QApplication app(argc, (char**)argv);
+
     // construct the viewer
     osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
 
@@ -467,5 +508,129 @@ int _tmain(int argc, _TCHAR* argv[])
 	viewer->setCameraManipulator( m );
 
     // execute main loop
-    return viewer->run();
+//    return viewer->run();
+
+
+	//QMessageBox::information(0, "Try Again", "I would really like this dialog to be in the openscenegraph view");
+
+ // run the frame loop, interleaving Qt and the main OSG frame loop
+	while(!viewer->done())
+	{
+		// process Qt events - this handles both events and paints the browser image
+		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+		viewer->frame();
+	}
+
+	return 0;
 }
+*/
+
+
+class ViewerWidget : public QWidget, public osgViewer::CompositeViewer
+{
+public:
+    ViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingModel=osgViewer::CompositeViewer::SingleThreaded) : QWidget()
+    {
+        setThreadingModel(threadingModel);
+
+		particleFlyingDebris = new CParticleFlyingDebris;
+
+		QGridLayout* grid = new QGridLayout;
+		setLayout( grid );
+
+		QWidget* widget = addViewWidget( createCamera( 0, 0, 512, 512 ), createScene() );
+
+		QWidget* containerPropertySheets = new QWidget;
+		QVBoxLayout* layoutPropertySheets = new QVBoxLayout;
+		containerPropertySheets->setLayout( layoutPropertySheets );
+
+		// add property sheets
+		layoutPropertySheets->addWidget( particleFlyingDebris->getPropertySheet() );
+
+		
+		QSplitter* splitter = new QSplitter;
+		splitter->addWidget( widget );
+		splitter->addWidget( containerPropertySheets );
+		grid->addWidget( splitter, 0,0 );
+
+		// we need a timer to do the osg update
+		connect( &_timer, SIGNAL(timeout()), this, SLOT(update()) );
+        _timer.start( 10 );
+
+
+		
+    }
+    
+    QWidget* addViewWidget( osg::Camera* camera, osg::Node* scene )
+    {
+        osgViewer::View* view = new osgViewer::View;
+        view->setCamera( camera );
+        addView( view );
+        
+        view->setSceneData( scene );
+        view->addEventHandler( new osgViewer::StatsHandler );
+
+        //view->setCameraManipulator( new osgGA::TrackballManipulator );
+		CMyCamera* m = new CMyCamera;
+		m->setHomePosition(
+			osg::Vec3(20,20,5),
+			osg::Vec3(0,0,0),
+			osg::Vec3(0,0,1)
+			);
+		view->setCameraManipulator( m );
+        
+        osgQt::GraphicsWindowQt* gw = dynamic_cast<osgQt::GraphicsWindowQt*>( camera->getGraphicsContext() );
+        return gw ? gw->getGLWidget() : NULL;
+    }
+	
+	osg::Camera* createCamera( int x, int y, int w, int h, const std::string& name="", bool windowDecoration=false )
+    {
+        osg::DisplaySettings* ds = osg::DisplaySettings::instance().get();
+        osg::ref_ptr<osg::GraphicsContext::Traits> traits = new osg::GraphicsContext::Traits;
+        traits->windowName = name;
+        traits->windowDecoration = windowDecoration;
+        traits->x = x;
+        traits->y = y;
+        traits->width = w;
+        traits->height = h;
+        traits->doubleBuffer = true;
+        traits->alpha = ds->getMinimumNumAlphaBits();
+        traits->stencil = ds->getMinimumNumStencilBits();
+        traits->sampleBuffers = ds->getMultiSamples();
+        traits->samples = ds->getNumMultiSamples();
+        
+        osg::ref_ptr<osg::Camera> camera = new osg::Camera;
+        camera->setGraphicsContext( new osgQt::GraphicsWindowQt(traits.get()) );
+        
+        camera->setClearColor( osg::Vec4(0.2, 0.2, 0.6, 1.0) );
+        camera->setViewport( new osg::Viewport(0, 0, traits->width, traits->height) );
+        camera->setProjectionMatrixAsPerspective(
+            30.0f, static_cast<double>(traits->width)/static_cast<double>(traits->height), 1.0f, 10000.0f );
+        return camera.release();
+    }
+
+
+    virtual void paintEvent( QPaintEvent* event )
+    { frame(); }
+
+
+protected:    
+    QTimer _timer;
+};
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	// Qt requires that we construct the global QApplication before creating any widgets.
+    QApplication app(argc, (char**)argv);
+
+    ViewerWidget* viewWidget = new ViewerWidget();
+    viewWidget->setGeometry( 100, 100, 800, 600 );
+    viewWidget->show();
+
+	app.exec();
+
+	return 0;
+}
+

@@ -5,6 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source Files\particles">
+      <UniqueIdentifier>{d88a2b4c-59d2-42f6-aa95-153f8fbcc307}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -19,6 +22,15 @@
     <ClInclude Include="ParticleDebris.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="propertySheet.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="particleFlyingDebris.h">
+      <Filter>Source Files\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleBase.h">
+      <Filter>Source Files\particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -29,6 +41,18 @@
     </ClCompile>
     <ClCompile Include="ParticleDebrisSystem.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDebris.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="propertySheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="particleFlyingDebris.cpp">
+      <Filter>Source Files\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="particleBase.cpp">
+      <Filter>Source Files\particles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
