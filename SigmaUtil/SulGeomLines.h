@@ -15,6 +15,7 @@ public:
 
 	// NOTE: remember to call createDrawable
 	void			addLine( const osg::Vec3& pos );
+	void			addLine( const osg::Vec3& pos0, const osg::Vec3& pos1 );
 	void			setLines( const sigma::VEC_LINESEGMENT& vecLines );
 
 	// only call if needed (constructors call this automatically)

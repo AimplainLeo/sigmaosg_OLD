@@ -6,15 +6,23 @@
 #include <osg/node>
 #include <osg/vec3>
 #include <osg/referenced>
+#include <osgParticle/range>
 
 class CSulParticle : public osg::Referenced
 {
 public:
-	CSulParticle( const osg::Vec3& velocity )
+	CSulParticle( const osg::Vec3& velocity, float posOffsetMin=0.0f, float posOffsetMax=0.0f )
 	{
 		m_vel = velocity;
 		m_life = 2.0f;				// seconds
-		m_pos.set( 0, 0, 0 );
+
+		
+		m_rangeOffsetRadius.set( posOffsetMin, posOffsetMax );
+
+		m_pos = m_vel;
+		m_pos.z() = 0.0f;
+		m_pos.normalize();
+		m_pos = m_pos *	m_rangeOffsetRadius.get_random();
 	}
 
 	virtual void reset() 
@@ -64,6 +72,8 @@ private:
 
 	float	m_life;
 	float	m_age;
+
+	osgParticle::rangef m_rangeOffsetRadius;
 };
 
 typedef std::vector< osg::ref_ptr<CSulParticle> >	VEC_PARTICLES;

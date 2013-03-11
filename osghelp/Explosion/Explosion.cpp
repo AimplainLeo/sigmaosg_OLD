@@ -21,6 +21,7 @@
 
 
 #include "ParticleDebrisSystem.h"
+#include <SigmaUtil/SulGeomLines.h>
 #include <SigmaUtil/SulGeomQuad.h>
 #include <SigmaUtil/SulGeomGrid.h>
 #include <SigmaUtil/SulGeode.h>
@@ -65,6 +66,24 @@ osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum );
 osg::Node* createAnimatedBurningSmoke( const osg::Vec3& pos, int binNum );
 osg::Node* createFireBall( const osg::Vec3& pos, int binNum );
 osg::Node* createDarkSmoke( const osg::Vec3& pos, int binNum  );
+
+osg::Node* testEmitter( const osg::Vec3& pos )
+{
+	osg::Group* group = new osg::Group;
+
+	CSulParticleEmitter* emitter = new CSulParticleEmitter;
+
+	CSulGeomLines* lines = new CSulGeomLines;
+
+	for (sigma::uint32 i=0; i<100; i++ )
+		lines->addLine( pos, emitter->get()+pos );
+
+	lines->createDrawable();
+	
+	group->addChild( new CSulGeode(lines) );
+
+	return group;
+}
 
 CPropertySheet* g_sheetFlyingDebris = 0;
 
@@ -134,6 +153,8 @@ public:
 							case '3': group->addChild( createAnimatedInitialSmoke(hit, 5000)  );	break;
 							case '4': group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );	break;
 							case '5': group->addChild( createDarkSmoke(hit, 8000 ) );				break;
+
+							case '0' : group->addChild( testEmitter( hit ) ); break;
 						}
 
 						++i;
@@ -418,7 +439,7 @@ osg::Node* createImpactRing( const osg::Vec3& pos, int binNum )
 	return mt;
 }
 
-
+/*
 osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum )
 {
 	osg::Group* group = new osg::Group;
@@ -435,6 +456,7 @@ osg::Node* createFlyingDebris( const osg::Vec3& pos, int binNum )
 
 	return group;
 }
+*/
 
 
 osg::Node* createExplosion( const osg::Vec3& pos )
@@ -451,7 +473,7 @@ osg::Node* createExplosion( const osg::Vec3& pos )
 	*/
 	
 
-	all->addChild( createFlyingDebris( pos, 3000 ) );
+//	all->addChild( createFlyingDebris( pos, 3000 ) );
 	
 	
 
@@ -548,7 +570,6 @@ public:
 		// add property sheets
 		layoutPropertySheets->addWidget( particleFlyingDebris->getPropertySheet() );
 
-		
 		QSplitter* splitter = new QSplitter;
 		splitter->addWidget( widget );
 		splitter->addWidget( containerPropertySheets );
@@ -557,9 +578,6 @@ public:
 		// we need a timer to do the osg update
 		connect( &_timer, SIGNAL(timeout()), this, SLOT(update()) );
         _timer.start( 10 );
-
-
-		
     }
     
     QWidget* addViewWidget( osg::Camera* camera, osg::Node* scene )

@@ -4,21 +4,59 @@
 #include "ParticleDebris.h"
 #include <osgParticle/ParticleSystemUpdater>
 
+CParticleDebris::CParticleDebris( 
+	const osg::Vec3& velocity,
+	float debrisPosOffsetMin,
+	float debrisPosOffsetMax,
+	float particleMass,
+	float particleLifeTime,
+	float particleSizeMin,
+	float particleSizeMax,
+	float emitterLifeTime,
+	float rateMin,
+	float rateMax
+) :
+CSulParticle( velocity )
+{
+	m_particleMass		= particleMass;
+	m_particleLifeTime	= particleLifeTime;
+	m_particleSizeMin	= particleSizeMin;
+	m_particleSizeMax	= particleSizeMax;
+	m_emitterLifeTime	= emitterLifeTime;
+	m_rateMin			= rateMin;
+	m_rateMax			= rateMax;
+
+	m_group = new osg::MatrixTransform;
+
+	m_group->addChild( myAnimatedBurningSmoke( osg::Vec3(0,0,0) , 5000 ) );
+	//m_group->addChild( mycreateFireBall( osg::Vec3(0,0,0) , 5000 ) );
+		
+	m_group->setDataVariance( osg::Object::DYNAMIC );
+
+	/*
+	osg::Vec4 color( sigma::rand0to1(),sigma::rand0to1(),sigma::rand0to1(),1 );
+	CSulGeomSphere* sphere = new CSulGeomSphere( 0.2f );
+	sphere->setColor( color );
+	m_group->addChild( sphere );
+	*/
+}
+
+
 osg::Node* CParticleDebris::myAnimatedBurningSmoke( const osg::Vec3& pos, int binNum )
 {
 	osg::Group* group = new osg::Group;
 	group->getOrCreateStateSet()->setRenderBinDetails( binNum, "DepthSortedBin" );
 
 	osgParticle::Particle pexplosion;
-	pexplosion.setLifeTime(3);
-    pexplosion.setSizeRange(osgParticle::rangef(0.75f, 3.0f));
+	pexplosion.setLifeTime(m_particleLifeTime);
+    pexplosion.setSizeRange(osgParticle::rangef(m_particleSizeMin, m_particleSizeMax));
     pexplosion.setAlphaRange(osgParticle::rangef(0.5f, 1.0f));
     pexplosion.setColorRange(osgParticle::rangev4(
         osg::Vec4(1, 1, 1, 1), 
         osg::Vec4(1, 1, 1, 1))
 	);
 	pexplosion.setRadius(0.5f);
-	 pexplosion.setMass(1/1.5f);
+	 pexplosion.setMass(m_particleMass);
 	pexplosion.setTextureTileRange(
 		4, 4, 
 		0, 15
@@ -39,13 +77,13 @@ osg::Node* CParticleDebris::myAnimatedBurningSmoke( const osg::Vec3& pos, int bi
 	emitter->setNumParticlesToCreateMovementCompensationRatio(1.5f);
 	emitter->setEndless( false );
 	emitter->setStartTime( 0 );
-	emitter->setLifeTime( 2.5 );
+	emitter->setLifeTime( m_emitterLifeTime );
     emitter->setParticleSystem(ps);
     emitter->setParticleTemplate(pexplosion);
 
 	// counter
     osgParticle::RandomRateCounter* counter = new osgParticle::RandomRateCounter;
-    counter->setRateRange(10, 10);
+    counter->setRateRange(m_rateMin, m_rateMax);
     emitter->setCounter(counter);
 
 	// sector

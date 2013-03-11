@@ -17,8 +17,28 @@ public:
 protected:
 	CPropertySheet* createPropertySheet();
 
-	CPropString*	m_particleCount;
 	CPropString*	m_renderBinNum;
+
+	CPropString*	m_debrisCount;
+	CPropFloat*		m_debrisPosOffsetMin;
+	CPropFloat*		m_debrisPosOffsetMax;
+	CPropFloat*		m_debrisSpeedMin;
+	CPropFloat*		m_debrisSpeedMax;
+	CPropFloat*		m_debrisThetaMin;
+	CPropFloat*		m_debrisThetaMax;
+	CPropFloat*		m_debrisPhiMin;
+	CPropFloat*		m_debrisPhiMax;
+
+	CPropFloat*		m_particleMass;
+	CPropFloat*		m_particleLifeTime;
+	CPropFloat*		m_particleSizeMin;
+	CPropFloat*		m_particleSizeMax;
+
+	
+	CPropFloat*		m_emitterLifeTime;
+	CPropFloat*		m_rateMin;
+	CPropFloat*		m_rateMax;
+	
 };
 
 #endif // __PARTICLEFLYINGDEBRIS_H__

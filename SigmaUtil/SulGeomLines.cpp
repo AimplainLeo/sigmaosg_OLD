@@ -51,3 +51,9 @@ void CSulGeomLines::addLine( const osg::Vec3& pos )
 	osg::LineSegment* ls = new  osg::LineSegment( osg::Vec3(0,0,0), pos );
 	m_vecLines.push_back( ls );
 }
+
+void CSulGeomLines::addLine( const osg::Vec3& pos0, const osg::Vec3& pos1  )
+{
+	osg::LineSegment* ls = new  osg::LineSegment( pos0, pos1 );
+	m_vecLines.push_back( ls );
+}

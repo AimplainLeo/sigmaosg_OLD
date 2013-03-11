@@ -25,8 +25,8 @@ public:
 	CSulParticleSystem( sigma::uint32 numParticles )
 	{
 		m_numParticles = numParticles;
-		m_emitterVelocityFlux.set( 10.0f, 10.0f, 10.0f );		// fluxation on velocity when created
-		m_emitterVelocity.set( 0,0,3 );		// distance per second
+//		m_emitterVelocityFlux.set( 10.0f, 10.0f, 10.0f );		// fluxation on velocity when created
+//		m_emitterVelocity.set( 0,0,3 );		// distance per second
 	}
 
 	void init()
@@ -49,9 +49,19 @@ public:
 	{
 		m_emitter = emitter;
 	}
+
+	CSulParticleEmitter* getEmitter()
+	{
+		if ( !m_emitter.valid() )
+			m_emitter = new CSulParticleEmitter;
+
+		return m_emitter;
+	}
 	
 	osg::Vec3 createVelocity()
 	{
+		return m_emitter->get();
+		/*
 		float x = m_emitterVelocityFlux.x()*sigma::rand0to1() - m_emitterVelocityFlux.x()/2.0f;
 		float y = m_emitterVelocityFlux.y()*sigma::rand0to1() - m_emitterVelocityFlux.y()/2.0f;
 		float z = m_emitterVelocityFlux.z()*sigma::rand0to1() - m_emitterVelocityFlux.z()/2.0f;
@@ -59,6 +69,7 @@ public:
 			m_emitterVelocity.x() + x,
 			m_emitterVelocity.y() + y,
 			m_emitterVelocity.z() + z );
+			*/
 	}
 
 	void add( CSulParticle* p )
@@ -140,8 +151,8 @@ private:
 	osg::ref_ptr<CSulParticleEmitter>	m_emitter;
 
 	sigma::uint32	m_numParticles;
-	osg::Vec3		m_emitterVelocity;
-	osg::Vec3		m_emitterVelocityFlux;
+//	osg::Vec3		m_emitterVelocity;
+//	osg::Vec3		m_emitterVelocityFlux;
 	VEC_PARTICLES	m_vecParticles;
 
 	VEC_PARTICLES	m_vecParticlesAdd;

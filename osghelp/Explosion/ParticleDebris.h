@@ -13,24 +13,18 @@
 class CParticleDebris : public CSulParticle
 {
 public:
-	CParticleDebris( const osg::Vec3& velocity ) :
-	CSulParticle( velocity )
-	{
-		m_group = new osg::MatrixTransform;
-
-		m_group->addChild( myAnimatedBurningSmoke( osg::Vec3(0,0,0) , 5000 ) );
-		//m_group->addChild( mycreateFireBall( osg::Vec3(0,0,0) , 5000 ) );
-		
-		m_group->setDataVariance( osg::Object::DYNAMIC );
-		
-
-		/*
-		osg::Vec4 color( sigma::rand0to1(),sigma::rand0to1(),sigma::rand0to1(),1 );
-		CSulGeomSphere* sphere = new CSulGeomSphere( 0.2f );
-		sphere->setColor( color );
-		m_group->addChild( sphere );
-		*/
-	}
+	CParticleDebris( 
+		const osg::Vec3& velocity,
+		float debrisPosOffsetMin = 0.0f,
+		float debrisPosOffsetMax = 0.0f,
+		float particleMass		= 0.7f,
+		float particleLifeTime	= 3.0f,
+		float particleSizeMin	= 0.75f,
+		float particleSizeMax	= 3.0f,
+		float emitterLifeTime	= 2.5f,
+		float rateMin			= 10.0,
+		float rateMax			= 10.0
+	);
 
 	virtual osg::Node* getNode()
 	{
@@ -70,6 +64,13 @@ private:
 //	osgParticle::SmokeEffect*	m_smoke;
 
 	osgParticle::SectorPlacer*	m_placer;
+	float						m_particleMass;
+	float						m_particleLifeTime;
+	float						m_particleSizeMin;
+	float						m_particleSizeMax;
+	float						m_emitterLifeTime;
+	float						m_rateMin;
+	float						m_rateMax;
 };
 
 #endif // __PARTICLEDEBRIS_H__

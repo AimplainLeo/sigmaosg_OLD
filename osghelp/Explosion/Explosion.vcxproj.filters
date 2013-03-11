@@ -8,6 +8,9 @@
     <Filter Include="Source Files\particles">
       <UniqueIdentifier>{d88a2b4c-59d2-42f6-aa95-153f8fbcc307}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\particles\flying debris">
+      <UniqueIdentifier>{a13a5504-5cab-4e8d-bd97-c8539d0df540}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -16,20 +19,20 @@
     <ClInclude Include="targetver.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleDebrisSystem.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleDebris.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="propertySheet.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="particleFlyingDebris.h">
-      <Filter>Source Files\particles</Filter>
-    </ClInclude>
     <ClInclude Include="particleBase.h">
       <Filter>Source Files\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="particleFlyingDebris.h">
+      <Filter>Source Files\particles\flying debris</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDebrisSystem.h">
+      <Filter>Source Files\particles\flying debris</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDebris.h">
+      <Filter>Source Files\particles\flying debris</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -39,20 +42,20 @@
     <ClCompile Include="Explosion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleDebrisSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleDebris.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="propertySheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="particleFlyingDebris.cpp">
-      <Filter>Source Files\particles</Filter>
-    </ClCompile>
     <ClCompile Include="particleBase.cpp">
       <Filter>Source Files\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="particleFlyingDebris.cpp">
+      <Filter>Source Files\particles\flying debris</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDebris.cpp">
+      <Filter>Source Files\particles\flying debris</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDebrisSystem.cpp">
+      <Filter>Source Files\particles\flying debris</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

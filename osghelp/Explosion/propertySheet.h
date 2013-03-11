@@ -40,6 +40,18 @@ public:
 	{
 	}
 
+	CPropString( const CSulString& label, const CSulString& text ) :
+		CPropBase( label, m_lineEdit = new QLineEdit( text.c_str() ) )
+		{
+		}
+
+	float getFloat()
+	{
+		QString t = m_lineEdit->text();
+		std::string s = t.toUtf8().constData();
+		return CSulString(s).asFloat();
+	}
+
 	sigma::uint32 getUint32()
 	{
 		QString t = m_lineEdit->text();
@@ -49,6 +61,16 @@ public:
 
 private:
 	QLineEdit* m_lineEdit;
+};
+
+class CPropFloat : public CPropString
+{
+public:
+	CPropFloat( const CSulString& label, float value=0.0f ) :
+		CPropString( label, CSulString( value ) )
+		{
+
+		}
 };
 
 class CPropertySheet : public QWidget
