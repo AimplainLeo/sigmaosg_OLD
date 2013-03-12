@@ -5,6 +5,7 @@
 
 #include "propertySheet.h"
 #include "ParticleFlyingDebris.h"
+#include "particleStandard.h"
 
 #include <QtCore/QTimer>
 #include <QtGui/QApplication>
@@ -46,8 +47,6 @@
 #include <osgDB/FileUtils>
 #include <iostream>
 
-
-
 // convienence global variable
 static osg::Group* group = 0;
 static osg::Vec3 wind( 1,0,0 );
@@ -57,7 +56,10 @@ static CSulGeomBox* cube = 0;
 static CSulGeomPlane* plane = 0;
 static CSulGeomQuad* quad = 0;
 
-static CParticleFlyingDebris* particleFlyingDebris = 0;
+static CParticleFlyingDebris*	particleFlyingDebris = 0;
+static CParticleStandard*		particleStandard = 0;
+
+static int key = 0;
 
 // forward declare
 osg::Node* createExplosion( const osg::Vec3& pos );
@@ -99,15 +101,17 @@ public:
 		VEC_KEY::iterator i = std::find( m_key.begin(), m_key.end(), ea.getKey() );
 		if ( i==m_key.end() )
 		{
-			int key = ea.getKey();
+			key = ea.getKey();
 
 			// hide all propertysheet
 			particleFlyingDebris->getPropertySheet()->hide();
+			particleStandard->getPropertySheet()->hide();
 
 			// show propertysheet that we are currently using
 			switch (key)
 			{
 				case '1': 	particleFlyingDebris->getPropertySheet()->show(); break;
+				case '2': 	particleStandard->getPropertySheet()->show(); break;
 			}
 
 			m_key.push_back( key );
@@ -142,6 +146,16 @@ public:
 					calcHitPoint( ea, us, hit );
 					gizmo->setPosition( hit );
 
+					switch ( key )
+					{
+						case '1': group->addChild( particleFlyingDebris->create( hit ) );		break;
+						case '2': group->addChild( particleStandard->create( hit ) );			break;
+
+						default:
+							break;
+					}
+
+					/*
 					VEC_KEY::iterator i = m_key.begin();
 					VEC_KEY::iterator ie = m_key.end();
 					while ( i!=ie )
@@ -149,23 +163,27 @@ public:
 						switch (*i)
 						{
 							case '1': group->addChild( particleFlyingDebris->create( hit ) );		break;
-							case '2': group->addChild( createFireBall(hit, 4000 ) );				break;
-							case '3': group->addChild( createAnimatedInitialSmoke(hit, 5000)  );	break;
-							case '4': group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );	break;
-							case '5': group->addChild( createDarkSmoke(hit, 8000 ) );				break;
+							case '2': group->addChild( particleStandard->create( hit ) );			break;
+							case '3': group->addChild( createFireBall(hit, 4000 ) );				break;
+							case '4': group->addChild( createAnimatedInitialSmoke(hit, 5000)  );	break;
+							case '5': group->addChild( createAnimatedBurningSmoke(hit, 6000 ) );	break;
+							case '6': group->addChild( createDarkSmoke(hit, 8000 ) );				break;
 
 							case '0' : group->addChild( testEmitter( hit ) ); break;
 						}
 
 						++i;
 					}
+					*/
 				}
 				return true;
 		}
 
+		/*
 		// prevent camera manipulation if the user is pressing a key
 		if ( m_key.size() )
 			return true;
+			*/
 
 		return CSulCameraManipulatorDebugger::handle( ea, us );
 	}
@@ -557,6 +575,7 @@ public:
         setThreadingModel(threadingModel);
 
 		particleFlyingDebris = new CParticleFlyingDebris;
+		particleStandard = new CParticleStandard;
 
 		QGridLayout* grid = new QGridLayout;
 		setLayout( grid );
@@ -569,6 +588,7 @@ public:
 
 		// add property sheets
 		layoutPropertySheets->addWidget( particleFlyingDebris->getPropertySheet() );
+		layoutPropertySheets->addWidget( particleStandard->getPropertySheet() );
 
 		QSplitter* splitter = new QSplitter;
 		splitter->addWidget( widget );

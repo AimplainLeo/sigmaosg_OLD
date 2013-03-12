@@ -22,6 +22,8 @@ public:
 		float particleLifeTime,
 		float particleSizeMin,
 		float particleSizeMax,
+		float particleAlphaMin,
+		float particleAlphaMax,
 		float emitterLifeTime,
 		float rateMin,
 		float rateMax
@@ -39,6 +41,8 @@ private:
 	float	m_particleSizeMin;
 	float	m_particleSizeMax;
 	float	m_emitterLifeTime;
+	float	m_particleAlphaMin;
+	float	m_particleAlphaMax;
 	float	m_rateMin;
 	float	m_rateMax;
 };

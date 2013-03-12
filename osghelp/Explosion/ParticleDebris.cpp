@@ -12,6 +12,8 @@ CParticleDebris::CParticleDebris(
 	float particleLifeTime,
 	float particleSizeMin,
 	float particleSizeMax,
+	float particleAlphaMin,
+	float particleAlphaMax,
 	float emitterLifeTime,
 	float rateMin,
 	float rateMax
@@ -22,6 +24,8 @@ CSulParticle( velocity )
 	m_particleLifeTime	= particleLifeTime;
 	m_particleSizeMin	= particleSizeMin;
 	m_particleSizeMax	= particleSizeMax;
+	m_particleAlphaMin	= particleAlphaMin;
+	m_particleAlphaMax	= particleAlphaMax;
 	m_emitterLifeTime	= emitterLifeTime;
 	m_rateMin			= rateMin;
 	m_rateMax			= rateMax;
@@ -50,7 +54,7 @@ osg::Node* CParticleDebris::myAnimatedBurningSmoke( const osg::Vec3& pos, int bi
 	osgParticle::Particle pexplosion;
 	pexplosion.setLifeTime(m_particleLifeTime);
     pexplosion.setSizeRange(osgParticle::rangef(m_particleSizeMin, m_particleSizeMax));
-    pexplosion.setAlphaRange(osgParticle::rangef(0.5f, 1.0f));
+    pexplosion.setAlphaRange(osgParticle::rangef(m_particleAlphaMin, m_particleAlphaMax));
     pexplosion.setColorRange(osgParticle::rangev4(
         osg::Vec4(1, 1, 1, 1), 
         osg::Vec4(1, 1, 1, 1))

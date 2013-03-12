@@ -81,6 +81,14 @@ CSulString::CSulString( const osg::Vec4 v, sigma::uint32 decimalCount )
 	assign( s.c_str() );
 }
 
+CSulString::CSulString( const osg::Vec4s v )
+{
+	CSulString s;
+	CSulString fmt = "%i, %i, %i, %i";
+	s.Format( fmt.c_str(), v.r(), v.g(), v.b(), v.a() );
+	assign( s.c_str() );
+}
+
 CSulString::CSulString( float f, sigma::uint32 decimalCount )
 {
 	CSulString s;
@@ -222,6 +230,18 @@ osg::Vec4 CSulString::asVec4() const
 	}
 
 	return osg::Vec4( 1, 1, 1, 1 );
+}
+
+osg::Vec4s CSulString::asVec4s() const
+{
+	if ( !empty() )
+	{
+		int r, g, b, a;
+		sscanf( c_str(), "%i,%i,%i,%i", &r, &g, &b, &a ); 
+		return osg::Vec4s( r, g, b, a );
+	}
+
+	return osg::Vec4s( 1, 1, 1, 1 );
 }
 
 void CSulString::replaceAll( const std::string& searchFor, const std::string& changeTo ) 

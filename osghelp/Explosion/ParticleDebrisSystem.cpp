@@ -18,6 +18,8 @@ CParticleDebrisSystem::CParticleDebrisSystem(
 	float particleLifeTime,
 	float particleSizeMin,
 	float particleSizeMax,
+	float particleAlphaMin,
+	float particleAlphaMax,
 	float emitterLifeTime,
 	float rateMin,
 	float rateMax
@@ -37,6 +39,9 @@ CSulParticleSystem( debrisCount )
 	m_particleLifeTime	= particleLifeTime;
 	m_particleSizeMin	= particleSizeMin;
 	m_particleSizeMax	= particleSizeMax;
+	m_particleAlphaMin	= particleAlphaMin;
+	m_particleAlphaMax	= particleAlphaMax;
+	
 	m_emitterLifeTime	= emitterLifeTime;
 	m_rateMin			= rateMin;
 	m_rateMax			= rateMax;
@@ -52,6 +57,8 @@ void CParticleDebrisSystem::createParticle( const osg::Vec3& velocity )
 		m_particleLifeTime,
 		m_particleSizeMin,
 		m_particleSizeMax,
+		m_particleAlphaMin,
+		m_particleAlphaMax,
 		m_emitterLifeTime,
 		m_rateMin,
 		m_rateMax

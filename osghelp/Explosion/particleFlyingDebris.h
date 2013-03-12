@@ -33,7 +33,8 @@ protected:
 	CPropFloat*		m_particleLifeTime;
 	CPropFloat*		m_particleSizeMin;
 	CPropFloat*		m_particleSizeMax;
-
+	CPropFloat*		m_particleAlphaMin;
+	CPropFloat*		m_particleAlphaMax;
 	
 	CPropFloat*		m_emitterLifeTime;
 	CPropFloat*		m_rateMin;

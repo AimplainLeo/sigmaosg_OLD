@@ -79,6 +79,7 @@
     <ClInclude Include="ParticleDebris.h" />
     <ClInclude Include="ParticleDebrisSystem.h" />
     <ClInclude Include="particleFlyingDebris.h" />
+    <ClInclude Include="particleStandard.h" />
     <ClInclude Include="propertySheet.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="ParticleDebris.cpp" />
     <ClCompile Include="ParticleDebrisSystem.cpp" />
     <ClCompile Include="particleFlyingDebris.cpp" />
+    <ClCompile Include="particleStandard.cpp" />
     <ClCompile Include="propertySheet.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

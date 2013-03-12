@@ -31,6 +31,8 @@ osg::Node* CParticleFlyingDebris::create( const osg::Vec3& pos )
 		m_particleLifeTime->getFloat(),
 		m_particleSizeMin->getFloat(),
 		m_particleSizeMax->getFloat(),
+		m_particleAlphaMin->getFloat(),
+		m_particleAlphaMax->getFloat(),
 		m_emitterLifeTime->getFloat(),
 		m_rateMin->getFloat(),
 		m_rateMax->getFloat()
@@ -58,7 +60,7 @@ CPropertySheet* CParticleFlyingDebris::createPropertySheet()
 	propertySheet->add( m_debrisPosOffsetMin = new CPropFloat( "Debris Pos Offset Min", 0.0f ) );
 	propertySheet->add( m_debrisPosOffsetMax = new CPropFloat( "Debris Pos Offset Max", 0.0f ) );
 	propertySheet->add( m_debrisSpeedMin = new CPropFloat( "Debris Speed Min", 10.0f ) );
-	propertySheet->add( m_debrisSpeedMax = new CPropFloat( "Debris Speed Max", 20.0f ) );
+	propertySheet->add( m_debrisSpeedMax = new CPropFloat( "Debris Speed Max", 10.0f ) );
 	propertySheet->add( m_debrisThetaMin = new CPropFloat( "Debris Theta Min", 0.0f ) );
 	propertySheet->add( m_debrisThetaMax = new CPropFloat( "Debris Theta Max", 2*osg::PI ) );
 	propertySheet->add( m_debrisPhiMin = new CPropFloat( "Debris Phi Min", 0.0f ) );
@@ -69,6 +71,8 @@ CPropertySheet* CParticleFlyingDebris::createPropertySheet()
 	propertySheet->add( m_particleLifeTime = new CPropFloat( "Particle Life Time (sec)", 3.0f ) );
 	propertySheet->add( m_particleSizeMin = new CPropFloat( "Particle Size Min", 0.75f) );
 	propertySheet->add( m_particleSizeMax = new CPropFloat( "Particle Size Max", 3.0f) );
+	propertySheet->add( m_particleAlphaMin = new CPropFloat( "Particle Alpha Min", 0.5f) );
+	propertySheet->add( m_particleAlphaMax = new CPropFloat( "Particle Alpha Max", 1.0f) );
 
 	// emitter
 	propertySheet->add( m_emitterLifeTime = new CPropFloat( "Emitter Life Time", 2.5f) );

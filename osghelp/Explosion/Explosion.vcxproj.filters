@@ -11,6 +11,9 @@
     <Filter Include="Source Files\particles\flying debris">
       <UniqueIdentifier>{a13a5504-5cab-4e8d-bd97-c8539d0df540}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\particles\standard">
+      <UniqueIdentifier>{368ffe7c-897c-4c83-968b-96b586828ca7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -34,6 +37,9 @@
     <ClInclude Include="ParticleDebris.h">
       <Filter>Source Files\particles\flying debris</Filter>
     </ClInclude>
+    <ClInclude Include="particleStandard.h">
+      <Filter>Source Files\particles\standard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -56,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="ParticleDebrisSystem.cpp">
       <Filter>Source Files\particles\flying debris</Filter>
+    </ClCompile>
+    <ClCompile Include="particleStandard.cpp">
+      <Filter>Source Files\particles\standard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 
 #include <QtGui/Qlabel>
 
-CPropertySheet::CPropertySheet() :
+CPropertySheet::CPropertySheet( const CSulString& title ) :
 QWidget()
 {
 	setStyleSheet("background-color:red;");
@@ -14,7 +14,7 @@ QWidget()
 
 	setLayout( m_layout );
 
-	QLabel* label = new QLabel( "Hello" );
+	QLabel* label = new QLabel( title.c_str() );
 	label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed ); 
 	label->setStyleSheet("background-color:green;");
 	m_layout->addWidget( label, Qt::AlignTop );

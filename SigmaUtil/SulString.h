@@ -25,6 +25,7 @@ public:
 					CSulString( double d, sigma::uint32 decimalCount=10 );
 					CSulString( const osg::Vec3 v, sigma::uint32 decimalCount=10 );
 					CSulString( const osg::Vec4 v, sigma::uint32 decimalCount=10 );
+					CSulString( const osg::Vec4s v );
 
 	// modifiers
 	void			Format( const char* Format, ... );
@@ -41,6 +42,7 @@ public:
 	bool			asBool() const;
 	osg::Vec3		asVec3() const;
 	osg::Vec4		asVec4() const;
+	osg::Vec4s		asVec4s() const;
 
 	CSulString		char2hex( char dec ) const;
 
