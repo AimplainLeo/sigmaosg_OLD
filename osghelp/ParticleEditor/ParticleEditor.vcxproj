@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{57F315FB-6D06-4C2D-99E7-70588ADB4DE6}</ProjectGuid>
+    <ProjectGuid>{FBE3577A-8816-4E0C-8871-1E6920A901CE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Explosion</RootNamespace>
+    <RootNamespace>ParticleEditor</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -75,21 +75,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="particleBase.h" />
-    <ClInclude Include="ParticleDebris.h" />
-    <ClInclude Include="ParticleDebrisSystem.h" />
-    <ClInclude Include="particleFlyingDebris.h" />
-    <ClInclude Include="particleStandard.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Explosion.cpp" />
-    <ClCompile Include="particleBase.cpp" />
-    <ClCompile Include="ParticleDebris.cpp" />
-    <ClCompile Include="ParticleDebrisSystem.cpp" />
-    <ClCompile Include="particleFlyingDebris.cpp" />
-    <ClCompile Include="particleStandard.cpp" />
+    <ClCompile Include="ParticleEditor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

@@ -8,6 +8,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Explosion", "Explosion.vcxp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SigmaUtil", "..\..\SigmaUtil\SigmaUtil_express2008.vcxproj", "{3EB97355-D1CB-4537-9255-2DEBF2777FE1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParticleEditor", "..\ParticleEditor\ParticleEditor.vcxproj", "{FBE3577A-8816-4E0C-8871-1E6920A901CE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EB97355-D1CB-4537-9255-2DEBF2777FE1} = {3EB97355-D1CB-4537-9255-2DEBF2777FE1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -22,6 +27,10 @@ Global
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Debug|Win32.Build.0 = Debug|Win32
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Release|Win32.ActiveCfg = Release|Win32
 		{3EB97355-D1CB-4537-9255-2DEBF2777FE1}.Release|Win32.Build.0 = Release|Win32
+		{FBE3577A-8816-4E0C-8871-1E6920A901CE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FBE3577A-8816-4E0C-8871-1E6920A901CE}.Debug|Win32.Build.0 = Debug|Win32
+		{FBE3577A-8816-4E0C-8871-1E6920A901CE}.Release|Win32.ActiveCfg = Release|Win32
+		{FBE3577A-8816-4E0C-8871-1E6920A901CE}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

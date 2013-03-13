@@ -19,23 +19,23 @@ osg::Node* CParticleFlyingDebris::create( const osg::Vec3& pos )
 
 	CParticleDebrisSystem* p = new CParticleDebrisSystem( 
 		m_debrisCount->getUint32(),
-		m_debrisPosOffsetMin->getFloat(),
-		m_debrisPosOffsetMax->getFloat(),
-		m_debrisSpeedMin->getFloat(),
-		m_debrisSpeedMax->getFloat(),
-		m_debrisThetaMin->getFloat(),
-		m_debrisThetaMax->getFloat(),
-		m_debrisPhiMin->getFloat(),
-		m_debrisPhiMax->getFloat(),
-		m_particleMass->getFloat(),
-		m_particleLifeTime->getFloat(),
-		m_particleSizeMin->getFloat(),
-		m_particleSizeMax->getFloat(),
-		m_particleAlphaMin->getFloat(),
-		m_particleAlphaMax->getFloat(),
-		m_emitterLifeTime->getFloat(),
-		m_rateMin->getFloat(),
-		m_rateMax->getFloat()
+		m_debrisPosOffsetMin->getValue(),
+		m_debrisPosOffsetMax->getValue(),
+		m_debrisSpeedMin->getValue(),
+		m_debrisSpeedMax->getValue(),
+		m_debrisThetaMin->getValue(),
+		m_debrisThetaMax->getValue(),
+		m_debrisPhiMin->getValue(),
+		m_debrisPhiMax->getValue(),
+		m_particleMass->getValue(),
+		m_particleLifeTime->getValue(),
+		m_particleSizeMin->getValue(),
+		m_particleSizeMax->getValue(),
+		m_particleAlphaMin->getValue(),
+		m_particleAlphaMax->getValue(),
+		m_emitterLifeTime->getValue(),
+		m_rateMin->getValue(),
+		m_rateMax->getValue()
 	);
 	p->init();
 
@@ -48,38 +48,38 @@ osg::Node* CParticleFlyingDebris::create( const osg::Vec3& pos )
 	return group;
 }
 
-CPropertySheet* CParticleFlyingDebris::createPropertySheet()
+CSulQtPropertySheet* CParticleFlyingDebris::createPropertySheet()
 {
-	CPropertySheet* propertySheet = new CPropertySheet;
-
+	CSulQtPropertySheet* propertySheet = new CSulQtPropertySheet;
+	/*
 	// general
-	propertySheet->add( m_renderBinNum = new CPropString( "RenderBin Num", 3000) );
+	propertySheet->add( m_renderBinNum = new CSulQtPropString( "RenderBin Num", 3000) );
 
 	// debris
-	propertySheet->add( m_debrisCount = new CPropString( "Debris Count", 10) );
-	propertySheet->add( m_debrisPosOffsetMin = new CPropFloat( "Debris Pos Offset Min", 0.0f ) );
-	propertySheet->add( m_debrisPosOffsetMax = new CPropFloat( "Debris Pos Offset Max", 0.0f ) );
-	propertySheet->add( m_debrisSpeedMin = new CPropFloat( "Debris Speed Min", 10.0f ) );
-	propertySheet->add( m_debrisSpeedMax = new CPropFloat( "Debris Speed Max", 10.0f ) );
-	propertySheet->add( m_debrisThetaMin = new CPropFloat( "Debris Theta Min", 0.0f ) );
-	propertySheet->add( m_debrisThetaMax = new CPropFloat( "Debris Theta Max", 2*osg::PI ) );
-	propertySheet->add( m_debrisPhiMin = new CPropFloat( "Debris Phi Min", 0.0f ) );
-	propertySheet->add( m_debrisPhiMax = new CPropFloat( "Debris Phi Max", osg::PI_2) );
+	propertySheet->add( m_debrisCount = new CSulQtPropString( "Debris Count", 10) );
+	propertySheet->add( m_debrisPosOffsetMin = new CSulQtPropFloat( "Debris Pos Offset Min", 0.0f ) );
+	propertySheet->add( m_debrisPosOffsetMax = new CSulQtPropFloat( "Debris Pos Offset Max", 0.0f ) );
+	propertySheet->add( m_debrisSpeedMin = new CSulQtPropFloat( "Debris Speed Min", 10.0f ) );
+	propertySheet->add( m_debrisSpeedMax = new CSulQtPropFloat( "Debris Speed Max", 10.0f ) );
+	propertySheet->add( m_debrisThetaMin = new CSulQtPropFloat( "Debris Theta Min", 0.0f ) );
+	propertySheet->add( m_debrisThetaMax = new CSulQtPropFloat( "Debris Theta Max", 2*osg::PI ) );
+	propertySheet->add( m_debrisPhiMin = new CSulQtPropFloat( "Debris Phi Min", 0.0f ) );
+	propertySheet->add( m_debrisPhiMax = new CSulQtPropFloat( "Debris Phi Max", osg::PI_2) );
 
 	// particles
-	propertySheet->add( m_particleMass = new CPropFloat( "Particle Mass", 0.7f ) );
-	propertySheet->add( m_particleLifeTime = new CPropFloat( "Particle Life Time (sec)", 3.0f ) );
-	propertySheet->add( m_particleSizeMin = new CPropFloat( "Particle Size Min", 0.75f) );
-	propertySheet->add( m_particleSizeMax = new CPropFloat( "Particle Size Max", 3.0f) );
-	propertySheet->add( m_particleAlphaMin = new CPropFloat( "Particle Alpha Min", 0.5f) );
-	propertySheet->add( m_particleAlphaMax = new CPropFloat( "Particle Alpha Max", 1.0f) );
+	propertySheet->add( m_particleMass = new CSulQtPropFloat( "Particle Mass", 0.7f ) );
+	propertySheet->add( m_particleLifeTime = new CSulQtPropFloat( "Particle Life Time (sec)", 3.0f ) );
+	propertySheet->add( m_particleSizeMin = new CSulQtPropFloat( "Particle Size Min", 0.75f) );
+	propertySheet->add( m_particleSizeMax = new CSulQtPropFloat( "Particle Size Max", 3.0f) );
+	propertySheet->add( m_particleAlphaMin = new CSulQtPropFloat( "Particle Alpha Min", 0.5f) );
+	propertySheet->add( m_particleAlphaMax = new CSulQtPropFloat( "Particle Alpha Max", 1.0f) );
 
 	// emitter
-	propertySheet->add( m_emitterLifeTime = new CPropFloat( "Emitter Life Time", 2.5f) );
+	propertySheet->add( m_emitterLifeTime = new CSulQtPropFloat( "Emitter Life Time", 2.5f) );
 
 	// rate
-	propertySheet->add( m_rateMin = new CPropFloat( "Rate Min", 10.0f) );
-	propertySheet->add( m_rateMax = new CPropFloat( "Rate Max", 10.0f) );
-
+	propertySheet->add( m_rateMin = new CSulQtPropFloat( "Rate Min", 10.0f) );
+	propertySheet->add( m_rateMax = new CSulQtPropFloat( "Rate Max", 10.0f) );
+	*/
 	return propertySheet;
 }

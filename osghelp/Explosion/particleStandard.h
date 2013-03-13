@@ -4,7 +4,12 @@
 #define __PARTICLESTANDARD_H__
 
 #include "particleBase.h"
-#include "propertySheet.h"
+#include <SigmaUtil/SulQtPropString.h>
+#include <SigmaUtil/SulQtPropFloat.h>
+#include <SigmaUtil/SulQtPropVec3.h>
+#include <SigmaUtil/SulQtPropBool.h>
+#include <SigmaUtil/SulQtPropVec4.h>
+#include <SigmaUtil/SulQtPropVec4s.h>
 
 class CParticleStandard : public CParticleBase
 {
@@ -14,39 +19,41 @@ public:
 	osg::Node*	create( const osg::Vec3& pos );
 
 protected:
-	CPropertySheet* createPropertySheet();
+	CSulQtPropertySheet* createPropertySheet();
 
 private:
-	CPropString*	m_renderBinNum;
-	CPropFloat*		m_fluidDensity;
-	CPropString*	m_psTextureFile;
-	CPropBool*		m_psEmissive;
+	CSulQtPropString*	m_renderBinNum;
+	CSulQtPropFloat*		m_fluidDensity;
+	CSulQtPropVec3*		m_wind;
+	CSulQtPropString*	m_psTextureFile;
+	CSulQtPropBool*		m_psEmissive;
 
-	CPropVec4s*		m_particleTextureTile;
-	CPropFloat*		m_particleMass;
-	CPropFloat*		m_particleRadius;
-	CPropFloat*		m_particleLifeTime;
-	CPropFloat*		m_particleSizeMin;
-	CPropFloat*		m_particleSizeMax;
-	CPropFloat*		m_particleAlphaMin;
-	CPropFloat*		m_particleAlphaMax;
-	CPropVec4*		m_particleColorMin;
-	CPropVec4*		m_particleColorMax;
+	CSulQtPropVec4s*		m_particleTextureTile;
+	CSulQtPropFloat*		m_particleMass;
+	CSulQtPropFloat*		m_particleRadius;
+	CSulQtPropFloat*		m_particleLifeTime;
+	CSulQtPropFloat*		m_particleSizeMin;
+	CSulQtPropFloat*		m_particleSizeMax;
+	CSulQtPropFloat*		m_particleAlphaMin;
+	CSulQtPropFloat*		m_particleAlphaMax;
+	CSulQtPropVec4*		m_particleColorMin;
+	CSulQtPropVec4*		m_particleColorMax;
 
-	CPropFloat*		m_emitterLifeTime;
+	CSulQtPropFloat*		m_emitterLifeTime;
+	CSulQtPropFloat*		m_emitterCompensationRatio;
 
-	CPropFloat*		m_rateMin;
-	CPropFloat*		m_rateMax;
+	CSulQtPropFloat*		m_rateMin;
+	CSulQtPropFloat*		m_rateMax;
 
-	CPropFloat*		m_sectorRadiusMin;
-	CPropFloat*		m_sectorRadiusMax;
+	CSulQtPropFloat*		m_sectorRadiusMin;
+	CSulQtPropFloat*		m_sectorRadiusMax;
 
-	CPropFloat*		m_shooterThetaMin;
-	CPropFloat*		m_shooterThetaMax;
-	CPropFloat*		m_shooterPhiMin;
-	CPropFloat*		m_shooterPhiMax;
-	CPropFloat*		m_shooterInitialSpeedMin;
-	CPropFloat*		m_shooterInitialSpeedMax;
+	CSulQtPropFloat*		m_shooterThetaMin;
+	CSulQtPropFloat*		m_shooterThetaMax;
+	CSulQtPropFloat*		m_shooterPhiMin;
+	CSulQtPropFloat*		m_shooterPhiMax;
+	CSulQtPropFloat*		m_shooterInitialSpeedMin;
+	CSulQtPropFloat*		m_shooterInitialSpeedMax;
 };
 
 #endif // __PARTICLESTANDARD_H__

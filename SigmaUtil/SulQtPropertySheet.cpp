@@ -1,11 +1,10 @@
-// propertySheet.cpp
+// SulQtPropertySheet.cpp
 
 #include "stdafx.h"
-#include "propertySheet.h"
+#include "SulQtPropertySheet.h"
+#include <QtGui/qlabel>
 
-#include <QtGui/Qlabel>
-
-CPropertySheet::CPropertySheet( const CSulString& title ) :
+CSulQtPropertySheet::CSulQtPropertySheet( const CSulString& title ) :
 QWidget()
 {
 	setStyleSheet("background-color:red;");
@@ -32,12 +31,26 @@ QWidget()
 	m_row = 0;
 }
 
-void CPropertySheet::add( CPropBase* prop )
+void CSulQtPropertySheet::add( CSulQtPropBase* prop )
 {
+	m_vecProp.push_back( prop );
+
 	m_grid->addWidget( new QLabel( prop->getLabel().c_str() ), m_row, 0 );
 
 	if ( prop->getWidget() )
 		m_grid->addWidget( prop->getWidget(), m_row, 1 );
 
 	m_row++;
+}
+
+void CSulQtPropertySheet::updateFromUI()
+{
+	VEC_PROP::iterator i = m_vecProp.begin();
+	VEC_PROP::iterator ie = m_vecProp.end();
+
+	while ( i!=ie )
+	{
+		(*i)->updateFromUI();
+		++i;
+	}
 }

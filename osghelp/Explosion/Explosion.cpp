@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 
-#include "propertySheet.h"
 #include "ParticleFlyingDebris.h"
 #include "particleStandard.h"
 
@@ -19,7 +18,6 @@
 #include <osgViewer/CompositeViewer>
 #include <osgViewer/ViewerEventHandlers>
 #include <osgGA/TrackballManipulator>
-
 
 #include "ParticleDebrisSystem.h"
 #include <SigmaUtil/SulGeomLines.h>
@@ -87,7 +85,7 @@ osg::Node* testEmitter( const osg::Vec3& pos )
 	return group;
 }
 
-CPropertySheet* g_sheetFlyingDebris = 0;
+CSulQtPropertySheet* g_sheetFlyingDebris = 0;
 
 class CMyCamera : public CSulCameraManipulatorDebugger
 {

@@ -125,6 +125,8 @@
     <ClCompile Include="SulGeomTickMarksHorizontal.cpp" />
     <ClCompile Include="SulGrid.cpp" />
     <ClCompile Include="SulParticleEmitter.cpp" />
+    <ClCompile Include="SulParticleSystemOsg.cpp" />
+    <ClCompile Include="SulQtPropertySheet.cpp" />
     <ClCompile Include="SulString.cpp" />
     <ClCompile Include="SulStringList.cpp" />
     <ClCompile Include="SulWAV.cpp" />
@@ -297,6 +299,15 @@
     <ClInclude Include="SulGeomHemiSphere.h" />
     <ClInclude Include="SulNodePath.h" />
     <ClInclude Include="SulParticleEmitter.h" />
+    <ClInclude Include="SulParticleSystemOsg.h" />
+    <ClInclude Include="SulQtPropBase.h" />
+    <ClInclude Include="SulQtPropBool.h" />
+    <ClInclude Include="SulQtPropertySheet.h" />
+    <ClInclude Include="SulQtPropFloat.h" />
+    <ClInclude Include="SulQtPropString.h" />
+    <ClInclude Include="SulQtPropVec3.h" />
+    <ClInclude Include="SulQtPropVec4.h" />
+    <ClInclude Include="SulQtPropVec4s.h" />
     <ClInclude Include="SulSigSlots.h" />
     <ClInclude Include="SulTypes.h" />
     <ClInclude Include="SulWAV.h" />

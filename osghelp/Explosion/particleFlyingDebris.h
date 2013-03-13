@@ -4,6 +4,8 @@
 #define __PARTICLEFLYINGDEBRIS_H__
 
 #include "particleBase.h"
+#include <SigmaUtil/SulQtPropString.h>
+#include <SigmaUtil/SulQtPropFloat.h>
 #include <osg/Vec3>
 #include <osg/Node>
 
@@ -15,30 +17,30 @@ public:
 	osg::Node*	create( const osg::Vec3& pos );
 
 protected:
-	CPropertySheet* createPropertySheet();
+	CSulQtPropertySheet* createPropertySheet();
 
-	CPropString*	m_renderBinNum;
+	CSulQtPropString*	m_renderBinNum;
 
-	CPropString*	m_debrisCount;
-	CPropFloat*		m_debrisPosOffsetMin;
-	CPropFloat*		m_debrisPosOffsetMax;
-	CPropFloat*		m_debrisSpeedMin;
-	CPropFloat*		m_debrisSpeedMax;
-	CPropFloat*		m_debrisThetaMin;
-	CPropFloat*		m_debrisThetaMax;
-	CPropFloat*		m_debrisPhiMin;
-	CPropFloat*		m_debrisPhiMax;
+	CSulQtPropString*	m_debrisCount;
+	CSulQtPropFloat*		m_debrisPosOffsetMin;
+	CSulQtPropFloat*		m_debrisPosOffsetMax;
+	CSulQtPropFloat*		m_debrisSpeedMin;
+	CSulQtPropFloat*		m_debrisSpeedMax;
+	CSulQtPropFloat*		m_debrisThetaMin;
+	CSulQtPropFloat*		m_debrisThetaMax;
+	CSulQtPropFloat*		m_debrisPhiMin;
+	CSulQtPropFloat*		m_debrisPhiMax;
 
-	CPropFloat*		m_particleMass;
-	CPropFloat*		m_particleLifeTime;
-	CPropFloat*		m_particleSizeMin;
-	CPropFloat*		m_particleSizeMax;
-	CPropFloat*		m_particleAlphaMin;
-	CPropFloat*		m_particleAlphaMax;
+	CSulQtPropFloat*		m_particleMass;
+	CSulQtPropFloat*		m_particleLifeTime;
+	CSulQtPropFloat*		m_particleSizeMin;
+	CSulQtPropFloat*		m_particleSizeMax;
+	CSulQtPropFloat*		m_particleAlphaMin;
+	CSulQtPropFloat*		m_particleAlphaMax;
 	
-	CPropFloat*		m_emitterLifeTime;
-	CPropFloat*		m_rateMin;
-	CPropFloat*		m_rateMax;
+	CSulQtPropFloat*		m_emitterLifeTime;
+	CSulQtPropFloat*		m_rateMin;
+	CSulQtPropFloat*		m_rateMax;
 	
 };
 

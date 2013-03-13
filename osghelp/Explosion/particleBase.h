@@ -3,22 +3,22 @@
 #ifndef __PARTICLEBASE_H__
 #define __PARTICLEBASE_H__
 
-#include "propertySheet.h"
+#include <SigmaUtil/SulQtPropertySheet.h>
 
 class CParticleBase
 {
 public:
 	CParticleBase();
 
-	CPropertySheet* getPropertySheet();
+	CSulQtPropertySheet* getPropertySheet();
 	
 	virtual osg::Node* create( const osg::Vec3& pos );
 
 protected:
-	virtual CPropertySheet* createPropertySheet() = 0;
+	virtual CSulQtPropertySheet* createPropertySheet() = 0;
 
 private:
-	CPropertySheet* m_propertySheet;
+	CSulQtPropertySheet* m_propertySheet;
 };
 
 #endif // __PARTICLEBASE_H__

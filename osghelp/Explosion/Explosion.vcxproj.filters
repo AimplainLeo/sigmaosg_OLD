@@ -22,9 +22,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="propertySheet.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="particleBase.h">
       <Filter>Source Files\particles</Filter>
     </ClInclude>
@@ -46,9 +43,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="propertySheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="particleBase.cpp">

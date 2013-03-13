@@ -16,7 +16,7 @@ osg::Node* CParticleBase::create( const osg::Vec3& pos )
 	return 0;
 }
 
-CPropertySheet* CParticleBase::getPropertySheet()
+CSulQtPropertySheet* CParticleBase::getPropertySheet()
 {
 	if ( !m_propertySheet )
 		m_propertySheet = createPropertySheet();
