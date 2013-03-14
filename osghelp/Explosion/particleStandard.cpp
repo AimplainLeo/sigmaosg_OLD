@@ -21,6 +21,7 @@ CParticleBase()
 osg::Node* CParticleStandard::create( const osg::Vec3& pos )
 {
 	osg::Group* group = new osg::Group;
+	/*
 	group->getOrCreateStateSet()->setRenderBinDetails( m_renderBinNum->getUint32(), "DepthSortedBin" );
 
 	osgParticle::Particle pexplosion;
@@ -91,7 +92,7 @@ osg::Node* CParticleStandard::create( const osg::Vec3& pos )
     osg::Geode *geode = new osg::Geode;
     geode->addDrawable(ps);
 	group->addChild( geode );
-
+	*/
 	return group;
 }
 

@@ -15,6 +15,7 @@ osg::Node* CParticleFlyingDebris::create( const osg::Vec3& pos )
 	CParticleBase::create( pos );
 
 	osg::Group* group = new osg::Group;
+	/*
 	group->getOrCreateStateSet()->setRenderBinDetails( m_renderBinNum->getUint32(), "DepthSortedBin" );
 
 	CParticleDebrisSystem* p = new CParticleDebrisSystem( 
@@ -44,7 +45,7 @@ osg::Node* CParticleFlyingDebris::create( const osg::Vec3& pos )
 	p->setMatrix( m );
 
 	group->addChild( p );
-
+	*/
 	return group;
 }
 

@@ -16,7 +16,8 @@
 #include <QtGui/QtEvents>
 #include <QtGui/QMessageBox>
 #include <QtGui/QGridLayout>
-#include <QtGui/qsplitter.h>
+#include <QtGui/qsplitter>
+#include <QtGui/QScrollArea>
 
 static CSulParticleSystemOsg* test = 0;
 osg::Group* group = 0;
@@ -97,18 +98,24 @@ public:
 		QGridLayout* grid = new QGridLayout;
 		setLayout( grid );
 
-		QWidget* widget = addViewWidget( createCamera( 0, 0, 512, 512 ), createScene() );
-
-		QWidget* containerPropertySheets = new QWidget;
-		QVBoxLayout* layoutPropertySheets = new QVBoxLayout;
-		containerPropertySheets->setLayout( layoutPropertySheets );
-
 		test = new CSulParticleSystemOsg;
-		layoutPropertySheets->addWidget( test->createPropertySheet() );
 
+		// create 3D view
+		QWidget* widgetView3D = addViewWidget( createCamera( 0, 0, 512, 512 ), createScene() );
+
+		// create property sheet
+		QWidget* widgetPropertySheet = test->createPropertySheet();
+
+		// create scroll area
+		QScrollArea* scrollArea = new QScrollArea;
+		scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAsNeeded );
+		scrollArea->setWidget( widgetPropertySheet );
+		scrollArea->setWidgetResizable( true );
+
+		// splitter
 		QSplitter* splitter = new QSplitter;
-		splitter->addWidget( widget );
-		splitter->addWidget( containerPropertySheets );
+		splitter->addWidget( widgetView3D );
+		splitter->addWidget( scrollArea );
 		grid->addWidget( splitter, 0,0 );
 
 		// we need a timer to do the osg update
@@ -173,7 +180,7 @@ int _tmain(int argc, _TCHAR* argv[])
     QApplication app(argc, (char**)argv);
 
     CViewerWidget* viewWidget = new CViewerWidget;
-    viewWidget->setGeometry( 100, 100, 1024, 600 );
+    viewWidget->setGeometry( 100, 100, 1600, 800 );
     viewWidget->show();
 
 	app.exec();

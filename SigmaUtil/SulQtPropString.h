@@ -33,7 +33,7 @@ public:
 		std::string s = t.toUtf8().constData();
 		return CSulString(s).asFloat();
 	}
-	*/
+	
 
 	sigma::uint32 getUint32()
 	{
@@ -41,7 +41,8 @@ public:
 		std::string s = t.toUtf8().constData();
 		return CSulString(s).asUint32();
 	}
-	
+	*/
+
 	osg::Vec3 getVec3()
 	{
 		QString t = m_lineEdit->text();

@@ -3,11 +3,14 @@
 #include "stdafx.h"
 #include "SulQtPropertySheet.h"
 #include <QtGui/qlabel>
+//#include <QtGui/QTreeWidget>
+
+
 
 CSulQtPropertySheet::CSulQtPropertySheet( const CSulString& title ) :
 QWidget()
 {
-	setStyleSheet("background-color:red;");
+	//setStyleSheet("background-color:red;");
 
 	m_layout = new QVBoxLayout;
 
@@ -15,21 +18,23 @@ QWidget()
 
 	QLabel* label = new QLabel( title.c_str() );
 	label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed ); 
-	label->setStyleSheet("background-color:green;");
+//	label->setStyleSheet("background-color:green;");
 	m_layout->addWidget( label, Qt::AlignTop );
 	
 	QWidget* w = new QWidget;
-	w->setStyleSheet("background-color:gray;");
+	w->setStyleSheet("background-color:lightgray;");
 	w->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed ); 
 	m_layout->addWidget( w, Qt::AlignTop );
 	
 	m_grid = new QGridLayout;
+	m_grid->setColumnMinimumWidth( 0, 130 );
 	w->setLayout( m_grid );
 
 	m_layout->addStretch(1);
 
 	m_row = 0;
 }
+
 
 void CSulQtPropertySheet::add( CSulQtPropBase* prop )
 {
