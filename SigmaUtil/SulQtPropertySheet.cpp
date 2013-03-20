@@ -59,3 +59,15 @@ void CSulQtPropertySheet::updateFromUI()
 		++i;
 	}
 }
+
+void CSulQtPropertySheet::updateToUI()
+{
+	VEC_PROP::iterator i = m_vecProp.begin();
+	VEC_PROP::iterator ie = m_vecProp.end();
+
+	while ( i!=ie )
+	{
+		(*i)->updateToUI();
+		++i;
+	}
+}

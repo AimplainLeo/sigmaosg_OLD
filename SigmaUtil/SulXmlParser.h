@@ -3,6 +3,16 @@
 #ifndef __SULXMLPARSER_H__
 #define __SULXMLPARSER_H__
 
+/*
+	NOTE: 
+
+	This is a simple parser which only handles tags and attributes. Currently it does not handle data sections between tags. 
+
+	The xml parser is currently based on the CSulParser which is a tokenizer, this is a bad solution for parsing xml files
+	because of the data section between tags. This part needs to be redesigned.
+
+*/
+
 #include "SulExport.h"
 #include "SulString.h"
 #include <osg/Referenced>

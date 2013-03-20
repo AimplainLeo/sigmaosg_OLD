@@ -103,7 +103,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 
 				// create a closing tag
 				CSulString sTmp;
-				sTmp.Format( "</%s>\n", strNameTmp );
+				sTmp.Format( "</%s>\n", strNameTmp.c_str() );
 				rFile->Print( sTmp );
 				/*
 				iRet = fprintf( pFile, "</%s>\n", strNameTmp.c_str() );
@@ -144,7 +144,7 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 
 			// save tag
 			CSulString sTmp;
-			sTmp.Format( "<%s", pDataInfo->getName() );
+			sTmp.Format( "<%s", pDataInfo->getName().c_str() );
 			rFile->Print( sTmp );
 			/*
 			iRet = fprintf( pFile, "<%s", pDataInfo->GetName().c_str() );
@@ -159,10 +159,14 @@ bool CSulXmlWriter::Save( const char* pszXmlFile )
 			iAttr = pDataInfo->getAttr()->m_rVectorAttrPtr.begin();
 			while ( dwCount-- )
 			{
+				
 				CSulString sTmp;
-				sTmp.Format( " %s=\"%s\"", (*iAttr)->strName, (*iAttr)->strValue );
+				sTmp.Format( " %s=\"%s\"", (*iAttr)->strName.c_str(), (*iAttr)->strValue.c_str() );
+				rFile->Print( sTmp );
+				
+				
 				/*
-				iRet = fprintf( pFile, " %s=\"%s\"", (*iAttr)->strName.c_str(), (*iAttr)->strValue.c_str() );
+				int iRet = fprintf( pFile, " %s=\"%s\"", (*iAttr)->strName.c_str(), (*iAttr)->strValue.c_str() );
 				assert( iRet );
 				*/
 

@@ -6,6 +6,8 @@
 #include "SulTypes.h"
 #include "SulString.h"
 #include "SulQtPropertySheet.h"
+#include "SulParticleSystemContainerOsg.h"
+#include "SulParticleSystemDataOsg.h"
 #include <osgParticle/Particle>
 #include <osgParticle/ParticleSystem>
 #include <osgParticle/ParticleSystemUpdater>
@@ -21,21 +23,21 @@ public:
 
 	void setDefaultValues();
 
-	osg::Node* create( const osg::Vec3& pos );
+	// creates a new particle system instance using the current variable values
+	CSulParticleSystemContainerOsg* createParticleSystem();
+	void placeParticleSystem( const osg::Vec3& pos, CSulParticleSystemContainerOsg* p );
+
+//	void create( const osg::Vec3& pos );
 
 	// some Qt stuff
 	void updateFromUI();
+	void updateToUI();
 	QWidget* createPropertySheet();
 
+	CSulParticleSystemDataOsg* getData();
+
 private:
-	osgParticle::Particle*				m_particle;
-	osgParticle::ParticleSystem*		m_ps;
 	osgParticle::ParticleSystemUpdater*	m_psu;
-	osgParticle::ModularEmitter*		m_emitter;
-	osgParticle::RandomRateCounter*		m_counterRandomRate;
-	osgParticle::SectorPlacer*			m_placer;
-	osgParticle::RadialShooter*			m_shooterRadial;
-	osgParticle::FluidProgram*			m_programFluid;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	// basic idea; you can setup all the values to be used by the particle system
@@ -43,6 +45,8 @@ private:
 	// us to create many particle systems using this as a template parameter list.
 	//////////////////////////////////////////////////////////////////////////////////////
 
+	CSulParticleSystemDataOsg*	m_data;
+	
 	CSulQtPropertySheet*		m_psParticles;
 	CSulQtPropertySheet*		m_psParticleSystem;
 	CSulQtPropertySheet*		m_psModularEmitter;
@@ -51,6 +55,7 @@ private:
 	CSulQtPropertySheet*		m_psShooterRadial;
 	CSulQtPropertySheet*		m_psProgramFluid;
 
+	/*
 	// osgParticle::Particle parameter values
 	float						m_particleLifeTime;
 	float						m_particleSizeMin;
@@ -100,6 +105,7 @@ private:
 	// osgParticle::FluidProgram parameter values
 	float						m_programFluidDensity;
 	osg::Vec3					m_programFluidWind;
+	*/
 };
 
 

@@ -14,6 +14,37 @@ CSulXmlAttr::~CSulXmlAttr()
 	free();
 }
 
+// copy constructor
+CSulXmlAttr::CSulXmlAttr( const CSulXmlAttr& other )
+{
+	VECTOR_ATTR_PTR::const_iterator i = other.m_rVectorAttrPtr.begin();
+	VECTOR_ATTR_PTR::const_iterator ie = other.m_rVectorAttrPtr.end();
+	while( i!=ie )
+	{
+		SINFO* info = new SINFO;
+		info->strName = (*i)->strName;
+		info->strValue = (*i)->strValue;
+		m_rVectorAttrPtr.push_back( info );
+		++i;
+	}
+}
+
+CSulXmlAttr& CSulXmlAttr::operator=( const CSulXmlAttr& other )
+{
+	VECTOR_ATTR_PTR::const_iterator i = other.m_rVectorAttrPtr.begin();
+	VECTOR_ATTR_PTR::const_iterator ie = other.m_rVectorAttrPtr.end();
+	while( i!=ie )
+	{
+		SINFO* info = new SINFO;
+		info->strName = (*i)->strName;
+		info->strValue = (*i)->strValue;
+		m_rVectorAttrPtr.push_back( info );
+		++i;
+	}
+
+	return *this;
+}
+
 void CSulXmlAttr::free()
 {
 	VECTOR_ATTR_PTR::iterator iAttr;
@@ -85,6 +116,20 @@ void CSulXmlAttr::add( const CSulString& sName, bool bVal )
 	p->strValue.Format( "%s", bVal?"true":"false" );
 }
 
+void CSulXmlAttr::add( const CSulString& sName, const osg::Vec4& value )
+{
+	SINFO* p = getInfo();
+	p->strName = sName;
+	p->strValue = CSulString( value );
+}
+
+void CSulXmlAttr::add( const CSulString& sName, const CSulString& value )
+{
+	SINFO* p = getInfo();
+	p->strName = sName;
+	p->strValue = value;
+}
+
 float CSulXmlAttr::getFloat( const CSulString& sName, float defaultValue )
 {
 	if ( exist( sName ) )
@@ -117,7 +162,7 @@ bool CSulXmlAttr::getBool( const CSulString& sName, bool defaultValue )
 	return defaultValue;
 }
 
-CSulString CSulXmlAttr::getString( const CSulString& sName, bool defaultValue )
+CSulString CSulXmlAttr::getString( const CSulString& sName, CSulString defaultValue )
 {
 	if ( exist( sName ) )
 		return get( sName );

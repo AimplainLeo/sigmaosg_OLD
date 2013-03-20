@@ -24,9 +24,12 @@
 
 bool CSulFile::Open( CSulString sFile, EMODE eMode )
 {
+	/*
+	// do not know why this is here!?!? I know what it does and it should be at a higher level
 	CSulString fileFound = osgDB::findDataFile( sFile );
 	if ( fileFound.empty() )
 		return false;
+		*/
 
 	CSulString	sMode;
 	switch ( eMode )
@@ -40,7 +43,7 @@ bool CSulFile::Open( CSulString sFile, EMODE eMode )
 
 	errno_t			err;
 
-	err = fopen_s( &m_pFile, fileFound.c_str(), sMode.c_str() );
+	err = fopen_s( &m_pFile, sFile.c_str(), sMode.c_str() );
 	if ( err )
 	{
 		return false;

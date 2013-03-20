@@ -25,6 +25,9 @@ public:
 					CSulXmlAttr();
 					~CSulXmlAttr();
 
+	// copy constructor
+					CSulXmlAttr( const CSulXmlAttr& other );
+
 	void			free();
 	void			reset();
 
@@ -35,6 +38,8 @@ public:
 	void			add( const CSulString& sName, sigma::int32 dwValue );
 	void			add( const CSulString& sName, sigma::uint32 dwValue );
 	void			add( const CSulString& sName, float fValue );
+	void			add( const CSulString& sName, const osg::Vec4& value );
+	void			add( const CSulString& sName, const CSulString& value );
 
 	CSulString&		get( const CSulString& sName );
 	bool			get( const CSulString& sName, float& f );
@@ -47,18 +52,19 @@ public:
 	sigma::uint32	getUint32( const CSulString& sName, sigma::uint32 defaultValue );
 	sigma::int32	getInt32( const CSulString& sName, sigma::int32 defaultValue );
 	bool			getBool( const CSulString& sName, bool defaultValue );
-	CSulString		getString( const CSulString& sName, bool defaultValue );
+	CSulString		getString( const CSulString& sName, CSulString defaultValue );
 	osg::Vec3		getVec3( const CSulString& sName, osg::Vec3 defaultValue );
 	osg::Vec4		getVec4( const CSulString& sName, osg::Vec4 defaultValue );
 	double			getDouble( const CSulString& sName, double defaultValue );
 
 	bool			exist( const CSulString& sName );
 
+	CSulXmlAttr&	operator=( const CSulXmlAttr& other );
+
 private:
 	SINFO*			getInfo();	
 
 private:
-	CSulString		m_strName;			// tag name
 	sigma::uint32	m_dwCount;			// number of actual used sinfo
 	CSulString		m_strEmpty;
 

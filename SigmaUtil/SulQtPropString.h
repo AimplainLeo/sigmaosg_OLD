@@ -9,63 +9,32 @@
 class CSulQtPropString : public CSulQtPropBase
 {
 public:
-	CSulQtPropString( const CSulString& label, sigma::uint32 value=0 ) :
-	  CSulQtPropBase( label, m_lineEdit = new QLineEdit( CSulString(value).c_str() ) )
+	CSulQtPropString( const CSulString& label, CSulString& value ) :
+	  CSulQtPropBase( label, m_lineEdit = new QLineEdit( value.c_str() ) ),
+		m_value(value)
 	{
 	}
 
-	CSulQtPropString( const CSulString& label, const CSulString& text ) :
-		CSulQtPropBase( label, m_lineEdit = new QLineEdit( text.c_str() ) )
-		{
-		}
-
-	CSulString getString()
+	CSulString getValue()
 	{
 		QString t = m_lineEdit->text();
 		std::string s = t.toUtf8().constData();
 		return s;
 	}
 
-	/*
-	float getFloat()
+	virtual void updateFromUI()
 	{
-		QString t = m_lineEdit->text();
-		std::string s = t.toUtf8().constData();
-		return CSulString(s).asFloat();
+		m_value = getValue();
 	}
-	
 
-	sigma::uint32 getUint32()
+	virtual void updateToUI()
 	{
-		QString t = m_lineEdit->text();
-		std::string s = t.toUtf8().constData();
-		return CSulString(s).asUint32();
-	}
-	*/
-
-	osg::Vec3 getVec3()
-	{
-		QString t = m_lineEdit->text();
-		std::string s = t.toUtf8().constData();
-		return CSulString(s).asVec3();
-	}
-	/*
-	osg::Vec4 getVec4()
-	{
-		QString t = m_lineEdit->text();
-		std::string s = t.toUtf8().constData();
-		return CSulString(s).asVec4();
-	}
-	*/
-	osg::Vec4s getVec4s()
-	{
-		QString t = m_lineEdit->text();
-		std::string s = t.toUtf8().constData();
-		return CSulString(s).asVec4s();
+		m_lineEdit->setText( QString(CSulString(m_value).c_str()) );
 	}
 
 private:
 	QLineEdit* m_lineEdit;
+	CSulString& m_value;
 };
 
 #endif // __SULQTPROPSTRING_H__

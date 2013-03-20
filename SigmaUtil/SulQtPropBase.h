@@ -22,6 +22,7 @@ public:
 	}
 
 	virtual void updateFromUI() {}
+	virtual void updateToUI() {}
 
 public:
 	CSulString	m_label;

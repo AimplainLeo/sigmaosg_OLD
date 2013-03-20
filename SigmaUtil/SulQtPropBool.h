@@ -16,14 +16,19 @@ public:
 			m_checkbox->setChecked( b );
 		}
 
+	bool getState()
+	{
+		return m_checkbox->checkState();
+	}
+
 	virtual void updateFromUI()
 	{
 		m_value = getState();
 	}
 
-	bool getState()
+	virtual void updateToUI()
 	{
-		return m_checkbox->checkState();
+		m_checkbox->setChecked( m_value );
 	}
 
 private:

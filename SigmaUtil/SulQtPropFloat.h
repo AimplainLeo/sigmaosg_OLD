@@ -27,6 +27,11 @@ public:
 		m_value = getValue();
 	}
 
+	virtual void updateToUI()
+	{
+		m_lineEdit->setText( QString(CSulString(m_value).c_str()) );
+	}
+
 private:
 	QLineEdit*	m_lineEdit;
 	float&		m_value;

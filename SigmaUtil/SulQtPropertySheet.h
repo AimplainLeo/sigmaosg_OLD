@@ -16,6 +16,7 @@ public:
 	void add( CSulQtPropBase* prop );
 
 	void updateFromUI();
+	void updateToUI();
 
 private:
 	typedef std::vector< CSulQtPropBase* >	VEC_PROP;

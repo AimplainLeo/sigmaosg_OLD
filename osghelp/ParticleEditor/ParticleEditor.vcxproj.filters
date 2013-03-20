@@ -13,6 +13,12 @@
     <ClInclude Include="targetver.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ViewerWidget.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleTrackballManipulator.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -21,5 +27,16 @@
     <ClCompile Include="ParticleEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ViewerWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleTrackballManipulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ViewerWidget.moc">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
