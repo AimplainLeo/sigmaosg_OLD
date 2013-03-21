@@ -38,12 +38,20 @@ public:
 private:
 	osg::Node* createScene();
 
+	void createLayout();
+	void createViews();
+
 protected:    
     QTimer _timer;
 
 private:
 	osg::Group*				m_group;
 	CSulParticleSystemOsg*	m_particleSystem;
+
+	QWidget* m_wView0;
+	QWidget* m_wView1;
+	QWidget* m_wView2;
+	QWidget* m_widgetToolbar;
 };
 
 
