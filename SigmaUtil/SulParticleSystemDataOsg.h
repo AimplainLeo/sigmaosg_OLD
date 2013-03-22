@@ -4,10 +4,16 @@
 #define __SULPARTICLESYSTEMDATAOSG_H__
 
 #include "SulString.h"
+#include <QtCore/QMetaType>
 
-class CSulParticleSystemDataOsg
+class CSulParticleSystemDataOsg : public osg::Referenced
 {
 public:
+	CSulParticleSystemDataOsg() {}
+	~CSulParticleSystemDataOsg() {}
+
+	void setDefaultValues();
+
 	bool save( const CSulString& file );
 	bool load( const CSulString& file );
 
@@ -62,5 +68,7 @@ public:
 	float						m_programFluidDensity;
 	osg::Vec3					m_programFluidWind;
 };
+
+//Q_DECLARE_METATYPE(CSulParticleSystemDataOsg)
 
 #endif // __SULPARTICLESYSTEMDATAOSG_H__

@@ -17,63 +17,9 @@ CSulParticleSystemOsg::CSulParticleSystemOsg() :
 osg::Group()
 {
 	m_data = new CSulParticleSystemDataOsg;
+	m_data->setDefaultValues();
 	m_psu = new osgParticle::ParticleSystemUpdater;
 	addChild( m_psu );
-
-	setDefaultValues();
-}
-
-void CSulParticleSystemOsg::setDefaultValues()
-{
-	// osgParticle::Particle parameter values
-	m_data->m_particleLifeTime					= 3.0f;
-	m_data->m_particleSizeMin					= 0.75f;
-	m_data->m_particleSizeMax					= 3.0f;
-	m_data->m_particleAlphaMin					= 1.0f;
-	m_data->m_particleAlphaMax					= 0.0f;
-	m_data->m_particleColorMin					= osg::Vec4(1,1,1,1);
-	m_data->m_particleColorMax					= osg::Vec4(1,1,1,1);
-	m_data->m_particleRadius					= 0.5f;
-	m_data->m_particleMass						= 0.6f;
-	m_data->m_particleTextureTileS				= 4;
-	m_data->m_particleTextureTileT				= 4;
-	m_data->m_particleTextureTileStart			= 0;
-	m_data->m_particleTextureTileEnd			= 15;
-
-	// osgParticle::ParticleSystem parameter values
-	m_data->m_psTextureFile						= "images/animated_smoke.png";
-	m_data->m_psUseEmissive						= false;
-	m_data->m_psUseLighting						= false;
-
-	// osgParticle::ModularEmitter parameter values
-	m_data->m_emitterCompensationRatio			= 1.5f;
-	m_data->m_emitterEndless					= false;
-	m_data->m_emitterStartTime					= 0.0f;
-	m_data->m_emitterLifeTime					= 10.0f;
-
-	// osgParticle::RandomRateCounter parameter values
-	m_data->m_counterRandomRateMin				= 10.0f;
-	m_data->m_counterRandomRateMax				= 10.0f;
-
-	// osgParticle::SectorPlacer parameter values
-	m_data->m_sectorRadiusMin					= 0.0f;
-	m_data->m_sectorRadiusMax					= 0.1f;
-	m_data->m_sectorPhiMin						= 0.0f;
-	m_data->m_sectorPhiMax						= 2*osg::PI;
-
-	// osgParticle::RadialShooter parameter values
-	m_data->m_shooterRadialThetaMin				= 0.0f;
-	m_data->m_shooterRadialThetaMax				= 0.4f;
-	m_data->m_shooterRadialPhiMin				= 0.0f;
-	m_data->m_shooterRadialPhiMax				= 2*osg::PI;
-	m_data->m_shooterRadialInitialSpeedMin		= 0.0f;
-	m_data->m_shooterRadialInitialSpeedMax		= 20.0f;
-	m_data->m_shooterRadialInitialRotationMin	= osg::Vec3(0,0,-1);
-	m_data->m_shooterRadialInitialRotationMax	= osg::Vec3(0,0,1);
-
-	// osgParticle::FluidProgram parameter values
-	m_data->m_programFluidDensity				= 1.2041f;
-	m_data->m_programFluidWind					= osg::Vec3(0,0,0);
 }
 
 QWidget* CSulParticleSystemOsg::createPropertySheet()
@@ -189,6 +135,11 @@ CSulParticleSystemContainerOsg* CSulParticleSystemOsg::createParticleSystem()
 {
 	CSulParticleSystemContainerOsg* p = new CSulParticleSystemContainerOsg( m_data, this );
 	return p;
+}
+
+void CSulParticleSystemOsg::setData( CSulParticleSystemDataOsg* data )
+{
+	m_data = new CSulParticleSystemDataOsg(*data);
 }
 
 CSulParticleSystemDataOsg* CSulParticleSystemOsg::getData()

@@ -14,6 +14,7 @@
 #include <QtGui/qlistwidget>
 #include <QtGui/qlayout>
 #include <QtGui/qlineedit>
+#include <QtGui/QListWidgetItem>
 
 /*
 																	layoutBase
@@ -32,6 +33,25 @@
 	-----------------------------------------		-----------------------------------------	   -----------------------------------------
 
 */
+
+CViewerWidget::CViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingModel) : QWidget()
+{
+	setThreadingModel( threadingModel );
+
+	m_psContainer = 0;
+
+	m_group = new osg::Group;
+
+	m_particleSystem = new CSulParticleSystemOsg;
+	m_group->addChild( m_particleSystem );
+
+	createLayout();
+	createViews();
+
+	// we need a timer to do the osg update
+	connect( &_timer, SIGNAL(timeout()), this, SLOT(update()) );
+    _timer.start( 10 );
+}
 
 void CViewerWidget::createLayout()
 {
@@ -105,18 +125,21 @@ void CViewerWidget::createViews()
 	QHBoxLayout* layoutListBoxEdit = new QHBoxLayout;
 	w->setLayout( layoutListBoxEdit );
 	layout->addWidget( w );
-	layoutListBoxEdit->addWidget( new QLineEdit );
-	layoutListBoxEdit->addWidget( new QPushButton("Add") );
-	layoutListBoxEdit->addWidget( new QPushButton("Remove") );
+	QPushButton* buttonAdd = new QPushButton("Add");
+	m_particleSystemName = new QLineEdit;
+	QPushButton* buttonRemove = new QPushButton("Remove");
+	layoutListBoxEdit->addWidget( m_particleSystemName );
+	layoutListBoxEdit->addWidget( buttonAdd );
+	layoutListBoxEdit->addWidget( buttonRemove );
 
+	m_listParticleSystem = new QListWidget;
+	layout->addWidget( m_listParticleSystem );
+
+	connect( buttonAdd, SIGNAL(clicked()), this, SLOT(addParticleSystem()) );
+	connect( buttonRemove, SIGNAL(clicked()), this, SLOT(removeParticleSystem()) );
+
+	connect( m_listParticleSystem, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(clickedParticleSystem(QListWidgetItem*)) );
 	
-	QListWidget* list = new QListWidget;
-	list->addItem( "test1" );
-	list->addItem( "test2" );
-	list->addItem( "test3" );
-	list->addItem( "test4" );
-	layout->addWidget( list );
-
 	/////////////////////////////////////////////////
 	// property sheet
 	/////////////////////////////////////////////////
@@ -133,154 +156,8 @@ void CViewerWidget::createViews()
 	layout = new QVBoxLayout;
 	m_wView2->setLayout( layout );
 	layout->addWidget( scrollArea );
-
-
 }
 
-CViewerWidget::CViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingModel) : QWidget()
-{
-	m_group = new osg::Group;
-
-	m_particleSystem = new CSulParticleSystemOsg;
-	m_group->addChild( m_particleSystem );
-
-	setThreadingModel( threadingModel );
-	
-	createLayout();
-	createViews();
-
-	/*
-	QGridLayout* grid = new QGridLayout;
-	setLayout( grid );
-
-	//////////////////////////////////////////////////////
-	// create top buttons (should be a toolbar)
-	//////////////////////////////////////////////////////
-
-	// FIXME: don't know why the buttons do not align to the left?! what am I missing
-	// create buttons
-	QHBoxLayout* layoutButtons = new QHBoxLayout;
-	QWidget* widgetButtons = new QWidget;
-	widgetButtons->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed ); 
-	widgetButtons->setLayout( layoutButtons );
-	grid->addWidget( widgetButtons, 0, 0 );
-
-	QPushButton* load = new QPushButton( "Load" );
-	load->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed ); 
-	layoutButtons->addWidget( load, Qt::AlignLeft );	
-	connect( load, SIGNAL(clicked()), this, SLOT(load()) );
-
-	QPushButton* save = new QPushButton( "Save" );
-	save->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed ); 
-	layoutButtons->addWidget( save, Qt::AlignLeft );	
-	connect( save, SIGNAL(clicked()), this, SLOT(save()) );
-
-	//////////////////////////////////////////////////////
-	// create listview for particlesystems
-	//////////////////////////////////////////////////////
-
-//	QListView* listview = new QListView;
-
-	//////////////////////////////////////////////////////
-	// create property sheet container
-	//////////////////////////////////////////////////////
-
-	m_particleSystem = new CSulParticleSystemOsg;
-	m_group->addChild( m_particleSystem );
-
-	// create 3D view
-	QWidget* widgetView3D = addViewWidget( createCamera( 0, 0, 512, 512 ), createScene() );
-
-	// create property sheet
-	QWidget* widgetPropertySheet = m_particleSystem->createPropertySheet();
-
-	// create scroll area
-	QScrollArea* scrollArea = new QScrollArea;
-	scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAsNeeded );
-	scrollArea->setWidget( widgetPropertySheet );
-	scrollArea->setWidgetResizable( true );
-
-	// splitter
-	QSplitter* splitter = new QSplitter;
-	splitter->addWidget( widgetView3D );
-	splitter->addWidget( scrollArea );
-	grid->addWidget( splitter, 1,0 );
-	*/
-	// we need a timer to do the osg update
-	connect( &_timer, SIGNAL(timeout()), this, SLOT(update()) );
-    _timer.start( 10 );
-}
-
-
-/*
-CViewerWidget::CViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingModel) : QWidget()
-{
-	m_group = new osg::Group;
-
-    setThreadingModel(threadingModel);
-
-	QGridLayout* grid = new QGridLayout;
-	setLayout( grid );
-
-	//////////////////////////////////////////////////////
-	// create top buttons (should be a toolbar)
-	//////////////////////////////////////////////////////
-
-	// FIXME: don't know why the buttons do not align to the left?! what am I missing
-	// create buttons
-	QHBoxLayout* layoutButtons = new QHBoxLayout;
-	QWidget* widgetButtons = new QWidget;
-	widgetButtons->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed ); 
-	widgetButtons->setLayout( layoutButtons );
-	grid->addWidget( widgetButtons, 0, 0 );
-
-	QPushButton* load = new QPushButton( "Load" );
-	load->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed ); 
-	layoutButtons->addWidget( load, Qt::AlignLeft );	
-	connect( load, SIGNAL(clicked()), this, SLOT(load()) );
-
-	QPushButton* save = new QPushButton( "Save" );
-	save->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed ); 
-	layoutButtons->addWidget( save, Qt::AlignLeft );	
-	connect( save, SIGNAL(clicked()), this, SLOT(save()) );
-
-	//////////////////////////////////////////////////////
-	// create listview for particlesystems
-	//////////////////////////////////////////////////////
-
-//	QListView* listview = new QListView;
-
-	//////////////////////////////////////////////////////
-	// create property sheet container
-	//////////////////////////////////////////////////////
-
-	m_particleSystem = new CSulParticleSystemOsg;
-	m_group->addChild( m_particleSystem );
-
-	// create 3D view
-	QWidget* widgetView3D = addViewWidget( createCamera( 0, 0, 512, 512 ), createScene() );
-
-	// create property sheet
-	QWidget* widgetPropertySheet = m_particleSystem->createPropertySheet();
-
-	// create scroll area
-	QScrollArea* scrollArea = new QScrollArea;
-	scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAsNeeded );
-	scrollArea->setWidget( widgetPropertySheet );
-	scrollArea->setWidgetResizable( true );
-
-	// splitter
-	QSplitter* splitter = new QSplitter;
-	splitter->addWidget( widgetView3D );
-	splitter->addWidget( scrollArea );
-	grid->addWidget( splitter, 1,0 );
-
-	// we need a timer to do the osg update
-	connect( &_timer, SIGNAL(timeout()), this, SLOT(update()) );
-    _timer.start( 10 );
-}
-*/
-    
 QWidget* CViewerWidget::addViewWidget( osg::Camera* camera, osg::Node* scene )
 {
     osgViewer::View* view = new osgViewer::View;
@@ -290,7 +167,8 @@ QWidget* CViewerWidget::addViewWidget( osg::Camera* camera, osg::Node* scene )
     view->setSceneData( scene );
     view->addEventHandler( new osgViewer::StatsHandler );
 
-	CParticleTrackballManipulator* tm = new CParticleTrackballManipulator( m_particleSystem );
+	//CParticleTrackballManipulator* tm = new CParticleTrackballManipulator( m_particleSystem );
+	CParticleTrackballManipulator* tm = new CParticleTrackballManipulator( this );
 	tm->setVerticalAxisFixed( true );
     view->setCameraManipulator( tm );
         
@@ -383,5 +261,71 @@ void CViewerWidget::save()
 	}
 }
 
+void CViewerWidget::addParticleSystem()
+{
+	QListWidgetItem* item = new QListWidgetItem;
+	item->setText( m_particleSystemName->text() );
+	item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+	item->setCheckState( Qt::Checked );
+	m_listParticleSystem->addItem( item );
 
+	CSulParticleSystemDataOsg* data = new CSulParticleSystemDataOsg;
+	data->setDefaultValues();
+
+	QVariant v = qVariantFromValue((void*)data);
+
+	item->setData( Qt::UserRole, v );
+}
+
+void CViewerWidget::removeParticleSystem()
+{
+	// FIXME: works, but does not delete the data associated with it.
+	qDeleteAll( m_listParticleSystem->selectedItems() );
+}
+
+void CViewerWidget::clickedParticleSystem( QListWidgetItem* item )
+{
+	//m_particleSystem->updateFromUI();
+
+	// get particle data
+	QVariant v = item->data( Qt::UserRole );
+	CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
+
+	m_particleSystem->setData( data );
+	m_particleSystem->updateToUI();
+}
+
+void CViewerWidget::place( const osg::Vec3& pos )
+{
+	VEC_PARTICLESYSTEMCONTAINEROSG::iterator i = m_vecParticleSystemContainer.begin();
+	VEC_PARTICLESYSTEMCONTAINEROSG::iterator ie = m_vecParticleSystemContainer.end();
+
+	while ( i!=ie )
+	{
+		m_particleSystem->placeParticleSystem( pos, (*i) );
+		++i;
+	}
+}
+
+void CViewerWidget::create()
+{
+	m_vecParticleSystemContainer.clear();
+
+	// we need to create one for each in the list
+	m_particleSystem->updateFromUI();
+	sigma::int32 count = m_listParticleSystem->count();
+	for ( sigma::int32 i=0; i<count; i++ )
+	{
+		QListWidgetItem* item = m_listParticleSystem->item( i );
+
+		// get particle data
+		QVariant v = item->data( Qt::UserRole );
+		CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
+
+		// create particle container
+		m_particleSystem->setData( data );
+		CSulParticleSystemContainerOsg* psContainer = m_particleSystem->createParticleSystem();
+		m_vecParticleSystemContainer.push_back( psContainer );
+	}
+}
 

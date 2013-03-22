@@ -15,12 +15,17 @@
 #include <QtGui/QScrollArea>
 #include <QtCore\qobject>
 #include <QtGui\qpushbutton>
+#include <QtGui\QListWidget>
+#include <QtGui\QListWidgetItem>
 
 class CViewerWidget : public QWidget, public osgViewer::CompositeViewer
 {
 	Q_OBJECT
 
 private slots:
+	void addParticleSystem();
+	void removeParticleSystem();
+	void clickedParticleSystem( QListWidgetItem * item );
 	void load();
 	void save();
 
@@ -30,10 +35,11 @@ public:
     CViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingModel=osgViewer::CompositeViewer::SingleThreaded);
     
     QWidget* addViewWidget( osg::Camera* camera, osg::Node* scene );
-	
 	osg::Camera* createCamera( int x, int y, int w, int h, const std::string& name="", bool windowDecoration=false );
-
     virtual void paintEvent( QPaintEvent* event );
+
+	void place( const osg::Vec3& pos );
+	void create();
 
 private:
 	osg::Node* createScene();
@@ -52,6 +58,14 @@ private:
 	QWidget* m_wView1;
 	QWidget* m_wView2;
 	QWidget* m_widgetToolbar;
+
+	QListWidget*	m_listParticleSystem;
+	QLineEdit*		m_particleSystemName;
+
+	CSulParticleSystemContainerOsg* m_psContainer;
+
+	typedef std::vector< osg::ref_ptr<CSulParticleSystemContainerOsg> >	VEC_PARTICLESYSTEMCONTAINEROSG;
+	VEC_PARTICLESYSTEMCONTAINEROSG						m_vecParticleSystemContainer;
 };
 
 

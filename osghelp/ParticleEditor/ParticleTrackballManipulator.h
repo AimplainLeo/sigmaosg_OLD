@@ -9,7 +9,7 @@
 class CParticleTrackballManipulator : public osgGA::TrackballManipulator
 {
 public:
-	CParticleTrackballManipulator( CSulParticleSystemOsg* particleSystem );
+	CParticleTrackballManipulator( class CViewerWidget* viewerWidget );
 
 	virtual bool handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us );
 
@@ -17,9 +17,7 @@ private:
 	bool calcHitPoint(  const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit );
 	
 private:
-	CSulParticleSystemOsg*			m_particleSystem;
-	CSulParticleSystemContainerOsg* m_particleSystemContainerLast;
-	
+	class CViewerWidget* m_viewerWidget;
 	bool	m_bCameraControl;
 };
 

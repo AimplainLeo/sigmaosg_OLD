@@ -2,14 +2,14 @@
 
 #include "stdafx.h"
 #include "ParticleTrackballManipulator.h"
+#include "ViewerWidget.h"
 #include <osgViewer/view>
 #include <osgManipulator/Projector>
 
-CParticleTrackballManipulator::CParticleTrackballManipulator( CSulParticleSystemOsg* particleSystem )
+CParticleTrackballManipulator::CParticleTrackballManipulator( CViewerWidget* viewerWidget )
 {
-	m_particleSystem = particleSystem;
+	m_viewerWidget = viewerWidget;
 	m_bCameraControl = false;
-	m_particleSystemContainerLast = 0;
 }
 
 bool CParticleTrackballManipulator::calcHitPoint(  const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit )
@@ -67,15 +67,12 @@ bool CParticleTrackballManipulator::handle( const osgGA::GUIEventAdapter& ea, os
 					osg::Vec3d hit;
 
 					if ( calcHitPoint( ea, us, hit ) )
-					{
-						m_particleSystem->placeParticleSystem( hit, m_particleSystemContainerLast );
-					}
+						m_viewerWidget->place( hit );
 				}
 				break;
 
 			case osgGA::GUIEventAdapter::PUSH:
-				m_particleSystem->updateFromUI();
-				m_particleSystemContainerLast = m_particleSystem->createParticleSystem();
+				m_viewerWidget->create();
 				break;
 		}
 

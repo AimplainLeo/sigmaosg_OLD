@@ -5,6 +5,59 @@
 #include "SulXmlWriter.h"
 #include "SulXmlReader.h"
 
+void CSulParticleSystemDataOsg::setDefaultValues()
+{
+	// osgParticle::Particle parameter values
+	m_particleLifeTime					= 3.0f;
+	m_particleSizeMin					= 0.75f;
+	m_particleSizeMax					= 3.0f;
+	m_particleAlphaMin					= 1.0f;
+	m_particleAlphaMax					= 0.0f;
+	m_particleColorMin					= osg::Vec4(1,1,1,1);
+	m_particleColorMax					= osg::Vec4(1,1,1,1);
+	m_particleRadius					= 0.5f;
+	m_particleMass						= 0.6f;
+	m_particleTextureTileS				= 4;
+	m_particleTextureTileT				= 4;
+	m_particleTextureTileStart			= 0;
+	m_particleTextureTileEnd			= 15;
+
+	// osgParticle::ParticleSystem parameter values
+	m_psTextureFile						= "images/animated_smoke.png";
+	m_psUseEmissive						= false;
+	m_psUseLighting						= false;
+
+	// osgParticle::ModularEmitter parameter values
+	m_emitterCompensationRatio			= 1.5f;
+	m_emitterEndless					= false;
+	m_emitterStartTime					= 0.0f;
+	m_emitterLifeTime					= 10.0f;
+
+	// osgParticle::RandomRateCounter parameter values
+	m_counterRandomRateMin				= 10.0f;
+	m_counterRandomRateMax				= 10.0f;
+
+	// osgParticle::SectorPlacer parameter values
+	m_sectorRadiusMin					= 0.0f;
+	m_sectorRadiusMax					= 0.1f;
+	m_sectorPhiMin						= 0.0f;
+	m_sectorPhiMax						= 2*osg::PI;
+
+	// osgParticle::RadialShooter parameter values
+	m_shooterRadialThetaMin				= 0.0f;
+	m_shooterRadialThetaMax				= 0.4f;
+	m_shooterRadialPhiMin				= 0.0f;
+	m_shooterRadialPhiMax				= 2*osg::PI;
+	m_shooterRadialInitialSpeedMin		= 0.0f;
+	m_shooterRadialInitialSpeedMax		= 20.0f;
+	m_shooterRadialInitialRotationMin	= osg::Vec3(0,0,-1);
+	m_shooterRadialInitialRotationMax	= osg::Vec3(0,0,1);
+
+	// osgParticle::FluidProgram parameter values
+	m_programFluidDensity				= 1.2041f;
+	m_programFluidWind					= osg::Vec3(0,0,0);
+}
+
 bool CSulParticleSystemDataOsg::save( const CSulString& file )
 {
 	CSulXmlWriter	writer( "ParticleSystemDataOsg" );
