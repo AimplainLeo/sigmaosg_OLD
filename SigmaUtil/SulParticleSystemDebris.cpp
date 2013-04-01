@@ -14,7 +14,7 @@ CSulParticleSystem(1)
 void CSulParticleSystemDebris::createParticle( const osg::Vec3& velocity )
 {
 	CSulParticleDebris* p = new CSulParticleDebris( m_placer, m_data, velocity );
-	p->enableDebug( this );
+	//p->enableDebug( this );
 	add( p );
 }
 

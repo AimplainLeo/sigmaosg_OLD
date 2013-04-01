@@ -29,11 +29,13 @@ void CSulParticleSystemDataPropertySheetQt::createPropertySheet()
 	layoutPropertySheets->addWidget( m_psGeneral );
 	m_psGeneral->add( new CSulQtPropUint32( "Render Bin Num", m_data->m_renderBinNum ) );
 	m_psGeneral->add( new CSulQtPropUint32( "Instance Count", m_data->m_instanceCount ) );
-
+	
 	// debris
 	m_psDebris = new CSulQtPropertySheet( "Debris" );
 	layoutPropertySheets->addWidget( m_psDebris );
 	m_psDebris->add( new CSulQtPropBool( "Enabled", m_data->m_debrisEnabled ) );
+	m_psDebris->add( new CSulQtPropFloat( "Life Time", m_data->m_debrisLifeTime ) );
+	m_psDebris->add( new CSulQtPropBool( "Endless", m_data->m_debrisEndless ) );
 	m_psDebris->add( new CSulQtPropFloat( "Position Offset Min", m_data->m_debrisPosOffsetMin ) );
 	m_psDebris->add( new CSulQtPropFloat( "Position Offset Max", m_data->m_debrisPosOffsetMax ) );
 	m_psDebris->add( new CSulQtPropFloat( "Speed Min", m_data->m_debrisSpeedMin ) );

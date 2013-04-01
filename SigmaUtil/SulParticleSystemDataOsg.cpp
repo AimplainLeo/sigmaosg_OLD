@@ -37,6 +37,7 @@ void CSulParticleSystemDataOsg::setDefaultValues()
 	// debris
 	m_debrisEnabled						= false;
 	m_debrisLifeTime					= 2.0f;
+	m_debrisEndless						= false;
 	m_debrisParticleCount				= 10;
 	m_debrisPosOffsetMin				= 0.0f;
 	m_debrisPosOffsetMax				= 0.0f;
@@ -98,6 +99,7 @@ bool CSulParticleSystemDataOsg::save( CSulXmlWriter& writer )
 	pAttr = writer.elementStart( "Debris" );
 	pAttr->add( "Enabled", m_debrisEnabled );
 	pAttr->add( "LifeTime", m_debrisLifeTime );
+	pAttr->add( "Endless", m_debrisEndless );
 	pAttr->add( "ParticleCount", m_debrisParticleCount );
 	pAttr->add( "PosOffsetMin", m_debrisPosOffsetMin );
 	pAttr->add( "PosOffsetMax", m_debrisPosOffsetMax );
@@ -192,6 +194,7 @@ bool CSulParticleSystemDataOsg::load( CSulXmlNodeTag* tagRoot )
 	tag = tagRoot->find( "Debris" );
 	m_debrisEnabled						= tag->getAttrAsBool( "Enabled", false );
 	m_debrisLifeTime					= tag->getAttrAsUint32( "LifeTime", 2.0f );
+	m_debrisEndless						= tag->getAttrAsBool( "Endless", false );
 	m_debrisParticleCount				= tag->getAttrAsUint32( "ParticleCount", 10 );
 	m_debrisPosOffsetMin				= tag->getAttrAsFloat( "PosOffsetMin", 0.0f  );
 	m_debrisPosOffsetMax				= tag->getAttrAsFloat( "PosOffsetMax", 0.0f );

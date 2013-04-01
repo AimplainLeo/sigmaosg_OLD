@@ -22,6 +22,7 @@ public:
 	void		setCounter( CSulParticleCounter* counter );
 
 	void		setEndless( bool endless );
+	void		setLifeTime( float lifetime );
 
 	void		setThetaRange( float min, float max );
 	void		setThetaRange( const osg::Vec2& range );

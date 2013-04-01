@@ -34,6 +34,11 @@ void CSulParticleEmitter::setEndless( bool endless )
 	m_endless = endless;
 }
 
+void CSulParticleEmitter::setLifeTime( float lifetime )
+{
+	m_lifeTime = lifetime;
+}
+
 void CSulParticleEmitter::setThetaRange( float min, float max )
 {
 	setThetaRange( osg::Vec2(min,max) );

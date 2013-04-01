@@ -122,14 +122,11 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 		m_debris->getEmitter()->setSpeedRange( m_data->m_debrisSpeedMin, m_data->m_debrisSpeedMax );
 		m_debris->getEmitter()->setPhiRange( m_data->m_debrisPhiMin, m_data->m_debrisPhiMax );
 		m_debris->getEmitter()->setThetaRange( m_data->m_debrisThetaMin, m_data->m_debrisThetaMax );
+		m_debris->getEmitter()->setEndless( m_data->m_debrisEndless );
+		m_debris->getEmitter()->setLifeTime( m_data->m_debrisLifeTime );
 
 		m_debris->init();
 
-		/*
-		m_debrisMT = new osg::MatrixTransform;
-		m_debrisMT->addChild( m_debris );
-		m_root->addChild( m_debrisMT );
-		*/
 		m_particleSystemMT->addChild( m_debris );
 	}
 
