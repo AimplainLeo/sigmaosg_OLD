@@ -11,6 +11,8 @@ class CSulXmlNodeTag : public CSulNodeGroup
 public:
 	CSulXmlNodeTag( const CSulString& name );
 
+	CSulXmlNodeTag* find( const CSulString& name );
+
 	const CSulString& getName();
 
 	void setAttr( const CSulXmlAttr& attr );
@@ -20,6 +22,7 @@ public:
 	osg::Vec4	getAttrAsVec4( const CSulString& attrName, osg::Vec4 defaultValue );
 	CSulString	getAttrAsString( const CSulString& attrName, CSulString defaultValue );
 	bool		getAttrAsBool( const CSulString& attrName, bool defaultValue );
+	sigma::uint32 getAttrAsUint32( const CSulString& attrName, sigma::uint32 defaultValue );
 
 private:
 	CSulString	m_tagName;

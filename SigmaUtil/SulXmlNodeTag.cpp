@@ -10,6 +10,28 @@ CSulNodeGroup()
 	m_tagName = name;
 }
 
+CSulXmlNodeTag* CSulXmlNodeTag::find( const CSulString& name )
+{
+	if ( m_tagName==name )
+		return this;
+
+	const CSulNode::VEC_NODE& vecChildren = getChildList();
+	CSulNode::VEC_NODE::const_iterator i = vecChildren.begin();
+	CSulNode::VEC_NODE::const_iterator ie = vecChildren.end();
+	while ( i!=ie )
+	{
+		CSulXmlNodeTag* childNode = dynamic_cast<CSulXmlNodeTag*>((*i).get());
+
+		CSulXmlNodeTag* found = childNode->find( name );
+		if ( found )
+			return found;
+
+		++i;
+	}
+
+	return 0;
+}
+
 const CSulString& CSulXmlNodeTag::getName()
 {
 	return m_tagName;
@@ -43,4 +65,9 @@ CSulString CSulXmlNodeTag::getAttrAsString( const CSulString& attrName, CSulStri
 bool CSulXmlNodeTag::getAttrAsBool( const CSulString& attrName, bool defaultValue )
 {
 	return m_attr.getBool( attrName, defaultValue );
+}
+
+sigma::uint32 CSulXmlNodeTag::getAttrAsUint32( const CSulString& attrName, sigma::uint32 defaultValue )
+{
+	return m_attr.getUint32( attrName, defaultValue );
 }

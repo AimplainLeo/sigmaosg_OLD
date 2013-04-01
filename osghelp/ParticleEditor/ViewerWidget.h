@@ -30,22 +30,24 @@ private slots:
 	void save();
 
 public:
-
-
     CViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingModel=osgViewer::CompositeViewer::SingleThreaded);
     
     QWidget* addViewWidget( osg::Camera* camera, osg::Node* scene );
 	osg::Camera* createCamera( int x, int y, int w, int h, const std::string& name="", bool windowDecoration=false );
     virtual void paintEvent( QPaintEvent* event );
 
-	void place( const osg::Vec3& pos );
-	void create();
+	void create( const osg::Vec3& pos );
 
 private:
+	CSulParticleSystemDataOsg* createParticleSystemData( const CSulString& title, bool bEnabled=true );
+
 	osg::Node* createScene();
 
 	void createLayout();
 	void createViews();
+
+	bool load( const CSulString& file );
+	bool save( const CSulString& file );
 
 protected:    
     QTimer _timer;
@@ -54,18 +56,20 @@ private:
 	osg::Group*				m_group;
 	CSulParticleSystemOsg*	m_particleSystem;
 
-	QWidget* m_wView0;
-	QWidget* m_wView1;
-	QWidget* m_wView2;
-	QWidget* m_widgetToolbar;
+	QWidget*				m_wView0;
+	QWidget*				m_wView1;
+	QWidget*				m_wView2;
+	QWidget*				m_widgetToolbar;
 
-	QListWidget*	m_listParticleSystem;
-	QLineEdit*		m_particleSystemName;
+	QWidget*				m_widgetPropertySheetContainer;
+	QScrollArea*			m_scrollAreaPropertySheet;
 
-	CSulParticleSystemContainerOsg* m_psContainer;
+	QListWidget*			m_listParticleSystem;
+	QLineEdit*				m_particleSystemName;
 
-	typedef std::vector< osg::ref_ptr<CSulParticleSystemContainerOsg> >	VEC_PARTICLESYSTEMCONTAINEROSG;
-	VEC_PARTICLESYSTEMCONTAINEROSG						m_vecParticleSystemContainer;
+	CSulParticleSystemDataPropertySheetQt* m_propertySheet;
+
+	CSulParticleSystemDataOsg* m_dataLast;
 };
 
 

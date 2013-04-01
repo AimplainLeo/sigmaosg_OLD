@@ -17,7 +17,6 @@ CSulXmlNodeTag* CSulXmlReader::findTag( const CSulString& tag, CSulXmlNodeTag* s
 		return searchTag;
 
 	const CSulNode::VEC_NODE& vecChildren = searchTag->getChildList();
-
 	CSulNode::VEC_NODE::const_iterator i = vecChildren.begin();
 	CSulNode::VEC_NODE::const_iterator ie = vecChildren.end();
 	while ( i!=ie )
@@ -32,6 +31,25 @@ CSulXmlNodeTag* CSulXmlReader::findTag( const CSulString& tag, CSulXmlNodeTag* s
 	}
 
 	return 0;
+}
+
+void CSulXmlReader::findTags( const CSulString& tag, VEC_XMLNODE& vecXmlNodes, CSulXmlNodeTag* searchTag )
+{
+	if ( !searchTag )
+		searchTag = m_root;
+	
+	if ( searchTag->getName()==tag )
+		vecXmlNodes.push_back( searchTag );
+
+	const CSulNode::VEC_NODE& vecChildren = searchTag->getChildList();
+	CSulNode::VEC_NODE::const_iterator i = vecChildren.begin();
+	CSulNode::VEC_NODE::const_iterator ie = vecChildren.end();
+	while ( i!=ie )
+	{
+		CSulXmlNodeTag* childNode = dynamic_cast<CSulXmlNodeTag*>((*i).get());
+		findTags( tag, vecXmlNodes, childNode );
+		++i;
+	}
 }
 
 void CSulXmlReader::elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData ) 

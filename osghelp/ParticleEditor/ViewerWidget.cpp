@@ -7,6 +7,7 @@
 #include <SigmaUtil/SulParticleSystemContainerOsg.h>
 #include <SigmaUtil/SulGeomGrid.h>
 #include <SigmaUtil/SulGeomQuad.h>
+#include <SigmaUtil/SulParticleSystemContainerOsg.h>
 #include <osgViewer/ViewerEventHandlers>
 #include <osgQt/GraphicsWindowQt>
 #include <QtGui/qfiledialog>
@@ -38,7 +39,7 @@ CViewerWidget::CViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingMode
 {
 	setThreadingModel( threadingModel );
 
-	m_psContainer = 0;
+	m_dataLast = 0;
 
 	m_group = new osg::Group;
 
@@ -144,18 +145,14 @@ void CViewerWidget::createViews()
 	// property sheet
 	/////////////////////////////////////////////////
 	
-	// create property sheet
-	QWidget* widgetPropertySheet = m_particleSystem->createPropertySheet();
-
 	// create scroll area
-	QScrollArea* scrollArea = new QScrollArea;
-	scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAsNeeded );
-	scrollArea->setWidget( widgetPropertySheet );
-	scrollArea->setWidgetResizable( true );
+	m_scrollAreaPropertySheet = new QScrollArea;
+	m_scrollAreaPropertySheet->setVerticalScrollBarPolicy( Qt::ScrollBarAsNeeded );
+	m_scrollAreaPropertySheet->setWidgetResizable( true );
 
 	layout = new QVBoxLayout;
 	m_wView2->setLayout( layout );
-	layout->addWidget( scrollArea );
+	layout->addWidget( m_scrollAreaPropertySheet );
 }
 
 QWidget* CViewerWidget::addViewWidget( osg::Camera* camera, osg::Node* scene )
@@ -167,8 +164,14 @@ QWidget* CViewerWidget::addViewWidget( osg::Camera* camera, osg::Node* scene )
     view->setSceneData( scene );
     view->addEventHandler( new osgViewer::StatsHandler );
 
-	//CParticleTrackballManipulator* tm = new CParticleTrackballManipulator( m_particleSystem );
 	CParticleTrackballManipulator* tm = new CParticleTrackballManipulator( this );
+
+	tm->setHomePosition(
+			osg::Vec3(20,20,5),
+			osg::Vec3(0,0,0),
+			osg::Vec3(0,0,1)
+			);
+
 	tm->setVerticalAxisFixed( true );
     view->setCameraManipulator( tm );
         
@@ -226,6 +229,99 @@ osg::Node* CViewerWidget::createScene()
 	return m_group;
 }
 
+CSulParticleSystemDataOsg* CViewerWidget::createParticleSystemData( const CSulString& title, bool bEnabled )
+{
+	QListWidgetItem* item = new QListWidgetItem;
+	item->setText( QString( title.c_str() ) );
+	item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+	item->setCheckState( bEnabled? Qt::Checked:Qt::Unchecked );
+	m_listParticleSystem->addItem( item );
+
+	CSulParticleSystemDataOsg* data = new CSulParticleSystemDataOsg( title );
+	data->setDefaultValues();
+	QVariant v = qVariantFromValue((void*)data);
+	item->setData( Qt::UserRole, v );
+
+	return data;
+}
+
+void CViewerWidget::addParticleSystem()
+{
+	createParticleSystemData( m_particleSystemName->text().toStdString() );
+}
+
+void CViewerWidget::removeParticleSystem()
+{
+	// FIXME: works, but does not delete the data associated with it.
+	qDeleteAll( m_listParticleSystem->selectedItems() );
+}
+
+void CViewerWidget::clickedParticleSystem( QListWidgetItem* item )
+{
+	// get particle data
+	QVariant v = item->data( Qt::UserRole );
+	CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
+
+	m_scrollAreaPropertySheet->takeWidget();
+	m_scrollAreaPropertySheet->setWidget( data->getPropertySheet() );
+}
+
+void CViewerWidget::create( const osg::Vec3& pos )
+{
+	//m_particleSystem->removeAll();
+
+	sigma::int32 count = m_listParticleSystem->count();
+	for ( sigma::int32 i=0; i<count; i++ )
+	{
+		QListWidgetItem* item = m_listParticleSystem->item( i );
+
+		if ( item->checkState()==Qt::Unchecked )
+			continue;
+
+		// get particle data
+		QVariant v = item->data( Qt::UserRole );
+		CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
+
+		data->getPropertySheet()->updateFromUI();
+
+		sigma::uint32 instanceCount = data->m_instanceCount;
+		for ( sigma::uint32 i=0; i<instanceCount; i++ )
+		{
+			CSulParticleSystemContainerOsg* psContainer = new CSulParticleSystemContainerOsg( data, m_group );
+			m_particleSystem->create( psContainer, pos );
+		}
+	}
+}
+
+bool CViewerWidget::load( const CSulString& file )
+{
+	CSulXmlReader reader;
+	if ( !reader.load( file ) )
+		return false;
+
+	CSulXmlReader::VEC_XMLNODE vecXmlNode;
+	reader.findTags( "ParticleSystemDataOsg", vecXmlNode );
+
+	CSulXmlReader::VEC_XMLNODE::iterator i = vecXmlNode.begin();
+	CSulXmlReader::VEC_XMLNODE::iterator ie = vecXmlNode.end();
+
+	while ( i!=ie )
+	{
+		CSulXmlNodeTag* tagParticleSystemDataOsg = (*i);
+
+		CSulString title = tagParticleSystemDataOsg->getAttrAsString( "Title", "" );
+		bool bEnabled = tagParticleSystemDataOsg->getAttrAsBool( "Enabled", true );
+
+		CSulParticleSystemDataOsg* data = createParticleSystemData( title, bEnabled );
+		data->load( tagParticleSystemDataOsg );
+		data->getPropertySheet()->updateToUI();
+		
+		++i;
+	}
+
+	return true;
+}
+
 void CViewerWidget::load()
 {
 	QFileDialog* dlg = new QFileDialog;
@@ -238,15 +334,35 @@ void CViewerWidget::load()
 	{
 		QString fileName = dlg->selectedFiles().takeFirst();
 		std::string s = fileName.toUtf8().constData();
-		m_particleSystem->getData()->load( s );
-		m_particleSystem->updateToUI();
+		
+		load( s );
 	}
+}
+
+bool CViewerWidget::save( const CSulString& file )
+{
+	CSulXmlWriter	writer( "ParticleSystem" );
+
+	sigma::int32 count = m_listParticleSystem->count();
+	for ( sigma::int32 i=0; i<count; i++ )
+	{
+		QListWidgetItem* item = m_listParticleSystem->item( i );
+
+		// get particle data
+		QVariant v = item->data( Qt::UserRole );
+		CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
+		data->m_enabled = item->checkState()==Qt::Checked ? true:false;
+		data->save( writer );
+	}
+
+	if ( !writer.Save( file.c_str() ) )
+		return false;
+
+	return true;
 }
 
 void CViewerWidget::save()
 {
-	m_particleSystem->updateFromUI();
-
 	QFileDialog* dlg = new QFileDialog;
 	dlg->setFileMode( QFileDialog::AnyFile );
 	dlg->setNameFilter(tr("XML (*.xml)"));
@@ -257,75 +373,6 @@ void CViewerWidget::save()
 	{
 		QString fileName = dlg->selectedFiles().takeFirst();
 		std::string s = fileName.toUtf8().constData();
-		m_particleSystem->getData()->save( s );
+		save( s );
 	}
 }
-
-void CViewerWidget::addParticleSystem()
-{
-	QListWidgetItem* item = new QListWidgetItem;
-	item->setText( m_particleSystemName->text() );
-	item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
-	item->setCheckState( Qt::Checked );
-	m_listParticleSystem->addItem( item );
-
-	CSulParticleSystemDataOsg* data = new CSulParticleSystemDataOsg;
-	data->setDefaultValues();
-
-	QVariant v = qVariantFromValue((void*)data);
-
-	item->setData( Qt::UserRole, v );
-}
-
-void CViewerWidget::removeParticleSystem()
-{
-	// FIXME: works, but does not delete the data associated with it.
-	qDeleteAll( m_listParticleSystem->selectedItems() );
-}
-
-void CViewerWidget::clickedParticleSystem( QListWidgetItem* item )
-{
-	//m_particleSystem->updateFromUI();
-
-	// get particle data
-	QVariant v = item->data( Qt::UserRole );
-	CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
-
-	m_particleSystem->setData( data );
-	m_particleSystem->updateToUI();
-}
-
-void CViewerWidget::place( const osg::Vec3& pos )
-{
-	VEC_PARTICLESYSTEMCONTAINEROSG::iterator i = m_vecParticleSystemContainer.begin();
-	VEC_PARTICLESYSTEMCONTAINEROSG::iterator ie = m_vecParticleSystemContainer.end();
-
-	while ( i!=ie )
-	{
-		m_particleSystem->placeParticleSystem( pos, (*i) );
-		++i;
-	}
-}
-
-void CViewerWidget::create()
-{
-	m_vecParticleSystemContainer.clear();
-
-	// we need to create one for each in the list
-	m_particleSystem->updateFromUI();
-	sigma::int32 count = m_listParticleSystem->count();
-	for ( sigma::int32 i=0; i<count; i++ )
-	{
-		QListWidgetItem* item = m_listParticleSystem->item( i );
-
-		// get particle data
-		QVariant v = item->data( Qt::UserRole );
-		CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
-
-		// create particle container
-		m_particleSystem->setData( data );
-		CSulParticleSystemContainerOsg* psContainer = m_particleSystem->createParticleSystem();
-		m_vecParticleSystemContainer.push_back( psContainer );
-	}
-}
-

@@ -22,11 +22,13 @@
 class CSulParticleSystem : public osg::MatrixTransform
 {
 public:
-	CSulParticleSystem( sigma::uint32 numParticles )
+	CSulParticleSystem( sigma::uint32 numParticles=10 )
 	{
 		m_numParticles = numParticles;
-//		m_emitterVelocityFlux.set( 10.0f, 10.0f, 10.0f );		// fluxation on velocity when created
-//		m_emitterVelocity.set( 0,0,3 );		// distance per second
+
+		// create default emitter
+		m_emitter = new CSulParticleEmitter;
+		m_emitter->setParticleSystem( this );
 	}
 
 	void init()
@@ -37,10 +39,12 @@ public:
 			m_emitter = new CSulParticleEmitter;
 		}
 
+		/*
 		for ( sigma::uint32 i=0; i<m_numParticles; i++ )
 		{
 			createParticle( createVelocity() );
 		}
+		*/
 
 		addUpdateCallback( new CSulParticleUpdater( this ) );
 	}
@@ -52,29 +56,18 @@ public:
 
 	CSulParticleEmitter* getEmitter()
 	{
-		if ( !m_emitter.valid() )
-			m_emitter = new CSulParticleEmitter;
-
 		return m_emitter;
 	}
 	
 	osg::Vec3 createVelocity()
 	{
 		return m_emitter->get();
-		/*
-		float x = m_emitterVelocityFlux.x()*sigma::rand0to1() - m_emitterVelocityFlux.x()/2.0f;
-		float y = m_emitterVelocityFlux.y()*sigma::rand0to1() - m_emitterVelocityFlux.y()/2.0f;
-		float z = m_emitterVelocityFlux.z()*sigma::rand0to1() - m_emitterVelocityFlux.z()/2.0f;
-		return m_emitterVelocity + osg::Vec3(
-			m_emitterVelocity.x() + x,
-			m_emitterVelocity.y() + y,
-			m_emitterVelocity.z() + z );
-			*/
 	}
 
 	void add( CSulParticle* p )
 	{
-		m_vecParticlesAdd.push_back( p );
+	//	m_vecParticlesAdd.push_back( p );
+		m_vecParticles.push_back( p );
 	}
 
 	void remove( CSulParticle* p )
@@ -84,6 +77,45 @@ public:
 
 	void update( double dt )
 	{
+		m_emitter->update( dt );
+
+		// update particles
+		VEC_PARTICLES::iterator is;
+		VEC_PARTICLES::iterator ie;
+
+		if ( m_vecParticlesRemove.size() )
+		{
+			is = m_vecParticlesRemove.begin();
+			ie = m_vecParticlesRemove.end();
+			while ( is!=ie )
+			{
+				VEC_PARTICLES::iterator i = std::find(m_vecParticles.begin(), m_vecParticles.end(), *is );
+
+				if ( (*i)->getNode() )
+					removeChild( (*i)->getNode() );
+
+				m_vecParticles.erase( i );
+				++is;
+			}
+
+			m_vecParticlesRemove.clear();
+		}
+
+
+		is = m_vecParticles.begin();
+		ie = m_vecParticles.end();
+		while ( is!=ie )
+		{
+			(*is)->update( dt );
+
+			// check to see if particle is alive, if not add it to the remove list
+			if ( !(*is)->alive() )
+				remove( (*is) );
+
+			++is;
+		}
+
+		/*
 		VEC_PARTICLES::iterator is;
 		VEC_PARTICLES::iterator ie;
 
@@ -141,6 +173,7 @@ public:
 
 			++is;
 		}
+		*/
 	}
 
 	virtual void remitParticle( CSulParticle* P ) {}
@@ -151,8 +184,6 @@ private:
 	osg::ref_ptr<CSulParticleEmitter>	m_emitter;
 
 	sigma::uint32	m_numParticles;
-//	osg::Vec3		m_emitterVelocity;
-//	osg::Vec3		m_emitterVelocityFlux;
 	VEC_PARTICLES	m_vecParticles;
 
 	VEC_PARTICLES	m_vecParticlesAdd;

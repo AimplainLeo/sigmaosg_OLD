@@ -9,9 +9,14 @@
 class CSulXmlReader : public CSulXmlParser
 {
 public:
+	typedef std::vector< osg::ref_ptr<CSulXmlNodeTag> > VEC_XMLNODE;
+	
+public:
 	CSulXmlReader();
 
 	CSulXmlNodeTag* findTag( const CSulString& tag, CSulXmlNodeTag* searchTag=0 );
+
+	void findTags( const CSulString& tag, VEC_XMLNODE& vecXmlNodes, CSulXmlNodeTag* searchTag=0 );
 
 protected:
 	virtual void	elementStart( const CSulString& sName, CSulXmlAttr* pAttr, CSulString sData );

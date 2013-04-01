@@ -7,11 +7,11 @@
 #include "SulExport.h"
 #include <osg/shapedrawable>
 
-class SUL_EXPORT CSulGeomSphere : public CSulGeode
+class SUL_EXPORT CSulGeodeSphere : public CSulGeode
 {
 
 public:
-				CSulGeomSphere( float radius=1.0f, osg::Vec3 pos=osg::Vec3(0,0,0)  );
+				CSulGeodeSphere( float radius=1.0f, osg::Vec3 pos=osg::Vec3(0,0,0)  );
 
 	void		setColor( const osg::Vec4& color );
 

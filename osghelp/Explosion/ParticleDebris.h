@@ -4,7 +4,7 @@
 #define __PARTICLEDEBRIS_H__
 
 #include <SigmaUtil/SulParticle.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <osg/MatrixTransform>
 #include <osgParticle/SmokeEffect>
 #include <osgParticle/SectorPlacer>

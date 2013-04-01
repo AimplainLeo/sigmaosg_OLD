@@ -64,15 +64,22 @@ bool CParticleTrackballManipulator::handle( const osgGA::GUIEventAdapter& ea, os
 		{
 			case osgGA::GUIEventAdapter::RELEASE:
 				{
+					/*
 					osg::Vec3d hit;
 
 					if ( calcHitPoint( ea, us, hit ) )
 						m_viewerWidget->place( hit );
+						*/
 				}
 				break;
 
 			case osgGA::GUIEventAdapter::PUSH:
-				m_viewerWidget->create();
+				{
+					osg::Vec3d hit;
+
+					if ( calcHitPoint( ea, us, hit ) )
+						m_viewerWidget->create( hit );
+				}
 				break;
 		}
 

@@ -4,18 +4,45 @@
 #define __SULPARTICLESYSTEMDATAOSG_H__
 
 #include "SulString.h"
+#include "SulParticleSystemDataPropertySheetQt.h"
+#include "SulXmlWriter.h"
+#include "SulXmlReader.h"
 #include <QtCore/QMetaType>
 
 class CSulParticleSystemDataOsg : public osg::Referenced
 {
 public:
-	CSulParticleSystemDataOsg() {}
-	~CSulParticleSystemDataOsg() {}
+	CSulParticleSystemDataOsg( const CSulString& title );
 
 	void setDefaultValues();
 
-	bool save( const CSulString& file );
-	bool load( const CSulString& file );
+	bool save( CSulXmlWriter& writer );
+	bool load( CSulXmlNodeTag* tag );
+
+	CSulParticleSystemDataPropertySheetQt* getPropertySheet();
+
+public:
+	CSulParticleSystemDataPropertySheetQt* m_propertySheetQT;
+
+	// general
+	CSulString					m_title;
+	sigma::uint32				m_renderBinNum; 
+	bool						m_enabled;
+	sigma::uint32				m_instanceCount;
+
+	// debris (SimgaOsg)
+	bool						m_debrisEnabled;
+	float						m_debrisLifeTime;		// particle
+	sigma::uint32				m_debrisParticleCount;
+	float						m_debrisPosOffsetMin;
+	float						m_debrisPosOffsetMax;
+	bool						m_debrisEndless;		// emitter
+	float						m_debrisSpeedMin;		// emitter
+	float						m_debrisSpeedMax;		// emitter
+	float						m_debrisThetaMin;		// emitter
+	float						m_debrisThetaMax;		// emitter
+	float						m_debrisPhiMin;			// emitter
+	float						m_debrisPhiMax;			// emitter
 
 	// osgParticle::Particle parameter values
 	float						m_particleLifeTime;

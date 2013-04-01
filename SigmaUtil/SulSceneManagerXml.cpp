@@ -9,7 +9,7 @@
 #include "SulScreenAlignedQuad.h"
 #include "SulDeferredCamera.h"
 #include "SulTestGeoms.h"
-#include "SulGeomSphere.h"
+#include "SulGeodeSphere.h"
 #include <osg/Fog>
 #include <osgText/Text>
 #include <iostream>

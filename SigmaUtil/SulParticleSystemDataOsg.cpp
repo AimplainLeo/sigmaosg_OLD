@@ -2,11 +2,23 @@
 
 #include "stdafx.h"
 #include "SulParticleSystemDataOsg.h"
-#include "SulXmlWriter.h"
-#include "SulXmlReader.h"
+
+CSulParticleSystemDataOsg::CSulParticleSystemDataOsg( const CSulString& title )
+{
+	m_title = title;
+
+	setDefaultValues();
+
+	m_propertySheetQT = new CSulParticleSystemDataPropertySheetQt( this );
+}
 
 void CSulParticleSystemDataOsg::setDefaultValues()
 {
+	// general
+	m_renderBinNum = 1000;
+	m_enabled = true;
+	m_instanceCount = 1;
+
 	// osgParticle::Particle parameter values
 	m_particleLifeTime					= 3.0f;
 	m_particleSizeMin					= 0.75f;
@@ -21,6 +33,20 @@ void CSulParticleSystemDataOsg::setDefaultValues()
 	m_particleTextureTileT				= 4;
 	m_particleTextureTileStart			= 0;
 	m_particleTextureTileEnd			= 15;
+
+	// debris
+	m_debrisEnabled						= false;
+	m_debrisLifeTime					= 2.0f;
+	m_debrisParticleCount				= 10;
+	m_debrisPosOffsetMin				= 0.0f;
+	m_debrisPosOffsetMax				= 0.0f;
+	m_debrisEndless						= false;
+	m_debrisSpeedMin					= 10.0f;
+	m_debrisSpeedMax					= 20.0f;
+	m_debrisThetaMin					= 0.0f;
+	m_debrisThetaMax					= 6.2831854820f;
+	m_debrisPhiMin						= 0.0f;
+	m_debrisPhiMax						= 0.5f;
 
 	// osgParticle::ParticleSystem parameter values
 	m_psTextureFile						= "images/animated_smoke.png";
@@ -58,11 +84,31 @@ void CSulParticleSystemDataOsg::setDefaultValues()
 	m_programFluidWind					= osg::Vec3(0,0,0);
 }
 
-bool CSulParticleSystemDataOsg::save( const CSulString& file )
+bool CSulParticleSystemDataOsg::save( CSulXmlWriter& writer )
 {
-	CSulXmlWriter	writer( "ParticleSystemDataOsg" );
-
 	CSulXmlAttr* pAttr;
+
+	pAttr = writer.elementStart( "ParticleSystemDataOsg" );	
+	pAttr->add( "Title", m_title );
+	pAttr->add( "RenderBin", m_renderBinNum );
+	pAttr->add( "Enabled", m_enabled );
+	pAttr->add( "InstanceCount", m_instanceCount );
+
+	// debris
+	pAttr = writer.elementStart( "Debris" );
+	pAttr->add( "Enabled", m_debrisEnabled );
+	pAttr->add( "LifeTime", m_debrisLifeTime );
+	pAttr->add( "ParticleCount", m_debrisParticleCount );
+	pAttr->add( "PosOffsetMin", m_debrisPosOffsetMin );
+	pAttr->add( "PosOffsetMax", m_debrisPosOffsetMax );
+	pAttr->add( "Endless", m_debrisEndless );
+	pAttr->add( "SpeedMin", m_debrisSpeedMin );
+	pAttr->add( "SpeedMax", m_debrisSpeedMax );
+	pAttr->add( "ThetaMin", m_debrisThetaMin );
+	pAttr->add( "ThetaMax", m_debrisThetaMax );
+	pAttr->add( "PhiMin", m_debrisPhiMin );
+	pAttr->add( "PhiMax", m_debrisPhiMax );
+	writer.elementEnd();
 
 	// particle
 	pAttr = writer.elementStart( "Particle" );
@@ -129,21 +175,35 @@ bool CSulParticleSystemDataOsg::save( const CSulString& file )
 	pAttr->add( "Wind", m_programFluidWind );
 	writer.elementEnd();
 
-	if ( !writer.Save( file.c_str() ) )
-		return false;
+	writer.elementEnd();
 
 	return true;
 }
 
-bool CSulParticleSystemDataOsg::load( const CSulString& file )
+bool CSulParticleSystemDataOsg::load( CSulXmlNodeTag* tagRoot )
 {
-	CSulXmlReader reader;
-	if ( !reader.load( file ) )
-		return false;
+	CSulXmlNodeTag* tag = 0;
 
-	CSulXmlNodeTag* tag;
-		
-	tag = reader.findTag( "Particle" );
+	m_title = tagRoot->getAttrAsString( "Title", "" );
+	m_renderBinNum = tagRoot->getAttrAsUint32( "RenderBin", 1000 );
+	m_enabled = tagRoot->getAttrAsBool( "Enabled", true );
+	m_instanceCount = tagRoot->getAttrAsUint32( "InstanceCount", 1 );
+
+	tag = tagRoot->find( "Debris" );
+	m_debrisEnabled						= tag->getAttrAsBool( "Enabled", false );
+	m_debrisLifeTime					= tag->getAttrAsUint32( "LifeTime", 2.0f );
+	m_debrisParticleCount				= tag->getAttrAsUint32( "ParticleCount", 10 );
+	m_debrisPosOffsetMin				= tag->getAttrAsFloat( "PosOffsetMin", 0.0f  );
+	m_debrisPosOffsetMax				= tag->getAttrAsFloat( "PosOffsetMax", 0.0f );
+	m_debrisEndless						= tag->getAttrAsBool( "Endless", false );
+	m_debrisSpeedMin					= tag->getAttrAsFloat( "SpeedMin", 10.0f );
+	m_debrisSpeedMax					= tag->getAttrAsFloat( "SpeedMax", 20.0f );
+	m_debrisThetaMin					= tag->getAttrAsFloat( "ThetaMin", 0.0f  );
+	m_debrisThetaMax					= tag->getAttrAsFloat( "ThetaMax", 0.0f );
+	m_debrisPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
+	m_debrisPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
+
+	tag = tagRoot->find( "Particle" );
 	m_particleLifeTime					= tag->getAttrAsFloat( "LifeTime", 2.5f );
 	m_particleSizeMin					= tag->getAttrAsFloat( "SizeMin", 2.5f );
 	m_particleSizeMax					= tag->getAttrAsFloat( "SizeMax", 2.5f );
@@ -158,29 +218,29 @@ bool CSulParticleSystemDataOsg::load( const CSulString& file )
 	m_particleTextureTileStart			= tag->getAttrAsFloat( "TextureTileStart", 2.5f );
 	m_particleTextureTileEnd			= tag->getAttrAsFloat( "TextureTileEnd", 2.5f );
 
-	tag = reader.findTag( "ParticleSystem" );
+	tag = tagRoot->find( "ParticleSystem" );
 	m_psTextureFile						= tag->getAttrAsString( "TextureFile", "" );
 	m_psUseEmissive						= tag->getAttrAsBool( "UseEmissive", false );
 	m_psUseLighting						= tag->getAttrAsBool( "UseLighting", false );
 	m_psSortMode						= tag->getAttrAsString( "SortMode", "NO_SORT" );
 
-	tag = reader.findTag( "ModularEmitter" );
+	tag = tagRoot->find( "ModularEmitter" );
 	m_emitterCompensationRatio			= tag->getAttrAsFloat( "CompensationRatio", 1.5f );
 	m_emitterEndless					= tag->getAttrAsBool( "EndLess", false );
 	m_emitterStartTime					= tag->getAttrAsFloat( "StartTime", 0.0f );
 	m_emitterLifeTime					= tag->getAttrAsFloat( "LifeTime", 3.0f );
 
-	tag = reader.findTag( "RandomRateCounter" );
+	tag = tagRoot->find( "RandomRateCounter" );
 	m_counterRandomRateMin				= tag->getAttrAsFloat( "RateMin", 10.0f );
 	m_counterRandomRateMax				= tag->getAttrAsFloat( "RateMax", 10.0f );
 
-	tag = reader.findTag( "SectorPlacer" );
+	tag = tagRoot->find( "SectorPlacer" );
 	m_sectorRadiusMin					= tag->getAttrAsFloat( "RadiusMin", 0.0f );
 	m_sectorRadiusMax					= tag->getAttrAsFloat( "RadiusMax", 0.1f );
 	m_sectorPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
 	m_sectorPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
 
-	tag = reader.findTag( "RadialShooter" );
+	tag = tagRoot->find( "RadialShooter" );
 	m_shooterRadialThetaMin				= tag->getAttrAsFloat( "ThetaMin", 0.0f );
 	m_shooterRadialThetaMax				= tag->getAttrAsFloat( "ThetaMax", 0.0f );
 	m_shooterRadialPhiMin				= tag->getAttrAsFloat( "PhiMin", 0.0f );
@@ -190,9 +250,14 @@ bool CSulParticleSystemDataOsg::load( const CSulString& file )
 	m_shooterRadialInitialRotationMin	= tag->getAttrAsVec3( "InitialRotationMin", osg::Vec3(0,0,-1) );
 	m_shooterRadialInitialRotationMax	= tag->getAttrAsVec3( "InitialRotationMax", osg::Vec3(0,0,1) );
 
-	tag = reader.findTag( "FluidProgram" );
+	tag = tagRoot->find( "FluidProgram" );
 	m_programFluidDensity				= tag->getAttrAsFloat( "Density", 0.0f );
 	m_programFluidWind					= tag->getAttrAsVec3( "Wind", osg::Vec3(0,0,0) );
 
 	return true;
+}
+
+CSulParticleSystemDataPropertySheetQt* CSulParticleSystemDataOsg::getPropertySheet()
+{
+	return m_propertySheetQT;
 }

@@ -11,10 +11,11 @@
 class CSulParticle : public osg::Referenced
 {
 public:
-	CSulParticle( const osg::Vec3& velocity, float posOffsetMin=0.0f, float posOffsetMax=0.0f )
+	CSulParticle( float lifetime, const osg::Vec3& velocity, float posOffsetMin=0.0f, float posOffsetMax=0.0f )
 	{
 		m_vel = velocity;
-		m_life = 2.0f;				// seconds
+		m_lifeTime = lifetime;				// seconds
+		m_age = 0.0f;
 
 		
 		m_rangeOffsetRadius.set( posOffsetMin, posOffsetMax );
@@ -28,7 +29,7 @@ public:
 	virtual void reset() 
 	{
 		m_pos.set( 0, 0, 0 );
-		m_age = m_life;
+		m_age = 0.0f;
 	}
 
 	virtual osg::Node* getNode()
@@ -38,11 +39,7 @@ public:
 
 	bool alive()
 	{
-		/*
-		if ( m_age<0 )
-			return false;
-			*/
-		if ( m_pos.z()<-5.0f )
+		if ( m_age>m_lifeTime )
 			return false;
 
 		return true;
@@ -63,15 +60,15 @@ public:
 		osg::Vec3 a( 0.0f, 0.0f, -9.8f );
 		m_vel = m_vel + a*dt;
 		m_pos = m_pos + m_vel*dt;
-		m_age -= dt;
+		m_age += dt;
 	}
 
 private:
 	osg::Vec3 m_pos;
 	osg::Vec3 m_vel;
 
-	float	m_life;
-	float	m_age;
+	float	m_lifeTime;
+	float m_age;
 
 	osgParticle::rangef m_rangeOffsetRadius;
 };

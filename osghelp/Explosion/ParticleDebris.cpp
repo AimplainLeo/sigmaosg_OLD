@@ -18,7 +18,7 @@ CParticleDebris::CParticleDebris(
 	float rateMin,
 	float rateMax
 ) :
-CSulParticle( velocity )
+CSulParticle( 2.0f, velocity )
 {
 	m_particleMass		= particleMass;
 	m_particleLifeTime	= particleLifeTime;

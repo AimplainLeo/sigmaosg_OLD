@@ -1,9 +1,9 @@
 // SulGeomSphere.cpp
 
 #include "stdafx.h"
-#include "SulGeomSphere.h"
+#include "SulGeodeSphere.h"
 
-CSulGeomSphere::CSulGeomSphere( float radius, osg::Vec3 pos ) :
+CSulGeodeSphere::CSulGeodeSphere( float radius, osg::Vec3 pos ) :
 CSulGeode(),
 m_radius( radius ),
 m_pos( pos ),
@@ -12,7 +12,7 @@ m_color( 1,0,0,1 )
 	createDrawable();
 }
 
-void CSulGeomSphere::createDrawable()
+void CSulGeodeSphere::createDrawable()
 {
 	osg::ref_ptr<osg::TessellationHints> rHints = new osg::TessellationHints;
 	rHints->setDetailRatio(2.0f);
@@ -27,7 +27,8 @@ void CSulGeomSphere::createDrawable()
 	addDrawable( m_rShape );
 }
 
-void CSulGeomSphere::setColor( const osg::Vec4& color )
+void CSulGeodeSphere::setColor( const osg::Vec4& color )
 {
 	m_rShape->setColor( color );
 }
+

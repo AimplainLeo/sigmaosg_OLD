@@ -87,6 +87,7 @@
     <ClCompile Include="SulCameraManipulatorDebugger.cpp" />
     <ClCompile Include="SulExtractGeometry.cpp" />
     <ClCompile Include="SulGeodeParachute.cpp" />
+    <ClCompile Include="SulGeodeSphere.cpp" />
     <ClCompile Include="SulGeomCylinder.cpp" />
     <ClCompile Include="SulGeomHemiSphere.cpp" />
     <ClCompile Include="SulInventory.cpp" />
@@ -114,7 +115,6 @@
     <ClCompile Include="SulGeomPlane.cpp" />
     <ClCompile Include="SulGeomQuad.cpp" />
     <ClCompile Include="SulGeomQuadTiles.cpp" />
-    <ClCompile Include="SulGeomSphere.cpp" />
     <ClCompile Include="SulGeomTriangle.cpp" />
     <ClCompile Include="SulGeomTriangleFan.cpp" />
     <ClCompile Include="SulGeomTriangleList.cpp" />
@@ -129,8 +129,13 @@
     <ClCompile Include="SulGeomCircle.cpp" />
     <ClCompile Include="SulGeomTickMarksHorizontal.cpp" />
     <ClCompile Include="SulGrid.cpp" />
+    <ClCompile Include="SulParticleCounterOnce.cpp" />
+    <ClCompile Include="SulParticleDebris.cpp" />
     <ClCompile Include="SulParticleEmitter.cpp" />
+    <ClCompile Include="SulParticleSystemContainerOsg.cpp" />
     <ClCompile Include="SulParticleSystemDataOsg.cpp" />
+    <ClCompile Include="SulParticleSystemDataPropertySheetQT.cpp" />
+    <ClCompile Include="SulParticleSystemDebris.cpp" />
     <ClCompile Include="SulParticleSystemOsg.cpp" />
     <ClCompile Include="SulPositionPlotter.cpp" />
     <ClCompile Include="SulPositionPlotterManager.cpp" />
@@ -305,6 +310,7 @@
     <ClInclude Include="SulExtractGeometry.h" />
     <ClInclude Include="SulFuncExtractor.h" />
     <ClInclude Include="SulGeodeParachute.h" />
+    <ClInclude Include="SulGeodeSphere.h" />
     <ClInclude Include="SulGeomCylinder.h" />
     <ClInclude Include="SulGeomHemiSphere.h" />
     <ClInclude Include="SulInventory.h" />
@@ -316,9 +322,14 @@
     <ClInclude Include="SulNode.h" />
     <ClInclude Include="SulNodeGroup.h" />
     <ClInclude Include="SulNodePath.h" />
+    <ClInclude Include="SulParticleCounter.h" />
+    <ClInclude Include="SulParticleCounterOnce.h" />
+    <ClInclude Include="SulParticleDebris.h" />
     <ClInclude Include="SulParticleEmitter.h" />
     <ClInclude Include="SulParticleSystemDataOsg.h" />
     <ClInclude Include="SulParticleSystemContainerOsg.h" />
+    <ClInclude Include="SulParticleSystemDataPropertySheetQT.h" />
+    <ClInclude Include="SulParticleSystemDebris.h" />
     <ClInclude Include="SulParticleSystemOsg.h" />
     <ClInclude Include="SulPositionPlotter.h" />
     <ClInclude Include="SulPositionPlotterManager.h" />
@@ -358,7 +369,6 @@
     <ClInclude Include="SulGeomPlane.h" />
     <ClInclude Include="SulGeomQuad.h" />
     <ClInclude Include="SulGeomQuadTiles.h" />
-    <ClInclude Include="SulGeomSphere.h" />
     <ClInclude Include="SulGeomTriangle.h" />
     <ClInclude Include="SulGeomTriangleFan.h" />
     <ClInclude Include="SulGeomTriangleList.h" />
