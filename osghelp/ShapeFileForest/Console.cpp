@@ -8,7 +8,7 @@
 #include <SigmaUtil/SulGenPositionTextures.h>
 #include <SigmaUtil/SulGeomBoundingBox.h>
 #include <SigmaUtil/SulGeomTriangleList.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <osg/shapedrawable>
 #include <osg/group>
 #include <osg/ComputeBoundsVisitor>

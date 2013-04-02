@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include <SigmaUtil/SulGeomPlane.h>
 #include <SigmaUtil/SulGeomLine.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <SigmaUtil/SulIntPlane.h>
 #include <osg/group>
 #include <osgViewer/Viewer>
@@ -32,7 +32,7 @@ osg::Group* createScene()
 	SulIntPlane( p1, p2, *pPlane, &pos );
 
 	// create sphere and put it at the intersection position
-	CSulGeomSphere* pGeomSphere = new CSulGeomSphere( 0.1f, pos );
+	CSulGeodeSphere* pGeomSphere = new CSulGeodeSphere( 0.1f, pos );
 	pGroup->addChild( pGeomSphere );
 
 	return pGroup;

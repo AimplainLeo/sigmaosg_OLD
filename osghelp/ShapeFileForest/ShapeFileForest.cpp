@@ -21,7 +21,7 @@
 #include <SigmaUtil/SulCoordUTM.h>
 #include <SigmaUtil/SulGenPositionTextures.h>
 #include <SigmaUtil/SulRenderInstances.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <SigmaUtil/SulXmlParser.h>
 #include <osg/group>
 #include <osgViewer/Viewer>

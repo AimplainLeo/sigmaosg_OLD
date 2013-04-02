@@ -6,7 +6,7 @@
 #include <SigmaUtil/SulParticle.h>
 #include <SigmaUtil/SulLightManager.h>
 #include <SigmaUtil/SulMath.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <SigmaUtil/SulParticleSystem.h>
 #include <osg/MatrixTransform>
 
@@ -14,7 +14,7 @@ class CMyParticle : public CSulParticle
 {
 public:
 	CMyParticle( CSulLightManager* lm, const osg::Vec3& velocity ) :
-	CSulParticle( velocity )
+	CSulParticle( 2.0f, velocity )
 	{
 		m_ml = lm;
 
@@ -29,7 +29,7 @@ public:
 		m_lp->setQuadraticAtt( 0.25f );
 
 		// create sphere
-		CSulGeomSphere* sphere = new CSulGeomSphere( 0.2f );
+		CSulGeodeSphere* sphere = new CSulGeodeSphere( 0.2f );
 		sphere->setColor( color );
 
 		m_mt = new osg::MatrixTransform;

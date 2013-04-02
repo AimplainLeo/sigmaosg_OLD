@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include <SigmaUtil/SulGeomPlane.h>
 #include <SigmaUtil/SulGeomLine.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <SigmaUtil/SulGeomTriangle.h>
 #include <SigmaUtil/SulIntPlane.h>
 #include <SigmaUtil/SulClipTriangle.h>

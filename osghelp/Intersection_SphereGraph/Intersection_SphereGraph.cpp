@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include <SigmaUtil/SulSphereIntersector.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
 #include <osg/matrixtransform>
@@ -108,7 +108,7 @@ osg::Node* CreateScene()
     pGeode5->addDrawable( new osg::ShapeDrawable( new osg::Capsule(osg::Vec3(8.0f,0.0f,1.0f),0.5f,3.0f) ) );
 
 	// create dummy sphere, so we can see where the collision should take place
-	CSulGeomSphere* pSphere = new CSulGeomSphere( radius, osg::Vec3( 0, 0, 0 ) );
+	CSulGeodeSphere* pSphere = new CSulGeodeSphere( radius, osg::Vec3( 0, 0, 0 ) );
 
 	mt = new osg::MatrixTransform;
 	mt->addChild( pSphere );

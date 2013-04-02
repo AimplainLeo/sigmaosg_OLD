@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include <SigmaUtil/SulGeomLine.h>
-#include <SigmaUtil/SulGeomSphere.h>
+#include <SigmaUtil/SulGeodeSphere.h>
 #include <SigmaUtil/SulGeomTriangle.h>
 #include <SigmaUtil/SulIntTriangle.h>
 #include <osg/group>
@@ -32,7 +32,7 @@ osg::Group* createScene()
 	sulIntTriangle( *pLineSeg, pGeomTriangle->getTriangle(), vHit );
 
 	// create sphere and put it at the intersection position
-	CSulGeomSphere* pGeomSphere = new CSulGeomSphere( 0.1f, vHit );
+	CSulGeodeSphere* pGeomSphere = new CSulGeodeSphere( 0.1f, vHit );
 	pGroup->addChild( pGeomSphere );
 
 	return pGroup;
