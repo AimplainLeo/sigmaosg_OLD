@@ -247,7 +247,8 @@ CSulParticleSystemDataOsg* CViewerWidget::createParticleSystemData( const CSulSt
 
 void CViewerWidget::addParticleSystem()
 {
-	createParticleSystemData( m_particleSystemName->text().toStdString() );
+	std::string s = m_particleSystemName->text().toUtf8().constData();
+	createParticleSystemData( s );
 }
 
 void CViewerWidget::removeParticleSystem()

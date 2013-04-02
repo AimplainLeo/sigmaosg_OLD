@@ -97,17 +97,22 @@ void CSulParticleSystemDataPropertySheetQt::createPropertySheet()
 	layoutPropertySheets->addWidget( m_psShooterRadial );
 	m_psShooterRadial->add( new CSulQtPropFloat( "Theta Min", m_data->m_shooterRadialThetaMin ) );
 	m_psShooterRadial->add( new CSulQtPropFloat( "Theta Max", m_data->m_shooterRadialThetaMax ) );
+	m_psShooterRadial->add( new CSulQtPropBool( "Theta Random Lock", m_data->m_shooterRadialThetaRandomLock ) );
 	m_psShooterRadial->add( new CSulQtPropFloat( "Phi Min", m_data->m_shooterRadialPhiMin ) );
 	m_psShooterRadial->add( new CSulQtPropFloat( "Phi Max", m_data->m_shooterRadialPhiMax ) );
+	m_psShooterRadial->add( new CSulQtPropBool( "Phi Random Lock", m_data->m_shooterRadialPhiRandomLock ) );
 	m_psShooterRadial->add( new CSulQtPropFloat( "Initial Speed Min", m_data->m_shooterRadialInitialSpeedMin ) );
 	m_psShooterRadial->add( new CSulQtPropFloat( "Initial Speed Max", m_data->m_shooterRadialInitialSpeedMax ) );
+	m_psShooterRadial->add( new CSulQtPropBool( "Initial Speed Random Lock", m_data->m_shooterRadialInitialSpeedRandomLock ) );
 	m_psShooterRadial->add( new CSulQtPropVec3( "Initial Rotation Min", m_data->m_shooterRadialInitialRotationMin ) );
 	m_psShooterRadial->add( new CSulQtPropVec3( "Initial Rotation Max", m_data->m_shooterRadialInitialRotationMax ) );
+	m_psShooterRadial->add( new CSulQtPropBool( "Initial Rotation Random Lock", m_data->m_shooterRadialInitialRotationRandomLock ) );
 
 	// Program Fluid
 	m_psProgramFluid = new CSulQtPropertySheet( "Program: Fluid" );
 	layoutPropertySheets->addWidget( m_psProgramFluid );
-	m_psProgramFluid->add( new CSulQtPropFloat( "Density",m_data-> m_programFluidDensity ) );
+	m_psProgramFluid->add( new CSulQtPropFloat( "Density kg/m3",m_data-> m_programFluidDensity ) );
+	m_psProgramFluid->add( new CSulQtPropFloat( "Viscosity",m_data-> m_programFluidViscosity ) );
 	m_psProgramFluid->add( new CSulQtPropVec3( "Wind", m_data->m_programFluidWind ) );
 }
 

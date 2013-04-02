@@ -71,17 +71,22 @@ void CSulParticleSystemDataOsg::setDefaultValues()
 	m_sectorPhiMax						= 2*osg::PI;
 
 	// osgParticle::RadialShooter parameter values
-	m_shooterRadialThetaMin				= 0.0f;
-	m_shooterRadialThetaMax				= 0.4f;
-	m_shooterRadialPhiMin				= 0.0f;
-	m_shooterRadialPhiMax				= 2*osg::PI;
-	m_shooterRadialInitialSpeedMin		= 0.0f;
-	m_shooterRadialInitialSpeedMax		= 20.0f;
-	m_shooterRadialInitialRotationMin	= osg::Vec3(0,0,-1);
-	m_shooterRadialInitialRotationMax	= osg::Vec3(0,0,1);
+	m_shooterRadialThetaMin						= 0.0f;
+	m_shooterRadialThetaMax						= 0.4f;
+	m_shooterRadialThetaRandomLock				= false;
+	m_shooterRadialPhiMin						= 0.0f;
+	m_shooterRadialPhiMax						= 2*osg::PI;
+	m_shooterRadialPhiRandomLock				= false;
+	m_shooterRadialInitialSpeedMin				= 0.0f;
+	m_shooterRadialInitialSpeedMax				= 20.0f;
+	m_shooterRadialInitialSpeedRandomLock		= false;
+	m_shooterRadialInitialRotationMin			= osg::Vec3(0,0,-1);
+	m_shooterRadialInitialRotationMax			= osg::Vec3(0,0,1);
+	m_shooterRadialInitialRotationRandomLock	= false;
 
 	// osgParticle::FluidProgram parameter values
 	m_programFluidDensity				= 1.2041f;
+	m_programFluidViscosity				= 1.8e-5f;
 	m_programFluidWind					= osg::Vec3(0,0,0);
 }
 
@@ -163,17 +168,22 @@ bool CSulParticleSystemDataOsg::save( CSulXmlWriter& writer )
 	pAttr = writer.elementStart( "RadialShooter" );
 	pAttr->add( "ThetaMin", m_shooterRadialThetaMin );
 	pAttr->add( "ThetaMax", m_shooterRadialThetaMax );
+	pAttr->add( "ThetaRandomLock", m_shooterRadialThetaRandomLock );
 	pAttr->add( "PhiMin", m_shooterRadialPhiMin );
 	pAttr->add( "PhiMax", m_shooterRadialPhiMax );
+	pAttr->add( "PhiRandomLock", m_shooterRadialPhiRandomLock );
 	pAttr->add( "InitialSpeedMin", m_shooterRadialInitialSpeedMin );
 	pAttr->add( "InitialSpeedMax", m_shooterRadialInitialSpeedMax );
+	pAttr->add( "InitialSpeedRandomLock", m_shooterRadialInitialSpeedRandomLock );
 	pAttr->add( "InitialRotationMin", m_shooterRadialInitialRotationMin );
 	pAttr->add( "InitialRotationMax", m_shooterRadialInitialRotationMax );
+	pAttr->add( "InitialRotationRandomLock", m_shooterRadialInitialRotationRandomLock );
 	writer.elementEnd();
 
 	// Fluid Program
 	pAttr = writer.elementStart( "FluidProgram" );
 	pAttr->add( "Density", m_programFluidDensity );
+	pAttr->add( "Viscosity", m_programFluidViscosity );
 	pAttr->add( "Wind", m_programFluidWind );
 	writer.elementEnd();
 
@@ -244,19 +254,24 @@ bool CSulParticleSystemDataOsg::load( CSulXmlNodeTag* tagRoot )
 	m_sectorPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
 
 	tag = tagRoot->find( "RadialShooter" );
-	m_shooterRadialThetaMin				= tag->getAttrAsFloat( "ThetaMin", 0.0f );
-	m_shooterRadialThetaMax				= tag->getAttrAsFloat( "ThetaMax", 0.0f );
-	m_shooterRadialPhiMin				= tag->getAttrAsFloat( "PhiMin", 0.0f );
-	m_shooterRadialPhiMax				= tag->getAttrAsFloat( "PhiMax", 0.0f );
-	m_shooterRadialInitialSpeedMin		= tag->getAttrAsFloat( "InitialSpeedMin", 0.0f );
-	m_shooterRadialInitialSpeedMax		= tag->getAttrAsFloat( "InitialSpeedMax", 0.0f );
-	m_shooterRadialInitialRotationMin	= tag->getAttrAsVec3( "InitialRotationMin", osg::Vec3(0,0,-1) );
-	m_shooterRadialInitialRotationMax	= tag->getAttrAsVec3( "InitialRotationMax", osg::Vec3(0,0,1) );
+	m_shooterRadialThetaMin						= tag->getAttrAsFloat( "ThetaMin", 0.0f );
+	m_shooterRadialThetaMax						= tag->getAttrAsFloat( "ThetaMax", 0.0f );
+	m_shooterRadialThetaRandomLock				= tag->getAttrAsBool( "ThetaRandomLock", false );
+	m_shooterRadialPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
+	m_shooterRadialPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
+	m_shooterRadialPhiRandomLock				= tag->getAttrAsBool( "PhiRandomLock", false );
+	m_shooterRadialInitialSpeedMin				= tag->getAttrAsFloat( "InitialSpeedMin", 0.0f );
+	m_shooterRadialInitialSpeedMax				= tag->getAttrAsFloat( "InitialSpeedMax", 0.0f );
+	m_shooterRadialInitialSpeedRandomLock		= tag->getAttrAsBool( "InitialSpeedRandomLock", false );
+	m_shooterRadialInitialRotationMin			= tag->getAttrAsVec3( "InitialRotationMin", osg::Vec3(0,0,-1) );
+	m_shooterRadialInitialRotationMax			= tag->getAttrAsVec3( "InitialRotationMax", osg::Vec3(0,0,1) );
+	m_shooterRadialInitialRotationRandomLock	= tag->getAttrAsBool( "InitialRotationRandomLock", false );
 
 	tag = tagRoot->find( "FluidProgram" );
 	m_programFluidDensity				= tag->getAttrAsFloat( "Density", 0.0f );
+	m_programFluidViscosity				= tag->getAttrAsFloat( "Viscosity", 1.8e-5f );
 	m_programFluidWind					= tag->getAttrAsVec3( "Wind", osg::Vec3(0,0,0) );
-
+	
 	return true;
 }
 

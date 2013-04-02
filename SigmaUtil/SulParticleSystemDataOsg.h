@@ -84,15 +84,20 @@ public:
 	// osgParticle::RadialShooter parameter values
 	float						m_shooterRadialThetaMin;
 	float						m_shooterRadialThetaMax;
+	bool						m_shooterRadialThetaRandomLock;				// random a value between theta min og max and uses this value as min og max for shooter
 	float						m_shooterRadialPhiMin;
 	float						m_shooterRadialPhiMax;
+	bool						m_shooterRadialPhiRandomLock;			// random
 	float						m_shooterRadialInitialSpeedMin;
 	float						m_shooterRadialInitialSpeedMax;
+	bool						m_shooterRadialInitialSpeedRandomLock;		// random
 	osg::Vec3					m_shooterRadialInitialRotationMin;
 	osg::Vec3					m_shooterRadialInitialRotationMax;
+	bool						m_shooterRadialInitialRotationRandomLock;	// random
 
 	// osgParticle::FluidProgram parameter values
 	float						m_programFluidDensity;
+	float						m_programFluidViscosity;
 	osg::Vec3					m_programFluidWind;
 };
 

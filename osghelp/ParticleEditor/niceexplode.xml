@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ParticleSystem>
+	<ParticleSystemDataOsg Title="debris" RenderBin="100" Enabled="true" InstanceCount="5">
+		<Debris Enabled="false" LifeTime="2.000000" Endless="false" ParticleCount="10" PosOffsetMin="0.000000" PosOffsetMax="0.000000" Endless="false" SpeedMin="10.000000" SpeedMax="20.000000" ThetaMin="0.000000" ThetaMax="6.283185" PhiMin="0.000000" PhiMax="0.500000"/>
+		<Particle LifeTime="2.000000" SizeMin="2.000000" SizeMax="0.000000" AlphaMin="0.500000" AlphaMax="0.000000" ColorMin="1.0000000000, 1.0000000000, 1.0000000000, 1.0000000000" ColorMax="1.0000000000, 1.0000000000, 1.0000000000, 1.0000000000" Radius="1.000000" Mass="2800.000000" TextureTileS="0" TextureTileT="0" TextureTileStart="0" TextureTileEnd="0"/>
+		<ParticleSystem TextureFile="images/smoke01.png" UseEmissive="false" UseLighting="false" SortMode="NO_SORT"/>
+		<ModularEmitter CompensationRatio="1.500000" EndLess="false" StartTime="0.000000" LifeTime="1.000000"/>
+		<RandomRateCounter RateMin="40.000000" RateMax="40.000000"/>
+		<SectorPlacer RadiusMin="0.000000" RadiusMax="0.000000" PhiMin="0.000000" PhiMax="6.283185"/>
+		<RadialShooter ThetaMin="0.000000" ThetaMax="1.000000" ThetaRandomLock="true" PhiMin="0.000000" PhiMax="6.283185" PhiRandomLock="true" InitialSpeedMin="5.000000" InitialSpeedMax="20.000000" InitialSpeedRandomLock="false" InitialRotationMin="0.0000000000, 0.0000000000, -1.0000000000" InitialRotationMax="0.0000000000, 0.0000000000, 1.0000000000" InitialRotationRandomLock="false"/>
+		<FluidProgram Density="1.204100" Wind="0.0000000000, 0.0000000000, 0.0000000000"/>
+	</ParticleSystemDataOsg>
+	<ParticleSystemDataOsg Title="smoke" RenderBin="500" Enabled="true" InstanceCount="1">
+		<Debris Enabled="false" LifeTime="2.000000" Endless="false" ParticleCount="10" PosOffsetMin="0.000000" PosOffsetMax="0.000000" Endless="false" SpeedMin="10.000000" SpeedMax="20.000000" ThetaMin="0.000000" ThetaMax="6.283185" PhiMin="0.000000" PhiMax="0.500000"/>
+		<Particle LifeTime="10.000000" SizeMin="3.000000" SizeMax="5.000000" AlphaMin="0.200000" AlphaMax="0.000000" ColorMin="1.0000000000, 1.0000000000, 1.0000000000, 1.0000000000" ColorMax="0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000" Radius="0.463000" Mass="0.500000" TextureTileS="0" TextureTileT="0" TextureTileStart="0" TextureTileEnd="0"/>
+		<ParticleSystem TextureFile="images/smoke01.png" UseEmissive="false" UseLighting="false" SortMode="SORT_BACK_TO_FRONT"/>
+		<ModularEmitter CompensationRatio="1.500000" EndLess="false" StartTime="0.200000" LifeTime="0.200000"/>
+		<RandomRateCounter RateMin="400.000000" RateMax="700.000000"/>
+		<SectorPlacer RadiusMin="0.000000" RadiusMax="2.000000" PhiMin="0.000000" PhiMax="6.283185"/>
+		<RadialShooter ThetaMin="0.000000" ThetaMax="0.400000" ThetaRandomLock="false" PhiMin="0.000000" PhiMax="6.283185" PhiRandomLock="false" InitialSpeedMin="0.000000" InitialSpeedMax="1000.000000" InitialSpeedRandomLock="false" InitialRotationMin="0.0000000000, 0.0000000000, -1.0000000000" InitialRotationMax="0.0000000000, 0.0000000000, 1.0000000000" InitialRotationRandomLock="false"/>
+		<FluidProgram Density="1.204100" Wind="0.0000000000, 0.0000000000, 0.0000000000"/>
+	</ParticleSystemDataOsg>
+</ParticleSystem>

@@ -93,19 +93,54 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	m_placer->setPhiRange( m_data->m_sectorPhiMin, m_data->m_sectorPhiMax );    // 360° angle to make a circle
 	m_emitter->setPlacer( m_placer );
 
+	////////////////////////////
 	// shooter
+	////////////////////////////
+	float min, max;
+
 	m_shooterRadial = new osgParticle::RadialShooter;
-	m_shooterRadial->setThetaRange( m_data->m_shooterRadialThetaMin, m_data->m_shooterRadialThetaMax );		// up/down
-	m_shooterRadial->setPhiRange( m_data->m_shooterRadialPhiMin, m_data->m_shooterRadialPhiMax );		// around
-	m_shooterRadial->setInitialSpeedRange( m_data->m_shooterRadialInitialSpeedMin, m_data->m_shooterRadialInitialSpeedMax );
-	m_shooterRadial->setInitialRotationalSpeedRange(
-		m_data->m_shooterRadialInitialRotationMin,
-		m_data->m_shooterRadialInitialRotationMax
-	);
+
+	// theta
+	min = m_data->m_shooterRadialThetaMin;
+	max = m_data->m_shooterRadialThetaMax;
+	if ( m_data->m_shooterRadialThetaRandomLock )
+	{
+		min = max = osgParticle::rangef( min, max ).get_random();
+	}
+	m_shooterRadial->setThetaRange( min, max );		// up/down
+
+	// phi
+	min = m_data->m_shooterRadialPhiMin;
+	max = m_data->m_shooterRadialPhiMax;
+	if ( m_data->m_shooterRadialPhiRandomLock )
+	{
+		min = max = osgParticle::rangef( min, max ).get_random();
+	}
+	m_shooterRadial->setPhiRange( min, max );		// around
+
+	// speed
+	min = m_data->m_shooterRadialInitialSpeedMin;
+	max = m_data->m_shooterRadialInitialSpeedMax;
+	if ( m_data->m_shooterRadialInitialSpeedRandomLock )
+	{
+		min = max = osgParticle::rangef( min, max ).get_random();
+	}
+	m_shooterRadial->setInitialSpeedRange( min, max );
+
+	// rotational speed
+	osg::Vec3 minV = m_data->m_shooterRadialInitialRotationMin;
+	osg::Vec3 maxV = m_data->m_shooterRadialInitialRotationMax;
+	if ( m_data->m_shooterRadialInitialRotationRandomLock )
+	{
+		minV = maxV = osgParticle::rangev3( minV, maxV ).get_random();
+	}
+	m_shooterRadial->setInitialRotationalSpeedRange( minV, maxV );
+
 	m_emitter->setShooter( m_shooterRadial );
 
 	m_programFluid = new osgParticle::FluidProgram;
-	m_programFluid->setFluidDensity( m_data->m_programFluidDensity );	
+	m_programFluid->setFluidDensity( m_data->m_programFluidDensity );
+	m_programFluid->setFluidViscosity( m_data->m_programFluidViscosity );
 	m_programFluid->setWind( m_data->m_programFluidWind );
 	m_programFluid->setParticleSystem( this );
 	m_particleSystemMT->addChild( m_programFluid );
