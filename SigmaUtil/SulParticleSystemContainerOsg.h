@@ -26,6 +26,7 @@ public:
 											CSulParticleSystemContainerOsg( CSulParticleSystemDataOsg* data, osg::Group* root );
 
 	void									create( const osg::Vec3& pos );
+	void									destroy();
 
 //	void									place( const osg::Vec3& pos );
 

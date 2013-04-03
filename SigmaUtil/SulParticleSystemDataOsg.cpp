@@ -202,19 +202,22 @@ bool CSulParticleSystemDataOsg::load( CSulXmlNodeTag* tagRoot )
 	m_instanceCount = tagRoot->getAttrAsUint32( "InstanceCount", 1 );
 
 	tag = tagRoot->find( "Debris" );
-	m_debrisEnabled						= tag->getAttrAsBool( "Enabled", false );
-	m_debrisLifeTime					= tag->getAttrAsUint32( "LifeTime", 2.0f );
-	m_debrisEndless						= tag->getAttrAsBool( "Endless", false );
-	m_debrisParticleCount				= tag->getAttrAsUint32( "ParticleCount", 10 );
-	m_debrisPosOffsetMin				= tag->getAttrAsFloat( "PosOffsetMin", 0.0f  );
-	m_debrisPosOffsetMax				= tag->getAttrAsFloat( "PosOffsetMax", 0.0f );
-	m_debrisEndless						= tag->getAttrAsBool( "Endless", false );
-	m_debrisSpeedMin					= tag->getAttrAsFloat( "SpeedMin", 10.0f );
-	m_debrisSpeedMax					= tag->getAttrAsFloat( "SpeedMax", 20.0f );
-	m_debrisThetaMin					= tag->getAttrAsFloat( "ThetaMin", 0.0f  );
-	m_debrisThetaMax					= tag->getAttrAsFloat( "ThetaMax", 0.0f );
-	m_debrisPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
-	m_debrisPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
+	if ( tag )
+	{
+		m_debrisEnabled						= tag->getAttrAsBool( "Enabled", false );
+		m_debrisLifeTime					= tag->getAttrAsUint32( "LifeTime", 2.0f );
+		m_debrisEndless						= tag->getAttrAsBool( "Endless", false );
+		m_debrisParticleCount				= tag->getAttrAsUint32( "ParticleCount", 10 );
+		m_debrisPosOffsetMin				= tag->getAttrAsFloat( "PosOffsetMin", 0.0f  );
+		m_debrisPosOffsetMax				= tag->getAttrAsFloat( "PosOffsetMax", 0.0f );
+		m_debrisEndless						= tag->getAttrAsBool( "Endless", false );
+		m_debrisSpeedMin					= tag->getAttrAsFloat( "SpeedMin", 10.0f );
+		m_debrisSpeedMax					= tag->getAttrAsFloat( "SpeedMax", 20.0f );
+		m_debrisThetaMin					= tag->getAttrAsFloat( "ThetaMin", 0.0f  );
+		m_debrisThetaMax					= tag->getAttrAsFloat( "ThetaMax", 0.0f );
+		m_debrisPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
+		m_debrisPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
+	}
 
 	tag = tagRoot->find( "Particle" );
 	m_particleLifeTime					= tag->getAttrAsFloat( "LifeTime", 2.5f );

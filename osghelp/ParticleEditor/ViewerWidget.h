@@ -70,6 +70,8 @@ private:
 	CSulParticleSystemDataPropertySheetQt* m_propertySheet;
 
 	CSulParticleSystemDataOsg* m_dataLast;
+
+	QPushButton*			m_multi;
 };
 
 

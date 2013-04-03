@@ -106,6 +106,29 @@ void CViewerWidget::createViews()
 	layoutH->addWidget( save, Qt::AlignLeft );	
 	connect( save, SIGNAL(clicked()), this, SLOT(save()) );
 
+	m_multi = new QPushButton( "Multi" );
+	m_multi->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed ); 
+	m_multi->setCheckable( true );
+	//m_multi->setFlat( true );
+	m_multi->setStyleSheet("QPushButton {"
+								"background-color: rgb(255, 0, 0);"
+								"border-style:outset;"
+								"border-width:2px;"
+								"border-radius:10px;"
+								"border-color:beige;"
+								"padding: 6px;"
+                            "}"
+							"QPushButton:checked {"
+								"background-color: rgb(0, 255, 0);"
+								"border-style:outset;"
+								"border-width:2px;"
+								"border-radius:10px;"
+								"padding: 6px;"
+                            "}"
+                            );	
+
+	layoutH->addWidget( m_multi, Qt::AlignLeft );	
+
 	/////////////////////////////////////////////////
 	// 3D view
 	/////////////////////////////////////////////////
@@ -269,7 +292,8 @@ void CViewerWidget::clickedParticleSystem( QListWidgetItem* item )
 
 void CViewerWidget::create( const osg::Vec3& pos )
 {
-	//m_particleSystem->removeAll();
+	if ( !m_multi->isChecked() )
+		m_particleSystem->removeAll();
 
 	sigma::int32 count = m_listParticleSystem->count();
 	for ( sigma::int32 i=0; i<count; i++ )
@@ -299,6 +323,9 @@ bool CViewerWidget::load( const CSulString& file )
 	CSulXmlReader reader;
 	if ( !reader.load( file ) )
 		return false;
+
+	// remove all current particles
+	m_listParticleSystem->clear();
 
 	CSulXmlReader::VEC_XMLNODE vecXmlNode;
 	reader.findTags( "ParticleSystemDataOsg", vecXmlNode );
@@ -335,7 +362,6 @@ void CViewerWidget::load()
 	{
 		QString fileName = dlg->selectedFiles().takeFirst();
 		std::string s = fileName.toUtf8().constData();
-		
 		load( s );
 	}
 }

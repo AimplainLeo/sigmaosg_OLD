@@ -21,17 +21,16 @@ class CSulParticleSystemOsg : public osg::Group
 public:
 	CSulParticleSystemOsg();
 
-//	void removeAll();
+	void removeAll();
 
 	void create( CSulParticleSystemContainerOsg* psContainer, const osg::Vec3& pos );
 	//void place( const osg::Vec3& pos );
 
 private:
 	osgParticle::ParticleSystemUpdater*	m_psu;
-	/*
+	
 	typedef std::vector< osg::ref_ptr<CSulParticleSystemContainerOsg> >	VEC_PARTICLESYSTEMCONTAINEROSG;
 	VEC_PARTICLESYSTEMCONTAINEROSG										m_vecParticleSystemContainer;
-	*/
 };
 
 

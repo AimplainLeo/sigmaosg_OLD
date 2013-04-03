@@ -164,6 +164,10 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 
 		m_particleSystemMT->addChild( m_debris );
 	}
+}
 
+void CSulParticleSystemContainerOsg::destroy()
+{
+	m_root->removeChild( m_particleSystemMT );
 }
 
