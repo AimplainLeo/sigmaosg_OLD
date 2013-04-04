@@ -13,12 +13,6 @@
 #include <osgDB/FileUtils>
 #include <osg/group>
 
-/*
-
-FIXME: add debris integration here!
-
-*/
-
 
 class CSulParticleSystemContainerOsg : public osgParticle::ParticleSystem
 {
@@ -27,8 +21,6 @@ public:
 
 	void									create( const osg::Vec3& pos );
 	void									destroy();
-
-//	void									place( const osg::Vec3& pos );
 
 	CSulParticleSystemDataOsg*				getData();
 	

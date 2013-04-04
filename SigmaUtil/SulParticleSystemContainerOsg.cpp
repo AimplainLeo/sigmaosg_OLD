@@ -15,27 +15,6 @@ CSulParticleSystemDataOsg* CSulParticleSystemContainerOsg::getData()
 	return m_data;
 }
 
-/*
-void CSulParticleSystemContainerOsg::place( const osg::Vec3& pos )
-{
-		osg::Matrix m;
-		m.setTrans( pos );
-		m_particleSystemMT->setMatrix( m );
-
-	
-	if ( m_debris.valid() )
-	{
-		osg::Matrix m;
-		m.setTrans( pos );
-		m_debrisMT->setMatrix( m );
-		return;
-	}
-
-	m_placer->setCenter( pos );
-	
-}
-*/
-
 void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 {
 	m_particleSystemMT = new osg::MatrixTransform;
