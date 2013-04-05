@@ -46,6 +46,7 @@ CViewerWidget::CViewerWidget(osgViewer::ViewerBase::ThreadingModel threadingMode
 	m_particleSystem = new CSulParticleSystemOsg;
 	m_group->addChild( m_particleSystem );
 
+	((QWidget*)this)->setWindowTitle( "Particle Editor 0.1 beta" );
 	createLayout();
 	createViews();
 
@@ -109,7 +110,6 @@ void CViewerWidget::createViews()
 	m_multi = new QPushButton( "Multi" );
 	m_multi->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed ); 
 	m_multi->setCheckable( true );
-	//m_multi->setFlat( true );
 	m_multi->setStyleSheet("QPushButton {"
 								"background-color: rgb(255, 0, 0);"
 								"border-style:outset;"
@@ -128,6 +128,8 @@ void CViewerWidget::createViews()
                             );	
 
 	layoutH->addWidget( m_multi, Qt::AlignLeft );	
+
+	layoutH->addStretch();
 
 	/////////////////////////////////////////////////
 	// 3D view

@@ -31,7 +31,7 @@ void CSulParticleSystemDataPropertySheetQt::createPropertySheet()
 	m_psGeneral->add( new CSulQtPropUint32( "Instance Count", m_data->m_instanceCount ) );
 	
 	// debris
-	m_psDebris = new CSulQtPropertySheet( "Debris" );
+	m_psDebris = new CSulQtPropertySheet( "Debris (Experimintal)" );
 	layoutPropertySheets->addWidget( m_psDebris );
 	m_psDebris->add( new CSulQtPropBool( "Enabled", m_data->m_debrisEnabled ) );
 	m_psDebris->add( new CSulQtPropFloat( "Life Time", m_data->m_debrisLifeTime ) );

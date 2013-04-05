@@ -220,61 +220,82 @@ bool CSulParticleSystemDataOsg::load( CSulXmlNodeTag* tagRoot )
 	}
 
 	tag = tagRoot->find( "Particle" );
-	m_particleLifeTime					= tag->getAttrAsFloat( "LifeTime", 2.5f );
-	m_particleSizeMin					= tag->getAttrAsFloat( "SizeMin", 2.5f );
-	m_particleSizeMax					= tag->getAttrAsFloat( "SizeMax", 2.5f );
-	m_particleAlphaMin					= tag->getAttrAsFloat( "AlphaMin", 2.5f );
-	m_particleAlphaMax					= tag->getAttrAsFloat( "AlphaMax", 2.5f );
-	m_particleColorMin					= tag->getAttrAsVec4( "ColorMin", osg::Vec4(0,0,0,0) );
-	m_particleColorMax					= tag->getAttrAsVec4( "ColorMax", osg::Vec4(0,0,0,0) );
-	m_particleRadius					= tag->getAttrAsFloat( "Radius", 2.5f );
-	m_particleMass						= tag->getAttrAsFloat( "Mass", 2.5f );
-	m_particleTextureTileS				= tag->getAttrAsFloat( "TextureTileS", 2.5f );
-	m_particleTextureTileT				= tag->getAttrAsFloat( "TextureTileT", 2.5f );
-	m_particleTextureTileStart			= tag->getAttrAsFloat( "TextureTileStart", 2.5f );
-	m_particleTextureTileEnd			= tag->getAttrAsFloat( "TextureTileEnd", 2.5f );
+	if ( tag )
+	{
+		m_particleLifeTime					= tag->getAttrAsFloat( "LifeTime", 2.5f );
+		m_particleSizeMin					= tag->getAttrAsFloat( "SizeMin", 2.5f );
+		m_particleSizeMax					= tag->getAttrAsFloat( "SizeMax", 2.5f );
+		m_particleAlphaMin					= tag->getAttrAsFloat( "AlphaMin", 2.5f );
+		m_particleAlphaMax					= tag->getAttrAsFloat( "AlphaMax", 2.5f );
+		m_particleColorMin					= tag->getAttrAsVec4( "ColorMin", osg::Vec4(0,0,0,0) );
+		m_particleColorMax					= tag->getAttrAsVec4( "ColorMax", osg::Vec4(0,0,0,0) );
+		m_particleRadius					= tag->getAttrAsFloat( "Radius", 2.5f );
+		m_particleMass						= tag->getAttrAsFloat( "Mass", 2.5f );
+		m_particleTextureTileS				= tag->getAttrAsFloat( "TextureTileS", 2.5f );
+		m_particleTextureTileT				= tag->getAttrAsFloat( "TextureTileT", 2.5f );
+		m_particleTextureTileStart			= tag->getAttrAsFloat( "TextureTileStart", 2.5f );
+		m_particleTextureTileEnd			= tag->getAttrAsFloat( "TextureTileEnd", 2.5f );
+	}
 
 	tag = tagRoot->find( "ParticleSystem" );
-	m_psTextureFile						= tag->getAttrAsString( "TextureFile", "" );
-	m_psUseEmissive						= tag->getAttrAsBool( "UseEmissive", false );
-	m_psUseLighting						= tag->getAttrAsBool( "UseLighting", false );
-	m_psSortMode						= tag->getAttrAsString( "SortMode", "NO_SORT" );
+	if ( tag )
+	{
+		m_psTextureFile						= tag->getAttrAsString( "TextureFile", "" );
+		m_psUseEmissive						= tag->getAttrAsBool( "UseEmissive", false );
+		m_psUseLighting						= tag->getAttrAsBool( "UseLighting", false );
+		m_psSortMode						= tag->getAttrAsString( "SortMode", "NO_SORT" );
+	}
 
 	tag = tagRoot->find( "ModularEmitter" );
-	m_emitterCompensationRatio			= tag->getAttrAsFloat( "CompensationRatio", 1.5f );
-	m_emitterEndless					= tag->getAttrAsBool( "EndLess", false );
-	m_emitterStartTime					= tag->getAttrAsFloat( "StartTime", 0.0f );
-	m_emitterLifeTime					= tag->getAttrAsFloat( "LifeTime", 3.0f );
+	if ( tag )
+	{
+		m_emitterCompensationRatio			= tag->getAttrAsFloat( "CompensationRatio", 1.5f );
+		m_emitterEndless					= tag->getAttrAsBool( "EndLess", false );
+		m_emitterStartTime					= tag->getAttrAsFloat( "StartTime", 0.0f );
+		m_emitterLifeTime					= tag->getAttrAsFloat( "LifeTime", 3.0f );
+	}
 
 	tag = tagRoot->find( "RandomRateCounter" );
-	m_counterRandomRateMin				= tag->getAttrAsFloat( "RateMin", 10.0f );
-	m_counterRandomRateMax				= tag->getAttrAsFloat( "RateMax", 10.0f );
+	if ( tag )
+	{
+		m_counterRandomRateMin				= tag->getAttrAsFloat( "RateMin", 10.0f );
+		m_counterRandomRateMax				= tag->getAttrAsFloat( "RateMax", 10.0f );
+	}
 
 	tag = tagRoot->find( "SectorPlacer" );
-	m_sectorRadiusMin					= tag->getAttrAsFloat( "RadiusMin", 0.0f );
-	m_sectorRadiusMax					= tag->getAttrAsFloat( "RadiusMax", 0.1f );
-	m_sectorPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
-	m_sectorPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
+	if ( tag )
+	{
+		m_sectorRadiusMin					= tag->getAttrAsFloat( "RadiusMin", 0.0f );
+		m_sectorRadiusMax					= tag->getAttrAsFloat( "RadiusMax", 0.1f );
+		m_sectorPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
+		m_sectorPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
+	}
 
 	tag = tagRoot->find( "RadialShooter" );
-	m_shooterRadialThetaMin						= tag->getAttrAsFloat( "ThetaMin", 0.0f );
-	m_shooterRadialThetaMax						= tag->getAttrAsFloat( "ThetaMax", 0.0f );
-	m_shooterRadialThetaRandomLock				= tag->getAttrAsBool( "ThetaRandomLock", false );
-	m_shooterRadialPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
-	m_shooterRadialPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
-	m_shooterRadialPhiRandomLock				= tag->getAttrAsBool( "PhiRandomLock", false );
-	m_shooterRadialInitialSpeedMin				= tag->getAttrAsFloat( "InitialSpeedMin", 0.0f );
-	m_shooterRadialInitialSpeedMax				= tag->getAttrAsFloat( "InitialSpeedMax", 0.0f );
-	m_shooterRadialInitialSpeedRandomLock		= tag->getAttrAsBool( "InitialSpeedRandomLock", false );
-	m_shooterRadialInitialRotationMin			= tag->getAttrAsVec3( "InitialRotationMin", osg::Vec3(0,0,-1) );
-	m_shooterRadialInitialRotationMax			= tag->getAttrAsVec3( "InitialRotationMax", osg::Vec3(0,0,1) );
-	m_shooterRadialInitialRotationRandomLock	= tag->getAttrAsBool( "InitialRotationRandomLock", false );
+	if ( tag )
+	{
+		m_shooterRadialThetaMin						= tag->getAttrAsFloat( "ThetaMin", 0.0f );
+		m_shooterRadialThetaMax						= tag->getAttrAsFloat( "ThetaMax", 0.0f );
+		m_shooterRadialThetaRandomLock				= tag->getAttrAsBool( "ThetaRandomLock", false );
+		m_shooterRadialPhiMin						= tag->getAttrAsFloat( "PhiMin", 0.0f );
+		m_shooterRadialPhiMax						= tag->getAttrAsFloat( "PhiMax", 0.0f );
+		m_shooterRadialPhiRandomLock				= tag->getAttrAsBool( "PhiRandomLock", false );
+		m_shooterRadialInitialSpeedMin				= tag->getAttrAsFloat( "InitialSpeedMin", 0.0f );
+		m_shooterRadialInitialSpeedMax				= tag->getAttrAsFloat( "InitialSpeedMax", 0.0f );
+		m_shooterRadialInitialSpeedRandomLock		= tag->getAttrAsBool( "InitialSpeedRandomLock", false );
+		m_shooterRadialInitialRotationMin			= tag->getAttrAsVec3( "InitialRotationMin", osg::Vec3(0,0,-1) );
+		m_shooterRadialInitialRotationMax			= tag->getAttrAsVec3( "InitialRotationMax", osg::Vec3(0,0,1) );
+		m_shooterRadialInitialRotationRandomLock	= tag->getAttrAsBool( "InitialRotationRandomLock", false );
+	}
 
 	tag = tagRoot->find( "FluidProgram" );
-	m_programFluidDensity				= tag->getAttrAsFloat( "Density", 0.0f );
-	m_programFluidViscosity				= tag->getAttrAsFloat( "Viscosity", 1.8e-5f );
-	m_programFluidWind					= tag->getAttrAsVec3( "Wind", osg::Vec3(0,0,0) );
-	
+	if ( tag )
+	{
+		m_programFluidDensity				= tag->getAttrAsFloat( "Density", 0.0f );
+		m_programFluidViscosity				= tag->getAttrAsFloat( "Viscosity", 1.8e-5f );
+		m_programFluidWind					= tag->getAttrAsVec3( "Wind", osg::Vec3(0,0,0) );
+	}
+
 	return true;
 }
 
