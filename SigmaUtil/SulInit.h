@@ -3,9 +3,9 @@
 #ifndef __SULINIT_H__
 #define __SULINIT_H__
 
-#include "SulExport.h"
 #include "SulProfiler.h"
 #include <osgViewer/Viewer>
+#include "SulExport.h"
 
 class SUL_EXPORT CSulInit
 {

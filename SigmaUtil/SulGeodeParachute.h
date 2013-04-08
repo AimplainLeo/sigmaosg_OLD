@@ -4,8 +4,9 @@
 #define __SULGEODEPARACHUTE_H__
 
 #include "SulGeode.h"
+#include "SulExport.h"
 
-class CSulGeodeParachute : public CSulGeode
+class SUL_EXPORT CSulGeodeParachute : public CSulGeode
 {
 public:
 	CSulGeodeParachute();

@@ -8,8 +8,9 @@
 #include <osg/vec2>
 #include <osg/Math>
 #include <osgParticle/range>
+#include "SulExport.h"
 
-class CSulParticleEmitter : public osg::Referenced
+class SUL_EXPORT CSulParticleEmitter : public osg::Referenced
 {
 friend class CSulParticleSystem;
 
