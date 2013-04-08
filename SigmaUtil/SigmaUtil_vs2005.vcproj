@@ -246,7 +246,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(DELTA_INC)"
+				AdditionalIncludeDirectories="$(DELTA_INC);$(QTDIR)\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;SIGMAUTIL_LIBRARY_DYNAMIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -271,9 +271,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgViewerd.lib osgTextd.lib osgUtild.lib osgManipulatord.lib osgGAd.lib OpenThreadsd.lib opengl32.lib osgDBd.lib "
+				AdditionalDependencies="QtGuid4.lib QtCored4.lib osgd.lib osgParticled.lib osgViewerd.lib osgTextd.lib osgUtild.lib osgManipulatord.lib osgGAd.lib OpenThreadsd.lib opengl32.lib osgDBd.lib "
 				OutputFile="$(SIGMAOSG_ROOT_PATH)\bin\$(ProjectName)d.dll"
-				AdditionalLibraryDirectories="$(DELTA_LIB)"
+				AdditionalLibraryDirectories="$(DELTA_LIB);$(QTDIR)\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -328,7 +328,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(DELTA_INC)"
+				AdditionalIncludeDirectories="$(DELTA_INC);$(QTDIR)\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SIGMAUTIL_LIBRARY_DYNAMIC"
 				RuntimeLibrary="2"
 				DefaultCharIsUnsigned="false"
@@ -351,9 +351,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osg.lib osgViewer.lib osgText.lib osgUtil.lib osgManipulator.lib osgGA.lib OpenThreads.lib opengl32.lib osgDB.lib "
+				AdditionalDependencies="QtGui4.lib QtCore4.lib osgParticle.lib osg.lib osgViewer.lib osgText.lib osgUtil.lib osgManipulator.lib osgGA.lib OpenThreads.lib opengl32.lib osgDB.lib "
 				OutputFile="$(SIGMAOSG_ROOT_PATH)\bin\$(ProjectName).dll"
-				AdditionalLibraryDirectories="$(DELTA_LIB)"
+				AdditionalLibraryDirectories="$(DELTA_LIB);$(QTDIR)\lib"
 				GenerateDebugInformation="true"
 				EntryPointSymbol=""
 				RandomizedBaseAddress="1"
@@ -532,6 +532,58 @@
 				</File>
 			</Filter>
 			<Filter
+				Name="Qt"
+				>
+				<File
+					RelativePath=".\SulQtPropBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropBool.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropCombobox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropertySheet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropertySheet.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropFloat.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropInt32.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropString.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropUint32.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropVec3.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropVec4.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulQtPropVec4s.h"
+					>
+				</File>
+			</Filter>
+			<Filter
 				Name="AnimationPaths"
 				>
 				<File
@@ -626,11 +678,27 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulXmlNodeTag.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlNodeTag.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulXmlParser.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\SulXmlParser.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlReader.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulXmlReader.h"
 						>
 					</File>
 					<File
@@ -1882,6 +1950,66 @@
 					RelativePath=".\SulParticleUpdater.h"
 					>
 				</File>
+				<Filter
+					Name="osg"
+					>
+					<File
+						RelativePath=".\SulParticleDebris.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleDebris.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemContainerOsg.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemContainerOsg.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemDataOsg.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemDataOsg.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemDataPropertySheetQT.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemDataPropertySheetQT.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemDebris.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemDebris.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemLoadInstancer.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemLoadInstancer.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemOsg.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemOsg.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Lights"
@@ -1976,6 +2104,26 @@
 				</File>
 				<File
 					RelativePath=".\SulInventoryUpdateCallback.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Nodes"
+				>
+				<File
+					RelativePath=".\SulNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulNode.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SulNodeGroup.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SulNodeGroup.h"
 					>
 				</File>
 			</Filter>

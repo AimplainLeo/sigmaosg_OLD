@@ -4,14 +4,22 @@
 #define __SULPARTICLESYSTEMINTERFACEOSG_H__
 
 #include "SulParticleSystemDataOsg.h"
-#include "SulParticleSystemDataPropertySheetQT.h"
 #include "SulParticleSystemDebris.h"
+
+// need to undefine emit because Qt has defined it and conflicts with osg
+#undef emit
 #include <osgParticle/ParticleSystem>
 #include <osgParticle/ModularEmitter>
 #include <osgParticle/SectorPlacer>
 #include <osgParticle/FluidProgram>
 #include <osgDB/FileUtils>
 #include <osg/group>
+
+/*
+	CSulParticleSystemContainerOsg :
+
+		creates a particle effect defined by the data
+*/
 
 
 class CSulParticleSystemContainerOsg : public osgParticle::ParticleSystem

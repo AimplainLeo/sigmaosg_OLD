@@ -24,7 +24,6 @@ public:
 	void removeAll();
 
 	void create( CSulParticleSystemContainerOsg* psContainer, const osg::Vec3& pos );
-	//void place( const osg::Vec3& pos );
 
 private:
 	osgParticle::ParticleSystemUpdater*	m_psu;

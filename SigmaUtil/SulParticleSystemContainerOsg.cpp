@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "SulParticleSystemContainerOsg.h"
+//#include <osg/Export>
 
 CSulParticleSystemContainerOsg::CSulParticleSystemContainerOsg( CSulParticleSystemDataOsg* data, osg::Group* root ) :
 osgParticle::ParticleSystem()
@@ -24,6 +25,8 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	m_particleSystemMT->getOrCreateStateSet()->setRenderBinDetails( m_data->m_renderBinNum, "DepthSortedBin" );
 	m_root->addChild( m_particleSystemMT );
 
+// only support in osg version 3
+#if OPENSCENEGRAPH_MAJOR_VERSION > 2
 	std::map<CSulString,osgParticle::ParticleSystem::SortMode> mapSortMode;
 	mapSortMode["NO_SORT"] = osgParticle::ParticleSystem::NO_SORT;
 	mapSortMode["SORT_FRONT_TO_BACK"] = osgParticle::ParticleSystem::SORT_FRONT_TO_BACK;
@@ -31,6 +34,7 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 
 	setDefaultAttributes( osgDB::findDataFile(m_data->m_psTextureFile), m_data->m_psUseEmissive, m_data->m_psUseLighting );
 	setSortMode( mapSortMode[m_data->m_psSortMode] );
+#endif
 
 	m_particle = new osgParticle::Particle;
 	m_particle->setLifeTime( m_data->m_particleLifeTime );
@@ -42,12 +46,16 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	);
 	m_particle->setRadius( m_data->m_particleRadius );
 	m_particle->setMass( m_data->m_particleMass );
+// only support in osg version 3
+#if OPENSCENEGRAPH_MAJOR_VERSION > 2
+
 	m_particle->setTextureTileRange(
 		m_data->m_particleTextureTileS, 
 		m_data->m_particleTextureTileT, 
 		m_data->m_particleTextureTileStart, 
 		m_data->m_particleTextureTileEnd 
 	);
+#endif
 
 	// emitter
 	m_emitter = new osgParticle::ModularEmitter;
