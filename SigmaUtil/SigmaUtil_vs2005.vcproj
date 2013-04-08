@@ -444,6 +444,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SulParticleCounter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SulParticleCounterOnce.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SulParticleEmitter.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SulSigSlots.h"
 				>
 			</File>
@@ -652,14 +664,6 @@
 				</File>
 				<File
 					RelativePath=".\SulGeomQuadTiles.h"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomSphere.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SulGeomSphere.h"
 					>
 				</File>
 				<File
@@ -2256,6 +2260,14 @@
 				</File>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath=".\SulParticleCounterOnce.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\SulParticleEmitter.cpp"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
