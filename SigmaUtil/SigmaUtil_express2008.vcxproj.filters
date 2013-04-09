@@ -1,0 +1,1721 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{2649e175-92e5-40fa-8a52-d13e2ddf72f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geoms">
+      <UniqueIdentifier>{5c4d3010-6d05-437e-b7a0-fc3ef5b02985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geoms\lines">
+      <UniqueIdentifier>{0944f04b-02ab-4769-b97f-5d679e1a9fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geoms\crosshairs">
+      <UniqueIdentifier>{95c8a8ec-0a61-4811-b3a5-9286bf7bb185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geoms\circles">
+      <UniqueIdentifier>{86cd8ed3-1dd6-4b11-b122-bed12d844a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geoms\tickmarks">
+      <UniqueIdentifier>{71f8ac91-50ea-449e-922e-47a78b231fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Grid">
+      <UniqueIdentifier>{ec48ec40-823c-4094-8e4e-accbe4faab87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Strings">
+      <UniqueIdentifier>{0b1a59e2-cf1e-4e73-83cc-90741fff2dfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\XML">
+      <UniqueIdentifier>{627a5d90-5f05-4880-85ac-0d9f6c685534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parsers">
+      <UniqueIdentifier>{6b453608-eef3-485f-9003-e7ff60765478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parsers\json">
+      <UniqueIdentifier>{4949c80a-2e38-46b9-bf60-93691e405cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parsers\ini">
+      <UniqueIdentifier>{b8179b67-a9a9-4a30-ba4d-8db9bab5708b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{f06d5a0f-cc74-49b3-940f-828b9ac88c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AnimationPaths">
+      <UniqueIdentifier>{7a73f141-fbfe-4b3d-ac77-a828021f294a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Console">
+      <UniqueIdentifier>{0a253f05-2485-45e0-8e77-7c8f6c8469a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager">
+      <UniqueIdentifier>{7346f265-d32f-4a5d-a167-3f5b656e9beb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Transformations">
+      <UniqueIdentifier>{67d7af14-e37c-48a5-b05d-ed938ca230ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lights">
+      <UniqueIdentifier>{1735e699-772e-45d0-8511-50d0413ae7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{4bdfcde0-55d7-434d-a64c-de9b35fa73ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI\Components">
+      <UniqueIdentifier>{238cb5a0-d84b-441c-94e8-026d470ed341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PerlinNoise">
+      <UniqueIdentifier>{39785e67-a7ef-46d9-bcfd-afcbdaa80c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{ff1d7cee-d9c4-4980-81e5-25977a5a75f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers\DebugMenu">
+      <UniqueIdentifier>{1cfda6a2-0d6a-40d5-ad7b-3b74e5a69b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers\Workload">
+      <UniqueIdentifier>{223b26b4-365d-4615-93e3-8353a997a86f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Array">
+      <UniqueIdentifier>{c78cbd6a-dc09-4aae-b6a7-a1759023f29c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manipulators">
+      <UniqueIdentifier>{ba91a167-157e-4ff8-9559-3ba009bfb0d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{2c40ca84-7fc5-4778-bafa-d1165d0d6b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intersections">
+      <UniqueIdentifier>{a3efe0db-521e-41b5-9623-efcea00f5177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intersections\ImageBaseIntersection">
+      <UniqueIdentifier>{8323318a-18fc-465b-84b5-49e0596d0b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intersections\Intersectors">
+      <UniqueIdentifier>{8ade3089-78dc-466a-8fac-7d9dd84c3121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NodeCallbacks">
+      <UniqueIdentifier>{d6faf400-da51-4c64-8559-1825945dd642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Plasma">
+      <UniqueIdentifier>{56ef2c0d-8dcf-4cfd-874a-3c6495f37cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Clouds">
+      <UniqueIdentifier>{e1b65c37-6f28-48a4-8617-924a83f6e6b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Grass">
+      <UniqueIdentifier>{5bd0c504-045d-4541-bf1b-7c3816d5d86d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Grass\shader folder temp">
+      <UniqueIdentifier>{b76f9b98-231f-435b-8406-870fea7a74bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Grass\work in progress">
+      <UniqueIdentifier>{59324dfa-0bf0-4c65-9830-7f735b6b363d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shadows">
+      <UniqueIdentifier>{46979ceb-2668-4599-b67f-a654b1a9f328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{40375cf4-2595-4c80-b602-a5478e21aa2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\Postfilters">
+      <UniqueIdentifier>{b87f9bf3-7ca5-4a9d-8ee2-bdd84c241e0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\Postfilters\Passes">
+      <UniqueIdentifier>{eb328b77-706a-4149-9cce-c27e1770bbd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\Shaders">
+      <UniqueIdentifier>{77c37fa5-ed24-4d08-ba41-49a45ffc6989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\Shader Vert and Frags">
+      <UniqueIdentifier>{b5960037-b940-4cc4-9d2d-f93b125c6cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\RTT">
+      <UniqueIdentifier>{665f1421-af2e-4393-b91a-51f1375c6436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\Deferred">
+      <UniqueIdentifier>{ae4eb2b9-e769-4025-8ea9-072da5bb6c96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Coordinates">
+      <UniqueIdentifier>{b8eb4a64-c5a5-44fc-b0a7-798e41e8ced0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{44ff7697-0e8b-4072-9bcb-4e0c0db131ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Clip">
+      <UniqueIdentifier>{f80c88fa-0ca4-4170-924e-b7246821cde8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{bfb4b352-1a77-4e4a-8af9-993cc8aebf8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Profiling">
+      <UniqueIdentifier>{f71cc3bf-d965-4d0f-bc71-14014d3d5c8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Particles">
+      <UniqueIdentifier>{7e3fd661-70ec-43e4-8155-ae0cb50c3a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Raymarching">
+      <UniqueIdentifier>{71b4fa8d-2781-421f-b5f1-1964f6fa4f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sound">
+      <UniqueIdentifier>{5831c494-7d7f-4cb7-95d3-308f577020e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geoms\shapes">
+      <UniqueIdentifier>{b8c12621-3304-4cf3-9395-6a982a189234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geodes">
+      <UniqueIdentifier>{e84a04c8-dec0-4885-bf7c-0f6928da9a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Particles\osg">
+      <UniqueIdentifier>{a9c030a9-016e-4733-b89d-bcd53c8acac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Qt">
+      <UniqueIdentifier>{0dc9baef-bfd1-46cd-b45f-7e92f2177909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Qt\PropertySheet">
+      <UniqueIdentifier>{5f4b419e-2dd4-4098-9b7d-8d3425d9bf98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Qt\PropertySheet\props">
+      <UniqueIdentifier>{65e888be-88bd-47dc-9f2b-2ce62096b218}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="SulExtractGeometry.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="SulNodePath.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeode.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeom.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomArrow2D.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomAxis.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomBarChart.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomBillboardInstancing.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomBoundingBox.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomCrossQuadInstancing.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomFrame.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomGrid.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomGriddedText.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomHeightField.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomLaser.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomPlane.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomQuad.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomQuadTiles.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomTriangle.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomTriangleFan.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomTriangleList.cpp">
+      <Filter>Source Files\Geoms</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeodeLineStrip.cpp">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomLine.cpp">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomLineList.cpp">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomLines.cpp">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomLineStrip.cpp">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeodeCrosshairs.cpp">
+      <Filter>Source Files\Geoms\crosshairs</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomCrosshairSimple.cpp">
+      <Filter>Source Files\Geoms\crosshairs</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeodeCircle.cpp">
+      <Filter>Source Files\Geoms\circles</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomCircle.cpp">
+      <Filter>Source Files\Geoms\circles</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomTickMarksHorizontal.cpp">
+      <Filter>Source Files\Geoms\tickmarks</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGrid.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="SulString.cpp">
+      <Filter>Source Files\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="SulStringList.cpp">
+      <Filter>Source Files\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="SulXmlAttr.cpp">
+      <Filter>Source Files\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="SulXmlDataInfo.cpp">
+      <Filter>Source Files\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="SulXmlParser.cpp">
+      <Filter>Source Files\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="SulXmlWriter.cpp">
+      <Filter>Source Files\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParser.cpp">
+      <Filter>Source Files\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTokenizer.cpp">
+      <Filter>Source Files\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTokenManager.cpp">
+      <Filter>Source Files\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulJson.cpp">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClCompile>
+    <ClCompile Include="SulJsonArray.cpp">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClCompile>
+    <ClCompile Include="SulJsonObject.cpp">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClCompile>
+    <ClCompile Include="SulJsonString.cpp">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClCompile>
+    <ClCompile Include="SulJsonUtil.cpp">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClCompile>
+    <ClCompile Include="SulInifileParser.cpp">
+      <Filter>Source Files\Parsers\ini</Filter>
+    </ClCompile>
+    <ClCompile Include="SulFile.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="SulFile_1.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="SulFile_2.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPaths.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="SulAnimationPath.cpp">
+      <Filter>Source Files\AnimationPaths</Filter>
+    </ClCompile>
+    <ClCompile Include="SulAnimationPathVisitor.cpp">
+      <Filter>Source Files\AnimationPaths</Filter>
+    </ClCompile>
+    <ClCompile Include="SulConsoleDisplay.cpp">
+      <Filter>Source Files\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="SulConsoleInputHandler.cpp">
+      <Filter>Source Files\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="SulSceneManager.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SulSceneManagerXml.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTransScreenAlign.cpp">
+      <Filter>Source Files\Transformations</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTransToEye.cpp">
+      <Filter>Source Files\Transformations</Filter>
+    </ClCompile>
+    <ClCompile Include="SulLightBase.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="SulLightManager.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="SulLightPoint.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="SulLightSpot.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiEventHandler.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiManager.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiThemeXml.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiXml.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiAlign.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiButton.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiCanvas.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiCheckBox.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiComboBox.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiComp.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiCounter.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiDial.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiEditBox.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiItem.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiListBox.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiListView.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiProfiler.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiRadioButton.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiRadioButtonGroup.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiScrollBar.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiSliderH.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiTab.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiTable.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiTabPage.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiText.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGuiTextBox.cpp">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPerlinNoise1D.cpp">
+      <Filter>Source Files\PerlinNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPerlinNoise2D.cpp">
+      <Filter>Source Files\PerlinNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPerlinNoiseBase.cpp">
+      <Filter>Source Files\PerlinNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCalcBoundingBox.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGenHeightTexture.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulProgramShaders.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulScreenAlignedQuad.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulUniformArrayHack.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulViewQuad.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulViewRTT.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulViewTexture.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDebugMenu.cpp">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDebugMenuKeyboardHandler.cpp">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDebugValueBase.cpp">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDebugValueFloat.cpp">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDebugValueText.cpp">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="SulManipulatorCamera.cpp">
+      <Filter>Source Files\Manipulators</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTexImage.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="SulVerticalCrossMap.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDistancePointAndLine.cpp">
+      <Filter>Source Files\Intersections</Filter>
+    </ClCompile>
+    <ClCompile Include="sulDistancePointAndTriangle2d.cpp">
+      <Filter>Source Files\Intersections</Filter>
+    </ClCompile>
+    <ClCompile Include="SulIntersectGraph.cpp">
+      <Filter>Source Files\Intersections</Filter>
+    </ClCompile>
+    <ClCompile Include="SulIntersectGraphMouse.cpp">
+      <Filter>Source Files\Intersections</Filter>
+    </ClCompile>
+    <ClCompile Include="SulIntLine.cpp">
+      <Filter>Source Files\Intersections</Filter>
+    </ClCompile>
+    <ClCompile Include="SulIntPlane.cpp">
+      <Filter>Source Files\Intersections</Filter>
+    </ClCompile>
+    <ClCompile Include="SulIntTriangle.cpp">
+      <Filter>Source Files\Intersections</Filter>
+    </ClCompile>
+    <ClCompile Include="SulIntersectionWithCamera.cpp">
+      <Filter>Source Files\Intersections\ImageBaseIntersection</Filter>
+    </ClCompile>
+    <ClCompile Include="SulSphereIntersector.cpp">
+      <Filter>Source Files\Intersections\Intersectors</Filter>
+    </ClCompile>
+    <ClCompile Include="SulSphereIntersectorTriangle.cpp">
+      <Filter>Source Files\Intersections\Intersectors</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPlasma.cpp">
+      <Filter>Source Files\Plasma</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCloudPlane.cpp">
+      <Filter>Source Files\Clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="SulClouds.cpp">
+      <Filter>Source Files\Clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCloudsTexture.cpp">
+      <Filter>Source Files\Clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGenerateHeightTexture.cpp">
+      <Filter>Source Files\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGrass.cpp">
+      <Filter>Source Files\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGenPositionMask.cpp">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGenPositionTextures.cpp">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGenTextureWithPositions.cpp">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClCompile>
+    <ClCompile Include="SulNodeVisitorExtractLines.cpp">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClCompile>
+    <ClCompile Include="SulRenderCellInstances.cpp">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClCompile>
+    <ClCompile Include="SulRenderInstances.cpp">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShadow.cpp">
+      <Filter>Source Files\Shadows</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShadowTexture.cpp">
+      <Filter>Source Files\Shadows</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShadowTextureNodeCallback.cpp">
+      <Filter>Source Files\Shadows</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCrossQuad.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SulRenderTransparent.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterBase.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterBloom.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterBrightPass.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterGhost.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterGodRays.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterHDR.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterHDR2.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterNightVision.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterStreaking.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPostFilterThermal.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTextureBuffer.cpp">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClCompile>
+    <ClCompile Include="SulFilterPass.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPass.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassBrightPass.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassCombineTex.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassGaussH.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassGaussV.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassGhost.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassGodRays.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassNormal.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassStreaking.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPassToneMap.cpp">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderAmplifier.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderBase.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderBrightPass.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderBW.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderColor.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderCombine.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderCombineTex.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderGaussH.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderGaussV.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderGhost.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderGodRays.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderGuiFrame.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderInstancingBillboards.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderIntensity.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderNormalMapObjectSpace.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderNormalMapTangentSpace.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderStreak.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulShaderZ.cpp">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SulRTT.cpp">
+      <Filter>Source Files\Rendering\RTT</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTexCam.cpp">
+      <Filter>Source Files\Rendering\RTT</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDeferredCamera.cpp">
+      <Filter>Source Files\Rendering\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCoordGeodetic.cpp">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCoordLatLon.cpp">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCoordUTM.cpp">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTranverseMercatorParameters.cpp">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClCompile>
+    <ClCompile Include="SulClipLines.cpp">
+      <Filter>Source Files\Clip</Filter>
+    </ClCompile>
+    <ClCompile Include="SulClipTriangle.cpp">
+      <Filter>Source Files\Clip</Filter>
+    </ClCompile>
+    <ClCompile Include="SulDataTri.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="SulInit.cpp">
+      <Filter>Source Files\Profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="SulProfiler.cpp">
+      <Filter>Source Files\Profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleUpdater.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="SulWAV.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SulAudioManager.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SulAudioListener.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SulAudioSource.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SulAudioSourceNode.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomBox.cpp">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomCone.cpp">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomHemiSphere.cpp">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeodeParachute.cpp">
+      <Filter>Source Files\Geodes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomCylinder.cpp">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleEmitter.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="SulCameraManipulatorDebugger.cpp">
+      <Filter>Source Files\Manipulators</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeomArrow3D.cpp">
+      <Filter>Source Files\Geodes</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleSystemOsg.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
+    <ClCompile Include="SulQtPropertySheet.cpp">
+      <Filter>Source Files\Qt\PropertySheet</Filter>
+    </ClCompile>
+    <ClCompile Include="SulInventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulInventoryHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulInventoryItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulNodeGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPositionPlotter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulPositionPlotterManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulXmlNodeTag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulXmlReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleSystemDataOsg.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
+    <ClCompile Include="SulGeodeSphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleSystemDataPropertySheetQT.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleSystemDebris.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleDebris.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleSystemContainerOsg.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleCounterOnce.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SulExtractGeometry.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SulFuncExtractor.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SulNodePath.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SulSigSlots.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTypes.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeode.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeom.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomArrow2D.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomAxis.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomBarChart.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomBillboardInstancing.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomBoundingBox.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomCrossQuadInstancing.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomFrame.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomGrid.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomGriddedText.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomHeightField.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomLaser.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomPlane.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomQuad.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomQuadTiles.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomTriangle.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomTriangleFan.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomTriangleList.h">
+      <Filter>Source Files\Geoms</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeodeLineStrip.h">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomLine.h">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomLineList.h">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomLines.h">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomLineStrip.h">
+      <Filter>Source Files\Geoms\lines</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeodeCrosshairs.h">
+      <Filter>Source Files\Geoms\crosshairs</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomCrosshairSimple.h">
+      <Filter>Source Files\Geoms\crosshairs</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeodeCircle.h">
+      <Filter>Source Files\Geoms\circles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomCircle.h">
+      <Filter>Source Files\Geoms\circles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomTickMarksHorizontal.h">
+      <Filter>Source Files\Geoms\tickmarks</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGrid.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="SulString.h">
+      <Filter>Source Files\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="SulStringList.h">
+      <Filter>Source Files\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="SulXmlAttr.h">
+      <Filter>Source Files\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="SulXmlDataInfo.h">
+      <Filter>Source Files\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="SulXmlParser.h">
+      <Filter>Source Files\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="SulXmlWriter.h">
+      <Filter>Source Files\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParser.h">
+      <Filter>Source Files\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTokenizer.h">
+      <Filter>Source Files\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTokenManager.h">
+      <Filter>Source Files\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulJson.h">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClInclude>
+    <ClInclude Include="SulJsonArray.h">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClInclude>
+    <ClInclude Include="SulJsonObject.h">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClInclude>
+    <ClInclude Include="SulJsonString.h">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClInclude>
+    <ClInclude Include="SulJsonUtil.h">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClInclude>
+    <ClInclude Include="SulJsonValue.h">
+      <Filter>Source Files\Parsers\json</Filter>
+    </ClInclude>
+    <ClInclude Include="SulInifileParser.h">
+      <Filter>Source Files\Parsers\ini</Filter>
+    </ClInclude>
+    <ClInclude Include="SulFile.h">
+      <Filter>Source Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPaths.h">
+      <Filter>Source Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="SulAnimationPath.h">
+      <Filter>Source Files\AnimationPaths</Filter>
+    </ClInclude>
+    <ClInclude Include="SulAnimationPathFunctor.h">
+      <Filter>Source Files\AnimationPaths</Filter>
+    </ClInclude>
+    <ClInclude Include="SulAnimationPathVisitor.h">
+      <Filter>Source Files\AnimationPaths</Filter>
+    </ClInclude>
+    <ClInclude Include="SulConsoleDisplay.h">
+      <Filter>Source Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="SulConsoleFunctor.h">
+      <Filter>Source Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="SulConsoleInputHandler.h">
+      <Filter>Source Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="SulSceneManager.h">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SulSceneManagerXml.h">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTransScreenAlign.h">
+      <Filter>Source Files\Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTransToEye.h">
+      <Filter>Source Files\Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="SulLightBase.h">
+      <Filter>Source Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="SulLightManager.h">
+      <Filter>Source Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="SulLightPoint.h">
+      <Filter>Source Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="SulLightSpot.h">
+      <Filter>Source Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiCompEditModeVisitor.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiCompVisitor.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiEvent.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiEventHandler.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiManager.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiThemeXml.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiXml.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiAlign.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiButton.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiCanvas.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiCheckBox.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiComboBox.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiComp.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiCounter.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiDial.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiEditBox.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiItem.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiListBox.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiListView.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiProfiler.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiRadioButton.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiRadioButtonGroup.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiScrollBar.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiSliderH.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiTab.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiTable.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiTabPage.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiText.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiTextBox.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGuiTextUpdateCallback.h">
+      <Filter>Source Files\GUI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPerlinNoise1D.h">
+      <Filter>Source Files\PerlinNoise</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPerlinNoise2D.h">
+      <Filter>Source Files\PerlinNoise</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPerlinNoiseBase.h">
+      <Filter>Source Files\PerlinNoise</Filter>
+    </ClInclude>
+    <ClInclude Include="SulBB.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCalcBoundingBox.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGenHeightTexture.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulProgramShaders.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulScreenAlignedQuad.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTestGeoms.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulUniformArrayHack.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulViewQuad.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulViewRTT.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulViewTexture.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDebugMenu.h">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDebugMenuKeyboardHandler.h">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDebugValueBase.h">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDebugValueFloat.h">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDebugValueText.h">
+      <Filter>Source Files\Helpers\DebugMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="SulWorkload.h">
+      <Filter>Source Files\Helpers\Workload</Filter>
+    </ClInclude>
+    <ClInclude Include="SulArray2D.h">
+      <Filter>Source Files\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="SulManipulatorCamera.h">
+      <Filter>Source Files\Manipulators</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTexImage.h">
+      <Filter>Source Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="SulVerticalCrossMap.h">
+      <Filter>Source Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDistancePointAndLine.h">
+      <Filter>Source Files\Intersections</Filter>
+    </ClInclude>
+    <ClInclude Include="sulDistancePointAndTriangle2d.h">
+      <Filter>Source Files\Intersections</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntersectGraph.h">
+      <Filter>Source Files\Intersections</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntersectGraphMouse.h">
+      <Filter>Source Files\Intersections</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntLine.h">
+      <Filter>Source Files\Intersections</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntPlane.h">
+      <Filter>Source Files\Intersections</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntTriangle.h">
+      <Filter>Source Files\Intersections</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntersectionCullCallback.h">
+      <Filter>Source Files\Intersections\ImageBaseIntersection</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntersectionDrawCallback.h">
+      <Filter>Source Files\Intersections\ImageBaseIntersection</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntersectionInfo.h">
+      <Filter>Source Files\Intersections\ImageBaseIntersection</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntersectionWithCamera.h">
+      <Filter>Source Files\Intersections\ImageBaseIntersection</Filter>
+    </ClInclude>
+    <ClInclude Include="SulIntersectionWithCameraCallback.h">
+      <Filter>Source Files\Intersections\ImageBaseIntersection</Filter>
+    </ClInclude>
+    <ClInclude Include="SulSphereIntersector.h">
+      <Filter>Source Files\Intersections\Intersectors</Filter>
+    </ClInclude>
+    <ClInclude Include="SulSphereIntersectorTriangle.h">
+      <Filter>Source Files\Intersections\Intersectors</Filter>
+    </ClInclude>
+    <ClInclude Include="SulNodeCallbackCameraSync.h">
+      <Filter>Source Files\NodeCallbacks</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPlasma.h">
+      <Filter>Source Files\Plasma</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCloudPlane.h">
+      <Filter>Source Files\Clouds</Filter>
+    </ClInclude>
+    <ClInclude Include="SulClouds.h">
+      <Filter>Source Files\Clouds</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCloudScrollTexture.h">
+      <Filter>Source Files\Clouds</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCloudsTexture.h">
+      <Filter>Source Files\Clouds</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGenerateHeightTexture.h">
+      <Filter>Source Files\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="sulgengrassupdatecallback.h">
+      <Filter>Source Files\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGrass.h">
+      <Filter>Source Files\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDataShapeMask.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGenNodeMaskVisitor.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGenPositionMask.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGenPositionTextures.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGenTextureWithPositions.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulNodeVisitorExtractLines.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulRenderCellInstances.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulRenderInstances.h">
+      <Filter>Source Files\Grass\work in progress</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShadow.h">
+      <Filter>Source Files\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShadowTexture.h">
+      <Filter>Source Files\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShadowTextureNodeCallback.h">
+      <Filter>Source Files\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCrossQuad.h">
+      <Filter>Source Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="SulRenderTransparent.h">
+      <Filter>Source Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterBase.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterBloom.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterBrightPass.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterGhost.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterGodRays.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterHDR.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterHDR2.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterNightVision.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterStreaking.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPostFilterThermal.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTextureBuffer.h">
+      <Filter>Source Files\Rendering\Postfilters</Filter>
+    </ClInclude>
+    <ClInclude Include="SulFilterPass.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPass.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassBrightPass.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassCombineTex.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassGaussH.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassGaussV.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassGhost.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassGodRays.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassNormal.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassStreaking.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulPassToneMap.h">
+      <Filter>Source Files\Rendering\Postfilters\Passes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderAmplifier.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderBase.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderBrightPass.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderBW.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderColor.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderCombine.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderCombineTex.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderGaussH.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderGaussV.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderGhost.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderGodRays.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderGuiFrame.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderInstancingBillboards.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderIntensity.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderNormalMapObjectSpace.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderNormalMapTangentSpace.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderStreak.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulShaderZ.h">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SulRTT.h">
+      <Filter>Source Files\Rendering\RTT</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTexCam.h">
+      <Filter>Source Files\Rendering\RTT</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDeferredCamera.h">
+      <Filter>Source Files\Rendering\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCoordGeodetic.h">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCoordLatLon.h">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCoordUTM.h">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTranverseMercatorParameters.h">
+      <Filter>Source Files\Coordinates</Filter>
+    </ClInclude>
+    <ClInclude Include="SulMath.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SulClipLines.h">
+      <Filter>Source Files\Clip</Filter>
+    </ClInclude>
+    <ClInclude Include="SulClipTriangle.h">
+      <Filter>Source Files\Clip</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDataRay.h">
+      <Filter>Source Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SulDataTri.h">
+      <Filter>Source Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SulInit.h">
+      <Filter>Source Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="SulProfiler.h">
+      <Filter>Source Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="SulProfilerData.h">
+      <Filter>Source Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticle.h">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleSystem.h">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleUpdater.h">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulWAV.h">
+      <Filter>Source Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SulAudioManager.h">
+      <Filter>Source Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SulAudioListener.h">
+      <Filter>Source Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SulAudioSource.h">
+      <Filter>Source Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SulAudioSourceNode.h">
+      <Filter>Source Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomCone.h">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomBox.h">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomHemiSphere.h">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeodeParachute.h">
+      <Filter>Source Files\Geodes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomCylinder.h">
+      <Filter>Source Files\Geoms\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleEmitter.h">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulCameraManipulatorDebugger.h">
+      <Filter>Source Files\Manipulators</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeomArrow3D.h">
+      <Filter>Source Files\Geodes</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleSystemOsg.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropertySheet.h">
+      <Filter>Source Files\Qt\PropertySheet</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropBase.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropBool.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropString.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropFloat.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropVec3.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropVec4.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropVec4s.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropInt32.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropUint32.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulInventory.h" />
+    <ClInclude Include="SulInventoryHelper.h" />
+    <ClInclude Include="SulInventoryHelperAction.h" />
+    <ClInclude Include="SulInventoryItem.h" />
+    <ClInclude Include="SulInventoryItemData.h" />
+    <ClInclude Include="SulInventoryUpdateCallback.h" />
+    <ClInclude Include="SulNode.h" />
+    <ClInclude Include="SulNodeGroup.h" />
+    <ClInclude Include="SulPositionPlotter.h" />
+    <ClInclude Include="SulPositionPlotterManager.h" />
+    <ClInclude Include="SulQtPropCombobox.h" />
+    <ClInclude Include="SulXmlNodeTag.h" />
+    <ClInclude Include="SulXmlReader.h" />
+    <ClInclude Include="SulParticleSystemDataOsg.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleSystemContainerOsg.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulGeodeSphere.h" />
+    <ClInclude Include="SulParticleSystemDataPropertySheetQT.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleSystemDebris.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleDebris.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleCounter.h">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleCounterOnce.h">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\shaders\sulFuncLightPoint.frag">
+      <Filter>Source Files\Lights</Filter>
+    </None>
+    <None Include="Data\shaders\sulFuncLightSpot.frag">
+      <Filter>Source Files\Lights</Filter>
+    </None>
+    <None Include="Data\default_theme.xml">
+      <Filter>Source Files\GUI</Filter>
+    </None>
+    <None Include="..\..\osghelp\Grass3\grass.frag">
+      <Filter>Source Files\Grass\shader folder temp</Filter>
+    </None>
+    <None Include="..\..\osghelp\Grass3\grass.vert">
+      <Filter>Source Files\Grass\shader folder temp</Filter>
+    </None>
+    <None Include="..\..\osghelp\Grass3\height_render.frag">
+      <Filter>Source Files\Grass\shader folder temp</Filter>
+    </None>
+    <None Include="..\..\osghelp\Grass3\height_render.vert">
+      <Filter>Source Files\Grass\shader folder temp</Filter>
+    </None>
+    <None Include="Data\shaders\amplifier.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\amplifier.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\brightpass.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\brightpass.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\bw.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\bw.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\color.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\combinetex.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\combinetex.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\compose.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\compose.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\gaussh.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\gaussh.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\gaussv.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\gaussv.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\ghost.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\ghost.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\godrays.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\godrays.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\gui_frame.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\gui_frame.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\instancing_billboards.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\instancing_billboards.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\instancing_billboards_collision.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\intensity.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\intensity.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\spotlight.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\spotlight.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\streak.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\streak.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\z.frag">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+    <None Include="Data\shaders\z.vert">
+      <Filter>Source Files\Rendering\Shader Vert and Frags</Filter>
+    </None>
+  </ItemGroup>
+</Project>
