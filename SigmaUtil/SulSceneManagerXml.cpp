@@ -402,11 +402,6 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 		{
 			texcam->setCullMask( m_rSceneManager->calcCullMask( pAttr->get("cullmask") ) );
 		}
-		if ( pAttr->exist("cullmask") )
-		{
-			texcam->setCullMask( m_rSceneManager->calcCullMask( pAttr->get("cullmask") ) );
-		}
-
 		// debug bar
 		//texcam->addChild( new CSulScreenAlignedQuad( 800, 600, 0, 0, 100, 800, 50 ) );		// bar over
 	}
