@@ -31,10 +31,10 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	mapSortMode["NO_SORT"] = osgParticle::ParticleSystem::NO_SORT;
 	mapSortMode["SORT_FRONT_TO_BACK"] = osgParticle::ParticleSystem::SORT_FRONT_TO_BACK;
 	mapSortMode["SORT_BACK_TO_FRONT"] = osgParticle::ParticleSystem::SORT_BACK_TO_FRONT;
-
-	setDefaultAttributes( osgDB::findDataFile(m_data->m_psTextureFile), m_data->m_psUseEmissive, m_data->m_psUseLighting );
 	setSortMode( mapSortMode[m_data->m_psSortMode] );
 #endif
+	
+	setDefaultAttributes( osgDB::findDataFile(m_data->m_psTextureFile), m_data->m_psUseEmissive, m_data->m_psUseLighting );
 
 	m_particle = new osgParticle::Particle;
 	m_particle->setLifeTime( m_data->m_particleLifeTime );

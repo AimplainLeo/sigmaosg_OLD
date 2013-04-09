@@ -3,11 +3,28 @@
 #include "stdafx.h"
 #include "SulParticleSystemLoadInstancer.h"
 #include "SulXmlReader.h"
-#include "SulParticleSystemDataOsg.h"
+
+CSulParticleSystemLoadInstancer::CSulParticleSystemLoadInstancer() :
+osg::Group()
+{
+	m_particleSystem = new CSulParticleSystemOsg;
+	addChild( m_particleSystem );
+}
 
 void CSulParticleSystemLoadInstancer::create( const osg::Vec3& pos )
 {
+	VEC_DATA::iterator i = m_vecData.begin();
+	VEC_DATA::iterator ie = m_vecData.end();
+	while ( i!=ie )
+	{
+		// create particle system
+		CSulParticleSystemContainerOsg* psContainer = new CSulParticleSystemContainerOsg( (*i), this );
 
+		// place it
+		m_particleSystem->create( psContainer, pos );
+
+		++i;
+	}
 }
 
 bool CSulParticleSystemLoadInstancer::load( const CSulString& file )
@@ -32,6 +49,8 @@ bool CSulParticleSystemLoadInstancer::load( const CSulString& file )
 		data->setDefaultValues();
 		data->load( tagParticleSystemDataOsg );
 		
+		m_vecData.push_back( data );
+
 		++i;
 	}
 
