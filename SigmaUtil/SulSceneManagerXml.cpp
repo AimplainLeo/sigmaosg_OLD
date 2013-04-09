@@ -397,7 +397,11 @@ void CSulSceneManagerXml::elementStart( const CSulString& sName, CSulXmlAttr* pA
 			osg::Vec4 c = pAttr->get("bgcolor").asVec4();
 			texcam->setClearColor( c );
 		}
-
+		// and here fuck everything up because we can not add this to sigma util project,. .but only to ifacts
+		if ( pAttr->exist("cullmask") )
+		{
+			texcam->setCullMask( m_rSceneManager->calcCullMask( pAttr->get("cullmask") ) );
+		}
 		// debug bar
 		//texcam->addChild( new CSulScreenAlignedQuad( 800, 600, 0, 0, 100, 800, 50 ) );		// bar over
 	}
