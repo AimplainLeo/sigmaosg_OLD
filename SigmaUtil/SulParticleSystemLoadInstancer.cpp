@@ -7,6 +7,7 @@
 CSulParticleSystemLoadInstancer::CSulParticleSystemLoadInstancer() :
 osg::Group()
 {
+	m_wind.set( 0,0,0 );
 	m_particleSystem = new CSulParticleSystemOsg;
 	addChild( m_particleSystem );
 }
@@ -25,6 +26,8 @@ void CSulParticleSystemLoadInstancer::create( const osg::Vec3& pos )
 
 		++i;
 	}
+
+	m_particleSystem->setWind( m_wind );
 }
 
 bool CSulParticleSystemLoadInstancer::load( const CSulString& file )
@@ -55,4 +58,10 @@ bool CSulParticleSystemLoadInstancer::load( const CSulString& file )
 	}
 
 	return true;
+}
+
+void CSulParticleSystemLoadInstancer::setWind( const osg::Vec3& wind )
+{
+	m_wind = wind;
+	m_particleSystem->setWind( m_wind );
 }

@@ -25,6 +25,8 @@ public:
 
 	void create( CSulParticleSystemContainerOsg* psContainer, const osg::Vec3& pos );
 
+	void setWind( const osg::Vec3& wind );
+
 private:
 	osgParticle::ParticleSystemUpdater*	m_psu;
 	

@@ -158,3 +158,7 @@ void CSulParticleSystemContainerOsg::destroy()
 	m_root->removeChild( m_particleSystemMT );
 }
 
+void CSulParticleSystemContainerOsg::setWind( const osg::Vec3& wind )
+{
+	m_programFluid->setWind( wind );
+}

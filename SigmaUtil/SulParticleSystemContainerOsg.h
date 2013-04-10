@@ -31,6 +31,8 @@ public:
 	void									destroy();
 
 	CSulParticleSystemDataOsg*				getData();
+
+	void									setWind( const osg::Vec3& wind );
 	
 public:
 	osg::ref_ptr<osg::Group>				m_root;

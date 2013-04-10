@@ -36,3 +36,14 @@ void CSulParticleSystemOsg::create( CSulParticleSystemContainerOsg* psContainer,
 	m_vecParticleSystemContainer.push_back( psContainer );
 }
 
+void CSulParticleSystemOsg::setWind( const osg::Vec3& wind )
+{
+	VEC_PARTICLESYSTEMCONTAINEROSG::iterator i = m_vecParticleSystemContainer.begin();
+	VEC_PARTICLESYSTEMCONTAINEROSG::iterator ie = m_vecParticleSystemContainer.end();
+	while ( i!=ie )
+	{
+		CSulParticleSystemContainerOsg* psContainer = (*i);
+		psContainer->setWind( wind );
+		++i;
+	}
+}
