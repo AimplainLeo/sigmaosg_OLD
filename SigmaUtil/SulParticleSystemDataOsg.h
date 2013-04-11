@@ -50,6 +50,7 @@ public:
 	float						m_particleSizeMax;
 	float						m_particleAlphaMin;
 	float						m_particleAlphaMax;
+	CSulString					m_particleAlphaInterpolator;
 	osg::Vec4					m_particleColorMin;
 	osg::Vec4					m_particleColorMax;
 	float						m_particleRadius;

@@ -1598,6 +1598,9 @@
     <ClInclude Include="SulParticleCounterOnce.h">
       <Filter>Source Files\Particles</Filter>
     </ClInclude>
+    <ClInclude Include="SulParticleSystemInterpolatorQuadratic.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\shaders\sulFuncLightPoint.frag">

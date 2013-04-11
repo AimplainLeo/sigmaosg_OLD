@@ -5,9 +5,11 @@
 
 #include "SulParticleSystemDataOsg.h"
 #include "SulParticleSystemDebris.h"
+#include "SulParticleSystemInterpolatorQuadratic.h"
 
 // need to undefine emit because Qt has defined it and conflicts with osg
 #undef emit
+#include <osgParticle/linearinterpolator>
 #include <osgParticle/ParticleSystem>
 #include <osgParticle/ModularEmitter>
 #include <osgParticle/SectorPlacer>
@@ -50,6 +52,9 @@ public:
 	osgParticle::SectorPlacer*				m_placer;
 	osgParticle::RadialShooter*				m_shooterRadial;
 	osgParticle::FluidProgram*				m_programFluid;
+
+	typedef std::map<CSulString, osg::ref_ptr<osgParticle::Interpolator> >	MAP_INTERPOLATOR;
+	MAP_INTERPOLATOR														mapInterpolator;
 };
 
 #endif // __SULPARTICLESYSTEMINTERFACEOSG_H__

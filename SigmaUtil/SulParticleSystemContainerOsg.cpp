@@ -2,13 +2,15 @@
 
 #include "stdafx.h"
 #include "SulParticleSystemContainerOsg.h"
-//#include <osg/Export>
 
 CSulParticleSystemContainerOsg::CSulParticleSystemContainerOsg( CSulParticleSystemDataOsg* data, osg::Group* root ) :
 osgParticle::ParticleSystem()
 {
 	m_root = root;
 	m_data = data;
+
+	mapInterpolator["LINEAR"] = new osgParticle::LinearInterpolator;
+	mapInterpolator["QUADRATIC"] = new CSulParticleSystemInterpolatorQuadratic;
 }
 
 CSulParticleSystemDataOsg* CSulParticleSystemContainerOsg::getData()
@@ -25,6 +27,12 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	m_particleSystemMT->getOrCreateStateSet()->setRenderBinDetails( m_data->m_renderBinNum, "DepthSortedBin" );
 	m_root->addChild( m_particleSystemMT );
 
+	setDefaultAttributes( osgDB::findDataFile(m_data->m_psTextureFile), m_data->m_psUseEmissive, m_data->m_psUseLighting );
+
+	/////////////////////////
+	// particle
+	/////////////////////////
+
 // only support in osg version 3
 #if OPENSCENEGRAPH_MAJOR_VERSION > 2
 	std::map<CSulString,osgParticle::ParticleSystem::SortMode> mapSortMode;
@@ -34,11 +42,10 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	setSortMode( mapSortMode[m_data->m_psSortMode] );
 #endif
 	
-	setDefaultAttributes( osgDB::findDataFile(m_data->m_psTextureFile), m_data->m_psUseEmissive, m_data->m_psUseLighting );
-
 	m_particle = new osgParticle::Particle;
 	m_particle->setLifeTime( m_data->m_particleLifeTime );
 	m_particle->setSizeRange( osgParticle::rangef(m_data->m_particleSizeMin, m_data->m_particleSizeMax) );
+	m_particle->setAlphaInterpolator( mapInterpolator[m_data->m_particleAlphaInterpolator] );
 	m_particle->setAlphaRange( osgParticle::rangef(m_data->m_particleAlphaMin, m_data->m_particleAlphaMax) );
 	m_particle->setColorRange( osgParticle::rangev4(
 		m_data->m_particleColorMin, 
@@ -57,7 +64,10 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	);
 #endif
 
+	/////////////////////////
 	// emitter
+	/////////////////////////
+
 	m_emitter = new osgParticle::ModularEmitter;
 	m_emitter->setReferenceFrame( osgParticle::ParticleProcessor::RELATIVE_RF );
 //	m_emitter->setReferenceFrame( osgParticle::ParticleProcessor::ABSOLUTE_RF );

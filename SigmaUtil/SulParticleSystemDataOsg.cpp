@@ -25,6 +25,7 @@ void CSulParticleSystemDataOsg::setDefaultValues()
 	m_particleSizeMax					= 3.0f;
 	m_particleAlphaMin					= 1.0f;
 	m_particleAlphaMax					= 0.0f;
+	m_particleAlphaInterpolator			= "LINEAR";
 	m_particleColorMin					= osg::Vec4(1,1,1,1);
 	m_particleColorMax					= osg::Vec4(1,1,1,1);
 	m_particleRadius					= 0.5f;
@@ -53,6 +54,7 @@ void CSulParticleSystemDataOsg::setDefaultValues()
 	m_psTextureFile						= "images/animated_smoke.png";
 	m_psUseEmissive						= false;
 	m_psUseLighting						= false;
+	m_psSortMode						= "NO_SORT";
 
 	// osgParticle::ModularEmitter parameter values
 	m_emitterCompensationRatio			= 1.5f;
@@ -124,6 +126,7 @@ bool CSulParticleSystemDataOsg::save( CSulXmlWriter& writer )
 	pAttr->add( "SizeMax", m_particleSizeMax );
 	pAttr->add( "AlphaMin", m_particleAlphaMin );
 	pAttr->add( "AlphaMax", m_particleAlphaMax );
+	pAttr->add( "AlphaInterplator", m_particleAlphaInterpolator );
 	pAttr->add( "ColorMin", m_particleColorMin );
 	pAttr->add( "ColorMax", m_particleColorMax );
 	pAttr->add( "Radius", m_particleRadius );
@@ -227,6 +230,7 @@ bool CSulParticleSystemDataOsg::load( CSulXmlNodeTag* tagRoot )
 		m_particleSizeMax					= tag->getAttrAsFloat( "SizeMax", 2.5f );
 		m_particleAlphaMin					= tag->getAttrAsFloat( "AlphaMin", 2.5f );
 		m_particleAlphaMax					= tag->getAttrAsFloat( "AlphaMax", 2.5f );
+		m_particleAlphaInterpolator			= tag->getAttrAsString( "AlphaInterplator", "LINEAR" );
 		m_particleColorMin					= tag->getAttrAsVec4( "ColorMin", osg::Vec4(0,0,0,0) );
 		m_particleColorMax					= tag->getAttrAsVec4( "ColorMax", osg::Vec4(0,0,0,0) );
 		m_particleRadius					= tag->getAttrAsFloat( "Radius", 2.5f );

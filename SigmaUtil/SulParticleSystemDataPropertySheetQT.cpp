@@ -53,6 +53,7 @@ void CSulParticleSystemDataPropertySheetQt::createPropertySheet()
 	m_psParticles->add( new CSulQtPropFloat( "Size Max", m_data->m_particleSizeMax ) );
 	m_psParticles->add( new CSulQtPropFloat( "Alpha Min", m_data->m_particleAlphaMin ) );
 	m_psParticles->add( new CSulQtPropFloat( "Alpha Max", m_data->m_particleAlphaMax ) );
+	m_psParticles->add( new CSulQtPropCombobox( "AlphaInterplator", m_data->m_particleAlphaInterpolator, "LINEAR,QUADRATIC" ) );
 	m_psParticles->add( new CSulQtPropVec4( "Color Min", m_data->m_particleColorMin ) );
 	m_psParticles->add( new CSulQtPropVec4( "Color Max", m_data->m_particleColorMax ) );
 	m_psParticles->add( new CSulQtPropFloat( "Radius", m_data->m_particleRadius ) );

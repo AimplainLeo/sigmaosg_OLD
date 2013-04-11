@@ -330,6 +330,7 @@
     <ClInclude Include="SulParticleSystemContainerOsg.h" />
     <ClInclude Include="SulParticleSystemDataPropertySheetQT.h" />
     <ClInclude Include="SulParticleSystemDebris.h" />
+    <ClInclude Include="SulParticleSystemInterpolatorQuadratic.h" />
     <ClInclude Include="SulParticleSystemOsg.h" />
     <ClInclude Include="SulPositionPlotter.h" />
     <ClInclude Include="SulPositionPlotterManager.h" />
