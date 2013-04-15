@@ -841,6 +841,12 @@
     <ClCompile Include="SulParticleCounterOnce.cpp">
       <Filter>Source Files\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="SulParticleSystemLoadInstancer.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
+    <ClCompile Include="SulParticleSystemCleanUpUpdater.cpp">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -1599,6 +1605,12 @@
       <Filter>Source Files\Particles</Filter>
     </ClInclude>
     <ClInclude Include="SulParticleSystemInterpolatorQuadratic.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleSystemLoadInstancer.h">
+      <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulParticleSystemCleanUpUpdater.h">
       <Filter>Source Files\Particles\osg</Filter>
     </ClInclude>
   </ItemGroup>

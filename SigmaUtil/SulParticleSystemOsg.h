@@ -21,6 +21,8 @@ class CSulParticleSystemOsg : public osg::Group
 public:
 	CSulParticleSystemOsg();
 
+	bool isAlive();
+
 	void removeAll();
 
 	void create( CSulParticleSystemContainerOsg* psContainer, const osg::Vec3& pos );

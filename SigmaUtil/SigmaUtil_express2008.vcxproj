@@ -132,10 +132,12 @@
     <ClCompile Include="SulParticleCounterOnce.cpp" />
     <ClCompile Include="SulParticleDebris.cpp" />
     <ClCompile Include="SulParticleEmitter.cpp" />
+    <ClCompile Include="SulParticleSystemCleanUpUpdater.cpp" />
     <ClCompile Include="SulParticleSystemContainerOsg.cpp" />
     <ClCompile Include="SulParticleSystemDataOsg.cpp" />
     <ClCompile Include="SulParticleSystemDataPropertySheetQT.cpp" />
     <ClCompile Include="SulParticleSystemDebris.cpp" />
+    <ClCompile Include="SulParticleSystemLoadInstancer.cpp" />
     <ClCompile Include="SulParticleSystemOsg.cpp" />
     <ClCompile Include="SulPositionPlotter.cpp" />
     <ClCompile Include="SulPositionPlotterManager.cpp" />
@@ -326,11 +328,13 @@
     <ClInclude Include="SulParticleCounterOnce.h" />
     <ClInclude Include="SulParticleDebris.h" />
     <ClInclude Include="SulParticleEmitter.h" />
+    <ClInclude Include="SulParticleSystemCleanUpUpdater.h" />
     <ClInclude Include="SulParticleSystemDataOsg.h" />
     <ClInclude Include="SulParticleSystemContainerOsg.h" />
     <ClInclude Include="SulParticleSystemDataPropertySheetQT.h" />
     <ClInclude Include="SulParticleSystemDebris.h" />
     <ClInclude Include="SulParticleSystemInterpolatorQuadratic.h" />
+    <ClInclude Include="SulParticleSystemLoadInstancer.h" />
     <ClInclude Include="SulParticleSystemOsg.h" />
     <ClInclude Include="SulPositionPlotter.h" />
     <ClInclude Include="SulPositionPlotterManager.h" />

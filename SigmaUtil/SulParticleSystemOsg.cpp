@@ -2,12 +2,32 @@
 
 #include "stdafx.h"
 #include "SulParticleSystemOsg.h"
+#include "SulParticleSystemCleanUpUpdater.h"
 
 CSulParticleSystemOsg::CSulParticleSystemOsg() :
 osg::Group()
 {
 	m_psu = new osgParticle::ParticleSystemUpdater;
 	addChild( m_psu );
+
+	// we use the cleanUp updator to remove dead particle systems
+	addUpdateCallback( new CSulParticleSystemCleanUpUpdater(this) );
+}
+
+bool CSulParticleSystemOsg::isAlive()
+{
+	VEC_PARTICLESYSTEMCONTAINEROSG::iterator i = m_vecParticleSystemContainer.begin();
+	VEC_PARTICLESYSTEMCONTAINEROSG::iterator ie = m_vecParticleSystemContainer.end();
+	while ( i!=ie )
+	{
+		CSulParticleSystemContainerOsg* psContainer = (*i);
+		if ( psContainer->m_emitter->isAlive() || !psContainer->areAllParticlesDead() )
+			return true;
+
+		++i;
+	}
+
+	return false;
 }
 
 
