@@ -1994,6 +1994,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulParticleSystemInterpolatorQuadratic.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulParticleSystemLoadInstancer.cpp"
 						>
 					</File>
