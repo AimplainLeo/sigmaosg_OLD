@@ -1962,6 +1962,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\SulParticleSystemCleanUpUpdater.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulParticleSystemCleanUpUpdater.h"
+						>
+					</File>
+					<File
 						RelativePath=".\SulParticleSystemContainerOsg.cpp"
 						>
 					</File>
