@@ -1,5 +1,62 @@
 // test.java
 
+
+/*
+// this one works in the console
+class test 
+{
+	static 
+	{
+		System.loadLibrary( "Debug/HelloJavaDLL" );
+	}
+
+	private native void print();
+
+	public static void main( String[] args )
+	{
+		new test().print();
+	}
+}
+*/
+
+import java.applet.*;
+import java.awt.*;
+
+public class test extends Applet 
+{
+	static 
+	{
+		System.loadLibrary( "Debug/HelloJavaDLL" );
+	}
+
+	private native void print();
+
+	public void init() 
+	{
+		//new test().print();
+	}
+
+	public void stop()
+	{
+	}
+	
+	public void paint(Graphics g) 
+	{
+		g.drawString( "Hello world from java 4!", 25, 50 );
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
 import java.applet.*;
 import java.awt.*;
 
@@ -10,12 +67,12 @@ public class test extends Applet
 {
 	private static native void myout();
 
-	/*
+	
 	public static void main( String[] args )
 	{
 		new test().print();
 	}
-	*/
+	
 	
 	static 
 	{
@@ -60,3 +117,4 @@ public class test extends Applet
 		g.drawString("Hello world from java 4!", 25, 50);
 	}
 }
+*/
