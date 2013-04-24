@@ -72,6 +72,7 @@ private:
 	CSulParticleSystemDataOsg* m_dataLast;
 
 	QPushButton*			m_multi;
+	QLineEdit*				m_wind;
 };
 
 

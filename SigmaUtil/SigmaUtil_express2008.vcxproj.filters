@@ -1579,7 +1579,6 @@
     <ClInclude Include="SulNodeGroup.h" />
     <ClInclude Include="SulPositionPlotter.h" />
     <ClInclude Include="SulPositionPlotterManager.h" />
-    <ClInclude Include="SulQtPropCombobox.h" />
     <ClInclude Include="SulXmlNodeTag.h" />
     <ClInclude Include="SulXmlReader.h" />
     <ClInclude Include="SulParticleSystemDataOsg.h">
@@ -1612,6 +1611,9 @@
     </ClInclude>
     <ClInclude Include="SulParticleSystemCleanUpUpdater.h">
       <Filter>Source Files\Particles\osg</Filter>
+    </ClInclude>
+    <ClInclude Include="SulQtPropCombobox.h">
+      <Filter>Source Files\Qt\PropertySheet\props</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

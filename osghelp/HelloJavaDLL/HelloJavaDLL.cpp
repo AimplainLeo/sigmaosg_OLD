@@ -8,7 +8,7 @@
 			javac test.java
 
 		2. create the c++ header code
-			javah test
+			javah -classpath . -jni -o test.h test
 
 		3. compile the c++ dll
 
@@ -36,11 +36,13 @@
 #include "test.h"
 #include <jni.h>
 #include <stdio.h>
+#include <Windows.h>
 
 JNIEXPORT void JNICALL
 Java_test_print( JNIEnv* env, jobject obj )
 {
-	printf( "Hello World from C++ the new one\n" );
+	//printf( "Hello World from C++ the new one\n" );
+	MessageBoxA(NULL,"Hello World from c++!", "Hello Popup", 0);
 	return;
 }
 

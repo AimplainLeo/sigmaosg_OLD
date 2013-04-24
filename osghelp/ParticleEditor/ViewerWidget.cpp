@@ -129,6 +129,10 @@ void CViewerWidget::createViews()
 
 	layoutH->addWidget( m_multi, Qt::AlignLeft );	
 
+	m_wind = new QLineEdit;
+	m_wind->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed ); 
+	layoutH->addWidget( m_wind );
+
 	layoutH->addStretch();
 
 	/////////////////////////////////////////////////
@@ -310,6 +314,12 @@ void CViewerWidget::create( const osg::Vec3& pos )
 		CSulParticleSystemDataOsg* data = (CSulParticleSystemDataOsg*)v.value<void *>();
 
 		data->getPropertySheet()->updateFromUI();
+
+		// adding wind testing values
+		QString t = m_wind->text();
+		std::string s = t.toUtf8().constData();
+		float w = CSulString(s).asFloat();
+		data->m_programFluidWind.set(w,0,0);
 
 		sigma::uint32 instanceCount = data->m_instanceCount;
 		for ( sigma::uint32 i=0; i<instanceCount; i++ )

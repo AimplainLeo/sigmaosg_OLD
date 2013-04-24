@@ -19,6 +19,7 @@ class test
 }
 */
 
+
 import java.applet.*;
 import java.awt.*;
 
@@ -27,19 +28,16 @@ public class test extends Applet
 	static 
 	{
 		System.loadLibrary( "Debug/HelloJavaDLL" );
+		//System.loadLibrary( "HelloJavaDLL" );
 	}
 
 	private native void print();
 
 	public void init() 
 	{
-		//new test().print();
+		new test().print();
 	}
 
-	public void stop()
-	{
-	}
-	
 	public void paint(Graphics g) 
 	{
 		g.drawString( "Hello world from java 4!", 25, 50 );

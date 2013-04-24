@@ -35,14 +35,6 @@ extern "C" {
 #define test_serialVersionUID -2728009084054400034i64
 #undef test_serialVersionUID
 #define test_serialVersionUID -5836846270535785031i64
-/*
- * Class:     test
- * Method:    print
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_test_print
-  (JNIEnv *, jobject);
-
 #ifdef __cplusplus
 }
 #endif

@@ -99,9 +99,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="buildme.bat" />
-    <None Include="test.html" />
+    <None Include="test.html">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="test.java" />
-    <None Include="test.php" />
+    <None Include="test2.java" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
