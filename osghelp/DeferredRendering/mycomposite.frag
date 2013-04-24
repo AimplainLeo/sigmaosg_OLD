@@ -4,7 +4,7 @@ uniform sampler2D texPositions;
 uniform sampler2D texNormals;
 uniform sampler2D texColors;
 
-vec4 sulCalcLightPoint( vec4 v, vec3 n );
+vec4 sulCalcLightPoint( vec4 v, vec3 n, bool ignoreNormal );
 
 // remember we are rending to a quad here!
 void main( void )
@@ -16,7 +16,7 @@ void main( void )
 	
 	vec4 frag;
 	
-	frag = tColors * sulCalcLightPoint( tPos, tNormals.xyz );
+	frag = tColors * sulCalcLightPoint( tPos, tNormals.xyz, false );
 
 	gl_FragColor = frag;	
 }
