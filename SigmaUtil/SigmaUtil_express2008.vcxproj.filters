@@ -8,21 +8,6 @@
     <Filter Include="Source Files\Misc">
       <UniqueIdentifier>{2649e175-92e5-40fa-8a52-d13e2ddf72f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Geoms">
-      <UniqueIdentifier>{5c4d3010-6d05-437e-b7a0-fc3ef5b02985}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Geoms\lines">
-      <UniqueIdentifier>{0944f04b-02ab-4769-b97f-5d679e1a9fcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Geoms\crosshairs">
-      <UniqueIdentifier>{95c8a8ec-0a61-4811-b3a5-9286bf7bb185}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Geoms\circles">
-      <UniqueIdentifier>{86cd8ed3-1dd6-4b11-b122-bed12d844a18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Geoms\tickmarks">
-      <UniqueIdentifier>{71f8ac91-50ea-449e-922e-47a78b231fa0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Grid">
       <UniqueIdentifier>{ec48ec40-823c-4094-8e4e-accbe4faab87}</UniqueIdentifier>
     </Filter>
@@ -161,12 +146,6 @@
     <Filter Include="Source Files\Sound">
       <UniqueIdentifier>{5831c494-7d7f-4cb7-95d3-308f577020e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Geoms\shapes">
-      <UniqueIdentifier>{b8c12621-3304-4cf3-9395-6a982a189234}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Geodes">
-      <UniqueIdentifier>{e84a04c8-dec0-4885-bf7c-0f6928da9a9b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Particles\osg">
       <UniqueIdentifier>{a9c030a9-016e-4733-b89d-bcd53c8acac5}</UniqueIdentifier>
     </Filter>
@@ -178,6 +157,33 @@
     </Filter>
     <Filter Include="Source Files\Qt\PropertySheet\props">
       <UniqueIdentifier>{65e888be-88bd-47dc-9f2b-2ce62096b218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable">
+      <UniqueIdentifier>{d02312bb-d1f0-41ac-8f6f-cc483c508171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\Geodes">
+      <UniqueIdentifier>{e84a04c8-dec0-4885-bf7c-0f6928da9a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\Geoms">
+      <UniqueIdentifier>{5c4d3010-6d05-437e-b7a0-fc3ef5b02985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\circles">
+      <UniqueIdentifier>{86cd8ed3-1dd6-4b11-b122-bed12d844a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\tickmarks">
+      <UniqueIdentifier>{71f8ac91-50ea-449e-922e-47a78b231fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\crosshairs">
+      <UniqueIdentifier>{95c8a8ec-0a61-4811-b3a5-9286bf7bb185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\lines">
+      <UniqueIdentifier>{0944f04b-02ab-4769-b97f-5d679e1a9fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\shapes">
+      <UniqueIdentifier>{b8c12621-3304-4cf3-9395-6a982a189234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderable\text">
+      <UniqueIdentifier>{70293b11-12e0-4583-a139-fbfe2b3adef8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -191,91 +197,91 @@
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="SulGeode.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeom.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomArrow2D.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomAxis.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomBarChart.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomBillboardInstancing.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomBoundingBox.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomCrossQuadInstancing.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomFrame.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomGrid.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomGriddedText.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomHeightField.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomLaser.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomPlane.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomQuad.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomQuadTiles.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomTriangle.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomTriangleFan.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomTriangleList.cpp">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClCompile>
     <ClCompile Include="SulGeodeLineStrip.cpp">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomLine.cpp">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomLineList.cpp">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomLines.cpp">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomLineStrip.cpp">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClCompile>
     <ClCompile Include="SulGeodeCrosshairs.cpp">
-      <Filter>Source Files\Geoms\crosshairs</Filter>
+      <Filter>Source Files\Renderable\crosshairs</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomCrosshairSimple.cpp">
-      <Filter>Source Files\Geoms\crosshairs</Filter>
+      <Filter>Source Files\Renderable\crosshairs</Filter>
     </ClCompile>
     <ClCompile Include="SulGeodeCircle.cpp">
-      <Filter>Source Files\Geoms\circles</Filter>
+      <Filter>Source Files\Renderable\circles</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomCircle.cpp">
-      <Filter>Source Files\Geoms\circles</Filter>
+      <Filter>Source Files\Renderable\circles</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomTickMarksHorizontal.cpp">
-      <Filter>Source Files\Geoms\tickmarks</Filter>
+      <Filter>Source Files\Renderable\tickmarks</Filter>
     </ClCompile>
     <ClCompile Include="SulGrid.cpp">
       <Filter>Source Files\Grid</Filter>
@@ -764,19 +770,19 @@
       <Filter>Source Files\Sound</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomBox.cpp">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomCone.cpp">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomHemiSphere.cpp">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClCompile>
     <ClCompile Include="SulGeodeParachute.cpp">
-      <Filter>Source Files\Geodes</Filter>
+      <Filter>Source Files\Renderable\Geodes</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomCylinder.cpp">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClCompile>
     <ClCompile Include="SulParticleEmitter.cpp">
       <Filter>Source Files\Particles</Filter>
@@ -785,7 +791,7 @@
       <Filter>Source Files\Manipulators</Filter>
     </ClCompile>
     <ClCompile Include="SulGeomArrow3D.cpp">
-      <Filter>Source Files\Geodes</Filter>
+      <Filter>Source Files\Renderable\Geodes</Filter>
     </ClCompile>
     <ClCompile Include="SulParticleSystemOsg.cpp">
       <Filter>Source Files\Particles\osg</Filter>
@@ -847,6 +853,9 @@
     <ClCompile Include="SulParticleSystemCleanUpUpdater.cpp">
       <Filter>Source Files\Particles\osg</Filter>
     </ClCompile>
+    <ClCompile Include="SulProjectionScreenAlignedText.cpp">
+      <Filter>Source Files\Renderable\text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -871,91 +880,91 @@
       <Filter>Source Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="SulGeode.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeom.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomArrow2D.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomAxis.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomBarChart.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomBillboardInstancing.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomBoundingBox.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomCrossQuadInstancing.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomFrame.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomGrid.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomGriddedText.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomHeightField.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomLaser.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomPlane.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomQuad.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomQuadTiles.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomTriangle.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomTriangleFan.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomTriangleList.h">
-      <Filter>Source Files\Geoms</Filter>
+      <Filter>Source Files\Renderable\Geoms</Filter>
     </ClInclude>
     <ClInclude Include="SulGeodeLineStrip.h">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomLine.h">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomLineList.h">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomLines.h">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomLineStrip.h">
-      <Filter>Source Files\Geoms\lines</Filter>
+      <Filter>Source Files\Renderable\lines</Filter>
     </ClInclude>
     <ClInclude Include="SulGeodeCrosshairs.h">
-      <Filter>Source Files\Geoms\crosshairs</Filter>
+      <Filter>Source Files\Renderable\crosshairs</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomCrosshairSimple.h">
-      <Filter>Source Files\Geoms\crosshairs</Filter>
+      <Filter>Source Files\Renderable\crosshairs</Filter>
     </ClInclude>
     <ClInclude Include="SulGeodeCircle.h">
-      <Filter>Source Files\Geoms\circles</Filter>
+      <Filter>Source Files\Renderable\circles</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomCircle.h">
-      <Filter>Source Files\Geoms\circles</Filter>
+      <Filter>Source Files\Renderable\circles</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomTickMarksHorizontal.h">
-      <Filter>Source Files\Geoms\tickmarks</Filter>
+      <Filter>Source Files\Renderable\tickmarks</Filter>
     </ClInclude>
     <ClInclude Include="SulGrid.h">
       <Filter>Source Files\Grid</Filter>
@@ -1513,19 +1522,19 @@
       <Filter>Source Files\Sound</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomCone.h">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomBox.h">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomHemiSphere.h">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClInclude>
     <ClInclude Include="SulGeodeParachute.h">
-      <Filter>Source Files\Geodes</Filter>
+      <Filter>Source Files\Renderable\Geodes</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomCylinder.h">
-      <Filter>Source Files\Geoms\shapes</Filter>
+      <Filter>Source Files\Renderable\shapes</Filter>
     </ClInclude>
     <ClInclude Include="SulParticleEmitter.h">
       <Filter>Source Files\Particles</Filter>
@@ -1534,7 +1543,7 @@
       <Filter>Source Files\Manipulators</Filter>
     </ClInclude>
     <ClInclude Include="SulGeomArrow3D.h">
-      <Filter>Source Files\Geodes</Filter>
+      <Filter>Source Files\Renderable\Geodes</Filter>
     </ClInclude>
     <ClInclude Include="SulParticleSystemOsg.h">
       <Filter>Source Files\Particles\osg</Filter>
@@ -1614,6 +1623,9 @@
     </ClInclude>
     <ClInclude Include="SulQtPropCombobox.h">
       <Filter>Source Files\Qt\PropertySheet\props</Filter>
+    </ClInclude>
+    <ClInclude Include="SulProjectionScreenAlignedText.h">
+      <Filter>Source Files\Renderable\text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

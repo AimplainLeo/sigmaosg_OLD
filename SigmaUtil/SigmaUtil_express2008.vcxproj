@@ -142,6 +142,7 @@
     <ClCompile Include="SulPositionPlotter.cpp" />
     <ClCompile Include="SulPositionPlotterManager.cpp" />
     <ClCompile Include="SulQtPropertySheet.cpp" />
+    <ClCompile Include="SulProjectionScreenAlignedText.cpp" />
     <ClCompile Include="SulString.cpp" />
     <ClCompile Include="SulStringList.cpp" />
     <ClCompile Include="SulWAV.cpp" />
@@ -349,6 +350,7 @@
     <ClInclude Include="SulQtPropVec3.h" />
     <ClInclude Include="SulQtPropVec4.h" />
     <ClInclude Include="SulQtPropVec4s.h" />
+    <ClInclude Include="SulProjectionScreenAlignedText.h" />
     <ClInclude Include="SulSigSlots.h" />
     <ClInclude Include="SulTypes.h" />
     <ClInclude Include="SulWAV.h" />
