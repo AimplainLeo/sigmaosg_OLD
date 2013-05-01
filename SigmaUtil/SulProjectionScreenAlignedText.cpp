@@ -29,7 +29,8 @@ osg::Projection()
 	m_text->setPosition( osg::Vec3( 0, 0, 0 ) );
     m_text->setColor( osg::Vec4( 1.0f, 1.0f, 1.0f, 1.0f ) );
 
-	CSulGeode* geode = new CSulGeode( m_text );
+	osg::ref_ptr<CSulGeode> geode = new CSulGeode( m_text );
+	geode->lighting( false );
 
 	osg::MatrixTransform* mtrans = new osg::MatrixTransform;
 	mtrans->setReferenceFrame( osg::Transform::ABSOLUTE_RF );

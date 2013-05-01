@@ -6,14 +6,14 @@
 #include "SulString.h"
 #include <osg/projection>
 #include <osgText/text>
+#include "SulExport.h"
 
-class CSulProjectionScreenAlignedText : public osg::Projection
+class SUL_EXPORT CSulProjectionScreenAlignedText : public osg::Projection
 {
 public:
 	CSulProjectionScreenAlignedText();
 
 	void setText( const CSulString& text );
-
 	void setPosition( const osg::Vec2& pos );
 
 private:

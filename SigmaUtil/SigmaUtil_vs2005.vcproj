@@ -2140,7 +2140,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Objects"
+				Name="Renderable"
 				>
 				<Filter
 					Name="Geoms"
@@ -2467,6 +2467,18 @@
 					</File>
 					<File
 						RelativePath=".\SulGeomHemiSphere.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="text"
+					>
+					<File
+						RelativePath=".\SulProjectionScreenAlignedText.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SulProjectionScreenAlignedText.h"
 						>
 					</File>
 				</Filter>
