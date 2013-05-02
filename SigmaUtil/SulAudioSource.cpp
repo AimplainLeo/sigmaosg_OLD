@@ -17,7 +17,7 @@ void CSulAudioSource::init()
 
 	alSourcef( m_source, AL_PITCH, 1 );
 	alSourcef( m_source, AL_GAIN, 1 );
-	alSourcei(m_source, AL_LOOPING, AL_TRUE);
+	alSourcei( m_source, AL_LOOPING, AL_TRUE );
 
 	alSourcei( m_source, AL_SOURCE_RELATIVE , AL_FALSE );
 	
@@ -27,11 +27,16 @@ void CSulAudioSource::init()
 	alSource3f( m_source, AL_VELOCITY, 0, 0, 0 );
 }
 
+void CSulAudioSource::setLooping( bool looping )
+{
+	alSourcei( m_source, AL_LOOPING, looping?AL_TRUE:AL_FALSE );
+}
+
 void CSulAudioSource::operator()( osg::Node* node, osg::NodeVisitor* nv )
 {
 	traverse( node, nv );
 
-	osg::Matrix w = osg::computeLocalToWorld( nv->getNodePath() );
+	osg::Matrix w = osg::computeLocalToWorld( nv->getNodePath(), false );
 
 	// handle timing
 	if ( m_bFirstInit )

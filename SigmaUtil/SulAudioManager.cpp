@@ -24,7 +24,8 @@ void CSulAudioManager::createBuffer( const CSulString& bufferName, const CSulStr
 	ALsizei size,freq;
 	ALenum  format;
 	ALvoid  *data;
-	alutLoadWAVFile( (ALbyte*)file.c_str(), &format, &data, &size, &freq, false );
+	ALboolean loop;
+	alutLoadWAVFile( (ALbyte*)file.c_str(), &format, &data, &size, &freq, &loop );
 	alBufferData( buffer, format, data, size, freq );
     alutUnloadWAV( format, data, size, freq );
 

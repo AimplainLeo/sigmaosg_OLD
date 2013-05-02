@@ -11,8 +11,9 @@ public:
 			CSulAudioSource( ALuint buffer );
 
 	void	init();
-
 	void	play();
+
+	void	setLooping( bool looping );
 
 protected:
 	virtual void operator()( osg::Node* node, osg::NodeVisitor* nv );

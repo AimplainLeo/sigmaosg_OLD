@@ -22,8 +22,7 @@ void CSulAudioListener::operator()( osg::Node* node, osg::NodeVisitor* nv )
 {
 	traverse( node, nv );
 
-	osg::Camera* cam = dynamic_cast<osg::Camera*>(node);
-	osg::Matrix w = cam->getInverseViewMatrix();
+	osg::Matrix w = osg::computeLocalToWorld( nv->getNodePath(), false );
 
 	// handle timing
 	if ( m_bFirstInit )

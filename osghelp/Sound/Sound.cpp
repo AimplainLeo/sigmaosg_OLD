@@ -28,7 +28,7 @@ enum ESHAPE
 	SHAPE_CAPSULE
 };
 
-osg::Node* createShape( const osg::Vec3& pos, ESHAPE eShape, const CSulString& bufferName )
+osg::Node* createShape( const osg::Vec3& pos, ESHAPE eShape )
 {
 	osg::Geode* geode = new osg::Geode;
 
@@ -61,11 +61,6 @@ osg::Node* createShape( const osg::Vec3& pos, ESHAPE eShape, const CSulString& b
 	osg::Matrix m;
 	m.setTrans( pos );
 	mt->setMatrix( m );
-
-	CSulAudioSource* audioSource = new CSulAudioSource( audioManager->getBuffer( bufferName ) );
-	audioSource->init();
-	audioSource->play();
-	mt->addUpdateCallback( audioSource );
 
 	return mt;
 }
@@ -104,13 +99,26 @@ void errorCheck( CSulString prefixString )
 	}
 }
 
+osg::Node* soundPistol()
+{
+	osg::Node* testPistol = createShape( osg::Vec3(10,10,0), SHAPE_SPHERE );
+	CSulAudioSource* audioSource = new CSulAudioSource( audioManager->getBuffer( "pistol" ) );
+	audioSource->init();
+	audioSource->setLooping( false );
+	audioSource->play();
+	testPistol->addUpdateCallback( audioSource );
+	return testPistol;
+}
+
 void setupSound( osgViewer::Viewer* viewer )
 {
 	// setup the audio manager
 	audioManager = new CSulAudioManager;
 	audioManager->init();
 	//audioManager->createBuffer( "background", "c:/ThunderStormRain_S08WT.99_short.wav" );
+
 	audioManager->createBuffer( "background", "C:/Projects/sigmaOsg/osghelp/Data/tank.wav" );
+	audioManager->createBuffer( "pistol", "C:/pistol.wav" );
 	
 	// there is only one listen for each application (that being you), we attach our listener to the camera
 	CSulAudioListener* audioListener = new CSulAudioListener;
@@ -121,7 +129,7 @@ void setupSound( osgViewer::Viewer* viewer )
 	osg::Group* group = viewer->getSceneData()->asGroup();
 	group->addChild( new CSulGeomAxis( 1.0f ) );
 
-	group->addChild( createShape( osg::Vec3(10,10,0), SHAPE_SPHERE, "background" ) );
+	group->addChild( soundPistol() );
 
 	/*
 	osg::Node* s2 = createShape( osg::Vec3(10,-10,0), SHAPE_BOX );
