@@ -145,6 +145,7 @@
     <ClCompile Include="SulProjectionScreenAlignedText.cpp" />
     <ClCompile Include="SulString.cpp" />
     <ClCompile Include="SulStringList.cpp" />
+    <ClCompile Include="SulTrackballManipulatorDebugger.cpp" />
     <ClCompile Include="SulWAV.cpp" />
     <ClCompile Include="SulXmlAttr.cpp" />
     <ClCompile Include="SulXmlDataInfo.cpp" />
@@ -310,6 +311,7 @@
     <ClInclude Include="SulAudioSource.h" />
     <ClInclude Include="SulAudioSourceNode.h" />
     <ClInclude Include="SulCameraManipulatorDebugger.h" />
+    <ClInclude Include="SulEntity.h" />
     <ClInclude Include="SulExtractGeometry.h" />
     <ClInclude Include="SulFuncExtractor.h" />
     <ClInclude Include="SulGeodeParachute.h" />
@@ -352,6 +354,7 @@
     <ClInclude Include="SulQtPropVec4s.h" />
     <ClInclude Include="SulProjectionScreenAlignedText.h" />
     <ClInclude Include="SulSigSlots.h" />
+    <ClInclude Include="SulTrackballManipulatorDebugger.h" />
     <ClInclude Include="SulTypes.h" />
     <ClInclude Include="SulWAV.h" />
     <ClInclude Include="SulXmlNodeTag.h" />

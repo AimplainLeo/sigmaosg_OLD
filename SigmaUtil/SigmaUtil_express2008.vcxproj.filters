@@ -185,6 +185,9 @@
     <Filter Include="Source Files\Renderable\text">
       <UniqueIdentifier>{70293b11-12e0-4583-a139-fbfe2b3adef8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entity">
+      <UniqueIdentifier>{bf812c56-a1d4-4044-9a50-80ccc0ae3efc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -855,6 +858,9 @@
     </ClCompile>
     <ClCompile Include="SulProjectionScreenAlignedText.cpp">
       <Filter>Source Files\Renderable\text</Filter>
+    </ClCompile>
+    <ClCompile Include="SulTrackballManipulatorDebugger.cpp">
+      <Filter>Source Files\Manipulators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1626,6 +1632,12 @@
     </ClInclude>
     <ClInclude Include="SulProjectionScreenAlignedText.h">
       <Filter>Source Files\Renderable\text</Filter>
+    </ClInclude>
+    <ClInclude Include="SulEntity.h">
+      <Filter>Source Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="SulTrackballManipulatorDebugger.h">
+      <Filter>Source Files\Manipulators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
