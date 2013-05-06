@@ -11,9 +11,12 @@ class CSulAudioManager
 public:
 	void init();
 
-	void createBuffer( const CSulString& bufferName, const CSulString& file );
+	bool createBuffer( const CSulString& bufferName, const CSulString& file );
 
 	ALuint getBuffer( const CSulString& bufferName );
+
+private:
+	bool Errors();
 
 private:
 	typedef std::map< CSulString, ALuint >	MAP_BUFFERS;

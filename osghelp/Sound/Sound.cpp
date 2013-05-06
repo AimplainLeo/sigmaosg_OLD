@@ -118,7 +118,7 @@ void setupSound( osgViewer::Viewer* viewer )
 	//audioManager->createBuffer( "background", "c:/ThunderStormRain_S08WT.99_short.wav" );
 
 	audioManager->createBuffer( "background", "C:/Projects/sigmaOsg/osghelp/Data/tank.wav" );
-	audioManager->createBuffer( "pistol", "C:/pistol.wav" );
+	audioManager->createBuffer( "pistol", "C:/pistol2.wav" );
 	
 	// there is only one listen for each application (that being you), we attach our listener to the camera
 	CSulAudioListener* audioListener = new CSulAudioListener;

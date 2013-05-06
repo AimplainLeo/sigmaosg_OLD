@@ -58,6 +58,9 @@
       <AdditionalLibraryDirectories>$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)/libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>osgQTd.lib;QtGuid4.lib;QtOpenGLd4.lib;QtCored4.lib;osgManipulatord.lib;osgGAd.lib;osgparticled.lib;osgd.lib;osgDBd.lib;osgViewerd.lib;SigmaUtil_x2008d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>moc ViewerWidget.h -o ViewerWidget.moc</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
