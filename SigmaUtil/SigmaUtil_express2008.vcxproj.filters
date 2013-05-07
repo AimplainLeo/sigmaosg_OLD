@@ -663,9 +663,11 @@
     </ClCompile>
     <ClCompile Include="SulParticleSystemCleanUpUpdater.cpp" />
     <ClCompile Include="SulParticleSystemLoadInstancer.cpp" />
-    <ClCompile Include="SulProjectionScreenAlignedText.cpp" />
     <ClCompile Include="SulTrackballManipulatorDebugger.cpp">
       <Filter>CameraManipulator</Filter>
+    </ClCompile>
+    <ClCompile Include="SulProjectionScreenAlignedText.cpp">
+      <Filter>Objects\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1456,9 +1458,11 @@
     <ClInclude Include="SulParticleSystemCleanUpUpdater.h" />
     <ClInclude Include="SulParticleSystemInterpolatorQuadratic.h" />
     <ClInclude Include="SulParticleSystemLoadInstancer.h" />
-    <ClInclude Include="SulProjectionScreenAlignedText.h" />
     <ClInclude Include="SulTrackballManipulatorDebugger.h">
       <Filter>CameraManipulator</Filter>
+    </ClInclude>
+    <ClInclude Include="SulProjectionScreenAlignedText.h">
+      <Filter>Objects\Text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1745,6 +1749,9 @@
     </Filter>
     <Filter Include="Particles\osg\Debris">
       <UniqueIdentifier>{315e5bfe-d7f0-4bed-9d42-4405c116f880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Text">
+      <UniqueIdentifier>{1324c187-9466-4c67-967c-8d5e95a9f935}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
