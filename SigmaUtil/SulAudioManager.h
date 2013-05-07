@@ -6,14 +6,19 @@
 #include "SulString.h"
 #include <al.h>
 
-class CSulAudioManager
+class CSulAudioManager :  public osg::Node
 {
 public:
 	void init();
 
 	bool createBuffer( const CSulString& bufferName, const CSulString& file );
-
 	ALuint getBuffer( const CSulString& bufferName );
+
+	/*
+	void	setListener( CSulAudioListener* listener );
+	void	addSource( CSulAudioSource* source );
+	void	play( 
+	*/
 
 private:
 	bool Errors();

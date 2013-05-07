@@ -8,6 +8,7 @@
 class CSulEntity : public osg::Referenced
 {
 public:
+	virtual void create( const osg::Vec3& pos ) {}
 };
 
 #endif // __SULENTITY_H__

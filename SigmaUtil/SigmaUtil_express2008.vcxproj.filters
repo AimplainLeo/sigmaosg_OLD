@@ -661,6 +661,12 @@
     <ClCompile Include="SulParticleCounterOnce.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="SulParticleSystemCleanUpUpdater.cpp" />
+    <ClCompile Include="SulParticleSystemLoadInstancer.cpp" />
+    <ClCompile Include="SulProjectionScreenAlignedText.cpp" />
+    <ClCompile Include="SulTrackballManipulatorDebugger.cpp">
+      <Filter>CameraManipulator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SulAnimationPathVisitor.h">
@@ -1445,6 +1451,14 @@
     </ClInclude>
     <ClInclude Include="SulParticleCounterOnce.h">
       <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulEntity.h" />
+    <ClInclude Include="SulParticleSystemCleanUpUpdater.h" />
+    <ClInclude Include="SulParticleSystemInterpolatorQuadratic.h" />
+    <ClInclude Include="SulParticleSystemLoadInstancer.h" />
+    <ClInclude Include="SulProjectionScreenAlignedText.h" />
+    <ClInclude Include="SulTrackballManipulatorDebugger.h">
+      <Filter>CameraManipulator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

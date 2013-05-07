@@ -18,6 +18,17 @@ void CSulAudioListener::init()
 	alListener3f( AL_VELOCITY, 0,0,0 );
 }
 
+float CSulAudioListener::calcDistanceTo( const osg::Vec3& pos )
+{
+	osg::Vec3 v = m_pos-pos;
+	return v.length();
+}
+
+osg::Vec3 CSulAudioListener::getPosition()
+{
+	return m_pos;
+}
+
 void CSulAudioListener::operator()( osg::Node* node, osg::NodeVisitor* nv )
 {
 	traverse( node, nv );

@@ -8,6 +8,10 @@ class CSulAudioListener : public osg::NodeCallback
 public:
 	void init();
 
+	float calcDistanceTo( const osg::Vec3& pos );
+
+	osg::Vec3 getPosition();
+
 	virtual void operator()( osg::Node* node, osg::NodeVisitor* nv );
 
 private:

@@ -5,6 +5,7 @@
 
 #include "SulEntity.h"
 #include "SulTypes.h"
+#include <osgGA/TrackballManipulator>
 
 class CSulTrackballManipulatorDebugger : public osgGA::TrackballManipulator
 {
@@ -22,7 +23,9 @@ private:
 	bool			m_bCameraControl;
 
 	typedef std::map<sigma::uint8, osg::ref_ptr<CSulEntity> >	MAP_ENTITIES;
-	MAP_ENTITIES												m_entities;
+	MAP_ENTITIES												m_mapEntities;
+
+	sigma::uint8												m_lastKey;
 };
 
 #endif // __SULTRACKBALLMANIPULATORDEBUGGER_H__

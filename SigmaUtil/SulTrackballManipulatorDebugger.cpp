@@ -9,11 +9,12 @@
 CSulTrackballManipulatorDebugger::CSulTrackballManipulatorDebugger()
 {
 	m_bCameraControl = false;
+	m_lastKey = 0;
 }
 
 void CSulTrackballManipulatorDebugger::add( sigma::uint8 key, CSulEntity* entity )
 {
-	m_entities[key] = entity;
+	m_mapEntities[key] = entity;
 }
 
 bool CSulTrackballManipulatorDebugger::calcHitPoint(  const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Vec3d& hit )
@@ -45,7 +46,10 @@ bool CSulTrackballManipulatorDebugger::handle( const osgGA::GUIEventAdapter& ea,
 				int key = ea.getKey();
 				int mask = ea.getModKeyMask();
 
-				if ( mask & osgGA::GUIEventAdapter::MODKEY_LEFT_CTRL )
+				m_lastKey = key;
+
+				//if ( mask & osgGA::GUIEventAdapter::MODKEY_LEFT_CTRL )
+				if ( key==osgGA::GUIEventAdapter::KEY_Control_L )
 					m_bCameraControl = true;
 			}
 			break;
@@ -55,7 +59,11 @@ bool CSulTrackballManipulatorDebugger::handle( const osgGA::GUIEventAdapter& ea,
 				int key = ea.getKey();
 				int mask = ea.getModKeyMask();
 
-				if ( mask & osgGA::GUIEventAdapter::MODKEY_LEFT_CTRL )
+				// we reset when any key goes up
+				m_lastKey = 0;
+
+				//if ( mask & osgGA::GUIEventAdapter::MODKEY_LEFT_CTRL )
+				if ( key==osgGA::GUIEventAdapter::KEY_Control_L )
 					m_bCameraControl = false;
 			}
 			break;
@@ -73,6 +81,12 @@ bool CSulTrackballManipulatorDebugger::handle( const osgGA::GUIEventAdapter& ea,
 
 			case osgGA::GUIEventAdapter::PUSH:
 				{
+					if ( m_lastKey && m_mapEntities.find( m_lastKey )!=m_mapEntities.end() )
+					{
+						osg::Vec3d hit;
+						if ( calcHitPoint( ea, us, hit ) )
+							m_mapEntities[m_lastKey]->create( hit );
+					}
 				}
 				break;
 		}
