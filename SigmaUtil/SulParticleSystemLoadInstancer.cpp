@@ -9,7 +9,12 @@ osg::Group()
 {
 	m_wind.set( 0,0,0 );
 	m_particleSystem = new CSulParticleSystemOsg;
-	addChild( m_particleSystem );
+	//addChild( m_particleSystem );
+}
+
+CSulParticleSystemOsg* CSulParticleSystemLoadInstancer::getParticleSystem()
+{
+	return m_particleSystem;
 }
 
 void CSulParticleSystemLoadInstancer::create( const osg::Vec3& pos )
@@ -64,4 +69,9 @@ void CSulParticleSystemLoadInstancer::setWind( const osg::Vec3& wind )
 {
 	m_wind = wind;
 	m_particleSystem->setWind( m_wind );
+}
+
+void CSulParticleSystemLoadInstancer::setColor( const osg::Vec4& min, const osg::Vec4& max )
+{
+	assert(0); // work in progress
 }

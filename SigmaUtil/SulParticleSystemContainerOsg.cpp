@@ -142,9 +142,9 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	m_programFluid->setParticleSystem( this );
 	m_particleSystemMT->addChild( m_programFluid );
 	    
-	osg::Geode *geode = new osg::Geode;
-	geode->addDrawable( this );
-	m_particleSystemMT->addChild( geode );
+	m_geode = new osg::Geode;
+	m_geode->addDrawable( this );
+	//m_particleSystemMT->addChild( geode );
 
 	// create the debris system here
 	if ( m_data->m_debrisEnabled )
@@ -171,4 +171,9 @@ void CSulParticleSystemContainerOsg::destroy()
 void CSulParticleSystemContainerOsg::setWind( const osg::Vec3& wind )
 {
 	m_programFluid->setWind( wind );
+}
+
+osg::Geode* CSulParticleSystemContainerOsg::getGeode()
+{
+	return m_geode;
 }

@@ -13,6 +13,8 @@ class SUL_EXPORT CSulParticleSystemLoadInstancer : public osg::Group
 public:
 			CSulParticleSystemLoadInstancer();
 
+	CSulParticleSystemOsg* getParticleSystem();
+
 	// loads the xml file that defines the particle effect
 	bool	load( const CSulString& file );
 
@@ -20,6 +22,9 @@ public:
 	void	create( const osg::Vec3& pos );
 
 	void	setWind( const osg::Vec3& wind );
+
+	// NOTE: not implementated yet
+	void setColor( const osg::Vec4& min, const osg::Vec4& max );
 
 private:
 	osg::ref_ptr<CSulParticleSystemOsg>								m_particleSystem;

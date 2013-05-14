@@ -39,8 +39,13 @@ void CSulParticleSystemOsg::removeAll()
 	while ( i!=ie )
 	{
 		CSulParticleSystemContainerOsg* psContainer = (*i);
+
+		removeChild( psContainer->getGeode() );
+
 		psContainer->destroy();
 		m_psu->removeParticleSystem( psContainer );
+
+		
 		++i;
 	}
 
@@ -54,6 +59,8 @@ void CSulParticleSystemOsg::create( CSulParticleSystemContainerOsg* psContainer,
 	m_psu->addParticleSystem( psContainer );	
 
 	m_vecParticleSystemContainer.push_back( psContainer );
+
+	addChild( psContainer->getGeode() );
 }
 
 void CSulParticleSystemOsg::setWind( const osg::Vec3& wind )

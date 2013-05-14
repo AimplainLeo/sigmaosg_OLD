@@ -27,6 +27,7 @@
 class CSulParticleSystemContainerOsg : public osgParticle::ParticleSystem
 {
 public:
+											// note: root is CSulParticleSystemLoadInstancer
 											CSulParticleSystemContainerOsg( CSulParticleSystemDataOsg* data, osg::Group* root );
 
 	void									create( const osg::Vec3& pos );
@@ -36,6 +37,8 @@ public:
 
 	void									setWind( const osg::Vec3& wind );
 	
+	osg::Geode*								getGeode();
+
 public:
 	osg::ref_ptr<osg::Group>				m_root;
 
@@ -55,6 +58,8 @@ public:
 
 	typedef std::map<CSulString, osg::ref_ptr<osgParticle::Interpolator> >	MAP_INTERPOLATOR;
 	MAP_INTERPOLATOR														mapInterpolator;
+
+	osg::ref_ptr<osg::Geode>												m_geode;
 };
 
 #endif // __SULPARTICLESYSTEMINTERFACEOSG_H__
