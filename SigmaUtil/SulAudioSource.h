@@ -36,8 +36,9 @@ private:
 
 	double			m_radiusStart;		// meter
 	double			m_radiusEnd;		// meter
-	double			m_maxDistance;		// meter
+	double			m_maxDistance;		// meter, max distance the sound can be heard
 
+	bool			m_bSoundStarted;
 	bool			m_bPlayCalled;
 	bool			m_bUseSoundInAir;	// default false
 

@@ -8,9 +8,10 @@ CSulAudioSource::CSulAudioSource( ALuint buffer, CSulAudioListener* listener )
 	m_listener = listener;
 	m_buffer = buffer;
 	m_radiusStart = 0.0;
-	m_maxDistance = 1000.0;
+	m_maxDistance = 100000.0;
 	m_bPlayCalled = false;
 	m_bUseSoundInAir = false;
+	m_bSoundStarted = false;
 }
 
 void CSulAudioSource::init()
@@ -59,33 +60,6 @@ AL_PLAYING			is set when the sound is playing
 AL_PAUSED1
 */
 
-	ALint state;
-	alGetSourcei( m_source, AL_SOURCE_STATE, &state );
-
-	if ( m_bPlayCalled && state!=AL_PLAYING )
-	{
-		// calc listener position relative to sound origin and only start if the sound is inside
-		osg::Vec3 listenerPos = m_listener->getPosition();
-
-		osg::Vec3 v = listenerPos-m_pos;
-		double len = v.length();
-
-		// not inside radius
-		if ( len>m_maxDistance )
-			return;
-
-		m_bPlayCalled = false; // reset it
-		alSourcePlay( m_source );
-	}
-
-	if ( state==AL_STOPPED )
-	{
-		int a = 0;
-	}
-
-	if ( state!=AL_PLAYING )
-		return;
-
 	// handle timing
 	if ( m_bFirstInit )
 	{
@@ -99,6 +73,40 @@ AL_PAUSED1
 	double dt = osg::Timer::instance()->delta_s( m_lastTicks, ticks );
 	m_lastTicks = ticks;
 
+	if ( m_bSoundStarted )
+	{
+		// calc sound movement through the air
+		m_radiusStart += 343.0*dt;
+	}
+
+	ALint state;
+	alGetSourcei( m_source, AL_SOURCE_STATE, &state );
+
+	if ( m_bPlayCalled && state!=AL_PLAYING )
+	{
+		// calc listener position relative to sound origin and only start if the sound is inside
+		osg::Vec3 listenerPos = m_listener->getPosition();
+
+		osg::Vec3 v = listenerPos-m_pos;
+		double len = v.length() - m_radiusStart;
+		m_bSoundStarted = true;
+
+		// inside radius
+		if ( len<0.0f )
+		{
+			m_bPlayCalled = false;		// reset it
+			alSourcePlay( m_source );	// plays the sound
+		}
+	}
+
+	if ( state==AL_STOPPED )
+	{
+		int a = 0;
+	}
+
+	if ( state!=AL_PLAYING )
+		return;
+
 	// velocity (we base the velocity time and distance moved from last time)
 	osg::Vec3f vel = (w.getTrans()-m_pos)/dt;
 	alSourcefv( m_source, AL_VELOCITY, (float*)&vel );
@@ -108,9 +116,6 @@ AL_PAUSED1
 	osg::Vec3 test( m_pos.x(), m_pos.z(), m_pos.y() );
 
 	alSourcefv( m_source, AL_POSITION, (float*)&test );
-
-	// calc sound movement through the air
-	m_radiusStart += 343.0*dt;
 }
 
 void CSulAudioSource::play()
