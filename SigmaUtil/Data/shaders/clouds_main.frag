@@ -12,5 +12,5 @@ void main()
 	temp.a = temp.a*len;
 	*/
 
-	gl_FragColor = temp;
+	gl_FragColor = frag;
 }

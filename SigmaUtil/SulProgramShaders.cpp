@@ -22,6 +22,7 @@ CSulProgramShaders::CSulProgramShaders( CSulString sShaderFiles )
 		ext.makeLower();
 
 		osg::ref_ptr< osg::Shader > shader = new osg::Shader();
+		shader->setName( s );
 
 		if ( ext=="vert" )
 			shader->setType( osg::Shader::VERTEX );

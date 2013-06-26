@@ -3,7 +3,7 @@
 // prototypes
 void clouds_init();
 
-void main()
+void main( void )
 {
 	clouds_init();
 }

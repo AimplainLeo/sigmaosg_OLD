@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include <SigmaUtil/SulClouds.h>
+#include <SigmaUtil/SulProgramShaders.h>
 #include <osgViewer/Viewer>
 #include <osg/ShapeDrawable>
 #include <osgDB/ReadFile>
@@ -12,8 +13,6 @@
 #include <osgGA/DriveManipulator>
 #include <osgGA/TerrainManipulator>
 #include <osgGA/KeySwitchMatrixManipulator>
-
-
 
 osg::Node* createScene()
 {
@@ -25,11 +24,17 @@ osg::Node* createScene()
 
 osg::Node* createClouds()
 {
-	osg::Group* pGroup = new osg::Group;
-
+	osg::Group* group = new osg::Group;
+	/*
+	group->getOrCreateStateSet()->setAttribute( new CSulProgramShaders( 
+		"shaders/clouds_main.frag,"
+		"shaders/clouds_main.vert"
+	) );
+	*/
 	CSulClouds* pClouds = new CSulClouds;
-	pGroup->addChild( pClouds->getGroup() );
+	group->addChild( pClouds->getGroup() );
 
+	/*
 	osg::Program* prg = pClouds->getCloudPlane()->getShaderProgram();
 
 	osg::Shader* shaderV = new osg::Shader( osg::Shader::VERTEX );
@@ -41,8 +46,17 @@ osg::Node* createClouds()
 	shaderF->loadShaderSourceFromFile( "main.frag" );
 	shaderF->setName( "main.frag" );
 	prg->addShader( shaderF );
+	*/
 
-	return pGroup;
+	
+	group->getOrCreateStateSet()->setAttribute( new CSulProgramShaders( 
+		"shaders/clouds_main.frag,"
+		"shaders/clouds_main.vert,"
+		"shaders/clouds.frag,"
+		"shaders/clouds.vert"
+	) );
+
+	return group;
 }
 
 int _tmain(int argc, _TCHAR* argv[])

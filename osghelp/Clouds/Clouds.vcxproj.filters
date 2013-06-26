@@ -15,20 +15,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="clouds.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="clouds.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="main.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="main.vert">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Source Files</Filter>
     </ClInclude>
