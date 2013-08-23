@@ -7,10 +7,10 @@
 
 CNetworkServer::CNetworkServer( const CSulString& hostName, sigma::uint32 port )
 {
-	m_socketServer	= 0;
-	m_hostName		= hostName;
-	m_port			= port;
-	m_debug			= false;
+	m_debug				= false;
+	m_socketServer		= 0;
+	m_hostName			= hostName;
+	m_port				= port;
 	init();
 }
 
@@ -34,18 +34,20 @@ void CNetworkServer::init()
 
 	server.sin_addr.s_addr = inet_addr(localIP);
 
+	// Attempt to bind the socket
 	int error;
-	error = bind( m_socketServer, (sockaddr*)&server, sizeof(server) ); // Attempt to bind the socket
+	error = bind( m_socketServer, (sockaddr*)&server, sizeof(server) ); 
 	if (error == SOCKET_ERROR)
 	{
-		std::cout << "Server: Ah ****... Somethings wrong with binding\n";
+		std::cout << "Server: bind failed\n";
 		return;
 	}
 
-	error = listen( m_socketServer, 5 ); // Listen for connections
+	// Listen for connections
+	error = listen( m_socketServer, 5 ); 
 	if (error == SOCKET_ERROR)
 	{
-		std::cout << "Server: Too deaf to listen...\n"; // Did we error?!?!
+		std::cout << "Server: listen failed\n"; 
 		return;
 	}
 }
@@ -55,20 +57,41 @@ void CNetworkServer::debug()
 	m_debug = true;
 }
 
+bool CNetworkServer::isDebug()
+{
+	return m_debug;
+}
+
+void CNetworkServer::sendStringToAll( const CSulString& s )
+{
+	VEC_SOCKETS::iterator i = m_vecSockets.begin();
+	VEC_SOCKETS::iterator ie = m_vecSockets.end();
+
+	while ( i!=ie )
+	{
+		int bytesSent = send( *i, s.c_str(), s.size(), 0);
+		if ( bytesSent == SOCKET_ERROR)
+			std::cout << "Server : send() error " << WSAGetLastError() << std::endl;
+
+		++i;
+	}
+}
+
 void CNetworkServer::run()
 {
 	if ( m_socketServer==0 )
 		return;
 
 	std::cout << "Server: Waiting for a client to connect ...\n"; // Just to keep us up to date - ish
-	int clientSocket; // Used for the client
-
-	clientSocket = accept(m_socketServer, 0, 0); // Accepts the client
-	if (clientSocket == SOCKET_ERROR)
+	
+	// Accepts the client (it is prepared to handle more than one socket.. but the code only accepts one socket right now)
+	int socketAccepted = accept(m_socketServer, 0, 0); 
+	if ( socketAccepted==SOCKET_ERROR )
 	{
-		std::cout << "I DUN WANNA!\n"; // did we Fu** up again?
+		std::cout << "Server: will not accept\n"; 
 		return;
 	}
+	m_vecSockets.push_back( socketAccepted );
 
 	std::cout << "Server: Client Connected!\n";
 	char recvbuf[200];
@@ -76,13 +99,16 @@ void CNetworkServer::run()
 	while ( connected )
 	{
 		int bytesRecv = SOCKET_ERROR;
-		bytesRecv = recv( clientSocket, recvbuf, 199, 0 );
+		bytesRecv = recv( socketAccepted, recvbuf, 199, 0 );
 		if ( bytesRecv!=SOCKET_ERROR )
 		{
 			recvbuf[bytesRecv] = 0; // we zero terminate
 
-			if ( m_debug )
-				std::cout << "Received (" << bytesRecv << "): " << recvbuf << std::endl;
+			if ( isDebug() )
+			{
+				std::cout << "Server: Received (" << bytesRecv << "): " << recvbuf << std::endl;
+				sendStringToAll( "bounce back: "+CSulString(recvbuf) ); // we bounce the message back
+			}
 
 			CSulStringList s;
 			s.explode( recvbuf, ';' );

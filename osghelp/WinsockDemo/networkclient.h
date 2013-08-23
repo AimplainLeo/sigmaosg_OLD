@@ -12,9 +12,11 @@ class CNetworkClient : public OpenThreads::Thread
 public:
 	CNetworkClient( const CSulString& hostName="", sigma::uint32 port=9000 );
 
-	void init();
-
+	void CNetworkClient::sendString( const CSulString& s );
 	void run();
+
+private:
+	void init();
 
 private:
 	int				m_socketClient;

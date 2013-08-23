@@ -57,7 +57,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>osgDBd.lib;osgd.lib;osgGAd.lib;osgViewerd.lib;osgManipulatord.lib;SigmaUtil_x2008d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>openThreadsd.lib;ws2_32.lib;osgDBd.lib;osgd.lib;osgGAd.lib;osgViewerd.lib;osgManipulatord.lib;SigmaUtil_x2008d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OSG_LIB_PATH);$(SIGMAOSG_ROOT_PATH)\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>

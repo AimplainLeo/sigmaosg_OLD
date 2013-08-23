@@ -24,6 +24,13 @@ void CNetworkClient::init()
     }
 }
 
+void CNetworkClient::sendString( const CSulString& s )
+{
+	int bytesSent = send( m_socketClient, s.c_str(), s.size(), 0);
+	if ( bytesSent == SOCKET_ERROR)
+		printf("Client: send() error %ld.\n", WSAGetLastError());
+}
+
 void CNetworkClient::run()
 {
 	if ( m_socketClient==0 )
@@ -51,13 +58,24 @@ void CNetworkClient::run()
 
 	std::cout << "Client: connected to the server!\n";
 
+	// If iMode!=0, non-blocking mode is enabled.
+	u_long iMode=1;
+	ioctlsocket( m_socketClient, FIONBIO, &iMode );
+
+	char recvbuf[200];
 	while (1)
 	{
-		char* sendbuf = "quick brown fox";
-		int bytesSent = send(m_socketClient, sendbuf, strlen(sendbuf), 0);
-		if ( bytesSent == SOCKET_ERROR)
-			printf("Client: send() error %ld.\n", WSAGetLastError());
+		// check for any messages received
+		int bytesRecv = SOCKET_ERROR;
+		bytesRecv = recv( m_socketClient, recvbuf, 199, 0 );
+		if ( bytesRecv!=SOCKET_ERROR )
+		{
+			recvbuf[bytesRecv] = 0; // we zero terminate
+			std::cout << "Client: Received (" << bytesRecv << "): " << recvbuf << std::endl;
+		}
 
+		// test we send a little message and wait
+		sendString( "quick brown fox" );
 		Sleep(1000);
 	}
 }
