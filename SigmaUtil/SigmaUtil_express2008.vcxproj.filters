@@ -673,6 +673,9 @@
     <ClCompile Include="SulParticleSystemLoadInstancer.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="SulNodeFinder.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SulAnimationPathVisitor.h">
@@ -1473,6 +1476,9 @@
     </ClInclude>
     <ClInclude Include="SulParticleSystemInterpolatorQuadratic.h">
       <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SulNodeFinder.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

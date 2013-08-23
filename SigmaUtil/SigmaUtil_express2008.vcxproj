@@ -94,6 +94,7 @@
     <ClCompile Include="SulInventoryHelper.cpp" />
     <ClCompile Include="SulInventoryItem.cpp" />
     <ClCompile Include="SulNode.cpp" />
+    <ClCompile Include="SulNodeFinder.cpp" />
     <ClCompile Include="SulNodeGroup.cpp" />
     <ClCompile Include="SulNodePath.cpp" />
     <ClCompile Include="SulGeode.cpp" />
@@ -325,6 +326,7 @@
     <ClInclude Include="SulInventoryItemData.h" />
     <ClInclude Include="SulInventoryUpdateCallback.h" />
     <ClInclude Include="SulNode.h" />
+    <ClInclude Include="SulNodeFinder.h" />
     <ClInclude Include="SulNodeGroup.h" />
     <ClInclude Include="SulNodePath.h" />
     <ClInclude Include="SulParticleCounter.h" />
