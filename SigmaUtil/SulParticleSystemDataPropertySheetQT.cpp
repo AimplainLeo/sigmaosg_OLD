@@ -19,6 +19,10 @@ CSulParticleSystemDataPropertySheetQt::CSulParticleSystemDataPropertySheetQt( CS
 	createPropertySheet();
 }
 
+CSulParticleSystemDataPropertySheetQt::~CSulParticleSystemDataPropertySheetQt()
+{
+}
+
 void CSulParticleSystemDataPropertySheetQt::createPropertySheet()
 {
 	QVBoxLayout* layoutPropertySheets = new QVBoxLayout;

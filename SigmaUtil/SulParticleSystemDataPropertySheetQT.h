@@ -11,6 +11,7 @@ class CSulParticleSystemDataPropertySheetQt : public QWidget
 {
 public:
 								CSulParticleSystemDataPropertySheetQt( class CSulParticleSystemDataOsg* data );
+								~CSulParticleSystemDataPropertySheetQt();
 
 	void						createPropertySheet();
 

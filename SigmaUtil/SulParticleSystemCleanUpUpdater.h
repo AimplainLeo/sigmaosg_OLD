@@ -14,6 +14,7 @@ class CSulParticleSystemCleanUpUpdater : public osg::NodeCallback
 {
 public:
 	CSulParticleSystemCleanUpUpdater( class CSulParticleSystemOsg* ps );
+	~CSulParticleSystemCleanUpUpdater();
 
 private:
 	void operator()( osg::Node* node, osg::NodeVisitor* nv );

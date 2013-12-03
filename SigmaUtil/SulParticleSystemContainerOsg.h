@@ -27,8 +27,8 @@
 class CSulParticleSystemContainerOsg : public osgParticle::ParticleSystem
 {
 public:
-											// note: root is CSulParticleSystemLoadInstancer
 											CSulParticleSystemContainerOsg( CSulParticleSystemDataOsg* data, osg::Group* root );
+											~CSulParticleSystemContainerOsg();
 
 	void									create( const osg::Vec3& pos );
 	void									destroy();
@@ -37,10 +37,8 @@ public:
 
 	void									setWind( const osg::Vec3& wind );
 	
-	osg::Geode*								getGeode();
-
 public:
-	osg::ref_ptr<osg::Group>				m_root;
+	osg::observer_ptr<osg::Group>			m_root;
 
 	CSulParticleSystemDataOsg*				m_data;
 
@@ -49,17 +47,17 @@ public:
 
 	osg::ref_ptr<osg::MatrixTransform>		m_particleSystemMT;
 
-	osgParticle::Particle*					m_particle;
-	osgParticle::ModularEmitter*			m_emitter;
-	osgParticle::RandomRateCounter*			m_counterRandomRate;
-	osgParticle::SectorPlacer*				m_placer;
-	osgParticle::RadialShooter*				m_shooterRadial;
-	osgParticle::FluidProgram*				m_programFluid;
+	osgParticle::Particle*							m_particle;
+	osg::ref_ptr<osgParticle::ModularEmitter>		m_emitter;
+	osg::ref_ptr<osgParticle::RandomRateCounter>	m_counterRandomRate;
+	osg::ref_ptr<osgParticle::SectorPlacer>			m_placer;
+	osg::ref_ptr<osgParticle::RadialShooter>		m_shooterRadial;
+	osg::ref_ptr<osgParticle::FluidProgram>			m_programFluid;
 
 	typedef std::map<CSulString, osg::ref_ptr<osgParticle::Interpolator> >	MAP_INTERPOLATOR;
 	MAP_INTERPOLATOR														mapInterpolator;
 
-	osg::ref_ptr<osg::Geode>												m_geode;
+	osg::ref_ptr<osg::Geode>	m_geode;
 };
 
 #endif // __SULPARTICLESYSTEMINTERFACEOSG_H__

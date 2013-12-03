@@ -13,6 +13,7 @@ class CSulParticleSystemDataOsg : public osg::Referenced
 {
 public:
 	CSulParticleSystemDataOsg( const CSulString& title );
+	~CSulParticleSystemDataOsg();
 
 	void setDefaultValues();
 

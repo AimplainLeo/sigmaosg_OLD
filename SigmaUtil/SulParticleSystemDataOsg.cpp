@@ -12,6 +12,11 @@ CSulParticleSystemDataOsg::CSulParticleSystemDataOsg( const CSulString& title )
 	m_propertySheetQT = new CSulParticleSystemDataPropertySheetQt( this );
 }
 
+CSulParticleSystemDataOsg::~CSulParticleSystemDataOsg()
+{
+	delete m_propertySheetQT;
+}
+
 void CSulParticleSystemDataOsg::setDefaultValues()
 {
 	// general

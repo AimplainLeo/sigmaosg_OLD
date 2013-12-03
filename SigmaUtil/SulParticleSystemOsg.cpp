@@ -14,6 +14,11 @@ osg::Group()
 	addUpdateCallback( new CSulParticleSystemCleanUpUpdater(this) );
 }
 
+CSulParticleSystemOsg::~CSulParticleSystemOsg()
+{
+	removeAll();
+}
+
 bool CSulParticleSystemOsg::isAlive()
 {
 	VEC_PARTICLESYSTEMCONTAINEROSG::iterator i = m_vecParticleSystemContainer.begin();

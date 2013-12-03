@@ -20,6 +20,7 @@ class CSulParticleSystemOsg : public osg::Group
 {
 public:
 	CSulParticleSystemOsg();
+	~CSulParticleSystemOsg();
 
 	bool isAlive();
 

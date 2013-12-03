@@ -6,11 +6,32 @@
 CSulParticleSystemContainerOsg::CSulParticleSystemContainerOsg( CSulParticleSystemDataOsg* data, osg::Group* root ) :
 osgParticle::ParticleSystem()
 {
+	m_particle = 0;
+
 	m_root = root;
 	m_data = data;
 
 	mapInterpolator["LINEAR"] = new osgParticle::LinearInterpolator;
 	mapInterpolator["QUADRATIC"] = new CSulParticleSystemInterpolatorQuadratic;
+}
+
+CSulParticleSystemContainerOsg::~CSulParticleSystemContainerOsg()
+{
+	if ( m_particle )
+	{
+		delete m_particle;
+		m_particle = 0;
+	}
+
+	destroy();
+
+	/*
+	m_root->removeChild( m_particleSystemMT );
+	m_particleSystemMT->unref();
+	m_programFluid->setParticleSystem( 0 );
+	m_emitter->setParticleSystem( 0 );
+	*/
+
 }
 
 CSulParticleSystemDataOsg* CSulParticleSystemContainerOsg::getData()
@@ -20,6 +41,9 @@ CSulParticleSystemDataOsg* CSulParticleSystemContainerOsg::getData()
 
 void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 {
+	if ( !m_root.valid() )
+		return;
+
 	m_particleSystemMT = new osg::MatrixTransform;
 	osg::Matrix m;
 	m.setTrans( pos );
@@ -144,7 +168,7 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 	    
 	m_geode = new osg::Geode;
 	m_geode->addDrawable( this );
-	//m_particleSystemMT->addChild( geode );
+	m_particleSystemMT->addChild( m_geode );
 
 	// create the debris system here
 	if ( m_data->m_debrisEnabled )
@@ -165,15 +189,23 @@ void CSulParticleSystemContainerOsg::create( const osg::Vec3& pos )
 
 void CSulParticleSystemContainerOsg::destroy()
 {
-	m_root->removeChild( m_particleSystemMT );
+	// stop circular reference
+	m_geode->removeDrawable( this );
+	/*
+	if ( m_root.valid() )
+		m_root->removeChild( m_particleSystemMT );
+		m_particleSystemMT->unref();
+		*/
+
+	// remove stuff 
+	// we need to do this because osg stuff has a refernce to this class (this will prevent circular referencing)
+	m_programFluid->setParticleSystem( 0 );
+	m_emitter->setParticleSystem( 0 );
+//	m_particleSystemMT->removeChild( (unsigned int)0 );
 }
+
 
 void CSulParticleSystemContainerOsg::setWind( const osg::Vec3& wind )
 {
 	m_programFluid->setWind( wind );
-}
-
-osg::Geode* CSulParticleSystemContainerOsg::getGeode()
-{
-	return m_geode;
 }

@@ -9,6 +9,10 @@ CSulParticleSystemCleanUpUpdater::CSulParticleSystemCleanUpUpdater( CSulParticle
 	m_ps = ps;
 }
 
+CSulParticleSystemCleanUpUpdater::~CSulParticleSystemCleanUpUpdater()
+{
+}
+
 void CSulParticleSystemCleanUpUpdater::operator()( osg::Node* node, osg::NodeVisitor* nv )
 {
 	if ( nv->getVisitorType()==osg::NodeVisitor::UPDATE_VISITOR && nv->getFrameStamp() )

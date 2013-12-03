@@ -12,6 +12,7 @@ class CSulQtPropertySheet : public QWidget
 {
 public:
 	CSulQtPropertySheet( const CSulString& title="" );
+	~CSulQtPropertySheet();
 
 	void add( CSulQtPropBase* prop );
 

@@ -90,7 +90,9 @@ bool CSulParser::InitStringParse( const CSulString& s )
 	sigma::uint32 dwSize = s.size();
 	sigma::uint8* pBuf = new sigma::uint8[dwSize];
 	memcpy( pBuf, s.c_str(), dwSize );
-	return ParseData( pBuf, dwSize );
+	bool bret = ParseData( pBuf, dwSize );
+	delete pBuf;
+	return bret;
 }
 
 bool CSulParser::ParseData( const sigma::uint8* pData, sigma::uint32 iSize )

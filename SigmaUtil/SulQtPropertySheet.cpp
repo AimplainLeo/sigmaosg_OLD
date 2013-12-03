@@ -35,6 +35,19 @@ QWidget()
 	m_row = 0;
 }
 
+CSulQtPropertySheet::~CSulQtPropertySheet()
+{
+	VEC_PROP::iterator i = m_vecProp.begin();
+	VEC_PROP::iterator ie = m_vecProp.end();
+
+	while ( i!=ie )
+	{
+		delete *i;
+		++i;
+	}
+
+	m_vecProp.clear();
+}
 
 void CSulQtPropertySheet::add( CSulQtPropBase* prop )
 {
